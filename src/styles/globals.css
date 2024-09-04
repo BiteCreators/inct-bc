@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+    color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,6 +25,6 @@ h1 {
 
 @layer utilities {
     .text-balance {
-        text-wrap: balance;
+        text-wrap: none;
     }
 }
