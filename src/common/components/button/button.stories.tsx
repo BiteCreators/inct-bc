@@ -8,7 +8,7 @@ const meta = {
 export const Primary = {
   args: {
     children: 'Button',
-    onClick: () => console.log('click'),
+    onClick: () => alert('click'),
     title: 'Primary button',
     variant: 'primary',
   },
@@ -16,7 +16,7 @@ export const Primary = {
 export const Secondary = {
   args: {
     children: 'Button',
-    onClick: () => console.log('click'),
+    onClick: () => alert('click'),
     title: 'Primary button',
     variant: 'secondary',
   },
@@ -24,7 +24,7 @@ export const Secondary = {
 export const Outline = {
   args: {
     children: 'Button',
-    onClick: () => console.log('click'),
+    onClick: () => alert('click'),
     title: 'Primary button',
     variant: 'outline',
   },
@@ -32,7 +32,7 @@ export const Outline = {
 export const Text = {
   args: {
     children: 'Button',
-    onClick: () => console.log('click'),
+    onClick: () => alert('click'),
     title: 'Primary button',
     variant: 'text',
   },

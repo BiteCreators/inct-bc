@@ -1,4 +1,3 @@
-import { Button } from '@/common/components/button/Button'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 
