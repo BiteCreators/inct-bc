@@ -1,8 +1,9 @@
 import type { Config } from 'tailwindcss'
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/common/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [],
@@ -13,13 +14,6 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       colors: {
-        accent: {
-          100: '#73A5FF',
-          300: '#4C8DFF',
-          500: '#397DF6',
-          700: '#2F68CC',
-          900: '#234E99',
-        },
         danger: {
           100: '#FF8099',
           300: '#F23D61',
@@ -41,6 +35,13 @@ const config: Config = {
           700: '#D5DAE0',
           900: '#8D9094',
         },
+        primary: {
+          100: '#73A5FF',
+          300: '#4C8DFF',
+          500: '#397DF6',
+          700: '#2F68CC',
+          900: '#234E99',
+        },
         success: {
           100: '#80FFBF',
           300: '#22E584',
@@ -56,9 +57,13 @@ const config: Config = {
           900: '#664400',
         },
       },
+      fontFamily: {
+        primary: ['Inter'],
+        roboto: ['Roboto', 'Inter'],
+      },
       fontSize: {
         lg: ['18px', { lineHeight: '24px' }],
-        md: ['18px', { lineHeight: '24px' }],
+        md: ['16px', { lineHeight: '24px' }],
         sm: ['14px', { lineHeight: '24px' }],
         xl: ['20px', { lineHeight: '36px' }],
         xs: ['12px', { lineHeight: '16px' }],
