@@ -9,6 +9,25 @@ type Props = {
 export const Input = ({ className, error, icon, label, ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false)
 
+  let borderColor = 'border-dark-100'
+
+  if (error) {
+    borderColor = 'border-danger-500'
+  } else if (props.disabled) {
+    borderColor = 'border-dark-100'
+  }
+
+  const inputClassName = `w-[279px] h-[36px] pt-[6px] pb-[6px] pl-[12px]
+            placeholder:${props.disabled ? 'text-light-900' : 'text-dark-300'} 
+            placeholder:font-weight-400 
+            placeholder:text-[16px] 
+            placeholder:leading-[24px]
+            focus:outline-none focus:border-primary-500 focus:border-2 focus:ring-0
+            ${props.disabled ? '' : 'hover:border hover:border-light-900'} 
+            border ${borderColor}
+            ${isFocused ? 'bg-dark-500 border-accent-500 text-light-100' : ''}
+            ${className}`
+
   return (
     <div className={'relative mb-4'} style={{ left: '24px', position: 'absolute', top: '12px' }}>
       {label && (
@@ -31,16 +50,7 @@ export const Input = ({ className, error, icon, label, ...props }: Props) => {
           </span>
         )}
         <input
-          className={`w-[279px] h-[36px] pt-[6px] pb-[6px] pl-[12px]
-            placeholder:${props.disabled ? 'text-light-900' : 'text-dark-300'} 
-            placeholder:font-weight-400 
-            placeholder:text-[16px] 
-            placeholder:leading-[24px]
-            focus:outline-none focus:border-primary-500 focus:border-2 focus:ring-0
-            ${props.disabled ? '' : 'hover:border hover:border-light-900'} 
-            border ${error ? 'border-danger-500' : props.disabled ? 'border-dark-100' : 'border-dark-100'}
-            ${isFocused ? 'bg-dark-500 border-accent-500 text-light-100' : ''}
-            ${className}`}
+          className={inputClassName}
           {...props}
           disabled={props.disabled}
           onBlur={() => setIsFocused(false)}
@@ -51,7 +61,7 @@ export const Input = ({ className, error, icon, label, ...props }: Props) => {
           }}
         />
       </div>
-      {error && <span className={'text-sm text-danger-500 mt-1 block'}>{error}</span>}
+      {error && <span className={'text-sm text-danger-500 block'}>{error}</span>}
     </div>
   )
 }
