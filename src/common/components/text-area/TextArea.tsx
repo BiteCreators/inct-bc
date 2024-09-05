@@ -43,27 +43,29 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
         <textarea
           className={cn([
             `
-          outline-none
-          px-3 
-          py-1.5 
-          text-light-100 
-          bg-dark-500 
-          border 
-          border-dark-100 
-          rounded-sm
-          focus:outline-accent-500
-          focus:border-none
-          active:border-light-100
-          active:border
-          disabled:text-dark-100
-          disabled:active:border-dark-100
-          placeholder:text-light-900
-          placeholder:text-sm
-          resize-none
-          outline-offset-0
-          overflow-y-hidden
-          min-h-8
-         `,
+            outline-none
+            px-3 
+            py-1.5 
+            text-light-100 
+            bg-dark-500 
+            border 
+            border-dark-100 
+            rounded-sm
+            focus:outline-primary-500
+            focus:border-dark-500
+            active:focus:border-dark-500
+            active:border-light-100
+            active:border
+            disabled:text-dark-100
+            disabled:active:border-dark-100
+            placeholder:text-light-900
+            placeholder:text-md
+            resize-none
+            outline-offset-0
+            overflow-y-hidden
+            min-h-9
+            text-md
+            `,
             isError && 'border-danger-500',
             resize === 'manual-y' && 'overflow-y-auto resize-y',
             resize === 'manual-x' && 'overflow-x-auto resize-x',
@@ -75,7 +77,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
           ref={textAreaRef}
           {...props}
         />
-        {isError && <p className={'text-danger-500 text-sm'}>{error}</p>}
+        {isError && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
       </div>
     )
   }
