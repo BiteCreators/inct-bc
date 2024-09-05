@@ -13,13 +13,6 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       colors: {
-        accent: {
-          100: '#73A5FF',
-          300: '#4C8DFF',
-          500: '#397DF6',
-          700: '#2F68CC',
-          900: '#234E99',
-        },
         danger: {
           100: '#FF8099',
           300: '#F23D61',
@@ -40,6 +33,13 @@ const config: Config = {
           500: '#EDF3FA',
           700: '#D5DAE0',
           900: '#8D9094',
+        },
+        primary: {
+          100: '#73A5FF',
+          300: '#4C8DFF',
+          500: '#397DF6',
+          700: '#2F68CC',
+          900: '#234E99',
         },
         success: {
           100: '#80FFBF',
