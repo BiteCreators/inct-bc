@@ -58,7 +58,7 @@ const config: Config = {
       },
       fontSize: {
         lg: ['18px', { lineHeight: '24px' }],
-        md: ['18px', { lineHeight: '24px' }],
+        md: ['16px', { lineHeight: '24px' }],
         sm: ['14px', { lineHeight: '24px' }],
         xl: ['20px', { lineHeight: '36px' }],
         xs: ['12px', { lineHeight: '16px' }],
