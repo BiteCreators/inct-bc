@@ -17,7 +17,6 @@ export const Button = ({ className, variant = 'primary', ...props }: ButtonProps
           'bg-none border-primary-500 border text-primary-500 active:border-primary-700 active:text-primary-700 hover:border-primary-100 hover:text-primary-100',
         variant === 'text' && 'bg-none text-primary-500'
       )}
-      type={'button'}
       {...props}
     />
   )
