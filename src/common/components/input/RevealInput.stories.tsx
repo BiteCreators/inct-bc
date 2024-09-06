@@ -51,7 +51,7 @@ export const Error: Story = {
   },
   render: args => {
     return (
-      <div className={'max-w-[279px]'}>
+      <div className={'max-w-[200px]'}>
         <RevealInput {...args} />
       </div>
     )

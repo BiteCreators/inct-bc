@@ -14,28 +14,27 @@ export const RevealInput = (props: Props) => {
   const [showContent, setShowContent] = useState(false)
 
   const svgColor = props.disabled ? 'text-dark-100' : 'text-light-900'
+  const changeShowContentHandler = () => {
+    if (props.disabled) {
+      return
+    } else {
+      setShowContent(!showContent)
+    }
+  }
 
   return (
     <Input
       icon={
-        <button
-          className={'focus:outline-none'}
-          onClick={() => setShowContent(!showContent)}
-          type={'button'}
-        >
+        <button className={'focus:outline-none'} onClick={changeShowContentHandler} type={'button'}>
           <Icon
-            className={`
-            position: absolute 
-            top-0
-            left-[13.4rem]
-            fill-current ${svgColor}
-            `}
+            className={`fill-current ${svgColor}`}
             iconId={`${showContent ? 'eye-outline' : 'eye-off-outline'}`}
-            viewBox={'0 -6 1 35'}
-            width={'50'}
+            viewBox={'10 -6 1 35'}
+            width={'30'}
           />
         </button>
       }
+      isRightIcon
       type={showContent ? 'text' : 'password'}
       {...props}
     />

@@ -23,6 +23,7 @@ export const SearchInput = (props: Props) => {
         />
       }
       inputPaddingLeft={'42px'}
+      isLeftIcon
       {...props}
     />
   )
