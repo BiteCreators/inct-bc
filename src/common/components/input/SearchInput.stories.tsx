@@ -13,7 +13,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     id: 'default',
-    label: 'Email',
     placeholder: 'Epam@epam.com',
   },
   render: args => {
@@ -29,7 +28,6 @@ export const Disabled: Story = {
   args: {
     disabled: true,
     id: 'disabled',
-    label: 'Email',
     placeholder: 'Epam@epam.com',
   },
   render: args => {
@@ -46,7 +44,6 @@ export const Error: Story = {
     error: 'Error text',
     id: 'error',
     isError: true,
-    label: 'Email',
     placeholder: 'Epam@epam.com',
   },
   render: args => {

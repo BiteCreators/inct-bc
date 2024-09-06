@@ -5,6 +5,7 @@ import { cn } from '@/common/utils/cn'
 type Props = {
   error?: string
   icon?: ReactNode
+  inputPaddingLeft?: string | undefined
   isError?: boolean
   label?: string
 } & InputHTMLAttributes<HTMLInputElement>
@@ -15,6 +16,7 @@ export const Input = ({
   error,
   icon,
   id,
+  inputPaddingLeft,
   isError,
   label,
   ...props
@@ -42,7 +44,7 @@ export const Input = ({
           className={cn([
             `
             w-[100%]
-            px-[6px] py-3 text-md text-light-100 outline-none outline-offset-0
+            pr-[6px] py-2 text-md text-light-100 outline-none outline-offset-0
             border border-dark-100 rounded-sm bg-transparent
             placeholder:text-light-900
             active:bg-dark-500 active:border-light-100
@@ -57,6 +59,7 @@ export const Input = ({
           id={id}
           {...props}
           disabled={disabled}
+          style={{ paddingLeft: `${inputPaddingLeft ? inputPaddingLeft : '8px'}` }}
         />
       </div>
       {isError && <p className={'text-sm text-danger-500'}>{error ?? 'invalid input'}</p>}
