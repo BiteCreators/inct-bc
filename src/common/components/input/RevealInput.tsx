@@ -24,10 +24,15 @@ export const RevealInput = (props: Props) => {
           type={'button'}
         >
           <Icon
-            className={`fill-current ${svgColor}`}
+            className={`
+            position: absolute 
+            top-0
+            left-[13.4rem]
+            fill-current ${svgColor}
+            `}
             iconId={`${showContent ? 'eye-outline' : 'eye-off-outline'}`}
             viewBox={'0 -6 1 35'}
-            width={'450'}
+            width={'50'}
           />
         </button>
       }
