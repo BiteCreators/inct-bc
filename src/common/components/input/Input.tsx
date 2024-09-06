@@ -5,7 +5,7 @@ import { cn } from '@/common/utils/cn'
 type Props = {
   error?: string
   icon?: ReactNode
-  inputPaddingLeft?: string | undefined
+  inputPaddingLeft?: string
   isError?: boolean
   isLeftIcon?: boolean
   isRightIcon?: boolean
@@ -43,7 +43,7 @@ export const Input = ({
           `
           relative flex items-center
           border border-dark-100 rounded-sm bg-transparent
-          focus:border-transparent focus:active:border-transparent
+          focus-within:border-primary-500 focus-within:active:border-primary-500
           hover:border-light-900
           disabled:border-dark-100 disabled:hover:border-dark-100 disabled:active:border-dark-100
        `,
@@ -60,12 +60,12 @@ export const Input = ({
         <input
           className={cn([
             `
-            w-[100%]
+            w-full
             pr-[6px] py-2 text-md text-light-100 outline-none outline-offset-0
             bg-transparent
             placeholder:text-light-900
             active:bg-dark-500
-            focus:outline-primary-500 
+            focus:outline-none 
             disabled:active:bg-inherit disabled:placeholder:text-dark-100
             hover:placeholder:text-light-900 
             `,
