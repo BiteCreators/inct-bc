@@ -1,23 +1,63 @@
 import { TabsBase } from '@/common/components/tabs/Tabs'
-import { Meta } from '@storybook/react'
+import { tabsData } from '@/common/components/tabs/tabsData'
+import { action } from '@storybook/addon-actions'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
+  argTypes: {
+    children: {
+      description: 'Имя вкладки',
+    },
+    disabled: {
+      description: 'Варианты отображения вкладок - Заблокирована | Незаблокирована.',
+    },
+    onClick: {
+      description: 'Функция, вызываемая при клике на вкладку.',
+    },
+    tabsData: {
+      control: { disable: true },
+      description: 'Обязательный Props принимающий массив с данными.',
+    },
+    variant: {
+      description: 'Варианты отображения вкладок - Primary | Secondary.',
+    },
+  },
   component: TabsBase,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
 } satisfies Meta<typeof TabsBase>
 
-export const Primary = {
+export const Primary: StoryObj<typeof TabsBase> = {
   args: {
     children: 'Primary',
-    onClick: () => console.log('click primary tab'),
+    onClick: action('click primary tab'),
+    tabsData,
     variant: 'primary',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Primary вариант вкладок',
+      },
+    },
   },
 }
 
-export const Secondary = {
+export const Secondary: StoryObj<typeof TabsBase> = {
   args: {
     children: 'Secondary',
-    onClick: () => console.log('click secondary tab'),
+    onClick: action('click secondary tab'),
+    tabsData,
     variant: 'secondary',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Secondary вариант вкладок',
+      },
+    },
   },
 }
 
