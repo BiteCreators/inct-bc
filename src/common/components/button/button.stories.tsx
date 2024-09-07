@@ -17,7 +17,7 @@ export const Secondary = {
   args: {
     children: 'Button',
     onClick: () => alert('click'),
-    title: 'Secondary button',
+    title: 'Primary button',
     variant: 'secondary',
   },
 }
@@ -25,7 +25,7 @@ export const Outline = {
   args: {
     children: 'Button',
     onClick: () => alert('click'),
-    title: 'Outline button',
+    title: 'Primary button',
     variant: 'outline',
   },
 }
@@ -43,7 +43,7 @@ export const Disabled = {
     disabled: true,
     onClick: () => alert('click'),
     title: 'Disabled button',
-    variant: 'primary',
+    variant: 'text',
   },
 }
 export default meta
