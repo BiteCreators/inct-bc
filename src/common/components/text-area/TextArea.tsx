@@ -65,6 +65,9 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
             overflow-y-hidden
             min-h-9
             text-md
+            transition-[outline-color]
+            ease-linear
+            duration-200
             `,
             isError && 'border-danger-500',
             resize === 'manual-y' && 'overflow-y-auto resize-y',
