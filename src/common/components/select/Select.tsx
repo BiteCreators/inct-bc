@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { Icon } from '../icon/Icon'
 import { useSelect } from './useSelect'
@@ -84,12 +85,20 @@ export const Select = ({ children, icon, id, label, placeholder, required, ...pr
               border border-light-100 border-t-[0px]
               rounded-b-sm
               bg-dark-500
+              -z-10
               `
             )}
             //does not work via tailwind for some reason
             style={{ width: width }}
           >
-            <div className={'transition-all delay-1000'}>{children}</div>
+            <motion.div
+              animate={{ transform: 'translateY(0)' }}
+              exit={{ transform: 'translateY(-15px)' }}
+              initial={{ transform: 'translateY(-15px)' }}
+              transition={{ duration: 0.1 }}
+            >
+              {children}
+            </motion.div>
           </SelectPrimitive.Content>
         </SelectPrimitive.Portal>
       </SelectPrimitive.Root>
