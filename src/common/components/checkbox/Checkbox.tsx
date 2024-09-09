@@ -63,11 +63,11 @@ export const Checkbox = ({
         )}
         htmlFor={id ?? checkboxId}
       ></label>
-      {text ? (
+      {text && (
         <span className={cn('mx-1 font-weight400 text-sm', disabled && 'text-light-900')}>
           {text}
         </span>
-      ) : null}
+      )}
     </div>
   )
 }
