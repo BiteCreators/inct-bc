@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import { Icon } from '../icon/Icon'
 import { useSelect } from './useSelect'
