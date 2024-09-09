@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { Icon } from '../icon/Icon'
-import { Select } from './select'
+import { Select } from './Select'
 
 const meta: Meta<typeof Select> = {
   component: Select,

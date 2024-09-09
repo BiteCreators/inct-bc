@@ -1,16 +1,10 @@
-import React, {
-  ComponentProps,
-  forwardRef,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { forwardRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
 
 import { Icon } from '../icon/Icon'
+import { useSelect } from './useSelect'
 
 type Props = {
   icon?: React.ReactNode
@@ -20,14 +14,7 @@ type Props = {
 } & SelectPrimitive.SelectProps
 
 export const Select = ({ children, icon, id, label, placeholder, required, ...props }: Props) => {
-  const triggerRef = useRef<HTMLButtonElement>(null)
-  const [width, setWidth] = useState(triggerRef.current?.clientWidth)
-
-  useLayoutEffect(() => {
-    if (triggerRef.current) {
-      setWidth(triggerRef.current.clientWidth + 2)
-    }
-  }, [triggerRef])
+  const { triggerRef, width } = useSelect()
 
   return (
     <div className={'flex flex-col max-w-[210px]'}>
