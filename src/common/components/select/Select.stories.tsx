@@ -16,8 +16,19 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>{'test'}</Select.Item>
-        <Select.Item value={'test1'}>{'test1'}</Select.Item>
+        <Select.Item value={'test'}>option 1</Select.Item>
+        <Select.Item value={'test1'}>option 2</Select.Item>
+        <Select.Item value={'test2'}>
+          option 3 with longer text option 3 with longer text
+        </Select.Item>
+
+        <Select.Item value={'test3'}>option 4</Select.Item>
+        <Select.Item value={'test4'}>option 5</Select.Item>
+        <Select.Item value={'test5'}>option 6</Select.Item>
+        <Select.Item value={'test6'}>option 7</Select.Item>
+        <Select.Item value={'test7'}>option 8</Select.Item>
+        <Select.Item value={'test8'}>option 9</Select.Item>
+        <Select.Item value={'test9'}>option 10</Select.Item>
       </>
     ),
     id: 'default',
@@ -29,8 +40,8 @@ export const Required: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>{'test'}</Select.Item>
-        <Select.Item value={'test1'}>{'test1'}</Select.Item>
+        <Select.Item value={'test'}>option 1</Select.Item>
+        <Select.Item value={'test1'}>option 2</Select.Item>
       </>
     ),
     id: 'required',
@@ -39,7 +50,23 @@ export const Required: Story = {
     required: true,
   },
 }
-
+export const CustomWidth: Story = {
+  args: {
+    children: (
+      <>
+        <Select.Item value={'test'}>option 1</Select.Item>
+        <Select.Item value={'test1'}>option 2</Select.Item>
+        <Select.Item value={'test2'}>
+          option 3 with longer text option 3 with longer text
+        </Select.Item>
+      </>
+    ),
+    id: 'custom-w',
+    label: 'custom width',
+    maxWidth: '500px',
+    placeholder: 'custom width',
+  },
+}
 export const Disabled: Story = {
   args: {
     children: (

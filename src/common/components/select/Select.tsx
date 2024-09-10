@@ -11,14 +11,24 @@ type Props = {
   icon?: React.ReactNode
   id?: string
   label?: string
+  maxWidth?: string
   placeholder?: string
 } & SelectPrimitive.SelectProps
 
-export const Select = ({ children, icon, id, label, placeholder, required, ...props }: Props) => {
-  const { triggerRef, width } = useSelect()
+export const Select = ({
+  children,
+  icon,
+  id,
+  label,
+  maxWidth = '210px',
+  placeholder,
+  required,
+  ...props
+}: Props) => {
+  const { contentWidth, triggerRef } = useSelect()
 
   return (
-    <div className={'flex flex-col max-w-[210px]'}>
+    <div className={cn('flex flex-col')} style={{ maxWidth }}>
       {label && (
         <label
           className={cn(
@@ -89,7 +99,7 @@ export const Select = ({ children, icon, id, label, placeholder, required, ...pr
               `
             )}
             //does not work via tailwind for some reason
-            style={{ width: width }}
+            style={{ width: contentWidth }}
           >
             <motion.div
               animate={{ transform: 'translateY(0)' }}
