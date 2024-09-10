@@ -120,7 +120,7 @@ export const WithIcon: Story = {
               height={'20px'}
               iconId={'british-flag'}
               viewBox={'-3 -1.5 40 30'}
-              width={'20px'}
+              width={'30px'}
             />
           )
         }
