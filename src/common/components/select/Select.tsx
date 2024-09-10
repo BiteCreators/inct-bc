@@ -80,11 +80,11 @@ export const Select = ({
             <Icon
               className={cn(
                 `
-              fill-current text-light-100 
-              group-[[data-state="open"]]:rotate-180
-              transition-transform
-              delay-100
-              `
+                fill-current text-light-100 
+                group-[[data-state="open"]]:rotate-180
+                transition-transform
+                delay-100
+                `
               )}
               height={'20px'}
               iconId={'arrow-ios-Up'}
@@ -122,9 +122,9 @@ export const Select = ({
         <p
           className={cn(
             `
-          absolute bottom-[-24px] -z-20
-          text-sm text-danger-500
-          `
+            absolute bottom-[-24px] -z-20
+            text-sm text-danger-500
+            `
           )}
         >
           {error ?? 'invalid input'}
@@ -144,7 +144,7 @@ Select.Item = forwardRef<HTMLDivElement, ItemProps>(
           `
           px-3 py-[6px]
           text-md
-        hover:text-primary-500 hover:bg-dark-300 hover:outline-none
+          hover:text-primary-500 hover:bg-dark-300 hover:outline-none
           cursor-pointer
           delay-[0.01s]
           transition-colors
