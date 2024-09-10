@@ -17,6 +17,14 @@ export const Default: Story = {
   },
 }
 
+export const Required: Story = {
+  args: {
+    id: 'required',
+    label: 'required',
+    required: true,
+  },
+}
+
 export const Error: Story = {
   args: {
     error: 'error message',
