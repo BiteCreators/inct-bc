@@ -117,10 +117,9 @@ export const WithIcon: Story = {
             />
           ) : (
             <Icon
-              className={'fill-current text-light-100'}
               height={'20px'}
-              iconId={'home'}
-              viewBox={'-3 -1.5 30 30'}
+              iconId={'british-flag'}
+              viewBox={'-3 -1.5 40 30'}
               width={'20px'}
             />
           )
