@@ -8,6 +8,7 @@ import { Icon } from '../icon/Icon'
 import { useSelect } from './useSelect'
 
 type Props = {
+  className?: string
   error?: string
   icon?: React.ReactNode
   id?: string
@@ -19,6 +20,7 @@ type Props = {
 
 export const Select = ({
   children,
+  className,
   error,
   icon,
   id,
@@ -33,7 +35,7 @@ export const Select = ({
   const { contentWidth, triggerRef } = useSelect()
 
   return (
-    <div className={cn('flex relative flex-col')} style={{ maxWidth }}>
+    <div className={cn('flex relative flex-col', className)} style={{ maxWidth }}>
       {label && (
         <label
           className={cn(
