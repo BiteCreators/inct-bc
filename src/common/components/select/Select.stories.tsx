@@ -71,8 +71,8 @@ export const Disabled: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>{'test'}</Select.Item>
-        <Select.Item value={'test1'}>{'test1'}</Select.Item>
+        <Select.Item value={'test'}>option 1</Select.Item>
+        <Select.Item value={'test1'}>option 2</Select.Item>
       </>
     ),
     disabled: true,
@@ -81,7 +81,21 @@ export const Disabled: Story = {
     placeholder: 'disabled',
   },
 }
-
+export const Error: Story = {
+  args: {
+    children: (
+      <>
+        <Select.Item value={'test'}>option 1</Select.Item>
+        <Select.Item value={'test1'}>option 2</Select.Item>
+      </>
+    ),
+    error: 'error message',
+    id: 'error',
+    isError: true,
+    label: 'error',
+    placeholder: 'error',
+  },
+}
 export const WithIcon: Story = {
   args: {
     id: 'with-icon',

@@ -8,8 +8,10 @@ import { Icon } from '../icon/Icon'
 import { useSelect } from './useSelect'
 
 type Props = {
+  error?: string
   icon?: React.ReactNode
   id?: string
+  isError?: boolean
   label?: string
   maxWidth?: string
   placeholder?: string
@@ -17,10 +19,13 @@ type Props = {
 
 export const Select = ({
   children,
+  error,
   icon,
   id,
+  isError,
   label,
   maxWidth = '210px',
+  open,
   placeholder,
   required,
   ...props
@@ -28,7 +33,7 @@ export const Select = ({
   const { contentWidth, triggerRef } = useSelect()
 
   return (
-    <div className={cn('flex flex-col')} style={{ maxWidth }}>
+    <div className={cn('flex relative flex-col')} style={{ maxWidth }}>
       {label && (
         <label
           className={cn(
@@ -42,7 +47,7 @@ export const Select = ({
           {label}
         </label>
       )}
-      <SelectPrimitive.Root {...props}>
+      <SelectPrimitive.Root {...props} open={open}>
         <SelectPrimitive.Trigger
           className={cn(
             `
@@ -61,7 +66,8 @@ export const Select = ({
             transition-[outline-color]
             delay-75
             group
-            `
+            `,
+            isError && 'border-danger-500'
           )}
           id={id}
           ref={triggerRef}
@@ -112,6 +118,18 @@ export const Select = ({
           </SelectPrimitive.Content>
         </SelectPrimitive.Portal>
       </SelectPrimitive.Root>
+      {isError && (
+        <p
+          className={cn(
+            `
+          absolute bottom-[-24px] -z-20
+          text-sm text-danger-500
+          `
+          )}
+        >
+          {error ?? 'invalid input'}
+        </p>
+      )}
     </div>
   )
 }
