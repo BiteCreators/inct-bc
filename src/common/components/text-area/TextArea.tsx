@@ -22,6 +22,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
       isError,
       label,
       onChange,
+      required,
       resize = 'auto',
       value,
       ...props
@@ -34,7 +35,11 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
       <div className={'flex flex-col'} ref={ref}>
         {!!label && (
           <label
-            className={cn(['text-light-900  text-sm', disabled && 'text-dark-100'])}
+            className={cn(
+              'text-light-900  text-sm',
+              disabled && 'text-dark-100',
+              required && 'after:content-["*"] after:ml-0.5 after: text-light-900'
+            )}
             htmlFor={id}
           >
             {label}
@@ -67,7 +72,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
             text-md
             transition-[outline-color]
             ease-linear
-            duration-200
+            duration-150
             `,
             isError && 'border-danger-500',
             resize === 'manual-y' && 'overflow-y-auto resize-y',
@@ -78,6 +83,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
           id={id}
           onChange={handleChange}
           ref={textAreaRef}
+          required={required}
           {...props}
         />
         {isError && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
