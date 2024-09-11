@@ -31,5 +31,14 @@ export const Disabled: Story = {
   },
   render: args => <Checkbox {...args} />,
 }
-
+export const Error: Story = {
+  args: {
+    checked: false,
+    error: 'This field is required',
+    id: 'Error',
+    required: true,
+    text: 'Checkbox',
+  },
+  render: args => <Checkbox {...args} />,
+}
 export default meta
