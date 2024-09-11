@@ -1,3 +1,4 @@
+'use client'
 import React, { forwardRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
@@ -5,7 +6,6 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 import { motion } from 'framer-motion'
 
 import { Icon } from '../icon/Icon'
-import { useSelect } from './useSelect'
 
 type Props = {
   className?: string
@@ -16,6 +16,7 @@ type Props = {
   label?: string
   maxWidth?: string
   placeholder?: string
+  width?: string
 } & SelectPrimitive.SelectProps
 
 export const Select = ({
@@ -30,12 +31,11 @@ export const Select = ({
   open,
   placeholder,
   required,
+  width,
   ...props
 }: Props) => {
-  const { contentWidth, triggerRef } = useSelect()
-
   return (
-    <div className={cn('flex relative flex-col', className)} style={{ maxWidth }}>
+    <div className={cn('flex relative flex-col', className)} style={{ maxWidth, width }}>
       {label && (
         <label
           className={cn(
@@ -53,7 +53,7 @@ export const Select = ({
         <SelectPrimitive.Trigger
           className={cn(
             `
-            flex justify-between 
+            flex justify-between
             border-dark-100 border
             active:outline-none 
             text-md 
@@ -72,13 +72,12 @@ export const Select = ({
             isError && 'border-danger-500'
           )}
           id={id}
-          ref={triggerRef}
         >
           <div className={'flex gap-3 align-center'}>
             {icon}
             <SelectPrimitive.Value className={'text-light-100'} placeholder={placeholder} />
           </div>
-          <SelectPrimitive.Icon className={'SelectIcon'}>
+          <SelectPrimitive.Icon className={'ml-2'}>
             <Icon
               className={cn(
                 `
@@ -103,11 +102,11 @@ export const Select = ({
               border border-light-100 border-t-[0px]
               rounded-b-sm
               bg-dark-500
-              -z-10
+              z-10
+              w-[var(--radix-select-trigger-width)]
               `
             )}
-            //does not work via tailwind for some reason
-            style={{ width: contentWidth }}
+            position={'popper'}
           >
             <motion.div
               animate={{ transform: 'translateY(0)' }}
