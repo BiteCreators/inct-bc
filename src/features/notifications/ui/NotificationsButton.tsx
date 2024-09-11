@@ -6,7 +6,7 @@ export const NotificationsButton = () => {
       <Icon
         className={'fill-current text-light-100'}
         iconId={'outline bell'}
-        viewBox={'-5 -3 30 30'}
+        viewBox={'-5 -1 30 30'}
       />
     </button>
   )
