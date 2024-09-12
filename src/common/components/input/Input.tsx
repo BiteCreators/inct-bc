@@ -1,36 +1,30 @@
-import { InputHTMLAttributes, ReactNode, forwardRef } from 'react'
-import { FieldError } from 'react-hook-form'
+import { InputHTMLAttributes, forwardRef, useState } from 'react'
 
+import { Icon } from '@/common/components/icon/Icon'
 import { cn } from '@/common/utils/cn'
 
 type Props = {
-  error?: FieldError | string
-  icon?: ReactNode
-  inputPaddingLeft?: string
-  isError?: boolean
-  isLeftIcon?: boolean
-  isRightIcon?: boolean
+  error?: string
+  inputType?: 'default' | 'reveal' | 'search'
   label?: string
+  onSearchClick?: (value: any) => void
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
-    {
-      className,
-      disabled,
-      error,
-      icon,
-      id,
-      inputPaddingLeft = '8px',
-      isError,
-      isLeftIcon,
-      isRightIcon,
-      label,
-      ...props
-    },
+    { className, disabled, error, id, inputType = 'default', label, onSearchClick, ...props },
     ref
   ) => {
-    const hasError = Boolean(error) || isError
+    const svgColor = disabled ? 'text-dark-100' : 'text-light-900'
+    const inputPaddingLeft = inputType === 'search' ? '42px' : '8px'
+    const [showContent, setShowContent] = useState(false)
+
+    const changeShowContentHandler = () => {
+      if (!disabled) {
+        setShowContent(prev => !prev)
+      }
+    }
+    const inputTypeToShow = inputType === 'reveal' && !showContent ? 'password' : 'text'
 
     return (
       <div className={cn('relative mb-4', className)}>
@@ -55,13 +49,30 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             disabled:border-dark-100 disabled:hover:border-dark-100 disabled:active:border-dark-100
           `,
             disabled && '!border-dark-100',
-            hasError && 'border-danger-500',
+            error && 'border-danger-500',
             className,
           ])}
         >
-          {icon && isLeftIcon && (
+          {inputType === 'search' && (
             <span className={'absolute inset-y-0 left-0 pl-3 flex items-center text-light-900'}>
-              {icon}
+              <button
+                className={cn([
+                  `
+                focus:outline-none 
+                ${disabled ? 'cursor-default' : 'cursor-pointer'}
+                `,
+                  className,
+                ])}
+                onClick={onSearchClick}
+                type={'button'}
+              >
+                <Icon
+                  className={`fill-current ${svgColor}`}
+                  iconId={'search-outline'}
+                  viewBox={'0 -8 30 40'}
+                  width={'30'}
+                />
+              </button>
             </span>
           )}
           <input
@@ -78,21 +89,37 @@ export const Input = forwardRef<HTMLInputElement, Props>(
               `,
               className,
             ])}
-            disabled={disabled}
             id={id}
-            ref={ref}
-            style={{ paddingLeft: inputPaddingLeft }}
+            type={inputTypeToShow}
             {...props}
+            disabled={disabled}
+            ref={ref}
+            style={{ paddingLeft: `${inputPaddingLeft}` }}
           />
-          {icon && isRightIcon && (
-            <span className={'flex items-center pr-1 mr-[0.5rem]'}>{icon}</span>
+          {inputType === 'reveal' && (
+            <span className={'flex items-center pr-1 mr-[0.5rem]'}>
+              <button
+                className={cn([
+                  `
+                focus:outline-none 
+                ${disabled ? 'cursor-default' : 'cursor-pointer'}
+                `,
+                  className,
+                ])}
+                onClick={changeShowContentHandler}
+                type={'button'}
+              >
+                <Icon
+                  className={`fill-current ${svgColor}`}
+                  iconId={`${showContent ? 'eye-outline' : 'eye-off-outline'}`}
+                  viewBox={'10 -6 1 35'}
+                  width={'30'}
+                />
+              </button>
+            </span>
           )}
         </div>
-        {hasError && (
-          <p className={'text-sm text-danger-500'}>
-            {typeof error === 'string' ? error : error?.message || 'Invalid input'}
-          </p>
-        )}
+        {error && <p className={'text-sm text-danger-500'}>{error ?? 'invalid input'}</p>}
       </div>
     )
   }
