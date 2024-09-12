@@ -9,11 +9,12 @@ export const LanguageSelect = () => {
   return (
     <Select
       icon={
-        lang === 'ru' ? (
-          <Icon height={'20px'} iconId={'russian-flag'} viewBox={'-3 -1.5 40 30'} width={'30px'} />
-        ) : (
-          <Icon height={'20px'} iconId={'british-flag'} viewBox={'-3 -1.5 40 30'} width={'30px'} />
-        )
+        <Icon
+          height={'20px'}
+          iconId={lang === 'en' ? 'british-flag' : 'russian-flag'}
+          viewBox={'-3 -1.5 40 30'}
+          width={'30px'}
+        />
       }
       onValueChange={(value: 'en' | 'ru') => setLang(value)}
       value={lang}
