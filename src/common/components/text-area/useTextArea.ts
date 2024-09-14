@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useId, useRef } from 'react'
 
 export const useTextArea = ({
   autoResize,
@@ -8,6 +8,8 @@ export const useTextArea = ({
   onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
+
+  const textAreaId = useId()
 
   const calcHeight = useCallback(() => {
     if (textAreaRef.current && autoResize) {
@@ -27,6 +29,7 @@ export const useTextArea = ({
 
   return {
     handleChange,
+    textAreaId,
     textAreaRef,
   }
 }
