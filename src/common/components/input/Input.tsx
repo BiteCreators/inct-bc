@@ -3,6 +3,8 @@ import { InputHTMLAttributes, forwardRef, useId, useState } from 'react'
 import { Icon } from '@/common/components/icon/Icon'
 import { cn } from '@/common/utils/cn'
 
+import { useInput } from './useInput'
+
 type Props = {
   error?: string
   inputType?: 'default' | 'reveal' | 'search'
@@ -15,24 +17,21 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     { className, disabled, error, id, inputType = 'default', label, onSearchClick, ...props },
     ref
   ) => {
-    const svgColor = disabled ? 'text-dark-100' : 'text-light-900'
-    const inputPaddingLeft = inputType === 'search' ? '42px' : '8px'
-    const [showContent, setShowContent] = useState(false)
-    const inputId = useId()
-
-    const changeShowContentHandler = () => {
-      if (!disabled) {
-        setShowContent(prev => !prev)
-      }
-    }
-    const inputTypeToShow = inputType === 'reveal' && !showContent ? 'password' : 'text'
+    const {
+      changeShowContentHandler,
+      inputId,
+      inputPaddingLeft,
+      inputTypeToShow,
+      showContent,
+      svgColor,
+    } = useInput({ disabled, inputType })
 
     return (
       <div className={cn('relative mb-4', className)}>
         {label && (
           <label
             className={cn(
-              'block leading-[24px] text-sm font-normal',
+              'block leading-6 text-sm font-normal',
               disabled ? 'text-dark-100' : 'text-light-900'
             )}
             htmlFor={id ?? inputId}
@@ -86,7 +85,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             {...props}
             disabled={disabled}
             ref={ref}
-            style={{ paddingLeft: `${inputPaddingLeft}` }}
+            style={{ paddingLeft: inputPaddingLeft }}
           />
           {inputType === 'reveal' && (
             <span className={'flex items-center pr-1 mr-[0.5rem]'}>
@@ -101,7 +100,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
               >
                 <Icon
                   className={`fill-current ${svgColor}`}
-                  iconId={`${showContent ? 'eye-outline' : 'eye-off-outline'}`}
+                  iconId={showContent ? 'eye-outline' : 'eye-off-outline'}
                   viewBox={'10 -6 1 35'}
                   width={'30'}
                 />
