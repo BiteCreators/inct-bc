@@ -1,12 +1,10 @@
-import { useState } from 'react'
-
 import { Icon } from '@/common/components/icon/Icon'
 import { Select } from '@/common/components/select/Select'
 import { useTranslation } from '@/common/utils/hooks/useTranslation'
 import { useRouter } from 'next/router'
 
 export const LanguageSelect = () => {
-  const { asPath, defaultLocale, locale, locales, pathname, push, query } = useRouter()
+  const { asPath, defaultLocale, locale, pathname, push, query } = useRouter()
 
   const {
     t: { Internationalization },
