@@ -29,7 +29,10 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
     }: Props,
     ref
   ) => {
-    const { handleChange, textAreaRef } = useTextArea({ autoResize: resize === 'auto', onChange })
+    const { handleChange, textAreaId, textAreaRef } = useTextArea({
+      autoResize: resize === 'auto',
+      onChange,
+    })
 
     return (
       <div className={'flex flex-col'} ref={ref}>
@@ -40,47 +43,31 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
               disabled && 'text-dark-100',
               required && 'after:content-["*"] after:ml-0.5 after: text-light-900'
             )}
-            htmlFor={id}
+            htmlFor={id ?? textAreaId}
           >
             {label}
           </label>
         )}
         <textarea
           className={cn([
-            `
-            outline-none
-            px-3 
-            py-1.5 
-            text-light-100 
-            bg-dark-500 
-            border 
-            border-dark-100 
-            rounded-sm
-            focus:outline-primary-500
-            focus:border-dark-500
-            active:focus:border-dark-500
-            active:border-light-100
-            active:border
-            disabled:text-dark-100
-            disabled:active:border-dark-100
-            placeholder:text-light-900
-            placeholder:text-md
-            resize-none
-            outline-offset-0
-            overflow-y-hidden
-            min-h-9
-            text-md
-            transition-[outline-color]
-            ease-linear
-            duration-150
-            `,
+            'px-3 py-1.5 min-h-9',
+            'outline-none outline-offset-0',
+            'text-light-100 text-md',
+            'border border-dark-100 rounded-sm',
+            'bg-dark-500',
+            'focus:outline-primary-500 focus:border-dark-500',
+            'active:focus:border-dark-500 active:border-light-100 active:border',
+            'disabled:text-dark-100 disabled:active:border-dark-100',
+            'placeholder:text-light-900 placeholder:text-md',
+            'overflow-y-hidden resize-none',
+            'transition-[outline-color] duration-100',
             isError && 'border-danger-500',
             resize === 'manual-y' && 'overflow-y-auto resize-y',
             resize === 'manual-x' && 'overflow-x-auto resize-x',
             className,
           ])}
           disabled={disabled}
-          id={id}
+          id={id ?? textAreaId}
           onChange={handleChange}
           ref={textAreaRef}
           required={required}

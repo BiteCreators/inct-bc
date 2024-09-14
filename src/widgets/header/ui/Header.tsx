@@ -9,11 +9,9 @@ export const Header = ({ isAuth }: { isAuth?: boolean }) => {
   return (
     <header
       className={cn(
-        `
-        flex justify-between align-middle
-        md:px-16 px-[15px] py-3 h-[60px]
-        border-b border-dark-300
-        `
+        'flex justify-between align-middle',
+        'md:px-16 px-[15px] py-3 h-[60px]',
+        'border-b border-dark-300'
       )}
     >
       <div>

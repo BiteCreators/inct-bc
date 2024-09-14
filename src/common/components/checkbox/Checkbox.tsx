@@ -43,24 +43,13 @@ export const Checkbox = ({
         />
         <label
           className={cn(
-            `
-          relative
-          bg-inherit
-          w-9 h-9
-          rounded-2xl
-          active:bg-dark-100 
-          hover:bg-dark-300 
-          focus:bg-dark-500
-          before:inline-block
-          before:content-['']
-          before:absolute
-          before:left-[9px]
-          before:top-[9px]
-          before:w-[18px]
-          before:h-[18px]
-          before:border-solid
-          before:border-2
-          before:rounded-sm`,
+            'relative',
+            'bg-inherit w-9 h-9 rounded-2xl',
+            'active:bg-dark-100 hover:bg-dark-300 focus:bg-dark-500',
+            'before:inline-block before:content-[""]',
+            'before:absolute  before:left-[9px] before:top-[9px] ',
+            'before:w-[18px] before:h-[18px]',
+            'before:border-solid before:border-2  before:rounded-sm',
             disabled && '!bg-inherit',
             isChecked && !disabled && 'before:bg-light-100 before:border-none',
             isChecked && disabled && 'before:bg-dark-100 before:border-none',

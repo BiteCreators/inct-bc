@@ -1,5 +1,5 @@
 'use client'
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useId } from 'react'
 
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
@@ -34,17 +34,17 @@ export const Select = ({
   width,
   ...props
 }: Props) => {
+  const selectId = useId()
+
   return (
     <div className={cn('flex relative flex-col', className)} style={{ maxWidth, width }}>
       {label && (
         <label
           className={cn(
-            `
-            text-sm text-light-900
-            `,
+            'text-sm text-light-900',
             required && 'after:content-["*"] after:text-light-900 after:text-sm after:ml-0.5'
           )}
-          htmlFor={id}
+          htmlFor={id ?? selectId}
         >
           {label}
         </label>
@@ -52,26 +52,20 @@ export const Select = ({
       <SelectPrimitive.Root {...props} open={open}>
         <SelectPrimitive.Trigger
           className={cn(
-            `
-            flex justify-between
-            border-dark-100 border
-            active:outline-none 
-            text-md 
-            px-3 py-[6px]
-            data-[placeholder]:text-light-900
-            outline-none
-            rounded-sm
-            outline-offset-0 focus:outline-primary-500 focus:outline-2
-            data-[state="open"]:bg-dark-500 data-[state="open"]:border-light-100
-            data-[state="open"]:rounded-b-none
-            data-[disabled]:data-[placeholder]:text-dark-100 
-            transition-[outline-color]
-            delay-75
-            group
-            `,
+            'flex justify-between',
+            'border-dark-100 border rounded-sm outline-offset-0 outline-none',
+            'px-3 py-[6px] text-md',
+            'active:outline-none',
+            'data-[placeholder]:text-light-900',
+            'focus:outline-primary-500 focus:outline-2',
+            'data-[state="open"]:bg-dark-500 data-[state="open"]:border-light-100',
+            'data-[state="open"]:rounded-b-none',
+            'data-[disabled]:data-[placeholder]:text-dark-100',
+            'transition-[outline-color] delay-75',
+            'group',
             isError && 'border-danger-500'
           )}
-          id={id}
+          id={id ?? selectId}
         >
           <div className={'flex gap-3 align-center'}>
             {icon}
@@ -80,12 +74,9 @@ export const Select = ({
           <SelectPrimitive.Icon className={'ml-2'}>
             <Icon
               className={cn(
-                `
-                fill-current text-light-100 
-                group-[[data-state="open"]]:rotate-180
-                transition-transform
-                delay-100
-                `
+                'fill-current text-light-100',
+                'group-[[data-state="open"]]:rotate-180',
+                'transition-transform delay-100'
               )}
               height={'20px'}
               iconId={'arrow-ios-Up'}
@@ -98,13 +89,9 @@ export const Select = ({
           <SelectPrimitive.Content
             asChild
             className={cn(
-              `
-              border border-light-100 border-t-[0px]
-              rounded-b-sm
-              bg-dark-500
-              z-10
-              w-[var(--radix-select-trigger-width)]
-              `
+              'border border-light-100 border-t-0 rounded-b-sm',
+              'bg-dark-500 w-[var(--radix-select-trigger-width)]',
+              'z-10'
             )}
             position={'popper'}
           >
@@ -120,14 +107,7 @@ export const Select = ({
         </SelectPrimitive.Portal>
       </SelectPrimitive.Root>
       {isError && (
-        <p
-          className={cn(
-            `
-            absolute bottom-[-24px] -z-20
-            text-sm text-danger-500
-            `
-          )}
-        >
+        <p className={cn('absolute -bottom-6 -z-20', 'text-sm text-danger-500')}>
           {error ?? 'invalid input'}
         </p>
       )}
@@ -142,14 +122,9 @@ Select.Item = forwardRef<HTMLDivElement, ItemProps>(
     return (
       <SelectPrimitive.Item
         className={cn(
-          `
-          px-3 py-[6px]
-          text-md
-          hover:text-primary-500 hover:bg-dark-300 hover:outline-none
-          cursor-pointer
-          delay-[0.01s]
-          transition-colors
-          `,
+          'px-3 py-[6px]',
+          'text-md cursor-pointer',
+          'hover:text-primary-500 hover:bg-dark-300 hover:outline-none',
           className
         )}
         {...props}
