@@ -1,4 +1,4 @@
-import Typography from '@/common/components/Typography/Typography'
+import Typography from '@/common/components/typography/Typography'
 import { Meta } from '@storybook/react'
 
 const meta = {
