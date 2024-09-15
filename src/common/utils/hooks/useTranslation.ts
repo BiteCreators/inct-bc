@@ -5,7 +5,13 @@ import { useRouter } from 'next/router'
 export const useTranslation = () => {
   const router = useRouter()
 
-  const t = router.locale === 'en' ? en : ru
+  const locale = router.locale === 'en' ? en : ru
 
-  return { t }
+  return locale
+}
+
+export const useScopedTranslation = <T extends keyof typeof en>(namespace: T) => {
+  const locale = useTranslation()
+
+  return locale[namespace]
 }
