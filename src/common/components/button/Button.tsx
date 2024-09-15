@@ -8,16 +8,12 @@ type ButtonProps = {
   variant?: 'outline' | 'primary' | 'secondary' | 'text'
 } & ComponentProps<'button'>
 
-export const Button = ({
-  asChild = false,
-  className,
-  variant = 'primary',
-  ...props
-}: ButtonProps) => {
+
+export const Button = ({ asChild, className, variant = 'primary', ...props }: ButtonProps) => {
   const Component = asChild ? Slot : 'button'
 
   return (
-    <button
+    <Component
       className={cn(
         'font-weight600 w-auto py-1.5 px-4 rounded-sm text-md text-slate-50',
         'disabled:opacity-50',
@@ -48,3 +44,9 @@ export const Button = ({
     />
   )
 }
+
+export default () => (
+  <Slot>
+    <div>Hello</div>
+  </Slot>
+)

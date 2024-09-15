@@ -15,11 +15,15 @@
     "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/common/assets/icons/svg --out-dir src/common/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
+=======
+    "@radix-ui/react-slot": "^1.1.0",
+>>>>>>> e0f9af6 (IN-35 feat: add polimorf variant)
     "clsx": "^2.1.1",
     "framer-motion": "^11.5.4",
     "next": "14.2.7",
