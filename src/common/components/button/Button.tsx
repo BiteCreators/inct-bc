@@ -34,13 +34,13 @@ export const Button = ({
         ],
         variant === 'outline' && [
           'bg-none border-primary-500 border text-primary-500',
-          'hover:border-primary-700 hover:text-primary-700 ',
+          'hover:border-primary-700 hover:text-primary-700',
           'disabled:border-primary-500 disabled:text-primary-500 disabled:hover:border-primary-500 disabled:hover:text-primary-500',
         ],
         variant === 'text' && [
           'bg-none text-primary-500',
-          ' hover:text-primary-700',
-          ' disabled:text-primary-500 disabled:hover:text-primary-500',
+          'hover:text-primary-700',
+          'disabled:text-primary-500 disabled:hover:text-primary-500',
         ],
         className
       )}
