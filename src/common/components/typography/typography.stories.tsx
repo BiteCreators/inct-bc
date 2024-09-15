@@ -10,12 +10,15 @@ export default meta
 export const Typographys = {
   render: () => (
     <div className={'flex flex-col'}>
-      <Typography variant={'h2'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
-      <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
-      <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
       <Typography variant={'large'}>
         Lorem ipsum dolor sit amet, consectetur adipisicing.
       </Typography>
+      <Typography variant={'h1'}>
+        111Lorem ipsum dolor sit amet, consectetur adipisicing.
+      </Typography>
+      <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
+      <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
+
       <Typography variant={'regular-text'}>
         Lorem ipsum dolor sit amet, consectetur adipisicing.
       </Typography>
