@@ -16,15 +16,19 @@ export const Typographys = {
       <Typography variant={'h1'}>
         111Lorem ipsum dolor sit amet, consectetur adipisicing.
       </Typography>
-      <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
+      <Typography variant={'h2'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
       <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
 
       <Typography variant={'regular-text'}>
         Lorem ipsum dolor sit amet, consectetur adipisicing.
       </Typography>
+      <Typography variant={'small-text'}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing.
+      </Typography>
       <Typography variant={'regular-link'}>
         Lorem ipsum dolor sit amet, consectetur adipisicing.
       </Typography>
+
       <Typography className={'font-bold'} variant={'small-text'}>
         Lorem ipsum dolor sit amet, consectetur adipisicing.
       </Typography>
