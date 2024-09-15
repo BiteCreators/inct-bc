@@ -1,12 +1,21 @@
 import React, { ComponentProps } from 'react'
 
 import { cn } from '@/common/utils/cn'
+import { Slot } from '@radix-ui/react-slot'
 
 type ButtonProps = {
+  asChild?: boolean
   variant?: 'outline' | 'primary' | 'secondary' | 'text'
 } & ComponentProps<'button'>
 
-export const Button = ({ className, variant = 'primary', ...props }: ButtonProps) => {
+export const Button = ({
+  asChild = false,
+  className,
+  variant = 'primary',
+  ...props
+}: ButtonProps) => {
+  const Component = asChild ? Slot : 'button'
+
   return (
     <button
       className={cn(
