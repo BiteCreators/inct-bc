@@ -1,5 +1,6 @@
 import { Button } from '@/common/components/button/Button'
 import { Meta } from '@storybook/react'
+import Link from 'next/link'
 
 const meta = {
   component: Button,
@@ -37,6 +38,16 @@ export const Text = {
     variant: 'text',
   },
 }
+export const LinkButton = {
+  render: () => {
+    return (
+      <Button asChild>
+        <Link href={'#'}>LinkButton</Link>
+      </Button>
+    )
+  },
+}
+
 export const Disabled = {
   args: {
     children: 'Button',

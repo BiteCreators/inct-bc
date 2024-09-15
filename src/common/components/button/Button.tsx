@@ -8,7 +8,12 @@ type ButtonProps = {
   variant?: 'outline' | 'primary' | 'secondary' | 'text'
 } & ComponentProps<'button'>
 
-export const Button = ({ asChild, className, variant = 'primary', ...props }: ButtonProps) => {
+export const Button = ({
+  asChild = false,
+  className,
+  variant = 'primary',
+  ...props
+}: ButtonProps) => {
   const Component = asChild ? Slot : 'button'
 
   return (
