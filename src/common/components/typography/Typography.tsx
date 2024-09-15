@@ -14,7 +14,7 @@ const typographyVariants = {
 }
 
 type TypographyProps = {
-  children: ReactNode
+  children?: ReactNode
   className?: string
   variant?: keyof typeof typographyVariants
 }
