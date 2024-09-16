@@ -4,5 +4,4 @@ export type FormFieldProps<T extends FieldValues> = {
   control?: Control<T>
   name: FieldPath<T>
   rules?: Record<string, unknown>
-  text?: string
 }
