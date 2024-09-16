@@ -1,10 +1,11 @@
 import React, { ComponentProps, forwardRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
+import { mergeRefs } from '@/common/utils/mergeRefs'
 
 import { useTextArea } from './useTextArea'
 
-type Props = {
+export type TextAreaProps = {
   className?: string
   error?: string
   isError?: boolean
@@ -12,7 +13,7 @@ type Props = {
   resize?: 'auto' | 'manual-x' | 'manual-y'
 } & ComponentProps<'textarea'>
 
-export const TextArea = forwardRef<HTMLDivElement, Props>(
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       className,
@@ -26,7 +27,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
       resize = 'auto',
       value,
       ...props
-    }: Props,
+    }: TextAreaProps,
     ref
   ) => {
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
@@ -35,7 +36,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
     })
 
     return (
-      <div className={'flex flex-col'} ref={ref}>
+      <div className={'flex flex-col'}>
         {!!label && (
           <label
             className={cn(
@@ -69,7 +70,7 @@ export const TextArea = forwardRef<HTMLDivElement, Props>(
           disabled={disabled}
           id={id ?? textAreaId}
           onChange={handleChange}
-          ref={textAreaRef}
+          ref={mergeRefs([ref, textAreaRef])}
           required={required}
           {...props}
         />

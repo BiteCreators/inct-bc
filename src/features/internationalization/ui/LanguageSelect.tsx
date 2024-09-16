@@ -1,6 +1,6 @@
 import { Icon } from '@/common/components/icon/Icon'
-import { Select } from '@/common/components/select/Select'
-import { useScopedTranslation, useTranslation } from '@/common/utils/hooks/useTranslation'
+import { Select, SelectItem } from '@/common/components/select/Select'
+import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { useRouter } from 'next/router'
 
 export const LanguageSelect = () => {
@@ -27,8 +27,8 @@ export const LanguageSelect = () => {
       onValueChange={handleChange}
       value={locale}
     >
-      <Select.Item value={'ru'}>{t.ru}</Select.Item>
-      <Select.Item value={'en'}>{t.en}</Select.Item>
+      <SelectItem value={'ru'}>{t.ru}</SelectItem>
+      <SelectItem value={'en'}>{t.en}</SelectItem>
     </Select>
   )
 }

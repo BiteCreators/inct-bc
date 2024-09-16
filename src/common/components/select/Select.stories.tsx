@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { Icon } from '../icon/Icon'
-import { Select } from './Select'
+import { Select, SelectItem } from './Select'
 
 const meta: Meta<typeof Select> = {
   component: Select,
@@ -16,19 +16,17 @@ export const Default: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>option 1</Select.Item>
-        <Select.Item value={'test1'}>option 2</Select.Item>
-        <Select.Item value={'test2'}>
-          option 3 with longer text option 3 with longer text
-        </Select.Item>
+        <SelectItem value={'test'}>option 1</SelectItem>
+        <SelectItem value={'test1'}>option 2</SelectItem>
+        <SelectItem value={'test2'}>option 3 with longer text option 3 with longer text</SelectItem>
 
-        <Select.Item value={'test3'}>option 4</Select.Item>
-        <Select.Item value={'test4'}>option 5</Select.Item>
-        <Select.Item value={'test5'}>option 6</Select.Item>
-        <Select.Item value={'test6'}>option 7</Select.Item>
-        <Select.Item value={'test7'}>option 8</Select.Item>
-        <Select.Item value={'test8'}>option 9</Select.Item>
-        <Select.Item value={'test9'}>option 10</Select.Item>
+        <SelectItem value={'test3'}>option 4</SelectItem>
+        <SelectItem value={'test4'}>option 5</SelectItem>
+        <SelectItem value={'test5'}>option 6</SelectItem>
+        <SelectItem value={'test6'}>option 7</SelectItem>
+        <SelectItem value={'test7'}>option 8</SelectItem>
+        <SelectItem value={'test8'}>option 9</SelectItem>
+        <SelectItem value={'test9'}>option 10</SelectItem>
       </>
     ),
     id: 'default',
@@ -40,8 +38,8 @@ export const Required: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>option 1</Select.Item>
-        <Select.Item value={'test1'}>option 2</Select.Item>
+        <SelectItem value={'test'}>option 1</SelectItem>
+        <SelectItem value={'test1'}>option 2</SelectItem>
       </>
     ),
     id: 'required',
@@ -54,11 +52,9 @@ export const CustomWidth: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>option 1</Select.Item>
-        <Select.Item value={'test1'}>option 2</Select.Item>
-        <Select.Item value={'test2'}>
-          option 3 with longer text option 3 with longer text
-        </Select.Item>
+        <SelectItem value={'test'}>option 1</SelectItem>
+        <SelectItem value={'test1'}>option 2</SelectItem>
+        <SelectItem value={'test2'}>option 3 with longer text option 3 with longer text</SelectItem>
       </>
     ),
     id: 'custom-w',
@@ -71,8 +67,8 @@ export const Disabled: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>option 1</Select.Item>
-        <Select.Item value={'test1'}>option 2</Select.Item>
+        <SelectItem value={'test'}>option 1</SelectItem>
+        <SelectItem value={'test1'}>option 2</SelectItem>
       </>
     ),
     disabled: true,
@@ -85,13 +81,12 @@ export const Error: Story = {
   args: {
     children: (
       <>
-        <Select.Item value={'test'}>option 1</Select.Item>
-        <Select.Item value={'test1'}>option 2</Select.Item>
+        <SelectItem value={'test'}>option 1</SelectItem>
+        <SelectItem value={'test1'}>option 2</SelectItem>
       </>
     ),
     error: 'error message',
     id: 'error',
-    isError: true,
     label: 'error',
     placeholder: 'error',
   },
@@ -127,8 +122,8 @@ export const WithIcon: Story = {
         onValueChange={(value: 'en' | 'ru') => setLang(value)}
         value={lang}
       >
-        <Select.Item value={'ru'}>{'Russian'}</Select.Item>
-        <Select.Item value={'en'}>{'English'}</Select.Item>
+        <SelectItem value={'ru'}>{'Russian'}</SelectItem>
+        <SelectItem value={'en'}>{'English'}</SelectItem>
       </Select>
     )
   },
