@@ -1,8 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '../button/Button'
-import { Select, SelectItem } from '../select/Select'
+import { SelectItem } from '../select/Select'
 import { FormCheckbox } from './FormCheckbox'
+import { FormInput } from './FormInput'
 import { FormSelect } from './FormSelect'
 import { FormTextArea } from './FormTextArea'
 
@@ -40,6 +41,7 @@ export const FormFiedls = {
           <SelectItem value={'option 2'}>option 2</SelectItem>
         </FormSelect>
         <FormTextArea control={control} name={'texareaText'} />
+        <FormInput control={control} name={'inputText'} />
         <div>
           <Button>Submit</Button>
         </div>
