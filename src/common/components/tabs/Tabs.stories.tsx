@@ -5,9 +5,6 @@ import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {
-    children: {
-      description: 'Имя вкладки',
-    },
     disabled: {
       description: 'Варианты отображения вкладок - Заблокирована | Незаблокирована.',
     },
@@ -31,7 +28,6 @@ const meta = {
 
 export const Primary: StoryObj<typeof TabsBase> = {
   args: {
-    children: 'Primary',
     onClick: action('click primary tab'),
     tabsData,
     variant: 'primary',
@@ -47,7 +43,6 @@ export const Primary: StoryObj<typeof TabsBase> = {
 
 export const Secondary: StoryObj<typeof TabsBase> = {
   args: {
-    children: 'Secondary',
     onClick: action('click secondary tab'),
     tabsData,
     variant: 'secondary',
