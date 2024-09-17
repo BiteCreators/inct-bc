@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
+import { Button } from '@/common/components/button/Button'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Modal } from './Modal'
 
 const meta = {
   component: Modal,
-  title: 'Components/Modal',
 } satisfies Meta<typeof Modal>
 
 export default meta
@@ -41,12 +41,7 @@ export const Closed: Story = {
 
     return (
       <div>
-        <button
-          className={'px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'}
-          onClick={() => setIsOpen(true)}
-        >
-          Open Modal
-        </button>
+        <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
         <Modal {...args} isOpen={isOpen} onOpenChange={setIsOpen} />
       </div>
     )
@@ -59,7 +54,7 @@ export const CustomContent: Story = {
       <div>
         <h2 className={'text-xl font-bold'}>Custom Content</h2>
         <p>This modal contains custom content, such as headers and additional text.</p>
-        <button className={'mt-4 px-4 py-2 bg-blue-600 text-white rounded'}>Action Button</button>
+        <Button className={'mt-4'}>Button</Button>
       </div>
     ),
     isOpen: true,

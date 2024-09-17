@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Icon } from '@/common/components/icon/Icon'
+import { Close } from '@/common/assets/icons/components'
 import * as Dialog from '@radix-ui/react-dialog'
 
 type Props = {
@@ -16,21 +16,18 @@ export const Modal = ({ children, isOpen, onOpenChange, title }: Props) => {
       <Dialog.Overlay className={'fixed inset-0 bg-black/50'} />
       <Dialog.Content
         className={
-          'fixed top-1/2 left-1/2 w-[90vw] max-w-md p-6 bg-white rounded-lg shadow-lg transform -translate-x-1/2 -translate-y-1/2'
+          'fixed top-1/2 left-1/2 max-w-md bg-dark-300 rounded-sm transform border border-dark-100' +
+          ' -translate-x-1/2 -translate-y-1/2'
         }
       >
-        <div className={'flex justify-between items-center'}>
-          <Dialog.Title className={'text-lg font-medium'}>{title}</Dialog.Title>
+        <div className={'flex justify-between items-center py-3 px-6'}>
+          <Dialog.Title className={'text-xl font-bold'}>{title}</Dialog.Title>
           <Dialog.Close className={'focus:outline-none cursor-pointer'}>
-            <Icon
-              className={'fill-current text-gray-500 hover:text-gray-700'}
-              iconId={'close'}
-              viewBox={'0 0 24 24'}
-              width={'24'}
-            />
+            <Close className={'fill-current text-light-100'} />
           </Dialog.Close>
         </div>
-        <div className={'mt-4'}>{children}</div>
+        <div className={'h-px bg-dark-100 w-full'}></div>
+        <div className={'py-3 px-6'}>{children}</div>
       </Dialog.Content>
     </Dialog.Root>
   )
