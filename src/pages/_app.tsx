@@ -18,11 +18,7 @@ type AppPropsWithLayout = {
 
 const DefaultLayout = (page: React.ReactElement) => {
   return (
-    <PageLayout
-      footer={<div>footer test</div>}
-      header={<Header />}
-      sidebar={<div>sidebar test</div>}
-    >
+    <PageLayout footer={<div>footer</div>} header={<Header />} sidebar={<div>sidebar</div>}>
       {page}
     </PageLayout>
   )
