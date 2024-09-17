@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, forwardRef, useId, useState } from 'react'
 
+import { EyeOutline } from '@/common/assets/icons/components'
 import { Icon } from '@/common/components/icon/Icon'
 import { cn } from '@/common/utils/cn'
 
@@ -98,9 +99,8 @@ export const Input = forwardRef<HTMLInputElement, Props>(
                 onClick={changeShowContentHandler}
                 type={'button'}
               >
-                <Icon
+                <EyeOutline
                   className={`fill-current ${svgColor}`}
-                  iconId={showContent ? 'eye-outline' : 'eye-off-outline'}
                   viewBox={'10 -6 1 35'}
                   width={'30'}
                 />
