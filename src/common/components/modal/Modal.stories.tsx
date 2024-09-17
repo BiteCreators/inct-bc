@@ -1,15 +1,13 @@
-import React from 'react'
+import { useState } from 'react'
 
-import { Button } from '@/common/components/button/Button'
-import { Icon } from '@/common/components/icon/Icon'
-import { Modal } from '@/common/components/modal/Modal'
-import Typography from '@/common/components/typography/Typography'
-import { cn } from '@/common/utils/cn'
-import { StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
+
+import { Modal } from './Modal'
 
 const meta = {
   component: Modal,
-}
+  title: 'Components/Modal',
+} satisfies Meta<typeof Modal>
 
 export default meta
 
@@ -17,64 +15,62 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    children: (
-      <div className={'flex flex-col items-start justify-center'}>
-        <span className={'flex items-center'}>
-          <button className={cn(['focus:outline-none cursor-pointer flex items-center'])}>
-            <Icon
-              className={'fill-current text-light-100'}
-              iconId={'settings'}
-              viewBox={'0 -8 30 40'}
-              width={'30'}
-            />
-            <Typography className={'text-light-100 whitespace-nowrap ml-2'} variant={'medium-text'}>
-              settings
-            </Typography>
-          </button>
-        </span>
-        <span className={'flex items-center'}>
-          <button className={cn(['focus:outline-none cursor-pointer flex items-center'])}>
-            <Icon
-              className={'fill-current text-light-100'}
-              iconId={'settings'}
-              viewBox={'0 -8 30 40'}
-              width={'30'}
-            />
-            <Typography className={'text-light-100 whitespace-nowrap ml-2'} variant={'medium-text'}>
-              settings
-            </Typography>
-          </button>
-        </span>
-        <span className={'flex items-center'}>
-          <button className={cn(['focus:outline-none cursor-pointer flex items-center'])}>
-            <Icon
-              className={'fill-current text-light-100'}
-              iconId={'settings'}
-              viewBox={'0 -8 30 40'}
-              width={'30'}
-            />
-            <Typography className={'text-light-100 whitespace-nowrap ml-2'} variant={'medium-text'}>
-              settings
-            </Typography>
-          </button>
-        </span>
+    children: <p>This is the default content of the modal.</p>,
+    isOpen: true,
+    onOpenChange: (open: boolean) => console.log('Modal open state:', open),
+    title: 'Default Modal',
+  },
+  render: args => {
+    return (
+      <div>
+        <Modal {...args} />
       </div>
-    ),
+    )
   },
 }
 
-export const WithCustomIcon: Story = {
+export const Closed: Story = {
+  args: {
+    children: <p>This modal is closed by default.</p>,
+    isOpen: false,
+    onOpenChange: (open: boolean) => console.log('Modal open state:', open),
+    title: 'Closed Modal',
+  },
+  render: args => {
+    const [isOpen, setIsOpen] = useState(args.isOpen)
+
+    return (
+      <div>
+        <button
+          className={'px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700'}
+          onClick={() => setIsOpen(true)}
+        >
+          Open Modal
+        </button>
+        <Modal {...args} isOpen={isOpen} onOpenChange={setIsOpen} />
+      </div>
+    )
+  },
+}
+
+export const CustomContent: Story = {
   args: {
     children: (
-      <div className={'flex flex-col items-center justify-center'}>
-        <Typography className={'text-light-100'} variant={'medium-text'}>
-          This is a custom icon modal.
-        </Typography>
-        <Button className={'mt-3'} onClick={() => alert('Action!')}>
-          Action
-        </Button>
+      <div>
+        <h2 className={'text-xl font-bold'}>Custom Content</h2>
+        <p>This modal contains custom content, such as headers and additional text.</p>
+        <button className={'mt-4 px-4 py-2 bg-blue-600 text-white rounded'}>Action Button</button>
       </div>
     ),
-    triggerIcon: 'settings',
+    isOpen: true,
+    onOpenChange: (open: boolean) => console.log('Modal open state:', open),
+    title: 'Modal with Custom Content',
+  },
+  render: args => {
+    return (
+      <div>
+        <Modal {...args} />
+      </div>
+    )
   },
 }

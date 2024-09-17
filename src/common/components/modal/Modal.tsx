@@ -1,45 +1,37 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 
 import { Icon } from '@/common/components/icon/Icon'
-import { cn } from '@/common/utils/cn'
 import * as Dialog from '@radix-ui/react-dialog'
-
-type Action = {
-  icon: string
-  label: string
-  onClick: () => void
-}
 
 type Props = {
   children: ReactNode
-  triggerIcon?: string
+  isOpen: boolean
+  onOpenChange: (open: boolean) => void
+  title: string
 }
 
-export const Modal = ({ children, triggerIcon }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
-
+export const Modal = ({ children, isOpen, onOpenChange, title }: Props) => {
   return (
-    <Dialog.Root onOpenChange={setIsOpen} open={isOpen}>
-      <Dialog.Trigger asChild>
-        <span className={'relative flex items-center justify-end'}>
-          <button
-            className={cn([
-              'focus:outline-none cursor-pointer fill-current p-2',
-              isOpen ? 'text-primary-700' : 'text-light-100',
-            ])}
-          >
-            <Icon iconId={triggerIcon || 'more-horizontal'} viewBox={'0 -8 30 40'} width={'30'} />
-          </button>
-        </span>
-      </Dialog.Trigger>
-
-      <Dialog.Portal>
-        <Dialog.Content
-          className={'absolute right-8 p-4 bg-dark-500 rounded-sm border border-dark-100 '}
-        >
-          <div className={'gap-3'}>{children}</div>
-        </Dialog.Content>
-      </Dialog.Portal>
+    <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
+      <Dialog.Overlay className={'fixed inset-0 bg-black/50'} />
+      <Dialog.Content
+        className={
+          'fixed top-1/2 left-1/2 w-[90vw] max-w-md p-6 bg-white rounded-lg shadow-lg transform -translate-x-1/2 -translate-y-1/2'
+        }
+      >
+        <div className={'flex justify-between items-center'}>
+          <Dialog.Title className={'text-lg font-medium'}>{title}</Dialog.Title>
+          <Dialog.Close className={'focus:outline-none cursor-pointer'}>
+            <Icon
+              className={'fill-current text-gray-500 hover:text-gray-700'}
+              iconId={'close'}
+              viewBox={'0 0 24 24'}
+              width={'24'}
+            />
+          </Dialog.Close>
+        </div>
+        <div className={'mt-4'}>{children}</div>
+      </Dialog.Content>
     </Dialog.Root>
   )
 }
