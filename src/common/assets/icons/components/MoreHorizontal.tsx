@@ -10,7 +10,7 @@ const SvgMoreHorizontal = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElemen
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#more-horizontal_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#more-horizontal_svg__a)'} fill={'currentcolor'}>
       <path
         d={
           'M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4M19 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4M5 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4'

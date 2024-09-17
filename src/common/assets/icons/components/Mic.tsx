@@ -10,7 +10,7 @@ const SvgMic = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#mic_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#mic_svg__a)'} fill={'currentcolor'}>
       <path d={'M12 15a4 4 0 0 0 4-4V6a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4'} />
       <path
         d={

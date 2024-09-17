@@ -9,7 +9,7 @@ const SvgSettings = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) =>
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#settings_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#settings_svg__a)'} fill={'currentcolor'}>
       <path d={'M12 13.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3'} />
       <path
         d={

@@ -10,7 +10,7 @@ const SvgPlayCircle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) 
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#play-circle_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#play-circle_svg__a)'} fill={'currentcolor'}>
       <path d={'m11.5 14.6 2.81-2.6-2.81-2.6z'} />
       <path
         d={

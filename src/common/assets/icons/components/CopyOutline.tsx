@@ -10,7 +10,7 @@ const SvgCopyOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>)
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#copy-outline_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#copy-outline_svg__a)'} fill={'currentcolor'}>
       <path
         d={
           'M18 21h-6a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3m-6-10a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1z'

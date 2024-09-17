@@ -15,7 +15,7 @@ const SvgPauseCircle = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>)
         d={
           'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20m-2 13a1 1 0 1 1-2 0V9a1 1 0 0 1 2 0zm6 0a1 1 0 0 1-2 0V9a1 1 0 0 1 2 0z'
         }
-        fill={'#000'}
+        fill={'currentcolor'}
       />
     </g>
     <defs>

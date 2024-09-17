@@ -10,7 +10,7 @@ const SvgLayers = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#layers_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#layers_svg__a)'} fill={'currentcolor'}>
       <path
         d={
           'm3.24 7.29 8.52 4.63a.51.51 0 0 0 .48 0l8.52-4.63a.44.44 0 0 0-.05-.81L12.19 3a.5.5 0 0 0-.38 0L3.29 6.48a.44.44 0 0 0-.05.81'

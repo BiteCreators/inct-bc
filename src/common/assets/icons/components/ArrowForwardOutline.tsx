@@ -13,7 +13,7 @@ const SvgArrowForwardOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGE
         d={
           'M5 13h11.86l-3.63 4.36a1 1 0 1 0 1.54 1.28l5-6q.051-.072.09-.15c0-.05.05-.08.07-.13A1 1 0 0 0 20 12a1 1 0 0 0-.07-.36c0-.05-.05-.08-.07-.13a1 1 0 0 0-.09-.15l-5-6a1 1 0 0 0-1.41-.13 1 1 0 0 0-.13 1.41L16.86 11H5a1 1 0 0 0 0 2'
         }
-        fill={'#000'}
+        fill={'currentcolor'}
       />
     </g>
     <defs>

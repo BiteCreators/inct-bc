@@ -10,7 +10,7 @@ const SvgPin = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#pin_svg__a)'} fill={'#000'}>
+    <g clipPath={'url(#pin_svg__a)'} fill={'currentcolor'}>
       <path d={'M12 11a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3'} />
       <path
         d={
