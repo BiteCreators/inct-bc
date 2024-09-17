@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { ScrollAria } from './ScrollArea'
+import { ScrollArea } from './ScrollArea'
 
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`)
 
 const meta = {
-  component: ScrollAria,
-} satisfies Meta<typeof ScrollAria>
+  component: ScrollArea,
+} satisfies Meta<typeof ScrollArea>
 
 type Story = StoryObj<typeof meta>
 
