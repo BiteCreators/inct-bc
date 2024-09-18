@@ -1,5 +1,5 @@
 import { cn } from '@/common/utils/cn'
-import { LoginButton, SignupButton } from '@/features/auth'
+import { SignInButton, SignUpButton } from '@/features/auth'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo, HeaderMenu } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'
@@ -29,7 +29,7 @@ export const Header = ({ isAuth }: { isAuth?: boolean }) => {
         </div>
         {!isAuth && (
           <div className={'gap-6 hidden md:flex'}>
-            <LoginButton /> <SignupButton />
+            <SignInButton /> <SignUpButton />
           </div>
         )}
       </div>

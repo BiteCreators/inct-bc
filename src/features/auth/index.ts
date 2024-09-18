@@ -1,2 +1,3 @@
-export { LoginButton } from './ui/LoginButton'
-export { SignupButton } from './ui/SignupButton'
+export { SignInButton } from './ui/SignInButton'
+export { SignUpButton } from './ui/SignUpButton'
+export { SignUpForm } from './ui/SignUpForm'
