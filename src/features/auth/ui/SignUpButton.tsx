@@ -1,6 +1,14 @@
 import { Button } from '@/common/components/button/Button'
+import Link from 'next/link'
 
-export const SignUpButton = () => {
-  //TODO: make it to be link not button
-  return <Button>Sing up</Button>
+type Props = {
+  variant?: 'primary' | 'text'
+}
+
+export const SignUpButton = ({ variant = 'text' }: Props) => {
+  return (
+    <Button asChild variant={variant}>
+      <Link href={'/auth/sign-up'}>Sing Up</Link>
+    </Button>
+  )
 }
