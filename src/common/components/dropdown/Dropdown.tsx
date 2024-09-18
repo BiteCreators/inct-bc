@@ -4,7 +4,7 @@ import { MoreHorizontal } from '@/common/assets/icons/components'
 import { DropdownContent } from '@/common/components/dropdown/DropdownContent'
 import { cn } from '@/common/utils/cn'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 export type DropdownItem = {
   icon?: ReactNode
@@ -27,7 +27,7 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
       opacity: 0,
       scale: 0.95,
       transition: {
-        duration: 0.4,
+        duration: 0.05,
         ease: [0.4, 0, 0.2, 1],
       },
       translateY: -20,
@@ -36,7 +36,7 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.4,
+        duration: 0.05,
         ease: [0.4, 0, 0.2, 1],
       },
       translateY: 0,
@@ -60,31 +60,22 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
-          <AnimatePresence>
-            {open && (
-              <DropdownMenu.Content
-                align={'end'}
-                asChild
-                forceMount
-                onCloseAutoFocus={e => e.preventDefault()} // Оставляем контроль закрытия
-                sideOffset={5}
+          {open && (
+            <DropdownMenu.Content align={'end'} asChild forceMount sideOffset={5}>
+              <motion.div
+                animate={'open'}
+                className={cn(
+                  'bg-dark-500 min-w-40 text-white rounded-sm p-3 gap-3 border border-dark-100',
+                  'relative z-10',
+                  className
+                )}
+                initial={'closed'}
+                variants={variants}
               >
-                <motion.div
-                  animate={'open'}
-                  className={cn(
-                    'bg-dark-500 min-w-40 text-white rounded-sm p-3 gap-3 border border-dark-100',
-                    'relative z-10',
-                    className
-                  )}
-                  exit={'closed'}
-                  initial={'closed'}
-                  variants={variants}
-                >
-                  <DropdownContent content={items || children} />
-                </motion.div>
-              </DropdownMenu.Content>
-            )}
-          </AnimatePresence>
+                <DropdownContent content={items || children} />
+              </motion.div>
+            </DropdownMenu.Content>
+          )}
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
     </div>
