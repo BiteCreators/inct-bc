@@ -1,6 +1,12 @@
 import { Button } from '@/common/components/button/Button'
+import Link from 'next/link'
 
 export const SignInButton = () => {
-  //TODO: make it to be link not button
-  return <Button variant={'text'}>Login</Button>
+  return (
+    <Button asChild variant={'text'}>
+      <Link className={'text-center'} href={'/auth/sign-in'}>
+        Sign in
+      </Link>
+    </Button>
+  )
 }

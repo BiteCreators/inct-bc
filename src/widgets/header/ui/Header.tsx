@@ -1,5 +1,5 @@
 import { cn } from '@/common/utils/cn'
-import {  SignInButton, SignupButton } from '@/features/auth'
+import { SignInButton, SignupButton } from '@/features/auth'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo, HeaderMenu } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'

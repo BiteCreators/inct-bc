@@ -8,6 +8,7 @@ import Typography from '@/common/components/typography/Typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { SignUpFormData, signUpSchema } from '../lib/schemas/signUp.schema'
+import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
   const { control, handleSubmit } = useForm<SignUpFormData>({
@@ -62,7 +63,7 @@ export const SignUpForm = () => {
         <Button>Sign Up</Button>
       </form>
       <Typography className={'text-center'}>Do you have an account?</Typography>
-      <Button variant={'text'}>Log in</Button>
+      <SignInButton />
     </Card>
   )
 }
