@@ -27,7 +27,7 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
       opacity: 0,
       scale: 0.95,
       transition: {
-        duration: 0.05,
+        duration: 0.1,
         ease: [0.4, 0, 0.2, 1],
       },
       translateY: -20,
@@ -36,7 +36,7 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.05,
+        duration: 0.1,
         ease: [0.4, 0, 0.2, 1],
       },
       translateY: 0,
