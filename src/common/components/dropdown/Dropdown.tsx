@@ -1,24 +1,47 @@
 import { ReactNode, useState } from 'react'
 
 import { MoreHorizontal } from '@/common/assets/icons/components'
-import Typography from '@/common/components/typography/Typography'
+import { DropdownContent } from '@/common/components/dropdown/DropdownContent'
 import { cn } from '@/common/utils/cn'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { AnimatePresence, motion } from 'framer-motion'
 
-type DropdownItem = {
+export type DropdownItem = {
   icon?: ReactNode
   label: string
   onClick?: () => void
 }
 
 type Props = {
+  children?: ReactNode
   className?: string
   iconButton?: ReactNode
-  items: DropdownItem[]
+  items?: DropdownItem[]
 }
 
-export const Dropdown = ({ className, iconButton, items }: Props) => {
+export const Dropdown = ({ children, className, iconButton, items }: Props) => {
   const [open, setOpen] = useState(false)
+
+  const variants = {
+    closed: {
+      opacity: 0,
+      scale: 0.95,
+      transition: {
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1],
+      },
+      translateY: -20,
+    },
+    open: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: [0.4, 0, 0.2, 1],
+      },
+      translateY: 0,
+    },
+  }
 
   return (
     <div className={cn('relative', className)}>
@@ -37,30 +60,31 @@ export const Dropdown = ({ className, iconButton, items }: Props) => {
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
-          <DropdownMenu.Content
-            align={'end'}
-            className={cn(
-              'bg-dark-500 min-w-40 text-white rounded-sm p-3 gap-3 border border-dark-100',
-              'relative z-10',
-              className
-            )}
-            sideOffset={5}
-          >
-            {items.map((item, index) => (
-              <DropdownMenu.Item
-                className={cn(
-                  'flex items-center px-1 py-2 cursor-pointer border-none',
-                  'hover:bg-dark-100 focus:bg-dark-100 focus:outline-none',
-                  className
-                )}
-                key={index}
-                onClick={item.onClick}
+          <AnimatePresence>
+            {open && (
+              <DropdownMenu.Content
+                align={'end'}
+                asChild
+                forceMount
+                onCloseAutoFocus={e => e.preventDefault()} // Оставляем контроль закрытия
+                sideOffset={5}
               >
-                {item.icon && <span className={cn('mr-2', className)}>{item.icon}</span>}
-                <Typography variant={'regular-text'}>{item.label}</Typography>
-              </DropdownMenu.Item>
-            ))}
-          </DropdownMenu.Content>
+                <motion.div
+                  animate={'open'}
+                  className={cn(
+                    'bg-dark-500 min-w-40 text-white rounded-sm p-3 gap-3 border border-dark-100',
+                    'relative z-10',
+                    className
+                  )}
+                  exit={'closed'}
+                  initial={'closed'}
+                  variants={variants}
+                >
+                  <DropdownContent content={items || children} />
+                </motion.div>
+              </DropdownMenu.Content>
+            )}
+          </AnimatePresence>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
     </div>
