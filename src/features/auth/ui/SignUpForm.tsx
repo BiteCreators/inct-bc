@@ -37,7 +37,7 @@ export const SignUpForm = () => {
       <Typography className={'text-center'} variant={'h1'}>
         Sing Up
       </Typography>
-      <form className={'flex flex-col gap-6'} onSubmit={handleSubmit(submit)}>
+      <form className={'flex flex-col gap-6'} noValidate onSubmit={handleSubmit(submit)}>
         <FormInput control={control} label={'username'} name={'username'} required />
         <FormInput control={control} label={'email'} name={'email'} required />
         <FormInput
