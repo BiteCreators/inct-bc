@@ -36,10 +36,10 @@ export const SignInForm = () => {
       </Typography>
       <div className={'flex gap-x-14 h-9 justify-center items-center mb-6'}>
         <Link href={'#'}>
-          <GoogleSvgrepoCom1 />
+          <GoogleSvgrepoCom1 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
         </Link>
         <Link href={'#'}>
-          <GithubSvgrepoCom31 />
+          <GithubSvgrepoCom31 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
         </Link>
       </div>
       <form className={'flex flex-col gap-1 mb-5'} onSubmit={handleSubmit(submit)}>
