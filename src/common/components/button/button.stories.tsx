@@ -1,5 +1,6 @@
 import { Button } from '@/common/components/button/Button'
 import { Meta } from '@storybook/react'
+import Link from 'next/link'
 
 const meta = {
   component: Button,
