@@ -1,11 +1,14 @@
 import React from 'react'
 
+import { useGetAllPostsTestQuery } from '@/app/inct.api'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
+  const { data } = useGetAllPostsTestQuery()
+
   return (
     <div className={'flex gap-4 flex-col'}>
       <h1>StartPage</h1>

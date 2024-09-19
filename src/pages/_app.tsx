@@ -1,15 +1,12 @@
 import type { AppProps } from 'next/app'
 
 import React from 'react'
-
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
-import { Header } from '@/widgets/header'
-import { NextPage } from 'next'
-
-import React from 'react'
 import { Provider } from 'react-redux'
 
 import { wrapper } from '@/app/store'
+import { PageLayout } from '@/common/components/page-layout/PageLayout'
+import { Header } from '@/widgets/header'
+import { NextPage } from 'next'
 
 import '@/styles/globals.css'
 
