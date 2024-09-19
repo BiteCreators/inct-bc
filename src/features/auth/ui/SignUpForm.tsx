@@ -8,7 +8,6 @@ import { FormInput } from '@/common/components/form/FormInput'
 import Typography from '@/common/components/typography/Typography'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import { SignUpFormData, signUpSchema } from '../lib/schemas/signUp.schema'
 import { SignInButton } from './SignInButton'
