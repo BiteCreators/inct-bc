@@ -1,13 +1,9 @@
-import { Icon } from '@/common/components/icon/Icon'
+import { OutlineBell } from '@/common/assets/icons/components'
 
 export const NotificationsButton = () => {
   return (
     <button onClick={() => alert("this doesn't do anything yet")}>
-      <Icon
-        className={'fill-current text-light-100'}
-        iconId={'outline bell'}
-        viewBox={'-5 -1 30 30'}
-      />
+      <OutlineBell />
     </button>
   )
 }

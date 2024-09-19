@@ -1,8 +1,7 @@
 import React, { ChangeEvent, ComponentProps, forwardRef, useId, useState } from 'react'
 
+import { CheckmarkOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
-
-import { Icon } from '../icon/Icon'
 
 type CheckboxProps = {
   error?: string
@@ -55,13 +54,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             htmlFor={id ?? checkboxId}
           >
             {isChecked && (
-              <Icon
+              <CheckmarkOutline
                 className={cn(
                   'absolute left-[6px] top-[6px]',
-                  disabled && `fill-current text-light-500`
+                  'fill-current text-dark-900',
+                  disabled && 'fill-current text-light-500'
                 )}
                 height={'22'}
-                iconId={'checkmark-outline'}
                 viewBox={'0 0 22 22'}
                 width={'22'}
               />
