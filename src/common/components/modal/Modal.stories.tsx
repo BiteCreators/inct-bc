@@ -17,7 +17,7 @@ export const Default: Story = {
   args: {
     children: <p>This is the default content of the modal.</p>,
     isOpen: true,
-    onOpenChange: (open: boolean) => console.log('Modal open state:', open),
+    mode: 'default',
     title: 'Default Modal',
   },
   render: args => {
@@ -33,7 +33,8 @@ export const Closed: Story = {
   args: {
     children: <p>This modal is closed by default.</p>,
     isOpen: false,
-    onOpenChange: (open: boolean) => console.log('Modal open state:', open),
+    mode: 'default',
+    onOpenChange: (open: boolean) => alert('Modal open state:' + open),
     title: 'Closed Modal',
   },
   render: args => {
@@ -48,18 +49,48 @@ export const Closed: Story = {
   },
 }
 
-export const CustomContent: Story = {
+export const OutsideMode: Story = {
   args: {
     children: (
       <div>
         <h2 className={'text-xl font-bold'}>Custom Content</h2>
-        <p>This modal contains custom content, such as headers and additional text.</p>
+        <p>
+          Drakari pykiros Tīkummo jemiros Yn lantyz bartossa Saelot vāedis Hen ñuhā elēnī: Perzyssy
+          vestretis Se gēlȳn irūdaks Ānogrose Perzyro udrȳssi Ezīmptos laehossi Hārossa letagon Aōt
+          vāedan Hae mērot gierūli: Se hāros bartossi Prūmȳsa sōvīli Gevī dāerī
+        </p>
         <Button className={'mt-4'}>Button</Button>
       </div>
     ),
     isOpen: true,
-    onOpenChange: (open: boolean) => console.log('Modal open state:', open),
-    title: 'Modal with Custom Content',
+    mode: 'outside',
+    title: 'Modal with OutsideMode',
+  },
+  render: args => {
+    return (
+      <div>
+        <Modal {...args} />
+      </div>
+    )
+  },
+}
+
+export const CustomMode: Story = {
+  args: {
+    children: (
+      <div>
+        <h2 className={'text-xl font-bold'}>Modal with CustomMode</h2>
+        <p>
+          Drakari pykiros Tīkummo jemiros Yn lantyz bartossa Saelot vāedis Hen ñuhā elēnī: Perzyssy
+          vestretis Se gēlȳn irūdaks Ānogrose Perzyro udrȳssi Ezīmptos laehossi Hārossa letagon Aōt
+          vāedan Hae mērot gierūli: Se hāros bartossi Prūmȳsa sōvīli Gevī dāerī
+        </p>
+        <Button className={'mt-4'}>Button</Button>
+      </div>
+    ),
+    isOpen: true,
+    mode: 'custom',
+    title: 'Modal with CustomMode',
   },
   render: args => {
     return (
