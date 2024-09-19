@@ -8,14 +8,12 @@ type Props<T extends FieldValues> = FormFieldProps<T> & RadioGroupProps
 
 export const FormRadioGroup = <T extends FieldValues>({
   control,
+  error,
   name,
   rules,
   ...props
 }: Props<T>) => {
-  const {
-    field,
-    fieldState: { error },
-  } = useController({ control, name, rules })
+  const { field, fieldState } = useController({ control, name, rules })
 
-  return <RadioGroup {...field} error={error?.message} {...props} />
+  return <RadioGroup {...field} error={error ?? fieldState.error?.message} {...props} />
 }
