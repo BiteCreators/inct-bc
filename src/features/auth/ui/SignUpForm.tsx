@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@/common/components/button/Button'
@@ -5,7 +6,9 @@ import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { FormInput } from '@/common/components/form/FormInput'
 import Typography from '@/common/components/typography/Typography'
+import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import { SignUpFormData, signUpSchema } from '../lib/schemas/signUp.schema'
 import { SignInButton } from './SignInButton'
@@ -22,6 +25,8 @@ export const SignUpForm = () => {
     resolver: zodResolver(signUpSchema),
   })
 
+  const t = useScopedTranslation('Auth')
+
   const submit: SubmitHandler<SignUpFormData> = data => {
     alert(`
     ${data.email}   
@@ -35,22 +40,22 @@ export const SignUpForm = () => {
   return (
     <Card className={'p-6 flex flex-col gap-6'}>
       <Typography className={'text-center'} variant={'h1'}>
-        Sing Up
+        {t.signUp}
       </Typography>
       <form className={'flex flex-col gap-6'} noValidate onSubmit={handleSubmit(submit)}>
-        <FormInput control={control} label={'username'} name={'username'} required />
-        <FormInput control={control} label={'email'} name={'email'} required />
+        <FormInput control={control} label={t.username} name={'username'} required />
+        <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
           control={control}
           inputType={'reveal'}
-          label={'password'}
+          label={t.password}
           name={'password'}
           required
         />
         <FormInput
           control={control}
           inputType={'reveal'}
-          label={'password confirmation'}
+          label={t.passwordConfirmation}
           name={'passwordConfirmation'}
           required
         />
@@ -58,11 +63,12 @@ export const SignUpForm = () => {
           control={control}
           name={'agreedToPrivacyPolicy'}
           required
+          //TODO: rewrite with updated checkbox
           text={'I agree to Terms of service and Privacy policy'}
         />
-        <Button>Sign Up</Button>
+        <Button>{t.signUp}</Button>
       </form>
-      <Typography className={'text-center'}>Do you have an account?</Typography>
+      <Typography className={'text-center'}>{t.doYouHaveAnAccount}</Typography>
       <SignInButton />
     </Card>
   )
