@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const SignInButton = () => {
   return (
     <Button asChild variant={'text'}>
-      <Link className={'text-center'} href={'/auth/sign-in'}>
+      <Link className={'mx-auto'} href={'/auth/sign-in'}>
         Sign in
       </Link>
     </Button>
