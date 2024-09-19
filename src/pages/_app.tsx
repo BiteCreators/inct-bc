@@ -6,6 +6,11 @@ import { PageLayout } from '@/common/components/page-layout/PageLayout'
 import { Header } from '@/widgets/header'
 import { NextPage } from 'next'
 
+import React from 'react'
+import { Provider } from 'react-redux'
+
+import { wrapper } from '@/app/store'
+
 import '@/styles/globals.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = {
@@ -24,8 +29,10 @@ const DefaultLayout = (page: React.ReactElement) => {
   )
 }
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({ Component, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? DefaultLayout
 
-  return getLayout(<Component {...pageProps} />)
+  const { props, store } = wrapper.useWrappedStore(rest)
+
+  return <Provider store={store}>{getLayout(<Component {...props.pageProps} />)}</Provider>
 }
