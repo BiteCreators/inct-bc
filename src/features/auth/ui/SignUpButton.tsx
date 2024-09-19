@@ -5,9 +5,9 @@ type Props = {
   variant?: 'primary' | 'text'
 }
 
-export const SignUpButton = ({ variant = 'primary' }: Props) => {
+export const SignUpButton = ({ variant = 'text' }: Props) => {
   return (
-    <Button asChild variant={variant}>
+    <Button asChild className={'mx-auto'} variant={variant}>
       <Link href={'/auth/sign-up'}>Sing Up</Link>
     </Button>
   )
