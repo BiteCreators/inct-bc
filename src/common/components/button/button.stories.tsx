@@ -1,6 +1,5 @@
 import { Button } from '@/common/components/button/Button'
 import { Meta } from '@storybook/react'
-import Link from 'next/link'
 
 const meta = {
   component: Button,
@@ -54,7 +53,7 @@ export const Disabled = {
     disabled: true,
     onClick: () => alert('click'),
     title: 'Disabled button',
-    variant: 'text',
+    variant: 'primary',
   },
 }
 export default meta

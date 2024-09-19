@@ -1,10 +1,8 @@
 import React, { ComponentProps } from 'react'
 
 import { cn } from '@/common/utils/cn'
-import { Slot } from '@radix-ui/react-slot'
 
 type ButtonProps = {
-  asChild?: boolean
   variant?: 'outline' | 'primary' | 'secondary' | 'text'
 } & ComponentProps<'button'>
 
@@ -39,13 +37,8 @@ export const Button = ({ asChild, className, variant = 'primary', ...props }: Bu
         ],
         className
       )}
+      type={'button'}
       {...props}
     />
   )
 }
-
-export default () => (
-  <Slot>
-    <div>Hello</div>
-  </Slot>
-)

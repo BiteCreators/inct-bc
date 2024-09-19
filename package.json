@@ -15,6 +15,7 @@
     "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/common/assets/icons/svg --out-dir src/common/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-dropdown-menu": "^2.1.1",
