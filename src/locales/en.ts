@@ -1,20 +1,30 @@
+import { AUTH_ERRORS } from '@/features/auth'
+
 export const en = {
   Auth: {
+    [AUTH_ERRORS.EMAIL_INVALID_ERROR]: `The email must match the format
+    example@example.com`,
+    [AUTH_ERRORS.EMAIL_REQUIRED_ERROR]: 'Email is required',
+    [AUTH_ERRORS.EMAIL_TAKEN_ERROR]: 'User with this email already registered',
+    [AUTH_ERRORS.PASSOWRD_CONFIRMATION_INVALID_ERROR]: "Passwords don't match",
+    [AUTH_ERRORS.PASSOWRD_CONFIRMATION_REQUIRED_ERROR]: 'Confirm your password',
+    [AUTH_ERRORS.PASSWORD_INVALID_ERROR]:
+      'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [  ] ^ _` { | } ~',
+    [AUTH_ERRORS.PASSWORD_REQUIRED_ERROR]: 'Password is required',
+    [AUTH_ERRORS.PASSWORD_TOO_LONG_ERROR]: 'Maximum number of characters 30',
+    [AUTH_ERRORS.PASSWORD_TOO_SHORT_ERROR]: 'Minimum number of characters 6',
+    [AUTH_ERRORS.PRIVACY_POLICY_REQUIRED_ERROR]: 'You must agree to privacy policy',
+    [AUTH_ERRORS.USERNAME_REQUIRED_ERROR]: 'Username is required',
+    [AUTH_ERRORS.USERNAME_TAKEN_ERROR]: 'User with this username already registered',
+    [AUTH_ERRORS.USERNAME_TOO_LONG_ERROR]: 'Maximum number of characters 30',
+    [AUTH_ERRORS.USERNAME_TOO_SHORT_ERROR]: 'Minimum number of characters 6',
     doYouHaveAnAccount: 'Do you have an account?',
     email: 'email',
-    emailInvalidError: `The email must match the format
-    example@example.com`,
-    emailRequiredError: 'Email is required',
     password: 'password',
     passwordConfirmation: 'password confirmation',
-    passwordConfirmationRequiredError: 'Please confirm the password',
-    passwordRequiredError: 'password is required',
-    passwordShortError: 'Minimum number of characters 6',
     privaccyPolicy: '???',
-    privacyPolicyRequiredError: 'You must agree to privacy policy',
     signUp: 'Sign Up',
     username: 'username',
-    usernameLongError: 'Maximum number of characters 30',
   },
   Internationalization: {
     en: 'English',
