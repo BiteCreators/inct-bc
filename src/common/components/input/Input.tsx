@@ -74,7 +74,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           )}
           <input
             className={cn([
-              'w-full pr-[6px] py-2',
+              'w-full h-9 pr-[6px] py-2',
               'bg-transparent text-md text-light-100 outline-none outline-offset-0',
               'placeholder:text-light-900 active:bg-dark-500 focus:outline-none',
               'disabled:active:bg-inherit disabled:placeholder:text-dark-100',
@@ -108,7 +108,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             </span>
           )}
         </div>
-        {error && <p className={'text-sm text-danger-500'}>{error ?? 'invalid input'}</p>}
+        {error && <p className={'text-sm absolute text-danger-500'}>{error ?? 'invalid input'}</p>}
       </div>
     )
   }
