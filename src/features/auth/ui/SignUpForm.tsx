@@ -41,11 +41,11 @@ export const SignUpForm = () => {
   }
 
   return (
-    <Card className={'p-6 flex flex-col gap-6'}>
+    <Card className={'p-6 flex flex-col'}>
       <Typography className={'text-center'} variant={'h1'}>
         {t.signUp}
       </Typography>
-      <form className={'flex flex-col gap-6'} noValidate onSubmit={handleSubmit(submit)}>
+      <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit(submit)}>
         <FormInput
           control={control}
           error={t[errors?.username?.message as keyof typeof t]}
@@ -76,18 +76,23 @@ export const SignUpForm = () => {
           name={'passwordConfirmation'}
           required
         />
-        <FormCheckbox
-          control={control}
-          error={t[errors?.agreedToPrivacyPolicy?.message as keyof typeof t]}
-          name={'agreedToPrivacyPolicy'}
-          required
-          //TODO: rewrite with updated checkbox
-          text={'I agree to Terms of service and Privacy policy'}
-        />
-        <Button>{t.signUp}</Button>
+        <div className={'flex gap-2 relative'}>
+          <FormCheckbox
+            control={control}
+            error={t[errors?.agreedToPrivacyPolicy?.message as keyof typeof t]}
+            name={'agreedToPrivacyPolicy'}
+            required
+          />
+          <Typography className={'absolute top-[11px] left-[35px]'} variant={'small-text'}>
+            I agree to Terms of service and Privacy policy
+          </Typography>
+        </div>
+        <Button className={'-mt-3'}>{t.signUp}</Button>
       </form>
-      <Typography className={'text-center'}>{t.doYouHaveAnAccount}</Typography>
-      <SignInButton />
+      <div className={'mt-[18px] flex gap-[6px] flex-col'}>
+        <Typography className={'text-center '}>{t.doYouHaveAnAccount}</Typography>
+        <SignInButton />
+      </div>
     </Card>
   )
 }
