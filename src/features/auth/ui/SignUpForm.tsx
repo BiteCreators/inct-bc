@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
@@ -6,6 +6,7 @@ import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { FormInput } from '@/common/components/form/FormInput'
+import { Trans } from '@/common/components/trans/Trans'
 import Typography from '@/common/components/typography/Typography'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -93,8 +94,23 @@ export const SignUpForm = () => {
             name={'agreedToPrivacyPolicy'}
             required
           />
-          <Typography className={'absolute top-[11px] left-[35px]'} variant={'small-text'}>
-            I agree to Terms of service and Privacy policy
+          {/*TODO: rewrite with updated input, remove this absolute positioning*/}
+          <Typography className={'absolute top-[10px] left-[31px]'} variant={'small-text'}>
+            <Trans
+              tags={{
+                '1': str => (
+                  <Link className={'underline text-primary-300'} href={'#'}>
+                    {str}
+                  </Link>
+                ),
+                '2': str => (
+                  <Link className={'underline text-primary-300'} href={'#'}>
+                    {str}
+                  </Link>
+                ),
+              }}
+              text={t.privacyPolicy}
+            />
           </Typography>
         </div>
         <Button className={'-mt-3'}>{t.signUp}</Button>

@@ -22,7 +22,7 @@ export const en = {
     email: 'email',
     password: 'password',
     passwordConfirmation: 'password confirmation',
-    privaccyPolicy: '???',
+    privacyPolicy: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
     signIn: 'Sign in',
     signUp: 'Sign Up',
     username: 'username',

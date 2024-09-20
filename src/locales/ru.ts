@@ -24,7 +24,7 @@ export const ru: LocaleType = {
     email: 'email',
     password: 'пароль',
     passwordConfirmation: 'подтвердите пароль',
-    privaccyPolicy: '???',
+    privacyPolicy: 'Я согласен с <1>Условиями</1> и <2>Политикой конфиденсальности</2>',
     signIn: 'Вход',
     signUp: 'Регистрация',
     username: 'имя пользователя',
