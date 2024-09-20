@@ -54,7 +54,7 @@ export const Disabled = {
     disabled: true,
     onClick: () => alert('click'),
     title: 'Disabled button',
-    variant: 'text',
+    variant: 'primary',
   },
 }
 export default meta

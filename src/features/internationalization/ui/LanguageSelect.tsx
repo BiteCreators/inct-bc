@@ -1,4 +1,4 @@
-import { Icon } from '@/common/components/icon/Icon'
+import { FlagRussia, FlagUnitedKingdom } from '@/common/assets/icons/components'
 import { Select, SelectItem } from '@/common/components/select/Select'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { useRouter } from 'next/router'
@@ -16,14 +16,7 @@ export const LanguageSelect = () => {
     <Select
       className={'min-w-[163px]'}
       defaultValue={defaultLocale}
-      icon={
-        <Icon
-          height={'20px'}
-          iconId={locale === 'en' ? 'british-flag' : 'russian-flag'}
-          viewBox={'-3 -1.5 40 30'}
-          width={'30px'}
-        />
-      }
+      icon={locale === 'en' ? <FlagUnitedKingdom /> : <FlagRussia />}
       onValueChange={handleChange}
       value={locale}
     >

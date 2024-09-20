@@ -1,11 +1,10 @@
 'use client'
 import React, { forwardRef, useId } from 'react'
 
+import { ArrowIosUp } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { motion } from 'framer-motion'
-
-import { Icon } from '../icon/Icon'
 
 export type SelectProps = {
   className?: string
@@ -75,16 +74,12 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
               <SelectPrimitive.Value className={'text-light-100'} placeholder={placeholder} />
             </div>
             <SelectPrimitive.Icon className={'ml-2'}>
-              <Icon
+              <ArrowIosUp
                 className={cn(
                   'fill-current text-light-100',
                   'group-[[data-state="open"]]:rotate-180',
                   'transition-transform delay-100'
                 )}
-                height={'20px'}
-                iconId={'arrow-ios-Up'}
-                viewBox={'2.5 1 20 20'}
-                width={'20px'}
               />
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
