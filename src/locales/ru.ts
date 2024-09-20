@@ -8,8 +8,8 @@ export const ru: LocaleType = {
     example@example.com`,
     [AUTH_ERRORS.EMAIL_REQUIRED_ERROR]: 'Введите email',
     [AUTH_ERRORS.EMAIL_TAKEN_ERROR]: 'Пользователь с таким email уже зарегистрирован',
-    [AUTH_ERRORS.PASSOWRD_CONFIRMATION_INVALID_ERROR]: 'Пароли не совпадают',
-    [AUTH_ERRORS.PASSOWRD_CONFIRMATION_REQUIRED_ERROR]: 'Подтвердите пароль',
+    [AUTH_ERRORS.PASSWORD_CONFIRMATION_INVALID_ERROR]: 'Пароли не совпадают',
+    [AUTH_ERRORS.PASSWORD_CONFIRMATION_REQUIRED_ERROR]: 'Подтвердите пароль',
     [AUTH_ERRORS.PASSWORD_INVALID_ERROR]:
       'Пароль должен содержать a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [  ] ^ _` { | } ~',
     [AUTH_ERRORS.PASSWORD_REQUIRED_ERROR]: 'Введите пароль',

@@ -6,8 +6,8 @@ export const en = {
     example@example.com`,
     [AUTH_ERRORS.EMAIL_REQUIRED_ERROR]: 'Email is required',
     [AUTH_ERRORS.EMAIL_TAKEN_ERROR]: 'User with this email already registered',
-    [AUTH_ERRORS.PASSOWRD_CONFIRMATION_INVALID_ERROR]: "Passwords don't match",
-    [AUTH_ERRORS.PASSOWRD_CONFIRMATION_REQUIRED_ERROR]: 'Confirm your password',
+    [AUTH_ERRORS.PASSWORD_CONFIRMATION_INVALID_ERROR]: "Passwords don't match",
+    [AUTH_ERRORS.PASSWORD_CONFIRMATION_REQUIRED_ERROR]: 'Confirm your password',
     [AUTH_ERRORS.PASSWORD_INVALID_ERROR]:
       'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [  ] ^ _` { | } ~',
     [AUTH_ERRORS.PASSWORD_REQUIRED_ERROR]: 'Password is required',

@@ -20,7 +20,7 @@ export const signUpSchema = z
       ),
     passwordConfirmation: z
       .string()
-      .min(1, AUTH_ERRORS.PASSOWRD_CONFIRMATION_REQUIRED_ERROR)
+      .min(1, AUTH_ERRORS.PASSWORD_CONFIRMATION_REQUIRED_ERROR)
       .min(6, AUTH_ERRORS.PASSWORD_TOO_SHORT_ERROR),
     username: z
       .string()
@@ -29,7 +29,7 @@ export const signUpSchema = z
       .max(30, AUTH_ERRORS.USERNAME_TOO_LONG_ERROR),
   })
   .refine(data => data.password === data.passwordConfirmation, {
-    message: AUTH_ERRORS.PASSOWRD_CONFIRMATION_INVALID_ERROR,
+    message: AUTH_ERRORS.PASSWORD_CONFIRMATION_INVALID_ERROR,
     path: ['passwordConfirmation'],
   })
 
