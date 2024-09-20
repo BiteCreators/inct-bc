@@ -25,6 +25,7 @@ export const ru: LocaleType = {
     password: 'пароль',
     passwordConfirmation: 'подтвердите пароль',
     privaccyPolicy: '???',
+    signIn: 'Вход',
     signUp: 'Регистрация',
     username: 'имя пользователя',
   },

@@ -23,6 +23,7 @@ export const en = {
     password: 'password',
     passwordConfirmation: 'password confirmation',
     privaccyPolicy: '???',
+    signIn: 'Sign in',
     signUp: 'Sign Up',
     username: 'username',
   },
