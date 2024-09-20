@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
@@ -8,6 +9,7 @@ import { FormInput } from '@/common/components/form/FormInput'
 import Typography from '@/common/components/typography/Typography'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 
 import { SignUpFormData, signUpSchema } from '../lib/schemas/signUp.schema'
 import { SignInButton } from './SignInButton'
@@ -45,6 +47,14 @@ export const SignUpForm = () => {
       <Typography className={'text-center'} variant={'h1'}>
         {t.signUp}
       </Typography>
+      <div className={'flex gap-[60px] mx-auto mt-3'}>
+        <Link href={'#'}>
+          <GoogleSvgrepoCom1 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
+        </Link>
+        <Link href={'#'}>
+          <GithubSvgrepoCom31 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
+        </Link>
+      </div>
       <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit(submit)}>
         <FormInput
           control={control}
