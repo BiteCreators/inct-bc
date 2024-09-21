@@ -15,11 +15,11 @@ const meta = {
   component: Recaptcha,
 } satisfies Meta<typeof Recaptcha>
 
-export const recaptchaScheme = z.object({
+const recaptchaScheme = z.object({
   recaptcha: z.string().min(1, 'Please complete the reCAPTCHA'), // Поле для reCAPTCHA
 })
 
-export const RecCaptcha = {
+export const ReСaptcha = {
   render: () => {
     const { control, handleSubmit, setValue } = useForm({
       resolver: zodResolver(recaptchaScheme),
@@ -40,7 +40,7 @@ export const RecCaptcha = {
         className={'bg-dark-100 w-96 h-[200px] flex rounded-2 justify-around flex-col items-center'}
         onSubmit={handleSubmit(submit)}
       >
-        <ReCAPTCHA
+        <Recaptcha
           badge={'inline'}
           hl={'en'}
           onChange={onRecaptchaChange}
