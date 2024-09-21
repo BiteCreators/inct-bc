@@ -1,12 +1,8 @@
 'use client'
-import { useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Button } from '@/common/components/button/Button'
 import { Recaptcha } from '@/common/components/reCaptcha/Recaptcha'
-import { SignUpFormData, signUpSchema } from '@/features/auth/lib/schemas/signUp.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Meta } from '@storybook/react'
 import { z } from 'zod'
@@ -16,7 +12,7 @@ const meta = {
 } satisfies Meta<typeof Recaptcha>
 
 const recaptchaScheme = z.object({
-  recaptcha: z.string().min(1, 'Please complete the reCAPTCHA'), // Поле для reCAPTCHA
+  recaptcha: z.string().min(1, 'Please complete the reCAPTCHA'),
 })
 
 export const ReСaptcha = {
@@ -24,15 +20,13 @@ export const ReСaptcha = {
     const { control, handleSubmit, setValue } = useForm({
       resolver: zodResolver(recaptchaScheme),
     })
-    const [recaptchaToken, setRecaptchaToken] = useState<null | string>(null)
 
     const onRecaptchaChange = (token: null | string) => {
-      setRecaptchaToken(token)
-      setValue('recaptcha', token) // Устанавливаем значение для reCAPTCHA в форме
+      setValue('recaptcha', token)
     }
 
     const submit = (data: any) => {
-      alert('SUCCESSFUL')
+      console.log(data)
     }
 
     return (
@@ -41,15 +35,11 @@ export const ReСaptcha = {
         onSubmit={handleSubmit(submit)}
       >
         <Recaptcha
-          badge={'inline'}
-          hl={'en'}
           onChange={onRecaptchaChange}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY!}
           theme={'dark'}
         />
-        <Button onClick={() => {}} type={'submit'}>
-          SUBMIT
-        </Button>
+        <Button type={'submit'}>SUBMIT</Button>
       </form>
     )
   },
