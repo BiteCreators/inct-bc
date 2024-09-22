@@ -6,18 +6,18 @@ import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
 import Typography from '@/common/components/typography/Typography'
 import {
-  forgotPasswordData,
-  forgotPasswordScheme,
-} from '@/features/auth/lib/schemas/forgotPassword.schema'
+  recoveryPasswordSchema,
+  recoveryPasswordSchemaData,
+} from '@/features/auth/lib/schemas/recoveryPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const CreateNewPasswordForm = () => {
-  const { control, handleSubmit, setValue } = useForm<any>({
+  const { control, handleSubmit } = useForm<recoveryPasswordSchemaData>({
     defaultValues: {
       confirmationPassword: '',
       newPassword: '',
     },
-    resolver: zodResolver(forgotPasswordScheme),
+    resolver: zodResolver(recoveryPasswordSchema),
   })
 
   return (
@@ -35,7 +35,7 @@ export const CreateNewPasswordForm = () => {
           control={control}
           inputType={'reveal'}
           label={'Password confirmation'}
-          name={'passwordConfirmation'}
+          name={'confirmationPassword'}
           required
         ></FormInput>
         <Button type={'submit'}>Create new password</Button>
