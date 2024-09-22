@@ -21,7 +21,7 @@ export const createSignUpSchema = (t: LocaleType['Auth']) => {
         .string()
         .min(1, t.passwordConfirmationRequiredError)
         .min(6, t.passwordTooShortError),
-      username: z
+      userName: z
         .string()
         .min(1, t.usernameRequiredError)
         .min(6, t.usernameTooShortError)
