@@ -1,3 +1,4 @@
+import React from 'react'
 import { FieldValues, Path, UseFormSetError } from 'react-hook-form'
 
 import { isApiError } from '@/common/utils/api-helpers'
@@ -5,14 +6,21 @@ import { LocaleType } from '@/locales/en'
 
 export const handleAuthApiError = <T extends FieldValues>({
   error,
+  setApiError,
   setError,
   t,
 }: {
   error: unknown
+  setApiError: React.Dispatch<React.SetStateAction<string>>
   setError: UseFormSetError<T>
   t: LocaleType['Auth']
 }) => {
   if (isApiError(error)) {
+    if (error.data.statusCode >= 500) {
+      setApiError('server error, try again later')
+
+      return
+    }
     error.data.messages.forEach(m => {
       let message = m.message
 

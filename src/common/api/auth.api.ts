@@ -13,7 +13,7 @@ export const authApi = inctagramApi.injectEndpoints({
       query: body => ({
         body,
         method: 'POST',
-        url: '/auth/registration',
+        url: 'v1/auth/registration',
       }),
     }),
   }),
