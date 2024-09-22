@@ -31,7 +31,7 @@ export const ForgotPasswordForm = () => {
     }
   }
   const submit = (data: RecoveryPassword) => {
-    console.log(data.recaptcha)
+    forgotPassword(data)
   }
 
   return (
@@ -55,6 +55,7 @@ export const ForgotPasswordForm = () => {
           <Link href={'/auth/sign-in'}>Back to Sign In</Link>
         </Button>
         <Recaptcha
+          className={'self-center'}
           onChange={onRecaptchaChange}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY!}
           theme={'dark'}
