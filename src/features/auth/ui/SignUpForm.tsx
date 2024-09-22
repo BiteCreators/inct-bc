@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
@@ -12,15 +12,15 @@ import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
-import { SignUpFormData, signUpSchema } from '../lib/schemas/signUp.schema'
+import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'
 import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<SignUpFormData>({
+  const t = useScopedTranslation('Auth')
+
+  const signUpSchema = createSignUpSchema(t)
+
+  const { control, handleSubmit } = useForm<SignUpFormData>({
     defaultValues: {
       agreedToPrivacyPolicy: false,
       email: '',
@@ -30,8 +30,6 @@ export const SignUpForm = () => {
     },
     resolver: zodResolver(signUpSchema),
   })
-
-  const t = useScopedTranslation('Auth')
 
   const submit: SubmitHandler<SignUpFormData> = data => {
     alert(`
@@ -57,23 +55,10 @@ export const SignUpForm = () => {
         </Link>
       </div>
       <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit(submit)}>
+        <FormInput control={control} label={t.username} name={'username'} required />
+        <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
           control={control}
-          error={t[errors?.username?.message as keyof typeof t]}
-          label={t.username}
-          name={'username'}
-          required
-        />
-        <FormInput
-          control={control}
-          error={t[errors?.email?.message as keyof typeof t]}
-          label={t.email}
-          name={'email'}
-          required
-        />
-        <FormInput
-          control={control}
-          error={t[errors?.password?.message as keyof typeof t]}
           inputType={'reveal'}
           label={t.password}
           name={'password'}
@@ -81,19 +66,13 @@ export const SignUpForm = () => {
         />
         <FormInput
           control={control}
-          error={t[errors?.passwordConfirmation?.message as keyof typeof t]}
           inputType={'reveal'}
           label={t.passwordConfirmation}
           name={'passwordConfirmation'}
           required
         />
         <div className={'flex gap-2 relative'}>
-          <FormCheckbox
-            control={control}
-            error={t[errors?.agreedToPrivacyPolicy?.message as keyof typeof t]}
-            name={'agreedToPrivacyPolicy'}
-            required
-          />
+          <FormCheckbox control={control} name={'agreedToPrivacyPolicy'} required />
           {/*TODO: rewrite with updated input, remove this absolute positioning*/}
           <Typography className={'absolute top-[10px] left-[31px]'} variant={'small-text'}>
             <Trans
@@ -113,7 +92,9 @@ export const SignUpForm = () => {
             />
           </Typography>
         </div>
-        <Button className={'-mt-3'}>{t.signUp}</Button>
+        <Button className={'-mt-3'} type={'submit'}>
+          {t.signUp}
+        </Button>
       </form>
       <div className={'mt-[18px] flex gap-[6px] flex-col'}>
         <Typography className={'text-center '}>{t.doYouHaveAnAccount}</Typography>
