@@ -1,6 +1,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { authApi } from '@/common/api/auth.api'
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
@@ -8,10 +9,12 @@ import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { FormInput } from '@/common/components/form/FormInput'
 import { Trans } from '@/common/components/trans/Trans'
 import Typography from '@/common/components/typography/Typography'
+import { isApiError } from '@/common/utils/api-helpers'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
+import { handleAuthApiError } from '../lib/handle-auth-api-error'
 import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'
 import { SignInButton } from './SignInButton'
 
@@ -20,25 +23,25 @@ export const SignUpForm = () => {
 
   const signUpSchema = createSignUpSchema(t)
 
-  const { control, handleSubmit } = useForm<SignUpFormData>({
+  const { control, handleSubmit, setError } = useForm<SignUpFormData>({
     defaultValues: {
       agreedToPrivacyPolicy: false,
       email: '',
       password: '',
       passwordConfirmation: '',
-      username: '',
+      userName: '',
     },
     resolver: zodResolver(signUpSchema),
   })
 
-  const submit: SubmitHandler<SignUpFormData> = data => {
-    alert(`
-    ${data.email}   
-    ${data.username}   
-    ${data.password}   
-    ${data.passwordConfirmation}   
-    ${data.agreedToPrivacyPolicy}   
-    `)
+  const [register, { isLoading }] = authApi.useRegistrationMutation()
+
+  const submit: SubmitHandler<SignUpFormData> = async ({ email, password, userName }) => {
+    try {
+      await register({ baseUrl: 'http://localhost:3000', email, password, userName }).unwrap()
+    } catch (error) {
+      handleAuthApiError({ error, setError, t })
+    }
   }
 
   return (
@@ -55,7 +58,7 @@ export const SignUpForm = () => {
         </Link>
       </div>
       <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit(submit)}>
-        <FormInput control={control} label={t.username} name={'username'} required />
+        <FormInput control={control} label={t.username} name={'userName'} required />
         <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
           control={control}
@@ -92,7 +95,7 @@ export const SignUpForm = () => {
             />
           </Typography>
         </div>
-        <Button className={'-mt-3'} type={'submit'}>
+        <Button className={'-mt-3'} disabled={isLoading} type={'submit'}>
           {t.signUp}
         </Button>
       </form>
