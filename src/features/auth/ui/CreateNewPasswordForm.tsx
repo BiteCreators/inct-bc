@@ -29,12 +29,14 @@ export const CreateNewPasswordForm = () => {
           inputType={'reveal'}
           label={'New password'}
           name={'newPassword'}
+          required
         ></FormInput>
         <FormInput
           control={control}
           inputType={'reveal'}
           label={'Password confirmation'}
           name={'passwordConfirmation'}
+          required
         ></FormInput>
         <Button type={'submit'}>Create new password</Button>
       </form>

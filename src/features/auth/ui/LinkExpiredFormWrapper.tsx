@@ -5,7 +5,7 @@ import { Card } from '@/common/components/card/Card'
 import Typography from '@/common/components/typography/Typography'
 import Image from 'next/image'
 
-export const LinkExpiredForm = () => {
+export const LinkExpiredFormWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={'flex flex-col items-center'}>
       <Card
@@ -17,7 +17,7 @@ export const LinkExpiredForm = () => {
         <Typography className={'text-center'} variant={'regular-text'}>
           Looks like the verification link has expired. Not to worry, we can send the link again
         </Typography>
-        <Button className={'w-full'}>Resend Link</Button>
+        {children}
       </Card>
       <Image
         alt={'image'}
