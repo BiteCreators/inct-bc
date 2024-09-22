@@ -1,7 +1,7 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { RecoveryPassword, useForgotPasswordMutation } from '@/app/inct.api'
+import { useForgotPasswordMutation } from '@/app/inct.api'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
@@ -11,7 +11,6 @@ import {
   forgotPasswordData,
   forgotPasswordScheme,
 } from '@/features/auth/lib/schemas/forgotPassword.schema'
-import { SignUpFormData, signUpSchema } from '@/features/auth/lib/schemas/signUp.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
@@ -30,12 +29,12 @@ export const ForgotPasswordForm = () => {
       setValue('recaptcha', token)
     }
   }
-  const submit = (data: RecoveryPassword) => {
+  const submit: SubmitHandler<forgotPasswordData> = data => {
     forgotPassword(data)
   }
 
   return (
-    <Card className={'p-6 flex flex-col gap-6'}>
+    <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
       <Typography className={'text-center'} variant={'h1'}>
         Forgot Password
       </Typography>
