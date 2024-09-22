@@ -1,12 +1,25 @@
 import React from 'react'
 
-import Link from 'next/link'
+import { PageLayout } from '@/common/components/page-layout/PageLayout'
+import { SignUpForm } from '@/features/auth'
+import { NextPageWithLayout } from '@/pages/_app'
+import { Header } from '@/widgets/header'
 
-export default function SignUp() {
+const SignUp: NextPageWithLayout = () => {
   return (
-    <div className={'flex gap-4 flex-col'}>
-      <h1>SignUp</h1>
-      <Link href={'/auth/sign-up/private-policy'}> Private Police</Link>
+    <div className={'flex gap-4 flex-col justify-center w-[380px] '}>
+      <SignUpForm />
+      {/* <Link href={'/auth/sign-up/private-policy'}> Private Police</Link> */}
     </div>
   )
 }
+
+SignUp.getLayout = (page: React.ReactElement) => {
+  return (
+    <PageLayout header={<Header />} mainClassName={'flex flex-col items-center justify-center '}>
+      {page}
+    </PageLayout>
+  )
+}
+
+export default SignUp

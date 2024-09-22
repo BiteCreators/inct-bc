@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+.idea
 .pnp.js
 .yarn/install-state.gz
 
@@ -36,3 +37,6 @@ yarn-error.log*
 next-env.d.ts
 
 *storybook.log
+
+# ide
+.idea
