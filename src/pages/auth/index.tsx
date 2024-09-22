@@ -9,6 +9,7 @@ export default function Auth() {
       <Link href={'/auth/sign-up'}>SignUp</Link>
       <Link href={'/auth/sign-in'}>SignIn</Link>
       <Link href={'/auth/create-new-password'}>Create new password</Link>
+      <Link href={'/auth/link-expired'}>link-expired</Link>
     </div>
   )
 }

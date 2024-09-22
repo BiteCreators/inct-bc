@@ -26,15 +26,15 @@ export const CreateNewPasswordForm = () => {
       <form className={'flex flex-col gap-6 '}>
         <FormInput
           control={control}
+          inputType={'reveal'}
           label={'New password'}
           name={'newPassword'}
-          type={'password'}
         ></FormInput>
         <FormInput
           control={control}
+          inputType={'reveal'}
           label={'Password confirmation'}
           name={'passwordConfirmation'}
-          type={'password'}
         ></FormInput>
         <Button type={'submit'}>Create new password</Button>
       </form>

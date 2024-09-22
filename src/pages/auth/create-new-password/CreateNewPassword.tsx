@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { AuthLayout } from '@/app/layouts/auth-layout'
-import { ForgotPasswordForm } from '@/features/auth'
 import { CreateNewPasswordForm } from '@/features/auth/ui/CreateNewPasswordForm'
 import { NextPageWithLayout } from '@/pages/_app'
 
