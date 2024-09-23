@@ -16,40 +16,12 @@ import Link from 'next/link'
 
 import { handleAuthApiError } from '../lib/handle-auth-api-error'
 import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'
+import { useSingUpForm } from '../model/useSingUpForm'
 import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
-  const t = useScopedTranslation('Auth')
-
-  const signUpSchema = createSignUpSchema(t)
-
-  const { control, getValues, handleSubmit, setError } = useForm<SignUpFormData>({
-    defaultValues: {
-      agreedToPrivacyPolicy: false,
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      userName: '',
-    },
-    resolver: zodResolver(signUpSchema),
-  })
-
-  const [apiError, setApiError] = useState('')
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [userEmail, setUserEmail] = useState('')
-
-  const [register, { isLoading }] = authApi.useRegistrationMutation()
-
-  const submit: SubmitHandler<SignUpFormData> = async ({ email, password, userName }) => {
-    try {
-      await register({ baseUrl: 'http://localhost:3000', email, password, userName }).unwrap()
-
-      setUserEmail(getValues('email'))
-      setIsModalOpen(true)
-    } catch (error) {
-      handleAuthApiError({ error, setApiError, setError, t })
-    }
-  }
+  const { apiError, control, handleSubmit, isLoading, isModalOpen, setIsModalOpen, t, userEmail } =
+    useSingUpForm()
 
   return (
     <Card className={'p-6 flex flex-col'}>
@@ -66,7 +38,7 @@ export const SignUpForm = () => {
           <GithubSvgrepoCom31 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
         </Link>
       </div>
-      <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit(submit)}>
+      <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit}>
         <FormInput control={control} label={t.username} name={'userName'} required />
         <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
