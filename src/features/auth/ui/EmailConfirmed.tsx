@@ -1,31 +1,11 @@
-import { useEffect, useState } from 'react'
-
-import { authApi } from '@/common/api/auth.api'
 import Typography from '@/common/components/typography/Typography'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
 
+import { useEmailConfirmed } from '../model/useEmailConfrmed'
 import { SignInButton } from './SignInButton'
 
 export const EmailConfirmed = () => {
-  const t = useScopedTranslation('Auth')
-  const params = useSearchParams()
-  const [isConfirmed, setIsConfirmed] = useState(false)
-  const [confirmRegistration, { isLoading }] = authApi.useRegistrationConfirmationMutation()
-
-  useEffect(() => {
-    const sendConfirmationCode = async () => {
-      try {
-        await confirmRegistration({ confirmationCode: params?.get('code') ?? '' }).unwrap()
-        setIsConfirmed(true)
-      } catch (error) {
-        setIsConfirmed(false)
-      }
-    }
-
-    sendConfirmationCode()
-  }, [confirmRegistration, params])
+  const { isConfirmed, isLoading, t } = useEmailConfirmed()
 
   if (isLoading) {
     //TODO: replace with a loader component
