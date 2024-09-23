@@ -119,10 +119,12 @@ export const SignUpForm = () => {
         isOpen={isModalOpen}
         mode={'default'}
         onOpenChange={setIsModalOpen}
-        title={'Email sent'}
+        title={t.emailSent}
       >
         <div className={'flex flex-col gap-[18px] pb-6 pt-[18px]'}>
-          <Typography>We have sent a link to confirm your email to {userEmail}</Typography>
+          <Typography>
+            {t.weSentALinkToConfirmYourEmail} {userEmail}
+          </Typography>
           <Button className={'self-end w-[96px]'} onClick={() => setIsModalOpen(false)}>
             Ok
           </Button>
