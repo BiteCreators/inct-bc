@@ -1,10 +1,12 @@
 export const en = {
   Auth: {
+    congratulations: 'Congratulations!',
     doYouHaveAnAccount: 'Do you have an account?',
     email: 'email',
     emailInvalidError: `The email must match the format
     example@example.com`,
     emailRequiredError: 'Email is required',
+    emailSent: 'Email sent',
     emailTakenError: 'User with this email already registered',
     password: 'password',
     passwordConfirmation: 'password confirmation',
@@ -24,6 +26,8 @@ export const en = {
     usernameTakenError: 'User with this username already registered',
     usernameTooLongError: 'Maximum number of characters 30',
     usernameTooShortError: 'Minimum number of characters 6',
+    weSentALinkToConfirmYourEmail: 'We have sent a link to confirm your email to',
+    yourEmailConfirmed: 'Your email has been confirmed',
   },
   Internationalization: {
     en: 'English',
