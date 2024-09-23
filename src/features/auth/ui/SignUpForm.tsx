@@ -14,8 +14,17 @@ import { useSingUpForm } from '../model/useSingUpForm'
 import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
-  const { apiError, control, handleSubmit, isLoading, isModalOpen, setIsModalOpen, t, userEmail } =
-    useSingUpForm()
+  const {
+    apiError,
+    control,
+    handleSubmit,
+    isLoading,
+    isModalOpen,
+    isValid,
+    setIsModalOpen,
+    t,
+    userEmail,
+  } = useSingUpForm()
 
   return (
     <Card className={'p-6 flex flex-col'}>
@@ -73,7 +82,7 @@ export const SignUpForm = () => {
             </Typography>
           }
         />
-        <Button className={'-mt-3'} disabled={isLoading} type={'submit'}>
+        <Button className={'-mt-3'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>
       </form>

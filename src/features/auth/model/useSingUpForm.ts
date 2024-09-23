@@ -13,7 +13,13 @@ export const useSingUpForm = () => {
 
   const signUpSchema = createSignUpSchema(t)
 
-  const { control, getValues, handleSubmit, setError } = useForm<SignUpFormData>({
+  const {
+    control,
+    formState: { isValid },
+    getValues,
+    handleSubmit,
+    setError,
+  } = useForm<SignUpFormData>({
     defaultValues: {
       agreedToPrivacyPolicy: false,
       email: '',
@@ -21,6 +27,7 @@ export const useSingUpForm = () => {
       passwordConfirmation: '',
       userName: '',
     },
+    mode: 'onChange',
     resolver: zodResolver(signUpSchema),
   })
 
@@ -47,6 +54,7 @@ export const useSingUpForm = () => {
     handleSubmit: handleSubmit(submit),
     isLoading,
     isModalOpen,
+    isValid,
     setIsModalOpen,
     t,
     userEmail,
