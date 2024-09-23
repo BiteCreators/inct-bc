@@ -1,3 +1,4 @@
+/* eslint-disable no-duplicate-imports */
 import type { SVGProps } from 'react'
 import { Ref, forwardRef, memo } from 'react'
 const SvgEmail = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
