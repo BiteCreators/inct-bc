@@ -9,7 +9,11 @@ export const recoveryPasswordSchema = z
     newPassword: z
       .string()
       .min(1, 'password is required')
-      .min(6, 'password can not be less than 6 symbols'),
+      .min(6, 'password can not be less than 6 symbols')
+      .regex(
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]+$/,
+        'Password must contain at least one uppercase letter, one number, and one special character'
+      ),
   })
   .refine(data => data.newPassword === data.confirmationPassword)
 

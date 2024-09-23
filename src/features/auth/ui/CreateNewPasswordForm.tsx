@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { authApi } from '@/common/api/auth.api'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
@@ -15,6 +16,15 @@ import { useRouter } from 'next/router'
 export const CreateNewPasswordForm = () => {
   const router = useRouter()
   const { code, email } = router.query
+  const [checkRecoveryCode] = authApi.useCheckRecoveryCodeMutation()
+
+  useEffect(() => {
+    if (code && email) {
+      checkRecoveryCode({ recoveryCode: code })
+        .unwrap()
+        .then(res => console.log(res))
+    }
+  }, [checkRecoveryCode, code, email])
 
   console.log(code)
   const { control, formState, handleSubmit } = useForm<recoveryPasswordSchemaData>({

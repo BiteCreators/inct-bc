@@ -1,37 +1,17 @@
 import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { useForgotPasswordMutation } from '@/app/inct.api'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
+import { Modal } from '@/common/components/modal/Modal'
 import { Recaptcha } from '@/common/components/reCaptcha/Recaptcha'
 import Typography from '@/common/components/typography/Typography'
-import {
-  forgotPasswordData,
-  forgotPasswordScheme,
-} from '@/features/auth/lib/schemas/forgotPassword.schema'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
-  const [forgotPassword, { error, isError, isLoading, isSuccess }] = useForgotPasswordMutation()
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!
-  const { control, handleSubmit, setValue } = useForm<forgotPasswordData>({
-    defaultValues: {
-      baseUrl: baseUrl,
-      email: '',
-    },
-    resolver: zodResolver(forgotPasswordScheme),
-  })
-  const onRecaptchaChange = (token: null | string) => {
-    if (token) {
-      setValue('recaptcha', token)
-    }
-  }
-  const submit: SubmitHandler<forgotPasswordData> = data => {
-    forgotPassword(data)
-  }
+  const { control, handleSubmit, isModalOpen, onRecaptchaChange, setIsModalOpen, submit } =
+    useForgotPassword()
 
   return (
     <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
@@ -60,6 +40,14 @@ export const ForgotPasswordForm = () => {
           theme={'dark'}
         />
       </form>
+      <Modal isOpen={isModalOpen} mode={'default'} onOpenChange={setIsModalOpen} title={'title'}>
+        <div className={'flex flex-col gap-[18px] pb-6 pt-[18px]'}>
+          <Typography>{'Typography'}</Typography>
+          <Button className={'self-end w-[96px]'} onClick={() => setIsModalOpen(false)}>
+            Ok
+          </Button>
+        </div>
+      </Modal>
     </Card>
   )
 }
