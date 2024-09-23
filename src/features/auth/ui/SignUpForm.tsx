@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import React from 'react'
 
-import { authApi } from '@/common/api/auth.api'
 import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
@@ -10,12 +8,8 @@ import { FormInput } from '@/common/components/form/FormInput'
 import { Modal } from '@/common/components/modal/Modal'
 import { Trans } from '@/common/components/trans/Trans'
 import Typography from '@/common/components/typography/Typography'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
-import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
-import { handleAuthApiError } from '../lib/handle-auth-api-error'
-import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'
 import { useSingUpForm } from '../model/useSingUpForm'
 import { SignInButton } from './SignInButton'
 
