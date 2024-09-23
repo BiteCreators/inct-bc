@@ -10,9 +10,13 @@ import {
   recoveryPasswordSchemaData,
 } from '@/features/auth/lib/schemas/recoveryPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Simulate } from 'react-dom/test-utils'
+import { useRouter } from 'next/router'
 
 export const CreateNewPasswordForm = () => {
+  const router = useRouter()
+  const { code, email } = router.query
+
+  console.log(code)
   const { control, formState, handleSubmit } = useForm<recoveryPasswordSchemaData>({
     defaultValues: {
       confirmationPassword: '',
