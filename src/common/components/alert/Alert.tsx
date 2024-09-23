@@ -5,13 +5,14 @@ import Typography from '@/common/components/typography/Typography'
 import { cn } from '@/common/utils/cn'
 import { motion } from 'framer-motion'
 
-type AlertProps = {
+type Props = {
   message: string
   onClose: () => void
+  purpose: 'alert' | 'toast'
   type: 'error' | 'info' | 'success'
 }
 
-export const Alert = ({ message, onClose, type }: AlertProps) => {
+export const Alert = ({ message, onClose, purpose, type }: Props) => {
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
     info: 'bg-primary-900 border-primary-500',
@@ -53,7 +54,8 @@ export const Alert = ({ message, onClose, type }: AlertProps) => {
     <motion.div
       animate={'visible'}
       className={cn(
-        'fixed bottom-4 left-1/4 transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white z-250',
+        'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white z-250',
+        purpose === 'alert' && 'fixed bottom-4 left-1/4',
         alertStyles[type]
       )}
       exit={'exit'}
@@ -64,9 +66,11 @@ export const Alert = ({ message, onClose, type }: AlertProps) => {
         <Typography className={'min-w-72'} variant={'medium-text'}>
           {message}
         </Typography>
-        <button className={'text-xl focus:outline-none ml-4'} onClick={onClose}>
-          <Close viewBox={'0 -1 24 24'} />
-        </button>
+        {purpose === 'alert' && (
+          <button className={'text-xl focus:outline-none ml-4'} onClick={onClose}>
+            <Close viewBox={'0 -1 24 24'} />
+          </button>
+        )}
       </div>
     </motion.div>
   )
