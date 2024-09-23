@@ -2,11 +2,13 @@ import { LocaleType } from './en'
 
 export const ru: LocaleType = {
   Auth: {
+    congratulations: 'Поздравляем!',
     doYouHaveAnAccount: 'Уже есть аккаунт?',
     email: 'email',
     emailInvalidError: `Email должен быть формата
     example@example.com`,
     emailRequiredError: 'Введите email',
+    emailSent: 'Письмо отправлено',
     emailTakenError: 'Пользователь с таким email уже зарегистрирован',
     password: 'пароль',
     passwordConfirmation: 'подтвердите пароль',
@@ -26,6 +28,8 @@ export const ru: LocaleType = {
     usernameTakenError: 'Пользователь с таким именем уже зарегестрирован',
     usernameTooLongError: 'Максимум 30 символов',
     usernameTooShortError: 'Минимум 6 символов',
+    weSentALinkToConfirmYourEmail: 'Письмо со ссылкой для подтверждения email была отправлена на',
+    yourEmailConfirmed: 'Ваш email успешно подтверждён',
   },
   Internationalization: {
     en: 'Английский',
