@@ -5,7 +5,7 @@ import { EmailConfirmed } from '@/features/auth/ui/EmailConfirmed'
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
 
-export const RegistrationConfirmation: NextPageWithLayout = () => {
+const RegistrationConfirmation: NextPageWithLayout = () => {
   const isExpired = true
 
   if (isExpired) {
@@ -23,3 +23,5 @@ RegistrationConfirmation.getLayout = (page: React.ReactElement) => {
     </PageLayout>
   )
 }
+
+export default RegistrationConfirmation

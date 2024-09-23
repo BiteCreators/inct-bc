@@ -1,3 +1,3 @@
-import { RegistrationConfirmation } from './EmailConfirmed'
+import RegistrationConfirmation from './EmailConfirmed'
 
 export default RegistrationConfirmation
