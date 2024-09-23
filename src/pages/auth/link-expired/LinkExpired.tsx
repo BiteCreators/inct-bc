@@ -2,15 +2,15 @@ import React from 'react'
 
 import { AuthLayout } from '@/app/layouts/auth-layout'
 import { Button } from '@/common/components/button/Button'
-import { LinkExpiredFormWrapper } from '@/features/auth/ui/LinkExpiredFormWrapper'
+import { LinkExpiredWrapper } from '@/features/auth/ui/LinkExpiredWrapper'
 import { NextPageWithLayout } from '@/pages/_app'
 
 export const LinkExpired: NextPageWithLayout = () => {
   return (
     <div>
-      <LinkExpiredFormWrapper>
+      <LinkExpiredWrapper>
         <Button className={'w-full'}>Resend Link</Button>
-      </LinkExpiredFormWrapper>
+      </LinkExpiredWrapper>
     </div>
   )
 }

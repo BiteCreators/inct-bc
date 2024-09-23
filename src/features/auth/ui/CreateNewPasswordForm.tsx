@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
@@ -10,20 +10,25 @@ import {
   recoveryPasswordSchemaData,
 } from '@/features/auth/lib/schemas/recoveryPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Simulate } from 'react-dom/test-utils'
 
 export const CreateNewPasswordForm = () => {
-  const { control, handleSubmit } = useForm<recoveryPasswordSchemaData>({
+  const { control, formState, handleSubmit } = useForm<recoveryPasswordSchemaData>({
     defaultValues: {
       confirmationPassword: '',
       newPassword: '',
     },
+    mode: 'onChange',
     resolver: zodResolver(recoveryPasswordSchema),
   })
+  const submit: SubmitHandler<recoveryPasswordSchemaData> = data => {
+    console.log('Form Data:', data)
+  }
 
   return (
     <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
       <Typography variant={'h1'}>Create New Password</Typography>
-      <form className={'flex flex-col gap-6 '}>
+      <form className={'flex flex-col gap-6 '} noValidate onSubmit={handleSubmit(submit)}>
         <FormInput
           control={control}
           inputType={'reveal'}
@@ -38,7 +43,9 @@ export const CreateNewPasswordForm = () => {
           name={'confirmationPassword'}
           required
         ></FormInput>
-        <Button type={'submit'}>Create new password</Button>
+        <Button disabled={!formState.isValid} type={'submit'}>
+          Create new password
+        </Button>
       </form>
     </Card>
   )
