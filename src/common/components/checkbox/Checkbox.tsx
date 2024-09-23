@@ -1,11 +1,11 @@
-import React, { ChangeEvent, ComponentProps, forwardRef, useId, useState } from 'react'
+import React, { ChangeEvent, ComponentProps, ReactNode, forwardRef, useId, useState } from 'react'
 
 import { CheckmarkOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
 
 type CheckboxProps = {
   error?: string
-  text?: string
+  text?: ReactNode
 } & ComponentProps<'input'>
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
@@ -72,7 +72,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             </span>
           )}
         </div>
-        {required && !isChecked && (
+        {!!error && (
           <p className={'text-sm text-danger-500'}>{error ? error : 'This field is required'} </p>
         )}
       </div>

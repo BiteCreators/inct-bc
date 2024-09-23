@@ -1,6 +1,4 @@
-import type { SVGProps } from 'react'
-// eslint-disable-next-line no-duplicate-imports
-import { Ref, forwardRef, memo } from 'react'
+import { Ref, SVGProps, forwardRef, memo } from 'react'
 const SvgArrowIosUp = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}

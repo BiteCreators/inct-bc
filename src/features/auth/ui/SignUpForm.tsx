@@ -1,56 +1,60 @@
-import { SubmitHandler, useForm } from 'react-hook-form'
+import React from 'react'
 
+import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { FormInput } from '@/common/components/form/FormInput'
+import { Modal } from '@/common/components/modal/Modal'
+import { Trans } from '@/common/components/trans/Trans'
 import Typography from '@/common/components/typography/Typography'
-import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 
-import { SignUpFormData, signUpSchema } from '../lib/schemas/signUp.schema'
+import { useSingUpForm } from '../model/useSingUpForm'
 import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
-  const { control, handleSubmit } = useForm<SignUpFormData>({
-    defaultValues: {
-      agreedToPrivacyPolicy: false,
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      username: '',
-    },
-    resolver: zodResolver(signUpSchema),
-  })
-
-  const submit: SubmitHandler<SignUpFormData> = data => {
-    alert(`
-    ${data.email}   
-    ${data.username}   
-    ${data.password}   
-    ${data.passwordConfirmation}   
-    ${data.agreedToPrivacyPolicy}   
-    `)
-  }
+  const {
+    apiError,
+    control,
+    handleSubmit,
+    isLoading,
+    isModalOpen,
+    isValid,
+    setIsModalOpen,
+    t,
+    userEmail,
+  } = useSingUpForm()
 
   return (
-    <Card className={'p-6 flex flex-col gap-6'}>
+    <Card className={'p-6 flex flex-col'}>
+      {/* TODO: replace it with alert component */}
+      <div>{apiError}</div>
       <Typography className={'text-center'} variant={'h1'}>
-        Sing Up
+        {t.signUp}
       </Typography>
-      <form className={'flex flex-col gap-6'} noValidate onSubmit={handleSubmit(submit)}>
-        <FormInput control={control} label={'username'} name={'username'} required />
-        <FormInput control={control} label={'email'} name={'email'} required />
+      <div className={'flex gap-[60px] mx-auto mt-3'}>
+        <Link href={'#'}>
+          <GoogleSvgrepoCom1 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
+        </Link>
+        <Link href={'#'}>
+          <GithubSvgrepoCom31 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
+        </Link>
+      </div>
+      <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit}>
+        <FormInput control={control} label={t.username} name={'userName'} required />
+        <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
           control={control}
           inputType={'reveal'}
-          label={'password'}
+          label={t.password}
           name={'password'}
           required
         />
         <FormInput
           control={control}
           inputType={'reveal'}
-          label={'password confirmation'}
+          label={t.passwordConfirmation}
           name={'passwordConfirmation'}
           required
         />
@@ -58,12 +62,49 @@ export const SignUpForm = () => {
           control={control}
           name={'agreedToPrivacyPolicy'}
           required
-          text={'I agree to Terms of service and Privacy policy'}
+          text={
+            <Typography variant={'small-text'}>
+              <Trans
+                tags={{
+                  '1': str => (
+                    <Link className={'underline text-primary-300'} href={'#'}>
+                      {str}
+                    </Link>
+                  ),
+                  '2': str => (
+                    <Link className={'underline text-primary-300'} href={'#'}>
+                      {str}
+                    </Link>
+                  ),
+                }}
+                text={t.privacyPolicy}
+              />
+            </Typography>
+          }
         />
-        <Button>Sign Up</Button>
+        <Button className={'-mt-3'} disabled={isLoading || !isValid} type={'submit'}>
+          {t.signUp}
+        </Button>
       </form>
-      <Typography className={'text-center'}>Do you have an account?</Typography>
-      <SignInButton />
+      <div className={'mt-[18px] flex gap-[6px] flex-col'}>
+        <Typography className={'text-center '}>{t.doYouHaveAnAccount}</Typography>
+        <SignInButton />
+      </div>
+      <Modal
+        isOpen={isModalOpen}
+        mode={'default'}
+        onOpenChange={setIsModalOpen}
+        title={t.emailSent}
+      >
+        <div className={'flex flex-col gap-[18px] pb-6 pt-[18px]'}>
+          <Typography>
+            {t.weSentALinkToConfirmYourEmail} {userEmail}
+          </Typography>
+          <Button className={'self-end w-[96px]'} onClick={() => setIsModalOpen(false)}>
+            Ok
+          </Button>
+        </div>
+      </Modal>
     </Card>
   )
 }

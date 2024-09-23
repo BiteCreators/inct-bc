@@ -27,7 +27,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     } = useInput({ disabled, inputType })
 
     return (
-      <div className={cn('relative mb-4', className)}>
+      <div className={cn('relative', className)}>
         {label && (
           <label
             className={cn(

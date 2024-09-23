@@ -1,19 +1,36 @@
+import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const signUpSchema = z
-  .object({
-    agreedToPrivacyPolicy: z.boolean({ required_error: 'you must agree to privacy policy' }),
-    email: z.string().email().min(1, 'email is required'),
-    password: z
-      .string()
-      .min(1, 'password is required')
-      .min(6, 'password can not be less than 6 symbols'),
-    passwordConfirmation: z
-      .string()
-      .min(1, 'password confirmation is required')
-      .min(6, 'password can not be less than 6 symbols'),
-    username: z.string().min(1, 'username is required'),
-  })
-  .refine(data => data.password === data.passwordConfirmation)
+export const createSignUpSchema = (t: LocaleType['Auth']) => {
+  return z
+    .object({
+      agreedToPrivacyPolicy: z.boolean({
+        required_error: t.privacyPolicyRequiredError,
+      }),
+      email: z.string().email({ message: t.emailInvalidError }).min(1, t.emailRequiredError),
+      password: z
+        .string()
+        .min(1, t.passwordRequiredError)
+        .max(30, t.passwordTooLongError)
+        .min(6, t.passwordTooShortError)
+        .regex(
+          new RegExp(/^[a-zA-Z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/g),
+          t.passwordInvalidError
+        ),
+      passwordConfirmation: z
+        .string()
+        .min(1, t.passwordConfirmationRequiredError)
+        .min(6, t.passwordTooShortError),
+      userName: z
+        .string()
+        .min(1, t.usernameRequiredError)
+        .min(6, t.usernameTooShortError)
+        .max(30, t.usernameTooShortError),
+    })
+    .refine(data => data.password === data.passwordConfirmation, {
+      message: t.passwordConfirmationInvalidError,
+      path: ['passwordConfirmation'],
+    })
+}
 
-export type SignUpFormData = z.infer<typeof signUpSchema>
+export type SignUpFormData = z.infer<ReturnType<typeof createSignUpSchema>>

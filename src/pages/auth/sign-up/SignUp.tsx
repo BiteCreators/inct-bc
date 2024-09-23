@@ -6,8 +6,7 @@ import { NextPageWithLayout } from '@/pages/_app'
 
 const SignUp: NextPageWithLayout = () => {
   return (
-    <div className={'flex gap-4 flex-col justify-center w-[30%] min-w-[360px]'}>
-      {/* <h1>SignUp</h1> */}
+    <div className={'flex gap-4 flex-col justify-center w-[380px] '}>
       <SignUpForm />
       {/* <Link href={'/auth/sign-up/private-policy'}> Private Police</Link> */}
     </div>
