@@ -26,6 +26,9 @@ export const en = {
     usernameTakenError: 'User with this username already registered',
     usernameTooLongError: 'Maximum number of characters 30',
     usernameTooShortError: 'Minimum number of characters 6',
+    verificationLinkExpired: 'Email verification link expired',
+    verificationLinkExpiredBody:
+      'Looks like the verification link has expired. Not to worry, we can send the link again',
     weSentALinkToConfirmYourEmail: 'We have sent a link to confirm your email to',
     yourEmailConfirmed: 'Your email has been confirmed',
   },

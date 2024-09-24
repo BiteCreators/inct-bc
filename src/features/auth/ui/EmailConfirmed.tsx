@@ -1,8 +1,10 @@
+import { Button } from '@/common/components/button/Button'
 import { Loader } from '@/common/components/loader/Loader'
 import Typography from '@/common/components/typography/Typography'
 import Image from 'next/image'
 
 import { useEmailConfirmed } from '../model/useEmailConfrmed'
+import { LinkExpiredWrapper } from './LinkExpiredWrapper'
 import { SignInButton } from './SignInButton'
 
 export const EmailConfirmed = () => {
@@ -13,7 +15,7 @@ export const EmailConfirmed = () => {
       return <Loader />
     case 'rejected':
       //TODO: replace with link expired component or a page redirect
-      return <div>link expired</div>
+      return <LinkExpiredWrapper button={<Button>Test</Button>} />
     case 'success':
       return (
         <div className={'flex text-center flex-col items-center'}>
