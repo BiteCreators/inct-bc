@@ -11,6 +11,8 @@ import Typography from '@/common/components/typography/Typography'
 import Link from 'next/link'
 
 import { useSingUpForm } from '../model/useSingUpForm'
+import { GithubOauthButton } from './GithubOauthButton'
+import { GoogleOauthButton } from './GoogleOauthButton'
 import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
@@ -34,12 +36,8 @@ export const SignUpForm = () => {
         {t.signUp}
       </Typography>
       <div className={'flex gap-[60px] mx-auto mt-3'}>
-        <Link href={'#'}>
-          <GoogleSvgrepoCom1 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
-        </Link>
-        <Link href={'#'}>
-          <GithubSvgrepoCom31 height={'36px'} viewBox={'0 0 24 24'} width={'36px'} />
-        </Link>
+        <GoogleOauthButton />
+        <GithubOauthButton />
       </div>
       <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit}>
         <FormInput control={control} label={t.username} name={'userName'} required />
