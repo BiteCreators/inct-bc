@@ -7,6 +7,7 @@ export const ru: LocaleType = {
     email: 'email',
     emailInvalidError: `Email должен быть формата
     example@example.com`,
+    emailIsNotValidOrAlreadyConfirmedError: 'Emali не валиден, или уже подтверждён',
     emailRequiredError: 'Введите email',
     emailSent: 'Письмо отправлено',
     emailTakenError: 'Пользователь с таким email уже зарегистрирован',
@@ -21,6 +22,7 @@ export const ru: LocaleType = {
     passwordTooShortError: 'Минимум 6 символов',
     privacyPolicy: 'Я согласен с <1>Условиями</1> и <2>Политикой конфиденсальности</2>',
     privacyPolicyRequiredError: 'Заполните это поле',
+    resendVerificationLink: 'Отправить новое письмо',
     signIn: 'Вход',
     signUp: 'Регистрация',
     username: 'имя пользователя',

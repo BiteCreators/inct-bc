@@ -5,6 +5,7 @@ export const en = {
     email: 'email',
     emailInvalidError: `The email must match the format
     example@example.com`,
+    emailIsNotValidOrAlreadyConfirmedError: "Email isn't valid or already confirmed",
     emailRequiredError: 'Email is required',
     emailSent: 'Email sent',
     emailTakenError: 'User with this email already registered',
@@ -19,6 +20,7 @@ export const en = {
     passwordTooShortError: 'Minimum number of characters 6',
     privacyPolicy: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
     privacyPolicyRequiredError: 'You must agree to privacy policy',
+    resendVerificationLink: 'Resend verification link',
     signIn: 'Sign in',
     signUp: 'Sign Up',
     username: 'username',

@@ -12,7 +12,7 @@ export const handleAuthApiError = <T extends FieldValues>({
 }: {
   error: unknown
   setApiError: React.Dispatch<React.SetStateAction<string>>
-  setError: UseFormSetError<T>
+  setError?: UseFormSetError<T>
   t: LocaleType['Auth']
 }) => {
   if (isApiError(error)) {
@@ -30,8 +30,14 @@ export const handleAuthApiError = <T extends FieldValues>({
       if (m.message.includes('already exist') && m.message.includes('email')) {
         message = t.emailTakenError
       }
-
-      setError(m.field as Path<T>, { message, type: 'manual' })
+      if (m.message.includes("Email isn't valid or already confirmed")) {
+        message = t.emailIsNotValidOrAlreadyConfirmedError
+      }
+      if (setError) {
+        setError(m.field as Path<T>, { message, type: 'manual' })
+      } else {
+        setApiError(message)
+      }
     })
   }
 }

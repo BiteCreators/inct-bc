@@ -8,14 +8,26 @@ import { LinkExpiredWrapper } from './LinkExpiredWrapper'
 import { SignInButton } from './SignInButton'
 
 export const EmailConfirmed = () => {
-  const { confirmationState, t } = useEmailConfirmed()
+  const { apiError, confirmationState, handleResendClick, isResendLinkLoading, t } =
+    useEmailConfirmed()
 
   switch (confirmationState) {
     case 'pending':
       return <Loader />
     case 'rejected':
-      //TODO: replace with link expired component or a page redirect
-      return <LinkExpiredWrapper button={<Button>Test</Button>} />
+      return (
+        <>
+          <LinkExpiredWrapper
+            button={
+              <Button disabled={isResendLinkLoading} onClick={handleResendClick}>
+                {t.resendVerificationLink}
+              </Button>
+            }
+          />
+          {/*TODO: make that with toasts or find a better way*/}
+          {!!apiError && <div className={'text-danger-500 mt-3'}>{apiError}</div>}
+        </>
+      )
     case 'success':
       return (
         <div className={'flex text-center flex-col items-center'}>
