@@ -10,8 +10,16 @@ import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
-  const { control, handleSubmit, isModalOpen, onRecaptchaChange, setIsModalOpen, submit } =
-    useForgotPassword()
+  const {
+    control,
+    handleSubmit,
+    isModalOpen,
+    isSubmitting,
+    isValid,
+    onRecaptchaChange,
+    setIsModalOpen,
+    submit,
+  } = useForgotPassword()
 
   return (
     <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
@@ -29,7 +37,9 @@ export const ForgotPasswordForm = () => {
         <Typography className={'text-light-900 -mt-6'} variant={'small-text'}>
           Enter your email address and we will send you further instructions{' '}
         </Typography>
-        <Button type={'submit'}>Send Link</Button>
+        <Button disabled={!isValid || isSubmitting} type={'submit'}>
+          Send Link
+        </Button>
         <Button type={'button'} variant={'text'}>
           <Link href={'/auth/sign-in'}>Back to Sign In</Link>
         </Button>

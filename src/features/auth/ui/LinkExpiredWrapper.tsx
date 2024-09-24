@@ -1,29 +1,16 @@
-import React from 'react'
+import React, { Children } from 'react'
 
-import { authApi } from '@/common/api/auth.api'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import Typography from '@/common/components/typography/Typography'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-export const LinkExpiredWrapper = ({
-  ButtonNameVariant,
-}: {
-  ButtonNameVariant: 'long' | 'short'
-}) => {
-  const router = useRouter()
-  const { code, email } = router.query
+type Props = {
+  children: React.ReactNode
+}
 
-  console.log(email)
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!
-  const [forgotPassword] = authApi.useForgotPasswordMutation()
-  const handler = () => {
-    const data = {}
-
-    forgotPassword(data).unwrap()
-  }
-
+export const LinkExpiredWrapper = ({ children }: Props) => {
   return (
     <div className={'flex flex-col items-center'}>
       <Card
@@ -35,9 +22,7 @@ export const LinkExpiredWrapper = ({
         <Typography className={'text-center'} variant={'regular-text'}>
           Looks like the verification link has expired. Not to worry, we can send the link again
         </Typography>
-        <Button onClick={() => handler()} type={'button'}>
-          Create new password
-        </Button>
+        {children}
       </Card>
       <Image
         alt={'image'}
