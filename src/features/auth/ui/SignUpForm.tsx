@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'

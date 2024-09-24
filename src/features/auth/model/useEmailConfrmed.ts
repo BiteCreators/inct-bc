@@ -7,16 +7,18 @@ import { useSearchParams } from 'next/navigation'
 export const useEmailConfirmed = () => {
   const t = useScopedTranslation('Auth')
   const params = useSearchParams()
-  const [isConfirmed, setIsConfirmed] = useState(false)
-  const [confirmRegistration, { isLoading }] = authApi.useRegistrationConfirmationMutation()
+  const [confirmationState, setConfirmationState] = useState<'pending' | 'rejected' | 'success'>(
+    'pending'
+  )
+  const [confirmRegistration] = authApi.useRegistrationConfirmationMutation()
 
   useEffect(() => {
     const sendConfirmationCode = async () => {
       try {
         await confirmRegistration({ confirmationCode: params?.get('code') ?? '' }).unwrap()
-        setIsConfirmed(true)
+        setConfirmationState('success')
       } catch (error) {
-        setIsConfirmed(false)
+        setConfirmationState('rejected')
       }
     }
 
@@ -24,8 +26,7 @@ export const useEmailConfirmed = () => {
   }, [confirmRegistration, params])
 
   return {
-    isConfirmed,
-    isLoading,
+    confirmationState,
     t,
   }
 }
