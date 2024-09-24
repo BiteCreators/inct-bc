@@ -7,7 +7,7 @@ export const useInput = ({
   disabled?: boolean
   inputType: 'default' | 'reveal' | 'search'
 }) => {
-  const svgColor = disabled ? 'text-dark-100' : 'text-light-900'
+  const svgColor = disabled ? 'text-dark-100' : 'text-light-700'
   const inputPaddingLeft = inputType === 'search' ? '42px' : '8px'
   const [showContent, setShowContent] = useState(false)
   const inputId = useId()

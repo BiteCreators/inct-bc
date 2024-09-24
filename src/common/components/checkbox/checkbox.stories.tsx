@@ -18,7 +18,7 @@ export const Text: Story = {
   args: {
     checked: true,
     id: 'Text',
-    text: 'Checkbox',
+    text: <p>Checkbox</p>,
   },
   render: args => <Checkbox {...args} />,
 }

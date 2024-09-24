@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import { Icon } from '../icon/Icon'
+import { FlagRussia, FlagUnitedKingdom } from '@/common/assets/icons/components'
+
 import { Select, SelectItem } from './Select'
 
 const meta: Meta<typeof Select> = {
@@ -102,23 +103,7 @@ export const WithIcon: Story = {
 
     return (
       <Select
-        icon={
-          lang === 'ru' ? (
-            <Icon
-              height={'20px'}
-              iconId={'russian-flag'}
-              viewBox={'-3 -1.5 40 30'}
-              width={'30px'}
-            />
-          ) : (
-            <Icon
-              height={'20px'}
-              iconId={'british-flag'}
-              viewBox={'-3 -1.5 40 30'}
-              width={'30px'}
-            />
-          )
-        }
+        icon={lang === 'ru' ? <FlagRussia /> : <FlagUnitedKingdom />}
         onValueChange={(value: 'en' | 'ru') => setLang(value)}
         value={lang}
       >

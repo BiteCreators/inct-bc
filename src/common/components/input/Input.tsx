@@ -1,7 +1,6 @@
-import { InputHTMLAttributes, forwardRef, useId, useState } from 'react'
+import { InputHTMLAttributes, forwardRef } from 'react'
 
-import { EyeOutline } from '@/common/assets/icons/components'
-import { Icon } from '@/common/components/icon/Icon'
+import { EyeOffOutline, EyeOutline, SearchOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
 
 import { useInput } from './useInput'
@@ -28,7 +27,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     } = useInput({ disabled, inputType })
 
     return (
-      <div className={cn('relative mb-4', className)}>
+      <div className={cn('relative', className)}>
         {label && (
           <label
             className={cn(
@@ -63,12 +62,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
                 onClick={onSearchClick}
                 type={'button'}
               >
-                <Icon
-                  className={`fill-current ${svgColor}`}
-                  iconId={'search-outline'}
-                  viewBox={'0 -8 30 40'}
-                  width={'30'}
-                />
+                <SearchOutline className={`fill-current ${svgColor}`} />
               </button>
             </span>
           )}
@@ -99,11 +93,11 @@ export const Input = forwardRef<HTMLInputElement, Props>(
                 onClick={changeShowContentHandler}
                 type={'button'}
               >
-                <EyeOutline
-                  className={`fill-current ${svgColor}`}
-                  viewBox={'10 -6 1 35'}
-                  width={'30'}
-                />
+                {showContent ? (
+                  <EyeOutline className={`fill-current ${svgColor}`} />
+                ) : (
+                  <EyeOffOutline className={`fill-current ${svgColor}`} />
+                )}
               </button>
             </span>
           )}

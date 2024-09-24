@@ -14,6 +14,7 @@ type TextFieldProps<T extends FieldValues> = {
 export const FormInput = <T extends FieldValues>({
   control,
   defaultValue,
+  error,
   inputType = 'default',
   label,
   name,
@@ -29,7 +30,7 @@ export const FormInput = <T extends FieldValues>({
   return (
     <Input
       {...field}
-      error={fieldState.error?.message}
+      error={error ?? fieldState.error?.message}
       inputType={inputType}
       label={label}
       {...rest}
