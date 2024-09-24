@@ -8,9 +8,7 @@ import { NextPageWithLayout } from '@/pages/_app'
 export const LinkExpired: NextPageWithLayout = () => {
   return (
     <div>
-      <LinkExpiredWrapper>
-        <Button className={'w-full'}>Resend Link</Button>
-      </LinkExpiredWrapper>
+      <LinkExpiredWrapper ButtonNameVariant={'long'} />
     </div>
   )
 }

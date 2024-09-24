@@ -1,32 +1,51 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
+import { Loader } from '@/common/components/loader/Loader'
 import Typography from '@/common/components/typography/Typography'
+import { useLoader } from '@/common/utils/hooks/useLoader'
 import {
   recoveryPasswordSchema,
   recoveryPasswordSchemaData,
 } from '@/features/auth/lib/schemas/recoveryPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 export const CreateNewPasswordForm = () => {
   const router = useRouter()
+  const params = useSearchParams()
+
+  useLoader()
+  //console.log(params?.get('code'))
   const { code, email } = router.query
-  const [checkRecoveryCode] = authApi.useCheckRecoveryCodeMutation()
+
+  const [loading, setLoading] = useState<boolean>(true)
+
+  const [checkRecoveryCode, { isError, isLoading, isSuccess, isUninitialized }] =
+    authApi.useCheckRecoveryCodeMutation()
 
   useEffect(() => {
-    if (code && email) {
-      checkRecoveryCode({ recoveryCode: code })
-        .unwrap()
-        .then(res => console.log(res))
-    }
-  }, [checkRecoveryCode, code, email])
+    const checkCode = async () => {
+      if (code) {
+        try {
+          const recoveryCode = Array.isArray(code) ? code[0] : code
 
-  console.log(code)
+          await checkRecoveryCode({ recoveryCode }).unwrap()
+          setLoading(false)
+        } catch (err) {
+          router.push(`/auth/link-expired?email=${email}&code=${code}`)
+        }
+      }
+    }
+
+    checkCode()
+  }, [code, email, router])
+
   const { control, formState, handleSubmit } = useForm<recoveryPasswordSchemaData>({
     defaultValues: {
       confirmationPassword: '',
@@ -37,6 +56,10 @@ export const CreateNewPasswordForm = () => {
   })
   const submit: SubmitHandler<recoveryPasswordSchemaData> = data => {
     console.log('Form Data:', data)
+  }
+
+  if (loading) {
+    return <Loader />
   }
 
   return (

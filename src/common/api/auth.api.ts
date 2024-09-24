@@ -13,7 +13,7 @@ type RegistrationConfirmationDto = {
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
-    checkRecoveryCode: builder.mutation<any, any>({
+    checkRecoveryCode: builder.mutation<any, { recoveryCode: string }>({
       query: body => ({
         body,
         method: 'POST',
