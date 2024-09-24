@@ -1,6 +1,5 @@
 import { Button } from '@/common/components/button/Button'
 import { Loader } from '@/common/components/loader/Loader'
-import { Modal } from '@/common/components/modal/Modal'
 import Typography from '@/common/components/typography/Typography'
 import Image from 'next/image'
 
