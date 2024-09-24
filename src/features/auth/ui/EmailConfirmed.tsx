@@ -1,15 +1,24 @@
 import { Button } from '@/common/components/button/Button'
 import { Loader } from '@/common/components/loader/Loader'
+import { Modal } from '@/common/components/modal/Modal'
 import Typography from '@/common/components/typography/Typography'
 import Image from 'next/image'
 
 import { useEmailConfirmed } from '../model/useEmailConfrmed'
 import { LinkExpiredWrapper } from './LinkExpiredWrapper'
+import { LinkSentModal } from './LinkSentModal'
 import { SignInButton } from './SignInButton'
 
 export const EmailConfirmed = () => {
-  const { apiError, confirmationState, handleResendClick, isResendLinkLoading, t } =
-    useEmailConfirmed()
+  const {
+    apiError,
+    confirmationState,
+    handleResendClick,
+    isModalOpen,
+    isResendLinkLoading,
+    setIsModalOpen,
+    t,
+  } = useEmailConfirmed()
 
   switch (confirmationState) {
     case 'pending':
@@ -26,6 +35,12 @@ export const EmailConfirmed = () => {
           />
           {/*TODO: make that with toasts or find a better way*/}
           {!!apiError && <div className={'text-danger-500 mt-3'}>{apiError}</div>}
+          <LinkSentModal
+            bodyText={t.emailVerificationLinkSentAgain}
+            isOpen={isModalOpen}
+            setIsOpen={setIsModalOpen}
+            title={t.emailSent}
+          />
         </>
       )
     case 'success':

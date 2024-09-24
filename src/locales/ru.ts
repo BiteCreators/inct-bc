@@ -11,6 +11,7 @@ export const ru: LocaleType = {
     emailRequiredError: 'Введите email',
     emailSent: 'Письмо отправлено',
     emailTakenError: 'Пользователь с таким email уже зарегистрирован',
+    emailVerificationLinkSentAgain: 'Письмо со ссылкой подтверждения повторно отправлено',
     password: 'пароль',
     passwordConfirmation: 'подтвердите пароль',
     passwordConfirmationInvalidError: 'Пароли не совпадают',

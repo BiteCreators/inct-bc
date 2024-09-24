@@ -13,6 +13,7 @@ export const useEmailConfirmed = () => {
     'pending'
   )
   const [apiError, setApiError] = useState<string>('')
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmRegistration] = authApi.useRegistrationConfirmationMutation()
   const [resendLink, { isLoading: isResendLinkLoading }] =
     authApi.useRegistrationEmailResendingMutation()
@@ -46,7 +47,9 @@ export const useEmailConfirmed = () => {
     apiError,
     confirmationState,
     handleResendClick,
+    isModalOpen,
     isResendLinkLoading,
+    setIsModalOpen,
     t,
   }
 }

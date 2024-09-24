@@ -9,6 +9,7 @@ export const en = {
     emailRequiredError: 'Email is required',
     emailSent: 'Email sent',
     emailTakenError: 'User with this email already registered',
+    emailVerificationLinkSentAgain: 'We have sent a verification link again',
     password: 'password',
     passwordConfirmation: 'password confirmation',
     passwordConfirmationInvalidError: "Passwords don't match",
