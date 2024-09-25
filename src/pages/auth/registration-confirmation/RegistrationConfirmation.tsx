@@ -6,13 +6,7 @@ import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
 
 const RegistrationConfirmation: NextPageWithLayout = () => {
-  const isExpired = true
-
-  if (isExpired) {
-    return <EmailConfirmed />
-  } else {
-    return <div>Email expired</div>
-  }
+  return <EmailConfirmed />
 }
 
 //TODO: rewrite with get auth layout

@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { GithubSvgrepoCom31, GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { FormInput } from '@/common/components/form/FormInput'
-import { Modal } from '@/common/components/modal/Modal'
 import { Trans } from '@/common/components/trans/Trans'
 import Typography from '@/common/components/typography/Typography'
 import Link from 'next/link'
@@ -13,6 +11,7 @@ import Link from 'next/link'
 import { useSingUpForm } from '../model/useSingUpForm'
 import { GithubOauthButton } from './GithubOauthButton'
 import { GoogleOauthButton } from './GoogleOauthButton'
+import { LinkSentModal } from './LinkSentModal'
 import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
@@ -88,21 +87,12 @@ export const SignUpForm = () => {
         <Typography className={'text-center '}>{t.doYouHaveAnAccount}</Typography>
         <SignInButton />
       </div>
-      <Modal
+      <LinkSentModal
+        bodyText={`${t.weSentALinkToConfirmYourEmail} ${userEmail}`}
         isOpen={isModalOpen}
-        mode={'default'}
-        onOpenChange={setIsModalOpen}
+        setIsOpen={setIsModalOpen}
         title={t.emailSent}
-      >
-        <div className={'flex flex-col gap-[18px] pb-6 pt-[18px]'}>
-          <Typography>
-            {t.weSentALinkToConfirmYourEmail} {userEmail}
-          </Typography>
-          <Button className={'self-end w-[96px]'} onClick={() => setIsModalOpen(false)}>
-            Ok
-          </Button>
-        </div>
-      </Modal>
+      />
     </Card>
   )
 }
