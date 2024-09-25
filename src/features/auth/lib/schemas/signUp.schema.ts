@@ -13,9 +13,14 @@ export const createSignUpSchema = (t: LocaleType['Auth']) => {
         .min(1, t.passwordRequiredError)
         .max(30, t.passwordTooLongError)
         .min(6, t.passwordTooShortError)
+        //server will not accept some of this characters as special, but thats what is written in figma
         .regex(
           new RegExp(/^[a-zA-Z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/g),
           t.passwordInvalidError
+        )
+        .regex(
+          new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
+          t.passwordNotStrongEnoughError
         ),
       passwordConfirmation: z
         .string()
@@ -30,6 +35,10 @@ export const createSignUpSchema = (t: LocaleType['Auth']) => {
     .refine(data => data.password === data.passwordConfirmation, {
       message: t.passwordConfirmationInvalidError,
       path: ['passwordConfirmation'],
+    })
+    .refine(data => data.agreedToPrivacyPolicy === true, {
+      message: t.privacyPolicyRequiredError,
+      path: ['agreedToPrivacyPolicy'],
     })
 }
 

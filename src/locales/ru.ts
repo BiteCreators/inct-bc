@@ -18,6 +18,8 @@ export const ru: LocaleType = {
     passwordConfirmationRequiredError: 'Подтвердите пароль',
     passwordInvalidError:
       'Пароль должен содержать a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [  ] ^ _` { | } ~',
+    passwordNotStrongEnoughError:
+      'Пароль должен содержать как минимум 1 специальный символ, 1 заглавную букву и 1 цифру',
     passwordRequiredError: 'Введите пароль',
     passwordTooLongError: 'Максимум 30 символов',
     passwordTooShortError: 'Минимум 6 символов',

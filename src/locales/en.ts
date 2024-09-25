@@ -16,6 +16,8 @@ export const en = {
     passwordConfirmationRequiredError: 'Confirm your password',
     passwordInvalidError:
       'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [  ] ^ _` { | } ~',
+    passwordNotStrongEnoughError:
+      'Passowod must contain at least one special character, one uppercase letter and one number',
     passwordRequiredError: 'Password is required',
     passwordTooLongError: 'Maximum number of characters 30',
     passwordTooShortError: 'Minimum number of characters 6',
