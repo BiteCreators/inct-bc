@@ -10,7 +10,7 @@ export const SignInButton = ({ variant = 'text' }: Props) => {
   const t = useScopedTranslation('Auth')
 
   return (
-    <Button asChild variant={variant}>
+    <Button asChild className={'mx-auto'} variant={variant}>
       <Link className={'text-center'} href={'/auth/sign-in'}>
         {t.signIn}
       </Link>
