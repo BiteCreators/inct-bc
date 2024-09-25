@@ -21,8 +21,12 @@ export const useEmailConfirmed = () => {
   useEffect(() => {
     const sendConfirmationCode = async () => {
       try {
-        await confirmRegistration({ confirmationCode: params?.get('code') ?? '' }).unwrap()
-        setConfirmationState('success')
+        if (params?.get('code')) {
+          await confirmRegistration({
+            confirmationCode: params.get('code') as string,
+          }).unwrap()
+          setConfirmationState('success')
+        }
       } catch (error) {
         setConfirmationState('rejected')
       }
