@@ -1,20 +1,16 @@
+import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const signInSchema = z
-  .object({
-    email: z.string().email('').min(1, 'Email is required'),
-    password: z.string().min(1, 'Password is required'),
+export const createSignInSchema = (t: LocaleType['Auth']) => {
+  return z.object({
+    email: z.string().email('').min(1, t.emailRequiredError),
+    password: z
+      .string()
+      .min(1, t.passwordRequiredError)
+      .max(30, t.passwordTooLongError)
+      .min(6, t.passwordTooShortError)
+      .regex(new RegExp(/^[a-zA-Z0-9!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]+$/g), t.passwordInvalidError),
   })
-  .superRefine((data, ctx) => {
-    const emailCheck = z.string().email().safeParse(data.email)
-    const passwordCheck = data.password.length > 5
+}
 
-    if (!emailCheck.success || !passwordCheck) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'The email or password are incorrect. Try again please',
-        path: ['password'],
-      })
-    }
-  })
-export type SignInFormData = z.infer<typeof signInSchema>
+export type SignInFormData = z.infer<ReturnType<typeof createSignInSchema>>
