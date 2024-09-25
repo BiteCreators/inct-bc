@@ -41,6 +41,15 @@ export const en = {
     en: 'English',
     ru: 'Russian',
   },
+  Navigation: {
+    create: 'Create',
+    favorites: 'Favorites',
+    home: 'Home',
+    messenger: 'Messenger',
+    myProfile: 'My profile',
+    search: 'Search',
+    statistics: 'Statistics',
+  },
 }
 
 export type LocaleType = typeof en

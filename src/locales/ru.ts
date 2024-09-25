@@ -43,4 +43,13 @@ export const ru: LocaleType = {
     en: 'Английский',
     ru: 'Русский',
   },
+  Navigation: {
+    create: 'Создать',
+    favorites: 'Избранное',
+    home: 'Главная',
+    messenger: 'Мессенджер',
+    myProfile: 'Профиль',
+    search: 'Поиск',
+    statistics: 'Статистика',
+  },
 }
