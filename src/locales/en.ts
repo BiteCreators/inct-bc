@@ -10,6 +10,7 @@ export const en = {
     emailSent: 'Email sent',
     emailTakenError: 'User with this email already registered',
     emailVerificationLinkSentAgain: 'We have sent a verification link again',
+    logOut: 'Log out',
     password: 'password',
     passwordConfirmation: 'password confirmation',
     passwordConfirmationInvalidError: "Passwords don't match",
@@ -40,6 +41,15 @@ export const en = {
   Internationalization: {
     en: 'English',
     ru: 'Russian',
+  },
+  Navigation: {
+    create: 'Create',
+    favorites: 'Favorites',
+    home: 'Home',
+    messenger: 'Messenger',
+    myProfile: 'My profile',
+    search: 'Search',
+    statistics: 'Statistics',
   },
 }
 

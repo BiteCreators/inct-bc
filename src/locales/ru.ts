@@ -12,6 +12,7 @@ export const ru: LocaleType = {
     emailSent: 'Письмо отправлено',
     emailTakenError: 'Пользователь с таким email уже зарегистрирован',
     emailVerificationLinkSentAgain: 'Письмо со ссылкой подтверждения повторно отправлено',
+    logOut: 'Выйти',
     password: 'пароль',
     passwordConfirmation: 'подтвердите пароль',
     passwordConfirmationInvalidError: 'Пароли не совпадают',
@@ -42,5 +43,14 @@ export const ru: LocaleType = {
   Internationalization: {
     en: 'Английский',
     ru: 'Русский',
+  },
+  Navigation: {
+    create: 'Создать',
+    favorites: 'Избранное',
+    home: 'Главная',
+    messenger: 'Мессенджер',
+    myProfile: 'Профиль',
+    search: 'Поиск',
+    statistics: 'Статистика',
   },
 }
