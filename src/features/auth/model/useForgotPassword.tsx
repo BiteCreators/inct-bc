@@ -2,19 +2,23 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
+import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import {
+  createForgotPasswordScheme,
   forgotPasswordData,
-  forgotPasswordScheme,
 } from '@/features/auth/lib/schemas/forgotPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 export const useForgotPassword = () => {
-  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  let { email } = router.query
 
-  email = Array.isArray(email) ? email[0] : email
+  const searchParams = useSearchParams()
+  const email = searchParams?.get('email') ?? null
+  const t = useScopedTranslation('Auth')
+
+  const forgotPasswordScheme = createForgotPasswordScheme(t)
+
   const [forgotPassword] = authApi.useForgotPasswordMutation()
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!
@@ -22,6 +26,7 @@ export const useForgotPassword = () => {
   const {
     control,
     formState: { isValid },
+    getValues,
     handleSubmit,
     setError,
     setValue,
@@ -71,7 +76,8 @@ export const useForgotPassword = () => {
 
   return {
     control,
-    handleSubmit,
+    getValues,
+    handleSubmit: handleSubmit(submit),
     isModalOpen,
     isSubmitting,
     isValid,
@@ -80,5 +86,6 @@ export const useForgotPassword = () => {
     setIsModalOpen,
     setValue,
     submit,
+    t,
   }
 }

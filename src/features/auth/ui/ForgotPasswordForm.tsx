@@ -12,36 +12,37 @@ import Link from 'next/link'
 export const ForgotPasswordForm = () => {
   const {
     control,
+    getValues,
     handleSubmit,
     isModalOpen,
     isSubmitting,
     isValid,
     onRecaptchaChange,
     setIsModalOpen,
-    submit,
+    t,
   } = useForgotPassword()
 
   return (
     <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
       <Typography className={'text-center'} variant={'h1'}>
-        Forgot Password
+        {t.forgotPassword}
       </Typography>
-      <form className={'flex flex-col gap-6'} onSubmit={handleSubmit(submit)}>
+      <form className={'flex flex-col gap-6'} onSubmit={handleSubmit}>
         <FormInput
           control={control}
-          label={'email'}
+          label={t.email}
           name={'email'}
           placeholder={'email@yandex.ru'}
           required
         />
         <Typography className={'text-light-900 -mt-6'} variant={'small-text'}>
-          Enter your email address and we will send you further instructions{' '}
+          {t.enterYourEmail}
         </Typography>
         <Button disabled={!isValid || isSubmitting} type={'submit'}>
-          Send Link
+          {t.emailSentButton}
         </Button>
         <Button type={'button'} variant={'text'}>
-          <Link href={'/auth/sign-in'}>Back to Sign In</Link>
+          <Link href={'/auth/sign-in'}>{t.backToSignIn}</Link>
         </Button>
         <Recaptcha
           className={'self-center'}
@@ -50,11 +51,17 @@ export const ForgotPasswordForm = () => {
           theme={'dark'}
         />
       </form>
-      <Modal isOpen={isModalOpen} mode={'default'} onOpenChange={setIsModalOpen} title={'title'}>
+      <Modal
+        isOpen={isModalOpen}
+        mode={'default'}
+        onOpenChange={setIsModalOpen}
+        title={t.emailSent}
+      >
         <div className={'flex flex-col gap-[18px] pb-6 pt-[18px]'}>
-          <Typography>{'Typography'}</Typography>
+          <Typography>{`${t.weHaveSent} ${getValues('email')}`}</Typography>
+
           <Button className={'self-end w-[96px]'} onClick={() => setIsModalOpen(false)}>
-            Ok
+            OK
           </Button>
         </div>
       </Modal>

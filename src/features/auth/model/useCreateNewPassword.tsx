@@ -2,17 +2,22 @@ import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
+import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import {
-  recoveryPasswordSchema,
+  createRecoveryPasswordSchema,
   recoveryPasswordSchemaData,
 } from '@/features/auth/lib/schemas/recoveryPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 export const useCreateNewPassword = () => {
   const router = useRouter()
-
-  const { code, email } = router.query
+  const searchParams = useSearchParams()
+  const code = searchParams?.get('code') ?? null
+  const email = searchParams?.get('email') ?? null
+  const t = useScopedTranslation('Auth')
+  const recoveryPasswordSchema = createRecoveryPasswordSchema(t)
 
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -24,9 +29,7 @@ export const useCreateNewPassword = () => {
     const checkCode = async () => {
       if (code) {
         try {
-          const recoveryCode = Array.isArray(code) ? code[0] : code
-
-          await checkRecoveryCode({ recoveryCode }).unwrap()
+          await checkRecoveryCode({ recoveryCode: code }).unwrap()
           setLoading(false)
         } catch (err) {
           await router.push(`/auth/link-expired?email=${email}&code=${code}`)
@@ -49,10 +52,10 @@ export const useCreateNewPassword = () => {
     mode: 'onChange',
     resolver: zodResolver(recoveryPasswordSchema),
   })
-  const handlerNewPassword: SubmitHandler<recoveryPasswordSchemaData> = async data => {
+  const submit: SubmitHandler<recoveryPasswordSchemaData> = async data => {
     const dataForRequest = {
       newPassword: data.newPassword,
-      recoveryCode: code,
+      recoveryCode: code as string,
     }
 
     await newPassword(dataForRequest)
@@ -62,10 +65,10 @@ export const useCreateNewPassword = () => {
   return {
     control,
     email,
-    handleSubmit,
-    handlerNewPassword,
+    handleSubmit: handleSubmit(submit),
     isValid,
     loading,
     router,
+    t,
   }
 }

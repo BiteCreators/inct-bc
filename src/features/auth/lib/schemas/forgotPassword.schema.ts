@@ -1,9 +1,11 @@
+import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const forgotPasswordScheme = z.object({
-  baseUrl: z.string(),
-  email: z.string().email().min(1, 'email is required'),
-  recaptcha: z.string().min(1, 'Please complete the reCAPTCHA'),
-})
+export const createForgotPasswordScheme = (t: LocaleType['Auth']) =>
+  z.object({
+    baseUrl: z.string(),
+    email: z.string().email().min(1, t.emailRequiredError),
+    recaptcha: z.string().min(1, t.recaptcha),
+  })
 
-export type forgotPasswordData = z.infer<typeof forgotPasswordScheme>
+export type forgotPasswordData = z.infer<ReturnType<typeof createForgotPasswordScheme>>
