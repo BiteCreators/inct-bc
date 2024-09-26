@@ -14,7 +14,6 @@ export const LanguageSelect = () => {
 
   return (
     <Select
-      className={'min-w-[163px]'}
       defaultValue={defaultLocale}
       icon={locale === 'en' ? <FlagUnitedKingdom /> : <FlagRussia />}
       onValueChange={handleChange}

@@ -1,0 +1,13 @@
+
+
+
+@media (max-width: 768px) {
+    .selectValue span {
+        display: none; /* Или спрячем текст */
+    }
+    .selectHidden div{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

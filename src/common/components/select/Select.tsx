@@ -4,11 +4,15 @@ import React, { forwardRef, useId } from 'react'
 import { ArrowIosUp } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
+import { icons } from '@storybook/core/components'
 import { motion } from 'framer-motion'
+
+import s from './select.module.css'
 
 export type SelectProps = {
   className?: string
   error?: string
+  hideText?: boolean
   icon?: React.ReactNode
   id?: string
   label?: string
@@ -23,6 +27,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
       children,
       className,
       error,
+      hideText = false,
       icon,
       id,
       label,
@@ -50,7 +55,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
             {label}
           </label>
         )}
-        <SelectPrimitive.Root {...props} open={open}>
+        <SelectPrimitive.Root {...props} open>
           <SelectPrimitive.Trigger
             className={cn(
               'flex justify-between',
@@ -69,9 +74,9 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
             id={id ?? selectId}
             ref={ref}
           >
-            <div className={'flex gap-3 align-center'}>
+            <div className={`flex gap-3 align-center ${s.selectValue}`}>
               {icon}
-              <SelectPrimitive.Value className={'text-light-100'} placeholder={placeholder} />
+              <SelectPrimitive.Value className={`text-light-100`} placeholder={placeholder} />
             </div>
             <SelectPrimitive.Icon className={'ml-2'}>
               <ArrowIosUp
@@ -89,7 +94,8 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
               className={cn(
                 'border border-light-100 border-t-0 rounded-b-sm',
                 'bg-dark-500 w-[var(--radix-select-trigger-width)]',
-                'z-10'
+                'z-10',
+                `${s.selectHidden}`
               )}
               position={'popper'}
             >
