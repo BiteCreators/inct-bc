@@ -1,5 +1,4 @@
 import { Avatar } from '@/common/components/avatar/Avatar'
-import Typography from '@/common/components/typography/Typography'
 import { Meta, StoryObj } from '@storybook/react'
 
 import exampleImage from './../../../../public/examples/exampleAvatar.png'
