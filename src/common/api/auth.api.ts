@@ -1,13 +1,13 @@
 import { inctagramApi } from './inct.api'
 
-type RegistrationDto = {
+type RegistrationRequest = {
   baseUrl: string
   email: string
   password: string
   userName: string
 }
 
-type RegistrationConfirmationDto = {
+type RegistrationConfirmationRequest = {
   confirmationCode: string
 }
 
@@ -26,27 +26,19 @@ type NewPasswordRequest = {
   recoveryCode: string
 }
 
-type Login = {
+type LoginRequest = {
   baseUrl: string
   email: string
   password: string
 }
 
-type RegistrationEmailResendingDto = {
+type RegistrationEmailResendingRequest = {
   baseUrl: string
   email: string
-
 }
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
-    login: builder.mutation<void, Login>({
-      query: body => ({
-        body,
-        method: 'POST',
-        url: '/v1/auth/login',
-      }),
-    }),
     checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeRequest>({
       query: body => ({
         body,
@@ -64,6 +56,13 @@ export const authApi = inctagramApi.injectEndpoints({
         url: `/v1/auth/password-recovery`,
       }),
     }),
+    login: builder.mutation<void, LoginRequest>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/login',
+      }),
+    }),
     newPassword: builder.mutation<void, NewPasswordRequest>({
       query: body => ({
         body,
@@ -74,21 +73,21 @@ export const authApi = inctagramApi.injectEndpoints({
         url: `/v1/auth/new-password`,
       }),
     }),
-    registration: builder.mutation<void, RegistrationDto>({
+    registration: builder.mutation<void, RegistrationRequest>({
       query: body => ({
         body,
         method: 'POST',
         url: 'v1/auth/registration',
       }),
     }),
-    registrationConfirmation: builder.mutation<void, RegistrationConfirmationDto>({
+    registrationConfirmation: builder.mutation<void, RegistrationConfirmationRequest>({
       query: body => ({
         body,
         method: 'POST',
         url: '/v1/auth/registration-confirmation',
       }),
     }),
-    registrationEmailResending: builder.mutation<void, RegistrationEmailResendingDto>({
+    registrationEmailResending: builder.mutation<void, RegistrationEmailResendingRequest>({
       query: body => ({
         body,
         method: 'POST',
