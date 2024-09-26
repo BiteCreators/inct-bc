@@ -32,6 +32,7 @@ export const en = {
     sendLink: 'Send Link',
     signIn: 'Sign in',
     signUp: 'Sign Up',
+    userNotFound: 'User with this email not founded',
     username: 'username',
     usernameRequiredError: 'Username is required',
     usernameTakenError: 'User with this username already registered',

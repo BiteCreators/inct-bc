@@ -31,6 +31,9 @@ export const handleAuthApiError = <T extends FieldValues>({
         message = t.emailTakenError
       }
 
+      if (m.message.includes('User with this email')) {
+        message = t.userNotFound
+      }
       setError(m.field as Path<T>, { message, type: 'manual' })
     })
   }

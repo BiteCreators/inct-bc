@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { handleAuthApiError } from '@/features/auth/lib/handle-auth-api-error'
 import {
   createForgotPasswordScheme,
   forgotPasswordData,
@@ -18,7 +19,7 @@ export const useForgotPassword = () => {
   const t = useScopedTranslation('Auth')
 
   const forgotPasswordScheme = createForgotPasswordScheme(t)
-
+  const [apiError, setApiError] = useState('')
   const [forgotPassword] = authApi.useForgotPasswordMutation()
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!
@@ -61,14 +62,7 @@ export const useForgotPassword = () => {
       setIsModalOpen(true)
     } catch (error) {
       setIsModalOpen(false)
-      const message = (error as ErrorResponse)?.data?.messages?.length
-        ? (error as ErrorResponse).data.messages[0].message
-        : 'Some default error message'
-
-      setError('email', {
-        message: message,
-        type: 'error',
-      })
+      handleAuthApiError({ error, setApiError, setError, t })
     } finally {
       setIsSubmitting(false)
     }
