@@ -16,9 +16,6 @@ export const SignInButton = ({ variant = 'text' }: Props) => {
           {t.signIn}
         </Link>
       </Button>
-      <Button className={'mx-auto'} variant={variant}>
-        Войти
-      </Button>
     </>
   )
 }
