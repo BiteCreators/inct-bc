@@ -23,8 +23,7 @@ export const Default: Story = {
 }
 export const Horizontal: Story = {
   args: {
-    children:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
+    children: 'Mērī qībōñoso kēli, āeksio vestras Qībōñoso iā daor, kēli pogrī ēza',
     className: 'h-20 w-96 whitespace-nowrap',
     orientation: 'horizontal',
   },

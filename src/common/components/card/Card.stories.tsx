@@ -20,12 +20,11 @@ export const WithText: Story = {
       <>
         <h2>Text</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-          sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-          est laborum.
+          Se skoro syt obūljagon yne sytilības? Mērī qībōñoso kēli, āeksio vestras Qībōñoso iā daor,
+          kēli pogrī ēza Se ñuhon sȳz, āeksios, sȳrpa hen aōt Kastāmiro Āeksio sesīr ȳdratas Yn Yn
+          hegnīr daorus ilza se lenton spryjataks Kastāmiro Āeksio sesīr ȳdratas Yn sīr āeksio
+          lenton daomiossi spryjataks Kastāmiro Āeksio sesīr ȳdratas Yn hegnīr daorus ilza se lenton
+          spryjataks Yn sīr āeksio lenton daomiossi spryjataks
         </p>
       </>
     ),

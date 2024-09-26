@@ -10,27 +10,17 @@ export default meta
 export const Typographys = {
   render: () => (
     <div className={'flex flex-col'}>
-      <Typography variant={'large'}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing.
-      </Typography>
-      <Typography variant={'h1'}>
-        111Lorem ipsum dolor sit amet, consectetur adipisicing.
-      </Typography>
-      <Typography variant={'h2'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
-      <Typography variant={'h3'}>Lorem ipsum dolor sit amet, consectetur adipisicing.</Typography>
+      <Typography variant={'large'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
+      <Typography variant={'h1'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
+      <Typography variant={'h2'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
+      <Typography variant={'h3'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
 
-      <Typography variant={'regular-text'}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing.
-      </Typography>
-      <Typography variant={'small-text'}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing.
-      </Typography>
-      <Typography variant={'regular-link'}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing.
-      </Typography>
+      <Typography variant={'regular-text'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
+      <Typography variant={'small-text'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
+      <Typography variant={'regular-link'}>Yn hegnīr daorus ilza se lenton spryjataks.</Typography>
 
       <Typography className={'font-bold'} variant={'small-text'}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing.
+        Yn hegnīr daorus ilza se lenton spryjataks.
       </Typography>
     </div>
   ),
