@@ -17,6 +17,12 @@ type Login = {
   password: string
 }
 
+type RegistrationEmailResendingDto = {
+  baseUrl: string
+  email: string
+
+}
+
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation<void, Login>({
@@ -38,6 +44,13 @@ export const authApi = inctagramApi.injectEndpoints({
         body,
         method: 'POST',
         url: '/v1/auth/registration-confirmation',
+      }),
+    }),
+    registrationEmailResending: builder.mutation<void, RegistrationEmailResendingDto>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/registration-email-resending',
       }),
     }),
   }),
