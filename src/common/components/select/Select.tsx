@@ -4,7 +4,6 @@ import React, { forwardRef, useId } from 'react'
 import { ArrowIosUp } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
-import { icons } from '@storybook/core/components'
 import { motion } from 'framer-motion'
 
 import s from './select.module.css'
@@ -55,7 +54,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
             {label}
           </label>
         )}
-        <SelectPrimitive.Root {...props} open>
+        <SelectPrimitive.Root {...props} open={open}>
           <SelectPrimitive.Trigger
             className={cn(
               'flex justify-between',
