@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
+import { AuthLayout } from '@/app/layouts/auth-layout'
 import { SignUpForm } from '@/features/auth'
 import { NextPageWithLayout } from '@/pages/_app'
-import { Header } from '@/widgets/header'
 
 const SignUp: NextPageWithLayout = () => {
   return (
@@ -14,12 +13,6 @@ const SignUp: NextPageWithLayout = () => {
   )
 }
 
-SignUp.getLayout = (page: React.ReactElement) => {
-  return (
-    <PageLayout header={<Header />} mainClassName={'flex flex-col items-center justify-center '}>
-      {page}
-    </PageLayout>
-  )
-}
+SignUp.getLayout = AuthLayout
 
 export default SignUp

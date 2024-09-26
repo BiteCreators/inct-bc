@@ -30,6 +30,10 @@ export const handleAuthApiError = <T extends FieldValues>({
       if (m.message.includes('already exist') && m.message.includes('email')) {
         message = t.emailTakenError
       }
+
+      if (m.message.includes('User with this email')) {
+        message = t.userNotFound
+      }
       if (m.message.includes("Email isn't valid or already confirmed")) {
         message = t.emailIsNotValidOrAlreadyConfirmedError
       }

@@ -11,6 +11,21 @@ type RegistrationConfirmationDto = {
   confirmationCode: string
 }
 
+type CheckRecoveryCodeRequest = {
+  recoveryCode: string
+}
+
+type ForgotPasswordRequest = {
+  baseUrl: string
+  email: string
+  recaptcha: string
+}
+
+type NewPasswordRequest = {
+  newPassword: string
+  recoveryCode: string
+}
+
 type Login = {
   baseUrl: string
   email: string
@@ -30,6 +45,33 @@ export const authApi = inctagramApi.injectEndpoints({
         body,
         method: 'POST',
         url: '/v1/auth/login',
+      }),
+    }),
+    checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeRequest>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: 'v1/auth/check-recovery-code',
+      }),
+    }),
+    forgotPassword: builder.mutation<void, ForgotPasswordRequest>({
+      query: body => ({
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        url: `/v1/auth/password-recovery`,
+      }),
+    }),
+    newPassword: builder.mutation<void, NewPasswordRequest>({
+      query: body => ({
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        url: `/v1/auth/new-password`,
       }),
     }),
     registration: builder.mutation<void, RegistrationDto>({

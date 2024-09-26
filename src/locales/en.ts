@@ -1,6 +1,8 @@
 export const en = {
   Auth: {
+    backToSignIn: 'Back to Sign In',
     congratulations: 'Congratulations!',
+    createNewPassword: 'Create New Password!',
     doYouHaveAnAccount: 'Do you have an account?',
     dontHaveAnAccount: 'Don’t have an account?',
     email: 'Email*',
@@ -11,26 +13,36 @@ export const en = {
     emailIsNotValidOrAlreadyConfirmedError: "Email isn't valid or already confirmed",
     emailRequiredError: 'Email is required',
     emailSent: 'Email sent',
+    emailSentButton: 'Email sent',
     emailTakenError: 'User with this email already registered',
     emailVerificationLinkSentAgain: 'We have sent a verification link again',
     logOut: 'Log out',
+    enterYourEmail: 'Enter your email address and we will send you further instructions',
+    forgotYourPassword: 'Forgot your password',
+    newPassword: 'New password',
     password: 'password',
     passwordConfirmation: 'password confirmation',
     passwordConfirmationInvalidError: "Passwords don't match",
+    passwordConfirmationRequired: 'password confirmation is required',
     passwordConfirmationRequiredError: 'Confirm your password',
     passwordInvalidError:
       'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [  ] ^ _` { | } ~',
     passwordNotStrongEnoughError:
       'Passowod must contain at least one special character, one uppercase letter and one number',
+    passwordMustContain:
+      'Password must contain at least one uppercase letter, one number, and one special character',
     passwordRequiredError: 'Password is required',
     passwordTooLongError: 'Maximum number of characters 30',
     passwordTooShortError: 'Minimum number of characters 6',
     privacyPolicy: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
     privacyPolicyRequiredError: 'You must agree to privacy policy',
     resendVerificationLink: 'Resend verification link',
+    recaptcha: 'Please complete the reCAPTCHA',
+    sendLink: 'Send Link',
     signIn: 'Sign in',
     signUp: 'Sign Up',
     username: 'Username',
+    userNotFound: 'User with this email not founded',
     usernameRequiredError: 'Username is required',
     usernameTakenError: 'User with this username already registered',
     usernameTooLongError: 'Maximum number of characters 30',
@@ -38,21 +50,13 @@ export const en = {
     verificationLinkExpired: 'Email verification link expired',
     verificationLinkExpiredBody:
       'Looks like the verification link has expired. Not to worry, we can send the link again',
+    weHaveSent: 'We have sent a link to confirm your email to ',
     weSentALinkToConfirmYourEmail: 'We have sent a link to confirm your email to',
     yourEmailConfirmed: 'Your email has been confirmed',
   },
   Internationalization: {
     en: 'English',
     ru: 'Russian',
-  },
-  Navigation: {
-    create: 'Create',
-    favorites: 'Favorites',
-    home: 'Home',
-    messenger: 'Messenger',
-    myProfile: 'My profile',
-    search: 'Search',
-    statistics: 'Statistics',
   },
 }
 

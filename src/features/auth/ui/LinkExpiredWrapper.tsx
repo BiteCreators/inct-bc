@@ -25,7 +25,7 @@ export const LinkExpiredWrapper = ({ button }: Props) => {
         className={'max-w-[473px] mt-8'}
         height={353}
         layout={'responsive'}
-        src={'/images/time-management-rafiki.png'}
+        src={'/images/rafiki.svg'}
         width={473}
       />
     </div>
