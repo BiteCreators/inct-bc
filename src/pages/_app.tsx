@@ -9,7 +9,7 @@ import { Header } from '@/widgets/header'
 import { Sidebar } from '@/widgets/sidebar'
 import { NextPage } from 'next'
 
-import '@/styles/globals.css'
+import '@/app/styles/globals.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: React.ReactElement) => React.ReactNode
