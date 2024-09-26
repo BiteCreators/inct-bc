@@ -41,6 +41,24 @@ export const en = {
     en: 'English',
     ru: 'Russian',
   },
+  PrivacyPolicy: {
+    text: `The purpose of these Rules is to ensure adequate protection of information from users,
+     including their personal data, from unauthorized access and disclosure. Current 
+     the edition of the Rules, which are a public document, is available to any Internet user at
+    follow the link. The Site Administration has the right to make changes to theseRules. When changes
+     are made to the Rules, the Site Administration notifies users of this 
+    by posting a new version of the Rules on the Site at a permanent address not 
+    later than 10 days before the relevant changes come into force. Previous editions of the Rules
+    are stored in the documentation archive of the Site Administration. These Rules have been developed and are used in
+    in accordance with the Site Use Rules posted on the Site at.In the event of contradictions between these Rules and 
+    other official documents of the Website Administration, these Rules shall apply. By registering and using
+     the Website, the User expresses their consent to the terms of these Rules. If the User disagrees with the 
+     terms of these Rules, the use of the Website and its services must be immediately discontinued. If, in accordance
+      with the law, separate consent from the User is required for the processing of personal data in connection.When 
+      using the Website, such consent is requested from the User only in relation to the use of the Website. A single 
+      consent request for all social networks and social interaction platforms is not permitted."`,
+    title: 'Privacy Policy',
+  },
 }
 
 export type LocaleType = typeof en
