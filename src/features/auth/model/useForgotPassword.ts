@@ -47,14 +47,6 @@ export const useForgotPassword = () => {
     }
   }
 
-  type ErrorResponse = {
-    data: {
-      error: string
-      messages: { field: string; message: string }[]
-      statusCode: number
-    }
-    status: number
-  }
   const submit: SubmitHandler<forgotPasswordData> = async data => {
     try {
       setIsSubmitting(true)

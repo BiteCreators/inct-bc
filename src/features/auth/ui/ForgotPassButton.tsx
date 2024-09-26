@@ -12,7 +12,7 @@ export const ForgotPassButton = ({ className, variant = 'text' }: Props) => {
 
   return (
     <Button asChild className={className} variant={variant}>
-      <Link href={'/auth/forgot'}>{t.forgotPassword}</Link>
+      <Link href={'/auth/forgot-password'}>{t.forgotPassword}</Link>
     </Button>
   )
 }

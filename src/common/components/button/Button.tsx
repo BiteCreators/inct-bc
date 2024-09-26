@@ -14,7 +14,7 @@ export const Button = ({ asChild, className, variant = 'primary', ...props }: Bu
   return (
     <Component
       className={cn(
-        'font-weight600 w-auto py-1.5 px-4 rounded-sm text-md text-slate-50',
+        'font-weight-600 w-auto py-1.5 px-4 rounded-sm text-md text-slate-50',
         'disabled:opacity-50',
         'focus:outline-primary-900 focus:outline-2 focus:outline',
         variant === 'primary' && [
@@ -35,9 +35,9 @@ export const Button = ({ asChild, className, variant = 'primary', ...props }: Bu
           'disabled:border-primary-500 disabled:text-primary-500 disabled:hover:border-primary-500 disabled:hover:text-primary-500',
         ],
         variant === 'text' && [
-          'bg-none text-primary-500',
+          'bg-none text-primary-500 w-max',
           'hover:text-primary-700',
-          'hover:bg-transparent w-max p-0',
+          'hover:bg-transparent',
           'disabled:text-primary-500 disabled:hover:text-primary-500',
         ],
         className
