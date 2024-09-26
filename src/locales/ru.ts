@@ -4,9 +4,12 @@ export const ru: LocaleType = {
   Auth: {
     congratulations: 'Поздравляем!',
     doYouHaveAnAccount: 'Уже есть аккаунт?',
-    email: 'email',
+    dontHaveAnAccount: 'Нет аккаунта?',
+    email: 'Email*',
     emailInvalidError: `Email должен быть формата
     example@example.com`,
+    emailOrPasswordError: 'Неверный пароль или email',
+    forgotPassword: 'Забыли пароль',
     emailIsNotValidOrAlreadyConfirmedError: 'Emali не валиден, или уже подтверждён',
     emailRequiredError: 'Введите email',
     emailSent: 'Письмо отправлено',
@@ -29,7 +32,7 @@ export const ru: LocaleType = {
     resendVerificationLink: 'Отправить новое письмо',
     signIn: 'Вход',
     signUp: 'Регистрация',
-    username: 'имя пользователя',
+    username: 'Имя пользователя',
     usernameRequiredError: 'Введите имя пользователя',
     usernameTakenError: 'Пользователь с таким именем уже зарегестрирован',
     usernameTooLongError: 'Максимум 30 символов',

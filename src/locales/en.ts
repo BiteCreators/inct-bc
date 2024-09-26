@@ -2,9 +2,12 @@ export const en = {
   Auth: {
     congratulations: 'Congratulations!',
     doYouHaveAnAccount: 'Do you have an account?',
-    email: 'email',
+    dontHaveAnAccount: 'Don’t have an account?',
+    email: 'Email*',
     emailInvalidError: `The email must match the format
     example@example.com`,
+    emailOrPasswordError: 'Invalid password or email',
+    forgotPassword: 'Forgot Password',
     emailIsNotValidOrAlreadyConfirmedError: "Email isn't valid or already confirmed",
     emailRequiredError: 'Email is required',
     emailSent: 'Email sent',
@@ -27,7 +30,7 @@ export const en = {
     resendVerificationLink: 'Resend verification link',
     signIn: 'Sign in',
     signUp: 'Sign Up',
-    username: 'username',
+    username: 'Username',
     usernameRequiredError: 'Username is required',
     usernameTakenError: 'User with this username already registered',
     usernameTooLongError: 'Maximum number of characters 30',
