@@ -64,12 +64,18 @@ export const SignUpForm = () => {
               <Trans
                 tags={{
                   '1': str => (
-                    <Link className={'underline text-primary-300'} href={'#'}>
+                    <Link
+                      className={'underline text-primary-300'}
+                      href={'/auth/sign-up/terms-of-service'}
+                    >
                       {str}
                     </Link>
                   ),
                   '2': str => (
-                    <Link className={'underline text-primary-300'} href={'#'}>
+                    <Link
+                      className={'underline text-primary-300'}
+                      href={'/auth/sign-up/privacy-policy'}
+                    >
                       {str}
                     </Link>
                   ),

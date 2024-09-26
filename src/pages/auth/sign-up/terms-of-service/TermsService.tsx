@@ -8,8 +8,8 @@ import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
 import Link from 'next/link'
 
-const PrivacyPolicy: NextPageWithLayout = () => {
-  const t = useScopedTranslation('PrivacyPolicy')
+const TermsService: NextPageWithLayout = () => {
+  const t = useScopedTranslation('TermsService')
 
   return (
     <div className={'flex md:block'}>
@@ -32,11 +32,11 @@ const PrivacyPolicy: NextPageWithLayout = () => {
   )
 }
 
-PrivacyPolicy.getLayout = (page: React.ReactElement) => {
+TermsService.getLayout = (page: React.ReactElement) => {
   return (
     <PageLayout header={<Header />} mainClassName={'mb-5'}>
       {page}
     </PageLayout>
   )
 }
-export default PrivacyPolicy
+export default TermsService
