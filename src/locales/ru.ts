@@ -4,14 +4,18 @@ export const ru: LocaleType = {
   Auth: {
     congratulations: 'Поздравляем!',
     doYouHaveAnAccount: 'Уже есть аккаунт?',
-    email: 'email',
+    dontHaveAnAccount: 'Нет аккаунта?',
+    email: 'Email*',
     emailInvalidError: `Email должен быть формата
     example@example.com`,
+    emailOrPasswordError: 'Неверный пароль или email',
+    forgotPassword: 'Забыли пароль',
     emailIsNotValidOrAlreadyConfirmedError: 'Emali не валиден, или уже подтверждён',
     emailRequiredError: 'Введите email',
     emailSent: 'Письмо отправлено',
     emailTakenError: 'Пользователь с таким email уже зарегистрирован',
     emailVerificationLinkSentAgain: 'Письмо со ссылкой подтверждения повторно отправлено',
+    logOut: 'Выйти',
     password: 'пароль',
     passwordConfirmation: 'подтвердите пароль',
     passwordConfirmationInvalidError: 'Пароли не совпадают',
@@ -28,7 +32,7 @@ export const ru: LocaleType = {
     resendVerificationLink: 'Отправить новое письмо',
     signIn: 'Вход',
     signUp: 'Регистрация',
-    username: 'имя пользователя',
+    username: 'Имя пользователя',
     usernameRequiredError: 'Введите имя пользователя',
     usernameTakenError: 'Пользователь с таким именем уже зарегестрирован',
     usernameTooLongError: 'Максимум 30 символов',
@@ -43,6 +47,7 @@ export const ru: LocaleType = {
     en: 'Английский',
     ru: 'Русский',
   },
+<<<<<<< HEAD
   PrivacyPolicy: {
     text: `Целью настоящих Правил является обеспечение надлежащей защиты информации c пользователях,
      в том числе их персональных данных, от несанкционированного доступа и разглашения. Действующая 
@@ -61,5 +66,15 @@ export const ru: LocaleType = {
     с использованием Сайта, то такое согласие запрашивается у Пользователя только применительно к использованию
      Сайта. Запрос одного указанного согласия для всех социальных сетей и платформ социального взаимодействия не допускается.`,
     title: 'Политика конфиденциальности',
+=======
+  Navigation: {
+    create: 'Создать',
+    favorites: 'Избранное',
+    home: 'Главная',
+    messenger: 'Мессенджер',
+    myProfile: 'Профиль',
+    search: 'Поиск',
+    statistics: 'Статистика',
+>>>>>>> development
   },
 }

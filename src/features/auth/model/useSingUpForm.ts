@@ -37,15 +37,9 @@ export const useSingUpForm = () => {
 
   const [register, { isLoading }] = authApi.useRegistrationMutation()
 
-  const submit: SubmitHandler<SignUpFormData> = async ({
-    agreedToPrivacyPolicy,
-    email,
-    password,
-    userName,
-  }) => {
+  const submit: SubmitHandler<SignUpFormData> = async ({ email, password, userName }) => {
     try {
       await register({ baseUrl: 'http://localhost:3000', email, password, userName }).unwrap()
-
       setUserEmail(getValues('email'))
       setIsModalOpen(true)
     } catch (error) {

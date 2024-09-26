@@ -11,13 +11,27 @@ type RegistrationConfirmationDto = {
   confirmationCode: string
 }
 
+type Login = {
+  baseUrl: string
+  email: string
+  password: string
+}
+
 type RegistrationEmailResendingDto = {
   baseUrl: string
   email: string
+
 }
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
+    login: builder.mutation<void, Login>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/login',
+      }),
+    }),
     registration: builder.mutation<void, RegistrationDto>({
       query: body => ({
         body,

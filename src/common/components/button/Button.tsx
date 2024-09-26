@@ -37,6 +37,7 @@ export const Button = ({ asChild, className, variant = 'primary', ...props }: Bu
         variant === 'text' && [
           'bg-none text-primary-500',
           'hover:text-primary-700',
+          'hover:bg-transparent w-max p-0',
           'disabled:text-primary-500 disabled:hover:text-primary-500',
         ],
         className
