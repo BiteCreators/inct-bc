@@ -41,6 +41,22 @@ export const Primary: StoryObj<typeof TabsBase> = {
   },
 }
 
+export const PrimaryDisabled: StoryObj<typeof TabsBase> = {
+  args: {
+    disabled: true,
+    onClick: action('click primary tab'),
+    tabsData,
+    variant: 'primary',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Primary disabled вариант вкладок',
+      },
+    },
+  },
+}
+
 export const Secondary: StoryObj<typeof TabsBase> = {
   args: {
     onClick: action('click secondary tab'),
@@ -51,6 +67,22 @@ export const Secondary: StoryObj<typeof TabsBase> = {
     docs: {
       description: {
         story: 'Secondary вариант вкладок',
+      },
+    },
+  },
+}
+
+export const SecondaryDisabled: StoryObj<typeof TabsBase> = {
+  args: {
+    disabled: true,
+    onClick: action('click secondary tab'),
+    tabsData,
+    variant: 'secondary',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Secondary disabled вариант вкладок',
       },
     },
   },
