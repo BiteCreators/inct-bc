@@ -39,7 +39,12 @@ export const useSingUpForm = () => {
 
   const submit: SubmitHandler<SignUpFormData> = async ({ email, password, userName }) => {
     try {
-      await register({ baseUrl: 'http://localhost:3000', email, password, userName }).unwrap()
+      await register({
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '',
+        email,
+        password,
+        userName,
+      }).unwrap()
       setUserEmail(getValues('email'))
       setIsModalOpen(true)
     } catch (error) {
