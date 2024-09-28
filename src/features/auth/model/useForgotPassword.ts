@@ -5,8 +5,8 @@ import { authApi } from '@/common/api/auth.api'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { handleAuthApiError } from '@/features/auth/lib/handle-auth-api-error'
 import {
-  createForgotPasswordScheme,
-  forgotPasswordData,
+  ForgotPasswordFormData,
+  createForgotPasswordSchema,
 } from '@/features/auth/lib/schemas/forgotPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
@@ -18,7 +18,7 @@ export const useForgotPassword = () => {
   const email = searchParams?.get('email') ?? null
   const t = useScopedTranslation('Auth')
 
-  const forgotPasswordScheme = createForgotPasswordScheme(t)
+  const forgotPasswordSchema = createForgotPasswordSchema(t)
   const [apiError, setApiError] = useState('')
   const [forgotPassword] = authApi.useForgotPasswordMutation()
 
@@ -32,13 +32,13 @@ export const useForgotPassword = () => {
     setError,
     setValue,
     trigger,
-  } = useForm<forgotPasswordData>({
+  } = useForm<ForgotPasswordFormData>({
     defaultValues: {
       baseUrl: baseUrl,
       email: email ?? '',
     },
     mode: 'onChange',
-    resolver: zodResolver(forgotPasswordScheme),
+    resolver: zodResolver(forgotPasswordSchema),
   })
   const onRecaptchaChange = (token: null | string) => {
     if (token) {
@@ -47,7 +47,7 @@ export const useForgotPassword = () => {
     }
   }
 
-  const submit: SubmitHandler<forgotPasswordData> = async data => {
+  const submit: SubmitHandler<ForgotPasswordFormData> = async data => {
     try {
       setIsSubmitting(true)
       await forgotPassword(data).unwrap()

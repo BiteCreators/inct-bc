@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/auth-layout'
+import { AuthLayout } from '@/app/layouts/AuthLayout'
 import { Button } from '@/common/components/button/Button'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { LinkExpiredWrapper } from '@/features/auth/ui/LinkExpiredWrapper'
