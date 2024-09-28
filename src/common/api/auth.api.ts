@@ -35,18 +35,10 @@ type Login = {
 type RegistrationEmailResendingDto = {
   baseUrl: string
   email: string
-
 }
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
-    login: builder.mutation<void, Login>({
-      query: body => ({
-        body,
-        method: 'POST',
-        url: '/v1/auth/login',
-      }),
-    }),
     checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeRequest>({
       query: body => ({
         body,
@@ -62,6 +54,13 @@ export const authApi = inctagramApi.injectEndpoints({
         },
         method: 'POST',
         url: `/v1/auth/password-recovery`,
+      }),
+    }),
+    login: builder.mutation<void, Login>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/login',
       }),
     }),
     newPassword: builder.mutation<void, NewPasswordRequest>({

@@ -1,12 +1,17 @@
-/*.recaptchaContainer div div iframe {*/
-/*    border: none !important;*/
-/*    background-color: transparent !important;*/
-/*}*/
+/* .recaptchaContainer div div iframe { */
+
+/*    border: none !important; */
+
+/*    background-color: transparent !important; */
+
+/* } */
 .recaptchaContainer {
-    display: inline-block;
-    padding: 0;
-    border-radius: 4px;
     overflow: hidden;
+    display: inline-block;
+
     width: 301px;
     height: 75px;
+    padding: 0;
+
+    border-radius: 4px;
 }

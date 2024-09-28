@@ -3,7 +3,6 @@ import ReCAPTCHA from 'react-google-recaptcha'
 
 import { cn } from '@/common/utils/cn'
 import { useRouter } from 'next/router'
-import { className } from 'postcss-selector-parser'
 
 import styles from './recaptcha.module.css'
 
