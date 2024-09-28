@@ -15,7 +15,7 @@ import { MobileAppMenuItem } from './MobileAppMenuItem'
 
 export const MobileAppMenu = () => {
   return (
-    <nav className={'p-[18px] border-t border-t-dark-300'}>
+    <nav className={'p-[18px] border-t border-t-dark-300 bg-dark-700'}>
       <ul className={'flex gap-9 justify-center'}>
         <MobileAppMenuItem href={'/'} icon={<HomeOutline />} iconActive={<Home />} />
         <MobileAppMenuItem
