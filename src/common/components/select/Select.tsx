@@ -54,7 +54,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
             {label}
           </label>
         )}
-        <SelectPrimitive.Root {...props} open>
+        <SelectPrimitive.Root {...props} open={open}>
           <SelectPrimitive.Trigger
             className={cn(
               'flex justify-between',
