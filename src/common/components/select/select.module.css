@@ -5,7 +5,7 @@
     .selectValue span {
         display: none; /* Или спрячем текст */
     }
-    .selectHidden div{
+    .selectHidden{
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
