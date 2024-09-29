@@ -6,13 +6,20 @@ import { cn } from '@/common/utils/cn'
 import { motion } from 'framer-motion'
 
 type Props = {
-  message: string
-  onClose: () => void
-  purpose: 'alert' | 'toast'
-  type: 'error' | 'info' | 'success'
+  duration?: number
+  message?: string
+  onClose?: () => void
+  purpose?: 'alert' | 'toast'
+  type?: 'error' | 'info' | 'success'
 }
 
-export const Alert = ({ message, onClose, purpose, type }: Props) => {
+export const Alert = ({
+  duration = 5000,
+  message,
+  onClose,
+  purpose = 'toast',
+  type = 'error',
+}: Props) => {
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
     info: 'bg-primary-900 border-primary-500',
@@ -44,18 +51,18 @@ export const Alert = ({ message, onClose, purpose, type }: Props) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onClose()
-    }, 5000)
+      onClose?.()
+    }, duration)
 
     return () => clearTimeout(timer)
-  }, [onClose])
+  }, [onClose, duration])
 
   return (
     <motion.div
       animate={'visible'}
       className={cn(
         'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white z-250',
-        purpose === 'alert' && 'fixed bottom-4 left-1/4',
+        purpose === 'toast' && 'fixed bottom-4 left-1/4',
         alertStyles[type]
       )}
       exit={'exit'}
@@ -66,7 +73,7 @@ export const Alert = ({ message, onClose, purpose, type }: Props) => {
         <Typography className={'min-w-72'} variant={'medium-text'}>
           {message}
         </Typography>
-        {purpose === 'alert' && (
+        {purpose === 'toast' && (
           <button className={'text-xl focus:outline-none ml-4'} onClick={onClose}>
             <Close viewBox={'0 -1 24 24'} />
           </button>
