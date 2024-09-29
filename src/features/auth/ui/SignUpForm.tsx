@@ -79,7 +79,7 @@ export const SignUpForm = () => {
             </Typography>
           }
         />
-        {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} />}
+        {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
         <Button className={'-mt-3'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>

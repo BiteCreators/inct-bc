@@ -10,16 +10,10 @@ type Props = {
   message?: string
   onClose?: () => void
   purpose?: 'alert' | 'toast'
-  type?: 'error' | 'info' | 'success'
+  type: 'error' | 'info' | 'success'
 }
 
-export const Alert = ({
-  duration = 5000,
-  message,
-  onClose,
-  purpose = 'toast',
-  type = 'error',
-}: Props) => {
+export const Alert = ({ duration = 5000, message, onClose, purpose = 'toast', type }: Props) => {
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
     info: 'bg-primary-900 border-primary-500',
