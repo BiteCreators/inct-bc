@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Alert } from '@/common/components/alert/Alert'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
@@ -11,6 +12,7 @@ import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
   const {
+    apiError,
     control,
     getValues,
     handleSubmit,
@@ -18,6 +20,7 @@ export const ForgotPasswordForm = () => {
     isSubmitting,
     isValid,
     onRecaptchaChange,
+    setApiError,
     setIsModalOpen,
     t,
   } = useForgotPassword()
@@ -51,6 +54,7 @@ export const ForgotPasswordForm = () => {
           theme={'dark'}
         />
       </form>
+      {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
       <Modal
         isOpen={isModalOpen}
         mode={'default'}

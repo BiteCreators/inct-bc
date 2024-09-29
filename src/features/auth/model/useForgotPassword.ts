@@ -61,6 +61,7 @@ export const useForgotPassword = () => {
   }
 
   return {
+    apiError,
     control,
     getValues,
     handleSubmit: handleSubmit(submit),
@@ -68,6 +69,7 @@ export const useForgotPassword = () => {
     isSubmitting,
     isValid,
     onRecaptchaChange,
+    setApiError,
     setError,
     setIsModalOpen,
     setValue,

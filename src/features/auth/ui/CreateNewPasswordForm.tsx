@@ -5,7 +5,6 @@ import { Card } from '@/common/components/card/Card'
 import { FormInput } from '@/common/components/form/FormInput'
 import { Loader } from '@/common/components/loader/Loader'
 import Typography from '@/common/components/typography/Typography'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { useCreateNewPassword } from '@/features/auth/model/useCreateNewPassword'
 
 export const CreateNewPasswordForm = () => {
