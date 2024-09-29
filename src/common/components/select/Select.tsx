@@ -33,7 +33,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
       open,
       placeholder,
       required,
-      responsive = true,
+      responsive = false,
       width,
       ...props
     }: SelectProps,
