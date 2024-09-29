@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Alert } from '@/common/components/alert/Alert'
 import { Button } from '@/common/components/button/Button'
 import { Card } from '@/common/components/card/Card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
@@ -22,6 +23,7 @@ export const SignUpForm = () => {
     isLoading,
     isModalOpen,
     isValid,
+    setApiError,
     setIsModalOpen,
     t,
     userEmail,
@@ -29,8 +31,6 @@ export const SignUpForm = () => {
 
   return (
     <Card className={'p-6 flex flex-col'}>
-      {/* TODO: replace it with alert component */}
-      <div>{apiError}</div>
       <Typography className={'text-center'} variant={'h1'}>
         {t.signUp}
       </Typography>
@@ -79,6 +79,7 @@ export const SignUpForm = () => {
             </Typography>
           }
         />
+        {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} />}
         <Button className={'-mt-3'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>

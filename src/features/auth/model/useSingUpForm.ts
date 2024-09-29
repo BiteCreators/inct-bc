@@ -54,6 +54,7 @@ export const useSingUpForm = () => {
     isLoading,
     isModalOpen,
     isValid,
+    setApiError,
     setIsModalOpen,
     t,
     userEmail,
