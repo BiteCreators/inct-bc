@@ -5,6 +5,7 @@ import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+import Router from 'next/router'
 
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')
@@ -28,7 +29,14 @@ export const useSignInForm = () => {
 
   const onSubmit: SubmitHandler<SignInFormData> = async ({ email, password }) => {
     try {
-      await login({ baseUrl: 'http://localhost:3000', email, password }).unwrap()
+      await login({ baseUrl: 'http://localhost:3000', email, password })
+        .unwrap()
+        .then(res => {
+          const token = res.accessToken
+
+          document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
+          Router.push('/')
+        })
     } catch (error) {
       const errorLogin = error as ResponseLoginError
       const errorNetwork = error as FetchBaseQueryError
