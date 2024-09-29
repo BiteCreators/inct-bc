@@ -38,8 +38,7 @@ export const useEmailConfirmed = () => {
   const handleResendClick = async () => {
     try {
       await resendLink({
-        //TODO: replace with env variable
-        baseUrl: 'http://localhost:3000',
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '',
         email: params?.get('email') ?? '',
       }).unwrap()
     } catch (error) {
