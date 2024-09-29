@@ -102,7 +102,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             </span>
           )}
         </div>
-        {error && <p className={'text-sm absolute text-danger-500'}>{error ?? 'invalid input'}</p>}
+        {error && <p className={'text-sm text-danger-500'}>{error ?? 'invalid input'}</p>}
       </div>
     )
   }
