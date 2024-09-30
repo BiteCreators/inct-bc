@@ -12,22 +12,28 @@ const PrivacyPolicy: NextPageWithLayout = () => {
   const t = useScopedTranslation('PrivacyPolicy')
 
   return (
-    <div className={'flex md:block'}>
-      <div className={'max-w-12 md:max-w-40 '}>
-        <Link className={'flex ml-6 gap-3'} href={'/auth/sign-up'}>
+    <div>
+      <div className={'relative flex flex-wrap justify-center md:block md:min-h-[85px]'}>
+        <Link
+          className={'absolute left-[15px] md:left-16 md:inline-flex gap-3'}
+          href={'/auth/sign-up'}
+        >
           <ArrowBackOutline />
           <span className={'hidden md:inline text-sm font-normal leading-6'}>Back to Sign Up</span>
         </Link>
-      </div>
-      <div className={'md:mx-40 text-center mx-[15px]'}>
-        {/* <div className={'flex flex-col items-center'}> */}
-        <Typography className={'text-lg md:text-xl mb-5'} variant={'h1'}>
+        <Typography
+          className={'md:relative top-[45px] text-lg text-center md:text-xl'}
+          variant={'h1'}
+        >
           {t.title}
         </Typography>
-        <Typography className={'text-sm leading-6 '} variant={'regular-text'}>
-          {t.text}
-        </Typography>
       </div>
+      <Typography
+        className={'text-sm mx-[15px] mt-5 leading-6 md:mx-40 text-center'}
+        variant={'regular-text'}
+      >
+        {t.text}
+      </Typography>
     </div>
   )
 }
@@ -39,4 +45,5 @@ PrivacyPolicy.getLayout = (page: React.ReactElement) => {
     </PageLayout>
   )
 }
+
 export default PrivacyPolicy
