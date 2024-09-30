@@ -94,6 +94,7 @@ export const CustomDayPicker = ({ classNames, mode, onSelect, selected, ...props
   if (mode === 'single') {
     return (
       <DayPicker
+        autoFocus
         classNames={{ ...DayPickerStyle, ...classNames }}
         mode={'single'}
         modifiers={customModifiers}
@@ -108,6 +109,7 @@ export const CustomDayPicker = ({ classNames, mode, onSelect, selected, ...props
 
   return (
     <DayPicker
+      autoFocus
       classNames={{ ...DayPickerStyle, ...classNames }}
       mode={'range'}
       modifiers={customModifiers}
