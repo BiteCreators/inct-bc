@@ -15,13 +15,14 @@ export const Avatar = ({
   href,
   isNextLink = false,
   rel = '',
-  size = 50,
+  size,
 }: Props) => {
   const AvatarImage = (
     <img
       alt={alt}
-      className={`rounded-full object-cover w-[${size}px] h-[${size}px]`}
+      className={'rounded-full object-cover'}
       src={avatarURL}
+      style={{ height: `${size}px`, width: `${size}px` }}
     />
   )
 
