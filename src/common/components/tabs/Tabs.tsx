@@ -6,10 +6,9 @@ import * as Tabs from '@radix-ui/react-tabs'
 type Props = {
   ariaLabel: string
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (value: string) => void
   tabsData: TabsData[]
-  value?: string
-  variant?: 'primary' | 'secondary'
+  value: string
 }
 
 type TabsData = {
@@ -18,31 +17,29 @@ type TabsData = {
   id: string
 }
 
-export const TabsBase = ({
-  ariaLabel,
-  disabled,
-  onClick,
-  tabsData,
-  variant = 'primary',
-}: Props) => (
-  <Tabs.Root className={cn('flex flex-col w-full min-w-[300px]')}>
+export const TabsBase = ({ ariaLabel, disabled, onClick, tabsData, value }: Props) => (
+  <Tabs.Root
+    className={cn('flex flex-col w-full min-w-[300px]')}
+    onValueChange={onClick}
+    value={value}
+  >
     <Tabs.List aria-label={ariaLabel} className={'shrink-0 flex'}>
       {tabsData.map(tab => (
         <Tabs.Trigger
           className={cn(
             'mb-1 flex-1 flex items-center justify-center h-[33px]',
-            'text-md font-weight-600 font-primary text-primary-500',
-            'border-b-2 border-primary-700',
-            'cursor-pointer focus:outline outline-primary-700',
-            'focus:rounded-sm',
-            !disabled && 'active:bg-[#101722]',
-            !disabled && 'hover:bg-[#0A0E14]',
-            variant === 'secondary' && 'text-dark-100 border-dark-100',
-            disabled && 'opacity-60 cursor-default hover:bg-transparent'
+            'text-md font-weight-600 font-primary',
+            'border-b-2 cursor-pointer',
+            'hover:bg-[#0A0E14]',
+            'active:bg-[#1C2431]',
+            'focus-visible:outline-none focus-visible:border-primary-700',
+            'disabled:opacity-60 disabled:cursor-default disabled:hover:bg-transparent',
+            'data-[state=active]:text-primary-500 data-[state=active]:border-primary-500',
+            'data-[state=inactive]:text-dark-100 data-[state=inactive]:border-dark-100',
+            'transition-colors transition-border duration-300 ease-in-out'
           )}
           disabled={disabled}
           key={tab.id}
-          onClick={onClick}
           value={tab.id}
         >
           {tab.buttonName}
@@ -50,7 +47,11 @@ export const TabsBase = ({
       ))}
     </Tabs.List>
     {tabsData.map(tab => (
-      <Tabs.Content className={'p-4'} key={tab.id} value={tab.id}>
+      <Tabs.Content
+        className={cn('p-4 transition-opacity duration-300 ease-in-out')}
+        key={tab.id}
+        value={tab.id}
+      >
         {tab.content}
       </Tabs.Content>
     ))}
