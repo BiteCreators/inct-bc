@@ -1,17 +1,18 @@
-import { useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
 import { Calendar } from '@/common/assets/icons/components'
-import { CustomDayPicker } from '@/common/components/datepicker/CustomDayPicker' // Импорт иконки календаря
+import { CustomDayPicker } from '@/common/components/datepicker/CustomDayPicker'
 import { cn } from '@/common/utils/cn'
+import { format, isValid, parse } from 'date-fns'
 
-type DatePickerProps = {
+type Props = {
   className?: string
   disabled?: boolean
   error?: null | string
-  label: string
+  label?: string
   mode: 'range' | 'single'
-  placeholder: string
+  placeholder?: string
 }
 
 export const DatePicker = ({
@@ -20,8 +21,8 @@ export const DatePicker = ({
   error,
   label,
   mode,
-  placeholder,
-}: DatePickerProps) => {
+  placeholder = 'Choose date',
+}: Props) => {
   const today = new Date()
   const tomorrow = new Date(today)
 
@@ -29,7 +30,9 @@ export const DatePicker = ({
 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(today)
   const [range, setRange] = useState<DateRange | undefined>({ from: today, to: tomorrow })
+  const [month, setMonth] = useState<Date>(today)
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const calendarRef = useRef<HTMLDivElement | null>(null)
 
   const toggleCalendar = () => {
     if (!disabled) {
@@ -40,45 +43,111 @@ export const DatePicker = ({
   const handleSelect = (selected: Date | DateRange | undefined) => {
     if (mode === 'single') {
       setSelectedDate(selected as Date)
+      setMonth(selected as Date)
+      setIsCalendarOpen(false)
     } else {
       setRange(selected as DateRange)
     }
   }
-
-  let inputValue = ''
-
-  if (mode === 'single') {
-    inputValue = selectedDate?.toLocaleDateString('en-GB') || ''
-  } else if (mode === 'range' && range?.from && range?.to) {
-    inputValue = `${range.from.toLocaleDateString('en-GB')} - ${range.to.toLocaleDateString('en-GB')}`
+  const formatDateForDisplay = (date: Date | undefined) => {
+    return date ? format(date, 'dd/MM/yyyy') : ''
   }
+
+  const formatDateForInput = (date: Date | undefined) => {
+    return date ? format(date, 'yyyy-MM-dd') : ''
+  }
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+
+    const parsedDate = parse(value, 'yyyy-MM-dd', new Date())
+
+    if (isValid(parsedDate)) {
+      setSelectedDate(parsedDate)
+      setMonth(parsedDate)
+      if (mode === 'range') {
+        setRange({ from: parsedDate, to: parsedDate })
+      }
+    } else {
+      setSelectedDate(undefined)
+      setRange(undefined)
+    }
+  }
+
+  const inputValue = mode === 'single' ? formatDateForInput(selectedDate) : ''
+
+  const rangeValue =
+    mode === 'range' && range?.from && range?.to
+      ? `${formatDateForDisplay(range.from)} - ${formatDateForDisplay(range.to)}`
+      : ''
+
+  useEffect(() => {
+    if (mode === 'single' && selectedDate) {
+      setSelectedDate(selectedDate)
+      setMonth(selectedDate)
+    } else if (mode === 'range' && range?.from && range?.to) {
+      setRange(range)
+    }
+  }, [selectedDate, range, mode])
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
+        setIsCalendarOpen(false)
+      }
+    }
+
+    if (isCalendarOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isCalendarOpen])
 
   return (
     <div className={cn('p-2 text-light-100 w-fit', className)}>
       <label className={cn('block', disabled ? 'text-dark-100' : 'text-light-900')}>{label}</label>
-      <div className={'relative'}>
+      <div className={'relative'} ref={calendarRef}>
         <div
           className={cn(
             'flex items-center bg-dark-500',
             'border border-dark-300 rounded-sm px-2 py-1',
-            'hover:border-light-900',
+            !disabled && 'hover:border-light-900',
             'focus-within:border-primary-700',
             disabled && 'border-dark-100',
             error && 'border-danger-500'
           )}
         >
-          <input
-            className={cn(
-              'bg-transparent text-light-100 outline-none w-fit',
-              disabled && 'text-light-900',
-              error && 'text-danger-500'
-            )}
-            disabled={disabled}
-            onClick={toggleCalendar}
-            placeholder={placeholder}
-            readOnly
-            value={inputValue}
-          />
+          {mode === 'single' ? (
+            <input
+              className={cn(
+                'bg-transparent text-light-100 outline-none w-fit',
+                disabled && 'text-light-900',
+                error && 'text-danger-500'
+              )}
+              disabled={disabled}
+              onChange={handleInputChange}
+              type={'date'}
+              value={inputValue}
+            />
+          ) : (
+            <input
+              className={cn(
+                'bg-transparent text-light-100 outline-none w-fit',
+                disabled && 'text-light-900',
+                error && 'text-danger-500'
+              )}
+              disabled={disabled}
+              onClick={toggleCalendar}
+              placeholder={placeholder}
+              readOnly
+              value={rangeValue}
+            />
+          )}
           <Calendar
             className={cn(
               'ml-2',
@@ -99,6 +168,8 @@ export const DatePicker = ({
           >
             <CustomDayPicker
               mode={mode}
+              month={month}
+              onMonthChange={setMonth}
               onSelect={handleSelect}
               selected={mode === 'single' ? selectedDate : range}
             />

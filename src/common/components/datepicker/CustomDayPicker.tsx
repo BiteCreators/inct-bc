@@ -7,14 +7,26 @@ import {
   SelectSingleEventHandler,
 } from 'react-day-picker'
 
+import { DayPickerStyle } from '@/common/components/datepicker/CustomDayPickerStyles'
+
 type Props = {
   classNames?: any
   mode: 'range' | 'single'
+  month?: Date
+  onMonthChange?: (month: Date) => void
   onSelect: (selected: Date | DateRange | undefined) => void
   selected: Date | DateRange | undefined
 } & Omit<DayPickerProps, 'mode' | 'onSelect' | 'selected'>
 
-export const CustomDayPicker = ({ classNames, mode, onSelect, selected, ...props }: Props) => {
+export const CustomDayPicker = ({
+  classNames,
+  mode,
+  month,
+  onMonthChange,
+  onSelect,
+  selected,
+  ...props
+}: Props) => {
   const handleSelectSingle: SelectSingleEventHandler = selectedDate => {
     if (selected && selectedDate && selectedDate.getTime() === (selected as Date)?.getTime()) {
       onSelect(undefined)
@@ -55,39 +67,15 @@ export const CustomDayPicker = ({ classNames, mode, onSelect, selected, ...props
     weekend: [{ dayOfWeek: 0 }, { dayOfWeek: 6 }],
   }
 
+  const hoverInsideRange = ' hover:bg-gray-400'
+
   const modifiersClassNames = {
-    end: 'bg-primary-900 rounded-r-full',
-    middle: 'bg-primary-900',
+    end: 'bg-primary-900 rounded-r-full' + hoverInsideRange,
+    middle: 'bg-primary-900' + hoverInsideRange,
     outside: 'text-light-900',
     selected: mode === 'single' ? 'bg-primary-900 rounded-full' : 'bg-primary-900',
-    start: 'bg-primary-900 rounded-l-full',
+    start: 'bg-primary-900 rounded-l-full' + hoverInsideRange,
     today: 'text-primary-500',
-    weekend: 'text-danger-300',
-  }
-
-  const navButtonStyle =
-    'w-9 h-9 flex items-center justify-center rounded-full transition-all duration-100' +
-    ' ease-in-out hover:w-9 hover:h-9 hover:bg-dark-100'
-
-  const DayPickerStyle = {
-    active: 'bg-primary-900 w-9 h-9 rounded-full flex items-center justify-center',
-    button_next: navButtonStyle,
-    button_previous: navButtonStyle,
-    caption: 'text-white text-center font-semibold mb-10',
-    caption_label: 'font-inter text-md font-bold text-left absolute top-[22px] ml-2',
-    chevron: 'fill-white hover:bg-dark-100 rounded-full w-5 h-5',
-    day:
-      'hover:bg-primary-700 hover:rounded-full text-center w-9 h-9 flex items-center justify-center' +
-      ' cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 ' +
-      'focus-visible:ring-offset-0',
-    disabled: 'bg-gray-300 text-light-900',
-    month_grid: 'w-full text-center',
-    nav: 'flex justify-end items-center',
-    other_month: 'text-light-900',
-    selected: 'bg-primary-900 w-9 h-9 rounded-full flex items-center justify-center',
-    today: 'w-9 h-9 flex items-center justify-center text-primary-500',
-    week: 'grid grid-cols-7',
-    weekdays: 'grid grid-cols-7 gap-0 text-center font-semibold mt-5',
     weekend: 'text-danger-300',
   }
 
@@ -99,6 +87,8 @@ export const CustomDayPicker = ({ classNames, mode, onSelect, selected, ...props
         mode={'single'}
         modifiers={customModifiers}
         modifiersClassNames={modifiersClassNames}
+        month={month}
+        onMonthChange={onMonthChange}
         onSelect={handleSelectSingle}
         selected={selected as Date | undefined}
         weekStartsOn={1}
@@ -114,6 +104,8 @@ export const CustomDayPicker = ({ classNames, mode, onSelect, selected, ...props
       mode={'range'}
       modifiers={customModifiers}
       modifiersClassNames={modifiersClassNames}
+      month={month}
+      onMonthChange={onMonthChange}
       onSelect={handleSelectRange}
       selected={selected as DateRange | undefined}
       weekStartsOn={1}
