@@ -1,7 +1,8 @@
 import React, { ChangeEvent, forwardRef } from 'react'
 
-import { Radio } from '@/common/components/radioGroup/Radio'
 import { cn } from '@/common/utils/cn'
+
+import { Radio } from './Radio'
 
 type RadioOptions = {
   label: string
