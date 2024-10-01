@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { authApi } from '@/common/api/auth.api'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import {
+  RecoveryPasswordFormData,
   createRecoveryPasswordSchema,
-  recoveryPasswordSchemaData,
 } from '@/features/auth/lib/schemas/recoveryPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
@@ -44,7 +44,7 @@ export const useCreateNewPassword = () => {
     control,
     formState: { isValid },
     handleSubmit,
-  } = useForm<recoveryPasswordSchemaData>({
+  } = useForm<RecoveryPasswordFormData>({
     defaultValues: {
       confirmationPassword: '',
       newPassword: '',
@@ -52,7 +52,7 @@ export const useCreateNewPassword = () => {
     mode: 'onChange',
     resolver: zodResolver(recoveryPasswordSchema),
   })
-  const submit: SubmitHandler<recoveryPasswordSchemaData> = async data => {
+  const submit: SubmitHandler<RecoveryPasswordFormData> = async data => {
     const dataForRequest = {
       newPassword: data.newPassword,
       recoveryCode: code as string,
