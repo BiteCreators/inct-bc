@@ -1,7 +1,7 @@
 'use client'
 import React, { forwardRef, useId } from 'react'
 
-import { ArrowIosUp } from '@/common/assets/icons/components'
+import { ArrowIosDownOutline, ArrowIosUp } from '@/common/assets/icons/components'
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { motion } from 'framer-motion'
@@ -61,17 +61,18 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
               'outline-offset-0 outline-none',
               'px-3 py-[6px] text-md',
               'active:outline-none',
-              !responsive && ['border'],
               'data-[placeholder]:text-light-900',
               'focus:outline-primary-500 focus:outline-2',
-              'data-[state="open"]:bg-dark-500 data-[state="open"]:border-light-100',
               'data-[state="open"]:rounded-b-none',
               'data-[disabled]:data-[placeholder]:text-dark-100',
               'transition-[outline-color] delay-75',
               'group',
-              responsive && [
-                'md:border rounded-sm data-[state="open"]:md:bg-dark-500 data-[state="open"]:md:border-light-100',
-              ],
+              responsive
+                ? [
+                    'md:border rounded-sm ',
+                    'data-[state="open"]:md:bg-dark-500 data-[state="open"]:md:border-light-100',
+                  ]
+                : ['boder', 'data-[state="open"]:bg-dark-500 data-[state="open"]:border-light-100'],
               error && 'border-danger-500'
             )}
             id={id ?? selectId}
@@ -82,7 +83,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
               <SelectPrimitive.Value className={`text-light-100`} placeholder={placeholder} />
             </div>
             <SelectPrimitive.Icon className={'ml-2'}>
-              <ArrowIosUp
+              <ArrowIosDownOutline
                 className={cn(
                   'fill-current text-light-100',
                   'group-[[data-state="open"]]:rotate-180',
