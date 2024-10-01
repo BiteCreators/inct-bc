@@ -17,6 +17,7 @@ export const LanguageSelect = () => {
       defaultValue={defaultLocale}
       icon={locale === 'en' ? <FlagUnitedKingdom /> : <FlagRussia />}
       onValueChange={handleChange}
+      responsive
       value={locale}
     >
       <SelectItem value={'ru'}>{t.ru}</SelectItem>
