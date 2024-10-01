@@ -55,7 +55,7 @@ export const Alert = ({ message, onClose, purpose, type }: Props) => {
       animate={'visible'}
       className={cn(
         'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white z-250',
-        purpose === 'alert' && 'fixed bottom-4 left-1/4',
+        purpose === 'alert' && 'fixed bottom-4 left-[10%]',
         alertStyles[type]
       )}
       exit={'exit'}
