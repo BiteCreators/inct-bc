@@ -8,6 +8,7 @@ import {
 } from 'react-day-picker'
 
 import { DayPickerStyle } from '@/common/components/datepicker/CustomDayPickerStyles'
+import { Variants, motion } from 'framer-motion'
 
 type Props = {
   classNames?: any
@@ -17,6 +18,21 @@ type Props = {
   onSelect: (selected: Date | DateRange | undefined) => void
   selected: Date | DateRange | undefined
 } & Omit<DayPickerProps, 'mode' | 'onSelect' | 'selected'>
+
+const calendarAnimation: Variants = {
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.9,
+  },
+  initial: {
+    opacity: 0,
+    scale: 0.9,
+  },
+}
 
 export const CustomDayPicker = ({
   classNames,
@@ -67,7 +83,7 @@ export const CustomDayPicker = ({
     weekend: [{ dayOfWeek: 0 }, { dayOfWeek: 6 }],
   }
 
-  const hoverInsideRange = ' hover:bg-gray-400'
+  const hoverInsideRange = ' hover:bg-gray-300 hover:bg-opacity-75'
 
   const modifiersClassNames = {
     end: 'bg-primary-900 rounded-r-full' + hoverInsideRange,
@@ -79,37 +95,43 @@ export const CustomDayPicker = ({
     weekend: 'text-danger-300',
   }
 
-  if (mode === 'single') {
-    return (
-      <DayPicker
-        autoFocus
-        classNames={{ ...DayPickerStyle, ...classNames }}
-        mode={'single'}
-        modifiers={customModifiers}
-        modifiersClassNames={modifiersClassNames}
-        month={month}
-        onMonthChange={onMonthChange}
-        onSelect={handleSelectSingle}
-        selected={selected as Date | undefined}
-        weekStartsOn={1}
-        {...props}
-      />
-    )
-  }
-
   return (
-    <DayPicker
-      autoFocus
-      classNames={{ ...DayPickerStyle, ...classNames }}
-      mode={'range'}
-      modifiers={customModifiers}
-      modifiersClassNames={modifiersClassNames}
-      month={month}
-      onMonthChange={onMonthChange}
-      onSelect={handleSelectRange}
-      selected={selected as DateRange | undefined}
-      weekStartsOn={1}
-      {...props}
-    />
+    <motion.div
+      animate={'animate'}
+      exit={'exit'}
+      initial={'initial'}
+      transition={calendarAnimation.transition}
+      variants={calendarAnimation}
+    >
+      {mode === 'single' ? (
+        <DayPicker
+          autoFocus
+          classNames={{ ...DayPickerStyle, ...classNames }}
+          mode={'single'}
+          modifiers={customModifiers}
+          modifiersClassNames={modifiersClassNames}
+          month={month}
+          onMonthChange={onMonthChange}
+          onSelect={handleSelectSingle}
+          selected={selected as Date | undefined}
+          weekStartsOn={1}
+          {...props}
+        />
+      ) : (
+        <DayPicker
+          autoFocus
+          classNames={{ ...DayPickerStyle, ...classNames }}
+          mode={'range'}
+          modifiers={customModifiers}
+          modifiersClassNames={modifiersClassNames}
+          month={month}
+          onMonthChange={onMonthChange}
+          onSelect={handleSelectRange}
+          selected={selected as DateRange | undefined}
+          weekStartsOn={1}
+          {...props}
+        />
+      )}
+    </motion.div>
   )
 }
