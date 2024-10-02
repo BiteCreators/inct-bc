@@ -53,6 +53,10 @@ export const en = {
     weSentALinkToConfirmYourEmail: 'We have sent a link to confirm your email to',
     yourEmailConfirmed: 'Your email has been confirmed',
   },
+  Common: {
+    internalServerError: 'Unexpected server error occured, try again later',
+    networkError: 'Seems like you have connection propblems, check out your network',
+  },
   Internationalization: {
     en: 'English',
     ru: 'Russian',

@@ -56,6 +56,10 @@ export const ru: LocaleType = {
     weSentALinkToConfirmYourEmail: 'Письмо со ссылкой для подтверждения отправлено на',
     yourEmailConfirmed: 'Ваш email был подтверждён',
   },
+  Common: {
+    internalServerError: 'Произошла непредвиденная ошибка, попробуйте позже',
+    networkError: 'Похоже у вас проблемы с сетью, проверьте подключение',
+  },
   Internationalization: {
     en: 'Английский',
     ru: 'Русский',
