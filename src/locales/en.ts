@@ -36,6 +36,7 @@ export const en = {
     privacyPolicy: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
     privacyPolicyRequiredError: 'You must agree to privacy policy',
     recaptcha: 'Please complete the reCAPTCHA',
+    recaptchaIsNotValid: 'Recaptcha is not valid',
     resendVerificationLink: 'Resend verification link',
     sendLink: 'Send Link',
     signIn: 'Sign in',

@@ -6,7 +6,7 @@ import { useHandleApiErorr } from '@/common/utils/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { modifyAuthApiError } from '../lib/modifyAuthApiError'
+import { modifySignUpApiError } from '../lib/modifyAuthApiError'
 import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'
 
 export const useSingUpForm = () => {
@@ -52,7 +52,7 @@ export const useSingUpForm = () => {
     } catch (error) {
       handleApiError({
         error,
-        modifyMessage: modifyAuthApiError,
+        modifyMessage: modifySignUpApiError,
         setApiError,
         setError,
       })

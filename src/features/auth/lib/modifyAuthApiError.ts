@@ -4,7 +4,7 @@ import { LocaleType } from '@/locales/en'
 
 import { SignUpFormData } from './schemas/signUp.schema'
 
-export const modifyAuthApiError = (
+export const modifySignUpApiError = (
   message: string,
   t: LocaleType['Auth']
 ): { field?: Path<SignUpFormData>; message: string } => {

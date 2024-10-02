@@ -39,6 +39,7 @@ export const ru: LocaleType = {
       'Я согласен с <1>Условиями обслуживания</1> и <2>Политикой конфиденциальности</2>',
     privacyPolicyRequiredError: 'Вы должны согласиться с политикой конфиденциальности',
     recaptcha: 'Пожалуйста, пройдите reCAPTCHA',
+    recaptchaIsNotValid: 'Recaptcha не действительна',
     resendVerificationLink: 'Отправить ссылку подтверждения повторно',
     sendLink: 'Отправить ссылку',
     signIn: 'Войти',
