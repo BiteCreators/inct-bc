@@ -1,3 +1,5 @@
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
+
 type ErrorMessage = {
   field: string
   message: string
@@ -17,6 +19,10 @@ export type ApiErrorResponseWithArray = {
     messages: ErrorMessage[]
     statusCode: number
   }
+}
+
+export const isFetchBaseQueryError = (error: unknown): error is FetchBaseQueryError => {
+  return typeof error === 'object' && error !== null && 'status' in error
 }
 
 export const isApiError = (error: unknown): error is ApiErrorResponse => {
