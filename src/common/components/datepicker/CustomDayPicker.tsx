@@ -83,14 +83,11 @@ export const CustomDayPicker = ({
     weekend: [{ dayOfWeek: 0 }, { dayOfWeek: 6 }],
   }
 
-  const hoverInsideRange = ' hover:bg-gray-300 hover:bg-opacity-75'
-
   const modifiersClassNames = {
-    end: 'bg-primary-900 rounded-r-full' + hoverInsideRange,
-    middle: 'bg-primary-900' + hoverInsideRange,
+    end: 'rounded-r-full',
     outside: 'text-light-900',
     selected: mode === 'single' ? 'bg-primary-900 rounded-full' : 'bg-primary-900',
-    start: 'bg-primary-900 rounded-l-full' + hoverInsideRange,
+    start: 'rounded-l-full',
     today: 'text-primary-500',
     weekend: 'text-danger-300',
   }

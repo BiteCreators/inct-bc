@@ -4,7 +4,7 @@ const navButtonStyle =
   ' ease-in-out hover:w-9 hover:h-9 hover:bg-dark-100'
 
 export const DayPickerStyle = {
-  active: 'bg-primary-900 w-9 h-9 rounded-full flex items-center justify-center',
+  active: 'bg-primary-900 w-9 h-9 flex items-center justify-center',
   button_next: navButtonStyle,
   button_previous: navButtonStyle,
   caption: 'text-white text-center font-semibold mb-10',
@@ -20,7 +20,7 @@ export const DayPickerStyle = {
   month_grid: 'w-full text-center',
   nav: 'flex justify-end items-center',
   other_month: 'text-light-900',
-  selected: 'bg-primary-900 w-9 h-9 rounded-full flex items-center justify-center',
+  selected: 'bg-primary-900 w-9 h-9 flex items-center justify-center',
   today: 'w-9 h-9 flex items-center justify-center text-primary-500',
   week: 'grid grid-cols-7',
   weekdays: 'grid grid-cols-7 gap-0 text-center font-semibold mt-5',
