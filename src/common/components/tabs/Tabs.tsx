@@ -18,31 +18,34 @@ type TabsData = {
 }
 
 export const TabsBase = ({ ariaLabel, disabled, onClick, tabsData, value }: Props) => (
-  <Tabs.Root
-    className={cn('flex flex-col w-full min-w-[300px]')}
-    onValueChange={onClick}
-    value={value}
-  >
+  <Tabs.Root className={cn('flex flex-col w-full')} onValueChange={onClick} value={value}>
     <Tabs.List aria-label={ariaLabel} className={'shrink-0 flex'}>
       {tabsData.map(tab => (
         <Tabs.Trigger
           className={cn(
-            'mb-1 flex-1 flex items-center justify-center h-[33px]',
+            'flex-1 flex items-center justify-center h-[33px] rounded-sm',
             'text-md font-weight-600 font-primary',
-            'border-b-2 cursor-pointer',
+            'cursor-pointer px-6 py-2',
             'hover:bg-[#0A0E14]',
             'active:bg-[#1C2431]',
-            'focus-visible:outline-none focus-visible:border-primary-700',
+            'focus:outline-none focus:outline-primary-700 outline-offset-0',
             'disabled:opacity-60 disabled:cursor-default disabled:hover:bg-transparent',
             'data-[state=active]:text-primary-500 data-[state=active]:border-primary-500',
             'data-[state=inactive]:text-dark-100 data-[state=inactive]:border-dark-100',
-            'transition-colors transition-border duration-300 ease-in-out'
+            'transition-colors transition-border duration-300 ease-in-out',
+            'group relative'
           )}
           disabled={disabled}
           key={tab.id}
           value={tab.id}
         >
           {tab.buttonName}
+          <div
+            className={cn(
+              'h-[2px] bg-dark-100 absolute -bottom-0.5 left-[-1px] right-[-1px]',
+              'group-data-[state=active]:bg-primary-500'
+            )}
+          ></div>
         </Tabs.Trigger>
       ))}
     </Tabs.List>

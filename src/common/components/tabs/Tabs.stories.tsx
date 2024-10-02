@@ -38,11 +38,7 @@ export const Default: StoryObj<typeof TabsBase> = {
     },
   },
   render: args => {
-    return (
-      <div className={'max-w-56'}>
-        <TabsBase {...args} />
-      </div>
-    )
+    return <TabsBase {...args} />
   },
 }
 
