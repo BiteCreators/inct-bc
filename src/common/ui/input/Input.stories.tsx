@@ -24,6 +24,22 @@ export const Default: Story = {
   },
 }
 
+export const DefaultRequired: Story = {
+  args: {
+    id: 'default',
+    label: 'Email',
+    placeholder: 'Epam@epam.com',
+    required: true,
+  },
+  render: args => {
+    return (
+      <div className={'max-w-[279px]'}>
+        <Input {...args} />
+      </div>
+    )
+  },
+}
+
 export const Disabled: Story = {
   args: {
     disabled: true,
