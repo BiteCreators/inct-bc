@@ -71,7 +71,7 @@ export const authApi = inctagramApi.injectEndpoints({
         url: '/v1/auth/login',
       }),
     }),
-    logout: builder.mutation<void, { baseUrl: string }>({
+    logout: builder.mutation<void, void>({
       invalidatesTags: ['Me'],
       query: body => ({
         body,

@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export default function middleware(req: NextRequest) {
-  //TODO: set a consistent name to this
-  const isAuth = req.cookies.get('isAuth')
+  const isAuth = req.cookies.get('accessToken')
 
   if (req.url.includes('/auth/sign-in') || req.url.includes('/auth/sign-up')) {
     if (isAuth) {

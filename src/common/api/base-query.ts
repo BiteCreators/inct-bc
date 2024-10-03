@@ -1,6 +1,6 @@
+import { authSlice } from '@/features/auth/model/auth.slice'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
-import Router from 'next/router'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
@@ -42,7 +42,8 @@ export const baseQueryWithReauth: BaseQueryFn<
           document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
           result = await baseQuery(args, api, extraOptions)
         } else {
-          Router.push('auth/sign-in')
+          api.dispatch(authSlice.actions.setAccessToken(null))
+          document.cookie = 'accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
         }
       } finally {
         release()
