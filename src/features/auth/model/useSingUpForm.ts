@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useHandleApiErorr } from '@/common/utils/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { handleAuthApiError } from '../lib/handle-auth-api-error'
+import { modifySignUpApiError } from '../lib/modifyAuthApiError'
 import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'
 
 export const useSingUpForm = () => {
@@ -34,6 +35,7 @@ export const useSingUpForm = () => {
   const [apiError, setApiError] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [userEmail, setUserEmail] = useState('')
+  const { handleApiError } = useHandleApiErorr('Auth')
 
   const [register, { isLoading }] = authApi.useRegistrationMutation()
 
@@ -48,7 +50,12 @@ export const useSingUpForm = () => {
       setUserEmail(getValues('email'))
       setIsModalOpen(true)
     } catch (error) {
-      handleAuthApiError({ error, setApiError, setError, t })
+      handleApiError({
+        error,
+        modifyMessage: modifySignUpApiError,
+        setApiError,
+        setError,
+      })
     }
   }
 

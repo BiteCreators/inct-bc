@@ -1,6 +1,10 @@
 import { authTranslationEn } from '@/locales/auth/auth.translation.en'
 
 export const en = {
+  Common: {
+    internalServerError: 'Unexpected server error occured, try again later',
+    networkError: 'Seems like you have connection propblems, check out your network',
+  },
   Auth: authTranslationEn,
   Internationalization: {
     en: 'English',
