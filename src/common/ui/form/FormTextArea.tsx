@@ -1,6 +1,7 @@
 import { FieldValues, useController } from 'react-hook-form'
 
-import { TextArea, TextAreaProps } from '@/common/ui'
+import { TextArea } from '@/common/ui'
+import { TextAreaProps } from '@/common/ui/text-area/TextArea'
 
 import { FormFieldProps } from './types'
 

@@ -1,6 +1,7 @@
 import { FieldValues, useController } from 'react-hook-form'
 
-import { Select, SelectProps } from '@/common/ui'
+import { Select } from '@/common/ui'
+import { SelectProps } from '@/common/ui/select/Select'
 
 import { FormFieldProps } from './types'
 
