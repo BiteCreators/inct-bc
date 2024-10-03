@@ -1,15 +1,15 @@
-import { authApi } from '@/common/api/auth.api'
+import { useCookies } from 'react-cookie'
+
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
 import { SignInButton, SignUpButton } from '@/features/auth'
+import { authSlice } from '@/features/auth/model/auth.slice'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo, HeaderMenu } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'
 
-//TODO: make auth feature, remove isAuth from props
-export const Header = ({ isAuth }: { isAuth?: boolean }) => {
-  const { error } = authApi.useMeQuery()
-
-  isAuth = error === undefined
+export const Header = () => {
+  const accessToken = useAppSelector(authSlice.selectors.selectAccessToken)
 
   return (
     <header
@@ -23,7 +23,7 @@ export const Header = ({ isAuth }: { isAuth?: boolean }) => {
         <AppLogo />
       </div>
       <div className={'flex gap-6 md:gap-12'}>
-        {isAuth && (
+        {accessToken && (
           <div className={'hidden md:block'}>
             <NotificationsButton />
           </div>
@@ -32,7 +32,7 @@ export const Header = ({ isAuth }: { isAuth?: boolean }) => {
         <div className={'block md:hidden'}>
           <HeaderMenu />
         </div>
-        {!isAuth && (
+        {!accessToken && (
           <div className={'gap-6 hidden md:flex'}>
             <SignInButton /> <SignUpButton />
           </div>
