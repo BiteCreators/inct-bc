@@ -10,13 +10,7 @@ type Props = {
   message?: string
   onClose?: () => void
   purpose?: 'alert' | 'toast'
-<<<<<<< HEAD:src/common/components/alert/Alert.tsx
   type: 'error' | 'info' | 'success'
-}
-
-export const Alert = ({ duration = 5000, message, onClose, purpose = 'toast', type }: Props) => {
-=======
-  type?: 'error' | 'info' | 'success'
 }
 
 export const Alert = ({
@@ -26,7 +20,6 @@ export const Alert = ({
   purpose = 'toast',
   type = 'error',
 }: Props) => {
->>>>>>> development:src/common/ui/alert/Alert.tsx
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
     info: 'bg-primary-900 border-primary-500',
