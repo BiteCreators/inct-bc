@@ -1,11 +1,6 @@
 import React from 'react'
 
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormCheckbox } from '@/common/components/form/FormCheckbox'
-import { FormInput } from '@/common/components/form/FormInput'
-import { Trans } from '@/common/components/trans/Trans'
-import Typography from '@/common/components/typography/Typography'
+import { Alert, Button, Card, FormCheckbox, FormInput, Trans, Typography } from '@/common/ui'
 import Link from 'next/link'
 
 import { useSingUpForm } from '../model/useSingUpForm'
@@ -22,6 +17,7 @@ export const SignUpForm = () => {
     isLoading,
     isModalOpen,
     isValid,
+    setApiError,
     setIsModalOpen,
     t,
     userEmail,
@@ -29,8 +25,6 @@ export const SignUpForm = () => {
 
   return (
     <Card className={'p-6 flex flex-col'}>
-      {/* TODO: replace it with alert component */}
-      <div>{apiError}</div>
       <Typography className={'text-center'} variant={'h1'}>
         {t.signUp}
       </Typography>
@@ -64,12 +58,18 @@ export const SignUpForm = () => {
               <Trans
                 tags={{
                   '1': str => (
-                    <Link className={'underline text-primary-300'} href={'#'}>
+                    <Link
+                      className={'underline text-primary-300'}
+                      href={'/auth/sign-up/terms-of-service'}
+                    >
                       {str}
                     </Link>
                   ),
                   '2': str => (
-                    <Link className={'underline text-primary-300'} href={'#'}>
+                    <Link
+                      className={'underline text-primary-300'}
+                      href={'/auth/sign-up/privacy-policy'}
+                    >
                       {str}
                     </Link>
                   ),
@@ -79,6 +79,7 @@ export const SignUpForm = () => {
             </Typography>
           }
         />
+        {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
         <Button className={'-mt-3'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 
 import { authApi } from '@/common/api/auth.api'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { useSearchParams } from 'next/navigation'
 
-import { handleAuthApiError } from '../lib/handle-auth-api-error'
+import { modifySignUpApiError } from '../lib/modifyAuthApiError'
 
 export const useEmailConfirmed = () => {
   const t = useScopedTranslation('Auth')
@@ -17,6 +18,7 @@ export const useEmailConfirmed = () => {
   const [confirmRegistration] = authApi.useRegistrationConfirmationMutation()
   const [resendLink, { isLoading: isResendLinkLoading }] =
     authApi.useRegistrationEmailResendingMutation()
+  const { handleApiError } = useHandleApiErorr('Auth')
 
   useEffect(() => {
     const sendConfirmationCode = async () => {
@@ -42,7 +44,7 @@ export const useEmailConfirmed = () => {
         email: params?.get('email') ?? '',
       }).unwrap()
     } catch (error) {
-      handleAuthApiError({ error, setApiError, t })
+      handleApiError({ error, modifyMessage: modifySignUpApiError, setApiError })
     }
   }
 
@@ -52,6 +54,7 @@ export const useEmailConfirmed = () => {
     handleResendClick,
     isModalOpen,
     isResendLinkLoading,
+    setApiError,
     setIsModalOpen,
     t,
   }

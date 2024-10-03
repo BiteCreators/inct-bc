@@ -32,6 +32,13 @@ type LoginRequest = {
   password: string
 }
 
+type MeResponse = {
+  email: string
+  isBlocked: boolean
+  userId: number
+  userName: string
+}
+
 type RegistrationEmailResendingRequest = {
   baseUrl: string
   email: string
@@ -56,11 +63,28 @@ export const authApi = inctagramApi.injectEndpoints({
         url: `/v1/auth/password-recovery`,
       }),
     }),
-    login: builder.mutation<void, LoginRequest>({
+    login: builder.mutation<{ accessToken: string }, LoginRequest>({
+      invalidatesTags: ['Me'],
       query: body => ({
         body,
         method: 'POST',
         url: '/v1/auth/login',
+      }),
+    }),
+    logout: builder.mutation<void, void>({
+      invalidatesTags: ['Me'],
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/logout',
+      }),
+    }),
+    me: builder.query<MeResponse, void>({
+      providesTags: ['Me'],
+      query: body => ({
+        body,
+        method: 'GET',
+        url: '/v1/auth/me',
       }),
     }),
     newPassword: builder.mutation<void, NewPasswordRequest>({

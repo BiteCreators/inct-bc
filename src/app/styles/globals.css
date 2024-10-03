@@ -35,3 +35,7 @@ h1 {
     text-wrap: none;
   }
 }
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+}

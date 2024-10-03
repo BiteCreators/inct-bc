@@ -4,11 +4,9 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
-import { wrapper } from '@/app/store'
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
-import { Header } from '@/widgets/header'
-import { Sidebar } from '@/widgets/sidebar'
+import { persistedStore, wrapper } from '@/app/store'
 import { NextPage } from 'next'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import '@/app/styles/globals.css'
 
@@ -25,5 +23,11 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   const { props, store } = wrapper.useWrappedStore(rest)
 
-  return <Provider store={store}>{getLayout(<Component {...props.pageProps} />)}</Provider>
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistedStore()}>
+        {getLayout(<Component {...props.pageProps} />)}
+      </PersistGate>
+    </Provider>
+  )
 }

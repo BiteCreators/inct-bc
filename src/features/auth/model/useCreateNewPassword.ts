@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import {
   RecoveryPasswordFormData,
   createRecoveryPasswordSchema,

@@ -1,16 +1,12 @@
 import React from 'react'
 
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormInput } from '@/common/components/form/FormInput'
-import { Modal } from '@/common/components/modal/Modal'
-import { Recaptcha } from '@/common/components/reCaptcha/Recaptcha'
-import Typography from '@/common/components/typography/Typography'
+import { Alert, Button, Card, FormInput, Modal, Recaptcha, Typography } from '@/common/ui'
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
   const {
+    apiError,
     control,
     getValues,
     handleSubmit,
@@ -18,6 +14,7 @@ export const ForgotPasswordForm = () => {
     isSubmitting,
     isValid,
     onRecaptchaChange,
+    setApiError,
     setIsModalOpen,
     t,
   } = useForgotPassword()
@@ -39,7 +36,7 @@ export const ForgotPasswordForm = () => {
           {t.enterYourEmail}
         </Typography>
         <Button disabled={!isValid || isSubmitting} type={'submit'}>
-          {t.emailSentButton}
+          {t.emailSendButton}
         </Button>
         <Button type={'button'} variant={'text'}>
           <Link href={'/auth/sign-in'}>{t.backToSignIn}</Link>
@@ -51,6 +48,7 @@ export const ForgotPasswordForm = () => {
           theme={'dark'}
         />
       </form>
+      {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
       <Modal
         isOpen={isModalOpen}
         mode={'default'}

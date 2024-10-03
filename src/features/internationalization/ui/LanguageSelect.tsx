@@ -1,6 +1,6 @@
 import { FlagRussia, FlagUnitedKingdom } from '@/common/assets/icons/components'
-import { Select, SelectItem } from '@/common/components/select/Select'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { Select, SelectItem } from '@/common/ui'
 import { useRouter } from 'next/router'
 
 export const LanguageSelect = () => {
@@ -17,6 +17,7 @@ export const LanguageSelect = () => {
       defaultValue={defaultLocale}
       icon={locale === 'en' ? <FlagUnitedKingdom /> : <FlagRussia />}
       onValueChange={handleChange}
+      responsive
       value={locale}
     >
       <SelectItem value={'ru'}>{t.ru}</SelectItem>
