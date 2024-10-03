@@ -4,10 +4,11 @@ import { cn } from '@/common/utils/cn'
 import * as Tabs from '@radix-ui/react-tabs'
 
 type Props = {
+  ariaLabel: string
   disabled?: boolean
-  onClick?: () => void
+  onClick?: (value: string) => void
   tabsData: TabsData[]
-  variant?: 'primary' | 'secondary'
+  value: string
 }
 
 type TabsData = {
@@ -16,19 +17,27 @@ type TabsData = {
   id: string
 }
 
-export const TabsBase = ({ disabled, onClick, tabsData, variant = 'primary' }: Props) => (
-  <Tabs.Root className={cn('flex, flex-col w-full')} defaultValue={tabsData[0].id}>
-    <Tabs.List aria-label={'Manage your account'} className={'shrink-0 flex'}>
+export const TabsBase = ({ ariaLabel, disabled, onClick, tabsData, value }: Props) => (
+  <Tabs.Root className={cn('flex flex-col w-full')} onValueChange={onClick} value={value}>
+    <Tabs.List aria-label={ariaLabel} className={'shrink-0 flex'}>
       {tabsData.map(tab => (
         <Tabs.Trigger
           className={cn(
-            'mb-1 flex-1 flex items-center justify-center h-[33px] text-md font-weight600 font-primary text-primary-700 bg-dark-700 border-b-2 border-primary-700 !rounded-none data-[state=active]:bg-primary-100 cursor-pointer hover:bg-primary-900 focus:outline outline-primary-700 ',
-            variant === 'secondary' && 'text-dark-100 border-dark-100',
-            disabled && 'opacity-60 cursor-default hover:bg-transparent'
+            'flex-1 flex items-center justify-center h-[33px] rounded-sm',
+            'text-md font-weight-600 font-primary',
+            'cursor-pointer px-6 py-2',
+            'hover:bg-[#0A0E14] active:bg-[#1C2431]',
+            'focus:outline-none focus:outline-primary-700 outline-offset-0',
+            'disabled:cursor-default disabled:hover:bg-transparent',
+            'data-[state=active]:text-primary-500 data-[state=active]:border-primary-500',
+            'data-[state=inactive]:text-dark-100 data-[state=inactive]:border-dark-100',
+            'transition-colors transition-border duration-300 ease-in-out relative',
+            'after:content-[""] after:bg-dark-100 after:h-[2px] after:absolute after:w-[calc(100%+4px)]',
+            'after:-bottom-0.5 after:-left-[2px] data-[state=active]:after:bg-primary-500 after:-z-20',
+            'data-[state=active]:after:-z-10'
           )}
           disabled={disabled}
           key={tab.id}
-          onClick={onClick}
           value={tab.id}
         >
           {tab.buttonName}
@@ -36,7 +45,11 @@ export const TabsBase = ({ disabled, onClick, tabsData, variant = 'primary' }: P
       ))}
     </Tabs.List>
     {tabsData.map(tab => (
-      <Tabs.Content className={'p-4'} key={tab.id} value={tab.id}>
+      <Tabs.Content
+        className={cn('p-4 transition-opacity duration-300 ease-in-out')}
+        key={tab.id}
+        value={tab.id}
+      >
         {tab.content}
       </Tabs.Content>
     ))}

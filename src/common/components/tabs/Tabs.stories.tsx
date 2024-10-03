@@ -15,9 +15,6 @@ const meta = {
       control: { disable: true },
       description: 'Обязательный Props принимающий массив с данными.',
     },
-    variant: {
-      description: 'Варианты отображения вкладок - Primary | Secondary.',
-    },
   },
   component: TabsBase,
   parameters: {
@@ -26,34 +23,35 @@ const meta = {
   tags: ['autodocs'],
 } satisfies Meta<typeof TabsBase>
 
-export const Primary: StoryObj<typeof TabsBase> = {
-  args: {
-    onClick: action('click primary tab'),
-    tabsData,
-    variant: 'primary',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Primary вариант вкладок',
-      },
-    },
-  },
-}
-
-export const Secondary: StoryObj<typeof TabsBase> = {
-  args: {
-    onClick: action('click secondary tab'),
-    tabsData,
-    variant: 'secondary',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Secondary вариант вкладок',
-      },
-    },
-  },
-}
-
 export default meta
+
+export const Default: StoryObj<typeof TabsBase> = {
+  args: {
+    onClick: action('click tab'),
+    tabsData,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Default вариант вкладок',
+      },
+    },
+  },
+  render: args => {
+    return <TabsBase {...args} />
+  },
+}
+
+export const Disabled: StoryObj<typeof TabsBase> = {
+  args: {
+    disabled: true,
+    tabsData,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled вариант вкладок',
+      },
+    },
+  },
+}
