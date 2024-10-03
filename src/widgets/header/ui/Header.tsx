@@ -1,4 +1,5 @@
-import { cn } from '@/common/lib/utils/cn'
+import { authApi } from '@/common/api/auth.api'
+import { cn } from '@/common/utils/cn'
 import { SignInButton, SignUpButton } from '@/features/auth'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo, HeaderMenu } from '@/features/navigation'
@@ -6,6 +7,10 @@ import { NotificationsButton } from '@/features/notifications'
 
 //TODO: make auth feature, remove isAuth from props
 export const Header = ({ isAuth }: { isAuth?: boolean }) => {
+  const { error } = authApi.useMeQuery()
+
+  isAuth = error === undefined
+
   return (
     <header
       className={cn(
