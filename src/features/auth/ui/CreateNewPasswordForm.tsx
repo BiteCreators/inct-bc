@@ -1,14 +1,6 @@
 import React from 'react'
 
-<<<<<<< HEAD
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormInput } from '@/common/components/form/FormInput'
-import { Loader } from '@/common/components/loader/Loader'
-import Typography from '@/common/components/typography/Typography'
-=======
 import { Button, Card, FormInput, Loader, Typography } from '@/common/ui'
->>>>>>> development
 import { useCreateNewPassword } from '@/features/auth/model/useCreateNewPassword'
 
 export const CreateNewPasswordForm = () => {
