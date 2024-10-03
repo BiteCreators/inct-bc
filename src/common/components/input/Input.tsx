@@ -46,7 +46,8 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             )}
             htmlFor={id ?? inputId}
           >
-            {required ? `${label}*` : label}
+            {label}
+            {required && <span className={'text-danger-500'}>*</span>}
           </label>
         )}
         <div
