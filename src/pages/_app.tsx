@@ -5,9 +5,6 @@ import { Provider } from 'react-redux'
 
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
 import { wrapper } from '@/app/store'
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
-import { Header } from '@/widgets/header'
-import { Sidebar } from '@/widgets/sidebar'
 import { NextPage } from 'next'
 
 import '@/app/styles/globals.css'

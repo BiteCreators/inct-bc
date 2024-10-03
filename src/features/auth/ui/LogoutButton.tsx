@@ -1,8 +1,7 @@
 import { authApi } from '@/common/api/auth.api'
-import { LogOut } from '@/common/assets/icons/components'
-import { cn } from '@/common/utils/cn'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
 import Router from 'next/router'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { cn } from '@/common/lib/utils/cn'
 
 export const LogoutButton = () => {
   const t = useScopedTranslation('Auth')

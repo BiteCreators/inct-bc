@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { cn } from '@/common/utils/cn'
+import { cn } from '@/common/lib/utils/cn'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 

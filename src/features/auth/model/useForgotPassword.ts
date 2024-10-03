@@ -2,14 +2,16 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
+import { useHandleApiErorr } from '@/common/utils/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
-import { handleAuthApiError } from '@/features/auth/lib/handle-auth-api-error'
 import {
   ForgotPasswordFormData,
   createForgotPasswordSchema,
 } from '@/features/auth/lib/schemas/forgotPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
+
+import { modifyForgotPasswordApiError } from '../lib/modifyForgotPassowrdApiError'
 
 export const useForgotPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -40,6 +42,7 @@ export const useForgotPassword = () => {
     mode: 'onChange',
     resolver: zodResolver(forgotPasswordSchema),
   })
+  const { handleApiError } = useHandleApiErorr('Auth')
   const onRecaptchaChange = (token: null | string) => {
     if (token) {
       setValue('recaptcha', token)
@@ -54,7 +57,7 @@ export const useForgotPassword = () => {
       setIsModalOpen(true)
     } catch (error) {
       setIsModalOpen(false)
-      handleAuthApiError({ error, setApiError, setError, t })
+      handleApiError({ error, modifyMessage: modifyForgotPasswordApiError, setApiError, setError })
     } finally {
       setIsSubmitting(false)
     }
