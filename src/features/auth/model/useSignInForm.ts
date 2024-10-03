@@ -1,11 +1,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
+import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import Router from 'next/router'
+
+import { authSlice } from './auth.slice'
 
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')
@@ -26,15 +29,17 @@ export const useSignInForm = () => {
     resolver: zodResolver(signInSchema),
   })
   const [login, { error, isLoading }] = authApi.useLoginMutation()
+  const dispatch = useAppDispatch()
 
   const onSubmit: SubmitHandler<SignInFormData> = async ({ email, password }) => {
     try {
-      await login({ baseUrl: 'http://localhost:3000', email, password })
+      await login({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '', email, password })
         .unwrap()
         .then(res => {
           const token = res.accessToken
 
           document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
+          dispatch(authSlice.actions.setAccessToken(token))
           Router.push('/')
         })
     } catch (error) {
