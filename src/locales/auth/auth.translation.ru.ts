@@ -1,4 +1,4 @@
-export const authLocaleRu = {
+export const authTranslationRu = {
   backToSignIn: 'Назад к авторизации',
   congratulations: 'Поздравляем!',
   createNewPassword: 'Создать новый пароль',

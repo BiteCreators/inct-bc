@@ -1,9 +1,9 @@
-import { authLocaleRu } from '@/locales/modules/auth/auth.locale.ru'
+import { authTranslationRu } from '@/locales/auth/auth.translation.ru'
 
 import { LocaleType } from './en'
 
 export const ru: LocaleType = {
-  Auth: authLocaleRu,
+  Auth: authTranslationRu,
   Internationalization: {
     en: 'Английский',
     ru: 'Русский',

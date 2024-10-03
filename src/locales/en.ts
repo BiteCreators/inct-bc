@@ -1,7 +1,7 @@
-import { authLocaleEn } from '@/locales/modules/auth/auth.locale.en'
+import { authTranslationEn } from '@/locales/auth/auth.translation.en'
 
 export const en = {
-  Auth: authLocaleEn,
+  Auth: authTranslationEn,
   Internationalization: {
     en: 'English',
     ru: 'Russian',
