@@ -1,6 +1,4 @@
-import { Button } from '@/common/components/button/Button'
-import { Loader } from '@/common/components/loader/Loader'
-import Typography from '@/common/components/typography/Typography'
+import { Alert, Button, Loader, Typography } from '@/common/ui'
 import Image from 'next/image'
 
 import { useEmailConfirmed } from '../model/useEmailConfrmed'
@@ -15,6 +13,7 @@ export const EmailConfirmed = () => {
     handleResendClick,
     isModalOpen,
     isResendLinkLoading,
+    setApiError,
     setIsModalOpen,
     t,
   } = useEmailConfirmed()
@@ -32,8 +31,9 @@ export const EmailConfirmed = () => {
               </Button>
             }
           />
-          {/*TODO: make that with toasts or find a better way*/}
-          {!!apiError && <div className={'text-danger-500 mt-3'}>{apiError}</div>}
+          {!!apiError && (
+            <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />
+          )}
           <LinkSentModal
             bodyText={t.emailVerificationLinkSentAgain}
             isOpen={isModalOpen}

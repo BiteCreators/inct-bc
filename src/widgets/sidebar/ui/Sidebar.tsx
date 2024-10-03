@@ -1,4 +1,4 @@
-import { cn } from '@/common/utils/cn'
+import { cn } from '@/common/lib/utils/cn'
 import { LogoutButton } from '@/features/auth'
 import { SideNavbar } from '@/features/navigation'
 

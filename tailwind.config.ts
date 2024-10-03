@@ -77,6 +77,19 @@ const config: Config = {
         weight700: '700',
       },
     },
+    screens: {
+      '2xl': '1536px', // Ultra-large screens
+
+      lg: '1024px', // Large screens like laptops
+
+      // Планшеты (от 640px до 768px)
+      md: '768px', // Medium screens like tablets
+
+      // Мобильные устройства (до 640px)
+      sm: '640px', // Small screens like phones
+
+      xl: '1280px', // Extra-large screens like desktops
+    },
   },
 }
 

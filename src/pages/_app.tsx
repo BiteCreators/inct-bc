@@ -3,13 +3,12 @@ import type { AppProps } from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'
 
-import { wrapper } from '@/app/store'
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
-import { Header } from '@/widgets/header'
-import { Sidebar } from '@/widgets/sidebar'
+import { DefaultLayout } from '@/app/layouts/DefautlLayout'
+import { persistedStore, wrapper } from '@/app/store'
 import { NextPage } from 'next'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import '@/styles/globals.css'
+import '@/app/styles/globals.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -19,18 +18,16 @@ type AppPropsWithLayout = {
   Component: NextPageWithLayout
 } & AppProps
 
-const DefaultLayout = (page: React.ReactElement) => {
-  return (
-    <PageLayout footer={<div>footer</div>} header={<Header />} sidebar={<Sidebar />}>
-      {page}
-    </PageLayout>
-  )
-}
-
 export default function App({ Component, ...rest }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? DefaultLayout
 
   const { props, store } = wrapper.useWrappedStore(rest)
 
-  return <Provider store={store}>{getLayout(<Component {...props.pageProps} />)}</Provider>
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistedStore()}>
+        {getLayout(<Component {...props.pageProps} />)}
+      </PersistGate>
+    </Provider>
+  )
 }
