@@ -29,23 +29,19 @@ export const TabsBase = ({ ariaLabel, disabled, onClick, tabsData, value }: Prop
             'hover:bg-[#0A0E14]',
             'active:bg-[#1C2431]',
             'focus:outline-none focus:outline-primary-700 outline-offset-0',
-            'disabled:opacity-60 disabled:cursor-default disabled:hover:bg-transparent',
+            'disabled:cursor-default disabled:hover:bg-transparent',
             'data-[state=active]:text-primary-500 data-[state=active]:border-primary-500',
             'data-[state=inactive]:text-dark-100 data-[state=inactive]:border-dark-100',
-            'transition-colors transition-border duration-300 ease-in-out',
-            'group relative'
+            'transition-colors transition-border duration-300 ease-in-out relative',
+            'after:content-[""] after:bg-dark-100 after:h-[2px] after:absolute after:w-[calc(100%+4px)]',
+            'after:-bottom-0.5 after:-left-[2px] data-[state=active]:after:bg-primary-500 after:-z-20',
+            'data-[state=active]:after:-z-10'
           )}
           disabled={disabled}
           key={tab.id}
           value={tab.id}
         >
           {tab.buttonName}
-          <div
-            className={cn(
-              'h-[2px] bg-dark-100 absolute -bottom-0.5 left-[-1px] right-[-1px]',
-              'group-data-[state=active]:bg-primary-500'
-            )}
-          ></div>
         </Tabs.Trigger>
       ))}
     </Tabs.List>
