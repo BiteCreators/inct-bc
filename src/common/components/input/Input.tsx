@@ -14,7 +14,17 @@ type Props = {
 
 export const Input = forwardRef<HTMLInputElement, Props>(
   (
-    { className, disabled, error, id, inputType = 'default', label, onSearchClick, ...props },
+    {
+      className,
+      disabled,
+      error,
+      id,
+      inputType = 'default',
+      label,
+      onSearchClick,
+      required = false,
+      ...props
+    },
     ref
   ) => {
     const {
@@ -36,7 +46,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             )}
             htmlFor={id ?? inputId}
           >
-            {label}
+            {required ? `${label}*` : label}
           </label>
         )}
         <div
