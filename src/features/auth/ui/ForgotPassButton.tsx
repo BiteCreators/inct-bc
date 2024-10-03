@@ -1,4 +1,4 @@
-import { Button } from '@/common/components/button/Button'
+import { Button } from '@/common/ui'
 import { useSignInForm } from '@/features/auth/model/useSignInForm'
 import Link from 'next/link'
 

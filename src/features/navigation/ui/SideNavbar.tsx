@@ -14,7 +14,7 @@ import {
   TrendingUp,
   TrendingUpOutline,
 } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 
 import { SideNavbarItem } from './SideNavbarItem'
 

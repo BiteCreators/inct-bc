@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
+import { PageLayout } from '@/common/ui'
 import { MobileAppMenu } from '@/features/navigation'
 import { Header } from '@/widgets/header'
 import { Sidebar } from '@/widgets/sidebar'

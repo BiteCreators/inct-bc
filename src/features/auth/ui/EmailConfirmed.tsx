@@ -1,6 +1,4 @@
-import { Button } from '@/common/components/button/Button'
-import { Loader } from '@/common/components/loader/Loader'
-import Typography from '@/common/components/typography/Typography'
+import { Button, Loader, Typography } from '@/common/ui'
 import Image from 'next/image'
 
 import { useEmailConfirmed } from '../model/useEmailConfrmed'

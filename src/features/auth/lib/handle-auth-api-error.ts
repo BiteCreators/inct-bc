@@ -1,7 +1,7 @@
 import React from 'react'
 import { FieldValues, Path, UseFormSetError } from 'react-hook-form'
 
-import { isApiError } from '@/common/utils/api-helpers'
+import { isApiError } from '@/common/lib/utils/apiHelpers'
 import { LocaleType } from '@/locales/en'
 
 export const handleAuthApiError = <T extends FieldValues>({
