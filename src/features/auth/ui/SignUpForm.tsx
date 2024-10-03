@@ -1,12 +1,6 @@
 import React from 'react'
 
-import { Alert } from '@/common/components/alert/Alert'
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormCheckbox } from '@/common/components/form/FormCheckbox'
-import { FormInput } from '@/common/components/form/FormInput'
-import { Trans } from '@/common/components/trans/Trans'
-import Typography from '@/common/components/typography/Typography'
+import { Alert, Button, Card, FormCheckbox, FormInput, Trans, Typography } from '@/common/ui'
 import Link from 'next/link'
 
 import { useSingUpForm } from '../model/useSingUpForm'

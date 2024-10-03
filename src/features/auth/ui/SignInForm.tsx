@@ -1,7 +1,4 @@
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormInput } from '@/common/components/form/FormInput'
-import Typography from '@/common/components/typography/Typography'
+import { Alert, Button, Card, FormInput, Typography } from '@/common/ui'
 import { useSignInForm } from '@/features/auth/model/useSignInForm'
 import { ForgotPassButton } from '@/features/auth/ui/ForgotPassButton'
 import { GithubOauthButton } from '@/features/auth/ui/GithubOauthButton'
@@ -10,7 +7,8 @@ import { GoogleOauthButton } from '@/features/auth/ui/GoogleOauthButton'
 import { SignUpButton } from './SignUpButton'
 
 export const SignInForm = () => {
-  const { control, handleSubmit, isLoading, isValid, onSubmit, t } = useSignInForm()
+  const { apiError, control, handleSubmit, isLoading, isValid, onSubmit, setApiError, t } =
+    useSignInForm()
 
   return (
     <Card className={'p-6 flex flex-col'}>
@@ -37,6 +35,14 @@ export const SignInForm = () => {
           {t.signIn}
         </Button>
       </form>
+      {apiError && (
+        <Alert
+          message={apiError}
+          onClose={() => setApiError('')}
+          purpose={'toast'}
+          type={'error'}
+        />
+      )}
       <Typography className={'text-center mb-2'}>{t.dontHaveAnAccount}</Typography>
       <SignUpButton variant={'text'} />
     </Card>

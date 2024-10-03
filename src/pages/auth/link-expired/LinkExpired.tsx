@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/auth-layout'
-import { Button } from '@/common/components/button/Button'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { Button } from '@/common/ui'
 import { LinkExpiredWrapper } from '@/features/auth/ui/LinkExpiredWrapper'
 import { NextPageWithLayout } from '@/pages/_app'
 import { useRouter } from 'next/router'

@@ -1,12 +1,6 @@
 import React from 'react'
 
-import { Alert } from '@/common/components/alert/Alert'
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormInput } from '@/common/components/form/FormInput'
-import { Modal } from '@/common/components/modal/Modal'
-import { Recaptcha } from '@/common/components/reCaptcha/Recaptcha'
-import Typography from '@/common/components/typography/Typography'
+import { Alert, Button, Card, FormInput, Modal, Recaptcha, Typography } from '@/common/ui'
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import Link from 'next/link'
 
@@ -42,7 +36,7 @@ export const ForgotPasswordForm = () => {
           {t.enterYourEmail}
         </Typography>
         <Button disabled={!isValid || isSubmitting} type={'submit'}>
-          {t.emailSentButton}
+          {t.emailSendButton}
         </Button>
         <Button type={'button'} variant={'text'}>
           <Link href={'/auth/sign-in'}>{t.backToSignIn}</Link>

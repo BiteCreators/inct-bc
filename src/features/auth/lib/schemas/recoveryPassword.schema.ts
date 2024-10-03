@@ -14,4 +14,4 @@ export const createRecoveryPasswordSchema = (t: LocaleType['Auth']) =>
     })
     .refine(data => data.newPassword === data.confirmationPassword)
 
-export type recoveryPasswordSchemaData = z.infer<ReturnType<typeof createRecoveryPasswordSchema>>
+export type RecoveryPasswordFormData = z.infer<ReturnType<typeof createRecoveryPasswordSchema>>

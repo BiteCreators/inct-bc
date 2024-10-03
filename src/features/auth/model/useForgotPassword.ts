@@ -2,14 +2,16 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
-import { handleAuthApiError } from '@/features/auth/lib/handle-auth-api-error'
+import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import {
-  createForgotPasswordScheme,
-  forgotPasswordData,
+  ForgotPasswordFormData,
+  createForgotPasswordSchema,
 } from '@/features/auth/lib/schemas/forgotPassword.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
+
+import { modifyForgotPasswordApiError } from '../lib/modifyForgotPassowrdApiError'
 
 export const useForgotPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -18,7 +20,7 @@ export const useForgotPassword = () => {
   const email = searchParams?.get('email') ?? null
   const t = useScopedTranslation('Auth')
 
-  const forgotPasswordScheme = createForgotPasswordScheme(t)
+  const forgotPasswordSchema = createForgotPasswordSchema(t)
   const [apiError, setApiError] = useState('')
   const [forgotPassword] = authApi.useForgotPasswordMutation()
 
@@ -32,14 +34,15 @@ export const useForgotPassword = () => {
     setError,
     setValue,
     trigger,
-  } = useForm<forgotPasswordData>({
+  } = useForm<ForgotPasswordFormData>({
     defaultValues: {
       baseUrl: baseUrl,
       email: email ?? '',
     },
     mode: 'onChange',
-    resolver: zodResolver(forgotPasswordScheme),
+    resolver: zodResolver(forgotPasswordSchema),
   })
+  const { handleApiError } = useHandleApiErorr('Auth')
   const onRecaptchaChange = (token: null | string) => {
     if (token) {
       setValue('recaptcha', token)
@@ -47,14 +50,14 @@ export const useForgotPassword = () => {
     }
   }
 
-  const submit: SubmitHandler<forgotPasswordData> = async data => {
+  const submit: SubmitHandler<ForgotPasswordFormData> = async data => {
     try {
       setIsSubmitting(true)
       await forgotPassword(data).unwrap()
       setIsModalOpen(true)
     } catch (error) {
       setIsModalOpen(false)
-      handleAuthApiError({ error, setApiError, setError, t })
+      handleApiError({ error, modifyMessage: modifyForgotPasswordApiError, setApiError, setError })
     } finally {
       setIsSubmitting(false)
     }
