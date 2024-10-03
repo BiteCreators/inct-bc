@@ -3,7 +3,7 @@ import { FieldValues, Path, UseFormSetError } from 'react-hook-form'
 
 import { LocaleType } from '@/locales/en'
 
-import { isApiError, isApiErrorWithArrary, isFetchBaseQueryError } from '../api-helpers'
+import { isApiError, isApiErrorWithArrary, isFetchBaseQueryError } from '../utils/apiHelpers'
 import { useScopedTranslation } from './useTranslation'
 
 export const useHandleApiErorr = <NT extends keyof LocaleType>(namespace: NT) => {

@@ -34,6 +34,7 @@ export const authTranslationEn = {
   privacyPolicy: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
   privacyPolicyRequiredError: 'You must agree to privacy policy',
   recaptcha: 'Please verify that you are not a robot',
+  recaptchaIsNotValid: 'Recaptcha is not valid',
   resendVerificationLink: 'Resend verification link',
   sendLink: 'Send Link',
   signIn: 'Sign In',

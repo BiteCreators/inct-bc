@@ -34,6 +34,7 @@ export const authTranslationRu = {
   privacyPolicy: 'Я согласен с <1>Условиями обслуживания</1> и <2>Политикой конфиденциальности</2>',
   privacyPolicyRequiredError: 'Вы должны согласиться с политикой конфиденциальности',
   recaptcha: 'Пожалуйста, подтвердите, что вы не робот',
+  recaptchaIsNotValid: 'Recaptcha не действительна',
   resendVerificationLink: 'Повторно отправить ссылку подтверждения',
   sendLink: 'Отправить ссылку',
   signIn: 'Войти',

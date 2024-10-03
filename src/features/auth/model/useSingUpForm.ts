@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
-import { useHandleApiErorr } from '@/common/utils/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { modifySignUpApiError } from '../lib/modifyAuthApiError'

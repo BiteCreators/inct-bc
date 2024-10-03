@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
 import { authApi } from '@/common/api/auth.api'
-import { useHandleApiErorr } from '@/common/utils/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { useSearchParams } from 'next/navigation'
 
-import { handleAuthApiError } from '../lib/handle-auth-api-error'
+import { modifySignUpApiError } from '../lib/modifyAuthApiError'
 
 export const useEmailConfirmed = () => {
   const t = useScopedTranslation('Auth')
