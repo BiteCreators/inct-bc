@@ -54,6 +54,7 @@ export const useEmailConfirmed = () => {
     handleResendClick,
     isModalOpen,
     isResendLinkLoading,
+    setApiError,
     setIsModalOpen,
     t,
   }
