@@ -1,5 +1,5 @@
 import { authApi } from '@/common/api/auth.api'
-import { cn } from '@/common/utils/cn'
+import { cn } from '@/common/lib/utils/cn'
 import { SignInButton, SignUpButton } from '@/features/auth'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo, HeaderMenu } from '@/features/navigation'
