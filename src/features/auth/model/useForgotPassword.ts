@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { handleAuthApiError } from '@/features/auth/lib/handle-auth-api-error'
 import {
   ForgotPasswordFormData,

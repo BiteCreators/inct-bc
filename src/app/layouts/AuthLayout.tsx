@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
+import { PageLayout } from '@/common/ui'
 import { Header } from '@/widgets/header'
 
 export const AuthLayout = (page: React.ReactElement) => {

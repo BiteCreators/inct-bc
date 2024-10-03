@@ -1,11 +1,6 @@
 import React from 'react'
 
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormInput } from '@/common/components/form/FormInput'
-import { Modal } from '@/common/components/modal/Modal'
-import { Recaptcha } from '@/common/components/reCaptcha/Recaptcha'
-import Typography from '@/common/components/typography/Typography'
+import { Button, Card, FormInput, Modal, Recaptcha, Typography } from '@/common/ui'
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import Link from 'next/link'
 

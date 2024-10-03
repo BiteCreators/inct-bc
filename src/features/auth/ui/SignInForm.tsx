@@ -1,7 +1,4 @@
-import { Button } from '@/common/components/button/Button'
-import { Card } from '@/common/components/card/Card'
-import { FormInput } from '@/common/components/form/FormInput'
-import Typography from '@/common/components/typography/Typography'
+import { Button, Card, FormInput, Typography } from '@/common/ui'
 import { useSignInForm } from '@/features/auth/model/useSignInForm'
 import { ForgotPassButton } from '@/features/auth/ui/ForgotPassButton'
 import { GithubOauthButton } from '@/features/auth/ui/GithubOauthButton'
