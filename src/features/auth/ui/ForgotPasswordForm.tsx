@@ -20,7 +20,11 @@ export const ForgotPasswordForm = () => {
   } = useForgotPassword()
 
   return (
-    <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
+    <Card
+      className={
+        'px-4 py-0 sm:p-6 flex flex-col gap-6 max-w-96 w-screen bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
+      }
+    >
       <Typography className={'text-center'} variant={'h1'}>
         {t.forgotPassword}
       </Typography>
@@ -32,15 +36,17 @@ export const ForgotPasswordForm = () => {
           placeholder={'email@yandex.ru'}
           required
         />
-        <Typography className={'text-light-900 -mt-6'} variant={'small-text'}>
+        <Typography className={'text-light-900 -mt-5'} variant={'small-text'}>
           {t.enterYourEmail}
         </Typography>
         <Button disabled={!isValid || isSubmitting} type={'submit'}>
           {t.emailSendButton}
         </Button>
-        <Button type={'button'} variant={'text'}>
-          <Link href={'/auth/sign-in'}>{t.backToSignIn}</Link>
-        </Button>
+        <div className={'flex justify-center'}>
+          <Button type={'button'} variant={'text'}>
+            <Link href={'/auth/sign-in'}>{t.backToSignIn}</Link>
+          </Button>
+        </div>
         <Recaptcha
           className={'self-center'}
           onChange={onRecaptchaChange}
@@ -55,10 +61,15 @@ export const ForgotPasswordForm = () => {
         onOpenChange={setIsModalOpen}
         title={t.emailSent}
       >
-        <div className={'flex flex-col gap-[18px] pb-6 pt-[18px]'}>
-          <Typography>{`${t.weHaveSent} ${getValues('email')}`}</Typography>
+        <div className={'flex flex-col gap-[18px] pb-6 pt-[18px] w-72 sm:w-80'}>
+          <Typography
+            className={'text-center sm:text-start'}
+          >{`${t.weHaveSent} ${getValues('email')}`}</Typography>
 
-          <Button className={'self-end w-[96px]'} onClick={() => setIsModalOpen(false)}>
+          <Button
+            className={'self-center sm:self-end w-full sm:w-[96px]'}
+            onClick={() => setIsModalOpen(false)}
+          >
             OK
           </Button>
         </div>

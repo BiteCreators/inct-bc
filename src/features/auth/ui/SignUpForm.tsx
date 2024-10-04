@@ -24,11 +24,15 @@ export const SignUpForm = () => {
   } = useSingUpForm()
 
   return (
-    <Card className={'p-6 flex flex-col'}>
+    <Card
+      className={
+        'px-6 py-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
+      }
+    >
       <Typography className={'text-center'} variant={'h1'}>
         {t.signUp}
       </Typography>
-      <div className={'flex gap-[60px] mx-auto mt-3'}>
+      <div className={'flex gap-[60px] mx-auto mt-5 sm:mt-3'}>
         <GoogleOauthButton />
         <GithubOauthButton />
       </div>
@@ -80,7 +84,7 @@ export const SignUpForm = () => {
           }
         />
         {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
-        <Button className={'-mt-3'} disabled={isLoading || !isValid} type={'submit'}>
+        <Button className={'-mt-3 py-2'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>
       </form>
