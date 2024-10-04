@@ -38,6 +38,7 @@ export const useForgotPassword = () => {
     defaultValues: {
       baseUrl: baseUrl,
       email: email ?? '',
+      recaptcha: undefined,
     },
     mode: 'onChange',
     resolver: zodResolver(forgotPasswordSchema),
@@ -46,8 +47,10 @@ export const useForgotPassword = () => {
   const onRecaptchaChange = (token: null | string) => {
     if (token) {
       setValue('recaptcha', token)
-      trigger('recaptcha')
+    } else {
+      setValue('recaptcha', '')
     }
+    trigger('recaptcha')
   }
 
   const submit: SubmitHandler<ForgotPasswordFormData> = async data => {
