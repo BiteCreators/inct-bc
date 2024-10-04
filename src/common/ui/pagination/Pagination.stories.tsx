@@ -6,13 +6,6 @@ import { Pagination } from './Pagination'
 
 const meta = {
   component: Pagination,
-  // decorators: [
-  //   Pagination => (
-  //     <div style={{ margin: '3em' }}>
-  //       <Pagination />
-  //     </div>
-  //   ),
-  // ],
 } satisfies Meta<typeof Pagination>
 
 type Story = StoryObj<typeof Pagination>
@@ -24,11 +17,9 @@ const range = (start: number, end: number) => {
 }
 
 export const Default: Story = {
-  args: {
-    currentPage: 1,
-  },
+  args: {},
   render: args => {
-    const [currentPage, setCurrentPage] = useState(args.currentPage)
+    const [currentPage, setCurrentPage] = useState(1)
     const onClickMainPaginationButton = (page: number) => {
       return () => {
         setCurrentPage(page)
@@ -40,32 +31,33 @@ export const Default: Story = {
     const onClickNextPageButton = () => {
       setCurrentPage(currentPage + 1)
     }
+
     const ellipsis = '...'
     const siblings = 1
-    const count = 55
+    const pagesCount = 55
 
-    const leftSiblingIndex = Math.max(currentPage - siblings, 1) //левая граница диапазона
-    const rightSiblingIndex = Math.min(currentPage + siblings, count) // правая граница диапазона
-    const shouldShowLeftDots = leftSiblingIndex > 2
-    const shouldShowRightDots = rightSiblingIndex < count - 2
-    let paginationRange: (number | string)[] = range(1, count)
+    const leftBorderIndex = Math.max(currentPage - siblings, 1) //номер левой границы (страницы) числового диапазона pagination
+    const rightBorderIndex = Math.min(currentPage + siblings, pagesCount) // номер правой границы (страницы) числового диапазона pagination
+    const shouldShowLeftEllipsis = leftBorderIndex > 2 // с какого номера левой границы (страницы) числового диапазона показывать многоточие слева
+    const shouldShowRightEllipsis = rightBorderIndex < pagesCount - 2 // с какого номера правой границы (страницы) числового диапазона показывать многоточие справа
+    let paginationRange: (number | string)[] = range(1, pagesCount)
     const isLastPage = currentPage === paginationRange.length - 1
     const isFirstPage = currentPage === 1
 
-    if (!shouldShowLeftDots && shouldShowRightDots) {
+    if (!shouldShowLeftEllipsis && shouldShowRightEllipsis) {
       const leftItemCount = 3 + 2 * siblings
       const leftRange = range(1, leftItemCount)
 
-      paginationRange = [...leftRange, ellipsis, count]
+      paginationRange = [...leftRange, ellipsis, pagesCount]
     }
-    if (shouldShowLeftDots && shouldShowRightDots) {
-      const middleRange = range(leftSiblingIndex, rightSiblingIndex)
+    if (shouldShowLeftEllipsis && shouldShowRightEllipsis) {
+      const middleRange = range(leftBorderIndex, rightBorderIndex)
 
-      paginationRange = [1, ellipsis, ...middleRange, ellipsis, count]
+      paginationRange = [1, ellipsis, ...middleRange, ellipsis, pagesCount]
     }
-    if (shouldShowLeftDots && !shouldShowRightDots) {
+    if (shouldShowLeftEllipsis && !shouldShowRightEllipsis) {
       const rightItemCount = 3 + 2 * siblings
-      const rightRange = range(count - rightItemCount + 1, count)
+      const rightRange = range(pagesCount - rightItemCount + 1, pagesCount)
 
       paginationRange = [1, ellipsis, ...rightRange]
     }
@@ -78,6 +70,7 @@ export const Default: Story = {
         handlePreviousPageClicked={onClickPreviousPageButton}
         isFirstPage={isFirstPage}
         isLastPage={isLastPage}
+        onChangePagesPortion={() => {}}
         paginationRange={paginationRange}
       />
     )
