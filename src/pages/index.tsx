@@ -1,44 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
-import { Button } from '@/common/ui'
 import { authSlice } from '@/features/auth/model/auth.slice'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
   const searchParams = useSearchParams()
   const validationCode = searchParams?.get('code') ?? null
-  const router = useRouter()
   const dispatch = useAppDispatch()
 
   const [googleAuth] = authApi.useGoogleAuthMutation()
   const [meResponse, { data }] = authApi.useLazyMeQuery()
-  const handler = async () => {
+
+  const googleAuthHandler = async () => {
     if (validationCode) {
       const { accessToken: token } = await googleAuth({ code: validationCode }).unwrap()
 
-      console.log(data)
-      await meResponse()
+      const { userId } = await meResponse().unwrap()
 
       document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
-      // dispatch(authSlice.actions.setAccessToken(token))
-      Router.push(`/profile${data?.userId}`)
+      dispatch(authSlice.actions.setAccessToken(token))
+      Router.push(`/profile${userId}`)
     }
   }
-  const handlerz = () => {
-    console.log(data)
-  }
+
+  useEffect(() => {
+    googleAuthHandler()
+  }, [])
 
   return (
     <div className={'flex gap-4 flex-col'}>
-      <Button onClick={handler}>btn</Button>
-      <Button onClick={handlerz}>ME</Button>
       <h1>StartPage</h1>
       <Link className={'text-red-600 text-4xl'} href={'/auth'}>
         Auth
