@@ -10,7 +10,7 @@ export default function middleware(req: NextRequest) {
       return NextResponse.next()
     }
   }
-  if (req.nextUrl.pathname === '/' && req.nextUrl.searchParams.get('test')) {
+  if (req.nextUrl.pathname === '/' && req.nextUrl.searchParams.has('code')) {
     return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
   }
 

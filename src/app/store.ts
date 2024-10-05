@@ -39,8 +39,10 @@ const makeStore = () =>
     reducer: persistedReducer,
   })
 
-export const persistedStore = () => persistStore(makeStore())
+const store = makeStore()
 
+export const persistedStore = persistStore(store)
+export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof makeStore>
 export type AppState = ReturnType<AppStore['getState']>
 export type AppDispatch = AppStore['dispatch']

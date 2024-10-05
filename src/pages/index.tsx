@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
+import { RootState } from '@/app/store'
 import { authApi } from '@/common/api/auth.api'
-import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { Loader } from '@/common/ui'
 import { authSlice } from '@/features/auth/model/auth.slice'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
@@ -11,29 +14,6 @@ import Router from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
-  const searchParams = useSearchParams()
-  const validationCode = searchParams?.get('code') ?? null
-  const dispatch = useAppDispatch()
-
-  const [googleAuth] = authApi.useGoogleAuthMutation()
-  const [meResponse, { data }] = authApi.useLazyMeQuery()
-
-  const googleAuthHandler = async () => {
-    if (validationCode) {
-      const { accessToken: token } = await googleAuth({ code: validationCode }).unwrap()
-
-      const { userId } = await meResponse().unwrap()
-
-      document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
-      dispatch(authSlice.actions.setAccessToken(token))
-      Router.push(`/profile${userId}`)
-    }
-  }
-
-  useEffect(() => {
-    googleAuthHandler()
-  }, [])
-
   return (
     <div className={'flex gap-4 flex-col'}>
       <h1>StartPage</h1>

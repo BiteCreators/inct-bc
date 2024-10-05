@@ -26,7 +26,7 @@ export const ReСaptcha = {
     }
 
     const submit = (data: any) => {
-      console.log(data)
+      alert(data)
     }
 
     return (
