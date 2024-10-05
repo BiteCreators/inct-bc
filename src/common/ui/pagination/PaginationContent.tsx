@@ -67,29 +67,30 @@ export const PaginationEllipsis = ({ className, ...props }: React.ComponentProps
     ...
   </span>
 )
-type SelectProps = {
+type SelectPagesPortionProps = {
   className?: string
 } & SelectPrimitive.SelectProps
 
-export const Select = forwardRef<HTMLButtonElement, SelectProps>(
-  ({ children, className, defaultValue, open, ...props }: SelectProps, ref) => {
+export const SelectPagesPortion = forwardRef<HTMLButtonElement, SelectPagesPortionProps>(
+  ({ children, className, defaultValue, ...props }: SelectPagesPortionProps, ref) => {
     return (
-      <SelectPrimitive.Root {...props} defaultValue={defaultValue} open={open}>
+      <SelectPrimitive.Root {...props} defaultValue={defaultValue}>
         <SelectPrimitive.Trigger
           className={cn(
-            'inline-flex box-border',
+            'group inline-flex box-border',
             'min-h-[24px] min-w-[52px]',
             'items-center border border-dark-300',
             'justify-center gap-[5px]',
             'rounded bg-dark-500',
             'pl-1 pr-0.5 text-sm',
             'text-light-100 outline-none',
+
             className
           )}
           ref={ref}
         >
-          <SelectPrimitive.Value className={''} placeholder={'100'} />
-          <SelectPrimitive.Icon className={''}>
+          <SelectPrimitive.Value />
+          <SelectPrimitive.Icon>
             <ArrowIosDownOutline
               className={cn(
                 'fill-current text-light-100',
@@ -127,7 +128,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
   }
 )
 
-export const SelectItem = forwardRef<HTMLDivElement, SelectPrimitive.SelectItemProps>(
+export const SelectPortion = forwardRef<HTMLDivElement, SelectPrimitive.SelectItemProps>(
   ({ children, className, ...props }: SelectPrimitive.SelectItemProps, ref) => {
     return (
       <SelectPrimitive.Item

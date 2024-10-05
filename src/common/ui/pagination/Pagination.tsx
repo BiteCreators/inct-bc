@@ -3,33 +3,37 @@ import React from 'react'
 import { ArrowIosBack, ArrowIosForward } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 
-import { MainPaginationButtons, Select, SelectItem } from './PaginationContent'
+import { MainPaginationButtons, SelectPagesPortion, SelectPortion } from './PaginationContent'
+import { usePagination } from './usePagination'
 
 type Props = {
   className?: string
   currentPage: number
-  handleMainPageClicked: (page: number) => () => void
-  handleNextPageClicked: () => void
-  handlePreviousPageClicked: () => void
-  isFirstPage?: boolean
-  isLastPage?: boolean
   onChangePagesPortion: (pagesPortion: string) => void
+  onClickPaginationButton: (page: number) => void
+  pagesCount: number
   pagesPortion?: string
-  paginationRange: (number | string)[]
+  siblings?: number
 }
 
 export const Pagination = ({
   className,
   currentPage,
-  handleMainPageClicked,
-  handleNextPageClicked,
-  handlePreviousPageClicked,
-  isFirstPage,
-  isLastPage,
   onChangePagesPortion,
+  onClickPaginationButton,
+  pagesCount,
   pagesPortion = '10',
-  paginationRange,
+  siblings = 1,
 }: Props) => {
+  const {
+    isFirstPage,
+    isLastPage,
+    onClickMainPaginationButton,
+    onClickNextPageButton,
+    onClickPreviousPageButton,
+    paginationRange,
+  } = usePagination({ currentPage, onClick: onClickPaginationButton, pagesCount, siblings })
+
   return (
     <div
       className={cn(
@@ -43,7 +47,7 @@ export const Pagination = ({
             'focus-visible:border-2 focus-visible:outline-none focus-visible:border-primary-700'
           }
           disabled={isFirstPage}
-          onClick={handlePreviousPageClicked}
+          onClick={onClickPreviousPageButton}
         >
           <ArrowIosBack
             className={cn(isFirstPage && 'text-dark-100')}
@@ -54,7 +58,7 @@ export const Pagination = ({
         </button>
         <MainPaginationButtons
           currentPage={currentPage}
-          onClick={handleMainPageClicked}
+          onClick={onClickMainPaginationButton}
           paginationRange={paginationRange}
         />
         <button
@@ -62,7 +66,7 @@ export const Pagination = ({
             'ml-3 focus-visible:border-2 focus-visible:outline-none focus-visible:border-primary-700'
           }
           disabled={isLastPage}
-          onClick={handleNextPageClicked}
+          onClick={onClickNextPageButton}
         >
           <ArrowIosForward
             className={cn(isLastPage && 'text-dark-100')}
@@ -74,13 +78,13 @@ export const Pagination = ({
       </div>
       <div className={'inline-flex items-center'}>
         <span className={'mr-1 ml-6 '}>Show</span>
-        <Select defaultValue={pagesPortion} onValueChange={onChangePagesPortion}>
-          <SelectItem value={'10'}>10</SelectItem>
-          <SelectItem value={'20'}>20</SelectItem>
-          <SelectItem value={'30'}>30</SelectItem>
-          <SelectItem value={'50'}>50</SelectItem>
-          <SelectItem value={'100'}>100</SelectItem>
-        </Select>
+        <SelectPagesPortion defaultValue={pagesPortion} onValueChange={onChangePagesPortion}>
+          <SelectPortion value={'10'}>10</SelectPortion>
+          <SelectPortion value={'20'}>20</SelectPortion>
+          <SelectPortion value={'30'}>30</SelectPortion>
+          <SelectPortion value={'50'}>50</SelectPortion>
+          <SelectPortion value={'100'}>100</SelectPortion>
+        </SelectPagesPortion>
         <span className={'ml-1'}>on page</span>
       </div>
     </div>
