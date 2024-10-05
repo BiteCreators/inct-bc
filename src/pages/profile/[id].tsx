@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useRouter } from 'next/router'
 
-export default function CurrentProfile(props: any) {
+export default function CurrentProfile() {
   const router = useRouter()
   const { id } = router.query
 
