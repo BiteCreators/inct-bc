@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 
-import { RootState } from '@/app/store'
-import { authApi } from '@/common/api/auth.api'
-import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { Loader } from '@/common/ui'
-import { authSlice } from '@/features/auth/model/auth.slice'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import Router from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
