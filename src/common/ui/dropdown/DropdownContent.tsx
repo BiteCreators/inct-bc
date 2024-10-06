@@ -18,7 +18,7 @@ export const DropdownContent = ({ content }: Props) => {
           <DropdownMenu.Item
             className={cn(
               'flex items-center px-1 py-2 cursor-pointer border-none',
-              'hover:bg-dark-100 rounded-sm focus:bg-dark-100 focus:outline-none'
+              'global-hover:hover:bg-dark-100 rounded-sm focus:bg-dark-100 focus:outline-none'
             )}
             key={index}
             onClick={item.onClick}

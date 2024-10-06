@@ -116,7 +116,7 @@ export const DatePicker = ({
           className={cn(
             'flex items-center bg-dark-500',
             'border border-dark-300 rounded-sm px-2 py-1',
-            !disabled && 'hover:border-light-900',
+            !disabled && 'global-hover:hover:border-light-900',
             'focus-within:border-primary-700',
             disabled && 'border-dark-100',
             error && 'border-danger-500'

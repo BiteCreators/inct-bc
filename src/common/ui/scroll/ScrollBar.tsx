@@ -20,7 +20,7 @@ export const ScrollBar = forwardRef<
     {...props}
   >
     <ScrollArea.ScrollAreaThumb
-      className={'relative flex-1 rounded-full bg-dark-300 hover:bg-light-900'}
+      className={'relative flex-1 rounded-full bg-dark-300 global-hover:hover:bg-light-900'}
     />
   </ScrollArea.ScrollAreaScrollbar>
 ))
