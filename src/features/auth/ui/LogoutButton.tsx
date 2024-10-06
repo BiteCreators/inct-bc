@@ -30,7 +30,7 @@ export const LogoutButton = () => {
       className={cn(
         'flex gap-3 text-sm font-weight500',
         'transition-colors delay-[10ms]',
-        'hover:text-primary-100'
+        'global-hover:hover:text-primary-100'
       )}
       onClick={handleLogout}
     >
