@@ -9,7 +9,6 @@ export const useGoogleAuth = () => {
   const validationCode = searchParams?.get('code') ?? null
   const dispatch = useAppDispatch()
 
-  console.log(validationCode)
   const [googleAuth] = authApi.useGoogleAuthMutation()
   const [meResponse] = authApi.useLazyMeQuery()
 
