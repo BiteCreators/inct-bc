@@ -44,7 +44,7 @@ export const useSignInForm = () => {
 
           document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
           dispatch(authSlice.actions.setAccessToken(token))
-          Router.push('/')
+          Router.push('/profile')
         })
     } catch (error) {
       handleApiError({ error, modifyMessage: modifySingInApiError, setApiError, setError })

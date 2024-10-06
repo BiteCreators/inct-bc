@@ -10,6 +10,9 @@ export default function middleware(req: NextRequest) {
       return NextResponse.next()
     }
   }
+  if (req.nextUrl.pathname === '/' && req.nextUrl.searchParams.has('code')) {
+    return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
+  }
 
   if (!isAuth) {
     return NextResponse.redirect(new URL('/auth/sign-in', req.url))
@@ -20,5 +23,5 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
   //all protected routes should go after '/auth/sing-up'
-  matcher: ['/auth/sign-in', '/auth/sign-up', '/create'],
+  matcher: ['/auth/sign-in', '/auth/sign-up', '/create', '/'],
 }

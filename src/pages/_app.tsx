@@ -25,7 +25,7 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistedStore()}>
+      <PersistGate persistor={persistedStore}>
         {getLayout(<Component {...props.pageProps} />)}
       </PersistGate>
     </Provider>
