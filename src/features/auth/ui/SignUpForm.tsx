@@ -90,7 +90,7 @@ export const SignUpForm = () => {
         </Button>
       </form>
       <div className={'mt-[18px] flex gap-[6px] flex-col'}>
-        <Typography className={'text-center '}>{t.doYouHaveAnAccount}</Typography>
+        <Typography className={'text-center'}>{t.doYouHaveAnAccount}</Typography>
         <SignInButton />
       </div>
       <LinkSentModal

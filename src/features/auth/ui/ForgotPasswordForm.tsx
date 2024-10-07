@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Alert, Button, Card, FormInput, Modal, Recaptcha, Typography } from '@/common/ui'
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
+import { LinkSentModal } from '@/features/auth/ui/LinkSentModal'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
@@ -63,25 +64,12 @@ export const ForgotPasswordForm = () => {
       </form>
 
       {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
-      <Modal
+      <LinkSentModal
+        bodyText={`${t.weHaveSent} ${getValues('email')}`}
         isOpen={isModalOpen}
-        mode={'default'}
-        onOpenChange={setIsModalOpen}
+        setIsOpen={setIsModalOpen}
         title={t.emailSent}
-      >
-        <div className={'flex flex-col gap-[18px] pb-6 pt-[18px] w-72 sm:w-80'}>
-          <Typography className={'text-center sm:text-start'}>
-            {`${t.weHaveSent} ${getValues('email')}`}
-          </Typography>
-
-          <Button
-            className={'self-center sm:self-end w-full sm:w-[96px]'}
-            onClick={() => setIsModalOpen(false)}
-          >
-            OK
-          </Button>
-        </div>
-      </Modal>
+      />
     </Card>
   )
 }
