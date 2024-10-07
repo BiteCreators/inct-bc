@@ -47,12 +47,12 @@ export const EmailConfirmed = () => {
         <div className={'flex text-center flex-col items-center'}>
           <Typography variant={'h2'}>{t.congratulations}</Typography>
           <Typography className={'mt-[19px]'}>{t.yourEmailConfirmed}</Typography>
-          <div className={'mt-[60px] flex w-[183px] flex-col'}>
+          <div className={'mt-[60px] flex w-[330px] sm:w-[183px] flex-col sm:order-1 order-2'}>
             <SignInButton variant={'primary'} />
           </div>
           <Image
             alt={'sing-up-bro'}
-            className={'mt-[72px]'}
+            className={'mt-[72px] sm:order-2 order-1'}
             height={300}
             src={'/images/sign-up-bro.png'}
             width={432}

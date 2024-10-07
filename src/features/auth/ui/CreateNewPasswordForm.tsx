@@ -11,8 +11,14 @@ export const CreateNewPasswordForm = () => {
   }
 
   return (
-    <Card className={'p-6 flex flex-col gap-6 max-w-96 w-screen'}>
-      <Typography variant={'h1'}>{t.createNewPassword}</Typography>
+    <Card
+      className={
+        'p-6 flex flex-col gap-6 max-w-96 w-screen bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
+      }
+    >
+      <Typography className={'text-center'} variant={'h1'}>
+        {t.createNewPassword}
+      </Typography>
       <form className={'flex flex-col gap-6 '} noValidate onSubmit={handleSubmit}>
         <FormInput
           control={control}
@@ -28,7 +34,7 @@ export const CreateNewPasswordForm = () => {
           name={'confirmationPassword'}
           required
         ></FormInput>
-        <Button disabled={!isValid} type={'submit'}>
+        <Button className={'mt-10 py-3 sm:py-2'} disabled={!isValid} type={'submit'}>
           {t.createNewPassword}
         </Button>
       </form>
