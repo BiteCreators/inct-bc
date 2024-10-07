@@ -21,7 +21,7 @@ export const SideNavbarItem = ({ disabled, href, icon, iconActive, label }: Prop
       className={cn(
         'flex gap-3 text-sm font-weight500',
         'transition-colors delay-[10ms]',
-        !disabled && 'hover:text-primary-100',
+        !disabled && 'global-hover:hover:text-primary-100',
         isActive && 'font-weight700 text-primary-500',
         disabled && 'text-dark-100 cursor-default'
       )}

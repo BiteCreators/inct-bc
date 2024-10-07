@@ -135,7 +135,7 @@ export const SelectItem = forwardRef<HTMLDivElement, ItemProps>(
         className={cn(
           'px-3 py-[6px]',
           'text-md cursor-pointer',
-          'hover:text-primary-500 hover:bg-dark-300 hover:outline-none',
+          'global-hover:hover:text-primary-500 global-hover:hover:bg-dark-300 global-hover:hover:outline-none',
           className
         )}
         {...props}

@@ -55,8 +55,8 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             'relative flex items-center',
             'border border-dark-100 rounded-sm bg-transparent',
             'focus-within:border-primary-500 focus-within:active:border-primary-500',
-            'hover:border-light-900',
-            'disabled:border-dark-100 disabled:hover:border-dark-100 disabled:active:border-dark-100',
+            'global-hover:hover:border-light-900',
+            'disabled:border-dark-100 disabled:global-hover:hover:border-dark-100 disabled:active:border-dark-100',
             disabled && '!border-dark-100',
             error && 'border-danger-500',
             className,
@@ -83,7 +83,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
               'bg-transparent text-md text-light-100 outline-none outline-offset-0',
               'placeholder:text-light-900 active:bg-dark-500 focus:outline-none',
               'disabled:active:bg-inherit disabled:placeholder:text-dark-100',
-              'hover:placeholder:text-light-900',
+              'global-hover:hover:placeholder:text-light-900',
               className,
             ])}
             id={id ?? inputId}
