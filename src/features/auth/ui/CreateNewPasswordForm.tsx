@@ -34,7 +34,7 @@ export const CreateNewPasswordForm = () => {
           name={'confirmationPassword'}
           required
         ></FormInput>
-        <Button className={'mt-10'} disabled={!isValid} type={'submit'}>
+        <Button className={'mt-10 py-3 sm:py-2'} disabled={!isValid} type={'submit'}>
           {t.createNewPassword}
         </Button>
       </form>

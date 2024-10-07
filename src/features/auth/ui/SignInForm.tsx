@@ -13,7 +13,7 @@ export const SignInForm = () => {
   return (
     <Card
       className={
-        'px-4 py-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
+        'px-4 py-0 -mt-5 sm:mt-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
       }
     >
       <Typography className={'text-center mb-5 sm:mb-3'} variant={'h1'}>
@@ -41,7 +41,11 @@ export const SignInForm = () => {
         <ForgotPassButton
           className={'flex p-0 mt-2 mb-2 ml-auto text-sm text-light-900 font-weight400'}
         />
-        <Button className={'mt-[52px] py-2'} disabled={!isValid || isLoading} type={'submit'}>
+        <Button
+          className={'mt-[52px] sm:mt-0 py-3 sm:py-2'}
+          disabled={!isValid || isLoading}
+          type={'submit'}
+        >
           {t.signIn}
         </Button>
       </form>

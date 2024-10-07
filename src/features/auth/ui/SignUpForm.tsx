@@ -26,7 +26,7 @@ export const SignUpForm = () => {
   return (
     <Card
       className={
-        'px-6 py-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
+        'px-6 py-0 -mt-5 sm:mt-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
       }
     >
       <Typography className={'text-center'} variant={'h1'}>
@@ -36,7 +36,7 @@ export const SignUpForm = () => {
         <GoogleOauthButton />
         <GithubOauthButton />
       </div>
-      <form className={'flex flex-col gap-6 mt-6'} noValidate onSubmit={handleSubmit}>
+      <form className={'flex flex-col gap-6 mt-3 sm:mt-6'} noValidate onSubmit={handleSubmit}>
         <FormInput control={control} label={t.username} name={'userName'} required />
         <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
@@ -54,11 +54,12 @@ export const SignUpForm = () => {
           required
         />
         <FormCheckbox
+          className={'-mt-3 sm:mt-0'}
           control={control}
           name={'agreedToPrivacyPolicy'}
           required
           text={
-            <Typography variant={'small-text'}>
+            <Typography className={'-mt-3 sm:mt-0'} variant={'small-text'}>
               <Trans
                 tags={{
                   '1': str => (
@@ -84,7 +85,7 @@ export const SignUpForm = () => {
           }
         />
         {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
-        <Button className={'-mt-3 py-2'} disabled={isLoading || !isValid} type={'submit'}>
+        <Button className={'mt-0 py-3 sm:py-2'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>
       </form>
