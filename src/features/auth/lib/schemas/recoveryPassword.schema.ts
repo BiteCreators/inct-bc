@@ -12,6 +12,9 @@ export const createRecoveryPasswordSchema = (t: LocaleType['Auth']) =>
         .string()
         .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]+$/, t.passwordMustContain),
     })
-    .refine(data => data.newPassword === data.confirmationPassword)
+    .refine(data => data.newPassword === data.confirmationPassword, {
+      message: t.passwordConfirmationInvalidError,
+      path: ['confirmationPassword'],
+    })
 
 export type RecoveryPasswordFormData = z.infer<ReturnType<typeof createRecoveryPasswordSchema>>
