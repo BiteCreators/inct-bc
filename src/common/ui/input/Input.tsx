@@ -59,17 +59,12 @@ export const Input = forwardRef<HTMLInputElement, Props>(
             'disabled:border-dark-100 disabled:global-hover:hover:border-dark-100 disabled:active:border-dark-100',
             disabled && '!border-dark-100',
             error && 'border-danger-500',
-            className,
           ])}
         >
           {inputType === 'search' && (
             <span className={'absolute inset-y-0 left-0 pl-3 flex items-center text-light-900'}>
               <button
-                className={cn([
-                  'focus:outline-none cursor-pointer',
-                  disabled && 'cursor-default',
-                  className,
-                ])}
+                className={cn(['focus:outline-none cursor-pointer', disabled && 'cursor-default'])}
                 onClick={onSearchClick}
                 type={'button'}
               >
@@ -83,8 +78,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
               'bg-transparent text-md text-light-100 outline-none outline-offset-0',
               'placeholder:text-light-900 active:bg-dark-500 focus:outline-none',
               'disabled:active:bg-inherit disabled:placeholder:text-dark-100',
-              'global-hover:hover:placeholder:text-light-900',
-              className,
+              'hover:placeholder:text-light-900',
             ])}
             id={id ?? inputId}
             type={inputTypeToShow}
@@ -96,11 +90,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           {inputType === 'reveal' && (
             <span className={'flex items-center pr-1 mr-[0.5rem]'}>
               <button
-                className={cn([
-                  'focus:outline-none cursor-pointer',
-                  disabled && 'cursor-default',
-                  className,
-                ])}
+                className={cn(['focus:outline-none cursor-pointer', disabled && 'cursor-default'])}
                 onClick={changeShowContentHandler}
                 type={'button'}
               >
