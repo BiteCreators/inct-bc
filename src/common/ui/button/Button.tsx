@@ -2,6 +2,7 @@ import React, { ComponentProps } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Slot } from '@radix-ui/react-slot'
+
 type Props = {
   asChild?: boolean
   variant?: 'outline' | 'primary' | 'secondary' | 'text'
@@ -13,7 +14,7 @@ export const Button = ({ asChild, className, variant = 'primary', ...props }: Pr
   return (
     <Component
       className={cn(
-        'font-weight-600 w-auto py-1.5 px-4 rounded-sm text-md text-slate-50',
+        `font-weight-600 w-auto py-1.5 px-4 rounded-sm text-md text-slate-50`,
         'disabled:opacity-50',
         'focus:outline-primary-900 focus:outline-2 focus:outline',
         variant === 'primary' && [
