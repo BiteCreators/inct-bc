@@ -51,7 +51,7 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
             className={cn(
               'absolute top-0 right-0 p-2 rounded-full focus:outline-none',
               open ? 'text-primary-700' : 'text-light-100',
-              'hover:text-primary-700',
+              'global-hover:hover:text-primary-700',
               className
             )}
           >

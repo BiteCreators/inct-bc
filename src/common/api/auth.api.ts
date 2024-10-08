@@ -43,6 +43,10 @@ type RegistrationEmailResendingRequest = {
   baseUrl: string
   email: string
 }
+type GoogleAuthResponse = {
+  accessToken: string
+  email: string
+}
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
@@ -61,6 +65,13 @@ export const authApi = inctagramApi.injectEndpoints({
         },
         method: 'POST',
         url: `/v1/auth/password-recovery`,
+      }),
+    }),
+    googleAuth: builder.mutation<GoogleAuthResponse, { code: string }>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/google/login',
       }),
     }),
     login: builder.mutation<{ accessToken: string }, LoginRequest>({

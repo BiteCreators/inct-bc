@@ -46,11 +46,15 @@ export const UsingChildren: Story = {
   render: args => (
     <Dropdown {...args}>
       <div className={'p-2'}>
-        <div className={'flex items-center cursor-pointer p-2 hover:bg-dark-100 rounded'}>
+        <div
+          className={'flex items-center cursor-pointer p-2 global-hover:hover:bg-dark-100 rounded'}
+        >
           <Person className={'mr-2'} />
           <span>Custom Profile Settings</span>
         </div>
-        <div className={'flex items-center cursor-pointer p-2 hover:bg-dark-100 rounded'}>
+        <div
+          className={'flex items-center cursor-pointer p-2 global-hover:hover:bg-dark-100 rounded'}
+        >
           <PaperPlane className={'mr-2'} />
           <span>Custom Send Message</span>
         </div>

@@ -6,6 +6,7 @@ import { Typography } from '@/common/ui'
 import { motion } from 'framer-motion'
 
 type Props = {
+  className?: string
   duration?: number
   message?: string
   onClose?: () => void
@@ -14,6 +15,7 @@ type Props = {
 }
 
 export const Alert = ({
+  className,
   duration = 5000,
   message,
   onClose,
@@ -62,7 +64,8 @@ export const Alert = ({
       animate={'visible'}
       className={cn(
         'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white z-250',
-        purpose === 'toast' && 'fixed bottom-4 left-1/4',
+        className,
+        purpose === 'toast' && className && 'fixed bottom-4 left-1/4',
         alertStyles[type]
       )}
       exit={'exit'}

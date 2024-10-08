@@ -1,9 +1,8 @@
 import React from 'react'
 
 import { ArrowBackOutline } from '@/common/assets/icons/components'
-import { PageLayout } from '@/common/components/page-layout/PageLayout'
-import Typography from '@/common/components/typography/Typography'
-import { useScopedTranslation } from '@/common/utils/hooks/useTranslation'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { PageLayout, Typography } from '@/common/ui'
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
 import Link from 'next/link'
