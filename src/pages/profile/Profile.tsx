@@ -26,9 +26,9 @@ export default function Profile() {
 
   const onSubmit = async () => {
     try {
-      await editProfile(profileData).then(res => {
-        console.log('editProfileSuccess', res)
-      })
+      const res = await editProfile(profileData)
+
+      console.log('editProfileSuccess', res)
     } catch (error) {
       console.log('editProfileError', error)
     }
@@ -40,9 +40,9 @@ export default function Profile() {
 
   const handleDeleteProfile = async () => {
     try {
-      await deleteProfile().then(res => {
-        console.log('deleteProfileSuccess', res)
-      })
+      const res = await deleteProfile()
+
+      console.log('deleteProfileSuccess', res)
     } catch (error) {
       console.log('deleteProfileError', error)
     }
@@ -55,11 +55,12 @@ export default function Profile() {
 
   const handleUploadImage = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
     try {
       if (file) {
-        await setAvatarProfile({ file }).then(res => {
-          console.log('uploadImageSuccess', res)
-        })
+        const res = await setAvatarProfile({ file })
+
+        console.log('uploadImageSuccess', res)
       }
     } catch (error) {
       console.error('uploadImageError', error)
@@ -72,9 +73,9 @@ export default function Profile() {
 
   const handleDeleteAvatarProfile = async () => {
     try {
-      await deleteAvatarProfile().then(res => {
-        console.log('deleteAvatarProfileSuccess', res)
-      })
+      const res = await deleteAvatarProfile()
+
+      console.log('deleteAvatarProfileSuccess', res)
     } catch (error) {
       console.log('deleteAvatarProfileError', error)
     }
@@ -86,9 +87,9 @@ export default function Profile() {
 
   const handleDeleteProfileForProfile = async () => {
     try {
-      await deleteProfileForId({ id: 1072 }).then(res => {
-        console.log('deleteProfileForIdSuccess', res)
-      })
+      const res = await deleteProfileForId({ id: 1072 })
+
+      console.log('deleteProfileForIdSuccess', res)
     } catch (error) {
       console.log('deleteProfileForIdError', error)
     }
