@@ -22,7 +22,7 @@ export const Avatar = () => {
       <Button className={'w-full'} onClick={UploadImage} variant={'outline'}>
         add
       </Button>
-      <input className={'hidden'} ref={fileInputRef} type={'file'} />
+      <input accept={'.jpg, .jpeg, .png'} className={'hidden'} ref={fileInputRef} type={'file'} />
     </div>
   )
 }
