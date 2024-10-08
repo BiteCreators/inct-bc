@@ -8,9 +8,9 @@ export const ProfileManagementTabs = () => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('general-information')
 
   return (
-    <TabsBase
+    <TabsBase<TabValues>
       ariaLabel={'profile management tabs'}
-      onClick={(value: any) => setSelectedTab(value)}
+      onClick={value => setSelectedTab(value)}
       tabsData={[
         { buttonName: 'General information', content: <div>1</div>, id: 'general-information' },
         { buttonName: 'Devices', content: <div>2</div>, id: 'devices' },
