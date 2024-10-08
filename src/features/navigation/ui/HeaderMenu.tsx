@@ -1,3 +1,5 @@
+import { useCookies } from 'react-cookie'
+
 import { authApi } from '@/common/api/auth.api'
 import {
   BookmarkOutline,
@@ -20,6 +22,7 @@ export const HeaderMenu = () => {
   const tAuth = useScopedTranslation('Auth')
   const tNav = useScopedTranslation('Navigation')
 
+  const [cookies, setCookie, removeCookie] = useCookies(['accessToken'])
   const dispatch = useAppDispatch()
   const [logout] = authApi.useLogoutMutation()
 
@@ -29,12 +32,9 @@ export const HeaderMenu = () => {
 
   const handleLogout = async () => {
     try {
-      await logout()
-        .unwrap()
-        .then(() => {
-          document.cookie = `accessToken=;expires=${new Date(0)}`
-          dispatch(authSlice.actions.setAccessToken(null))
-        })
+      await logout().unwrap()
+      removeCookie('accessToken', { path: '/' })
+      dispatch(authSlice.actions.setAccessToken(null))
     } catch (err) {
       console.log('Logout error', err)
     }
@@ -44,22 +44,18 @@ export const HeaderMenu = () => {
     {
       icon: <SettingsOutline />,
       label: tNav.profileSettings,
-      onClick: async () => {
-        await router.push('/profile-settings')
-      },
+      onClick: () => router.push('/profile-settings'),
     },
     {
       icon: <TrendingUp />,
       label: tNav.statistics,
-      onClick: async () => {
-        await router.push('/statistics')
-      },
+      onClick: () => router.push('/statistics'),
     },
     {
       icon: <BookmarkOutline />,
       label: tNav.favorites,
-      onClick: async () => {
-        await router.push('/favorites')
+      onClick: () => {
+        router.push('/favorites')
       },
     },
     {
@@ -73,28 +69,20 @@ export const HeaderMenu = () => {
     {
       icon: <PersonOutline />,
       label: tAuth.signIn,
-      onClick: async () => {
-        try {
-          await router.push('/auth/sign-in')
-        } catch (err) {
-          console.log('Sign In error', err)
-        }
-      },
+      onClick: () => router.push('/auth/sign-in'),
     },
     {
       icon: <PlusSquareOutline />,
       label: tAuth.signUp,
-      onClick: async () => {
-        try {
-          await router.push('/auth/sign-up')
-        } catch (err) {
-          console.log('Sign Up error', err)
-        }
-      },
+      onClick: () => router.push('/auth/sign-up'),
     },
   ]
 
   const items = isAuth ? loggedInItems : loggedOutItems
 
-  return <Dropdown className={'ml-6 -mt-0.5'} items={items} />
+  return (
+    <nav>
+      <Dropdown className={'ml-6 -mt-0.5'} items={items} />
+    </nav>
+  )
 }
