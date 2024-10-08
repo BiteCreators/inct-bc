@@ -1,6 +1,3 @@
-import { useCookies } from 'react-cookie'
-
-import { authApi } from '@/common/api/auth.api'
 import {
   BookmarkOutline,
   LogOut,
@@ -9,12 +6,13 @@ import {
   SettingsOutline,
   TrendingUp,
 } from '@/common/assets/icons/components'
-import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Dropdown } from '@/common/ui'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 import { authSlice } from '@/features/auth/model/auth.slice'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router' // импортируем хук
 
 export const HeaderMenu = () => {
   const router = useRouter()
@@ -22,22 +20,10 @@ export const HeaderMenu = () => {
   const tAuth = useScopedTranslation('Auth')
   const tNav = useScopedTranslation('Navigation')
 
-  const [cookies, setCookie, removeCookie] = useCookies(['accessToken'])
-  const dispatch = useAppDispatch()
-  const [logout] = authApi.useLogoutMutation()
+  const { handleLogout } = useLogout()
 
   if (router.pathname.startsWith('/auth') && router.pathname !== '/auth') {
     return null
-  }
-
-  const handleLogout = async () => {
-    try {
-      await logout().unwrap()
-      removeCookie('accessToken', { path: '/' })
-      dispatch(authSlice.actions.setAccessToken(null))
-    } catch (err) {
-      console.log('Logout error', err)
-    }
   }
 
   const loggedInItems: DropdownItem[] = [
@@ -54,9 +40,7 @@ export const HeaderMenu = () => {
     {
       icon: <BookmarkOutline />,
       label: tNav.favorites,
-      onClick: () => {
-        router.push('/favorites')
-      },
+      onClick: () => router.push('/favorites'),
     },
     {
       icon: <LogOut />,
