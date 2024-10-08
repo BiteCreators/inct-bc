@@ -1,5 +1,3 @@
-import { useCookies } from 'react-cookie'
-
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
 import { SignInButton, SignUpButton } from '@/features/auth'
