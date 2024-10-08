@@ -12,10 +12,10 @@ export const ProfileManagementTabs = () => {
       ariaLabel={'profile management tabs'}
       onClick={value => setSelectedTab(value)}
       tabsData={[
-        { buttonName: 'General information', content: <div>1</div>, id: 'general-information' },
-        { buttonName: 'Devices', content: <div>2</div>, id: 'devices' },
-        { buttonName: 'Account management', content: <div>3</div>, id: 'account-management' },
-        { buttonName: 'My payments', content: <div>4</div>, id: 'my-payments' },
+        { content: <div>1</div>, label: 'General information', value: 'general-information' },
+        { content: <div>2</div>, label: 'Devices', value: 'devices' },
+        { content: <div>3</div>, label: 'Account management', value: 'account-management' },
+        { content: <div>4</div>, label: 'My payments', value: 'my-payments' },
       ]}
       value={selectedTab}
     />

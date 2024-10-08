@@ -12,9 +12,9 @@ type Props<T extends string> = {
 }
 
 type TabsData<T extends string> = {
-  buttonName: string
   content: ReactNode
-  id: T
+  label: string
+  value: T
 }
 
 export const TabsBase = <T extends string = string>({
@@ -48,18 +48,18 @@ export const TabsBase = <T extends string = string>({
               'data-[state=active]:after:-z-10'
             )}
             disabled={disabled}
-            key={tab.id}
-            value={tab.id}
+            key={tab.value}
+            value={tab.value}
           >
-            {tab.buttonName}
+            {tab.label}
           </Tabs.Trigger>
         ))}
       </Tabs.List>
       {tabsData.map(tab => (
         <Tabs.Content
           className={cn('p-4 transition-opacity duration-300 ease-in-out')}
-          key={tab.id}
-          value={tab.id}
+          key={tab.value}
+          value={tab.value}
         >
           {tab.content}
         </Tabs.Content>
