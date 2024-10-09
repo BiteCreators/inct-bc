@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
-import ReactCrop, { Crop, centerCrop, makeAspectCrop } from 'react-image-crop'
+import ReactCrop, { Crop, centerCrop, convertToPixelCrop, makeAspectCrop } from 'react-image-crop'
 
 import { Avatar as AvatarC, Button, Modal } from '@/common/ui'
+import setCanvasPreview from '@/common/ui/avatar/setCanvasPreview'
 
 import 'react-image-crop/dist/ReactCrop.css'
 
@@ -9,9 +10,17 @@ export const Avatar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [imageUrl, setImageUrl] = useState<null | string>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const imgRef = useRef<HTMLImageElement | null>(null)
+  const previewImgRef = useRef<HTMLCanvasElement | null>(null)
   const [error, setError] = useState('')
 
-  const [crop, setCrop] = useState<Crop>()
+  const [crop, setCrop] = useState<Crop>({
+    height: 50,
+    unit: '%', // Can be 'px' or '%'
+    width: 50,
+    x: 25,
+    y: 25,
+  })
 
   const onSelectFile = (e: any) => {
     const file = e.target.files?.[0]
@@ -22,10 +31,25 @@ export const Avatar = () => {
     const reader = new FileReader()
 
     reader.addEventListener('load', () => {
+      const imageElement = new Image()
       const url = reader.result?.toString() || ''
 
+      imageElement.src = url
+
+      imageElement.addEventListener('load', (e: any) => {
+        if (error) {
+          setError('')
+        }
+        const { naturalHeigth, naturalWidth } = e.currentTarget
+
+        if (naturalHeigth < 150 || naturalWidth < 150) {
+          setError('image must be at least 100')
+
+          return setImageUrl('')
+        }
+      })
+
       setImageUrl(url)
-      setIsOpen(true)
     })
     reader.readAsDataURL(file)
   }
@@ -35,13 +59,13 @@ export const Avatar = () => {
     }
   }
   const onImageLoad = (e: any) => {
-    const { height, naturalHeigth, naturalWidth, width } = e.currentTarget
+    const { height, width } = e.currentTarget
 
     const crop = centerCrop(
       makeAspectCrop(
         {
-          unit: 'px',
-          width: 200,
+          unit: '%',
+          width: (150 / width) * 100,
         },
         1,
         width,
@@ -70,6 +94,7 @@ export const Avatar = () => {
           onOpenChange={setIsOpen}
           title={'Add profile photo'}
         >
+          {error}
           <div className={'w-full items-end'}>
             {imageUrl && (
               <div className={'w-[444px] flex flex-col items-end'}>
@@ -79,12 +104,32 @@ export const Avatar = () => {
                   className={'w-full flex max-h-[600px]'}
                   crop={crop}
                   keepSelection
-                  minWidth={200}
                   onChange={c => setCrop(c)}
                 >
-                  <img alt={'Selected'} className={'m-auto'} onLoad={onImageLoad} src={imageUrl} />
+                  <img
+                    alt={'Selected'}
+                    className={'m-auto object-contain'}
+                    onLoad={onImageLoad}
+                    ref={imgRef}
+                    src={imageUrl}
+                  />
                 </ReactCrop>
-                <Button className={'mt-6 mb-4 px-7'}>Save</Button>
+                <Button
+                  className={'mt-6 mb-4 px-7'}
+                  onClick={() => {
+                    if (imgRef.current && previewImgRef.current) {
+                      const pixelCrop = convertToPixelCrop(
+                        crop,
+                        imgRef.current.width,
+                        imgRef.current.height
+                      )
+
+                      setCanvasPreview(imgRef.current, previewImgRef.current, pixelCrop)
+                    }
+                  }}
+                >
+                  Save
+                </Button>
               </div>
             )}
             {!imageUrl && (
@@ -103,6 +148,9 @@ export const Avatar = () => {
             ref={fileInputRef}
             type={'file'}
           />
+          {crop && (
+            <canvas className={'border hidden object-contain w-36 h-36'} ref={previewImgRef} />
+          )}
         </Modal>
       )}
     </div>
