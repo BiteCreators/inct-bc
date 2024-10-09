@@ -26,42 +26,42 @@ type Profile = {
 }
 
 export const profileApi = inctagramApi.injectEndpoints({
-  endpoints: bulder => ({
-    deleteAvatarProfile: bulder.mutation<void, void>({
+  endpoints: builder => ({
+    deleteAvatarProfile: builder.mutation<void, void>({
       query: body => ({
         body,
         method: 'DELETE',
         url: 'v1/users/profile/avatar',
       }),
     }),
-    deleteProfile: bulder.mutation<void, void>({
+    deleteProfile: builder.mutation<void, void>({
       query: body => ({
         body,
         method: 'DELETE',
         url: 'v1/users/profile',
       }),
     }),
-    deleteProfileForId: bulder.mutation<void, { id: number }>({
+    deleteProfileForId: builder.mutation<void, { id: number }>({
       query: ({ id }) => ({
         method: 'DELETE',
         url: `v1/users/profile/${id}`,
       }),
     }),
-    editProfile: bulder.mutation<void, Profile>({
+    editProfile: builder.mutation<void, Profile>({
       query: body => ({
         body,
         method: 'PUT',
         url: 'v1/users/profile',
       }),
     }),
-    getProfile: bulder.query<Profile & ProfileResponse, void>({
+    getProfile: builder.query<Profile & ProfileResponse, void>({
       query: body => ({
         body,
         method: 'GET',
         url: 'v1/users/profile',
       }),
     }),
-    setAvatarProfile: bulder.mutation<Avatars[], { file: File }>({
+    setAvatarProfile: builder.mutation<Avatars[], { file: File }>({
       query: ({ file }) => {
         const formData = new FormData()
 
