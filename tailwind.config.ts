@@ -77,6 +77,14 @@ const config: Config = {
         weight700: '700',
       },
     },
+    screens: {
+      'global-hover': { raw: '(hover: hover)' },
+      lg: '976px',
+      md: '768px',
+      'no-hover': { raw: '(hover: none)' },
+      sm: '480px',
+      xl: '1440px',
+    },
   },
 }
 

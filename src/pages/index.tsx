@@ -1,14 +1,11 @@
 import React from 'react'
 
-import { useGetAllPostsTestQuery } from '@/app/inct.api'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
-  const { data } = useGetAllPostsTestQuery()
-
   return (
     <div className={'flex gap-4 flex-col'}>
       <h1>StartPage</h1>
@@ -17,31 +14,29 @@ const Home = () => {
       </Link>
       <Link href={'/profile'}>Profile</Link>
       <div className={'text-[50px]'}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem beatae eos, rerum omnis
-        consectetur ab velit accusantium nostrum adipisci expedita, alias unde laboriosam eligendi,
-        dicta odit maiores exercitationem optio modi. Doloribus voluptas at tempora vitae hic
-        excepturi rerum magnam facere, numquam omnis sint beatae nisi a, consequuntur odio non
-        molestiae voluptatibus harum sed repellat sit! Ipsam provident odio qui sit! Molestias fuga
-        magni suscipit porro quo cum quos? Ducimus accusantium maiores labore, tempora expedita quos
-        explicabo sunt velit voluptatum iure consequatur. Magni nesciunt doloribus sapiente minima
-        laudantium placeat odit veniam. Nobis veritatis nemo voluptas ipsam. Modi, maxime voluptatum
-        hic, rerum nihil natus beatae eveniet nisi delectus nobis sapiente veritatis quis ab officia
-        perspiciatis. Illo facere deserunt maiores, delectus obcaecati nihil? A tempora odit dicta
-        necessitatibus doloremque dolores qui eveniet explicabo molestias quisquam, suscipit rerum
-        delectus expedita cupiditate inventore? Repudiandae dicta reprehenderit velit dolorum quam
-        accusamus ut. Velit, nostrum? Fugiat, magnam? Exercitationem ea recusandae consectetur animi
-        obcaecati eligendi similique necessitatibus rem porro labore quas provident non, nostrum
-        velit, ipsam ipsum veritatis laboriosam molestias quam cum eos autem incidunt. Odit, quis
-        suscipit. Cumque optio voluptatem vitae in doloremque voluptatum animi fugiat inventore
-        culpa magnam, corrupti impedit a possimus expedita voluptate porro totam sapiente quae, illo
-        aspernatur! Laborum a mollitia saepe vitae totam. Maiores nulla repellat perspiciatis omnis
-        hic quisquam autem animi. Minus tenetur fugit error delectus eos. Pariatur non eum, aliquam
-        sapiente ab eos perferendis debitis hic voluptatum cupiditate eligendi accusantium ipsum.
-        Labore quis soluta qui dolore exercitationem, id sunt tempore ea deserunt. Sapiente, fuga!
-        Laborum, vel provident a delectus placeat, non eius excepturi velit accusantium recusandae
-        nemo cum magnam magni repudiandae. Dolorum voluptas in excepturi cupiditate sequi totam
-        consectetur. Eum iste numquam quibusdam exercitationem officia iure soluta, modi vel ipsam
-        sapiente quas voluptatem odio omnis inventore veritatis, eius quidem, vitae quis.
+        Aegon Targārio Ānogār Luqisūti Daor rhaenagon iā tubis jēdi. Yn ziry iāndes korona iā
+        Qēlioroz brōzi kesrio tolī ēza lēda hāre ossȳngas, se vēzos tubis luqagon daor ēza
+        mazvēlzir, ēdrus Dorne kostōro ezīmagon. Любимая страта многих цыган — бахнуть честных людей
+        на бабки под тавером в мидгейме. Цыганки качнули хай скилл на гипноз, так что одного лука с
+        ними хватает, чтобы ты сразу начал лить в чат и делать всё, на что они байтят. Часто вардят
+        они с лоу-лвл керри, которые не просто афкашат рядом, а заняты фармом карманов жертвы. Пока
+        мейн саппорт крутит брейнсап и держит на цепочке гипнозом — керри чекают карманы на шмот, и
+        если там есть что-то норм, то засовывают это в инвентарь своей смекалистой цыганской пачки.
+        Qilūbri gevives luqagon lo va doron ēza iā Āegon issa ziry tolmon issa ābra. Luqagon hen
+        mazves lo azantys valzir, ēdrus lo ēza daor bē ipradagon emāqi ivēza, tolmon. Ziry ēza daor
+        ūndan emaragon ziry ēza zōbrar. Rybis zīrī dāezma dorinagon ēza Āegono ēdrus tolī lo
+        ēzīmagon, vēzos rūvario sēn emagon. Lo ziry ēza daor. Tolī ēza mazvēlzir ēza Āegono īssāt.
+        Sūlos mazves lo ēza udagon iā Korona īlva Rōzda, ēzi ēza jāton iā zābravo ēza lentos mērios
+        ziry issa rūs emāzmo. Valyria jemēlos hen lentys ēza vēzos pojaliks zōbrar. Skōra zolūpty
+        jelmio ānogri ēzos belmur mōrī īlva iemnōti, va naejot ēza bē, iēdro ēza dorinazmor.
+        Targārio luoty ēza daor ēnykso lo sūndas tolmiot, se rybis belmoti mazvēlzir ēza zūgagon
+        Aenaro bē Dāreksio Vezof tōna va jāre. Yn tolvys ēza daor. Tāba rūho Dēnys iā rōvalāksōna
+        ēza jāton, se ēzos ōrēssys Māzis va Vestrasī, vāedarzies zōbrar. Hen ābrazma tolvūpas ēza
+        darilar hen sȳndror nykeēza. Dāreksio Vezof mēre vēzos bē tubis ānogrīs ēza biarzes dorios
+        hen Valyria. Ziry ēza syt pōjes hen Iynkē Skōriot lo ēza rytsos hen Lōgrion. Targārio
+        tolminar iā vēzos lo ēza rīhiltary Velarion hen Driftmark (mēre vēzos zōbrī Valyria) ēza
+        pāplan, rūñagon iā daorār hārezī kīdaks. Velarion iā kēly ānogri zōbrī Celtigar hen Kogarō
+        Ānogrī ēza bantar iā sīmon Uzvestrī morghon hen Sūdy ēza Targārio drakari ēdrus iā sōvior.
       </div>
     </div>
   )
