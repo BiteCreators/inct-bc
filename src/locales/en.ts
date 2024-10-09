@@ -16,6 +16,7 @@ export const en = {
     home: 'Home',
     messenger: 'Messenger',
     myProfile: 'My Profile',
+    profileSettings: 'Profile Settings',
     search: 'Search',
     statistics: 'Statistics',
   },
