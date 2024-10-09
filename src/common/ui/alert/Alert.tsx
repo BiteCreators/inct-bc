@@ -72,12 +72,12 @@ export const Alert = ({
       initial={'hidden'}
       variants={variants}
     >
-      <div className={'flex'}>
-        <Typography className={'min-w-72'} variant={'medium-text'}>
+      <div className={'flex justify-between items-center'}>
+        <Typography className={'min-w-64'} variant={'medium-text'}>
           {message}
         </Typography>
         {purpose === 'toast' && (
-          <button className={'text-xl focus:outline-none ml-4'} onClick={onClose}>
+          <button className={'text-xl focus:outline-none ml-2'} onClick={onClose}>
             <Close viewBox={'0 -1 24 24'} />
           </button>
         )}

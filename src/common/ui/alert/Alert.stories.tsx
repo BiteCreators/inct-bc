@@ -16,7 +16,6 @@ type Story = StoryObj<typeof Alert>
 export const Success: Story = {
   args: {
     message: 'Your settings are saved',
-    onClose: () => {},
     purpose: 'alert',
     type: 'success',
   },
@@ -25,7 +24,6 @@ export const Success: Story = {
 export const Error: Story = {
   args: {
     message: 'Error! Server is not available',
-    onClose: () => {},
     purpose: 'alert',
     type: 'error',
   },
@@ -34,7 +32,6 @@ export const Error: Story = {
 export const Info: Story = {
   args: {
     message: 'Information: Changes have been applied',
-    onClose: () => {},
     purpose: 'alert',
     type: 'info',
   },
