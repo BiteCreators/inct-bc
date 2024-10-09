@@ -18,10 +18,9 @@ export const useLogout = () => {
       removeCookie('accessToken', { path: '/' })
       dispatch(authSlice.actions.setAccessToken(null))
     } catch (error) {
-      //todo: fix
       handleApiError({
         error,
-        setApiError: msg => console.log('API Error:', msg),
+        setApiError: () => console.log('log out error: ' + error),
       })
     }
   }
