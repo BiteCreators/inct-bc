@@ -11,7 +11,7 @@ export const SignInButton = ({ variant = 'text' }: Props) => {
 
   return (
     <>
-      <Button asChild className={'mx-auto mt-1'} variant={variant}>
+      <Button asChild className={'mx-auto'} variant={variant}>
         <Link className={'text-center'} href={'/auth/sign-in'}>
           {t.signIn}
         </Link>

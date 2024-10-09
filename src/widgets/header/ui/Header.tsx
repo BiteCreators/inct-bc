@@ -34,7 +34,7 @@ export const Header = () => {
           <HeaderMenu />
         </div>
         {!accessToken && (
-          <div className={'gap-6 hidden md:flex'}>
+          <div className={'gap-6 hidden global-hover:md:flex'}>
             <SignInButton /> <SignUpButton />
           </div>
         )}
