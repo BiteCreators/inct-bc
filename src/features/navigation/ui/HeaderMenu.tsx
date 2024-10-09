@@ -12,7 +12,7 @@ import { Dropdown } from '@/common/ui'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 import { authSlice } from '@/features/auth/model/auth.slice'
-import { useRouter } from 'next/router' // импортируем хук
+import { useRouter } from 'next/router'
 
 export const HeaderMenu = () => {
   const router = useRouter()
