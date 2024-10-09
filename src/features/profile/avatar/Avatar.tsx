@@ -9,14 +9,9 @@ export const Avatar = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [isOpen, setIsOpen] = useState(false)
   const [imageUrl, setImageUrl] = useState<null | string>(null)
+  const [error, setError] = useState('')
 
-  const [crop, setCrop] = useState<Crop>({
-    height: 50,
-    unit: '%',
-    width: 50,
-    x: 25,
-    y: 25,
-  })
+  const [crop, setCrop] = useState<Crop>()
 
   const onSelectFile = (e: any) => {
     const file = e.target.files?.[0]
@@ -43,7 +38,7 @@ export const Avatar = () => {
     }
   }
   const onImageLoad = (e: any) => {
-    const { height, width } = e.currentTarget
+    const { height, naturalHeigth, naturalWidth, width } = e.currentTarget
 
     const crop = centerCrop(
       makeAspectCrop(
