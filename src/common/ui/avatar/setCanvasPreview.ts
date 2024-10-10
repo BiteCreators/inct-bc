@@ -38,7 +38,6 @@ const setCanvasPreview = (image: HTMLImageElement, canvas: HTMLCanvasElement, cr
     image.naturalWidth,
     image.naturalHeight
   )
-
   ctx.restore()
 }
 
