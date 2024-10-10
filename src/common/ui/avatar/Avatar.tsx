@@ -3,22 +3,22 @@ import Link from 'next/link'
 type Props = {
   alt?: string
   avatarURL: string
-  close?: boolean
   closeFunc?: () => void
   href?: string
   isNextLink?: boolean
   rel?: string
+  showClose?: boolean
   size: number
 }
 
 export const Avatar = ({
   alt = 'Avatar',
   avatarURL,
-  close = false,
   closeFunc,
   href,
   isNextLink = false,
   rel = '',
+  showClose = false,
   size,
 }: Props) => {
   const closeHandler = () => {
@@ -34,7 +34,7 @@ export const Avatar = ({
         src={avatarURL}
         style={{ height: `${size}px`, width: `${size}px` }}
       />
-      {close && (
+      {showClose && (
         <div
           className={
             'bg-danger-100 absolute rounded-full w-8 h-8 right-0 top-1/4 transform -translate-y-1/2'
