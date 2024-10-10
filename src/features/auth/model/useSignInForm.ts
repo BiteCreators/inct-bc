@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
-import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -32,7 +32,7 @@ export const useSignInForm = () => {
   })
   const [login, { error, isLoading }] = authApi.useLoginMutation()
   const dispatch = useAppDispatch()
-  const { handleApiError } = useHandleApiErorr('Auth')
+  const { handleApiError } = useHandleApiError('Auth')
   const [apiError, setApiError] = useState('')
 
   const onSubmit: SubmitHandler<SignInFormData> = async ({ email, password }) => {
