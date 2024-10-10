@@ -4,7 +4,7 @@ type Props = {
   alt?: string
   avatarURL?: string
   href: string
-  isNextLink: boolean
+  isNextLink?: boolean
   rel?: string
   size: number
 }

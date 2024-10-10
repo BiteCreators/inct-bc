@@ -47,6 +47,28 @@ export const en = {
     particularly when using applications.`,
     title: 'Privacy Policy',
   },
+  Profile: {
+    aboutMe: 'About Me',
+    citiesList: 'St. Petersburg, Moscow, Tver, Samara, Pskov',
+    city: 'City',
+    countriesList: 'Russia, Belarus, Ukraine, Georgia, Abkhazia',
+    country: 'Country',
+    dateOfBirth: 'Date of birth',
+    editProfileError: {
+      ageUser: 'A user under 13 cannot create a profile.PrivacyPolicy',
+      maxLengthAboutMe: 'Maximum length is 200 characters',
+      maxLengthName: 'Maximum length is 50 characters',
+      maxLengthUserName: 'Maximum length is 30 characters',
+      minLengthUserName: 'Minimum length is 6 characters',
+      requiredError: 'Field is required',
+    },
+    firstName: 'First name',
+    lastName: 'Last name',
+    saveChangesBtn: 'Save changes',
+    selectYourCity: 'Select your city',
+    selectYourCountry: 'Select your country',
+    userName: 'Username',
+  },
   TermsService: {
     text: `Welcome to the website, an online resource that helps you stay connected with your old and new friends. 
     The site is a network project that brings people together based on their places of study or work. The site is
