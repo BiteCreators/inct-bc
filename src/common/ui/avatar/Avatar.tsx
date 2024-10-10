@@ -23,7 +23,7 @@ export const Avatar = ({
 }: Props) => {
   const closeHandler = () => {
     if (closeFunc) {
-      closeFunc
+      closeFunc()
     }
   }
   const AvatarImage = (
