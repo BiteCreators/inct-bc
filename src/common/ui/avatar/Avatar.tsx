@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 type Props = {
   alt?: string
-  avatarURL?: string
-  href: string
+  avatarURL: string
+  href?: string
   isNextLink?: boolean
   rel?: string
   size: number
@@ -26,7 +26,7 @@ export const Avatar = ({
     />
   )
 
-  return isNextLink ? (
+  return isNextLink && href ? (
     <Link href={href} rel={rel}>
       {AvatarImage}
     </Link>
