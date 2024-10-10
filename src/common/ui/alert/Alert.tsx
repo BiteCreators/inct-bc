@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Close } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
@@ -7,21 +7,23 @@ import { motion } from 'framer-motion'
 
 type Props = {
   className?: string
+  closed?: boolean
   duration?: number
   message?: string
-  onClose?: () => void
   purpose?: 'alert' | 'toast'
   type: 'error' | 'info' | 'success'
 }
 
 export const Alert = ({
   className,
+  closed = false,
   duration = 5000,
   message,
-  onClose,
   purpose = 'toast',
   type = 'error',
 }: Props) => {
+  const [isVisible, setIsVisible] = useState(!closed)
+
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
     info: 'bg-primary-900 border-primary-500',
@@ -52,12 +54,20 @@ export const Alert = ({
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose?.()
-    }, duration)
+    if (closed) {
+      const timer = setTimeout(() => setIsVisible(false), duration)
 
-    return () => clearTimeout(timer)
-  }, [onClose, duration])
+      return () => clearTimeout(timer)
+    }
+  }, [duration, closed])
+
+  const handleClose = () => {
+    setIsVisible(false)
+  }
+
+  if (!isVisible) {
+    return null
+  }
 
   return (
     <motion.div
@@ -77,7 +87,7 @@ export const Alert = ({
           {message}
         </Typography>
         {purpose === 'toast' && (
-          <button className={'text-xl focus:outline-none ml-2'} onClick={onClose}>
+          <button className={'text-xl focus:outline-none ml-2'} onClick={handleClose}>
             <Close viewBox={'0 -1 24 24'} />
           </button>
         )}

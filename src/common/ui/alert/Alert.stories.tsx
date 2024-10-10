@@ -37,6 +37,15 @@ export const Info: Story = {
   },
 }
 
+export const Closed: Story = {
+  args: {
+    closed: true,
+    message: 'Information: Changes have been applied',
+    purpose: 'alert',
+    type: 'info',
+  },
+}
+
 export const ShowOnButtonClick: Story = {
   render: () => {
     const [showAlert, setShowAlert] = useState(false)
