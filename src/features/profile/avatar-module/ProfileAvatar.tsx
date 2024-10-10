@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Avatar, Button } from '@/common/ui'
 import { ModalAvatar } from '@/features/profile/avatar-module/ModalAvatar'
 
 import 'react-image-crop/dist/ReactCrop.css'
 
-export const AvatarModule = () => {
+export const ProfileAvatar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [avatarUrl, setAvatarUrl] = useState('')
 

@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { Crop, convertToPixelCrop } from 'react-image-crop'
 
-import { Button, Modal } from '@/common/ui'
+import { Image, ImageOutline } from '@/common/assets/icons/components'
+import { Alert, Button, Modal } from '@/common/ui'
 import setCanvasPreview from '@/common/ui/avatar/setCanvasPreview'
 import { CropImage } from '@/features/profile/avatar-module/CropImage'
 
@@ -38,7 +39,8 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
     const reader = new FileReader()
 
     reader.addEventListener('load', () => {
-      const imageElement = new Image()
+      const imageElement = document.createElement('img')
+
       const url = reader.result?.toString() || ''
 
       imageElement.src = url
@@ -47,9 +49,9 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
         if (error) {
           setError('')
         }
-        const { naturalHeigth, naturalWidth } = e.currentTarget
+        const { naturalHeight: naturalHeight, naturalWidth } = e.currentTarget
 
-        if (naturalHeigth < 150 || naturalWidth < 150) {
+        if (naturalHeight < 150 || naturalWidth < 150) {
           setError('image must be at least 100')
 
           return setImageUrl('')
@@ -84,7 +86,9 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
       onOpenChange={setIsOpen}
       title={'Add profile photo'}
     >
-      {error}
+      {error && (
+        <Alert message={error} onClose={() => setError('')} purpose={'toast'} type={'error'} />
+      )}
       <div className={'w-full items-end'}>
         {imageUrl && (
           <CropImage
@@ -96,7 +100,9 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
         )}
         {!imageUrl && (
           <div className={'w-full flex flex-col justify-center items-center gap-5'}>
-            <div className={'bg-dark-700 w-56 h-56 mt-7'}></div>
+            <div className={'bg-dark-700 w-56 h-56 mt-7 flex justify-center items-center'}>
+              <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
+            </div>
             <Button className={'w-56 bottom-0 mt-6 mb-16'} onClick={UploadImage}>
               Select from Computer
             </Button>
