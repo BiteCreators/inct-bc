@@ -78,10 +78,15 @@ export const Avatar = () => {
 
     setCrop(centeredCrop)
   }
+  const avatarUrl = useRef('')
+  const updateAvatar = (imgSrc: any) => {
+    console.log(imgSrc)
+    avatarUrl.current = imgSrc
+  }
 
   return (
     <div className={'bg-dark-700 w-1/5 flex flex-col items-center gap-5 p-2'}>
-      <AvatarC href={''} isNextLink={false} size={200} />
+      <AvatarC href={avatarUrl.current} isNextLink={false} size={200} />
       <Button className={'w-full'} onClick={() => setIsOpen(true)} variant={'outline'}>
         Add a Profile Photo
       </Button>
@@ -126,6 +131,10 @@ export const Avatar = () => {
 
                       setCanvasPreview(imgRef.current, previewImgRef.current, pixelCrop)
                     }
+                    const dataUrl = previewImgRef.current?.toDataURL()
+
+                    updateAvatar(dataUrl)
+                    setIsOpen(false)
                   }}
                 >
                   Save
@@ -148,9 +157,7 @@ export const Avatar = () => {
             ref={fileInputRef}
             type={'file'}
           />
-          {crop && (
-            <canvas className={'border hidden object-contain w-36 h-36'} ref={previewImgRef} />
-          )}
+          {crop && <canvas className={'border object-contain w-36 h-36'} ref={previewImgRef} />}
         </Modal>
       )}
     </div>
