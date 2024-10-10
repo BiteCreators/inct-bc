@@ -16,7 +16,6 @@ type Story = StoryObj<typeof Alert>
 export const Success: Story = {
   args: {
     canClose: true,
-    closed: true,
     message: 'Your settings are saved',
     purpose: 'alert',
     type: 'success',
@@ -41,11 +40,10 @@ export const Info: Story = {
   },
 }
 
-export const Closed: Story = {
+export const NotAutoClosing: Story = {
   args: {
     canClose: false,
-    closed: true,
-    message: 'Information: Changes have been applied',
+    message: 'Close me',
     purpose: 'alert',
     type: 'info',
   },
@@ -71,7 +69,7 @@ export const ShowOnButtonClick: Story = {
   },
 }
 
-export const Toast: Story = {
+export const Toasts: Story = {
   render: () => {
     const [showAlert, setShowAlert] = useState(false)
 
@@ -81,7 +79,15 @@ export const Toast: Story = {
           Toast
         </Button>
         {showAlert && (
-          <Alert canClose message={'This is really toast.'} purpose={'toast'} type={'error'} />
+          <>
+            <Alert message={'This is really toast.'} purpose={'toast'} type={'error'} />
+            <Alert
+              canClose={false}
+              message={'This is really closed toast.'}
+              purpose={'toast'}
+              type={'error'}
+            />
+          </>
         )}
       </div>
     )

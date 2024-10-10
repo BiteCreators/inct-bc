@@ -8,9 +8,9 @@ import { motion } from 'framer-motion'
 type Props = {
   canClose?: boolean
   className?: string
-  closed?: boolean
   duration?: number
   message?: string
+  onClose?: () => void
   purpose?: 'alert' | 'toast'
   type: 'error' | 'info' | 'success'
 }
@@ -20,10 +20,11 @@ export const Alert = ({
   className,
   duration = 5000,
   message,
+  onClose,
   purpose = 'toast',
   type = 'error',
 }: Props) => {
-  const [isVisible, setIsVisible] = useState(!closed)
+  const [isVisible, setIsVisible] = useState(true)
 
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
@@ -55,17 +56,23 @@ export const Alert = ({
   }
 
   useEffect(() => {
-    if (closed || !canClose) {
+    if (!canClose) {
       return
     }
 
-    const timer = setTimeout(() => setIsVisible(false), duration)
+    const timer = setTimeout(() => {
+      setIsVisible(false)
+      onClose?.()
+    }, duration)
 
     return () => clearTimeout(timer)
-  }, [duration, closed, canClose])
+  }, [duration, canClose, onClose])
 
-  const handleClose = () => {
+  const onCloseHandler = () => {
     setIsVisible(false)
+    if (onClose) {
+      onClose()
+    }
   }
 
   if (!isVisible) {
@@ -76,21 +83,23 @@ export const Alert = ({
     <motion.div
       animate={'visible'}
       className={cn(
-        'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white z-250',
+        'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white',
         className,
-        purpose === 'toast' && className && 'fixed bottom-4 left-1/4',
+        purpose === 'toast' && 'mb-3',
+        purpose === 'alert' &&
+          'fixed md:bottom-4 bottom-[61px] md:left-[173px] left-5 right-5 min-w-72 md:max-w-[420px] max-w-[350px]',
         alertStyles[type]
       )}
       exit={'exit'}
       initial={'hidden'}
       variants={variants}
     >
-      <div className={'flex justify-between items-center'}>
-        <Typography className={'min-w-64'} variant={'medium-text'}>
+      <div className={cn(['flex justify-between items-center z-250'])}>
+        <Typography className={'whitespace-normal'} variant={'medium-text'}>
           {message}
         </Typography>
         {!canClose && (
-          <button className={'text-xl focus:outline-none ml-2'} onClick={handleClose}>
+          <button className={'text-xl focus:outline-none ml-2'} onClick={onCloseHandler}>
             <Close viewBox={'0 -1 24 24'} />
           </button>
         )}
