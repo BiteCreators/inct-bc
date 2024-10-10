@@ -6,6 +6,7 @@ import { Typography } from '@/common/ui'
 import { motion } from 'framer-motion'
 
 type Props = {
+  canClose?: boolean
   className?: string
   closed?: boolean
   duration?: number
@@ -15,8 +16,8 @@ type Props = {
 }
 
 export const Alert = ({
+  canClose = true,
   className,
-  closed = false,
   duration = 5000,
   message,
   purpose = 'toast',
@@ -54,12 +55,14 @@ export const Alert = ({
   }
 
   useEffect(() => {
-    if (closed) {
-      const timer = setTimeout(() => setIsVisible(false), duration)
-
-      return () => clearTimeout(timer)
+    if (closed || !canClose) {
+      return
     }
-  }, [duration, closed])
+
+    const timer = setTimeout(() => setIsVisible(false), duration)
+
+    return () => clearTimeout(timer)
+  }, [duration, closed, canClose])
 
   const handleClose = () => {
     setIsVisible(false)
@@ -86,7 +89,7 @@ export const Alert = ({
         <Typography className={'min-w-64'} variant={'medium-text'}>
           {message}
         </Typography>
-        {purpose === 'toast' && (
+        {!canClose && (
           <button className={'text-xl focus:outline-none ml-2'} onClick={handleClose}>
             <Close viewBox={'0 -1 24 24'} />
           </button>

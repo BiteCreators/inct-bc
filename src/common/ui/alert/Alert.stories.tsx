@@ -15,6 +15,8 @@ type Story = StoryObj<typeof Alert>
 
 export const Success: Story = {
   args: {
+    canClose: true,
+    closed: true,
     message: 'Your settings are saved',
     purpose: 'alert',
     type: 'success',
@@ -23,6 +25,7 @@ export const Success: Story = {
 
 export const Error: Story = {
   args: {
+    canClose: true,
     message: 'Error! Server is not available',
     purpose: 'alert',
     type: 'error',
@@ -31,6 +34,7 @@ export const Error: Story = {
 
 export const Info: Story = {
   args: {
+    canClose: true,
     message: 'Information: Changes have been applied',
     purpose: 'alert',
     type: 'info',
@@ -39,6 +43,7 @@ export const Info: Story = {
 
 export const Closed: Story = {
   args: {
+    canClose: false,
     closed: true,
     message: 'Information: Changes have been applied',
     purpose: 'alert',
@@ -55,8 +60,8 @@ export const ShowOnButtonClick: Story = {
         <Button onClick={() => setShowAlert(!showAlert)}>Alert</Button>
         {showAlert && (
           <Alert
+            canClose={false}
             message={'This is an alert triggered by a button'}
-            onClose={() => setShowAlert(false)}
             purpose={'alert'}
             type={'error'}
           />
@@ -76,12 +81,7 @@ export const Toast: Story = {
           Toast
         </Button>
         {showAlert && (
-          <Alert
-            message={'This is really toast.'}
-            onClose={() => setShowAlert(false)}
-            purpose={'toast'}
-            type={'error'}
-          />
+          <Alert canClose message={'This is really toast.'} purpose={'toast'} type={'error'} />
         )}
       </div>
     )
