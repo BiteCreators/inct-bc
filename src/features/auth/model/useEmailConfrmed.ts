@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { authApi } from '@/common/api/auth.api'
-import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { useSearchParams } from 'next/navigation'
 
@@ -18,7 +18,7 @@ export const useEmailConfirmed = () => {
   const [confirmRegistration] = authApi.useRegistrationConfirmationMutation()
   const [resendLink, { isLoading: isResendLinkLoading }] =
     authApi.useRegistrationEmailResendingMutation()
-  const { handleApiError } = useHandleApiErorr('Auth')
+  const { handleApiError } = useHandleApiError('Auth')
 
   useEffect(() => {
     const sendConfirmationCode = async () => {

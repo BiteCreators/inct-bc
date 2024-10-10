@@ -1,29 +1,12 @@
-import { authApi } from '@/common/api/auth.api'
 import { LogOut } from '@/common/assets/icons/components'
-import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { cn } from '@/common/lib/utils/cn'
-
-import { authSlice } from '../model/auth.slice'
+import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 
 export const LogoutButton = () => {
   const t = useScopedTranslation('Auth')
 
-  const [logout] = authApi.useLogoutMutation()
-  const dispatch = useAppDispatch()
-
-  const handleLogout = async () => {
-    try {
-      await logout()
-        .unwrap()
-        .then(res => {
-          document.cookie = `accessToken=;expires=${new Date(0)}`
-          dispatch(authSlice.actions.setAccessToken(null))
-        })
-    } catch (err) {
-      console.log('logout error', err)
-    }
-  }
+  const { handleLogout } = useLogout()
 
   return (
     <button
