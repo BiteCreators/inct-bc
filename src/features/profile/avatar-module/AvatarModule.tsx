@@ -7,16 +7,15 @@ import 'react-image-crop/dist/ReactCrop.css'
 
 export const AvatarModule = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [avatarUrl, setAvatarUrl] = useState('')
 
-  const avatarUrl = useRef('')
-
-  const updateAvatar = (imgSrc: string) => {
-    avatarUrl.current = imgSrc
+  const updateAvatar = (imgSrc: any) => {
+    setAvatarUrl(imgSrc)
   }
 
   return (
-    <div className={'bg-dark-700 w-1/5 flex flex-col items-center gap-5 p-2'}>
-      <Avatar avatarURL={avatarUrl.current} isNextLink={false} size={200} />
+    <div className={'bg-dark-700 w-1/5 min-w-56 flex flex-col items-center gap-5 p-2'}>
+      <Avatar avatarURL={avatarUrl} isNextLink={false} showClose={!!avatarUrl} size={200} />
       <Button className={'w-full'} onClick={() => setIsOpen(true)} variant={'outline'}>
         Add a Profile Photo
       </Button>
