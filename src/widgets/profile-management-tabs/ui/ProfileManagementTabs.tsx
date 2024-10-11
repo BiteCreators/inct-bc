@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { TabsBase } from '@/common/ui'
+import { SessionsList } from '@/features/devices'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
@@ -10,7 +11,7 @@ export const ProfileManagementTabs = () => {
   return (
     <TabsBase<TabValues>
       ariaLabel={'profile management tabs'}
-      listClassName={'w-max h-[35px]'}
+      listClassName={'w-max md:w-full h-[35px]'}
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {
@@ -18,7 +19,7 @@ export const ProfileManagementTabs = () => {
           label: 'General information',
           value: 'general-information',
         },
-        { content: <div>devices</div>, label: 'Devices', value: 'devices' },
+        { content: <SessionsList />, label: 'Devices', value: 'devices' },
         {
           content: <div>account management</div>,
           label: 'Account management',

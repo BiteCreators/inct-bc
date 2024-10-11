@@ -34,7 +34,7 @@ export const TabsBase = <T extends string = string>({
       onValueChange={onClick as (value: string) => void}
       value={value}
     >
-      <div className={'overflow-x-auto h-full'}>
+      <div className={'overflow-x-auto md:overflow-hidden h-full'}>
         <Tabs.List aria-label={ariaLabel} className={cn('shrink-0 flex', listClassName)}>
           {tabsData.map(tab => (
             <Tabs.Trigger
