@@ -77,4 +77,5 @@ export const profileApi = inctagramApi.injectEndpoints({
   }),
 })
 
-export const { useDeleteAvatarProfileMutation, useSetAvatarProfileMutation } = profileApi
+export const { useDeleteAvatarProfileMutation, useGetProfileQuery, useSetAvatarProfileMutation } =
+  profileApi

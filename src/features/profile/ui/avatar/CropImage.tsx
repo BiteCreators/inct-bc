@@ -50,7 +50,13 @@ export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) 
             minWidth={150}
             onChange={newCrop => setCrop(newCrop)}
           >
-            <img alt={'Selected'} onLoad={onImageLoad} ref={imgRef} src={imageUrl} />
+            <img
+              alt={'Selected'}
+              className={'max-w-full h-auto'}
+              onLoad={onImageLoad}
+              ref={imgRef}
+              src={imageUrl}
+            />
           </ReactCrop>
           <Button className={'mt-6 mb-4 px-7 z-10 self-end'} onClick={saveCroppedImageHandler}>
             Save

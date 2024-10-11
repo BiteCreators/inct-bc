@@ -1,20 +1,20 @@
 import React, { useRef, useState } from 'react'
 import { Crop, convertToPixelCrop } from 'react-image-crop'
 
+import { Avatars } from '@/common/api/profile.api'
 import { ImageOutline } from '@/common/assets/icons/components'
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Alert, Avatar, Button, Modal } from '@/common/ui'
 import setCanvasPreview from '@/common/ui/avatar/setCanvasPreview'
 import { CropImage } from '@/features/profile/ui/avatar/CropImage'
-import { selectCurrentAvatar } from '@/features/profile/ui/model/profile.slice'
 
 type Props = {
+  currentAvatar: Avatars | null
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
-  updateAvatar: (imgSrc: string, file: File) => void
+  updateAvatar: (file: File) => void
 }
 
-export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
+export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: Props) => {
   const previewImgRef = useRef<HTMLCanvasElement | null>(null)
   const [error, setError] = useState('')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -27,8 +27,6 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
     y: 25,
   })
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-
-  const currentAvatar = useAppSelector(selectCurrentAvatar)
 
   const UploadImage = () => {
     if (fileInputRef.current) {
@@ -66,10 +64,19 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
       const url = reader.result?.toString() || ''
 
       imageElement.src = url
-      imageElement.addEventListener('load', () => {
+      imageElement.addEventListener('load', (e: any) => {
         setImageUrl(url)
         setSelectedFile(file)
-        setError('')
+        if (error) {
+          setError('')
+        }
+        const { naturalHeight: naturalHeight, naturalWidth } = e.currentTarget
+
+        if (naturalHeight < 150 || naturalWidth < 150) {
+          setError('image must be at least 100')
+
+          return setImageUrl('')
+        }
       })
     })
 
@@ -85,9 +92,8 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
 
     const dataUrl = previewImgRef.current?.toDataURL()
 
-    //updateAvatar(dataUrl), setIsOpen(false) закомментить чтобы видеть превью аватара
     if (dataUrl && selectedFile) {
-      updateAvatar(dataUrl, selectedFile)
+      updateAvatar(selectedFile)
     }
 
     setIsOpen(false)
@@ -137,9 +143,8 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
         type={'file'}
       />
       {crop && (
-        //hidden - позволяет отобразить или скрыть превью
         <canvas
-          className={'border object-contain w-[150px] hidden h-[150px]'}
+          className={'border object-contain hidden w-[150px] h-[150px]'}
           ref={previewImgRef}
         />
       )}
