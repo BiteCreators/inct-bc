@@ -60,7 +60,9 @@ export const ru: LocaleType = {
     dateOfBirth: 'Дата рождения',
     editProfileError: {
       ageUser: 'Пользователь младше 13 лет не может создать профиль.Политика конфиденциальности',
-      // privacyPolicyLink:'Политика конфиденциальности'
+      invalidFirstName: 'Имя может содержать символы A-Za-zА-Яа-я',
+      invalidLastName: 'Фамилия может содержать символы A-Za-zА-Яа-я',
+      invalidUserName: 'Имя пользователя может содержать символы A-Za-z0-9_-',
       maxLengthAboutMe: 'Максимальная длина 200 символов',
       maxLengthName: 'Максимальная длина 50 символов',
       maxLengthUserName: 'Максимальная длина 30 символов',

@@ -9,13 +9,14 @@ import { format, isValid, parse } from 'date-fns'
 type Props = {
   className?: string
   disabled?: boolean
-  error?: React.ReactNode | null
+  error?: React.ReactNode
   inputClassName?: string
   label?: string
   mode: 'range' | 'single'
   onDateChange?: (date: Date | DateRange | undefined) => void
   placeholder?: string
-  selectedDate?: Date | null
+  required?: boolean
+  selectedDate: Date | null
 }
 
 export const DatePicker = forwardRef<HTMLInputElement, Props>(
@@ -29,6 +30,7 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>(
       mode,
       onDateChange,
       placeholder = 'Choose date',
+      required,
       selectedDate,
     }: Props,
     ref
@@ -129,7 +131,13 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>(
 
     return (
       <div className={cn('p-2 text-light-100', className)}>
-        <label className={cn('block', disabled ? 'text-dark-100' : 'text-light-900')}>
+        <label
+          className={cn(
+            'block',
+            disabled ? 'text-dark-100' : 'text-light-900',
+            required && 'after:content-["*"] after:text-danger-500'
+          )}
+        >
           {label}
         </label>
         <div className={'relative'} ref={calendarRef}>
@@ -149,7 +157,6 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>(
                 className={cn(
                   'bg-transparent text-light-100 outline-none w-fit',
                   disabled && 'text-light-900',
-                  // inputClassName,
                   error && 'text-danger-500'
                 )}
                 disabled={disabled}
@@ -163,7 +170,6 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>(
                 className={cn(
                   'bg-transparent text-light-100 outline-none w-fit',
                   disabled && 'text-light-900',
-                  // inputClassName,
                   error && 'text-danger-500'
                 )}
                 disabled={disabled}
@@ -206,19 +212,3 @@ export const DatePicker = forwardRef<HTMLInputElement, Props>(
     )
   }
 )
-// Использование с режимом single:
-// <form onSubmit={handleSubmit(onSubmit)}>
-//   <Controller
-//     control={control}
-//     name={'date'}
-//     render={({ field: { onChange, value } }) => (
-//       <DatePicker
-//         mode={'single'}
-//         onDateChange={onChange} // передаем обработчик изменения
-//         placeholder={'Выберите дату'}
-//         selectedDate={value} // передаем текущее значение
-//       />
-//     )}
-//   />
-//   <button type={'submit'}>Отправить</button>
-// </form>

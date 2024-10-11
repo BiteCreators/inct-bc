@@ -55,7 +55,10 @@ export const en = {
     country: 'Country',
     dateOfBirth: 'Date of birth',
     editProfileError: {
-      ageUser: 'A user under 13 cannot create a profile.PrivacyPolicy',
+      ageUser: 'A user under 13 cannot create a profile.Privacy Policy',
+      invalidFirstName: 'The first name may contain the characters A-Za-zА-Яа-я',
+      invalidLastName: 'The last name may contain the characters A-Za-zА-Яа-я',
+      invalidUserName: 'The username may contain the characters A-Za-z0-9_-',
       maxLengthAboutMe: 'Maximum length is 200 characters',
       maxLengthName: 'Maximum length is 50 characters',
       maxLengthUserName: 'Maximum length is 30 characters',

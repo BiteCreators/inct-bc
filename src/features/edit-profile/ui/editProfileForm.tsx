@@ -1,6 +1,7 @@
 import { Controller, useForm } from 'react-hook-form'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { cn } from '@/common/lib/utils/cn'
 import {
   Avatar,
   Button,
@@ -25,7 +26,8 @@ export const EditProfileForm = ({ userName }: Props) => {
   const { control, getValues, handleSubmit } = useForm<EditProfileFormData>({
     defaultValues: {
       aboutMe: '',
-      dateOfbirth: null,
+      dateOfbirth: undefined,
+      // dateOfbirth: new Date(1900, 0, 1),
       firstName: '',
       lastName: '',
       selectYourCity: '',
@@ -71,25 +73,35 @@ export const EditProfileForm = ({ userName }: Props) => {
           control={control}
           name={'dateOfbirth'}
           render={({ field: { onChange, value }, fieldState: { error } }) => {
-            const errorText = t.editProfileError.ageUser.split('.')[0]
-            const errorLink = t.editProfileError.ageUser.split('.')[1]
-            const errorWithLink = error?.message ? (
-              <p>
-                {errorText + '. '}
-                <Link className={'underline'} href={'/auth/sign-up/privacy-policy'}>
-                  {errorLink}
-                </Link>
-              </p>
-            ) : null
+            console.log('VALUE: ', value)
+            let fieldError
+
+            if (error?.message) {
+              const errorAsArray = error.message.split('.')
+              const errorText = errorAsArray[0]
+              const errorLink = errorAsArray[1]
+
+              errorAsArray.length > 1
+                ? (fieldError = (
+                    <p>
+                      {errorText + '. '}
+                      <Link className={'underline'} href={'/auth/sign-up/privacy-policy'}>
+                        {errorLink}
+                      </Link>
+                    </p>
+                  ))
+                : (fieldError = <p>{errorText}</p>)
+            }
 
             return (
               <DatePicker
                 className={'w-full p-[0px] bg-inherit'}
-                error={errorWithLink}
+                error={fieldError}
                 inputClassName={'justify-between px-2 border border-dark-300'}
                 label={t.dateOfBirth}
                 mode={'single'}
                 onDateChange={onChange}
+                required
                 selectedDate={value}
               />
             )
@@ -119,10 +131,11 @@ export const EditProfileForm = ({ userName }: Props) => {
           </FormSelect>
         </div>
         <FormTextArea control={control} label={t.aboutMe} name={'aboutMe'} />
-        <Button className={'mb-5 w-[160px] self-end'} type={'submit'}>
+        <Button className={'mt-7 w-min-[160px] self-end'} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
+      <span className={'inline-block absolute h-[1px] top-[83%] w-full bg-dark-300'}></span>
     </div>
   )
 }
