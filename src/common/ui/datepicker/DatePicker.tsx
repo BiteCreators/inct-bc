@@ -9,7 +9,7 @@ import { format, isValid, parse } from 'date-fns'
 type Props = {
   className?: string
   disabled?: boolean
-  error?: React.ReactNode
+  error?: React.ReactNode | string
   inputClassName?: string
   label?: string
   mode: 'range' | 'single'

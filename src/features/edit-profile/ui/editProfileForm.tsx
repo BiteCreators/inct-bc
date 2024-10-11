@@ -10,6 +10,7 @@ import {
   FormTextArea,
   SelectItem,
 } from '@/common/ui'
+import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 
@@ -67,7 +68,16 @@ export const EditProfileForm = ({ userName }: Props) => {
         <FormInput control={control} label={t.userName} name={'userName'} required />
         <FormInput control={control} label={t.firstName} name={'firstName'} required />
         <FormInput control={control} label={t.lastName} name={'lastName'} required />
-        <Controller
+        <FormDatePicker
+          className={'w-full p-[0px] bg-inherit'}
+          control={control}
+          inputClassName={'justify-between px-2 border border-dark-300'}
+          label={t.dateOfBirth}
+          mode={'single'}
+          name={'dateOfbirth'}
+          required
+        />
+        {/* <Controller
           control={control}
           name={'dateOfbirth'}
           render={({ field: { onChange, value }, fieldState: { error } }) => {
@@ -104,7 +114,7 @@ export const EditProfileForm = ({ userName }: Props) => {
               />
             )
           }}
-        />
+        /> */}
         <div className={'flex gap-5 justify-between w-full'}>
           <FormSelect
             control={control}
