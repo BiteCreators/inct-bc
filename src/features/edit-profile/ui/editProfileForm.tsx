@@ -1,18 +1,9 @@
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import {
-  Avatar,
-  Button,
-  DatePicker,
-  FormInput,
-  FormSelect,
-  FormTextArea,
-  SelectItem,
-} from '@/common/ui'
+import { Avatar, Button, FormInput, FormSelect, FormTextArea, SelectItem } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
 
 import exampleImage from '../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
 import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
@@ -77,44 +68,6 @@ export const EditProfileForm = ({ userName }: Props) => {
           name={'dateOfbirth'}
           required
         />
-        {/* <Controller
-          control={control}
-          name={'dateOfbirth'}
-          render={({ field: { onChange, value }, fieldState: { error } }) => {
-            console.log('VALUE: ', value)
-            let fieldError
-
-            if (error?.message) {
-              const errorAsArray = error.message.split('.')
-              const errorText = errorAsArray[0]
-              const errorLink = errorAsArray[1]
-
-              errorAsArray.length > 1
-                ? (fieldError = (
-                    <p>
-                      {errorText + '. '}
-                      <Link className={'underline'} href={'/auth/sign-up/privacy-policy'}>
-                        {errorLink}
-                      </Link>
-                    </p>
-                  ))
-                : (fieldError = <p>{errorText}</p>)
-            }
-
-            return (
-              <DatePicker
-                className={'w-full p-[0px] bg-inherit'}
-                error={fieldError}
-                inputClassName={'justify-between px-2 border border-dark-300'}
-                label={t.dateOfBirth}
-                mode={'single'}
-                onDateChange={onChange}
-                required
-                selectedDate={value}
-              />
-            )
-          }}
-        /> */}
         <div className={'flex gap-5 justify-between w-full'}>
           <FormSelect
             control={control}
@@ -139,11 +92,11 @@ export const EditProfileForm = ({ userName }: Props) => {
           </FormSelect>
         </div>
         <FormTextArea control={control} label={t.aboutMe} name={'aboutMe'} />
-        <Button className={'mt-7 w-min-[160px] self-end'} type={'submit'}>
+        <Button className={'mt-7 w-min-40 self-end'} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
-      <span className={'inline-block absolute h-[1px] top-[83%] w-full bg-dark-300'}></span>
+      <span className={'inline-block absolute h-[1px] bottom-[120px] w-full bg-dark-300'}></span>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageLayout } from '@/common/ui'
-import { EditProfileForm } from '@/features/edit-profile/ui/editProfileForm'
+import { EditProfileForm } from '@/features/edit-profile/ui/EditProfileForm'
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
 import { Sidebar } from '@/widgets/sidebar'
