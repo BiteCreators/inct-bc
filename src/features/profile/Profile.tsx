@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ProfileAvatar } from '@/features/profile/avatar-module/ProfileAvatar'
+import { ProfileAvatar } from '@/features/profile/ui/avatar/ProfileAvatar'
 
 export const Profile = () => {
   return (

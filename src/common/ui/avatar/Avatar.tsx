@@ -1,12 +1,14 @@
+import { cn } from '@/common/lib/utils/cn'
 import Link from 'next/link'
 
 type Props = {
   alt?: string
   avatarURL: string
-  closeFunc?: () => void
   href?: string
   isNextLink?: boolean
+  onClose?: () => void
   rel?: string
+  rounded?: boolean
   showClose?: boolean
   size: number
 }
@@ -14,31 +16,33 @@ type Props = {
 export const Avatar = ({
   alt = 'Avatar',
   avatarURL,
-  closeFunc,
   href,
   isNextLink = false,
+  onClose,
   rel = '',
+  rounded = true,
   showClose = false,
   size,
 }: Props) => {
   const closeHandler = () => {
-    if (closeFunc) {
-      closeFunc()
+    if (onClose) {
+      onClose()
     }
   }
   const AvatarImage = (
-    <div className={`relative w-[${size}px h-[${size}px rounded-full`}>
+    <div className={cn([`relative w-[${size}px h-[${size}px`])}>
       <img
         alt={alt}
-        className={'rounded-full object-cover'}
+        className={cn([rounded && 'rounded-full', 'object-cover'])}
         src={avatarURL}
         style={{ height: `${size}px`, width: `${size}px` }}
       />
       {showClose && (
         <div
-          className={
-            'bg-danger-100 absolute rounded-full w-8 h-8 right-0 top-1/4 transform -translate-y-1/2'
-          }
+          className={cn([
+            'bg-danger-100 absolute w-8 h-8 right-0 top-1/4 transform -translate-y-1/2',
+            rounded && 'rounded-full',
+          ])}
           onClick={closeHandler}
         ></div>
       )}

@@ -1,15 +1,17 @@
 import React, { useRef, useState } from 'react'
 import { Crop, convertToPixelCrop } from 'react-image-crop'
 
-import { Image, ImageOutline } from '@/common/assets/icons/components'
-import { Alert, Button, Modal } from '@/common/ui'
+import { ImageOutline } from '@/common/assets/icons/components'
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { Alert, Avatar, Button, Modal } from '@/common/ui'
 import setCanvasPreview from '@/common/ui/avatar/setCanvasPreview'
-import { CropImage } from '@/features/profile/avatar-module/CropImage'
+import { CropImage } from '@/features/profile/ui/avatar/CropImage'
+import { selectCurrentAvatar } from '@/features/profile/ui/model/profile.slice'
 
 type Props = {
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
-  updateAvatar: (imgSrc: string) => void
+  updateAvatar: (imgSrc: string, file: File) => void
 }
 
 export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
@@ -24,55 +26,68 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
     x: 25,
     y: 25,
   })
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+
+  const currentAvatar = useAppSelector(selectCurrentAvatar)
 
   const UploadImage = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
     }
   }
+
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
 
     if (!file) {
       return
     }
+
+    const validFormats = ['image/jpeg', 'image/png']
+
+    if (!validFormats.includes(file.type)) {
+      setError('Error! The format of the uploaded photo must be PNG and JPEG')
+
+      return
+    }
+
+    const maxSizeInMB = 10
+
+    if (file.size > maxSizeInMB * 1024 * 1024) {
+      setError('Error! Photo size must be less than 10 MB!')
+
+      return
+    }
+
     const reader = new FileReader()
 
     reader.addEventListener('load', () => {
       const imageElement = document.createElement('img')
-
       const url = reader.result?.toString() || ''
 
       imageElement.src = url
-
-      imageElement.addEventListener('load', (e: any) => {
-        if (error) {
-          setError('')
-        }
-        const { naturalHeight: naturalHeight, naturalWidth } = e.currentTarget
-
-        if (naturalHeight < 150 || naturalWidth < 150) {
-          setError('image must be at least 100')
-
-          return setImageUrl('')
-        }
+      imageElement.addEventListener('load', () => {
+        setImageUrl(url)
+        setSelectedFile(file)
+        setError('')
       })
-
-      setImageUrl(url)
     })
+
     reader.readAsDataURL(file)
   }
+
   const saveCroppedImage = (imgRef: HTMLImageElement | null) => {
     if (imgRef && previewImgRef.current) {
       const pixelCrop = convertToPixelCrop(crop, imgRef.width, imgRef.height)
 
       setCanvasPreview(imgRef, previewImgRef.current, pixelCrop)
     }
+
     const dataUrl = previewImgRef.current?.toDataURL()
 
-    //updateAvatar(dataUrl), setIsOpen(false) закомментить что бы видеть превью аватара
-    if (dataUrl) {
-      updateAvatar(dataUrl)
+    //updateAvatar(dataUrl), setIsOpen(false) закомментить чтобы видеть превью аватара
+    if (dataUrl && selectedFile) {
+      updateAvatar(dataUrl, selectedFile)
     }
 
     setIsOpen(false)
@@ -101,8 +116,13 @@ export const ModalAvatar = ({ isOpen, setIsOpen, updateAvatar }: Props) => {
         {!imageUrl && (
           <div className={'w-full flex flex-col justify-center items-center gap-5'}>
             <div className={'bg-dark-700 w-56 h-56 mt-7 flex justify-center items-center'}>
-              <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
+              {currentAvatar ? (
+                <Avatar avatarURL={currentAvatar.url} rounded={false} size={224} />
+              ) : (
+                <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
+              )}
             </div>
+
             <Button className={'w-56 bottom-0 mt-6 mb-16'} onClick={UploadImage}>
               Select from Computer
             </Button>

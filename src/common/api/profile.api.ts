@@ -6,7 +6,7 @@ type ProfileResponse = {
   id: number
 }
 
-type Avatars = {
+export type Avatars = {
   createdAt: string
   fileSize: number
   height: number
@@ -76,3 +76,5 @@ export const profileApi = inctagramApi.injectEndpoints({
     }),
   }),
 })
+
+export const { useDeleteAvatarProfileMutation, useSetAvatarProfileMutation } = profileApi

@@ -12,8 +12,10 @@ type Props = {
 
 export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) => {
   const imgRef = useRef<HTMLImageElement | null>(null)
+
   const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const { height, width } = e.currentTarget
+
     const crop = centerCrop(
       makeAspectCrop(
         {
@@ -27,31 +29,30 @@ export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) 
       width,
       height
     )
-    const centeredCrop = centerCrop(crop, width, height)
 
-    setCrop(centeredCrop)
+    setCrop(crop)
   }
+
   const saveCroppedImageHandler = () => {
     saveCroppedImage(imgRef.current)
   }
 
   return (
-    <div className={'w-[444px]'}>
+    <div className={''}>
       <ScrollArea className={'max-h-[calc(100vh-100px)] flex flex-col'}>
-        <div className={'w-full flex flex-col items-end'}>
+        <div className={'flex flex-col items-center'}>
           <ReactCrop
             aspect={1}
             circularCrop
-            className={'w-full'}
             crop={crop}
             keepSelection
             minHeight={150}
             minWidth={150}
-            onChange={crop => setCrop(crop)}
+            onChange={newCrop => setCrop(newCrop)}
           >
-            <img alt={'Selected'} className={''} onLoad={onImageLoad} ref={imgRef} src={imageUrl} />
+            <img alt={'Selected'} onLoad={onImageLoad} ref={imgRef} src={imageUrl} />
           </ReactCrop>
-          <Button className={'mt-6 mb-4 px-7 z-10'} onClick={saveCroppedImageHandler}>
+          <Button className={'mt-6 mb-4 px-7 z-10 self-end'} onClick={saveCroppedImageHandler}>
             Save
           </Button>
         </div>

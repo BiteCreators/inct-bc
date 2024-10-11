@@ -1,5 +1,6 @@
 import { inctagramApi } from '@/common/api/inct.api'
 import { authSlice } from '@/features/auth/model/auth.slice'
+import { profileSlice } from '@/features/profile/ui/model/profile.slice'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import {
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
   [inctagramApi.reducerPath]: inctagramApi.reducer,
+  profile: profileSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
