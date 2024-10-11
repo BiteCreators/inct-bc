@@ -3,6 +3,7 @@ import { Crop, ReactCrop, centerCrop, makeAspectCrop } from 'react-image-crop'
 
 import { Button, ScrollArea } from '@/common/ui'
 
+import 'react-image-crop/dist/ReactCrop.css'
 type Props = {
   crop: Crop
   imageUrl: string
