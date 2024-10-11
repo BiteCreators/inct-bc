@@ -1,18 +1,18 @@
 export const tabsData = [
   {
-    buttonName: 'Tab1',
     content: 'Hae elēni ā iepagon Tcheret gere vēja pelothos',
-    id: '1',
+    label: 'Tab1',
+    value: '1',
   },
   {
-    buttonName: 'Tab2',
     content:
       'Tchoile ka eee tchaïvei ja Tchaïmè elēni ja elakot tchémé geleves ja pelogho Tchaïme tchiani ja',
-    id: '2',
+    label: 'Tab2',
+    value: '2',
   },
   {
-    buttonName: 'Tab3',
     content: 'Tchere iā mili bano',
-    id: '3',
+    label: 'Tab3',
+    value: '3',
   },
 ]

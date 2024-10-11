@@ -18,6 +18,7 @@ export const ru: LocaleType = {
     home: 'Главная',
     messenger: 'Мессенджер',
     myProfile: 'Профиль',
+    profileSettings: 'Настройки профиля',
     search: 'Поиск',
     statistics: 'Статистика',
   },
