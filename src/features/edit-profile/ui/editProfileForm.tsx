@@ -1,7 +1,6 @@
 import { Controller, useForm } from 'react-hook-form'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { cn } from '@/common/lib/utils/cn'
 import {
   Avatar,
   Button,
@@ -27,7 +26,6 @@ export const EditProfileForm = ({ userName }: Props) => {
     defaultValues: {
       aboutMe: '',
       dateOfbirth: undefined,
-      // dateOfbirth: new Date(1900, 0, 1),
       firstName: '',
       lastName: '',
       selectYourCity: '',
