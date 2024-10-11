@@ -10,7 +10,7 @@ const SvgBrowserPlaceholder = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEl
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <style>{'.browser-placeholder_svg__st0{fill:#000}'}</style>
+    <style>{'.browser-placeholder_svg__st0{fill:#fff}'}</style>
     <path
       className={'browser-placeholder_svg__st0'}
       d={
