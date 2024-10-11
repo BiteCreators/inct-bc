@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { TabsBase } from '@/common/ui'
-import { SessionsList } from '@/features/devices'
+import { CurrentDevice, SessionsList } from '@/features/devices'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
@@ -19,7 +19,16 @@ export const ProfileManagementTabs = () => {
           label: 'General information',
           value: 'general-information',
         },
-        { content: <SessionsList />, label: 'Devices', value: 'devices' },
+        {
+          content: (
+            <div className={'flex flex-col gap-[78px]'}>
+              <CurrentDevice />
+              <SessionsList />
+            </div>
+          ),
+          label: 'Devices',
+          value: 'devices',
+        },
         {
           content: <div>account management</div>,
           label: 'Account management',
