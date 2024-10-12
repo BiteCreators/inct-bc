@@ -2,6 +2,7 @@ import { devicesApi } from '@/common/api/devices.api'
 import { Typography } from '@/common/ui'
 
 import { SessionCard } from './SessionCard'
+import { TerminateSessionButton } from './TerminateSessionButton'
 
 export const SessionsList = () => {
   const { data, error, isError, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
@@ -22,6 +23,7 @@ export const SessionsList = () => {
 
           return (
             <SessionCard
+              action={<TerminateSessionButton deviceId={session.deviceId} />}
               browserName={session.browserName}
               ip={session.ip}
               key={session.deviceId}

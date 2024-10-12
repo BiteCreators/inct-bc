@@ -1,17 +1,5 @@
 import React from 'react'
 
-import {
-  Brave,
-  BrowserPlaceholder,
-  ChromeSvgrepoCom,
-  Explorer,
-  Firefox,
-  MicrosoftEdge,
-  Opera,
-  Safari,
-  UcBrowser,
-  Yandex,
-} from '@/common/assets/icons/components'
 import { Card, Typography } from '@/common/ui'
 
 import { useSessionCard } from '../model/useSessionCard'
@@ -37,7 +25,7 @@ export const SessionCard = ({ action, browserName, ip, lastVisit, type }: Props)
           {!!lastVisit && <Typography className={'mt-3'}>Last visit: {lastVisitDate}</Typography>}
         </div>
       </div>
-      {!!action && <div>{action}</div>}
+      {!!action && <div className={'self-center'}>{action}</div>}
     </Card>
   )
 }

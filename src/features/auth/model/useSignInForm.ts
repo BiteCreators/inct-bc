@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { authApi } from '@/common/api/auth.api'
@@ -30,22 +31,30 @@ export const useSignInForm = () => {
     mode: 'onChange',
     resolver: zodResolver(signInSchema),
   })
-  const [login, { error, isLoading }] = authApi.useLoginMutation()
+  const [login, { isLoading }] = authApi.useLoginMutation()
   const dispatch = useAppDispatch()
   const { handleApiError } = useHandleApiError('Auth')
   const [apiError, setApiError] = useState('')
+  const [_, setCookies] = useCookies(['accessToken'])
 
   const onSubmit: SubmitHandler<SignInFormData> = async ({ email, password }) => {
     try {
-      await login({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '', email, password })
-        .unwrap()
-        .then(res => {
-          const token = res.accessToken
+      const res = await login({
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '',
+        email,
+        password,
+      }).unwrap()
+      const token = res.accessToken
 
-          document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
-          dispatch(authSlice.actions.setAccessToken(token))
-          Router.push('/profile')
-        })
+      // document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
+      setCookies('accessToken', res.accessToken, {
+        maxAge: 3600,
+        path: '/',
+        sameSite: 'strict',
+        secure: true,
+      })
+      dispatch(authSlice.actions.setAccessToken(token))
+      Router.push('/profile')
     } catch (error) {
       handleApiError({ error, modifyMessage: modifySingInApiError, setApiError, setError })
     }
