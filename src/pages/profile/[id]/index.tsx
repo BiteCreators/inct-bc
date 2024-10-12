@@ -1,5 +1,6 @@
-import { cn } from '@/common/lib/utils/cn'
-import { ProfileHeader } from '@/widgets/profile-header'
+import React from 'react'
+
+import { Profile } from '@/features/profile/Profile'
 import { useRouter } from 'next/router'
 
 export default function CurrentProfile() {
@@ -7,9 +8,8 @@ export default function CurrentProfile() {
   const { id } = router.query
 
   return (
-    <div className={cn('pl-6 pr-16')}>
-      <ProfileHeader />
-      Profile ID : {id}
+    <div>
+      <Profile />
     </div>
   )
 }
