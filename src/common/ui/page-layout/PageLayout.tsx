@@ -24,7 +24,7 @@ export const PageLayout = ({
     <div className={cn('min-h-[100vh]')}>
       {!!header && <div className={'sticky top-0'}>{header}</div>}
       <ScrollArea className={'h-[calc(100vh-60px)] flex flex-col'}>
-        <div className={cn('grow', !!sidebar && 'grid grid-cols-[220px_1fr]')}>
+        <div className={cn('grow', !!sidebar && 'md:grid md:grid-cols-[220px_1fr]')}>
           {!!sidebar && (
             <div className={'sticky top-0 left-0 self-start md:block hidden'}>{sidebar}</div>
           )}
