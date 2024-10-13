@@ -62,11 +62,9 @@ export const ProfileAvatar = () => {
           <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
         </div>
       )}
-
       <Button className={'w-full'} onClick={() => setIsOpen(true)} variant={'outline'}>
         Add a Profile Photo
       </Button>
-
       {isOpen && (
         <ModalAvatar
           currentAvatar={currentAvatar}

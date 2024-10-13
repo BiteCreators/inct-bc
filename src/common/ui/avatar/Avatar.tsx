@@ -1,3 +1,4 @@
+import { Close } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import Link from 'next/link'
 
@@ -40,11 +41,15 @@ export const Avatar = ({
       {showClose && (
         <div
           className={cn([
-            'bg-danger-100 absolute w-8 h-8 right-0 top-1/4 transform -translate-y-1/2',
+            'bg-dark-700 flex justify-center items-center absolute w-9 h-9 right-0 top-[4%]',
             rounded && 'rounded-full',
           ])}
           onClick={closeHandler}
-        ></div>
+        >
+          <div className={'flex items-center justify-center bg-danger-500 rounded-full'}>
+            <Close />
+          </div>
+        </div>
       )}
     </div>
   )
