@@ -50,7 +50,7 @@ export const useSignInForm = () => {
       setCookies('accessToken', res.accessToken, {
         maxAge: 3600,
         path: '/',
-        sameSite: 'strict',
+        sameSite: 'lax',
         secure: true,
       })
       dispatch(authSlice.actions.setAccessToken(token))
