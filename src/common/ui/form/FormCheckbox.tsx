@@ -20,7 +20,19 @@ export const FormCheckbox = <T extends FieldValues>({
   text,
   ...props
 }: Props<T>) => {
-  const { field, fieldState } = useController({ control, name, rules })
+  const {
+    field: { onChange, value, ...field },
+    fieldState,
+  } = useController({ control, name, rules })
 
-  return <Checkbox {...field} text={text} {...props} error={error ?? fieldState.error?.message} />
+  return (
+    <Checkbox
+      checked={value}
+      onChecked={onChange}
+      {...field}
+      text={text}
+      {...props}
+      error={error ?? fieldState.error?.message}
+    />
+  )
 }

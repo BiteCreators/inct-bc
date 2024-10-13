@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
 import { Calendar } from '@/common/assets/icons/components'

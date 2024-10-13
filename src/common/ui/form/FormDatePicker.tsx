@@ -1,3 +1,4 @@
+import React from 'react'
 import { FieldValues, useController } from 'react-hook-form'
 
 import Link from 'next/link'
@@ -9,7 +10,7 @@ type Props<T extends FieldValues> = {
   className?: string
   disabled?: boolean
   error?: React.ReactNode
-  inputClassName: string
+  inputClassName?: string
   label?: string
   mode: 'range' | 'single'
   placeholder?: string
