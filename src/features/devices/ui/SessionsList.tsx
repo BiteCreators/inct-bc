@@ -7,6 +7,11 @@ import { TerminateSessionButton } from './TerminateSessionButton'
 export const SessionsList = () => {
   const { data, error, isError, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
 
+  if (isError) {
+    //TODO: handle error
+    return <div>error</div>
+  }
+
   if (isSuccess) {
     const { current, others } = data
 

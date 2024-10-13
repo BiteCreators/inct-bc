@@ -1,11 +1,14 @@
 import { authTranslationEn } from '@/locales/auth/auth.translation.en'
 
+import { devicesTranslationsEn } from './devices/devices.en'
+
 export const en = {
   Auth: authTranslationEn,
   Common: {
     internalServerError: 'Unexpected server error occured, try again later',
     networkError: 'Seems like you have connection propblems, check out your network',
   },
+  Devices: devicesTranslationsEn,
   Internationalization: {
     en: 'English',
     ru: 'Russian',
