@@ -22,7 +22,7 @@ type ParentRegions = {
   name: string
 }
 
-type ChildRegionsResponse = {
+type RegionsResponse = {
   edges: {
     cursor: string
     node: CountryResponse
@@ -41,10 +41,10 @@ export const locationApi = createApi({
     },
   }),
   endpoints: builder => ({
-    getChildRegion: builder.query<ChildRegionsResponse, { id: string; lng: string }>({
-      query: ({ id, lng }) => ({
+    getCity: builder.query<RegionsResponse, { countryCode: string; lng: string }>({
+      query: ({ countryCode, lng }) => ({
         method: 'GET',
-        url: `/child-regions?parentId=${id}&lng=${lng}`,
+        url: `/regions?countryCode=${countryCode}&type=city&lng=${lng}`,
       }),
     }),
     getCountry: builder.query<CountryResponse[], { lng: string }>({
