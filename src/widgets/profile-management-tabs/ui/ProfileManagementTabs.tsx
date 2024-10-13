@@ -21,7 +21,7 @@ export const ProfileManagementTabs = () => {
         },
         {
           content: (
-            <div className={'flex flex-col gap-[78px]'}>
+            <div className={'flex flex-col gap-[18px]'}>
               <CurrentDevice />
               <SessionsList />
             </div>

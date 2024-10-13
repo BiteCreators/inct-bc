@@ -25,7 +25,7 @@ export const devicesApi = inctagramApi.injectEndpoints({
         url: 'v1/sessions',
       }),
     }),
-    terminateAllSessions: builder.mutation({
+    terminateAllSessions: builder.mutation<void, void>({
       invalidatesTags: ['Devices'],
       query: () => ({
         method: 'DELETE',
