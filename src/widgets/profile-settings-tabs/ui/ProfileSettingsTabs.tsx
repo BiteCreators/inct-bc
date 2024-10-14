@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
+import { EditProfileForm } from '@/features/edit-profile'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
@@ -17,7 +18,7 @@ export const ProfileSettingsTabs = () => {
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {
-          content: <div>general information</div>,
+          content: <EditProfileForm />,
           label: 'General information',
           value: 'general-information',
         },
