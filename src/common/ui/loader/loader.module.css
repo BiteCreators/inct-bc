@@ -1,16 +1,22 @@
 .wrapper{
-    display: block;
-    width: 100vw;
+    position: absolute;
+    z-index: 1000;
     top: 0;
     left: 0;
-    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
     height: 100vh;
-    background-color: #000000;
-    z-index: 1000;
+
+    background-color: #0D0D0D;
 }
 
 .loader {
     display: inline-block;
+
     box-sizing: border-box;
     width: 48px;
     height: 48px;
