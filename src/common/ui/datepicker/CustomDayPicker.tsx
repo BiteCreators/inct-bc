@@ -16,7 +16,7 @@ type Props = {
   month?: Date
   onMonthChange?: (month: Date) => void
   onSelect: (selected: Date | DateRange | undefined) => void
-  selected: Date | DateRange | undefined
+  selected: Date | DateRange | null | undefined
 } & Omit<DayPickerProps, 'mode' | 'onSelect' | 'selected'>
 
 const calendarAnimation: Variants = {

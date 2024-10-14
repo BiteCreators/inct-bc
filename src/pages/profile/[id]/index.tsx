@@ -9,7 +9,7 @@ export default function CurrentProfile() {
   const { data } = authApi.useMeQuery()
 
   return (
-    <div className={cn('pl-6 pr-16')}>
+    <div className={cn('px-[15px] md:pl-6 md:pr-16')}>
       <ProfileHeader />
       Profile ID : {id}
     </div>
