@@ -1,5 +1,6 @@
 import { authTranslationRu } from '@/locales/auth/auth.translation.ru'
 
+import { devicesTranslationsRu } from './devices/devices.ru'
 import { LocaleType } from './en'
 
 export const ru: LocaleType = {
@@ -8,12 +9,14 @@ export const ru: LocaleType = {
     internalServerError: 'Произошла непредвиденная ошибка, попробуйте позже',
     networkError: 'Похоже у вас проблемы с сетью, проверьте подключение',
   },
+  Devices: devicesTranslationsRu,
   Internationalization: {
     en: 'Английский',
     ru: 'Русский',
   },
   Navigation: {
     create: 'Создать',
+    devices: 'Устройства',
     favorites: 'Избранное',
     home: 'Главная',
     messenger: 'Мессенджер',
@@ -51,6 +54,31 @@ export const ru: LocaleType = {
     такими контрагентами обязательств по обеспечению конфиденциальности полученной информации, в частности при 
     использовании приложений.`,
     title: 'Политика конфиденциальности',
+  },
+  Profile: {
+    aboutMe: 'Обо мне',
+    citiesList: 'Санкт-Петербург,Москва,Тверь,Самара,Псков',
+    city: 'Город',
+    countriesList: 'Россия,Беларусь,Украина,Грузия,Абхазия',
+    country: 'Страна',
+    dateOfBirth: 'Дата рождения',
+    editProfileError: {
+      ageUser: 'Пользователь младше 13 лет не может создать профиль.Политика конфиденциальности',
+      invalidFirstName: 'Имя может содержать символы A-Za-zА-Яа-я',
+      invalidLastName: 'Фамилия может содержать символы A-Za-zА-Яа-я',
+      invalidUserName: 'Имя пользователя может содержать символы A-Za-z0-9_-',
+      maxLengthAboutMe: 'Максимальная длина 200 символов',
+      maxLengthName: 'Максимальная длина 50 символов',
+      maxLengthUserName: 'Максимальная длина 30 символов',
+      minLengthUserName: 'Минимальная длина 6 символов',
+      requiredError: 'Поле обязательно для заполнения',
+    },
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    saveChangesBtn: 'Сохранить изменения',
+    selectYourCity: 'Выберите город',
+    selectYourCountry: 'Выберите страну',
+    userName: 'Имя пользователя',
   },
   TermsService: {
     text: ` Добро пожаловать на Сайт , интернет-ресурс, который помогает вам поддерживать связь с вашими старыми 

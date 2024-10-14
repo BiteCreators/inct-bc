@@ -1,17 +1,21 @@
 import { authTranslationEn } from '@/locales/auth/auth.translation.en'
 
+import { devicesTranslationsEn } from './devices/devices.en'
+
 export const en = {
   Auth: authTranslationEn,
   Common: {
     internalServerError: 'Unexpected server error occurred, try again later',
     networkError: 'Seems like you have connection problems, check out your network',
   },
+  Devices: devicesTranslationsEn,
   Internationalization: {
     en: 'English',
     ru: 'Russian',
   },
   Navigation: {
     create: 'Create',
+    devices: 'Devices',
     favorites: 'Favorites',
     home: 'Home',
     messenger: 'Messenger',
@@ -47,6 +51,31 @@ export const en = {
     provided that such contractors undertake obligations to ensure the confidentiality of the received information, 
     particularly when using applications.`,
     title: 'Privacy Policy',
+  },
+  Profile: {
+    aboutMe: 'About Me',
+    citiesList: 'St. Petersburg, Moscow, Tver, Samara, Pskov',
+    city: 'City',
+    countriesList: 'Russia, Belarus, Ukraine, Georgia, Abkhazia',
+    country: 'Country',
+    dateOfBirth: 'Date of birth',
+    editProfileError: {
+      ageUser: 'A user under 13 cannot create a profile.Privacy Policy',
+      invalidFirstName: 'The first name may contain the characters A-Za-zА-Яа-я',
+      invalidLastName: 'The last name may contain the characters A-Za-zА-Яа-я',
+      invalidUserName: 'The username may contain the characters A-Za-z0-9_-',
+      maxLengthAboutMe: 'Maximum length is 200 characters',
+      maxLengthName: 'Maximum length is 50 characters',
+      maxLengthUserName: 'Maximum length is 30 characters',
+      minLengthUserName: 'Minimum length is 6 characters',
+      requiredError: 'Field is required',
+    },
+    firstName: 'First name',
+    lastName: 'Last name',
+    saveChangesBtn: 'Save changes',
+    selectYourCity: 'Select your city',
+    selectYourCountry: 'Select your country',
+    userName: 'Username',
   },
   TermsService: {
     text: `Welcome to the website, an online resource that helps you stay connected with your old and new friends. 
