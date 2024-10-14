@@ -6,7 +6,7 @@ type ProfileResponse = {
   id: number
 }
 
-type Avatars = {
+export type Avatars = {
   createdAt: string
   fileSize: number
   height: number
@@ -28,6 +28,7 @@ type Profile = {
 export const profileApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     deleteAvatarProfile: builder.mutation<void, void>({
+      invalidatesTags: ['Profile'],
       query: body => ({
         body,
         method: 'DELETE',
@@ -35,6 +36,7 @@ export const profileApi = inctagramApi.injectEndpoints({
       }),
     }),
     deleteProfile: builder.mutation<void, void>({
+      invalidatesTags: ['Profile'],
       query: body => ({
         body,
         method: 'DELETE',
@@ -42,12 +44,14 @@ export const profileApi = inctagramApi.injectEndpoints({
       }),
     }),
     deleteProfileForId: builder.mutation<void, { id: number }>({
+      invalidatesTags: (result, error, { id }) => [{ id, type: 'Profile' }],
       query: ({ id }) => ({
         method: 'DELETE',
         url: `v1/users/profile/${id}`,
       }),
     }),
     editProfile: builder.mutation<void, Profile>({
+      invalidatesTags: ['Profile'],
       query: body => ({
         body,
         method: 'PUT',
@@ -55,13 +59,14 @@ export const profileApi = inctagramApi.injectEndpoints({
       }),
     }),
     getProfile: builder.query<Profile & ProfileResponse, void>({
-      query: body => ({
-        body,
+      providesTags: ['Profile'],
+      query: () => ({
         method: 'GET',
         url: 'v1/users/profile',
       }),
     }),
     setAvatarProfile: builder.mutation<Avatars[], { file: File }>({
+      invalidatesTags: ['Profile'],
       query: ({ file }) => {
         const formData = new FormData()
 

@@ -5,8 +5,8 @@ import { devicesTranslationsEn } from './devices/devices.en'
 export const en = {
   Auth: authTranslationEn,
   Common: {
-    internalServerError: 'Unexpected server error occured, try again later',
-    networkError: 'Seems like you have connection propblems, check out your network',
+    internalServerError: 'Unexpected server error occurred, try again later',
+    networkError: 'Seems like you have connection problems, check out your network',
   },
   Devices: devicesTranslationsEn,
   Internationalization: {
