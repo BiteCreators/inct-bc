@@ -1,5 +1,6 @@
 import { authTranslationRu } from '@/locales/auth/auth.translation.ru'
 
+import { devicesTranslationsRu } from './devices/devices.ru'
 import { LocaleType } from './en'
 
 export const ru: LocaleType = {
@@ -8,12 +9,14 @@ export const ru: LocaleType = {
     internalServerError: 'Произошла непредвиденная ошибка, попробуйте позже',
     networkError: 'Похоже у вас проблемы с сетью, проверьте подключение',
   },
+  Devices: devicesTranslationsRu,
   Internationalization: {
     en: 'Английский',
     ru: 'Русский',
   },
   Navigation: {
     create: 'Создать',
+    devices: 'Устройства',
     favorites: 'Избранное',
     home: 'Главная',
     messenger: 'Мессенджер',

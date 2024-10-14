@@ -6,12 +6,12 @@
 
 /* } */
 .recaptchaContainer {
-    overflow: hidden;
-    display: inline-block;
+  overflow: hidden;
+  display: inline-block;
 
-    width: 301px;
-    height: 75px;
-    padding: 0;
+  width: 301px;
+  height: 75px;
+  padding: 0;
 
-    border-radius: 4px;
+  border-radius: 4px;
 }

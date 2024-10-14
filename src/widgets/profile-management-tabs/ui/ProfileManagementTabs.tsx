@@ -1,16 +1,19 @@
 import { useState } from 'react'
 
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TabsBase } from '@/common/ui'
+import { CurrentDevice, SessionsList } from '@/features/devices'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
 export const ProfileManagementTabs = () => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('general-information')
+  const t = useScopedTranslation('Navigation')
 
   return (
     <TabsBase<TabValues>
       ariaLabel={'profile management tabs'}
-      listClassName={'w-max h-[35px]'}
+      listClassName={'w-max md:w-full h-[35px]'}
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {
@@ -18,7 +21,16 @@ export const ProfileManagementTabs = () => {
           label: 'General information',
           value: 'general-information',
         },
-        { content: <div>devices</div>, label: 'Devices', value: 'devices' },
+        {
+          content: (
+            <div className={'flex flex-col gap-[18px]'}>
+              <CurrentDevice />
+              <SessionsList />
+            </div>
+          ),
+          label: t.devices,
+          value: 'devices',
+        },
         {
           content: <div>account management</div>,
           label: 'Account management',
