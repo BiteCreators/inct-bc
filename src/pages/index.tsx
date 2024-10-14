@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Button } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
@@ -13,6 +13,15 @@ const Home = () => {
     useConfirmation()
 
   const funk = async () => {
+    const isConfirmed = await requestConfirmation()
+
+    if (isConfirmed) {
+      alert('Action confirmed!')
+    } else {
+      alert('Action rejected!')
+    }
+  }
+  const funk2 = async () => {
     const isConfirmed = await requestConfirmation()
 
     if (isConfirmed) {
@@ -37,6 +46,7 @@ const Home = () => {
         title={'Confirm Action'}
       />
       <Button onClick={funk}>TEST</Button>
+      <Button onClick={funk2}>TEST</Button>
       <Link href={'/profile'}>Profile</Link>
       <div className={'text-[50px]'}>
         Aegon Targārio Ānogār Luqisūti Daor rhaenagon iā tubis jēdi. Yn ziry iāndes korona iā
