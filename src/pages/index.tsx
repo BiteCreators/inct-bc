@@ -1,52 +1,17 @@
 import React from 'react'
 
-import { Button } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 const Home = () => {
-  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
-    useConfirmation()
-
-  const funk = async () => {
-    const isConfirmed = await requestConfirmation()
-
-    if (isConfirmed) {
-      alert('Action confirmed!')
-    } else {
-      alert('Action rejected!')
-    }
-  }
-  const funk2 = async () => {
-    const isConfirmed = await requestConfirmation()
-
-    if (isConfirmed) {
-      alert('Action confirmed!')
-    } else {
-      alert('Action rejected!')
-    }
-  }
-
   return (
     <div className={'flex gap-4 flex-col'}>
       <h1>StartPage</h1>
       <Link className={'text-red-600 text-4xl'} href={'/auth'}>
         Auth
       </Link>
-      <ActionConfirmation
-        isOpen={confirmOpen}
-        message={'Are you sure?'}
-        onConfirm={handleConfirm}
-        onReject={handleReject}
-        setIsOpen={setConfirmOpen}
-        title={'Confirm Action'}
-      />
-      <Button onClick={funk}>TEST</Button>
-      <Button onClick={funk2}>TEST</Button>
       <Link href={'/profile'}>Profile</Link>
       <div className={'text-[50px]'}>
         Aegon Targārio Ānogār Luqisūti Daor rhaenagon iā tubis jēdi. Yn ziry iāndes korona iā
