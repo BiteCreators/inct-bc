@@ -6,7 +6,7 @@ import { CurrentDevice, SessionsList } from '@/features/devices'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
-export const ProfileManagementTabs = () => {
+export const ProfileSettingsTabs = () => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('general-information')
   const t = useScopedTranslation('Navigation')
 
