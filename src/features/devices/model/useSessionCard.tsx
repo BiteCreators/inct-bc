@@ -4,10 +4,12 @@ import {
   Brave,
   BrowserPlaceholder,
   ChromeSvgrepoCom,
+  DesktopMac,
   Explorer,
   Firefox,
   MicrosoftEdge,
   Opera,
+  PhoneIphone,
   Safari,
   UcBrowser,
   Yandex,
@@ -16,10 +18,12 @@ import {
 export const useSessionCard = ({
   browserName,
   lastVisit,
+  osName,
   type,
 }: {
   browserName: string
   lastVisit?: string
+  osName?: string
   type: 'browser' | 'device'
 }) => {
   let icon: React.ReactNode
@@ -65,9 +69,13 @@ export const useSessionCard = ({
     }
   }
 
-  if (type === 'device') {
-    //no data to display for some reason
-    //TODO: ask what to do with this
+  if (type === 'device' && osName) {
+    title = osName
+    if (osName === 'Linux' || osName === 'Windows' || osName === 'MacOS') {
+      icon = <DesktopMac />
+    } else {
+      icon = <PhoneIphone />
+    }
   }
 
   return {

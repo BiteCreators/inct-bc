@@ -33,7 +33,8 @@ export const SessionsList = () => {
               ip={session.ip}
               key={session.deviceId}
               lastVisit={session.lastActive}
-              type={'browser'}
+              osName={session.osName}
+              type={'device'}
             />
           )
         })}

@@ -9,11 +9,12 @@ type Props = {
   browserName: string
   ip: string
   lastVisit?: string
+  osName?: string
   type: 'browser' | 'device'
 }
 
-export const SessionCard = ({ action, browserName, ip, lastVisit, type }: Props) => {
-  const { icon, lastVisitDate, title } = useSessionCard({ browserName, lastVisit, type })
+export const SessionCard = ({ action, browserName, ip, lastVisit, osName, type }: Props) => {
+  const { icon, lastVisitDate, title } = useSessionCard({ browserName, lastVisit, osName, type })
 
   return (
     <Card className={'flex p-6 pt-[18px] justify-between'}>
