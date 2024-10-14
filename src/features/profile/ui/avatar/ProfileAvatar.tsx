@@ -1,22 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import {
-  useDeleteAvatarProfileMutation,
-  useGetProfileQuery,
-  useSetAvatarProfileMutation,
-} from '@/common/api/profile.api'
 import { ImageOutline } from '@/common/assets/icons/components'
 import { Avatar, Button, Loader } from '@/common/ui'
+import { useProfileAvatar } from '@/features/profile/lib/hooks/useProfileAvatar'
 import { ModalAvatar } from '@/features/profile/ui/avatar/ModalAvatar'
 
 export const ProfileAvatar = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const { currentAvatar, isLoading, isOpen, removeAvatar, setIsOpen, updateAvatar } =
+    useProfileAvatar()
 
-  const { data: profile, isLoading: isProfileLoading, refetch } = useGetProfileQuery()
-  const [setAvatarProfile, { isLoading: isLoadingSet }] = useSetAvatarProfileMutation()
-  const [deleteAvatarProfile, { isLoading: isLoadingDelete }] = useDeleteAvatarProfileMutation()
-
-  if (isProfileLoading || isLoadingSet || isLoadingDelete) {
+  if (isLoading) {
     return (
       <div className={'bg-dark-700 w-1/5 p-2 flex justify-center'}>
         <div className={'mt-16'}>
@@ -24,29 +17,6 @@ export const ProfileAvatar = () => {
         </div>
       </div>
     )
-  }
-
-  const currentAvatar = profile?.avatars?.[0] || null
-
-  const updateAvatar = async (file: File) => {
-    try {
-      await setAvatarProfile({ file }).unwrap()
-      refetch()
-    } catch (error) {
-      console.error('Ошибка при установке аватара:', error)
-    }
-  }
-
-  const removeAvatar = async () => {
-    if (!currentAvatar) {
-      return
-    }
-    try {
-      await deleteAvatarProfile().unwrap()
-      refetch()
-    } catch (error) {
-      console.error('Ошибка при удалении аватара:', error)
-    }
   }
 
   return (

@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
-import { Crop, convertToPixelCrop } from 'react-image-crop'
+import React from 'react'
 
 import { Avatars } from '@/common/api/profile.api'
 import { ImageOutline } from '@/common/assets/icons/components'
 import { Alert, Avatar, Button, Modal } from '@/common/ui'
-import setCanvasPreview from '@/common/ui/avatar/setCanvasPreview'
+import { useCropImage } from '@/features/profile/lib/hooks/useCropImage'
+import { useImageUpload } from '@/features/profile/lib/hooks/useImageUpload'
 import { CropImage } from '@/features/profile/ui/avatar/CropImage'
 
 type Props = {
@@ -15,93 +15,13 @@ type Props = {
 }
 
 export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: Props) => {
-  const previewImgRef = useRef<HTMLCanvasElement | null>(null)
-  const [error, setError] = useState('')
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const [imageUrl, setImageUrl] = useState<null | string>(null)
-  const [crop, setCrop] = useState<Crop>({
-    height: 150,
-    unit: 'px',
-    width: 150,
-    x: 25,
-    y: 25,
-  })
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const { error, fileInputRef, imageUrl, onSelectFile, selectedFile, setError, uploadImage } =
+    useImageUpload()
 
-  const UploadImage = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click()
-    }
-  }
+  const { crop, previewImgRef, saveCroppedImage, setCrop } = useCropImage(updateAvatar)
 
-  const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-
-    if (!file) {
-      return
-    }
-
-    const validFormats = ['image/jpeg', 'image/png']
-
-    if (!validFormats.includes(file.type)) {
-      setError('Error! The format of the uploaded photo must be PNG and JPEG')
-
-      return
-    }
-
-    const maxSizeInMB = 10
-
-    if (file.size > maxSizeInMB * 1024 * 1024) {
-      setError('Error! Photo size must be less than 10 MB!')
-
-      return
-    }
-
-    const reader = new FileReader()
-
-    reader.addEventListener('load', () => {
-      const imageElement = document.createElement('img')
-      const url = reader.result?.toString() || ''
-
-      imageElement.src = url
-      imageElement.addEventListener('load', (e: any) => {
-        setImageUrl(url)
-        setSelectedFile(file)
-        if (error) {
-          setError('')
-        }
-        const { naturalHeight: naturalHeight, naturalWidth } = e.currentTarget
-
-        if (naturalHeight < 150 || naturalWidth < 150) {
-          setError('image must be at least 100')
-
-          return setImageUrl('')
-        }
-      })
-    })
-
-    reader.readAsDataURL(file)
-  }
-
-  const saveCroppedImage = (imgRef: HTMLImageElement | null) => {
-    if (imgRef && previewImgRef.current) {
-      const pixelCrop = convertToPixelCrop(crop, imgRef.width, imgRef.height)
-
-      setCanvasPreview(imgRef, previewImgRef.current, pixelCrop)
-    }
-
-    if (previewImgRef.current) {
-      previewImgRef.current.toBlob(blob => {
-        if (blob) {
-          const croppedFile = new File([blob], selectedFile?.name || 'croppedImage.png', {
-            type: 'image/png',
-          })
-
-          updateAvatar(croppedFile)
-        }
-      }, 'image/png')
-    }
-
+  const handleSave = (imgRef: HTMLImageElement | null) => {
+    saveCroppedImage(imgRef, selectedFile)
     setIsOpen(false)
   }
 
@@ -121,7 +41,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
           <CropImage
             crop={crop}
             imageUrl={imageUrl}
-            saveCroppedImage={saveCroppedImage}
+            saveCroppedImage={handleSave}
             setCrop={setCrop}
           />
         )}
@@ -135,7 +55,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
               )}
             </div>
 
-            <Button className={'w-56 bottom-0 mt-6 mb-16'} onClick={UploadImage}>
+            <Button className={'w-56 bottom-0 mt-6 mb-16'} onClick={uploadImage}>
               Select from Computer
             </Button>
           </div>
