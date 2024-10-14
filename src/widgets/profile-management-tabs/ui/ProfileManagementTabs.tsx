@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
 
@@ -7,6 +8,7 @@ type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-
 
 export const ProfileManagementTabs = () => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('general-information')
+  const t = useScopedTranslation('Navigation')
 
   return (
     <TabsBase<TabValues>
@@ -26,7 +28,7 @@ export const ProfileManagementTabs = () => {
               <SessionsList />
             </div>
           ),
-          label: 'Devices',
+          label: t.devices,
           value: 'devices',
         },
         {

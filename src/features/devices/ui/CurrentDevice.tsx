@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { devicesApi } from '@/common/api/devices.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Alert, Button, Loader, Typography } from '@/common/ui'
 
 import { SessionCard } from './SessionCard'
@@ -12,6 +13,7 @@ export const CurrentDevice = () => {
     devicesApi.useTerminateAllSessionsMutation()
   const [terminateError, setTerminateError] = useState('')
   const { handleApiError } = useHandleApiError('Devices')
+  const t = useScopedTranslation('Devices')
 
   if (isLoading) {
     return (
@@ -40,7 +42,7 @@ export const CurrentDevice = () => {
     return (
       <div className={'flex flex-col'}>
         <Typography className={'mb-[6px]'} variant={'h1'}>
-          Current device
+          {t.currentDevice}
         </Typography>
         <SessionCard browserName={current.browserName} ip={current.ip} type={'browser'} />
         <Button
@@ -49,7 +51,7 @@ export const CurrentDevice = () => {
           onClick={handleClick}
           variant={'outline'}
         >
-          Terminate all other sessions
+          {t.terminateOtherSessions}
         </Button>
         {!!terminateError && (
           <Alert message={terminateError} onClose={() => setTerminateError('')} type={'error'} />

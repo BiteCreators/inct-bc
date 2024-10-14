@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const SessionCard = ({ action, browserName, ip, lastVisit, osName, type }: Props) => {
-  const { icon, lastVisitDate, title } = useSessionCard({ browserName, lastVisit, osName, type })
+  const { icon, lastVisitDate, t, title } = useSessionCard({ browserName, lastVisit, osName, type })
 
   return (
     <Card className={'flex p-6 pt-[18px] justify-between'}>
@@ -23,7 +23,11 @@ export const SessionCard = ({ action, browserName, ip, lastVisit, osName, type }
         <div>
           <Typography variant={'h2'}>{title}</Typography>
           <Typography className={'mt-3'}>IP: {ip}</Typography>
-          {!!lastVisit && <Typography className={'mt-3'}>Last visit: {lastVisitDate}</Typography>}
+          {!!lastVisit && (
+            <Typography className={'mt-3'}>
+              {t.lastVisit}: {lastVisitDate}
+            </Typography>
+          )}
         </div>
       </div>
       {!!action && <div className={'self-center'}>{action}</div>}

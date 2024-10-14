@@ -16,6 +16,7 @@ export const ru: LocaleType = {
   },
   Navigation: {
     create: 'Создать',
+    devices: 'Устройства',
     favorites: 'Избранное',
     home: 'Главная',
     messenger: 'Мессенджер',

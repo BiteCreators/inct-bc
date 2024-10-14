@@ -14,6 +14,7 @@ import {
   UcBrowser,
   Yandex,
 } from '@/common/assets/icons/components'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 
 export const useSessionCard = ({
   browserName,
@@ -26,6 +27,7 @@ export const useSessionCard = ({
   osName?: string
   type: 'browser' | 'device'
 }) => {
+  const t = useScopedTranslation('Devices')
   let icon: React.ReactNode
   let title: string = 'test'
   let lastVisitDate: string | undefined = undefined
@@ -81,6 +83,7 @@ export const useSessionCard = ({
   return {
     icon,
     lastVisitDate,
+    t,
     title,
   }
 }

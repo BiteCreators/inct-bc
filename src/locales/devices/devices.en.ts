@@ -1,3 +1,6 @@
 export const devicesTranslationsEn = {
-  test: 'test',
+  activeSessions: 'Active sessions',
+  currentDevice: 'Current device',
+  lastVisit: 'Last visit',
+  terminateOtherSessions: 'Terminate all other sessions',
 }

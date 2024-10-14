@@ -15,6 +15,7 @@ export const en = {
   },
   Navigation: {
     create: 'Create',
+    devices: 'Devices',
     favorites: 'Favorites',
     home: 'Home',
     messenger: 'Messenger',
