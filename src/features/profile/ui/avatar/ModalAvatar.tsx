@@ -3,6 +3,7 @@ import React from 'react'
 import { Avatars } from '@/common/api/profile.api'
 import { ImageOutline } from '@/common/assets/icons/components'
 import { Alert, Avatar, Button, Modal } from '@/common/ui'
+import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 import { useCropImage } from '@/features/profile/lib/hooks/useCropImage'
 import { useImageUpload } from '@/features/profile/lib/hooks/useImageUpload'
 import { CropImage } from '@/features/profile/ui/avatar/CropImage'
@@ -15,7 +16,7 @@ type Props = {
 }
 
 export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: Props) => {
-  const { error, fileInputRef, imageUrl, onSelectFile, selectedFile, setError, uploadImage } =
+  const { error, fileInputRef, handleFileSelect, imageUrl, selectedFile, setError, uploadImage } =
     useImageUpload()
 
   const { crop, previewImgRef, saveCroppedImage, setCrop } = useCropImage(updateAvatar)
@@ -47,27 +48,21 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
         )}
         {!imageUrl && (
           <div className={'w-full flex flex-col justify-center items-center gap-5'}>
-            <div className={'bg-dark-700 w-56 h-56 mt-7 flex justify-center items-center'}>
-              {currentAvatar ? (
-                <Avatar avatarURL={currentAvatar.url} rounded={false} size={224} />
-              ) : (
-                <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
-              )}
-            </div>
-
+            <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
+              <div className={'bg-dark-700 w-56 h-56 mt-7 flex justify-center items-center'}>
+                {currentAvatar ? (
+                  <Avatar avatarURL={currentAvatar.url} rounded={false} size={224} />
+                ) : (
+                  <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
+                )}
+              </div>
+            </DragAndDropInput>
             <Button className={'w-56 bottom-0 mt-6 mb-16'} onClick={uploadImage}>
               Select from Computer
             </Button>
           </div>
         )}
       </div>
-      <input
-        accept={'.jpg, .jpeg, .png'}
-        className={'hidden'}
-        onChange={onSelectFile}
-        ref={fileInputRef}
-        type={'file'}
-      />
       {crop && (
         <canvas
           className={'border object-contain hidden w-[150px] h-[150px]'}

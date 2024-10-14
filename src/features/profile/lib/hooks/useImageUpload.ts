@@ -1,24 +1,12 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-export const useImageUpload = (onFileSelected?: (file: File) => void) => {
+export const useImageUpload = () => {
   const [imageUrl, setImageUrl] = useState<null | string>(null)
   const [error, setError] = useState('')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
-  const uploadImage = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click()
-    }
-  }
-
-  const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-
-    if (!file) {
-      return
-    }
-
+  const handleFileSelect = (file: File) => {
     const validFormats = ['image/jpeg', 'image/png']
 
     if (!validFormats.includes(file.type)) {
@@ -57,21 +45,23 @@ export const useImageUpload = (onFileSelected?: (file: File) => void) => {
         if (error) {
           setError('')
         }
-
-        if (onFileSelected) {
-          onFileSelected(file)
-        }
       })
     })
 
     reader.readAsDataURL(file)
   }
 
+  const uploadImage = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
+    }
+  }
+
   return {
     error,
     fileInputRef,
+    handleFileSelect,
     imageUrl,
-    onSelectFile,
     selectedFile,
     setError,
     uploadImage,
