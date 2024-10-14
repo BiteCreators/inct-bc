@@ -90,10 +90,16 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
       setCanvasPreview(imgRef, previewImgRef.current, pixelCrop)
     }
 
-    const dataUrl = previewImgRef.current?.toDataURL()
+    if (previewImgRef.current) {
+      previewImgRef.current.toBlob(blob => {
+        if (blob) {
+          const croppedFile = new File([blob], selectedFile?.name || 'croppedImage.png', {
+            type: 'image/png',
+          })
 
-    if (dataUrl && selectedFile) {
-      updateAvatar(selectedFile)
+          updateAvatar(croppedFile)
+        }
+      }, 'image/png')
     }
 
     setIsOpen(false)

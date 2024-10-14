@@ -17,7 +17,13 @@ export const ProfileAvatar = () => {
   const [deleteAvatarProfile, { isLoading: isLoadingDelete }] = useDeleteAvatarProfileMutation()
 
   if (isProfileLoading || isLoadingSet || isLoadingDelete) {
-    return <Loader />
+    return (
+      <div className={'bg-dark-700 w-1/5 p-2 flex justify-center'}>
+        <div className={'mt-16'}>
+          <Loader />
+        </div>
+      </div>
+    )
   }
 
   const currentAvatar = profile?.avatars?.[0] || null

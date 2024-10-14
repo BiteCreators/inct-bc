@@ -46,7 +46,11 @@ export const Avatar = ({
           ])}
           onClick={closeHandler}
         >
-          <div className={'flex items-center justify-center bg-danger-500 rounded-full'}>
+          <div
+            className={
+              'flex items-center justify-center bg-danger-500 rounded-full hover:cursor-pointer'
+            }
+          >
             <Close />
           </div>
         </div>
