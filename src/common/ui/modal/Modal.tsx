@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import ReactDOM from 'react-dom'
 
 import { cn } from '@/common/lib/utils/cn'
 import { ModalContent } from '@/common/ui/modal/ModalContent'
@@ -14,7 +15,7 @@ type Props = {
 }
 
 export const Modal = ({ children, className, isOpen, mode, onOpenChange, title }: Props) => {
-  return (
+  const modalContent = (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-50')} />
       <Dialog.Content
@@ -30,4 +31,6 @@ export const Modal = ({ children, className, isOpen, mode, onOpenChange, title }
       </Dialog.Content>
     </Dialog.Root>
   )
+
+  return ReactDOM.createPortal(modalContent, document.body)
 }
