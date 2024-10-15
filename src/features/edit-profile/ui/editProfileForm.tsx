@@ -46,16 +46,12 @@ export const EditProfileForm = ({ userName }: Props) => {
   })
 
   return (
-    <div className={'flex justify-between items-start ml-6 mr-[65px] relative mt-6 h-full text-sm'}>
-      <div className={'flex items-center gap-y-5 flex-col h-[195px] basis-1/4'}>
+    <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
+      <div className={'flex flex-col gap-6'}>
         <Avatar avatarURL={exampleImage.src} href={'/'} size={192} />
         <Button variant={'outline'}>Add a profile photo</Button>
       </div>
-      <form
-        className={'ml-10 flex flex-col gap-y-6 basis-3/4'}
-        noValidate
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className={'flex flex-col grow gap-6'} noValidate onSubmit={handleSubmit(onSubmit)}>
         <FormInput control={control} label={t.userName} name={'userName'} required />
         <FormInput control={control} label={t.firstName} name={'firstName'} required />
         <FormInput control={control} label={t.lastName} name={'lastName'} required />
@@ -68,35 +64,33 @@ export const EditProfileForm = ({ userName }: Props) => {
           name={'dateOfbirth'}
           required
         />
-        <div className={'flex gap-5 justify-between w-full'}>
+        <div className={'flex gap-6'}>
           <FormSelect
+            className={'w-full'}
             control={control}
             label={t.selectYourCountry}
-            maxWidth={'360px'}
             name={'selectYourCountry'}
             placeholder={t.country}
             responsive
-            width={'358px'}
           >
             {countriesList}
           </FormSelect>
           <FormSelect
+            className={'w-full'}
             control={control}
             label={t.selectYourCity}
-            maxWidth={'360px'}
             name={'selectYourCity'}
             placeholder={t.city}
-            width={'358px'}
           >
             {citiesList}
           </FormSelect>
         </div>
-        <FormTextArea control={control} label={t.aboutMe} name={'aboutMe'} />
-        <Button className={'mt-7 w-min-40 self-end'} type={'submit'}>
+        <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
+        <Button className={'w-min-40 self-end'} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
-      <span className={'inline-block absolute h-[1px] bottom-[120px] w-full bg-dark-300'}></span>
+      <hr className={'border-dark-300 w-full absolute bottom-[60px]'}></hr>
     </div>
   )
 }
