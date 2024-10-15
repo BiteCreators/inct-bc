@@ -60,7 +60,7 @@ export const en = {
     country: 'Country',
     dateOfBirth: 'Date of birth',
     editProfileError: {
-      ageUser: 'A user under 13 cannot create a profile.Privacy Policy',
+      ageUser: 'A user under 13 cannot create a profile.<1> Privacy Policy</1>',
       invalidFirstName: 'The first name may contain the characters A-Za-zА-Яа-я',
       invalidLastName: 'The last name may contain the characters A-Za-zА-Яа-я',
       invalidUserName: 'The username may contain the characters A-Za-z0-9_-',
