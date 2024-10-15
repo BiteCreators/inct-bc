@@ -1,6 +1,7 @@
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Typography } from '@/common/ui'
+import { Alert, Typography } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
+import { ErrorQueryType } from '@/entities/devices/api/devices.api'
 
 import { SessionCard } from './SessionCard'
 import { TerminateSessionButton } from './TerminateSessionButton'
@@ -10,8 +11,16 @@ export const SessionsList = () => {
   const t = useScopedTranslation('Devices')
 
   if (isError) {
-    //TODO: handle error
-    return <div>error</div>
+    const err = error as ErrorQueryType
+
+    return (
+      <Alert
+        duration={999999}
+        message={err.data.messages[0].message}
+        purpose={'alert'}
+        type={'error'}
+      />
+    )
   }
 
   if (isSuccess) {
