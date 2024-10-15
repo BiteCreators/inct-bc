@@ -36,7 +36,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
       title={'Add profile photo'}
     >
       {error && (
-        <Alert message={error} onClose={() => setError('')} purpose={'toast'} type={'error'} />
+        <Alert message={error} onClose={() => setError('')} purpose={'alert'} type={'error'} />
       )}
       <div className={'w-full items-end'}>
         {imageUrl && (
