@@ -6,7 +6,8 @@ import { Alert, Avatar, Button, Modal } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 import { useCropImage } from '@/features/profile/lib/hooks/useCropImage'
 import { useImageUpload } from '@/features/profile/lib/hooks/useImageUpload'
-import { CropImage } from '@/features/profile/ui/avatar/CropImage'
+
+import { CropImage } from './CropImage'
 
 type Props = {
   currentAvatar: Avatars | null

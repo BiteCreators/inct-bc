@@ -4,7 +4,8 @@ import { ImageOutline } from '@/common/assets/icons/components'
 import { Avatar, Button, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useProfileAvatar } from '@/features/profile/lib/hooks/useProfileAvatar'
-import { ModalAvatar } from '@/features/profile/ui/avatar/ModalAvatar'
+
+import { ModalAvatar } from './ModalAvatar'
 
 export const ProfileAvatar = () => {
   const {
