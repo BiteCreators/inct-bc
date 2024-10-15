@@ -29,7 +29,11 @@ export const useProfileAvatar = () => {
       return
     }
 
-    await requestConfirmation()
+    const confirmed = await requestConfirmation()
+
+    if (!confirmed) {
+      return
+    }
 
     try {
       await deleteAvatarProfile().unwrap()

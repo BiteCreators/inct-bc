@@ -16,7 +16,11 @@ export const useLogout = () => {
   const { handleApiError } = useHandleApiError('Auth')
 
   const handleLogout = async () => {
-    await requestConfirmation()
+    const confirmed = await requestConfirmation()
+
+    if (!confirmed) {
+      return
+    }
     try {
       await logout().unwrap()
       removeCookie('accessToken', { path: '/' })
