@@ -3,9 +3,8 @@ import { useCookies } from 'react-cookie'
 import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { authSlice } from '@/entities/auth'
 
 export const useLogout = () => {
   const [__, _, removeCookie] = useCookies(['accessToken'])

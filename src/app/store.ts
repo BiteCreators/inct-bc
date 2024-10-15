@@ -1,6 +1,6 @@
 import { inctagramApi } from '@/common/api/inct.api'
 import { locationApi } from '@/common/api/location.api'
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { authSlice } from '@/entities/auth'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import {

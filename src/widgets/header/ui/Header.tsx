@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
+import { authSlice } from '@/entities/auth'
 import { SignInButton, SignUpButton } from '@/features/auth'
-import { authSlice } from '@/features/auth/model/auth.slice'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'
@@ -26,7 +26,7 @@ export const Header = () => {
         <AppLogo />
       </div>
       <div className={cn(['flex', !isAuthPage && 'gap-6', 'md:gap-12'])}>
-        {accessToken && (
+        {!!accessToken && (
           <div className={'hidden md:block'}>
             <NotificationsButton />
           </div>

@@ -1,4 +1,4 @@
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { authSlice } from '@/entities/auth'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 

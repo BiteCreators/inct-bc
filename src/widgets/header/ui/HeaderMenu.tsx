@@ -11,8 +11,8 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import { authSlice } from '@/entities/auth'
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
-import { authSlice } from '@/features/auth/model/auth.slice'
 import { useRouter } from 'next/router'
 
 export const HeaderMenu = () => {
