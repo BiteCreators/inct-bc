@@ -9,6 +9,7 @@ import {
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Dropdown } from '@/common/ui'
+import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 import { authSlice } from '@/features/auth/model/auth.slice'
@@ -20,7 +21,8 @@ export const HeaderMenu = () => {
   const tAuth = useScopedTranslation('Auth')
   const tNav = useScopedTranslation('Navigation')
 
-  const { handleLogout } = useLogout()
+  const { confirmOpen, handleConfirm, handleLogout, handleReject, isLoading, me, setConfirmOpen } =
+    useLogout()
 
   if (router.pathname.startsWith('/auth') && router.pathname !== '/auth') {
     return null
@@ -67,6 +69,14 @@ export const HeaderMenu = () => {
   return (
     <nav>
       <Dropdown className={'ml-6 -mt-0.5'} items={items} />
+      <ActionConfirmation
+        isOpen={confirmOpen}
+        message={`${tAuth.areYouSureYouWantToLogout} "${me?.email}"?`}
+        onConfirm={handleConfirm}
+        onReject={handleReject}
+        setIsOpen={setConfirmOpen}
+        title={tAuth.logOut}
+      />
     </nav>
   )
 }
