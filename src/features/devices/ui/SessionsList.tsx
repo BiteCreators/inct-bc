@@ -1,6 +1,6 @@
-import { devicesApi } from '@/common/api/devices.api'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Typography } from '@/common/ui'
+import { devicesApi } from '@/entities/devices'
 
 import { SessionCard } from './SessionCard'
 import { TerminateSessionButton } from './TerminateSessionButton'

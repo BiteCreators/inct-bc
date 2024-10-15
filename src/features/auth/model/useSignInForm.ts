@@ -2,16 +2,15 @@ import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi, authSlice } from '@/entities/auth'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
 
 import { modifySingInApiError } from '../lib/modifySignInApiError'
-import { authSlice } from './auth.slice'
 
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')

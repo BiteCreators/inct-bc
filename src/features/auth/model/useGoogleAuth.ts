@@ -1,6 +1,5 @@
-import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { authApi, authSlice } from '@/entities/auth'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 

@@ -1,4 +1,7 @@
-export const authTranslationRu = {
+import { LocaleType } from '../en'
+
+export const authTranslationRu: LocaleType['Auth'] = {
+  areYouSureYouWantToLogout: 'Вы уверены что хотите выйти из своего аккаунта',
   backToSignIn: 'Назад к авторизации',
   congratulations: 'Поздравляем!',
   createNewPassword: 'Создать новый пароль',

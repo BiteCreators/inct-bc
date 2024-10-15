@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import exampleImage from '../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
 import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
+import { ProfileAvatar } from './avatar/ProfileAvatar'
 
 type Props = {
   userName?: string
@@ -47,10 +48,7 @@ export const EditProfileForm = ({ userName }: Props) => {
 
   return (
     <div className={'flex justify-between items-start ml-6 mr-[65px] relative mt-6 h-full text-sm'}>
-      <div className={'flex items-center gap-y-5 flex-col h-[195px] basis-1/4'}>
-        <Avatar avatarURL={exampleImage.src} href={'/'} size={192} />
-        <Button variant={'outline'}>Add a profile photo</Button>
-      </div>
+      <ProfileAvatar />
       <form
         className={'ml-10 flex flex-col gap-y-6 basis-3/4'}
         noValidate

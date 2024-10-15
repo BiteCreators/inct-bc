@@ -2,12 +2,24 @@ import React from 'react'
 
 import { ImageOutline } from '@/common/assets/icons/components'
 import { Avatar, Button, Loader } from '@/common/ui'
-import { useProfileAvatar } from '@/features/profile/lib/hooks/useProfileAvatar'
-import { ModalAvatar } from '@/features/profile/ui/avatar/ModalAvatar'
+import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { useProfileAvatar } from '@/features/edit-profile/lib/hooks/useProfileAvatar'
+
+import { ModalAvatar } from './ModalAvatar'
 
 export const ProfileAvatar = () => {
-  const { currentAvatar, isLoading, isOpen, removeAvatar, setIsOpen, updateAvatar } =
-    useProfileAvatar()
+  const {
+    confirmOpen,
+    currentAvatar,
+    handleConfirm,
+    handleReject,
+    isLoading,
+    isOpen,
+    removeAvatar,
+    setConfirmOpen,
+    setIsOpen,
+    updateAvatar,
+  } = useProfileAvatar()
 
   if (isLoading) {
     return (
@@ -22,13 +34,23 @@ export const ProfileAvatar = () => {
   return (
     <div className={'bg-dark-700 w-1/5 min-w-56 flex flex-col items-center gap-5 p-2'}>
       {currentAvatar ? (
-        <Avatar
-          avatarURL={currentAvatar?.url || ''}
-          isNextLink={false}
-          onClose={removeAvatar}
-          showClose={!!currentAvatar?.url}
-          size={200}
-        />
+        <>
+          <Avatar
+            avatarURL={currentAvatar?.url || ''}
+            isNextLink={false}
+            onClose={removeAvatar}
+            showClose={!!currentAvatar?.url}
+            size={200}
+          />
+          <ActionConfirmation
+            isOpen={confirmOpen}
+            message={'Are you sure you want to delete the photo?'}
+            onConfirm={handleConfirm}
+            onReject={handleReject}
+            setIsOpen={setConfirmOpen}
+            title={'Delete photo'}
+          />
+        </>
       ) : (
         <div
           className={
