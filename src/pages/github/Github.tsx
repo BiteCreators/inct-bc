@@ -8,7 +8,7 @@ const Github: NextPageWithLayout = () => {
   const router = useRouter()
 
   if (router.query.accessToken) {
-    document.cookie = `accessToken=${router.query.accessToken};max-age=3600;secure;path=/;samesite=lax`
+    document.cookie = `accessToken=${router.query.accessToken};max-age=2678400;secure;path=/;samesite=lax`
     Router.push('/')
   }
 

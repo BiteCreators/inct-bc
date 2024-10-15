@@ -45,9 +45,8 @@ export const useSignInForm = () => {
       }).unwrap()
       const token = res.accessToken
 
-      // document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
       setCookies('accessToken', res.accessToken, {
-        maxAge: 3600,
+        maxAge: 2678400,
         path: '/',
         sameSite: 'lax',
         secure: true,
