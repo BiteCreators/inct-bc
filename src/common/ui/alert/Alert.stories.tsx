@@ -15,8 +15,8 @@ type Story = StoryObj<typeof Alert>
 
 export const Success: Story = {
   args: {
+    canClose: true,
     message: 'Your settings are saved',
-    onClose: () => {},
     purpose: 'alert',
     type: 'success',
   },
@@ -24,8 +24,8 @@ export const Success: Story = {
 
 export const Error: Story = {
   args: {
+    canClose: true,
     message: 'Error! Server is not available',
-    onClose: () => {},
     purpose: 'alert',
     type: 'error',
   },
@@ -33,8 +33,17 @@ export const Error: Story = {
 
 export const Info: Story = {
   args: {
+    canClose: true,
     message: 'Information: Changes have been applied',
-    onClose: () => {},
+    purpose: 'alert',
+    type: 'info',
+  },
+}
+
+export const NotAutoClosing: Story = {
+  args: {
+    canClose: false,
+    message: 'Close me',
     purpose: 'alert',
     type: 'info',
   },
@@ -49,8 +58,8 @@ export const ShowOnButtonClick: Story = {
         <Button onClick={() => setShowAlert(!showAlert)}>Alert</Button>
         {showAlert && (
           <Alert
+            canClose={false}
             message={'This is an alert triggered by a button'}
-            onClose={() => setShowAlert(false)}
             purpose={'alert'}
             type={'error'}
           />
@@ -60,7 +69,7 @@ export const ShowOnButtonClick: Story = {
   },
 }
 
-export const Toast: Story = {
+export const Toasts: Story = {
   render: () => {
     const [showAlert, setShowAlert] = useState(false)
 
@@ -70,12 +79,15 @@ export const Toast: Story = {
           Toast
         </Button>
         {showAlert && (
-          <Alert
-            message={'This is really toast.'}
-            onClose={() => setShowAlert(false)}
-            purpose={'toast'}
-            type={'error'}
-          />
+          <>
+            <Alert message={'This is really toast.'} purpose={'toast'} type={'error'} />
+            <Alert
+              canClose={false}
+              message={'This is really closed toast.'}
+              purpose={'toast'}
+              type={'error'}
+            />
+          </>
         )}
       </div>
     )
