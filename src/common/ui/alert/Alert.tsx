@@ -21,7 +21,7 @@ export const Alert = ({
   duration = 5000,
   message,
   onClose,
-  purpose = 'toast',
+  purpose = 'alert',
   type = 'error',
 }: Props) => {
   const [isVisible, setIsVisible] = useState(true)
@@ -85,8 +85,8 @@ export const Alert = ({
       className={cn(
         'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white',
         className,
-        purpose === 'toast' && 'mb-3',
-        purpose === 'alert' &&
+        purpose === 'alert' && 'mb-3',
+        purpose === 'toast' &&
           'fixed md:bottom-4 bottom-[61px] md:left-[173px] left-5 right-5 min-w-72 md:max-w-[420px] max-w-[350px]',
         alertStyles[type]
       )}

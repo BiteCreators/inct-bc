@@ -28,7 +28,7 @@ export const TerminateSessionButton = ({ deviceId }: { deviceId: number }) => {
       >
         <LogOut /> {t.logOut}
       </button>
-      {!!apiError && <Alert message={apiError} type={'error'} />}
+      {!!apiError && <Alert message={apiError} purpose={'toast'} type={'error'} />}
     </>
   )
 }

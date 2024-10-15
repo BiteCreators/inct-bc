@@ -54,7 +54,12 @@ export const CurrentDevice = () => {
           {t.terminateOtherSessions}
         </Button>
         {!!terminateError && (
-          <Alert message={terminateError} onClose={() => setTerminateError('')} type={'error'} />
+          <Alert
+            message={terminateError}
+            onClose={() => setTerminateError('')}
+            purpose={'toast'}
+            type={'error'}
+          />
         )}
       </div>
     )

@@ -63,7 +63,14 @@ export const ForgotPasswordForm = () => {
         </div>
       </form>
 
-      {!!apiError && <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />}
+      {!!apiError && (
+        <Alert
+          message={apiError}
+          onClose={() => setApiError('')}
+          purpose={'alert'}
+          type={'error'}
+        />
+      )}
       <LinkSentModal
         bodyText={`${t.weHaveSent} ${getValues('email')}`}
         isOpen={isModalOpen}

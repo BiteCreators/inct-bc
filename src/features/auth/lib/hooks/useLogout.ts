@@ -8,7 +8,7 @@ import { authSlice } from '@/features/auth/model/auth.slice'
 export const useLogout = () => {
   const [__, _, removeCookie] = useCookies(['accessToken'])
   const dispatch = useAppDispatch()
-  const [logout] = authApi.useLogoutMutation()
+  const [logout, { isLoading }] = authApi.useLogoutMutation()
 
   const { handleApiError } = useHandleApiError('Auth')
 
@@ -25,5 +25,5 @@ export const useLogout = () => {
     }
   }
 
-  return { handleLogout }
+  return { handleLogout, isLoading }
 }

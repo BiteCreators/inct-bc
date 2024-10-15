@@ -54,7 +54,7 @@ export const SignInForm = () => {
           canClose={false}
           message={apiError}
           onClose={() => setApiError('')}
-          purpose={'toast'}
+          purpose={'alert'}
           type={'error'}
         />
       )}
