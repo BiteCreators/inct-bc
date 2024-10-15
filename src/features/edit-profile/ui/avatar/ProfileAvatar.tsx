@@ -3,7 +3,7 @@ import React from 'react'
 import { ImageOutline } from '@/common/assets/icons/components'
 import { Avatar, Button, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { useProfileAvatar } from '@/features/profile/lib/hooks/useProfileAvatar'
+import { useProfileAvatar } from '@/features/edit-profile/lib/hooks/useProfileAvatar'
 
 import { ModalAvatar } from './ModalAvatar'
 
