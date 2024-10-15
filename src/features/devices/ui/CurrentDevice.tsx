@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { devicesApi } from '@/common/api/devices.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Alert, Button, Loader, Typography } from '@/common/ui'
+import { devicesApi } from '@/entities/devices'
 
 import { SessionCard } from './SessionCard'
 

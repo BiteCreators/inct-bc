@@ -1,4 +1,4 @@
-import { inctagramApi } from './inct.api'
+import { inctagramApi } from '@/common/api/inct.api'
 
 type Session = {
   browserName: string
