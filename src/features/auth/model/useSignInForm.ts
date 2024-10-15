@@ -16,7 +16,7 @@ import { authSlice } from './auth.slice'
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')
 
-  const signInSchema = createSignInSchema(t)
+  const signInSchema = createSignInSchema(t.errors)
 
   const {
     control,

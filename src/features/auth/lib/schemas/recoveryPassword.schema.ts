@@ -1,7 +1,7 @@
 import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const createRecoveryPasswordSchema = (t: LocaleType['Auth']) =>
+export const createRecoveryPasswordSchema = (t: LocaleType['Auth']['errors']) =>
   z
     .object({
       confirmationPassword: z
