@@ -32,7 +32,8 @@ export const CurrentDevice = () => {
   }
 
   if (isError) {
-    //TODO: handle error
+    console.log(error)
+
     return <div>{JSON.stringify(error)}</div>
   }
 
