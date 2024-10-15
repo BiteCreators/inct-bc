@@ -1,5 +1,6 @@
 export const profileTranslationRu = {
   aboutMe: 'Обо мне',
+  addProfilePhoto: 'Добавить фотографию профиля',
   citiesList: 'Санкт-Петербург,Москва,Тверь,Самара,Псков',
   city: 'Город',
   countriesList: 'Россия,Беларусь,Украина,Грузия,Абхазия',

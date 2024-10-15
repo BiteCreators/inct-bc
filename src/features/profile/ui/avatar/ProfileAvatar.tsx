@@ -1,11 +1,13 @@
 import React from 'react'
 
 import { ImageOutline } from '@/common/assets/icons/components'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Avatar, Button, Loader } from '@/common/ui'
 import { useProfileAvatar } from '@/features/profile/lib/hooks/useProfileAvatar'
 import { ModalAvatar } from '@/features/profile/ui/avatar/ModalAvatar'
 
 export const ProfileAvatar = () => {
+  const t = useScopedTranslation('Profile')
   const { currentAvatar, isLoading, isOpen, removeAvatar, setIsOpen, updateAvatar } =
     useProfileAvatar()
 
@@ -39,7 +41,7 @@ export const ProfileAvatar = () => {
         </div>
       )}
       <Button className={'w-full'} onClick={() => setIsOpen(true)} variant={'outline'}>
-        Add a Profile Photo
+        {t.addProfilePhoto}
       </Button>
       {isOpen && (
         <ModalAvatar

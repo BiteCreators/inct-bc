@@ -49,7 +49,7 @@ export const EditProfileForm = ({ userName }: Props) => {
     <div className={'flex justify-between items-start ml-6 mr-[65px] relative mt-6 h-full text-sm'}>
       <div className={'flex items-center gap-y-5 flex-col h-[195px] basis-1/4'}>
         <Avatar avatarURL={exampleImage.src} href={'/'} size={192} />
-        <Button variant={'outline'}>Add a profile photo</Button>
+        <Button variant={'outline'}>{t.addProfilePhoto}</Button>
       </div>
       <form
         className={'ml-10 flex flex-col gap-y-6 basis-3/4'}

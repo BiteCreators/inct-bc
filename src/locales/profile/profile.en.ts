@@ -1,5 +1,6 @@
 export const profileTranslationEn = {
   aboutMe: 'About Me',
+  addProfilePhoto: 'Add a profile photo',
   citiesList: 'St. Petersburg, Moscow, Tver, Samara, Pskov',
   city: 'City',
   countriesList: 'Russia, Belarus, Ukraine, Georgia, Abkhazia',
