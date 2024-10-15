@@ -1,7 +1,9 @@
+import { useScopedTranslation, useTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import exampleImage from '../../../../public/examples/exampleAvatar.png'
 
@@ -14,10 +16,14 @@ export const ProfileHeader = () => {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
   const params = useParams<{ id: string }>()
   const id = params?.id
+  const router = useRouter()
+  const locale = router.locale === 'en' ? 'en' : 'ru'
+  const t = useScopedTranslation('Profile')
+  const tNav = useScopedTranslation('Navigation')
 
   return (
     <>
-      <div className={'flex items-center sm:items-start gap-7 sm:gap-9 mb-2 sm:mb-12'}>
+      <div className={'flex items-center sm:items-start gap-5 sm:gap-7 md:!gap-9 mb-2 sm:mb-12'}>
         <div className={'self-start'}>
           <Link className={''} href={''}>
             <div className={'w-20 sm:w-36 lg:!w-52'}>
@@ -38,15 +44,25 @@ export const ProfileHeader = () => {
               {username}
             </Typography>
             <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
-              <Link href={`/profile/${id}/settings`}>Profile Settings</Link>
+              <Link href={`/profile/${id}/settings`}>{tNav.profileSettings}</Link>
             </Button>
           </div>
-          <div className={'flex gap-5 sm:gap-9 lg:!gap-20 text-sm sm:mb-5'}>
-            <ProfileFollowButton count={followingCount} href={`#`} label={'Following'} />
-            <ProfileFollowButton count={followersCount} href={`#`} label={'Followers'} />
+          <div className={'flex gap-5 sm:gap-7 lg:!gap-20 text-sm sm:mb-5'}>
+            <ProfileFollowButton
+              count={followingCount}
+              href={`#`}
+              label={t.following}
+              locale={locale}
+            />
+            <ProfileFollowButton
+              count={followersCount}
+              href={`#`}
+              label={t.followers}
+              locale={locale}
+            />
             <div className={'flex flex-col text-xs sm:text-sm'}>
               <span className={'font-weight700'}>{publications}</span>
-              <span>Publications</span>
+              <span>{t.publications}</span>
             </div>
           </div>
           <AboutUser className={'hidden sm:flex text-left'} text={aboutUser} />
