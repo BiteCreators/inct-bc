@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageLayout } from '@/common/ui'
-import { EditProfileForm } from '@/features/edit-profile/ui/EditProfileForm'
+import { EditProfileForm } from '@/features/edit-profile/ui/editProfileForm'
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
 import { Sidebar } from '@/widgets/sidebar'
@@ -12,7 +12,7 @@ const EditProfile: NextPageWithLayout = () => {
 
 EditProfile.getLayout = (page: React.ReactElement) => {
   return (
-    <PageLayout header={<Header />} mainClassName={'mb-5'} sidebar={<Sidebar />}>
+    <PageLayout header={<Header />} mainClassName={'mb-5 relative'} sidebar={<Sidebar />}>
       {page}
     </PageLayout>
   )

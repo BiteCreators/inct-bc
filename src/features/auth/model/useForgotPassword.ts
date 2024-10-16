@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authApi } from '@/common/api/auth.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi } from '@/entities/auth'
 import {
   ForgotPasswordFormData,
   createForgotPasswordSchema,
@@ -18,7 +18,7 @@ export const useForgotPassword = () => {
 
   const searchParams = useSearchParams()
   const email = searchParams?.get('email') ?? null
-  const t = useScopedTranslation('Auth')
+  const t = useScopedTranslation('Auth').errors
 
   const forgotPasswordSchema = createForgotPasswordSchema(t)
   const [apiError, setApiError] = useState('')

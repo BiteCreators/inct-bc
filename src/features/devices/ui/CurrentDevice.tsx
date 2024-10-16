@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { devicesApi } from '@/common/api/devices.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Alert, Button, Loader, Typography } from '@/common/ui'
+import { devicesApi } from '@/entities/devices'
 
 import { SessionCard } from './SessionCard'
 
@@ -54,7 +54,12 @@ export const CurrentDevice = () => {
           {t.terminateOtherSessions}
         </Button>
         {!!terminateError && (
-          <Alert message={terminateError} onClose={() => setTerminateError('')} type={'error'} />
+          <Alert
+            message={terminateError}
+            onClose={() => setTerminateError('')}
+            purpose={'toast'}
+            type={'error'}
+          />
         )}
       </div>
     )

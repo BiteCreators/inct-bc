@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { cn } from '@/common/lib/utils/cn'
 import { Button, Modal } from '@/common/ui'
 
@@ -20,6 +21,7 @@ export const ActionConfirmation = ({
   setIsOpen,
   title = 'test Title',
 }: Props) => {
+  const t = useScopedTranslation('Common')
   const handleConfirm = () => {
     onConfirm()
     setIsOpen(false)
@@ -35,9 +37,9 @@ export const ActionConfirmation = ({
       <div className={'calc(min-w-[430px]-40px) flex mb-4'}>{message}</div>
       <div className={'w-full flex gap-5 mb-6 items-center justify-end'}>
         <Button className={'h-[37px]'} onClick={handleConfirm} variant={'outline'}>
-          Да
+          {t.yes}
         </Button>
-        <Button onClick={handleReject}>Нет</Button>
+        <Button onClick={handleReject}>{t.no}</Button>
       </div>
     </Modal>
   )

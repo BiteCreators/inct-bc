@@ -18,7 +18,7 @@ export const ProfileSettingsTabs = () => {
       tabsData={[
         {
           content: <EditProfileForm />,
-          label: 'General information',
+          label: t.generalInfo,
           value: 'general-information',
         },
         {
@@ -33,10 +33,10 @@ export const ProfileSettingsTabs = () => {
         },
         {
           content: <div>account management</div>,
-          label: 'Account management',
+          label: t.accountManagement,
           value: 'account-management',
         },
-        { content: <div>my paments</div>, label: 'My payments', value: 'my-payments' },
+        { content: <div>my paments</div>, label: t.myPayments, value: 'my-payments' },
       ]}
       value={selectedTab}
     />

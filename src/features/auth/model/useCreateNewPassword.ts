@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authApi } from '@/common/api/auth.api'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi } from '@/entities/auth'
 import {
   RecoveryPasswordFormData,
   createRecoveryPasswordSchema,
@@ -17,7 +17,7 @@ export const useCreateNewPassword = () => {
   const code = searchParams?.get('code') ?? null
   const email = searchParams?.get('email') ?? null
   const t = useScopedTranslation('Auth')
-  const recoveryPasswordSchema = createRecoveryPasswordSchema(t)
+  const recoveryPasswordSchema = createRecoveryPasswordSchema(t.errors)
 
   const [loading, setLoading] = useState<boolean>(true)
 

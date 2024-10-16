@@ -26,12 +26,12 @@ export const useHandleApiError = <NT extends keyof LocaleType>(namespace: NT) =>
   }) => {
     if (isFetchBaseQueryError(error)) {
       if (error.status === 'FETCH_ERROR') {
-        setApiError(internalT.networkError)
+        setApiError(internalT.errors.networkError)
 
         return
       }
       if (error.status === 500) {
-        setApiError(internalT.internalServerError)
+        setApiError(internalT.errors.internalServerError)
 
         return
       }

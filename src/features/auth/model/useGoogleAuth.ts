@@ -1,6 +1,5 @@
-import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { authApi, authSlice } from '@/entities/auth'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -25,7 +24,7 @@ export const useGoogleAuth = () => {
 
       const { userId } = await meResponse().unwrap()
 
-      document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=lax`
+      document.cookie = `accessToken=${token};max-age=2678400;secure;path=/;samesite=lax`
       dispatch(authSlice.actions.setAccessToken(token))
       await router.push(`/profile/${userId}`)
     }
