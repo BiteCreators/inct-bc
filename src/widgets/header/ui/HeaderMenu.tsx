@@ -8,7 +8,7 @@ import {
 } from '@/common/assets/icons/components'
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Dropdown } from '@/common/ui'
+import { Alert, Dropdown, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { authSlice } from '@/entities/auth'
@@ -21,7 +21,7 @@ export const HeaderMenu = () => {
   const tAuth = useScopedTranslation('Auth')
   const tNav = useScopedTranslation('Navigation')
 
-  const { confirmOpen, handleConfirm, handleLogout, handleReject, isLoading, me, setConfirmOpen } =
+  const { apiError, confirmOpen, handleConfirm, handleLogout, handleReject, me, setConfirmOpen } =
     useLogout()
 
   if (router.pathname.startsWith('/auth') && router.pathname !== '/auth') {
@@ -77,6 +77,7 @@ export const HeaderMenu = () => {
         setIsOpen={setConfirmOpen}
         title={tAuth.logOut}
       />
+      {!!apiError && <Alert message={apiError} purpose={'toast'} type={'error'} />}
     </nav>
   )
 }

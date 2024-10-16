@@ -1,15 +1,23 @@
 import { LogOut } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { cn } from '@/common/lib/utils/cn'
-import { Loader } from '@/common/ui'
+import { Alert, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 
 export const LogoutButton = () => {
   const t = useScopedTranslation('Auth')
 
-  const { confirmOpen, handleConfirm, handleLogout, handleReject, isLoading, me, setConfirmOpen } =
-    useLogout()
+  const {
+    apiError,
+    confirmOpen,
+    handleConfirm,
+    handleLogout,
+    handleReject,
+    isLoading,
+    me,
+    setConfirmOpen,
+  } = useLogout()
 
   if (isLoading) {
     return (
@@ -39,6 +47,7 @@ export const LogoutButton = () => {
         setIsOpen={setConfirmOpen}
         title={t.logOut}
       />
+      {!!apiError && <Alert message={apiError} purpose={'toast'} type={'error'} />}
     </>
   )
 }

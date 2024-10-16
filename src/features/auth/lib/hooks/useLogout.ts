@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
@@ -12,6 +13,7 @@ export const useLogout = () => {
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
   const { data: me } = authApi.useMeQuery()
+  const [apiError, setApiError] = useState('')
 
   const { handleApiError } = useHandleApiError('Auth')
 
@@ -28,12 +30,13 @@ export const useLogout = () => {
     } catch (error) {
       handleApiError({
         error,
-        setApiError: () => console.log('log out error: ' + error),
+        setApiError,
       })
     }
   }
 
   return {
+    apiError,
     confirmOpen,
     handleConfirm,
     handleLogout,
