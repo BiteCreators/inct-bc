@@ -12,7 +12,7 @@ import { Alert, Dropdown, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { authSlice } from '@/entities/auth'
-import { useLogout } from '@/features/auth/lib/hooks/useLogout'
+import { useLogout } from '@/features/auth'
 import { useRouter } from 'next/router'
 
 export const HeaderMenu = () => {

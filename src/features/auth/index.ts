@@ -1,3 +1,4 @@
+export { useLogout } from './lib/hooks/useLogout'
 export { ForgotPasswordForm } from './ui/ForgotPasswordForm'
 export { LogoutButton } from './ui/LogoutButton'
 export { SignInButton } from './ui/SignInButton'

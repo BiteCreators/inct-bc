@@ -3,7 +3,8 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { cn } from '@/common/lib/utils/cn'
 import { Alert, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { useLogout } from '@/features/auth/lib/hooks/useLogout'
+
+import { useLogout } from '../lib/hooks/useLogout'
 
 export const LogoutButton = () => {
   const t = useScopedTranslation('Auth')
