@@ -8,11 +8,15 @@ export const useImageUpload = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const t = useScopedTranslation('Profile')
+
   const handleFileSelect = (file: File) => {
+    setError('')
+
     const validFormats = ['image/jpeg', 'image/png']
 
     if (!validFormats.includes(file.type)) {
       setError(t.editProfileError.incorrectPhotoFormat)
+      resetFileInput()
 
       return
     }
@@ -21,6 +25,7 @@ export const useImageUpload = () => {
 
     if (file.size > maxSizeInMB * 1024 * 1024) {
       setError(t.editProfileError.photoTooBig)
+      resetFileInput()
 
       return
     }
@@ -38,19 +43,24 @@ export const useImageUpload = () => {
 
         if (naturalHeight < 150 || naturalWidth < 150) {
           setError(t.editProfileError.photoTooSmall)
+          resetFileInput()
 
           return setImageUrl('')
         }
 
         setImageUrl(url)
         setSelectedFile(file)
-        if (error) {
-          setError('')
-        }
+        setError('')
       })
     })
 
     reader.readAsDataURL(file)
+  }
+
+  const resetFileInput = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
   }
 
   const uploadImage = () => {
