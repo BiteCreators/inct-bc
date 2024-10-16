@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { profileApi } from '@/common/api/profile.api'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 
 export const useProfileAvatar = () => {
@@ -12,15 +13,18 @@ export const useProfileAvatar = () => {
     profileApi.useDeleteAvatarProfileMutation()
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
+  const t = useScopedTranslation('Profile')
+  const [apiError, setApiError] = useState<null | string>(null)
 
   const isLoading = isProfileLoading || isLoadingSet || isLoadingDelete
   const currentAvatar = profile?.avatars?.[0] || null
 
   const updateAvatar = async (file: File) => {
+    setApiError(null)
     try {
       await setAvatarProfile({ file }).unwrap()
     } catch (error) {
-      console.error('Ошибка при установке аватара:', error)
+      setApiError(t.editProfileError.settingsNotSaved)
     }
   }
 
@@ -38,11 +42,12 @@ export const useProfileAvatar = () => {
     try {
       await deleteAvatarProfile().unwrap()
     } catch (error) {
-      console.error('Ошибка при удалении аватара:', error)
+      setApiError(t.editProfileError.settingsNotSaved)
     }
   }
 
   return {
+    apiError,
     confirmOpen,
     currentAvatar,
     handleConfirm,
