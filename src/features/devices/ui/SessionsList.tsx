@@ -1,13 +1,12 @@
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Alert, Typography } from '@/common/ui'
+import { Typography } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
-import { ErrorQueryType } from '@/entities/devices/api/devices.api'
 
 import { SessionCard } from './SessionCard'
 import { TerminateSessionButton } from './TerminateSessionButton'
 
 export const SessionsList = () => {
-  const { data, error, isError, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
+  const { data, isSuccess } = devicesApi.useGetSessionsQuery()
   const t = useScopedTranslation('Devices')
 
   if (isSuccess) {

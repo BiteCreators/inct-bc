@@ -2,19 +2,17 @@ import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { isApiError, isApiErrorWithArrary } from '@/common/lib/utils/apiHelpers'
+import { isApiErrorWithArrary } from '@/common/lib/utils/apiHelpers'
 import { Alert, Button, Loader, Typography } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
-import { ErrorQueryType } from '@/entities/devices/api/devices.api'
 
 import { SessionCard } from './SessionCard'
 
 export const CurrentDevice = () => {
-  const { data, error, isError, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
+  const { data, error, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
   const [terminateAllSessions, { isLoading: isTerminateLoading }] =
     devicesApi.useTerminateAllSessionsMutation()
   const [terminateError, setTerminateError] = useState('')
-  const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Devices')
   const t = useScopedTranslation('Devices')
 
