@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ImageOutline } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'

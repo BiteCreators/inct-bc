@@ -74,13 +74,15 @@ export const EditProfileForm = () => {
         </Button>
       </form>
       {isShowAlert && (
-        <Alert
-          duration={3000}
-          message={message}
-          onClose={onClose}
-          purpose={'toast'}
-          type={isError ? 'error' : 'success'}
-        />
+        <div className={'relative'}>
+          <Alert
+            duration={3000}
+            message={message}
+            onClose={onClose}
+            purpose={'toast'}
+            type={isError ? 'error' : 'success'}
+          />
+        </div>
       )}
     </div>
   )

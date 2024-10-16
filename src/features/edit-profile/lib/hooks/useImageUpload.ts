@@ -21,9 +21,9 @@ export const useImageUpload = () => {
       return
     }
 
-    const maxSizeInMB = 10
+    const maxSizeInB = 10000000
 
-    if (file.size > maxSizeInMB * 1024 * 1024) {
+    if (file.size > maxSizeInB) {
       setError(t.editProfileError.photoTooBig)
       resetFileInput()
 
@@ -38,22 +38,25 @@ export const useImageUpload = () => {
 
       imageElement.src = url
 
-      imageElement.addEventListener('load', (e: any) => {
+      const onLoadHandler = (e: any) => {
         const { naturalHeight, naturalWidth } = e.currentTarget
 
         if (naturalHeight < 150 || naturalWidth < 150) {
           setError(t.editProfileError.photoTooSmall)
           resetFileInput()
+          setImageUrl('')
 
-          return setImageUrl('')
+          return
         }
 
         setImageUrl(url)
         setSelectedFile(file)
         setError('')
-      })
-    })
+        imageElement.removeEventListener('load', onLoadHandler)
+      }
 
+      imageElement.addEventListener('load', onLoadHandler)
+    })
     reader.readAsDataURL(file)
   }
 
