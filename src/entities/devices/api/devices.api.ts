@@ -6,15 +6,7 @@ type GetSessionsResponse = {
   current: Session
   others: Session[]
 }
-export type ErrorQueryType = {
-  data: ErrorDataType
-  status: number
-}
-export type ErrorDataType = {
-  error: string
-  messages: { message: string }[]
-  statusCode: number
-}
+
 export const devicesApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     getSessions: builder.query<GetSessionsResponse, void>({
