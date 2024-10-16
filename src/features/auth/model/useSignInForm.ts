@@ -45,7 +45,7 @@ export const useSignInForm = () => {
         password,
       }).unwrap()
       const token = res.accessToken
-      const decodeJwt = jose.decodeJwt(token)
+      const { userId } = jose.decodeJwt(token)
 
       setCookies('accessToken', res.accessToken, {
         maxAge: 2678400,
@@ -54,7 +54,7 @@ export const useSignInForm = () => {
         secure: true,
       })
       dispatch(authSlice.actions.setAccessToken(token))
-      Router.push(`/profile/${decodeJwt.userId}`)
+      Router.push(`/profile/${userId}`)
     } catch (error) {
       handleApiError({ error, modifyMessage: modifySingInApiError, setApiError, setError })
     }
