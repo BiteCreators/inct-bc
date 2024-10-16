@@ -14,7 +14,7 @@ export type Avatars = {
   width: number
 }
 
-type Profile = {
+export type Profile = {
   aboutMe?: string
   city?: string
   country?: string

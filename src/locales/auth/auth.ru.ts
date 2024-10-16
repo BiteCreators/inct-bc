@@ -1,4 +1,5 @@
 export const authTranslationRu = {
+  areYouSureYouWantToLogout: 'Вы уверены что хотите выйти из своего аккаунта',
   backToSignIn: 'Назад к авторизации',
   congratulations: 'Поздравляем!',
   createNewPassword: 'Создать новый пароль',

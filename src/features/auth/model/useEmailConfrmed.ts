@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { authApi } from '@/common/api/auth.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi } from '@/entities/auth'
 import { useSearchParams } from 'next/navigation'
 
 import { modifySignUpApiError } from '../lib/modifyAuthApiError'

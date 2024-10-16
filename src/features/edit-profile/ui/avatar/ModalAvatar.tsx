@@ -5,9 +5,10 @@ import { ImageOutline } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Alert, Avatar, Button, Modal } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
-import { useCropImage } from '@/features/profile/lib/hooks/useCropImage'
-import { useImageUpload } from '@/features/profile/lib/hooks/useImageUpload'
-import { CropImage } from '@/features/profile/ui/avatar/CropImage'
+import { useCropImage } from '@/features/edit-profile/lib/hooks/useCropImage'
+import { useImageUpload } from '@/features/edit-profile/lib/hooks/useImageUpload'
+
+import { CropImage } from './CropImage'
 
 type Props = {
   currentAvatar: Avatars | null
@@ -37,7 +38,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
       title={t.addProfilePhoto}
     >
       {error && (
-        <Alert message={error} onClose={() => setError('')} purpose={'toast'} type={'error'} />
+        <Alert message={error} onClose={() => setError('')} purpose={'alert'} type={'error'} />
       )}
       <div className={'w-full items-end'}>
         {imageUrl && (

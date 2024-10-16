@@ -1,4 +1,5 @@
 export const authTranslationEn = {
+  areYouSureYouWantToLogout: 'Are you sure you want to logout from your account',
   backToSignIn: 'Back to Sign In',
   congratulations: 'Congratulations!',
   createNewPassword: 'Create new password',
@@ -36,8 +37,8 @@ export const authTranslationEn = {
     usernameTooLongError: 'Maximum number of characters 30',
     usernameTooShortError: 'Minimum number of characters 6',
   },
-  forgotPassword: 'Forgot Password',
 
+  forgotPassword: 'Forgot Password',
   logOut: 'Log out',
   newPassword: 'New password',
   password: 'Password',

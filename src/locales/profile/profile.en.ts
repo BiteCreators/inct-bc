@@ -16,6 +16,7 @@ export const profileTranslationEn = {
     maxLengthUserName: 'Maximum length is 30 characters',
     minLengthUserName: 'Minimum length is 6 characters',
     requiredError: 'Field is required',
+    settingsNotSaved: 'Error! Server is not available!',
   },
   firstName: 'First name',
   followers: 'Followers',
@@ -25,5 +26,6 @@ export const profileTranslationEn = {
   saveChangesBtn: 'Save changes',
   selectYourCity: 'Select your city',
   selectYourCountry: 'Select your country',
+  settingsSaved: 'Your settings are saved!',
   userName: 'Username',
 }

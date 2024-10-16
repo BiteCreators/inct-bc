@@ -1,4 +1,6 @@
-export const profileTranslationRu = {
+import { LocaleType } from '../en'
+
+export const profileTranslationRu: LocaleType['Profile'] = {
   aboutMe: 'Обо мне',
   addProfilePhoto: 'Добавить фотографию профиля',
   citiesList: 'Санкт-Петербург,Москва,Тверь,Самара,Псков',
@@ -16,6 +18,7 @@ export const profileTranslationRu = {
     maxLengthUserName: 'Максимальная длина 30 символов',
     minLengthUserName: 'Минимальная длина 6 символов',
     requiredError: 'Поле обязательно для заполнения',
+    settingsNotSaved: 'Ошибка! Сервер недоступен',
   },
   firstName: 'Имя',
   followers: 'Подписчики',
@@ -25,5 +28,6 @@ export const profileTranslationRu = {
   saveChangesBtn: 'Сохранить изменения',
   selectYourCity: 'Выберите город',
   selectYourCountry: 'Выберите страну',
+  settingsSaved: 'Настройки профиля сохранены!',
   userName: 'Имя пользователя',
 }
