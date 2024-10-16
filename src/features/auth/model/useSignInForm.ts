@@ -15,7 +15,7 @@ import { modifySingInApiError } from '../lib/modifySignInApiError'
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')
 
-  const signInSchema = createSignInSchema(t)
+  const signInSchema = createSignInSchema(t.errors)
 
   const {
     control,

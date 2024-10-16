@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Avatars } from '@/common/api/profile.api'
 import { ImageOutline } from '@/common/assets/icons/components'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Alert, Avatar, Button, Modal } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 import { useCropImage } from '@/features/edit-profile/lib/hooks/useCropImage'
@@ -21,6 +22,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
     useImageUpload()
 
   const { crop, previewImgRef, saveCroppedImage, setCrop } = useCropImage(updateAvatar)
+  const t = useScopedTranslation('Profile')
 
   const handleSave = (imgRef: HTMLImageElement | null) => {
     saveCroppedImage(imgRef, selectedFile)
@@ -33,7 +35,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
       isOpen={isOpen}
       mode={'default'}
       onOpenChange={setIsOpen}
-      title={'Add profile photo'}
+      title={t.addProfilePhoto}
     >
       {error && (
         <Alert message={error} onClose={() => setError('')} purpose={'alert'} type={'error'} />

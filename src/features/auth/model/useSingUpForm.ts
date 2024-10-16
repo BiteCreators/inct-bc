@@ -12,7 +12,7 @@ import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema
 export const useSingUpForm = () => {
   const t = useScopedTranslation('Auth')
 
-  const signUpSchema = createSignUpSchema(t)
+  const signUpSchema = createSignUpSchema(t.errors)
 
   const {
     control,

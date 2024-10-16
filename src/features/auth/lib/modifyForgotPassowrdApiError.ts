@@ -8,13 +8,15 @@ export const modifyForgotPasswordApiError = (
   message: string,
   t: LocaleType['Auth']
 ): { field?: Path<ForgotPasswordFormData>; message: string } => {
+  const { errors } = t
+
   if (message.includes('User with this email')) {
     return {
-      message: t.userNotFound,
+      message: errors.userNotFound,
     }
   }
   if (message.includes('Recaptcha is not valid')) {
-    return { message: t.recaptchaIsNotValid }
+    return { message: errors.recaptchaIsNotValid }
   }
 
   return { message }

@@ -1,7 +1,7 @@
 import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const createSignInSchema = (t: LocaleType['Auth']) => {
+export const createSignInSchema = (t: LocaleType['Auth']['errors']) => {
   return z.object({
     email: z.string().email('').min(1, t.emailRequiredError),
     password: z

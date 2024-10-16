@@ -1,7 +1,6 @@
-import { Avatar, Button, FormInput, FormSelect, FormTextArea, SelectItem } from '@/common/ui'
+import { Button, FormInput, FormSelect, FormTextArea, SelectItem } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 
-import exampleImage from '../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { Alert } from './../../../common/ui/alert/Alert'
 import { Loader } from './../../../common/ui/loader/Loader'

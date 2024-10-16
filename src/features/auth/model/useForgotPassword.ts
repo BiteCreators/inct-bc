@@ -18,7 +18,7 @@ export const useForgotPassword = () => {
 
   const searchParams = useSearchParams()
   const email = searchParams?.get('email') ?? null
-  const t = useScopedTranslation('Auth')
+  const t = useScopedTranslation('Auth').errors
 
   const forgotPasswordSchema = createForgotPasswordSchema(t)
   const [apiError, setApiError] = useState('')

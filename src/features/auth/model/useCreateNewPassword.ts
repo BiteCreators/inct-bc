@@ -17,7 +17,7 @@ export const useCreateNewPassword = () => {
   const code = searchParams?.get('code') ?? null
   const email = searchParams?.get('email') ?? null
   const t = useScopedTranslation('Auth')
-  const recoveryPasswordSchema = createRecoveryPasswordSchema(t)
+  const recoveryPasswordSchema = createRecoveryPasswordSchema(t.errors)
 
   const [loading, setLoading] = useState<boolean>(true)
 
