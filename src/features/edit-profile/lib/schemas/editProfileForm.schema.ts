@@ -5,7 +5,10 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
   return z
     .object({
       aboutMe: z.string().max(200, t.editProfileError.maxLengthAboutMe).optional(),
-      dateOfbirth: z.date({ message: t.editProfileError.requiredError }),
+      city: z.string().optional(),
+      country: z.string().optional(),
+      dateOfBirth: z.date({ message: t.editProfileError.requiredError }),
+
       firstName: z
         .string()
         .min(1, t.editProfileError.requiredError)
@@ -16,9 +19,6 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
         .min(1, t.editProfileError.requiredError)
         .max(50, t.editProfileError.maxLengthName)
         .regex(new RegExp(/^[a-zа-я]+$/, 'i'), { message: t.editProfileError.invalidLastName }),
-
-      selectYourCity: z.string().optional(),
-      selectYourCountry: z.string().optional(),
       userName: z
         .string()
         .min(6, t.editProfileError.minLengthUserName)
@@ -27,15 +27,16 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
     })
     .refine(
       data => {
-        if (data.dateOfbirth !== null && data.dateOfbirth !== undefined) {
-          return new Date().getFullYear() - data.dateOfbirth.getFullYear() >= 1 //исправить на 13 по ТЗ
+        if (data.dateOfBirth !== null && data.dateOfBirth !== undefined) {
+          return new Date().getFullYear() - data.dateOfBirth.getFullYear() >= 1 //исправить на 13 по ТЗ
         }
+
+        return false
       },
       {
         message: t.editProfileError.ageUser,
-        path: ['dateOfbirth'],
+        path: ['dateOfBirth'],
       }
     )
 }
-
 export type EditProfileFormData = z.infer<ReturnType<typeof createEditProfileSchema>>

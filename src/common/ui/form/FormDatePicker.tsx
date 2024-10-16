@@ -1,6 +1,7 @@
 import React from 'react'
 import { FieldValues, useController } from 'react-hook-form'
 
+import { Trans } from '@/common/ui'
 import Link from 'next/link'
 
 import { DatePicker } from '../datepicker/DatePicker'
@@ -28,7 +29,18 @@ export const FormDatePicker = <T extends FieldValues>({
     fieldState,
   } = useController({ control, name })
 
-  const fieldError = fieldState.error?.message && errorWithLink(fieldState.error?.message)
+  const fieldError = fieldState.error?.message && (
+    <Trans
+      tags={{
+        1: text => (
+          <Link className={'underline'} href={'/auth/sign-up/privacy-policy'}>
+            {text}
+          </Link>
+        ),
+      }}
+      text={fieldState.error?.message}
+    ></Trans>
+  )
 
   return (
     <DatePicker
@@ -38,22 +50,5 @@ export const FormDatePicker = <T extends FieldValues>({
       {...props}
       error={error ?? fieldError}
     />
-  )
-}
-
-function errorWithLink(message: string) {
-  const errorAsArray = message.split('.')
-  const errorText = errorAsArray[0]
-  const errorLink = errorAsArray[1]
-
-  return errorAsArray.length > 1 ? (
-    <p>
-      {errorText + '. '}
-      <Link className={'underline'} href={'/auth/sign-up/privacy-policy'}>
-        {errorLink}
-      </Link>
-    </p>
-  ) : (
-    <p>{errorText}</p>
   )
 }

@@ -65,7 +65,8 @@ export const ru: LocaleType = {
     country: 'Страна',
     dateOfBirth: 'Дата рождения',
     editProfileError: {
-      ageUser: 'Пользователь младше 13 лет не может создать профиль.Политика конфиденциальности',
+      ageUser:
+        'Пользователь младше 13 лет не может создать профиль.<1> Политика конфиденциальности</1>',
       invalidFirstName: 'Имя может содержать символы A-Za-zА-Яа-я',
       invalidLastName: 'Фамилия может содержать символы A-Za-zА-Яа-я',
       invalidUserName: 'Имя пользователя может содержать символы A-Za-z0-9_-',
@@ -74,12 +75,14 @@ export const ru: LocaleType = {
       maxLengthUserName: 'Максимальная длина 30 символов',
       minLengthUserName: 'Минимальная длина 6 символов',
       requiredError: 'Поле обязательно для заполнения',
+      settingsNotSaved: 'Ошибка! Сервер недоступен',
     },
     firstName: 'Имя',
     lastName: 'Фамилия',
     saveChangesBtn: 'Сохранить изменения',
     selectYourCity: 'Выберите город',
     selectYourCountry: 'Выберите страну',
+    settingsSaved: 'Настройки профиля сохранены!',
     userName: 'Имя пользователя',
   },
   TermsService: {

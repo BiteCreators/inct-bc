@@ -62,7 +62,7 @@ export const en = {
     country: 'Country',
     dateOfBirth: 'Date of birth',
     editProfileError: {
-      ageUser: 'A user under 13 cannot create a profile.Privacy Policy',
+      ageUser: 'A user under 13 cannot create a profile.<1> Privacy Policy</1>',
       invalidFirstName: 'The first name may contain the characters A-Za-zА-Яа-я',
       invalidLastName: 'The last name may contain the characters A-Za-zА-Яа-я',
       invalidUserName: 'The username may contain the characters A-Za-z0-9_-',
@@ -71,12 +71,14 @@ export const en = {
       maxLengthUserName: 'Maximum length is 30 characters',
       minLengthUserName: 'Minimum length is 6 characters',
       requiredError: 'Field is required',
+      settingsNotSaved: 'Error! Server is not available!',
     },
     firstName: 'First name',
     lastName: 'Last name',
     saveChangesBtn: 'Save changes',
     selectYourCity: 'Select your city',
     selectYourCountry: 'Select your country',
+    settingsSaved: 'Your settings are saved!',
     userName: 'Username',
   },
   TermsService: {
