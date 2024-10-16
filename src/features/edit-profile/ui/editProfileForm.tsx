@@ -1,9 +1,7 @@
-import { Button, FormInput, FormSelect, FormTextArea, SelectItem } from '@/common/ui'
+import { Alert, Button, FormInput, FormSelect, FormTextArea, Loader, SelectItem } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
-import { Alert } from './../../../common/ui/alert/Alert'
-import { Loader } from './../../../common/ui/loader/Loader'
 import { ProfileAvatar } from './avatar/ProfileAvatar'
 
 export const EditProfileForm = () => {
@@ -77,10 +75,10 @@ export const EditProfileForm = () => {
       </form>
       {isShowAlert && (
         <Alert
-          className={'absolute bottom-12 left-[-100px]'}
           duration={3000}
           message={message}
           onClose={onClose}
+          purpose={'toast'}
           type={isError ? 'error' : 'success'}
         />
       )}
