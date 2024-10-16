@@ -24,21 +24,21 @@ export const CurrentDevice = () => {
     try {
       terminateAllSessions().unwrap()
     } catch (error) {
-      // handleApiError({ error, setApiError: setTerminateError })
+      handleApiError({ error, setApiError: setTerminateError })
     }
   }
 
   if (isError) {
     const err = error as ErrorQueryType
-    //
-    // return (
-    //   <Alert
-    //     duration={999999}
-    //     message={err.data.messages[0].message}
-    //     purpose={'alert'}
-    //     type={'error'}
-    //   />
-    // )
+
+    return (
+      <Alert
+        duration={999999}
+        message={err.data.messages[0].message}
+        purpose={'alert'}
+        type={'error'}
+      />
+    )
   }
 
   if (isSuccess) {
@@ -46,26 +46,26 @@ export const CurrentDevice = () => {
 
     return (
       <div className={'flex flex-col'}>
-        {/*<Typography className={'mb-[6px]'} variant={'h1'}>*/}
-        {/*  {t.currentDevice}*/}
-        {/*</Typography>*/}
-        {/*<SessionCard browserName={current.browserName} ip={current.ip} type={'browser'} />*/}
-        {/*<Button*/}
-        {/*  className={'mt-6 self-end'}*/}
-        {/*  disabled={isTerminateLoading}*/}
-        {/*  onClick={handleClick}*/}
-        {/*  variant={'outline'}*/}
-        {/*>*/}
-        {/*  {t.terminateOtherSessions}*/}
-        {/*</Button>*/}
-        {/*{!!terminateError && (*/}
-        {/*  <Alert*/}
-        {/*    message={terminateError}*/}
-        {/*    onClose={() => setTerminateError('')}*/}
-        {/*    purpose={'toast'}*/}
-        {/*    type={'error'}*/}
-        {/*  />*/}
-        {/*)}*/}
+        <Typography className={'mb-[6px]'} variant={'h1'}>
+          {t.currentDevice}
+        </Typography>
+        <SessionCard browserName={current.browserName} ip={current.ip} type={'browser'} />
+        <Button
+          className={'mt-6 self-end'}
+          disabled={isTerminateLoading}
+          onClick={handleClick}
+          variant={'outline'}
+        >
+          {t.terminateOtherSessions}
+        </Button>
+        {!!terminateError && (
+          <Alert
+            message={terminateError}
+            onClose={() => setTerminateError('')}
+            purpose={'toast'}
+            type={'error'}
+          />
+        )}
       </div>
     )
   }
