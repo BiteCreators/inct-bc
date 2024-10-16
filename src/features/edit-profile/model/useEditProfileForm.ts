@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Profile, profileApi } from '@/common/api/profile.api'
@@ -7,38 +7,48 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
 
-type Props = {
-  userName?: string
-}
-export const useEditProfileForm = ({ userName }: Props) => {
+export const useEditProfileForm = () => {
   const t = useScopedTranslation('Profile')
-
   const editProfileSchema = createEditProfileSchema(t)
 
-  const [trigger, { isError, isLoading }] = profileApi.useEditProfileMutation()
+  const { data: profile, isLoading: isLoadingGetProfile } = profileApi.useGetProfileQuery()
+  const [trigger, { isError, isLoading: isLoadingUpdateProfile }] =
+    profileApi.useEditProfileMutation()
+
+  const [message, setMessage] = useState('') //сообщение в алерте
+  const [isShowAlert, setIsShowAlert] = useState(false)
+
+  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile
 
   const {
     control,
     formState: { isValid },
     handleSubmit,
+    reset,
   } = useForm<EditProfileFormData>({
-    defaultValues: {
-      aboutMe: '',
-      city: '',
-      country: '',
-      dateOfBirth: undefined,
-      firstName: '',
-      lastName: '',
-      userName: userName ? userName : '',
-    },
     mode: 'onChange',
     resolver: zodResolver(editProfileSchema),
   })
-  const [message, setMessage] = useState('')
-  const [isShowAlert, setIsShowAlert] = useState(false)
+
+  useEffect(() => {
+    if (profile) {
+      reset({
+        aboutMe: profile.aboutMe || '',
+        city: profile.city || '',
+        country: profile.country || '',
+        dateOfBirth: profile?.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
+        firstName: profile.firstName || '',
+        lastName: profile.lastName || '',
+        userName: profile.userName || '',
+      })
+    }
+  }, [profile, reset])
 
   const onSubmit = async (data: EditProfileFormData) => {
-    const formData: Profile = { ...data, dateOfBirth: data.dateOfBirth.toLocaleDateString() }
+    const formData: Profile = {
+      ...data,
+      dateOfBirth: data.dateOfBirth.toLocaleDateString(),
+    }
 
     try {
       await trigger(formData).unwrap()

@@ -6,13 +6,9 @@ import { useEditProfileForm } from '../model/useEditProfileForm'
 import { Alert } from './../../../common/ui/alert/Alert'
 import { Loader } from './../../../common/ui/loader/Loader'
 
-type Props = {
-  userName?: string
-}
-
-export const EditProfileForm = ({ userName }: Props) => {
+export const EditProfileForm = () => {
   const { control, handleSubmit, isError, isLoading, isShowAlert, isValid, message, onClose, t } =
-    useEditProfileForm({ userName })
+    useEditProfileForm()
 
   const countriesList = t.countriesList.split(',').map((el, ind) => {
     return (
@@ -77,6 +73,7 @@ export const EditProfileForm = ({ userName }: Props) => {
           </FormSelect>
         </div>
         <FormTextArea control={control} label={t.aboutMe} name={'aboutMe'} />
+        <span className={'inline-block ml-[-35%] h-[1px] w-[135%] bg-dark-300'} />
         <Button className={'mt-7 w-min-40 self-end'} disabled={!isValid} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
@@ -90,7 +87,6 @@ export const EditProfileForm = ({ userName }: Props) => {
           type={isError ? 'error' : 'success'}
         />
       )}
-      <span className={'inline-block absolute h-[1px] bottom-[120px] w-full bg-dark-300'}></span>
     </div>
   )
 }

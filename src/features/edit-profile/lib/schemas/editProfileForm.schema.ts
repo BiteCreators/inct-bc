@@ -30,6 +30,8 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
         if (data.dateOfBirth !== null && data.dateOfBirth !== undefined) {
           return new Date().getFullYear() - data.dateOfBirth.getFullYear() >= 1 //исправить на 13 по ТЗ
         }
+
+        return false
       },
       {
         message: t.editProfileError.ageUser,
@@ -37,5 +39,4 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
       }
     )
 }
-
 export type EditProfileFormData = z.infer<ReturnType<typeof createEditProfileSchema>>
