@@ -47,12 +47,12 @@ export const EditProfileForm = () => {
           required
         />
         <div className={'flex gap-6'}>
-          <FormSelect
+          {/* <FormSelect
             className={'w-full'}
             control={control}
             label={t.selectYourCountry}
-            name={'selectYourCountry'}
             maxWidth={'360px'}
+            name={'selectYourCountry'}
             name={'country'}
             placeholder={t.country}
             responsive
@@ -63,21 +63,20 @@ export const EditProfileForm = () => {
             className={'w-full'}
             control={control}
             label={t.selectYourCity}
-            name={'selectYourCity'}
             maxWidth={'360px'}
+            name={'selectYourCity'}
             name={'city'}
             placeholder={t.city}
           >
             {citiesList}
-          </FormSelect>
+          </FormSelect> */}
         </div>
         <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
-        <Button className={'w-min-40 self-end'} type={'submit'} disabled={!isValid} >
+        <Button className={'w-min-40 self-end'} disabled={!isValid} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
       <hr className={'border-dark-300 w-full absolute bottom-[60px]'}></hr>
-      </form>
       {isShowAlert && (
         <Alert
           className={'absolute bottom-12 left-[-100px]'}
