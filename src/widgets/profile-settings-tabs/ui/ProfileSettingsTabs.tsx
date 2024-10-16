@@ -14,7 +14,6 @@ export const ProfileSettingsTabs = () => {
   return (
     <TabsBase<TabValues>
       ariaLabel={'profile management tabs'}
-      listClassName={'w-max md:w-full h-[35px]'}
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {

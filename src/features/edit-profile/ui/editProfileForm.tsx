@@ -46,34 +46,37 @@ export const EditProfileForm = () => {
           name={'dateOfBirth'}
           required
         />
-        <div className={'flex gap-5 justify-between w-full'}>
+        <div className={'flex gap-6'}>
           <FormSelect
+            className={'w-full'}
             control={control}
             label={t.selectYourCountry}
+            name={'selectYourCountry'}
             maxWidth={'360px'}
             name={'country'}
             placeholder={t.country}
             responsive
-            width={'358px'}
           >
             {countriesList}
           </FormSelect>
           <FormSelect
+            className={'w-full'}
             control={control}
             label={t.selectYourCity}
+            name={'selectYourCity'}
             maxWidth={'360px'}
             name={'city'}
             placeholder={t.city}
-            width={'358px'}
           >
             {citiesList}
           </FormSelect>
         </div>
-        <FormTextArea control={control} label={t.aboutMe} name={'aboutMe'} />
-        <span className={'inline-block ml-[-35%] h-[1px] w-[135%] bg-dark-300'} />
-        <Button className={'mt-7 w-min-40 self-end'} disabled={!isValid} type={'submit'}>
+        <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
+        <Button className={'w-min-40 self-end'} type={'submit'} disabled={!isValid} >
           {t.saveChangesBtn}
         </Button>
+      </form>
+      <hr className={'border-dark-300 w-full absolute bottom-[60px]'}></hr>
       </form>
       {isShowAlert && (
         <Alert

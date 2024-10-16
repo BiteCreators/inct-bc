@@ -59,11 +59,11 @@ export const Avatar = ({
   )
 
   return isNextLink && href ? (
-    <Link href={href} rel={rel}>
+    <Link className={'max-w-max mx-auto'} href={href} rel={rel}>
       {AvatarImage}
     </Link>
   ) : (
-    <a href={href} rel={rel}>
+    <a className={'max-w-max mx-auto'} href={href} rel={rel}>
       {AvatarImage}
     </a>
   )

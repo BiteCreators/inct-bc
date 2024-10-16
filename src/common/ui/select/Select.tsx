@@ -29,7 +29,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
       icon,
       id,
       label,
-      maxWidth = '210px',
+      maxWidth,
       open,
       placeholder,
       required,
