@@ -1,4 +1,6 @@
-import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { useCallback } from 'react'
+
+import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { authApi, authSlice } from '@/entities/auth'
 import * as jose from 'jose'
 import { useSearchParams } from 'next/navigation'
@@ -12,14 +14,8 @@ export const useGoogleAuth = () => {
 
   const [googleAuth] = authApi.useGoogleAuthMutation()
 
-  const token = useAppSelector(authSlice.selectors.selectAccessToken)
-
-  const googleAuthHandler = async (): Promise<void> => {
-    if (token) {
-      const { userId } = jose.decodeJwt(token)
-
-      await router.push(`/profile?id=${userId}`)
-    } else if (validationCode) {
+  const googleAuthHandler = useCallback(async (): Promise<void> => {
+    if (validationCode) {
       const { accessToken: token } = await googleAuth({ code: validationCode }).unwrap()
 
       const { userId } = jose.decodeJwt(token)
@@ -28,7 +24,7 @@ export const useGoogleAuth = () => {
       dispatch(authSlice.actions.setAccessToken(token))
       await router.push(`/profile/${userId}`)
     }
-  }
+  }, [validationCode, dispatch, googleAuth, router])
 
   return { googleAuthHandler, validationCode }
 }
