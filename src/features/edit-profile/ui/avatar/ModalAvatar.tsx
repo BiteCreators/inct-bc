@@ -64,7 +64,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
                 }
               >
                 {currentAvatar ? (
-                  <Avatar avatarURL={currentAvatar.url} rounded={false} size={224} />
+                  <Avatar avatarURL={currentAvatar.url} rounded={false} />
                 ) : (
                   <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
                 )}
