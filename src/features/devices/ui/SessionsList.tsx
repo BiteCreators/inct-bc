@@ -10,19 +10,6 @@ export const SessionsList = () => {
   const { data, error, isError, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
   const t = useScopedTranslation('Devices')
 
-  if (isError) {
-    const err = error as ErrorQueryType
-
-    return (
-      <Alert
-        duration={999999}
-        message={err.data.messages[0].message}
-        purpose={'alert'}
-        type={'error'}
-      />
-    )
-  }
-
   if (isSuccess) {
     const { current, others } = data
 
