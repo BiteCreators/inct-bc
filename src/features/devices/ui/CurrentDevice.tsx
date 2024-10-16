@@ -17,7 +17,11 @@ export const CurrentDevice = () => {
   const t = useScopedTranslation('Devices')
 
   if (isLoading) {
-    return <div className={'flex justify-center pt-11'}>{/*<Loader />*/}</div>
+    return (
+      <div className={'flex justify-center pt-11'}>
+        <Loader />
+      </div>
+    )
   }
 
   const handleClick = async () => {
