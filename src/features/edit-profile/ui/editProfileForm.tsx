@@ -5,6 +5,7 @@ import exampleImage from '../../../../public/examples/0a9f264bc73447e3ce0157c47f
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { Alert } from './../../../common/ui/alert/Alert'
 import { Loader } from './../../../common/ui/loader/Loader'
+import { ProfileAvatar } from './avatar/ProfileAvatar'
 
 export const EditProfileForm = () => {
   const { control, handleSubmit, isError, isLoading, isShowAlert, isValid, message, onClose, t } =
@@ -32,10 +33,7 @@ export const EditProfileForm = () => {
 
   return (
     <div className={'flex justify-between items-start ml-6 mr-[65px] relative mt-6 h-full text-sm'}>
-      <div className={'flex items-center gap-y-5 flex-col h-[195px] basis-1/4'}>
-        <Avatar avatarURL={exampleImage.src} href={'/'} size={192} />
-        <Button variant={'outline'}>Add a profile photo</Button>
-      </div>
+      <ProfileAvatar />
       <form className={'ml-10 flex flex-col gap-y-6 basis-3/4'} noValidate onSubmit={handleSubmit}>
         <FormInput control={control} label={t.userName} name={'userName'} required />
         <FormInput control={control} label={t.firstName} name={'firstName'} required />

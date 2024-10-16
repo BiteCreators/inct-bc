@@ -1,4 +1,5 @@
 export const authTranslationEn = {
+  areYouSureYouWantToLogout: 'Are you sure you want to logout from your account',
   backToSignIn: 'Back to Sign In',
   congratulations: 'Congratulations!',
   createNewPassword: 'Create new password',

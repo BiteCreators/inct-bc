@@ -14,7 +14,7 @@ export const Default: Story = {
     id: 'default',
     label: 'text area',
     placeholder: 'text area',
-    resize: "manual-x"
+    resize: 'manual-x',
   },
 }
 

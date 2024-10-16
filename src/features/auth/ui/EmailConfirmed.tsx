@@ -32,7 +32,12 @@ export const EmailConfirmed = () => {
             }
           />
           {!!apiError && (
-            <Alert message={apiError} onClose={() => setApiError('')} type={'error'} />
+            <Alert
+              message={apiError}
+              onClose={() => setApiError('')}
+              purpose={'toast'}
+              type={'error'}
+            />
           )}
           <LinkSentModal
             bodyText={t.emailVerificationLinkSentAgain}

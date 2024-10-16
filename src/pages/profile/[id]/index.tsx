@@ -1,6 +1,5 @@
-
-import { authApi } from '@/common/api/auth.api'
 import { cn } from '@/common/lib/utils/cn'
+import { authApi } from '@/entities/auth'
 import { ProfileHeader } from '@/widgets/profile-header'
 import { useRouter } from 'next/router'
 
