@@ -17,7 +17,9 @@ export const ScrollArea = forwardRef<
       ref={ref}
       {...props}
     >
-      <ScrollAreaPrimitive.Viewport className={'h-full w-full rounded'}>
+      <ScrollAreaPrimitive.Viewport
+        className={cn('h-full w-full rounded', orientation === 'horizontal' && 'pb-3')}
+      >
         {children}
       </ScrollAreaPrimitive.Viewport>
       <ScrollBar orientation={orientation} />

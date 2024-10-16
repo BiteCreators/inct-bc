@@ -28,7 +28,7 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
     .refine(
       data => {
         if (data.dateOfBirth !== null && data.dateOfBirth !== undefined) {
-          return new Date().getFullYear() - data.dateOfBirth.getFullYear() >= 1 //исправить на 13 по ТЗ
+          return new Date().getFullYear() - data.dateOfBirth.getFullYear() >= 13
         }
 
         return false
