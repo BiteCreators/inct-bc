@@ -25,6 +25,7 @@ export const profileTranslationRu: LocaleType['Profile'] = {
     photoTooSmall: 'Ошибка! Изображение должно быть не менее 150x150 пикселей',
     requiredError: 'Поле обязательно для заполнения',
     settingsNotSaved: 'Ошибка! Сервер недоступен',
+    usernameTaken: 'Это имя пользователя уже занято',
   },
   firstName: 'Имя',
   followers: 'Подписчики',

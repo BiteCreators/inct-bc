@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Profile, profileApi } from '@/common/api/profile.api'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -17,6 +18,7 @@ export const useEditProfileForm = () => {
 
   const [message, setMessage] = useState('') //сообщение в алерте
   const [isShowAlert, setIsShowAlert] = useState(false)
+  const { handleApiError } = useHandleApiError('Profile')
 
   const isLoading = isLoadingGetProfile || isLoadingUpdateProfile
 
@@ -25,6 +27,7 @@ export const useEditProfileForm = () => {
     formState: { isValid },
     handleSubmit,
     reset,
+    setError,
   } = useForm<EditProfileFormData>({
     mode: 'onChange',
     resolver: zodResolver(editProfileSchema),
@@ -55,7 +58,18 @@ export const useEditProfileForm = () => {
       setMessage(t.settingsSaved)
       setIsShowAlert(true)
     } catch (error) {
-      setMessage(t.editProfileError.settingsNotSaved)
+      handleApiError({
+        error,
+        modifyMessage(message, t) {
+          if (message.includes('already exists') && message.includes('User with userName')) {
+            return { message: t.editProfileError.usernameTaken }
+          }
+
+          return { message }
+        },
+        setApiError: setMessage,
+        setError,
+      })
       setIsShowAlert(true)
     }
   }

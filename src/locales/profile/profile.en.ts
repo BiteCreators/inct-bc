@@ -22,6 +22,7 @@ export const profileTranslationEn = {
     photoTooSmall: 'Error! Image must be at least 150x150 pixels',
     requiredError: 'Field is required',
     settingsNotSaved: 'Error! Server is not available!',
+    usernameTaken: 'This username is already taken!',
   },
   firstName: 'First name',
   followers: 'Followers',
