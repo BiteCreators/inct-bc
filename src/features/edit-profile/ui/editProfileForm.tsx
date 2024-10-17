@@ -29,9 +29,12 @@ export const EditProfileForm = () => {
   }
 
   return (
-    <div className={'flex justify-between items-start ml-6 mr-[65px] relative mt-6 h-full text-sm'}>
-      <ProfileAvatar />
-      <form className={'ml-10 flex flex-col gap-y-6 basis-3/4'} noValidate onSubmit={handleSubmit}>
+    <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
+      <div className={'flex flex-col gap-6'}>
+        <Avatar avatarURL={exampleImage.src} href={'/'} size={192} />
+        <Button variant={'outline'}>Add a profile photo</Button>
+      </div>
+      <form className={'flex flex-col grow gap-6'} noValidate onSubmit={handleSubmit(onSubmit)}>
         <FormInput control={control} label={t.userName} name={'userName'} required />
         <FormInput control={control} label={t.firstName} name={'firstName'} required />
         <FormInput control={control} label={t.lastName} name={'lastName'} required />
@@ -45,13 +48,11 @@ export const EditProfileForm = () => {
           required
         />
         <div className={'flex gap-6'}>
-          {/* <FormSelect
+          <FormSelect
             className={'w-full'}
             control={control}
             label={t.selectYourCountry}
-            maxWidth={'360px'}
             name={'selectYourCountry'}
-            name={'country'}
             placeholder={t.country}
             responsive
           >
@@ -61,31 +62,17 @@ export const EditProfileForm = () => {
             className={'w-full'}
             control={control}
             label={t.selectYourCity}
-            maxWidth={'360px'}
             name={'selectYourCity'}
-            name={'city'}
             placeholder={t.city}
           >
             {citiesList}
-          </FormSelect> */}
+          </FormSelect>
         </div>
         <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
-        <Button className={'w-min-40 self-end'} disabled={!isValid} type={'submit'}>
+        <Button className={'w-min-40 self-end'} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
       <hr className={'border-dark-300 w-full absolute bottom-[60px]'}></hr>
-      {isShowAlert && (
-        <div className={'relative'}>
-          <Alert
-            duration={3000}
-            message={message}
-            onClose={onClose}
-            purpose={'toast'}
-            type={isError ? 'error' : 'success'}
-          />
-        </div>
-      )}
     </div>
-  )
 }
