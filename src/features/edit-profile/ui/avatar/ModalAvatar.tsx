@@ -71,7 +71,7 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
               </div>
             </DragAndDropInput>
             <Button className={'w-56 bottom-0 mb-9 h-12 md:h-9 md:mb-[84px]'} onClick={uploadImage}>
-              Select from Computer
+              {t.selectPhoto}
             </Button>
           </div>
         )}

@@ -1,9 +1,7 @@
-import { Button, FormInput, FormSelect, FormTextArea, SelectItem } from '@/common/ui'
+import { Alert, Button, FormInput, FormSelect, FormTextArea, Loader, SelectItem } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
-import { Alert } from './../../../common/ui/alert/Alert'
-import { Loader } from './../../../common/ui/loader/Loader'
 import { ProfileAvatar } from './avatar/ProfileAvatar'
 
 export const EditProfileForm = () => {
@@ -46,43 +44,47 @@ export const EditProfileForm = () => {
           name={'dateOfBirth'}
           required
         />
-        <div className={'flex gap-5 justify-between w-full'}>
-          <FormSelect
+        <div className={'flex gap-6'}>
+          {/* <FormSelect
+            className={'w-full'}
             control={control}
             label={t.selectYourCountry}
             maxWidth={'360px'}
+            name={'selectYourCountry'}
             name={'country'}
             placeholder={t.country}
             responsive
-            width={'358px'}
           >
             {countriesList}
           </FormSelect>
           <FormSelect
+            className={'w-full'}
             control={control}
             label={t.selectYourCity}
             maxWidth={'360px'}
+            name={'selectYourCity'}
             name={'city'}
             placeholder={t.city}
-            width={'358px'}
           >
             {citiesList}
-          </FormSelect>
+          </FormSelect> */}
         </div>
-        <FormTextArea control={control} label={t.aboutMe} name={'aboutMe'} />
-        <span className={'inline-block ml-[-35%] h-[1px] w-[135%] bg-dark-300'} />
-        <Button className={'mt-7 w-min-40 self-end'} disabled={!isValid} type={'submit'}>
+        <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
+        <Button className={'w-min-40 self-end'} disabled={!isValid} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
+      <hr className={'border-dark-300 w-full absolute bottom-[60px]'}></hr>
       {isShowAlert && (
-        <Alert
-          className={'absolute bottom-12 left-[-100px]'}
-          duration={3000}
-          message={message}
-          onClose={onClose}
-          type={isError ? 'error' : 'success'}
-        />
+        <div className={'relative'}>
+          <Alert
+            duration={3000}
+            message={message}
+            onClose={onClose}
+            purpose={'toast'}
+            type={isError ? 'error' : 'success'}
+          />
+        </div>
       )}
     </div>
   )

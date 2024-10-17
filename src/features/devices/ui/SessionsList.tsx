@@ -6,13 +6,8 @@ import { SessionCard } from './SessionCard'
 import { TerminateSessionButton } from './TerminateSessionButton'
 
 export const SessionsList = () => {
-  const { data, error, isError, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
+  const { data, isSuccess } = devicesApi.useGetSessionsQuery()
   const t = useScopedTranslation('Devices')
-
-  if (isError) {
-    //TODO: handle error
-    return <div>error</div>
-  }
 
   if (isSuccess) {
     const { current, others } = data

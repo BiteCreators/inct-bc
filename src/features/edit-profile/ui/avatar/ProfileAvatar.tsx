@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { ImageOutline } from '@/common/assets/icons/components'
-import { Avatar, Button, Loader } from '@/common/ui'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { Alert, Avatar, Button, Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useProfileAvatar } from '@/features/edit-profile/lib/hooks/useProfileAvatar'
 
@@ -9,6 +10,7 @@ import { ModalAvatar } from './ModalAvatar'
 
 export const ProfileAvatar = () => {
   const {
+    apiError,
     confirmOpen,
     currentAvatar,
     handleConfirm,
@@ -20,10 +22,11 @@ export const ProfileAvatar = () => {
     setIsOpen,
     updateAvatar,
   } = useProfileAvatar()
+  const t = useScopedTranslation('Profile')
 
   if (isLoading) {
     return (
-      <div className={'bg-dark-700 w-1/5 p-2 flex justify-center'}>
+      <div className={'w-1/5 p-2 flex justify-center'}>
         <div className={'mt-16'}>
           <Loader />
         </div>
@@ -44,11 +47,11 @@ export const ProfileAvatar = () => {
           />
           <ActionConfirmation
             isOpen={confirmOpen}
-            message={'Are you sure you want to delete the photo?'}
+            message={t.deletePhoto}
             onConfirm={handleConfirm}
             onReject={handleReject}
             setIsOpen={setConfirmOpen}
-            title={'Delete photo'}
+            title={t.deletePhotoTitle}
           />
         </>
       ) : (
@@ -61,8 +64,9 @@ export const ProfileAvatar = () => {
         </div>
       )}
       <Button className={'w-full'} onClick={() => setIsOpen(true)} variant={'outline'}>
-        Add a Profile Photo
+        {t.addProfilePhoto}
       </Button>
+      {apiError && <Alert duration={3000} message={apiError} purpose={'toast'} type={'error'} />}
       {isOpen && (
         <ModalAvatar
           currentAvatar={currentAvatar}
