@@ -11,7 +11,8 @@ export const profileTranslationRu: LocaleType['Profile'] = {
   deletePhoto: 'Вы уверены, что хотите удалить фотографию?',
   deletePhotoTitle: 'Удалить фотографию',
   editProfileError: {
-    ageUser: 'Пользователь младше 13 лет не может создать профиль.Политика конфиденциальности',
+    ageUser:
+      'Пользователь младше 13 лет не может создать профиль.<1>Политика конфиденциальности</1>',
     incorrectPhotoFormat: 'Ошибка! Формат загружаемой фотографии должен быть PNG или JPEG',
     invalidFirstName: 'Имя может содержать символы A-Za-zА-Яа-я',
     invalidLastName: 'Фамилия может содержать символы A-Za-zА-Яа-я',

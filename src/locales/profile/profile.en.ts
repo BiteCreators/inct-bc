@@ -9,8 +9,8 @@ export const profileTranslationEn = {
   deletePhoto: 'Are you sure you want to delete the photo?',
   deletePhotoTitle: 'Delete photo',
   editProfileError: {
-    ageUser: 'A user under 13 cannot create a profile.Privacy Policy',
-    incorrectPhotoFormat: 'Error! The format of the uploaded photo must be PNG or JPEG',
+    ageUser: 'A user under 13 cannot create a profile.<1>Privacy Policy</1>',
+    incorrectPhotoFormat: 'Error! The format of the uploaded jphoto must be PNG or JPEG',
     invalidFirstName: 'The first name may contain the characters A-Za-zА-Яа-я',
     invalidLastName: 'The last name may contain the characters A-Za-zА-Яа-я',
     invalidUserName: 'The username may contain the characters A-Za-z0-9_-',
