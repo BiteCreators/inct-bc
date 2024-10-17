@@ -39,7 +39,6 @@ export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) 
   }
 
   return (
-    <div className={''}>
       <ScrollArea className={'max-h-[calc(100vh-100px)] flex flex-col'}>
         <div className={'flex flex-col items-center'}>
           <ReactCrop
@@ -64,6 +63,5 @@ export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) 
           </Button>
         </div>
       </ScrollArea>
-    </div>
   )
 }
