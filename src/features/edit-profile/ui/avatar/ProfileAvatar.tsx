@@ -35,7 +35,7 @@ export const ProfileAvatar = () => {
   }
 
   return (
-    <div className={'w-1/5 min-w-56 flex flex-col items-center gap-5 p-2'}>
+    <div className={'flex flex-col gap-6 max-w-max'}>
       {currentAvatar ? (
         <>
           <Avatar
