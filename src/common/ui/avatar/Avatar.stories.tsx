@@ -15,7 +15,6 @@ export const Small: Story = {
   args: {
     avatarURL: exampleImage.src,
     href: '',
-    size: 40,
   },
 }
 
@@ -23,6 +22,5 @@ export const Big: Story = {
   args: {
     avatarURL: exampleImage.src,
     href: '',
-    size: 300,
   },
 }

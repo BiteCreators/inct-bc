@@ -43,8 +43,6 @@ export const ProfileAvatar = () => {
             isNextLink={false}
             onClose={removeAvatar}
             showClose={!!currentAvatar?.url}
-            //TODO: Find out why this prop was removed
-            // size={200}
           />
           <ActionConfirmation
             isOpen={confirmOpen}
