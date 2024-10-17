@@ -31,14 +31,20 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
 
   return (
     <Modal
-      className={'max-w-[492px] w-full min-h-64'}
+      className={'max-w-[330px] md:max-w-[492px] w-full min-h-64'}
       isOpen={isOpen}
       mode={'default'}
       onOpenChange={setIsOpen}
       title={t.addProfilePhoto}
     >
       {error && (
-        <Alert message={error} onClose={() => setError('')} purpose={'alert'} type={'error'} />
+        <Alert
+          className={'static left-0 right-0 !mb-0 md:absolute md:left-4 md:right-4'}
+          message={error}
+          onClose={() => setError('')}
+          purpose={'alert'}
+          type={'error'}
+        />
       )}
       <div className={'w-full items-end'}>
         {imageUrl && (
@@ -50,17 +56,21 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
           />
         )}
         {!imageUrl && (
-          <div className={'w-full flex flex-col justify-center items-center gap-5'}>
+          <div className={'w-full flex flex-col justify-center items-center gap-9 md:gap-14'}>
             <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
-              <div className={'bg-dark-700 w-56 h-56 mt-7 flex justify-center items-center'}>
+              <div
+                className={
+                  'bg-dark-700 w-[300px] h-[300px] md:w-56 md:h-56 mt-3 md:mt-[72px] flex justify-center items-center'
+                }
+              >
                 {currentAvatar ? (
-                  <Avatar avatarURL={currentAvatar.url} rounded={false} size={224} />
+                  <Avatar avatarURL={currentAvatar.url} rounded={false} />
                 ) : (
                   <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
                 )}
               </div>
             </DragAndDropInput>
-            <Button className={'w-56 bottom-0 mt-6 mb-16'} onClick={uploadImage}>
+            <Button className={'w-56 bottom-0 mb-9 h-12 md:h-9 md:mb-[84px]'} onClick={uploadImage}>
               {t.selectPhoto}
             </Button>
           </div>
