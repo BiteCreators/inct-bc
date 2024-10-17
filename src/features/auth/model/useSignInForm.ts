@@ -8,6 +8,7 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { authApi, authSlice } from '@/entities/auth'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as jose from 'jose'
 import Router from 'next/router'
 
 import { modifySingInApiError } from '../lib/modifySignInApiError'
@@ -44,6 +45,7 @@ export const useSignInForm = () => {
         password,
       }).unwrap()
       const token = res.accessToken
+      const { userId } = jose.decodeJwt(token)
 
       setCookies('accessToken', res.accessToken, {
         maxAge: 2678400,
@@ -52,7 +54,7 @@ export const useSignInForm = () => {
         secure: true,
       })
       dispatch(authSlice.actions.setAccessToken(token))
-      Router.push('/profile')
+      Router.push(`/profile/${userId}`)
     } catch (error) {
       handleApiError({ error, modifyMessage: modifySingInApiError, setApiError, setError })
     }
