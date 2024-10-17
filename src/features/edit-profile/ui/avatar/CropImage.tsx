@@ -39,31 +39,29 @@ export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) 
   }
 
   return (
-    <div className={''}>
-      <ScrollArea className={'max-h-[calc(100vh-100px)] flex flex-col'}>
-        <div className={'flex flex-col items-center'}>
-          <ReactCrop
-            aspect={1}
-            circularCrop
-            crop={crop}
-            keepSelection
-            minHeight={150}
-            minWidth={150}
-            onChange={newCrop => setCrop(newCrop)}
-          >
-            <img
-              alt={'Selected'}
-              className={'max-w-full h-auto'}
-              onLoad={onImageLoad}
-              ref={imgRef}
-              src={imageUrl}
-            />
-          </ReactCrop>
-          <Button className={'mt-6 mb-4 px-7 z-10 self-end'} onClick={saveCroppedImageHandler}>
-            Save
-          </Button>
-        </div>
-      </ScrollArea>
-    </div>
+    <ScrollArea className={'max-h-[calc(100vh-100px)] flex flex-col'}>
+      <div className={'flex flex-col items-center'}>
+        <ReactCrop
+          aspect={1}
+          circularCrop
+          crop={crop}
+          keepSelection
+          minHeight={150}
+          minWidth={150}
+          onChange={newCrop => setCrop(newCrop)}
+        >
+          <img
+            alt={'Selected'}
+            className={'max-w-full h-auto'}
+            onLoad={onImageLoad}
+            ref={imgRef}
+            src={imageUrl}
+          />
+        </ReactCrop>
+        <Button className={'mt-6 mb-4 px-7 z-10 self-end'} onClick={saveCroppedImageHandler}>
+          Save
+        </Button>
+      </div>
+    </ScrollArea>
   )
 }
