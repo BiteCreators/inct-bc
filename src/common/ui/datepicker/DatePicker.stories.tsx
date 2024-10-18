@@ -7,32 +7,32 @@ const meta = {
 
 export default meta
 
-type Story = StoryObj<typeof meta>
+//type Story = StoryObj<typeof meta>
 
-export const SingleDatePicker: Story = {
-  args: {
-    label: 'Date',
-    mode: 'single',
-  },
-  render: args => {
+export const SingleDatePicker = {
+  // args: {
+  //   label: 'Date',
+  //   mode: 'single',
+  // },
+  render: () => {
     return (
       <div className={'max-w-[300px]'}>
-        <DatePicker {...args} />
+        <DatePicker label={'Date'} mode={'single'} selectedDate={null} />
       </div>
     )
   },
 }
 
-export const DisabledDatePicker: Story = {
+export const DisabledDatePicker = {
   args: {
     disabled: true,
     label: 'Select a Date',
     mode: 'single',
   },
-  render: args => {
+  render: () => {
     return (
       <div className={'max-w-[300px]'}>
-        <DatePicker {...args} />
+        <DatePicker disabled label={'Select a Date'} mode={'single'} selectedDate={null} />
       </div>
     )
   },
