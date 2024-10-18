@@ -30,7 +30,7 @@ export const EditProfileForm = () => {
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
-      <div className={'flex flex-col gap-6'}>
+      <div className={'flex flex-col gap-6 min-w-[270px]'}>
         <ProfileAvatar />
       </div>
       <form className={'flex flex-col grow gap-6'} noValidate onSubmit={handleSubmit}>
