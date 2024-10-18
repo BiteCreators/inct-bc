@@ -6,6 +6,7 @@ type Props = {
   alt?: string
   avatarURL: string
   href?: string
+  imgStyles?: string
   isNextLink?: boolean
   onClose?: () => void
   rel?: string
@@ -17,6 +18,7 @@ export const Avatar = ({
   alt = 'Avatar',
   avatarURL,
   href,
+  imgStyles,
   isNextLink = false,
   onClose,
   rel = '',
@@ -29,8 +31,8 @@ export const Avatar = ({
     }
   }
   const AvatarImage = (
-    <span className={'relative'}>
-      <img alt={alt} className={cn('w-full', [rounded && 'rounded-full'])} src={avatarURL} />
+    <span className={'relative inline-block'}>
+      <img alt={alt} className={cn(imgStyles, [rounded && 'rounded-full'])} src={avatarURL} />
       {showClose && (
         <span
           className={cn([
@@ -52,11 +54,11 @@ export const Avatar = ({
   )
 
   return isNextLink && href ? (
-    <Link className={'w-full h-full'} href={href} rel={rel}>
+    <Link className={'w-full h-full text-center'} href={href} rel={rel}>
       {AvatarImage}
     </Link>
   ) : (
-    <a className={'w-full h-full'} href={href} rel={rel}>
+    <a className={'w-full h-full text-center'} href={href} rel={rel}>
       {AvatarImage}
     </a>
   )
