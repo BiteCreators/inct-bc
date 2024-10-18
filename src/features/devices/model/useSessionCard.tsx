@@ -73,7 +73,12 @@ export const useSessionCard = ({
 
   if (type === 'device' && osName) {
     title = osName
-    if (osName === 'Linux' || osName === 'Windows' || osName === 'MacOS') {
+    if (
+      osName === 'Linux' ||
+      osName === 'Windows' ||
+      osName === 'Macintosh' ||
+      osName === 'Intel Mac OS'
+    ) {
       icon = <DesktopMac />
     } else {
       icon = <PhoneIphone />
