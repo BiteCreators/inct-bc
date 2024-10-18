@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { DateRange } from 'react-day-picker'
+
 import { DatePicker } from '@/common/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -7,32 +10,48 @@ const meta = {
 
 export default meta
 
-//type Story = StoryObj<typeof meta>
+type Story = StoryObj<typeof meta>
 
-export const SingleDatePicker = {
-  // args: {
-  //   label: 'Date',
-  //   mode: 'single',
-  // },
-  render: () => {
+export const SingleDatePicker: Story = {
+  args: {
+    label: 'Date',
+    mode: 'single',
+    selectedDate: null,
+  },
+  render: args => {
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+    const handleDateChange = (date: Date | DateRange | undefined) => {
+      if (date instanceof Date) {
+        setSelectedDate(date)
+      }
+    }
+
     return (
       <div className={'max-w-[300px]'}>
-        <DatePicker label={'Date'} mode={'single'} selectedDate={null} />
+        <DatePicker {...args} onDateChange={handleDateChange} selectedDate={selectedDate} />
       </div>
     )
   },
 }
 
-export const DisabledDatePicker = {
+export const DisabledDatePicker: Story = {
   args: {
     disabled: true,
     label: 'Select a Date',
     mode: 'single',
+    selectedDate: null,
   },
-  render: () => {
+  render: args => {
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+    const handleDateChange = (date: Date | DateRange | undefined) => {
+      if (date instanceof Date) {
+        setSelectedDate(date)
+      }
+    }
+
     return (
       <div className={'max-w-[300px]'}>
-        <DatePicker disabled label={'Select a Date'} mode={'single'} selectedDate={null} />
+        <DatePicker {...args} onDateChange={handleDateChange} selectedDate={selectedDate} />
       </div>
     )
   },
@@ -43,6 +62,7 @@ export const ErrorDatePicker: Story = {
     error: 'Error',
     label: 'Select a Date',
     mode: 'single',
+    selectedDate: new Date(),
   },
   render: args => {
     return (
@@ -57,6 +77,7 @@ export const RangeDatePicker: Story = {
   args: {
     label: 'Select Date Range',
     mode: 'range',
+    selectedDate: null,
   },
   render: args => {
     return (

@@ -4,7 +4,6 @@ import { DateRange } from 'react-day-picker'
 import { Calendar } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { CustomDayPicker } from '@/common/ui/datepicker/CustomDayPicker'
-import { a } from '@vitest/utils/dist/types-9l4niLY8'
 import { format, isValid, parse } from 'date-fns'
 
 type Props = {
