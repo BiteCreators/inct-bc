@@ -27,5 +27,5 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
   //all protected routes should go after '/auth/sing-up'
-  matcher: ['/auth/sign-in', '/auth/sign-up', '/auth/google', '/create', '/'],
+  matcher: ['/auth/sign-in', '/auth/sign-up', '/auth/google', '/create', '/', '/profile/:path*'],
 }
