@@ -22,7 +22,7 @@ export const ModalContent = ({ children, mode, title }: Props) => {
             </Dialog.Close>
           </div>
           <div className={cn('h-px bg-dark-100 w-full')} />
-          <div className={cn('py-3 px-6')}>{children}</div>
+          <div className={cn('py-3 px-6 max-w-full')}>{children}</div>
         </>
       )}
 
