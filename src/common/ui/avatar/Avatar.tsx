@@ -58,7 +58,7 @@ export const Avatar = ({
       {AvatarImage}
     </Link>
   ) : (
-    <a className={'w-full h-full text-center'} href={href} rel={rel}>
+    <a className={'max-w-full h-full text-center flex'} href={href} rel={rel}>
       {AvatarImage}
     </a>
   )
