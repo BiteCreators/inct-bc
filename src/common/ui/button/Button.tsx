@@ -40,9 +40,7 @@ export const Button = ({ asChild, className, variant = 'primary', ...props }: Pr
           'global-hover:hover:bg-transparent',
           'disabled:text-primary-500 disabled:global-hover:hover:text-primary-500',
         ],
-        variant === 'icon' && [
-          'bg-dark-500 bg-opacity-80 p-1.5 focus:text-primary-500 focus:outline-0',
-        ],
+        variant === 'icon' && ['bg-dark-500 bg-opacity-80 p-1.5  focus:outline-0'],
         className
       )}
       type={'button'}

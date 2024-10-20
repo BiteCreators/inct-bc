@@ -1,6 +1,13 @@
-import React, { JSX, useState } from 'react'
+import React, { JSX, useEffect, useRef, useState } from 'react'
 
-import { ExpandOutline, ImageOutline, MaximizeOutline } from '@/common/assets/icons/components'
+import {
+  ExpandOutline,
+  HorizontalOrientation,
+  ImageOutline,
+  MaximizeOutline,
+  Square,
+  VerticalOrientation,
+} from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
 
@@ -90,12 +97,12 @@ export const CreatePostModal = () => {
             <div className={'h-[504px] relative'}>
               <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
               <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
-                <Button variant={'icon'}>
-                  <ExpandOutline />
-                </Button>
+                <AspectRatio />
+
                 <Button variant={'icon'}>
                   <MaximizeOutline />
                 </Button>
+
                 <div className={'flex-1 text-right'}>
                   <Button variant={'icon'}>
                     <ImageOutline />
@@ -145,12 +152,14 @@ export const CreatePostModal = () => {
 
 export const ImageFilter = ({ filter }: { filter: string }) => {
   return (
-    <div className={'flex flex-col gap-2 items-center'}>
-      <div className={'w-[108px] h-[108px]'}>
-        <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
+    <button>
+      <div className={'flex flex-col gap-2 items-center'}>
+        <div className={'w-[108px] h-[108px]'}>
+          <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
+        </div>
+        <Typography>{filter}</Typography>
       </div>
-      <Typography>{filter}</Typography>
-    </div>
+    </button>
   )
 }
 
@@ -161,6 +170,63 @@ export const UserProfileUrl = ({ className }: { className?: string }) => {
         <Avatar avatarURL={exampleImage.src} />
       </div>
       <Typography className={'font-medium'}>URLProfile</Typography>
+    </div>
+  )
+}
+
+export const AspectRatio = () => {
+  const [isAspectRatioOpen, setIsAspectRatioOpen] = useState(false)
+  const aspectRatioRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (aspectRatioRef.current && !aspectRatioRef.current.contains(event.target as Node)) {
+        setIsAspectRatioOpen(false)
+      }
+    }
+
+    if (isAspectRatioOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isAspectRatioOpen])
+
+  return (
+    <div className={'relative'} ref={aspectRatioRef}>
+      <Button
+        className={`${isAspectRatioOpen && 'focus:text-primary-500'}`}
+        onClick={() => setIsAspectRatioOpen(!isAspectRatioOpen)}
+        variant={'icon'}
+      >
+        <ExpandOutline />
+      </Button>
+      {isAspectRatioOpen && (
+        <div
+          className={`flex flex-col gap-3 min-w-36 absolute bottom-[38px] bg-dark-500 bg-opacity-80 p-3 rounded-sm`}
+        >
+          <button className={'flex gap-7 justify-between items-center'}>
+            <span>Original</span>
+            <ImageOutline />
+          </button>
+          <button className={'flex gap-7 justify-between items-center'}>
+            <span>1:1</span>
+            <Square />
+          </button>
+          <button className={'flex gap-7 justify-between items-center'}>
+            <span>4:5</span>
+            <VerticalOrientation />
+          </button>
+          <button className={'flex gap-7 justify-between items-center'}>
+            <span>16:9</span>
+            <HorizontalOrientation />
+          </button>
+        </div>
+      )}
     </div>
   )
 }
