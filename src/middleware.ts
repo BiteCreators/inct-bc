@@ -14,8 +14,12 @@ export default function middleware(req: NextRequest) {
       return NextResponse.next()
     }
   }
-  if (req.nextUrl.pathname === '/' && req.nextUrl.searchParams.has('code')) {
-    return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
+  if (req.nextUrl.pathname === '/') {
+    if (req.nextUrl.searchParams.has('code')) {
+      return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
+    } else {
+      return NextResponse.next()
+    }
   }
 
   if (!isAuth) {
