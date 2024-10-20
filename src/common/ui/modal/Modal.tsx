@@ -8,13 +8,26 @@ import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   children: ReactNode
   className?: string
+  handleBack?: () => void
+  handleNext?: () => void
   isOpen: boolean
-  mode: 'custom' | 'default' | 'outside'
+  mode: 'custom' | 'default' | 'outside' | 'withStep'
+  nextButtonTitle?: string
   onOpenChange?: (open: boolean) => void
   title?: string
 }
 
-export const Modal = ({ children, className, isOpen, mode, onOpenChange, title }: Props) => {
+export const Modal = ({
+  children,
+  className,
+  handleBack,
+  handleNext,
+  isOpen,
+  mode,
+  nextButtonTitle,
+  onOpenChange,
+  title,
+}: Props) => {
   const modalContent = (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-50')} />
@@ -25,7 +38,13 @@ export const Modal = ({ children, className, isOpen, mode, onOpenChange, title }
           className
         )}
       >
-        <ModalContent mode={mode} title={title}>
+        <ModalContent
+          handleBack={handleBack}
+          handleNext={handleNext}
+          mode={mode}
+          nextButtonTitle={nextButtonTitle}
+          title={title}
+        >
           {children}
         </ModalContent>
       </Dialog.Content>

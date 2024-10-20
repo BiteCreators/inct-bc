@@ -73,6 +73,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           required={required}
           {...props}
         />
+        <span className={'text-xs leading-none text-light-900 text-right'}>0/500</span>
         {isError && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
       </div>
     )
