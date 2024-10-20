@@ -32,7 +32,7 @@ export default function EditPost({
       onOpenChange={changeOpen}
       title={'Edit post'}
     >
-      <div className={'w-[920px] h-[465px] flex flex-row'}>
+      <div className={'sm:w-[920px] h-[465px] flex flex-row'}>
         <div className={'w-1/2 h-full bg-amber-200'}>
           <img
             alt={'img'}
@@ -41,19 +41,31 @@ export default function EditPost({
           />
         </div>
         <div className={'w-1/2 h-full pl-4'}>
-          <div className={'flex w-full justify-start items-center gap-5 mb-6'}>
-            <Avatar
-              avatarURL={'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'}
-              imgStyles={'w-9 h-9'}
-            />
-            <Typography variant={'medium-text'}>{urlProfile}</Typography>
+          <div className={'flex w-full h-1/3 flex-col '}>
+            <div className={'flex w-full justify-start items-center gap-5 mb-6'}>
+              <Avatar
+                avatarURL={
+                  'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'
+                }
+                imgStyles={'w-9 h-9'}
+              />
+              <Typography className={'font-bold'} variant={'medium-text'}>
+                {urlProfile}
+              </Typography>
+            </div>
+            <TextArea
+              className={'min-h-32'}
+              label={'Add publication descriptions'}
+              onChange={changeText}
+            >
+              {textAreaText}
+            </TextArea>
           </div>
-          <TextArea label={'Add publication descriptions'} onChange={changeText}>
-            {textAreaText}
-          </TextArea>
-          <Button className={'absolute bottom-10 right-6'} onClick={saveChanges}>
-            Save changes
-          </Button>
+          <div className={'flex w-full h-2/3 justify-end items-end py-5 '}>
+            <Button className={'max-h-screen'} onClick={saveChanges}>
+              Save changes
+            </Button>
+          </div>
         </div>
       </div>
     </Modal>
