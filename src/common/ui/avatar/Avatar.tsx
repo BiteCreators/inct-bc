@@ -54,7 +54,7 @@ export const Avatar = ({
   )
 
   return isNextLink && href ? (
-    <Link className={'w-full h-full text-center'} href={href} rel={rel}>
+    <Link className={'max-w-full h-full text-center'} href={href} rel={rel}>
       {AvatarImage}
     </Link>
   ) : (
