@@ -32,7 +32,7 @@ export default function EditPost({
       onOpenChange={changeOpen}
       title={'Edit post'}
     >
-      <div className={'sm:w-[920px] h-[465px] flex flex-row'}>
+      <div className={'w-[920px] h-[465px] flex flex-row'}>
         <div className={'w-1/2 h-full bg-amber-200'}>
           <img
             alt={'img'}
