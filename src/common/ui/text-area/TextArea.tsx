@@ -1,15 +1,18 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import React, { ComponentProps, forwardRef, useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
+import { toArray } from '@vitest/utils'
 
 import { useTextArea } from './useTextArea'
 
 export type TextAreaProps = {
   className?: string
   error?: string
+  isCorrect?: boolean
   isError?: boolean
   label?: string
+  limitCount?: number
   resize?: 'auto' | 'manual-x' | 'manual-y'
 } & ComponentProps<'textarea'>
 
@@ -20,8 +23,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       disabled,
       error,
       id,
+      isCorrect,
       isError,
       label,
+      limitCount,
       onChange,
       required,
       resize = 'auto',
@@ -29,10 +34,16 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     }: TextAreaProps,
     ref
   ) => {
+    if (limitCount) {
+      limitCount = limitCount < 0 ? undefined : limitCount
+    }
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: resize === 'auto',
       onChange,
     })
+    const currentCount = props.value?.toString().length ?? 0
+
+    console.log(isCorrect)
 
     return (
       <div className={'flex flex-col'}>
@@ -73,6 +84,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           required={required}
           {...props}
         />
+        {!!limitCount && (
+          <div
+            className={`flex justify-end text-light-900 text-xs ${!isCorrect && 'text-red-700'}`}
+          >{`${currentCount}/${limitCount}`}</div>
+        )}
         {isError && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
       </div>
     )
