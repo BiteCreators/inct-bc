@@ -5,16 +5,16 @@ import { Slider } from './Slider'
 const meta: Meta<typeof Slider> = {
   argTypes: {
     duration: {
-      description: 'Скорость обновления слайдов.',
+      description: 'Скорость обновления слайдов, если ноль то обновление слайдов отключено.',
     },
     height: {
       description: 'Высота слайдера, по умолчанию 560px.',
     },
-    sliderStyles: {
-      description: 'Дополнительные стили для слайдера.',
-    },
     slidesUrl: {
       description: 'Обязательный Props - массив ссылок на изображения.',
+    },
+    stylesSlider: {
+      description: 'Дополнительные стили для слайдера.',
     },
   },
   component: Slider,
@@ -36,8 +36,8 @@ type Story = StoryObj<typeof Slider>
 export const Default: Story = {
   args: {
     duration: 4000,
-    height: '560px',
-    sliderStyles: 'w-[500px]',
+    height: '560',
     slidesUrl: slides,
+    stylesSlider: 'w-full md:w-[500px]',
   },
 }
