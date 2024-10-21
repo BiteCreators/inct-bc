@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authApi } from '@/common/api/auth.api'
-import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi } from '@/entities/auth'
 import {
   ForgotPasswordFormData,
   createForgotPasswordSchema,
@@ -20,7 +20,7 @@ export const useForgotPassword = () => {
   const email = searchParams?.get('email') ?? null
   const t = useScopedTranslation('Auth')
 
-  const forgotPasswordSchema = createForgotPasswordSchema(t)
+  const forgotPasswordSchema = createForgotPasswordSchema(t.errors)
   const [apiError, setApiError] = useState('')
   const [forgotPassword] = authApi.useForgotPasswordMutation()
 
@@ -43,7 +43,7 @@ export const useForgotPassword = () => {
     mode: 'onChange',
     resolver: zodResolver(forgotPasswordSchema),
   })
-  const { handleApiError } = useHandleApiErorr('Auth')
+  const { handleApiError } = useHandleApiError('Auth')
   const onRecaptchaChange = (token: null | string) => {
     if (token) {
       setValue('recaptcha', token)

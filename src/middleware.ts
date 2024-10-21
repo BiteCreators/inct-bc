@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export default function middleware(req: NextRequest) {
-  const isAuth = req.cookies.get('accessToken')
+  const isAuth = req.cookies.get('accessToken')?.value
 
-  if (req.url.includes('/auth/sign-in') || req.url.includes('/auth/sign-up')) {
+  if (
+    req.nextUrl.pathname === '/auth/sign-in' ||
+    req.nextUrl.pathname === '/auth/sign-up' ||
+    req.nextUrl.pathname === '/auth/google'
+  ) {
     if (isAuth) {
       return NextResponse.redirect(new URL('/', req.url))
     } else {
@@ -23,5 +27,5 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
   //all protected routes should go after '/auth/sing-up'
-  matcher: ['/auth/sign-in', '/auth/sign-up', '/create', '/'],
+  matcher: ['/auth/sign-in', '/auth/sign-up', '/auth/google', '/create', '/', '/profile/:path*'],
 }

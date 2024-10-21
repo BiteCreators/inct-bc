@@ -4,6 +4,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
+import { AuthProvider } from '@/app/providers/AuthProvider'
 import { persistedStore, wrapper } from '@/app/store'
 import { NextPage } from 'next'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -26,7 +27,7 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistedStore}>
-        {getLayout(<Component {...props.pageProps} />)}
+        <AuthProvider>{getLayout(<Component {...props.pageProps} />)}</AuthProvider>
       </PersistGate>
     </Provider>
   )

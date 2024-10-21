@@ -1,4 +1,4 @@
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { authSlice } from '@/entities/auth'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
@@ -39,7 +39,7 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           const token = refreshResult.data.accessToken
 
-          document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
+          document.cookie = `accessToken=${token};max-age=2678400;secure;path=/;samesite=lax`
           result = await baseQuery(args, api, extraOptions)
         } else {
           api.dispatch(authSlice.actions.setAccessToken(null))

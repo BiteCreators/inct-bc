@@ -1,7 +1,7 @@
 import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const createSignUpSchema = (t: LocaleType['Auth']) => {
+export const createSignUpSchema = (t: LocaleType['Auth']['errors']) => {
   return z
     .object({
       agreedToPrivacyPolicy: z.boolean({

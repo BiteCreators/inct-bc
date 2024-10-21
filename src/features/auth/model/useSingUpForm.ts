@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authApi } from '@/common/api/auth.api'
-import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi } from '@/entities/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { modifySignUpApiError } from '../lib/modifyAuthApiError'
@@ -12,7 +12,7 @@ import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema
 export const useSingUpForm = () => {
   const t = useScopedTranslation('Auth')
 
-  const signUpSchema = createSignUpSchema(t)
+  const signUpSchema = createSignUpSchema(t.errors)
 
   const {
     control,
@@ -35,7 +35,7 @@ export const useSingUpForm = () => {
   const [apiError, setApiError] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [userEmail, setUserEmail] = useState('')
-  const { handleApiError } = useHandleApiErorr('Auth')
+  const { handleApiError } = useHandleApiError('Auth')
 
   const [register, { isLoading }] = authApi.useRegistrationMutation()
 

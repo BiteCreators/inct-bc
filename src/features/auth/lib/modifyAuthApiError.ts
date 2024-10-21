@@ -8,25 +8,27 @@ export const modifySignUpApiError = (
   message: string,
   t: LocaleType['Auth']
 ): { field?: Path<SignUpFormData>; message: string } => {
+  const { errors } = t
+
   if (message.includes('already exist') && message.includes('userName')) {
     return {
-      message: t.usernameTakenError,
+      message: errors.usernameTakenError,
     }
   }
   if (message.includes('already exist') && message.includes('email')) {
     return {
-      message: t.emailTakenError,
+      message: errors.emailTakenError,
     }
   }
 
   if (message.includes('User with this email')) {
     return {
-      message: t.userNotFound,
+      message: errors.userNotFound,
     }
   }
   if (message.includes("Email isn't valid or already confirmed")) {
     return {
-      message: t.emailIsNotValidOrAlreadyConfirmedError,
+      message: errors.emailIsNotValidOrAlreadyConfirmedError,
     }
   }
 

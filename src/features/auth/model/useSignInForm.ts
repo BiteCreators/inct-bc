@@ -1,21 +1,22 @@
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { authApi } from '@/common/api/auth.api'
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
-import { useHandleApiErorr } from '@/common/lib/hooks/useHanldeApiError'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authApi, authSlice } from '@/entities/auth'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as jose from 'jose'
 import Router from 'next/router'
 
 import { modifySingInApiError } from '../lib/modifySignInApiError'
-import { authSlice } from './auth.slice'
 
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')
 
-  const signInSchema = createSignInSchema(t)
+  const signInSchema = createSignInSchema(t.errors)
 
   const {
     control,
@@ -30,22 +31,30 @@ export const useSignInForm = () => {
     mode: 'onChange',
     resolver: zodResolver(signInSchema),
   })
-  const [login, { error, isLoading }] = authApi.useLoginMutation()
+  const [login, { isLoading }] = authApi.useLoginMutation()
   const dispatch = useAppDispatch()
-  const { handleApiError } = useHandleApiErorr('Auth')
+  const { handleApiError } = useHandleApiError('Auth')
   const [apiError, setApiError] = useState('')
+  const [_, setCookies] = useCookies(['accessToken'])
 
   const onSubmit: SubmitHandler<SignInFormData> = async ({ email, password }) => {
     try {
-      await login({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '', email, password })
-        .unwrap()
-        .then(res => {
-          const token = res.accessToken
+      const res = await login({
+        baseUrl: process.env.NEXT_PUBLIC_BASE_URL || '',
+        email,
+        password,
+      }).unwrap()
+      const token = res.accessToken
+      const { userId } = jose.decodeJwt(token)
 
-          document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
-          dispatch(authSlice.actions.setAccessToken(token))
-          Router.push('/profile')
-        })
+      setCookies('accessToken', res.accessToken, {
+        maxAge: 2678400,
+        path: '/',
+        sameSite: 'lax',
+        secure: true,
+      })
+      dispatch(authSlice.actions.setAccessToken(token))
+      Router.push(`/profile/${userId}`)
     } catch (error) {
       handleApiError({ error, modifyMessage: modifySingInApiError, setApiError, setError })
     }

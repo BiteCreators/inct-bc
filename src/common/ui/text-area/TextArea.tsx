@@ -25,7 +25,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onChange,
       required,
       resize = 'auto',
-      value,
       ...props
     }: TextAreaProps,
     ref

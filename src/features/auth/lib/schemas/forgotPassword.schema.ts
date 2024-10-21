@@ -1,7 +1,7 @@
 import { LocaleType } from '@/locales/en'
 import { z } from 'zod'
 
-export const createForgotPasswordSchema = (t: LocaleType['Auth']) =>
+export const createForgotPasswordSchema = (t: LocaleType['Auth']['errors']) =>
   z.object({
     baseUrl: z.string(),
     email: z.string().email().min(1, t.emailRequiredError),

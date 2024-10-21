@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import {
   Button,
   FormCheckbox,
+  FormDatePicker,
   FormInput,
   FormRadioGroup,
   FormSelect,
@@ -12,6 +13,7 @@ import {
 
 export default {}
 type FormData = {
+  datePicker: Date | null
   inputText: string
   isChecked: boolean
   radioValue: string
@@ -60,6 +62,12 @@ export const FormFiedls = {
             { label: 'RadioBtn1', value: '1' },
             { label: 'RadioBtn2', value: '2' },
           ]}
+        />
+        <FormDatePicker
+          control={control}
+          inputClassName={'flex justify-between'}
+          mode={'single'}
+          name={'datePicker'}
         />
         <div>
           <Button>Submit</Button>

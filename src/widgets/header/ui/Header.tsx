@@ -1,15 +1,18 @@
-import { useCookies } from 'react-cookie'
-
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
+import { authSlice } from '@/entities/auth'
 import { SignInButton, SignUpButton } from '@/features/auth'
-import { authSlice } from '@/features/auth/model/auth.slice'
 import { LanguageSelect } from '@/features/internationalization'
-import { AppLogo, HeaderMenu } from '@/features/navigation'
+import { AppLogo } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'
+import { useRouter } from 'next/router'
+
+import { HeaderMenu } from './HeaderMenu'
 
 export const Header = () => {
   const accessToken = useAppSelector(authSlice.selectors.selectAccessToken)
+  const router = useRouter()
+  const isAuthPage = router.pathname.startsWith('/auth') && router.pathname !== '/auth'
 
   return (
     <header
@@ -22,8 +25,8 @@ export const Header = () => {
       <div>
         <AppLogo />
       </div>
-      <div className={'flex gap-6 md:gap-12'}>
-        {accessToken && (
+      <div className={cn(['flex', !isAuthPage && 'gap-6', 'md:gap-12'])}>
+        {!!accessToken && (
           <div className={'hidden md:block'}>
             <NotificationsButton />
           </div>

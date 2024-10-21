@@ -6,7 +6,7 @@ import { LocaleType } from '@/locales/en'
 import { isApiError, isApiErrorWithArrary, isFetchBaseQueryError } from '../utils/apiHelpers'
 import { useScopedTranslation } from './useTranslation'
 
-export const useHandleApiErorr = <NT extends keyof LocaleType>(namespace: NT) => {
+export const useHandleApiError = <NT extends keyof LocaleType>(namespace: NT) => {
   const internalT = useScopedTranslation('Common')
   const t = useScopedTranslation(namespace)
 
@@ -26,12 +26,12 @@ export const useHandleApiErorr = <NT extends keyof LocaleType>(namespace: NT) =>
   }) => {
     if (isFetchBaseQueryError(error)) {
       if (error.status === 'FETCH_ERROR') {
-        setApiError(internalT.networkError)
+        setApiError(internalT.errors.networkError)
 
         return
       }
       if (error.status === 500) {
-        setApiError(internalT.internalServerError)
+        setApiError(internalT.errors.internalServerError)
 
         return
       }

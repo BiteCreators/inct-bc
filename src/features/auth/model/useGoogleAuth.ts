@@ -1,6 +1,8 @@
-import { authApi } from '@/common/api/auth.api'
-import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { useCallback } from 'react'
+
+import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
+import { authApi, authSlice } from '@/entities/auth'
+import * as jose from 'jose'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -11,25 +13,18 @@ export const useGoogleAuth = () => {
   const router = useRouter()
 
   const [googleAuth] = authApi.useGoogleAuthMutation()
-  const [meResponse] = authApi.useLazyMeQuery()
 
-  const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
-
-  const googleAuthHandler = async (): Promise<void> => {
-    if (isAuth) {
-      const { userId } = await meResponse().unwrap()
-
-      await router.push(`/profile?id=${userId}`)
-    } else if (validationCode) {
+  const googleAuthHandler = useCallback(async (): Promise<void> => {
+    if (validationCode) {
       const { accessToken: token } = await googleAuth({ code: validationCode }).unwrap()
 
-      const { userId } = await meResponse().unwrap()
+      const { userId } = jose.decodeJwt(token)
 
-      document.cookie = `accessToken=${token};max-age=3600;secure;path=/;samesite=strict`
+      document.cookie = `accessToken=${token};max-age=2678400;secure;path=/;samesite=lax`
       dispatch(authSlice.actions.setAccessToken(token))
       await router.push(`/profile/${userId}`)
     }
-  }
+  }, [validationCode, dispatch, googleAuth, router])
 
   return { googleAuthHandler, validationCode }
 }

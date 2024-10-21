@@ -1,5 +1,6 @@
 import { inctagramApi } from '@/common/api/inct.api'
-import { authSlice } from '@/features/auth/model/auth.slice'
+import { locationApi } from '@/common/api/location.api'
+import { authSlice } from '@/entities/auth'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import {
@@ -15,7 +16,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 const persistConfig = {
-  blacklist: ['inctagramApi'],
+  blacklist: ['inctagramApi', 'locationApi'],
   key: 'root',
   storage,
 }
@@ -23,6 +24,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
   [inctagramApi.reducerPath]: inctagramApi.reducer,
+  [locationApi.reducerPath]: locationApi.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -35,7 +37,7 @@ const makeStore = () =>
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-      }).concat(inctagramApi.middleware),
+      }).concat(inctagramApi.middleware, locationApi.middleware),
     reducer: persistedReducer,
   })
 

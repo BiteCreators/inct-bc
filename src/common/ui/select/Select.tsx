@@ -29,7 +29,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
       icon,
       id,
       label,
-      maxWidth = '210px',
+      maxWidth,
       open,
       placeholder,
       required,
@@ -72,7 +72,10 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
                     'md:border rounded-sm ',
                     'data-[state="open"]:md:bg-dark-500 data-[state="open"]:md:border-light-100',
                   ]
-                : ['boder', 'data-[state="open"]:bg-dark-500 data-[state="open"]:border-light-100'],
+                : [
+                    'border',
+                    'data-[state="open"]:bg-dark-500 data-[state="open"]:border-light-100',
+                  ],
               error && 'border-danger-500'
             )}
             id={id ?? selectId}
