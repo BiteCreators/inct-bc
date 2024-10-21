@@ -9,7 +9,9 @@ enum Reaction {
 }
 type Response<T> = {
   items: T
+  page: number
   pageSize: number
+  pagesCount: number
   totalCount: number
 }
 type Params = {
@@ -20,6 +22,8 @@ type Params = {
 }
 type SearchParams = { cursor?: number; search?: string } & Omit<Params, 'sortBy' | 'sortDirection'>
 
+type Avatar = Omit<Image, 'uploadId'>
+
 type Like = {
   avatars: Avatar[]
   createdAt: string
@@ -29,8 +33,11 @@ type Like = {
   userId: number
   userName: string
 }
-type Avatar = Omit<Image, 'uploadId'>
-
+type From = {
+  avatars: Avatar[]
+  id: number
+  username: string
+}
 type Comment = {
   answerCount: number
   content: string
@@ -41,16 +48,17 @@ type Comment = {
   likeCount: number
   postId: number
 }
-type From = {
-  avatars: {}[] //в свагере указан массив пустых объектов
-  id: number
-  username: string
-}
-type CommentAnswersRequest = { commentId: number; postId: number } & Params
+type Posts = Response<Omit<Post, 'images'>[]>
 
 type Answer = { commentId: number } & Omit<Comment, 'answerCount' | 'postId'>
 
+type CommentAnswersRequest = { commentId: number; postId: number } & Params
+
 type AnswerLikesRequest = { answerId: number; commentId: number; postId: number } & SearchParams
+
+type Likes = { nextCursor?: number; prevCursor: number } & Response<Like[]>
+
+type PostLikes = { isLiked: boolean } & Likes
 
 type CommentLikesRequest = { commentId: number; postId: number } & SearchParams
 
@@ -93,7 +101,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: `v1/posts/image/${uploadId}`,
       }),
     }),
-    getAnswerLikes: builder.query<Response<Like[]>, AnswerLikesRequest>({
+    getAnswerLikes: builder.query<Likes, AnswerLikesRequest>({
       query: data => {
         const { answerId, commentId, postId, ...params } = data
 
@@ -113,7 +121,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         }
       },
     }),
-    getCommentLikes: builder.query<Response<Like[]>, CommentLikesRequest>({
+    getCommentLikes: builder.query<Likes, CommentLikesRequest>({
       query: data => {
         const { commentId, postId, ...params } = data
 
@@ -133,7 +141,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         }
       },
     }),
-    getPostLikes: builder.query<Response<Like[]>, { postId: number } & SearchParams>({
+    getPostLikes: builder.query<PostLikes, { postId: number } & SearchParams>({
       query: data => {
         const { postId, ...params } = data
 
@@ -143,7 +151,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         }
       },
     }),
-    getPosts: builder.query<Response<Post[]>, { userName: string } & Params>({
+    getPosts: builder.query<Posts, { userName: string } & Params>({
       query: data => {
         const { userName, ...params } = data
 

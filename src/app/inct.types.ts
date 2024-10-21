@@ -13,8 +13,8 @@ export type Post = {
   userName: string
 }
 type Owner = {
-  firstName?: string
-  lastName?: string
+  firstName: string
+  lastName: string
 }
 export type Image = {
   createdAt: string
