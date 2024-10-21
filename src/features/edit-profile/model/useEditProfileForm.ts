@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Profile, profileApi } from '@/common/api/profile.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { Profile, profileApi } from '@/entities/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
