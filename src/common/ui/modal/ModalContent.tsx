@@ -43,7 +43,7 @@ export const ModalContent = ({ children, mode, title }: Props) => {
         </>
       )}
 
-      {mode === 'custom' && <div className={cn('relative px-4 py-3')}>{children}</div>}
+      {mode === 'custom' && <div className={cn('relative')}>{children}</div>}
     </>
   )
 }

@@ -7,7 +7,7 @@ type Props = {}
 
 export const PostComment = ({}: Props) => {
   return (
-    <div className={'flex mb-4 py-0 gap-3 items-start'}>
+    <div className={'flex mb-4 gap-3 items-start'}>
       <div className={'flex-shrink-0 w-9 h-9 pt-1'}>
         <Avatar avatarURL={exampleAvatar.src} imgStyles={'w-full h-full'} />
       </div>
