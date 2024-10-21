@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 
 import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
-import Image from 'next/image'
+import { useValidationLimit } from '@/features/edit-post/useValidationLimit'
 
 type Props = {
   changeOpen: (e: boolean) => void
@@ -9,6 +9,7 @@ type Props = {
   postText?: string
   urlProfile?: string
 }
+
 export default function EditPost({
   changeOpen,
   isOpen,
@@ -16,11 +17,12 @@ export default function EditPost({
   urlProfile = 'default url',
 }: Props) {
   const [textAreaText, setTextAreaText] = useState<string>(postText)
+
   const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextAreaText(postText)
+    setTextAreaText(e.target.value)
   }
+  const { correct, limit } = useValidationLimit(textAreaText, 10)
   const saveChanges = () => {
-    // textAreaText=>save
     changeOpen(false)
   }
 
@@ -55,14 +57,15 @@ export default function EditPost({
             </div>
             <TextArea
               className={'min-h-32'}
+              isCorrect={correct}
               label={'Add publication descriptions'}
+              limitCount={limit}
               onChange={changeText}
-            >
-              {textAreaText}
-            </TextArea>
+              value={textAreaText}
+            />
           </div>
           <div className={'flex w-full h-2/3 justify-end items-end py-5 '}>
-            <Button className={'max-h-screen'} onClick={saveChanges}>
+            <Button className={'max-h-screen'} disabled={false} onClick={saveChanges}>
               Save changes
             </Button>
           </div>
