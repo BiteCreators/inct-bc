@@ -1,28 +1,12 @@
 import { inctagramApi } from '@/common/api/inct.api'
 
+import { Profile } from '../types/profile.type'
+import { ProfileAvatars } from '../types/profileAvatars.type'
+
 type ProfileResponse = {
-  avatars: Avatars[]
+  avatars: ProfileAvatars[]
   createdAt: string
   id: number
-}
-
-export type Avatars = {
-  createdAt: string
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
-
-export type Profile = {
-  aboutMe?: string
-  city?: string
-  country?: string
-  dateOfBirth: string
-  firstName: string
-  lastName: string
-  region?: string
-  userName: string
 }
 
 export const profileApi = inctagramApi.injectEndpoints({
