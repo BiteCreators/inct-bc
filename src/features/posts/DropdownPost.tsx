@@ -3,19 +3,27 @@ import React from 'react'
 import { PersonAdd, PersonRemove } from '@/common/assets/icons/components'
 import { Dropdown } from '@/common/ui'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
-import { CopyIcon, EditIcon } from '@storybook/icons'
-
+import { CopyIcon, DeleteIcon, EditIcon, TrashIcon } from '@storybook/icons'
+type callBack = () => void
 type Props = {
+  className?: string
   follow?: boolean
   isMyPost: boolean
+  setEditMode: (mode: boolean) => void
 }
-export const DropdownPost = ({ follow, isMyPost }: Props) => {
+export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props) => {
   const forDrop: DropdownItem[] = []
 
   if (isMyPost) {
     forDrop.push(
-      { icon: <EditIcon />, label: 'Edit post', onClick: () => {} },
-      { icon: <CopyIcon />, label: 'Delete post', onClick: () => {} }
+      {
+        icon: <EditIcon />,
+        label: 'Edit post',
+        onClick: () => {
+          setEditMode(true)
+        },
+      },
+      { icon: <TrashIcon />, label: 'Delete post', onClick: () => {} }
     )
   } else {
     if (follow) {
@@ -26,5 +34,5 @@ export const DropdownPost = ({ follow, isMyPost }: Props) => {
     forDrop.push({ icon: <CopyIcon />, label: 'Copy link', onClick: () => {} })
   }
 
-  return <Dropdown items={forDrop} />
+  return <Dropdown className={className} items={forDrop} />
 }
