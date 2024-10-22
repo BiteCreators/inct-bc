@@ -43,8 +43,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     })
     const currentCount = props.value?.toString().length ?? 0
 
-    console.log(isCorrect)
-
     return (
       <div className={'flex flex-col'}>
         {!!label && (

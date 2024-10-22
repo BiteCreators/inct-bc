@@ -32,7 +32,7 @@ export const ModalContent = ({ children, mode, title }: Props) => {
             <Dialog.Close
               className={cn('absolute -top-14 -right-14 m-5 focus:outline-none cursor-pointer')}
             >
-              <Close className={cn('fill-current text-light-100')} />
+              <Close className={cn()} />
             </Dialog.Close>
             <div>
               <Dialog.Title className={cn('text-xl font-bold px-4 py-3')}>{title}</Dialog.Title>

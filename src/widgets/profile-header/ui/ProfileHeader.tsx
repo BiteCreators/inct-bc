@@ -1,6 +1,13 @@
+import { useState } from 'react'
+
+import { PersonAdd, PersonRemove } from '@/common/assets/icons/components'
 import { useScopedTranslation, useTranslation } from '@/common/lib/hooks/useTranslation'
-import { Button, Typography } from '@/common/ui'
+import { Button, Dropdown, Typography } from '@/common/ui'
+import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import EditPost from '@/features/edit-post'
+import { DropdownPost } from '@/features/posts/DropdownPost'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
+import { CopyIcon } from '@storybook/icons'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -19,6 +26,7 @@ export const ProfileHeader = () => {
   const router = useRouter()
   const locale = router.locale === 'en' ? 'en' : 'ru'
   const t = useScopedTranslation('Profile')
+  const [editMode, setEditMode] = useState(false)
   const tNav = useScopedTranslation('Navigation')
 
   return (
@@ -43,6 +51,8 @@ export const ProfileHeader = () => {
             >
               {username}
             </Typography>
+            <EditPost changeOpen={setEditMode} isOpen={editMode} />
+            <Button onClick={() => setEditMode(true)}>Open</Button>
             <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
               <Link href={`/profile/${id}/settings`}>{tNav.profileSettings}</Link>
             </Button>

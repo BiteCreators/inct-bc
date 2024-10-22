@@ -43,8 +43,6 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
     },
   }
 
-  console.log(className)
-
   return (
     <div className={cn('relative', className)}>
       <DropdownMenu.Root onOpenChange={setOpen} open={open}>

@@ -5,6 +5,7 @@ import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { useValidationLimit } from '@/features/edit-post/useValidationLimit'
+import { useParams } from 'next/navigation'
 
 type Props = {
   changeOpen: (e: boolean) => void
@@ -19,6 +20,10 @@ export default function EditPost({
   postText = 'text text text',
   urlProfile = 'default url',
 }: Props) {
+  const param = useParams<{ postid: string }>()
+
+  console.log(param)
+
   const [textAreaText, setTextAreaText] = useState<string>(postText)
   const [updatePost] = postsApi.useUpdatePostMutation()
   const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
