@@ -7,7 +7,7 @@ import {
   PaperPlaneOutline,
 } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Dropdown, Modal, Typography } from '@/common/ui'
+import { Avatar, Dropdown, Modal, ScrollArea, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { AddPostTextarea } from '@/features/posts/ui/AddPostTextarea'
 import { PostComment } from '@/features/posts/ui/PostComment'
@@ -25,9 +25,9 @@ const slides = [
 
 export const PostDetailsModal = ({}: Props) => {
   return (
-    <Modal className={'w-full'} isOpen maxWidth={'max-w-[960px]'} mode={'custom'}>
+    <Modal className={'w-full'} isOpen maxWidth={'max-w-[980px]'} mode={'custom'}>
       <div className={'flex'}>
-        <Slider slidesUrl={slides} />
+        <Slider height={'full'} sliderStyles={'max-w-[500px]'} slidesUrl={slides} />
         <>
           {/*HEADER*/}
           <Dialog.Close
@@ -36,7 +36,7 @@ export const PostDetailsModal = ({}: Props) => {
             <Close className={cn('fill-current text-light-100')} />
           </Dialog.Close>
           {/*----------*/}
-          <div className={'max-w-[480px]'}>
+          <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             {/*TITLE*/}
             <Dialog.Title className={cn('text-xl font-bold py-3 px-6')}>
               <div className={'flex justify-between w-full'}>
@@ -49,39 +49,54 @@ export const PostDetailsModal = ({}: Props) => {
                 <Dropdown className={'-top-0.5 -mr-3'} items={[]} />
               </div>
             </Dialog.Title>
+            <div className={'border-y-[1px] border-dark-100'} />
             {/*----------*/}
-            <div>
-              <div className={cn('h-px bg-dark-100 w-full')} />
-              <div className={'pt-5 px-6'}>
-                {/*comments map here*/}
-                <PostComment />
-                <PostComment />
-              </div>
-              <div className={'border-y-[1px] border-dark-100 relative'}>
-                <div className={'pt-4 px-6'}>
-                  <div className={'flex justify-between mb-3'}>
-                    <div>
-                      <button className={'mr-6'}>
-                        <HeartOutline />
-                      </button>
-                      <button>
-                        <PaperPlaneOutline viewBox={'0 0 26 26'} />
-                      </button>
-                    </div>
-                    <button>
-                      <BookmarkOutline viewBox={'0 3 24 24'} />
-                    </button>
-                  </div>
-                  <div className={'mb-2'}>
-                    <p>Likes</p>
-                    <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
-                      July 3, 2021
-                    </Typography>
-                  </div>
+            {/* Scrollable Content Area */}
+            <ScrollArea className={'flex-1 px-6 w-full'}>
+              <div className={'flex flex-col pt-5 gap-5'}>
+                {/* Comments */}
+                <div>
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
+                  <PostComment />
                 </div>
               </div>
-              <AddPostTextarea />
+            </ScrollArea>
+            <div className={'border-y-[1px] border-dark-100 relative'}>
+              <div className={'pt-4 px-6'}>
+                <div className={'flex justify-between mb-3'}>
+                  <div>
+                    <button className={'mr-6'}>
+                      <HeartOutline />
+                    </button>
+                    <button>
+                      <PaperPlaneOutline viewBox={'0 0 26 26'} />
+                    </button>
+                  </div>
+                  <button>
+                    <BookmarkOutline viewBox={'0 3 24 24'} />
+                  </button>
+                </div>
+                <div className={'mb-2'}>
+                  <p>Likes</p>
+                  <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
+                    July 3, 2021
+                  </Typography>
+                </div>
+              </div>
             </div>
+            <AddPostTextarea />
           </div>
         </>
       </div>
