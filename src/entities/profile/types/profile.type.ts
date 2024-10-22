@@ -1,3 +1,5 @@
+import { ProfileAvatars } from './profileAvatars.type'
+
 export type Profile = {
   aboutMe?: string
   city?: string
@@ -7,4 +9,8 @@ export type Profile = {
   lastName: string
   region?: string
   userName: string
+  id: number
+  avatars: ProfileAvatars[]
 }
+
+export type EditProfileBody = Omit<Profile, 'id' | 'avatars'>
