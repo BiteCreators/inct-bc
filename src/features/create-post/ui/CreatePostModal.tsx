@@ -1,20 +1,17 @@
-import React, { JSX, useEffect, useRef, useState } from 'react'
+import React, { JSX, useState } from 'react'
 
-import {
-  ExpandOutline,
-  HorizontalOrientation,
-  ImageOutline,
-  MaximizeOutline,
-  Square,
-  VerticalOrientation,
-} from '@/common/assets/icons/components'
+import { ImageOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
 
 import exampleImage from '../../../../public/examples/image2.png'
+import { useCreatePost } from '../lib/hooks/useCreatePost'
+import { AspectRatio } from './AspectRatio'
+import { Cropping } from './Cropping'
+import { ImageControl } from './ImagesControl'
 
 export const CreatePostModal = () => {
-  const [isOpenCreatePost, setIsOpenCreatePost] = useState(false)
+  const { isOpenCreatePost, setIsOpenCreatePost } = useCreatePost()
   const [step, setStep] = useState(1)
   const nameFilters = [
     'Normal',
@@ -84,11 +81,12 @@ export const CreatePostModal = () => {
               >
                 <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
               </div>
-              <Button className={'w-56 bottom-0 mb-7'}>Select from Computer</Button>
+              <Button className={'w-56 bottom-0 mb-7'} onClick={handleNext}>
+                Select from Computer
+              </Button>
               <Button className={'w-56 bottom-0 mb-12'} variant={'outline'}>
                 Open Draft
               </Button>
-              <Button onClick={handleNext}>next</Button>
             </div>
           </div>
         )}
@@ -98,16 +96,8 @@ export const CreatePostModal = () => {
               <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
               <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
                 <AspectRatio />
-
-                <Button variant={'icon'}>
-                  <MaximizeOutline />
-                </Button>
-
-                <div className={'flex-1 text-right'}>
-                  <Button variant={'icon'}>
-                    <ImageOutline />
-                  </Button>
-                </div>
+                <Cropping />
+                <ImageControl className={'ml-auto'} />
               </div>
             </div>
           </>
@@ -170,63 +160,6 @@ export const UserProfileUrl = ({ className }: { className?: string }) => {
         <Avatar avatarURL={exampleImage.src} />
       </div>
       <Typography className={'font-medium'}>URLProfile</Typography>
-    </div>
-  )
-}
-
-export const AspectRatio = () => {
-  const [isAspectRatioOpen, setIsAspectRatioOpen] = useState(false)
-  const aspectRatioRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (aspectRatioRef.current && !aspectRatioRef.current.contains(event.target as Node)) {
-        setIsAspectRatioOpen(false)
-      }
-    }
-
-    if (isAspectRatioOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [isAspectRatioOpen])
-
-  return (
-    <div className={'relative'} ref={aspectRatioRef}>
-      <Button
-        className={`${isAspectRatioOpen && 'focus:text-primary-500'}`}
-        onClick={() => setIsAspectRatioOpen(!isAspectRatioOpen)}
-        variant={'icon'}
-      >
-        <ExpandOutline />
-      </Button>
-      {isAspectRatioOpen && (
-        <div
-          className={`flex flex-col gap-3 min-w-36 absolute bottom-[38px] bg-dark-500 bg-opacity-80 p-3 rounded-sm`}
-        >
-          <button className={'flex gap-7 justify-between items-center'}>
-            <span>Original</span>
-            <ImageOutline />
-          </button>
-          <button className={'flex gap-7 justify-between items-center'}>
-            <span>1:1</span>
-            <Square />
-          </button>
-          <button className={'flex gap-7 justify-between items-center'}>
-            <span>4:5</span>
-            <VerticalOrientation />
-          </button>
-          <button className={'flex gap-7 justify-between items-center'}>
-            <span>16:9</span>
-            <HorizontalOrientation />
-          </button>
-        </div>
-      )}
     </div>
   )
 }
