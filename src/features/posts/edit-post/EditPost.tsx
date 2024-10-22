@@ -4,7 +4,7 @@ import { postsApi } from '@/common/api/posts.api'
 import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
-import { useValidationLimit } from '@/features/edit-post/useValidationLimit'
+import { useValidationLimit } from '@/features/posts/edit-post/useValidationLimit'
 import { useParams } from 'next/navigation'
 
 type Props = {
@@ -20,9 +20,8 @@ export default function EditPost({
   postText = 'text text text',
   urlProfile = 'default url',
 }: Props) {
-  const param = useParams<{ postid: string }>()
-
-  console.log(param)
+  const params = useParams()
+  const postId = Number(params?.id) ?? null
 
   const [textAreaText, setTextAreaText] = useState<string>(postText)
   const [updatePost] = postsApi.useUpdatePostMutation()
@@ -32,11 +31,17 @@ export default function EditPost({
 
   const { correct, limit } = useValidationLimit(textAreaText, 500)
   const saveChanges = () => {
-    updatePost({ description: textAreaText, postId: 12 })
+    updatePost({ description: textAreaText, postId })
+    changeOpen(false)
   }
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
-  const test = async () => {
+  const changeModalState = async () => {
+    if (textAreaText === postText) {
+      changeOpen(false)
+
+      return
+    }
     setConfirmOpen(true)
     const isConfirmed = await requestConfirmation()
 
@@ -48,17 +53,19 @@ export default function EditPost({
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={'t.deletePhoto'}
+        message={
+          'Do you really want to close the edition of the publication? If you close changes won’t be saved'
+        }
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={'t.deletePhotoTitle'}
+        title={'Close Post'}
       />
       <Modal
         className={'h-[565px] max-w-[960px] z-[1000] '}
         isOpen={isOpen}
         mode={'default'}
-        onOpenChange={test}
+        onOpenChange={changeModalState}
         title={'Edit post'}
       >
         <div className={'w-[920px] h-[465px] flex flex-row'}>
