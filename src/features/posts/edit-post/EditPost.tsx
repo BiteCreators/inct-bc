@@ -1,11 +1,8 @@
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react'
 
-import { postsApi } from '@/common/api/posts.api'
 import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
-import { useValidationLimit } from '@/features/posts/edit-post/useValidationLimit'
-import { useParams } from 'next/navigation'
+import { useEditPost } from '@/features/posts/edit-post/useEditPost'
 
 type Props = {
   changeOpen: (e: boolean) => void
@@ -20,34 +17,20 @@ export default function EditPost({
   postText = 'text text text',
   urlProfile = 'default url',
 }: Props) {
-  const params = useParams()
-  const postId = Number(params?.id) ?? null
+  const {
+    changeModalState,
+    changeText,
+    confirmOpen,
+    correct,
+    handleConfirm,
+    handleReject,
+    limit,
+    saveChanges,
+    setConfirmOpen,
+    textAreaText,
+  } = useEditPost({ changeOpen, postText })
 
-  const [textAreaText, setTextAreaText] = useState<string>(postText)
-  const [updatePost] = postsApi.useUpdatePostMutation()
-  const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextAreaText(e.target.value)
-  }
-
-  const { correct, limit } = useValidationLimit(textAreaText, 500)
-  const saveChanges = () => {
-    updatePost({ description: textAreaText, postId })
-    changeOpen(false)
-  }
-  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
-    useConfirmation()
-  const changeModalState = async () => {
-    if (textAreaText === postText) {
-      changeOpen(false)
-
-      return
-    }
-    setConfirmOpen(true)
-    const isConfirmed = await requestConfirmation()
-
-    changeOpen(!isConfirmed)
-    setConfirmOpen(false)
-  }
+  console.log('postTExt')
 
   return (
     <>
