@@ -6,10 +6,10 @@ import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import { useDropdownPost } from '@/features/posts/dropdown-post/useDropdownPost'
 import { CopyIcon, DeleteIcon, EditIcon, TrashIcon } from '@storybook/icons'
 import { useParams } from 'next/navigation'
 
-type callBack = () => void
 type Props = {
   className?: string
   follow?: boolean
@@ -18,18 +18,14 @@ type Props = {
 }
 export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props) => {
   const forDrop: DropdownItem[] = []
-  const [deletePost] = postsApi.useDeletePostMutation()
-  const params = useParams()
-  const postId = Number(params?.id) ?? null
-  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
-    useConfirmation()
-  const deletePostHandler = async () => {
-    const isConfirmed = await requestConfirmation()
-
-    if (isConfirmed) {
-      deletePost({ postId })
-    }
-  }
+  const {
+    confirmOpen,
+    copyLinkHandler,
+    deletePostHandler,
+    handleConfirm,
+    handleReject,
+    setConfirmOpen,
+  } = useDropdownPost()
 
   if (isMyPost) {
     forDrop.push(
@@ -59,7 +55,7 @@ export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props
     forDrop.push({
       icon: <CopyIcon />,
       label: 'Copy link',
-      onClick: () => {},
+      onClick: copyLinkHandler,
     })
   }
 
@@ -67,13 +63,11 @@ export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={
-          'Do you really want to close the edition of the publication? If you close changes won’t be saved'
-        }
+        message={'Are you sure you want to delete this post?'}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={'Close Post'}
+        title={'Delete Post'}
       />
       <Dropdown className={className} items={forDrop} />
     </>
