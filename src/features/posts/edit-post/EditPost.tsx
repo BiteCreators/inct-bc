@@ -2,20 +2,25 @@ import React from 'react'
 
 import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/posts/edit-post/useEditPost'
 
 type Props = {
+  avatarUrl?: string
   changeOpen: (e: boolean) => void
   isOpen: boolean
   postText?: string
-  urlProfile?: string
+  profileId?: number
+  userName?: string
 }
 
 export default function EditPost({
+  avatarUrl = 'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png',
   changeOpen,
   isOpen,
   postText = 'text text text',
-  urlProfile = 'default url',
+  profileId = 1111,
+  userName = 'default',
 }: Props) {
   const {
     changeModalState,
@@ -60,15 +65,11 @@ export default function EditPost({
           <div className={'w-1/2 h-full pl-4'}>
             <div className={'flex w-full h-1/3 flex-col '}>
               <div className={'flex w-full justify-start items-center gap-5 mb-6'}>
-                <Avatar
-                  avatarURL={
-                    'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'
-                  }
-                  imgStyles={'w-9 h-9'}
+                <UserProfile
+                  avatarUrl={avatarUrl ?? undefined}
+                  profileId={profileId}
+                  userName={userName}
                 />
-                <Typography className={'font-bold'} variant={'medium-text'}>
-                  {urlProfile}
-                </Typography>
               </div>
               <TextArea
                 className={'min-h-32'}
