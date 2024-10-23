@@ -2,30 +2,21 @@ import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Button, Typography } from '@/common/ui'
-import { PostComment } from '@/features/posts/ui/PostComment'
+import { PostComment } from '@/features/posts/ui/post/commonUi/PostComment'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
-export const PostCommentsBlock = () => {
+type Props = {
+  comments: { id: string; text: string }[]
+}
+
+export const PostCommentsBlock = ({ comments }: Props) => {
   const [showViewAllButton, setShowViewAllButton] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const commentsContainerRef = useRef<HTMLDivElement>(null)
   const params = useParams<{ id: string; postId: string }>()
   const id = params?.id
   const postId = params?.postId
-
-  const comments = [
-    {
-      id: '1',
-      text: 'eiusmodcididunt ut laboreagna aliquaeiusmod tempor incididunt ut labore et dolore magna aliquaeiusmod tempor incididunt ut labore et dolore magna aliquaeiusmod tempor incididunt ut labore et dolore magna aliqua',
-    },
-    { id: '2', text: 'eiusmod' },
-    { id: '3', text: 'eiusmod tempor labore et dolore magna aliqua' },
-    {
-      id: '4',
-      text: 'eiusmod tempor incididunt ut labore et dolore magna aliquadolore magna aliqua',
-    },
-  ]
 
   useEffect(() => {
     if (commentsContainerRef.current) {
@@ -41,7 +32,7 @@ export const PostCommentsBlock = () => {
 
   return (
     <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
-      <div className={'flex-1 w-full px-0 md:px-6'}>
+      <div className={'flex-1 w-full px-0'}>
         {showViewAllButton && !expanded && (
           <Button className={'mb-2 pt-0 px-0 border-none text-light-900 text-sm'} variant={'text'}>
             <Link href={`/profile/${id}/publications/${postId}/comments`}>

@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { HeartOutline } from '@/common/assets/icons/components'
 import { Avatar, Typography } from '@/common/ui'
 
-import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
+import exampleAvatar from '../../../../../../public/examples/exampleAvatar.png'
 
 type Props = {
   children?: ReactNode

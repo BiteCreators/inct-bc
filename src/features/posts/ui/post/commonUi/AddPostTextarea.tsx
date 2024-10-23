@@ -37,16 +37,17 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
 
     return (
       <div className={cn(['flex py-3 px-0', 'md:px-6'])}>
-        <ScrollArea className={'w-full max-h-52'}>
+        <ScrollArea className={'w-full max-h-44'}>
           <div className={'flex flex-col min-h-4 w-full'}>
             <textarea
               className={cn([
                 'pt-2 pr-2.5 pb-0',
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
-                // 'bg-transparent',
-                'bg-dark-100',
+                'bg-transparent',
+                // 'bg-dark-100',
                 'leading-none',
+                'md: leading-tight',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',
                 'resize-none',
