@@ -1,3 +1,5 @@
+import { Image, Post } from '@/entities/posts'
+
 import { inctagramApi } from './inct.api'
 
 enum Reaction {
