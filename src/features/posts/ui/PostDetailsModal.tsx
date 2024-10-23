@@ -9,7 +9,7 @@ import {
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Dropdown, Modal, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
-import { DropdownPost } from '@/features/posts/DropdownPost'
+import { DropdownPost } from '@/features/posts/dropdown-post/DropdownPost'
 import { AddPostTextarea } from '@/features/posts/ui/AddPostTextarea'
 import { PostComment } from '@/features/posts/ui/PostComment'
 import * as Dialog from '@radix-ui/react-dialog'
