@@ -14,7 +14,7 @@ export const PostComment = ({}: Props) => {
       <div className={'flex-1'}>
         <Typography variant={'regular-text'}>
           {<span className={'text-base font-weight600 leading-5'}>URLProfile </span>}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          Lorem ipsum dolor sit
         </Typography>
         <div className={'mt-1 flex gap-3'}>
           <Typography className={'text-light-900'} variant={'small-text'}>

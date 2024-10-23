@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { BookmarkOutline, HeartOutline, PaperPlaneOutline } from '@/common/assets/icons/components'
+import { cn } from '@/common/lib/utils/cn'
 import { Typography } from '@/common/ui'
-import { Post } from '@/pages/profile/[id]'
+import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 
 type Props = {
   post: Post
@@ -10,8 +11,8 @@ type Props = {
 
 export const PostEngagementBlock = ({ post }: Props) => {
   return (
-    <div className={'border-y-[1px] border-dark-100 relative'}>
-      <div className={'pt-4 px-6'}>
+    <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
+      <div className={cn(['pt-4 px-0', 'md:px-6'])}>
         <div className={'flex justify-between mb-3'}>
           <div>
             <button className={'mr-6'}>

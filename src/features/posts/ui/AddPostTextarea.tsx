@@ -1,5 +1,6 @@
-import React, { ComponentProps, forwardRef } from 'react'
+import React, { ComponentProps, forwardRef, useEffect } from 'react'
 
+import { PlusSquareOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
 import { Button, ScrollArea } from '@/common/ui'
@@ -17,6 +18,23 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
       onChange,
     })
 
+    const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      handleChange(e)
+      setTimeout(() => {
+        if (textAreaRef.current) {
+          textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
+        }
+      }, 50)
+    }
+
+    useEffect(() => {
+      setTimeout(() => {
+        if (textAreaRef.current) {
+          textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
+        }
+      }, 50)
+    }, [textAreaRef])
+
     return (
       <div className={'flex py-3 px-6'}>
         <ScrollArea className={'w-full max-h-52'}>
@@ -26,8 +44,7 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 'pt-2 pr-2.5 pb-0',
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
-                'bg-dark-700',
-                // 'bg-transparent',
+                'bg-transparent',
                 'leading-none',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',
@@ -36,14 +53,17 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
               ])}
               disabled={disabled}
               id={id ?? textAreaId}
-              onChange={handleChange}
+              onChange={handleTextAreaChange}
               placeholder={'Add a Comment...'}
               ref={mergeRefs([ref, textAreaRef])}
             />
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
         </ScrollArea>
-        <Button className={'max-h-9 ml-6'} variant={'text'}>
+        <button className={'md:hidden'}>
+          <PlusSquareOutline />
+        </button>
+        <Button className={cn(['max-h-9 ml-6 hidden', 'md:inline-block'])} variant={'text'}>
           Publish
         </Button>
       </div>
