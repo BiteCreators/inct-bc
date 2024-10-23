@@ -1,6 +1,5 @@
 import { postsApi } from '@/common/api/posts.api'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
-import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { useParams } from 'next/navigation'
 
 export const useDropdownPost = () => {

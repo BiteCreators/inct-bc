@@ -7,7 +7,7 @@ import {
   PaperPlaneOutline,
 } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Dropdown, Modal, Typography } from '@/common/ui'
+import { Avatar, Modal, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { DropdownPost } from '@/features/posts/dropdown-post/DropdownPost'
 import { AddPostTextarea } from '@/features/posts/ui/AddPostTextarea'

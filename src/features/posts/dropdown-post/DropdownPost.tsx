@@ -1,14 +1,11 @@
 import React from 'react'
 
-import { postsApi } from '@/common/api/posts.api'
 import { PersonAdd, PersonRemove } from '@/common/assets/icons/components'
 import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { useDropdownPost } from '@/features/posts/dropdown-post/useDropdownPost'
-import { CopyIcon, DeleteIcon, EditIcon, TrashIcon } from '@storybook/icons'
-import { useParams } from 'next/navigation'
+import { CopyIcon, EditIcon, TrashIcon } from '@storybook/icons'
 
 type Props = {
   className?: string

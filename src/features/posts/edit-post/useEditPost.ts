@@ -25,6 +25,7 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
   }
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
+
   const changeModalState = async () => {
     if (textAreaText === postText) {
       changeOpen(false)
@@ -34,8 +35,8 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
     setConfirmOpen(true)
     const isConfirmed = await requestConfirmation()
 
+    isConfirmed && setTextAreaText(postText)
     changeOpen(!isConfirmed)
-    setTextAreaText(postText)
     setConfirmOpen(false)
   }
 

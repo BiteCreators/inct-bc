@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Avatar, Button, Modal, TextArea, Typography } from '@/common/ui'
+import { Button, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/posts/edit-post/useEditPost'
