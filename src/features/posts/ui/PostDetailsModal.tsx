@@ -9,13 +9,13 @@ import {
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Dropdown, Modal, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
-import EditPost from '@/features/edit-post'
 import { DropdownPost } from '@/features/posts/DropdownPost'
 import { AddPostTextarea } from '@/features/posts/ui/AddPostTextarea'
 import { PostComment } from '@/features/posts/ui/PostComment'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
+import EditPost from '../edit-post'
 
 type Props = {}
 
@@ -54,7 +54,6 @@ export const PostDetailsModal = ({}: Props) => {
                   </div>
                   <DropdownPost
                     className={'-top-0.5 -mr-3 z-[10000]'}
-                    follow
                     isMyPost
                     setEditMode={setEditMode}
                   />

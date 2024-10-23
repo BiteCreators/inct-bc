@@ -1,5 +1,3 @@
-import { Image, Post } from '@/app/inct.types'
-
 import { inctagramApi } from './inct.api'
 
 enum Reaction {

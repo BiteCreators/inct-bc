@@ -4,7 +4,6 @@ import { PersonAdd, PersonRemove } from '@/common/assets/icons/components'
 import { useScopedTranslation, useTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Dropdown, Typography } from '@/common/ui'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
-import EditPost from '@/features/edit-post'
 import { DropdownPost } from '@/features/posts/DropdownPost'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import { CopyIcon } from '@storybook/icons'
@@ -13,6 +12,7 @@ import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import exampleImage from '../../../../public/examples/exampleAvatar.png'
+import EditPost from '../../../features/posts/edit-post'
 
 export const ProfileHeader = () => {
   const username = 'URLProfiele'
