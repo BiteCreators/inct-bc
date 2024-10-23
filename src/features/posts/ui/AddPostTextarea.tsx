@@ -36,7 +36,7 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
     }, [textAreaRef])
 
     return (
-      <div className={'flex py-3 px-6'}>
+      <div className={cn(['flex py-3 px-0', 'md:px-6'])}>
         <ScrollArea className={'w-full max-h-52'}>
           <div className={'flex flex-col min-h-4 w-full'}>
             <textarea
@@ -44,7 +44,8 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 'pt-2 pr-2.5 pb-0',
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
-                'bg-transparent',
+                // 'bg-transparent',
+                'bg-dark-100',
                 'leading-none',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',
@@ -60,8 +61,8 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
         </ScrollArea>
-        <button className={'md:hidden'}>
-          <PlusSquareOutline />
+        <button className={'md:hidden ml-6 max-h-9'}>
+          <PlusSquareOutline viewBox={'-3 0 24 24'} />
         </button>
         <Button className={cn(['max-h-9 ml-6 hidden', 'md:inline-block'])} variant={'text'}>
           Publish

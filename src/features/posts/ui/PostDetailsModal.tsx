@@ -7,7 +7,7 @@ import { Avatar, Dropdown, Modal, ScrollArea, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { AddPostTextarea } from '@/features/posts/ui/AddPostTextarea'
 import { PostComment } from '@/features/posts/ui/PostComment'
-import { PostDetails } from '@/features/posts/ui/PostCommentsBlock'
+import { PostCommentsBlock } from '@/features/posts/ui/PostCommentsBlock'
 import { PostEngagementBlock } from '@/features/posts/ui/PostEngagementBlock'
 import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -58,14 +58,15 @@ export const PostDetailsModal = ({ post }: Props) => {
                 <div className={'flex flex-col pt-5 gap-5 h-[336px]'}>
                   {/* Comments*/}
                   <div>
-                    <PostComment />
-                    <PostComment />
-                    <PostComment />
-                    <PostComment />
-                    <PostComment />
-                    <PostComment />
-                    <PostComment />
-                    <PostComment />
+                    <PostCommentsBlock />
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
+                    {/*<PostComment />*/}
                   </div>
                   {/*----------*/}
                 </div>
@@ -96,14 +97,14 @@ export const PostDetailsModal = ({ post }: Props) => {
           <Slider height={'full'} sliderStyles={'max-w-[500px]'} slidesUrl={slidesUrl} />
           <>
             {/*--------------------------MAIN--------------------------*/}
-            <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
+            <div className={'max-w-[480px] max-h-[564px] w-full flex flex-col overflow-hidden'}>
               {/* Scrollable Comments Area */}
               {/*---------------------------*/}
               <PostEngagementBlock post={post} />
               <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>
-                <div className={'flex flex-col pt-5 gap-5 h-[336px]'}>
+                <div className={'flex flex-col pt-3 gap-5 w-full'}>
                   {/* Comments*/}
-                  <PostDetails />
+                  <PostCommentsBlock />
                   {/*----------*/}
                 </div>
               </div>
