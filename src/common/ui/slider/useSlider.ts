@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSwipeable } from 'react-swipeable'
 
 export const useSlider = (slidesUrl: string[]) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -24,11 +25,19 @@ export const useSlider = (slidesUrl: string[]) => {
     setIsPaused(false)
   }
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextSlide(),
+    onSwipedRight: () => prevSlide(),
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  })
+
   return {
     currentIndex,
     goToSlide,
     handleMouseEnter,
     handleMouseLeave,
+    handlers,
     isPaused,
     nextSlide,
     prevSlide,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { ArrowIosBack, ArrowIosForward } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
@@ -7,41 +7,43 @@ import { useSlider } from '@/common/ui/slider/useSlider'
 type Props = {
   duration?: number
   height?: string
-  sliderStyles?: string
   slidesUrl: string[]
+  stylesSlider?: string
 }
 
-export const Slider = ({ duration = 4000, height = '560px', sliderStyles, slidesUrl }: Props) => {
+export const Slider = ({ duration = 4000, height = '560', slidesUrl, stylesSlider }: Props) => {
   const {
     currentIndex,
     goToSlide,
     handleMouseEnter,
     handleMouseLeave,
+    handlers,
     isPaused,
     nextSlide,
     prevSlide,
   } = useSlider(slidesUrl)
 
   useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(nextSlide, duration)
+    if (duration !== 0) {
+      if (!isPaused) {
+        const interval = setInterval(nextSlide, duration)
 
-      return () => clearInterval(interval)
+        return () => clearInterval(interval)
+      }
     }
   }, [isPaused])
 
+  const stylesBtn =
+    'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 p-3 cursor-pointer duration-300 ease-in-out md:block hidden hover:bg-gray-700 hover:opacity-85'
+
   return (
     <div
-      className={cn(`relative w-full h-[${height}] overflow-hidden`, sliderStyles)}
+      {...handlers}
+      className={cn(`relative w-full h-[${height}px] overflow-hidden`, stylesSlider)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button
-        className={
-          'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 left-3 p-3 cursor-pointer duration-300 ease-in-out hover:bg-gray-700 hover:opacity-85'
-        }
-        onClick={prevSlide}
-      >
+      <button className={cn('left-3', stylesBtn)} onClick={prevSlide}>
         <ArrowIosBack viewBox={'5 5 14 14'} />
       </button>
       <ul
@@ -58,12 +60,7 @@ export const Slider = ({ duration = 4000, height = '560px', sliderStyles, slides
           </li>
         ))}
       </ul>
-      <button
-        className={
-          'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 right-3 p-3 cursor-pointer duration-300 ease-in-out hover:bg-gray-700 hover:opacity-85'
-        }
-        onClick={nextSlide}
-      >
+      <button className={cn('right-3', stylesBtn)} onClick={nextSlide}>
         <ArrowIosForward viewBox={'5 5 14 14'} />
       </button>
       <div

@@ -169,4 +169,3 @@ export const postsApi = inctagramApi.injectEndpoints({
     }),
   }),
 })
-postsApi.useUpdatePostMutation
