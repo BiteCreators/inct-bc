@@ -30,8 +30,6 @@ export default function EditPost({
     textAreaText,
   } = useEditPost({ changeOpen, postText })
 
-  console.log('postTExt')
-
   return (
     <>
       <ActionConfirmation
