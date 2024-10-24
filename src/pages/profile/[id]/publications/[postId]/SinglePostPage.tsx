@@ -18,11 +18,11 @@ export type Post = {
   updatedAt: string
   userName: string
 }
-type Owner = {
+export type Owner = {
   firstName: string
   lastName: string
 }
-type Image = {
+export type Image = {
   createdAt: string
   fileSize: number
   height: number

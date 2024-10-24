@@ -5,8 +5,8 @@ import { cn } from '@/common/lib/utils/cn'
 import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
+import { PostActionsBlock } from '@/features/posts/ui/post/commonUi/PostActionsBlock'
 import { PostDescriptionCommentsMap } from '@/features/posts/ui/post/commonUi/PostDescriptionCommentsMap'
-import { PostEngagementBlock } from '@/features/posts/ui/post/commonUi/PostEngagementBlock'
 import { PostModalTitle } from '@/features/posts/ui/post/desktop/PostModalTitle'
 import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 import * as Dialog from '@radix-ui/react-dialog'
@@ -45,7 +45,7 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
             <PostModalTitle post={post} />
             <div className={'border-y-[1px] border-dark-100'} />
             <PostDescriptionCommentsMap comments={comments} post={post} />
-            <PostEngagementBlock post={post} />
+            <PostActionsBlock post={post} />
             <AddPostTextarea />
           </div>
         </>

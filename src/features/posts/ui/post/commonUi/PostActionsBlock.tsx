@@ -9,7 +9,7 @@ type Props = {
   post: Post
 }
 
-export const PostEngagementBlock = ({ post }: Props) => {
+export const PostActionsBlock = ({ post }: Props) => {
   return (
     <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
       <div className={cn(['pt-4 px-0', 'md:px-6'])}>

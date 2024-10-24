@@ -4,7 +4,7 @@ import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Dropdown, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
-import { PostEngagementBlock } from '@/features/posts/ui/post/commonUi/PostEngagementBlock'
+import { PostActionsBlock } from '@/features/posts/ui/post/commonUi/PostActionsBlock'
 import { PostDescriptionCommentsBlock } from '@/features/posts/ui/post/mobile/PostDescriptionCommentsBlock'
 import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 
@@ -30,7 +30,7 @@ export const PostMobile = ({ comments, post, slidesUrl }: Props) => {
         <Slider height={'full'} sliderStyles={'max-w-[500px]'} slidesUrl={slidesUrl} />
         <>
           <div className={'max-w-[480px] max-h-[564px] w-full flex flex-col overflow-hidden'}>
-            <PostEngagementBlock post={post} />
+            <PostActionsBlock post={post} />
             <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>
               <div className={'flex flex-col pt-3 gap-5 w-full'}>
                 <PostDescriptionCommentsBlock comments={comments} post={post} />
