@@ -32,7 +32,7 @@ export default function EditPost({
     limit,
     saveChanges,
     setConfirmOpen,
-    textAreaText,
+    text,
   } = useEditPost({ changeOpen, postText })
 
   return (
@@ -48,7 +48,7 @@ export default function EditPost({
         title={'Close Post'}
       />
       <Modal
-        className={'h-[565px] max-w-[960px] z-[1000] '}
+        className={'h-[565px] max-w-[960px]'}
         isOpen={isOpen}
         mode={'default'}
         onOpenChange={changeModalState}
@@ -72,12 +72,12 @@ export default function EditPost({
                 />
               </div>
               <TextArea
-                className={'min-h-32'}
+                className={'min-h-32 max-h-72'}
                 isCorrect={correct}
                 label={'Add publication descriptions'}
                 limitCount={limit}
                 onChange={changeText}
-                value={textAreaText}
+                value={text}
               />
             </div>
             <div className={'flex w-full h-2/3 justify-end items-end py-5 '}>

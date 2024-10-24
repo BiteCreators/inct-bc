@@ -12,22 +12,21 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
   const params = useParams()
   const postId = Number(params?.id) ?? null
 
-  const [textAreaText, setTextAreaText] = useState<string>(postText)
   const [updatePost] = postsApi.useUpdatePostMutation()
-  const changeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTextAreaText(e.target.value)
-  }
 
-  const { correct, limit } = useValidationLimit(textAreaText, 500)
+  const { changeText, correct, limit, setText, text } = useValidationLimit({
+    limit: 500,
+    startText: postText,
+  })
   const saveChanges = () => {
-    updatePost({ description: textAreaText, postId })
+    updatePost({ description: text, postId })
     changeOpen(false)
   }
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
 
   const changeModalState = async () => {
-    if (textAreaText === postText) {
+    if (text === postText) {
       changeOpen(false)
 
       return
@@ -35,7 +34,7 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
     setConfirmOpen(true)
     const isConfirmed = await requestConfirmation()
 
-    isConfirmed && setTextAreaText(postText)
+    isConfirmed && setText(postText)
     changeOpen(!isConfirmed)
     setConfirmOpen(false)
   }
@@ -50,6 +49,6 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
     limit,
     saveChanges,
     setConfirmOpen,
-    textAreaText,
+    text,
   }
 }
