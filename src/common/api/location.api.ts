@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-type CountryResponse = {
+export type CountryResponse = {
   continentCode: string
   countryCode: string
   division1Code: string
