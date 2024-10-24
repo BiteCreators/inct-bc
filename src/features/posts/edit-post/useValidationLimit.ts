@@ -1,11 +1,18 @@
 import { useEffect, useState } from 'react'
+type validationLimit = {
+  limit: number
+  startText: string
+}
 
-export const useValidationLimit = (currentString: string, limit: number = 0) => {
+export const useValidationLimit = <T extends HTMLInputElement | HTMLTextAreaElement>({
+  limit,
+  startText,
+}: validationLimit) => {
   const [correct, setCorrect] = useState<boolean>(true)
+  const [text, setText] = useState(startText)
+  const changeText = (e: React.ChangeEvent<T>) => {
+    setText(e.target.value)
+  }
 
-  useEffect(() => {
-    setCorrect(currentString.length <= limit && limit > 0)
-  }, [currentString, limit])
-
-  return { correct, limit }
+  return { changeText, correct, limit, setText, text }
 }
