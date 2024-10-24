@@ -7,7 +7,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   children?: ReactNode
   mode: 'custom' | 'default' | 'outside'
-  title?: string
+  title?: ReactNode | string
 }
 
 export const ModalContent = ({ children, mode, title }: Props) => {
@@ -43,7 +43,7 @@ export const ModalContent = ({ children, mode, title }: Props) => {
         </>
       )}
 
-      {mode === 'custom' && <div className={cn('relative px-4 py-3')}>{children}</div>}
+      {mode === 'custom' && <div className={cn('relative')}>{children}</div>}
     </>
   )
 }
