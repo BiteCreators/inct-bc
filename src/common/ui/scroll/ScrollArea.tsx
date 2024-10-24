@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, ElementRef, forwardRef, useId, useRef } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
@@ -19,6 +19,7 @@ export const ScrollArea = forwardRef<
     >
       <ScrollAreaPrimitive.Viewport
         className={cn('h-full w-full rounded', orientation === 'horizontal' && 'pb-3')}
+        id={'scrollAreaViewport'}
       >
         {children}
       </ScrollAreaPrimitive.Viewport>

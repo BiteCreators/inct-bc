@@ -10,6 +10,8 @@ export type {
   Post,
   PostLikes,
   Posts,
+  PublicPostsRequest,
+  PublicPostsResponse,
   Reaction,
   Response,
   SearchParams,

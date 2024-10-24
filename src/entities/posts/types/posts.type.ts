@@ -15,6 +15,19 @@ export type SearchParams = { cursor?: number; search?: string } & Omit<
   Params,
   'sortBy' | 'sortDirection'
 >
+export type PublicPostsResponse = {
+  items: Post[]
+  pageSize: number
+  totalCount: number
+  totalUsers: number
+}
+export type PublicPostsRequest = {
+  endCursorPostId?: number
+  pageSize?: number
+  sortBy?: string
+  sortDirection?: 'asc' | 'desc'
+  userId: number
+}
 export type Post = {
   avatarOwner: string
   createdAt: string
