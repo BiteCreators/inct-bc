@@ -1,28 +1,12 @@
 import { inctagramApi } from '@/common/api/inct.api'
 
+import { EditProfileBody, Profile } from '../types/profile.type'
+import { ProfileAvatars } from '../types/profileAvatars.type'
+
 type ProfileResponse = {
-  avatars: Avatars[]
+  avatars: ProfileAvatars[]
   createdAt: string
   id: number
-}
-
-export type Avatars = {
-  createdAt: string
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
-
-export type Profile = {
-  aboutMe?: string
-  city?: string
-  country?: string
-  dateOfBirth: string
-  firstName: string
-  lastName: string
-  region?: string
-  userName: string
 }
 
 export const profileApi = inctagramApi.injectEndpoints({
@@ -50,7 +34,7 @@ export const profileApi = inctagramApi.injectEndpoints({
         url: `v1/users/profile/${id}`,
       }),
     }),
-    editProfile: builder.mutation<void, Profile>({
+    editProfile: builder.mutation<void, EditProfileBody>({
       invalidatesTags: ['Profile'],
       query: body => ({
         body,
@@ -65,7 +49,7 @@ export const profileApi = inctagramApi.injectEndpoints({
         url: 'v1/users/profile',
       }),
     }),
-    setAvatarProfile: builder.mutation<Avatars[], { file: File }>({
+    setAvatarProfile: builder.mutation<ProfileAvatars[], { file: File }>({
       invalidatesTags: ['Profile'],
       query: ({ file }) => {
         const formData = new FormData()
