@@ -1,12 +1,11 @@
 import React from 'react'
-import { Controller, useController, useForm } from 'react-hook-form'
-import Select from 'react-select'
+import { Controller } from 'react-hook-form'
 
-import { Alert, Button, FormInput, FormTextArea, Loader } from '@/common/ui'
+import { Button, FormInput, FormSelect, FormTextArea, Loader, SelectItem } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
+import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
+import { Select } from '@/common/ui/select/Select'
 import { useCountryCity } from '@/features/profile/model/useSelectCountryCity'
-import { SelectDropdownIndicator } from '@/features/profile/ui/select-country-city/SelectDropdownIndicator'
-import { selectStyle } from '@/features/profile/ui/select-country-city/selectStyles'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { ProfileAvatar } from './avatar/ProfileAvatar'
@@ -14,11 +13,13 @@ import { ProfileAvatar } from './avatar/ProfileAvatar'
 export const EditProfileForm = () => {
   const { control, handleSubmit, isError, isLoading, isShowAlert, isValid, message, onClose, t } =
     useEditProfileForm()
-  const { cityOptions, countryOptions, handlerCountry } = useCountryCity()
+  const { checkError, cityOptions, countryOptions, handlerCountry } = useCountryCity()
 
   if (isLoading) {
     return <Loader fullScreen />
   }
+
+  console.log('controlEditForm', control)
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
@@ -29,6 +30,8 @@ export const EditProfileForm = () => {
         <FormInput control={control} label={t.userName} name={'userName'} required />
         <FormInput control={control} label={t.firstName} name={'firstName'} required />
         <FormInput control={control} label={t.lastName} name={'lastName'} required />
+        {/*<FormInput control={control} name={'country'} />*/}
+        {/*<FormInput control={control} name={'city'} />*/}
         <FormDatePicker
           className={'w-full p-[0px] bg-inherit'}
           control={control}
@@ -40,53 +43,55 @@ export const EditProfileForm = () => {
         />
         <div className={'flex gap-6'}>
           <div className={'w-full'}>
-            <label className={'text-sm text-light-900'} htmlFor={'country-select'}>
-              {t.selectYourCountry}
-            </label>
+            {/*<FormSelect*/}
+            {/*  control={control}*/}
+            {/*  label={t.selectYourCountry}*/}
+            {/*  name={''}*/}
+            {/*  // onChange={e => console.log('eventChange', e)}*/}
+            {/*  // onOpenChange={e => console.log('eventOpen', e)}*/}
+            {/*  // onValueChange={e => console.log('eventValue', e)}*/}
+            {/*  // placeholder={'test select'}*/}
+            {/*>*/}
+            {/*  /!*<SearchableOptions options={countryOptions || []} />*!/*/}
+            {/*</FormSelect>*/}
             <Controller
               control={control}
               name={'country'}
               render={({ field }) => (
                 <Select
-                  components={{ DropdownIndicator: SelectDropdownIndicator }}
-                  id={'country-select'}
-                  isSearchable
-                  onChange={optionValue =>
-                    // field.onChange(handlerCountry(optionValue), optionValue!.label)
-                    field.onChange(optionValue!.label)
-                  }
-                  options={countryOptions}
+                  {...field}
+                  error={checkError(countryOptions)}
+                  label={t.selectYourCountry}
+                  onValueChange={optionValue => {
+                    handlerCountry(optionValue), field.onChange(optionValue)
+                  }}
                   placeholder={t.country}
-                  styles={selectStyle}
-                />
+                >
+                  <SearchableOptions options={countryOptions || []} />
+                </Select>
               )}
             />
           </div>
           <div className={'w-full'}>
-            <label className={'text-sm text-light-900 block'} htmlFor={'city-select'}>
-              {t.selectYourCity}
-            </label>
             <Controller
               control={control}
               name={'city'}
               render={({ field }) => (
                 <Select
-                  components={{ DropdownIndicator: SelectDropdownIndicator }}
-                  id={'city-select'}
-                  isDisabled={cityOptions.length === 0}
-                  isSearchable
-                  onChange={optionValue => field.onChange(optionValue!.label)}
-                  options={cityOptions}
+                  {...field}
+                  disabled={cityOptions.length === 0}
+                  label={t.selectYourCity}
+                  onValueChange={field.onChange}
                   placeholder={t.city}
-                  styles={selectStyle}
-                />
+                >
+                  <SearchableOptions options={cityOptions || []} />
+                </Select>
               )}
             />
           </div>
         </div>
         <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
-        {/*<Button className={'w-min-40 self-end'} disabled={!isValid} type={'submit'}>*/}
-        <Button className={'w-min-40 self-end'} type={'submit'}>
+        <Button className={'w-min-40 self-end'} disabled={!isValid} type={'submit'}>
           {t.saveChangesBtn}
         </Button>
       </form>
