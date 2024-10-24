@@ -1,55 +1,60 @@
 import { useState } from 'react'
-import { SingleValue } from 'react-select'
 
-import { locationApi } from '@/common/api/location.api'
+import { CountryResponse, locationApi } from '@/common/api/location.api'
 import { useRouter } from 'next/router'
-
-export type SelectData = {
-  label: string
-  value: string
-}
 
 export const useCountryCity = () => {
   const { locale } = useRouter()
-  const [cityOptions, setCityOptions] = useState<SelectData[]>([])
+  const [cityOptions, setCityOptions] = useState<string[]>([])
 
-  const { data: countryData, error: countryError } = locationApi.useGetCountryQuery({
+  const { data: countryData } = locationApi.useGetCountryQuery({
     lng: locale ?? 'ru',
   })
 
-  const countryOptions = countryData?.map(item => ({
-    label: item.name,
-    value: item.countryCode,
-  }))
+  const checkCountryData = (countryData: CountryResponse[] | undefined) => {
+    if (countryData) {
+      return countryData.map(item => item.name)
+    } else {
+      return []
+    }
+  }
+
+  const countryOptions = checkCountryData(countryData)
+
+  const checkError = (options: string[]) => {
+    if (options.length === 0 && locale === 'en') {
+      return 'The list is temporarily unavailable'
+    }
+    if (options.length === 0 && locale === 'ru') {
+      return 'Список временно недоступен'
+    } else {
+      return ''
+    }
+  }
 
   const [triggerGetCity] = locationApi.useLazyGetCityQuery()
 
-  const handlerCountry = async (newValue: SingleValue<SelectData>) => {
-    if (newValue) {
-      try {
-        const res = await triggerGetCity({ countryCode: newValue.value, lng: locale ?? '' })
-        const cityOptions = res
-          .data!.edges.map(item => {
-            return { label: item.node.name, value: item.node.id }
-          })
-          .sort((a, b) => a.label.localeCompare(b.label, locale))
+  const handlerCountry = async (optionValue: string) => {
+    if (optionValue) {
+      const countryCode = countryData?.find(item => item.name === optionValue)?.countryCode
 
-        console.log('handlerCountry', newValue.label)
+      try {
+        const res = await triggerGetCity({ countryCode: countryCode || '', lng: locale ?? '' })
+        const cityOptions = res
+          .data!.edges.map(item => item.node.name)
+          .sort((a, b) => a.localeCompare(b, locale))
+
         setCityOptions(cityOptions)
       } catch (error) {
-        console.log('triggerGetCity', error)
+        return []
       }
     }
   }
 
-  const handlerCity = (newValue: SingleValue<SelectData>) => {
-    console.log('handlerCity', newValue!.label)
-  }
-
   return {
+    checkError,
     cityOptions,
     countryOptions,
-    handlerCity,
     handlerCountry,
   }
 }
