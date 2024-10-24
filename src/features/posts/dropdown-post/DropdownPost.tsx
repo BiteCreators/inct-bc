@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PersonAdd, PersonRemove } from '@/common/assets/icons/components'
+import { PersonAdd, PersonRemoveOutline } from '@/common/assets/icons/components'
 import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
@@ -38,7 +38,7 @@ export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props
   } else {
     if (follow) {
       forDrop.push({
-        icon: <PersonRemove />,
+        icon: <PersonRemoveOutline />,
         label: 'Unfollow',
         onClick: () => {},
       })
