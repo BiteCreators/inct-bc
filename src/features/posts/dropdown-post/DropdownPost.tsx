@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PersonAdd, PersonRemoveOutline } from '@/common/assets/icons/components'
+import { PersonAdd, PersonAddOutline, PersonRemoveOutline } from '@/common/assets/icons/components'
 import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
@@ -44,13 +44,13 @@ export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props
       })
     } else {
       forDrop.push({
-        icon: <PersonAdd />,
+        icon: <PersonAddOutline />,
         label: 'Follow',
         onClick: () => {},
       })
     }
     forDrop.push({
-      icon: <CopyIcon />,
+      icon: <CopyIcon className={'w-[23px] h-[18px]'} viewBox={' 0 0 14 15'} />,
       label: 'Copy link',
       onClick: copyLinkHandler,
     })
