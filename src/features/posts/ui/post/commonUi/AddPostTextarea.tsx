@@ -1,6 +1,6 @@
 import React, { ComponentProps, forwardRef, useEffect } from 'react'
 
-import { PlusSquareOutline } from '@/common/assets/icons/components'
+import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
 import { Button, ScrollArea } from '@/common/ui'
@@ -47,7 +47,6 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 'bg-transparent',
                 // 'bg-dark-100',
                 'leading-none',
-                'md: leading-tight',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',
                 'resize-none',
@@ -62,12 +61,23 @@ export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
         </ScrollArea>
-        <button className={'md:hidden ml-6 max-h-9'}>
-          <PlusSquareOutline viewBox={'-3 0 24 24'} />
-        </button>
-        <Button className={cn(['max-h-9 ml-6 hidden', 'md:inline-block'])} variant={'text'}>
-          Publish
-        </Button>
+        <div className={'flex items-end mb-2'}>
+          <button className={'md:hidden ml-6 max-h-9'}>
+            <ArrowBackOutline
+              className={'text-dark-900 bg-light-100 rounded-full'}
+              height={20}
+              style={{ transform: 'rotate(90deg)' }}
+              viewBox={'0 0 24 24'}
+              width={20}
+            />
+          </button>
+          <Button
+            className={cn(['max-h-9 align-bottom ml-6 hidden', 'md:inline-block'])}
+            variant={'text'}
+          >
+            Publish
+          </Button>
+        </div>
       </div>
     )
   }

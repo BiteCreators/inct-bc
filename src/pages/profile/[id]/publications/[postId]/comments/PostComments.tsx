@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { Typography } from '@/common/ui'
-import { PostCommentsMapBlock } from '@/features/posts/ui/post/commonUi/PostCommentsMapBlock'
+import { PostDescriptionCommentsMap } from '@/features/posts/ui/post/commonUi/PostDescriptionCommentsMap'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
@@ -37,7 +37,7 @@ export const PostComments = () => {
         </Typography>
       </div>
       {/*Comments*/}
-      <PostCommentsMapBlock comments={comments} />
+      <PostDescriptionCommentsMap comments={comments} />
     </div>
   )
 }

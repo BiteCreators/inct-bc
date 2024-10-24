@@ -5,7 +5,8 @@ import { cn } from '@/common/lib/utils/cn'
 import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
-import { PostCommentsMapBlock } from '@/features/posts/ui/post/commonUi/PostCommentsMapBlock'
+import { PostDescription } from '@/features/posts/ui/post/commonUi/PostDescription'
+import { PostDescriptionCommentsMap } from '@/features/posts/ui/post/commonUi/PostDescriptionCommentsMap'
 import { PostEngagementBlock } from '@/features/posts/ui/post/commonUi/PostEngagementBlock'
 import { PostModalTitle } from '@/features/posts/ui/post/desktop/PostModalTitle'
 import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
@@ -44,7 +45,7 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
           <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             <PostModalTitle post={post} />
             <div className={'border-y-[1px] border-dark-100'} />
-            <PostCommentsMapBlock comments={comments} />
+            <PostDescriptionCommentsMap comments={comments} post={post} />
             <PostEngagementBlock post={post} />
             <AddPostTextarea />
           </div>

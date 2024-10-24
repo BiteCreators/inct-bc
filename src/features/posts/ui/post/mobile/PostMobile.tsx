@@ -5,7 +5,7 @@ import { Avatar, Dropdown, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
 import { PostEngagementBlock } from '@/features/posts/ui/post/commonUi/PostEngagementBlock'
-import { PostCommentsBlock } from '@/features/posts/ui/post/mobile/PostCommentsBlock'
+import { PostDescriptionCommentsBlock } from '@/features/posts/ui/post/mobile/PostDescriptionCommentsBlock'
 import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 
 type Props = {
@@ -33,7 +33,7 @@ export const PostMobile = ({ comments, post, slidesUrl }: Props) => {
             <PostEngagementBlock post={post} />
             <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>
               <div className={'flex flex-col pt-3 gap-5 w-full'}>
-                <PostCommentsBlock comments={comments} />
+                <PostDescriptionCommentsBlock comments={comments} post={post} />
               </div>
             </div>
             <AddPostTextarea />

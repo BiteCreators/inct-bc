@@ -1,7 +1,4 @@
-import { useState } from 'react'
-
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
-import { Button } from '@/common/ui'
 import { PostDetailsModal } from '@/features/posts/ui/PostDetailsModal'
 import { ProfileHeader } from '@/widgets/profile-header'
 
@@ -66,7 +63,7 @@ export const SinglePostPage = () => {
   const postForModal = {
     avatarOwner: exampleAvatar.src,
     createdAt: 'July 3, 2021',
-    description: '',
+    description: 'This is post descriptionThis is post descriptionThis is post description',
     id: 1,
     images: slides,
     isLiked: false,
