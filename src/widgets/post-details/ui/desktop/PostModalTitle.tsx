@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Post } from '@/app/inct.types'
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Dropdown, Typography } from '@/common/ui'
+import { Post } from '@/entities/posts'
 import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   post: Post

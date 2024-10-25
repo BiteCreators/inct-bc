@@ -1,12 +1,11 @@
-import React from 'react'
-
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Dropdown, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
-import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
-import { PostActionsBlock } from '@/features/posts/ui/post/commonUi/PostActionsBlock'
-import { PostDescriptionCommentsBlock } from '@/features/posts/ui/post/mobile/PostDescriptionCommentsBlock'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
+import { Post } from '@/entities/posts'
+import { AddCommentTextarea } from '@/features/comments'
+import { PostActionsBlock } from '@/features/posts'
+import React from 'react'
+import { PostDescriptionCommentsBlock } from './PostDesctiptionCommentsBlock'
 
 type Props = {
   comments: { id: string; text: string }[]
@@ -36,7 +35,7 @@ export const PostMobile = ({ comments, post, slidesUrl }: Props) => {
                 <PostDescriptionCommentsBlock comments={comments} post={post} />
               </div>
             </div>
-            <AddPostTextarea />
+            <AddCommentTextarea />
           </div>
         </>
       </>

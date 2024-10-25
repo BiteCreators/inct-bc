@@ -3,7 +3,7 @@ import React from 'react'
 import { BookmarkOutline, HeartOutline, PaperPlaneOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { Typography } from '@/common/ui'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
+import { Post } from '@/entities/posts'
 
 type Props = {
   post: Post

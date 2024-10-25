@@ -1,10 +1,10 @@
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
-import { PostDetailsModal } from '@/features/posts/ui/PostDetailsModal'
 import { ProfileHeader } from '@/widgets/profile-header'
 
 import exampleAvatar from '../../../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
+import { PostDetails } from '@/widgets/post-details'
 
-export type Post = {
+type Post = {
   avatarOwner: string
   createdAt: string
   description: string
@@ -18,11 +18,11 @@ export type Post = {
   updatedAt: string
   userName: string
 }
-export type Owner = {
+type Owner = {
   firstName: string
   lastName: string
 }
-export type Image = {
+type Image = {
   createdAt: string
   fileSize: number
   height: number
@@ -79,7 +79,7 @@ export const SinglePostPage = () => {
   return (
     <div>
       {isLargeScreen && <ProfileHeader />}
-      <PostDetailsModal post={postForModal} />
+      <PostDetails post={postForModal} />
     </div>
   )
 }

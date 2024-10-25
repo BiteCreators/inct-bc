@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Button, Typography } from '@/common/ui'
-import { PostComment } from '@/features/posts/ui/post/commonUi/PostComment'
-import { PostDescription } from '@/features/posts/ui/post/commonUi/PostDescription'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import { Post } from '@/entities/posts'
+import { PostDescription } from '@/features/posts'
+import { PostComment } from '@/features/comments'
 
 type Props = {
   comments: { id: string; text: string }[]

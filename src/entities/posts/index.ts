@@ -1,4 +1,3 @@
-export type { Post } from './lib/types/post'
 export { postsApi } from './api/posts.api'
 
 export type {
