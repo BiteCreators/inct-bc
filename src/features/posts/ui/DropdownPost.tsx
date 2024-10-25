@@ -4,7 +4,7 @@ import { PersonAdd, PersonAddOutline, PersonRemoveOutline } from '@/common/asset
 import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
-import { useDropdownPost } from '@/features/posts/dropdown-post/useDropdownPost'
+import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 import { CopyIcon, EditIcon, TrashIcon } from '@storybook/icons'
 
 type Props = {
