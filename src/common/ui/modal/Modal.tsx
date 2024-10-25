@@ -11,6 +11,7 @@ type Props = {
   handleBack?: () => void
   handleNext?: () => void
   isOpen: boolean
+  maxWidth?: string
   mode: 'custom' | 'default' | 'outside' | 'withStep'
   nextButtonTitle?: string
   onOpenChange?: (open: boolean) => void
@@ -23,6 +24,7 @@ export const Modal = ({
   handleBack,
   handleNext,
   isOpen,
+  maxWidth,
   mode,
   nextButtonTitle,
   onOpenChange,

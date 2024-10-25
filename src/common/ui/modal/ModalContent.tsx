@@ -12,7 +12,7 @@ type Props = {
   handleNext?: () => void
   mode: 'custom' | 'default' | 'outside' | 'withStep'
   nextButtonTitle?: string
-  title?: string
+  title?: ReactNode | string
 }
 
 export const ModalContent = ({
