@@ -10,11 +10,11 @@ type Props = {
 }
 
 export const PostActionsBlock = ({ post }: Props) => {
-  const formattedDate = new Date(post.createdAt).toLocaleDateString('en-US', {
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-  })
+  }).format(new Date(post.createdAt))
 
   return (
     <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
