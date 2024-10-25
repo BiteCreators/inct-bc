@@ -29,8 +29,8 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
       <div className={cn(['flex flex-row'])}>
         <Slider
           height={'full'}
-          sliderStyles={'max-w-[500px] min-w-[390px]'}
           slidesUrl={slidesUrl}
+          stylesSlider={'max-w-[500px] min-w-[390px]'}
         />
         <>
           <Dialog.Close
