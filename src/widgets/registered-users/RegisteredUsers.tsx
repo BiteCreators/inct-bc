@@ -29,7 +29,7 @@ export const RegisteredUsers = ({ usersCount }: Props) => {
     <div
       className={'max-w-[972px] w-full h-[72px] bg-dark-500 px-7 flex justify-between items-center'}
     >
-      <Typography variant={'medium-text'}>Registered users:</Typography>
+      <Typography className={'text-lg font-bold'}>Registered users:</Typography>
       <div className={' border h-2/3 w-auto px-5 bg-dark-700 flex items-center gap-2'}>
         {usersForDisplay}
       </div>
