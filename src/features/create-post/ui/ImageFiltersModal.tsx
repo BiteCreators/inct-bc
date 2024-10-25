@@ -1,4 +1,4 @@
-import React, { JSX } from 'react'
+import React from 'react'
 
 import { Typography } from '@/common/ui'
 
@@ -16,23 +16,24 @@ export const ImageFiltersModal = () => {
     'Gingham',
     'Moon',
   ]
-  const filters: JSX.Element[] = nameFilters.map((el, index) => (
-    <button key={index}>
-      <div className={'flex flex-col gap-2 items-center'}>
-        <div className={'w-[108px] h-[108px]'}>
-          <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
-        </div>
-        <Typography>{el}</Typography>
-      </div>
-    </button>
-  ))
 
   return (
     <div className={'h-[504px] flex'}>
       <div className={'w-1/2'}>
         <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
       </div>
-      <div className={'w-1/2 grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>{filters}</div>
+      <div className={'w-1/2 grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>
+        {nameFilters.map((el, index) => (
+          <button key={index}>
+            <div className={'flex flex-col gap-2 items-center'}>
+              <div className={'w-[108px] h-[108px]'}>
+                <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
+              </div>
+              <Typography>{el}</Typography>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   )
 }

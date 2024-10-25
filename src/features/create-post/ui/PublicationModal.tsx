@@ -28,7 +28,7 @@ export const PublicationModal = () => {
   )
 }
 
-export const UserProfileUrl = ({ className }: { className?: string }) => {
+const UserProfileUrl = ({ className }: { className?: string }) => {
   return (
     <div className={cn('flex items-center gap-3', className)}>
       <div className={'w-9 h-9'}>

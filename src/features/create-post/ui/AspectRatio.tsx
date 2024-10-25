@@ -5,11 +5,11 @@ import {
   VerticalOrientation,
 } from '@/common/assets/icons/components'
 
-import { Select, SelectItem } from './Select'
+import { SelectItem, SelectSideTop } from '../../../common/ui/select-side-top/SelectSideTop'
 
 export const AspectRatio = () => {
   return (
-    <Select defaultValue={'1'} value={'1'}>
+    <SelectSideTop defaultValue={'1'}>
       <SelectItem value={'1'}>
         <span>Original</span>
         <ImageOutline />
@@ -26,6 +26,6 @@ export const AspectRatio = () => {
         <span>16:9</span>
         <HorizontalOrientation />
       </SelectItem>
-    </Select>
+    </SelectSideTop>
   )
 }

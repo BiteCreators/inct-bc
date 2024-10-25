@@ -9,27 +9,10 @@ import {
 import { cn } from '@/common/lib/utils/cn'
 import { Button } from '@/common/ui'
 
+import { useImageControl } from '../model/useImageControl'
+
 export const ImageControl = ({ className }: { className?: string }) => {
-  const [isImagesControlOpen, setIsImagesControlOpen] = useState(false)
-  const imagesControlRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (imagesControlRef.current && !imagesControlRef.current.contains(event.target as Node)) {
-        setIsImagesControlOpen(false)
-      }
-    }
-
-    if (imagesControlRef) {
-      document.addEventListener('mousedown', handleClickOutside)
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [imagesControlRef])
+  const { imagesControlRef, isImagesControlOpen, setIsImagesControlOpen } = useImageControl()
 
   return (
     <div className={cn('relative', className)} ref={imagesControlRef}>

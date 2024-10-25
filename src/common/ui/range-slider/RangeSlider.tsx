@@ -2,7 +2,7 @@ import React from 'react'
 
 import * as SliderPrimitive from '@radix-ui/react-slider'
 
-export const Slider = () => (
+export const RangeSlider = () => (
   <form>
     <SliderPrimitive.Root
       className={'cursor-pointer select-none relative flex items-center w-[100px] h-[20px]'}

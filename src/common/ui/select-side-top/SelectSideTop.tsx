@@ -1,4 +1,4 @@
-import React, { forwardRef, useId } from 'react'
+import React, { forwardRef, useId, useState } from 'react'
 
 import { ExpandOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
@@ -6,12 +6,17 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 
 type Props = { id?: string } & SelectPrimitive.SelectProps
 
-export const Select = forwardRef<HTMLButtonElement, Props>(
+export const SelectSideTop = forwardRef<HTMLButtonElement, Props>(
   ({ children, defaultValue, id }, ref) => {
     const selectId = useId()
+    const [isOpenSelect, setIsOpenSelect] = useState(false)
 
     return (
-      <SelectPrimitive.Root defaultValue={defaultValue}>
+      <SelectPrimitive.Root
+        defaultValue={defaultValue}
+        onOpenChange={setIsOpenSelect}
+        open={isOpenSelect}
+      >
         <SelectPrimitive.Trigger
           className={cn(
             'bg-dark-500 bg-opacity-80 p-1.5 focus:outline-0 rounded-sm',
