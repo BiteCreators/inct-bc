@@ -1,4 +1,4 @@
-[![Header](https://github.com/BiteCreators/inct-bc/public/images/inct.png)]()
+[![Header](https://github.com/BiteCreators/inct-bc/blob/development/public/images/inct.png)]()
 
 # INCTAGRAM      
 <a href="https://inctbc.ru/">
