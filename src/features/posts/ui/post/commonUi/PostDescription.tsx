@@ -1,6 +1,6 @@
 import { HeartOutline } from '@/common/assets/icons/components'
 import { Avatar, Typography } from '@/common/ui'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
+import { Post } from '@/entities/posts'
 
 type Props = {
   post: Post

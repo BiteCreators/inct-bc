@@ -13,18 +13,30 @@ type PublicPostsResponse = {
   totalCount: number
 }
 
-export const getServerSideProps = (async () => {
+// export const getServerSideProps = (async () => {
+//   const res = await fetch(
+//     `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/,?sortDirection=desc&pageSize=4`
+//   )
+//   const postsData: PublicPostsResponse = await res.json()
+//
+//   return { props: { postsData } }
+// }) satisfies GetServerSideProps<{ postsData: PublicPostsResponse }>
+
+export const getStaticProps = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/,?sortDirection=desc&pageSize=4`
+    `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=4`
   )
   const postsData: PublicPostsResponse = await res.json()
 
-  return { props: { postsData } }
-}) satisfies GetServerSideProps<{ postsData: PublicPostsResponse }>
+  return {
+    props: { postsData },
+    revalidate: 60, // Page refresh every 60 sec
+  }
+}
 
 const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
   postsData,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetServerSidePropsType<typeof getStaticProps>) => {
   const { items: posts } = postsData
 
   return (

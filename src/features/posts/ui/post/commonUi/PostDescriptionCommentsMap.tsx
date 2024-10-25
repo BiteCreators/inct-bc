@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { ScrollArea } from '@/common/ui'
+import { Post } from '@/entities/posts'
 import { PostComment } from '@/features/posts/ui/post/commonUi/PostComment'
 import { PostDescription } from '@/features/posts/ui/post/commonUi/PostDescription'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 
 type Props = {
   comments: { id: string; text: string }[]
