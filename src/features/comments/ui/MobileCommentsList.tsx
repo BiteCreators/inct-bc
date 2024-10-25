@@ -10,10 +10,10 @@ import { PostComment } from '@/features/comments'
 
 type Props = {
   comments: { id: string; text: string }[]
-  post: Post
+  description: React.ReactNode
 }
 
-export const PostDescriptionCommentsBlock = ({ comments, post }: Props) => {
+export const MobileCommentsList = ({ comments, description }: Props) => {
   const [showViewAllButton, setShowViewAllButton] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const commentsContainerRef = useRef<HTMLDivElement>(null)
@@ -36,7 +36,7 @@ export const PostDescriptionCommentsBlock = ({ comments, post }: Props) => {
   return (
     <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
       <div className={'flex-1 w-full px-0'}>
-        <PostDescription post={post} />
+        {description}
         {showViewAllButton && !expanded && (
           <Button className={'mb-2 pt-0 px-0 border-none text-light-900 text-sm'} variant={'text'}>
             <Link href={`/profile/${id}/publications/${postId}/comments`}>

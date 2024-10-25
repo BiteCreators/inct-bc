@@ -2,8 +2,6 @@ import React from 'react'
 
 import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { Typography } from '@/common/ui'
-import { PostDescriptionCommentsMap } from '@/features/posts/ui/post/commonUi/PostDescriptionCommentsMap'
-import { Image, Owner, Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
@@ -84,7 +82,6 @@ export const PostComments = () => {
         </Typography>
       </div>
       {/*Comments*/}
-      <PostDescriptionCommentsMap comments={comments} post={postForModal} />
     </div>
   )
 }

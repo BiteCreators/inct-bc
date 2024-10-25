@@ -7,14 +7,14 @@ import { PostDescription } from '@/features/posts'
 
 type Props = {
   comments: { id: string; text: string }[]
-  post: Post
+  description: React.ReactNode
 }
 
-export const PostDescriptionCommentsMap = ({ comments, post }: Props) => {
+export const DesktopCommentsList = ({ comments, description }: Props) => {
   return (
     <ScrollArea className={'flex-1 px-6 pt-5 pb-2 w-full'}>
       <div className={'flex flex-col gap-4 h-[336px]'}>
-        <PostDescription post={post} />
+        {description}
         {comments.map(el => (
           <PostComment key={el.id} text={el.text} />
         ))}

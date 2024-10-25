@@ -5,11 +5,10 @@ import { cn } from '@/common/lib/utils/cn'
 import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { Post } from '@/entities/posts'
-import { AddCommentTextarea } from '@/features/comments'
-import { PostActionsBlock } from '@/features/posts'
+import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
+import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
 
-import { PostDescriptionCommentsMap } from '../PostDescriptionCommentsMap'
 import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
@@ -45,7 +44,10 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
           <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             <PostModalTitle post={post} />
             <div className={'border-y-[1px] border-dark-100'} />
-            <PostDescriptionCommentsMap comments={comments} post={post} />
+            <DesktopCommentsList
+              comments={comments}
+              description={<PostDescription post={post} />}
+            />
             <PostActionsBlock post={post} />
             <AddCommentTextarea />
           </div>
