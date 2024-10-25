@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { UserProfile } from '@/entities/profile'
-import { useEditPost } from '@/features/posts/edit-post/lib/useEditPost'
+import { useEditPost } from '@/features/edit-post/model/useEditPost'
 
 type Props = {
   avatarUrl?: string

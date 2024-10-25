@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
+import { EditPost } from '@/features/edit-post'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import exampleImage from '../../../../public/examples/exampleAvatar.png'
-import EditPost from '../../../features/posts/edit-post'
 
 export const ProfileHeader = () => {
   const username = 'URLProfiele'
