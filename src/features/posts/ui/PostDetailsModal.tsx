@@ -54,7 +54,7 @@ export const PostDetailsModal = ({}: Props) => {
                   </div>
                   <DropdownPost
                     className={'-top-0.5 -mr-3 z-[10000]'}
-                    isMyPost={false}
+                    isMyPost
                     setEditMode={setEditMode}
                   />
                   {/*<Dropdown className={'-top-0.5 -mr-3'} items={[]} />*/}
