@@ -14,7 +14,7 @@ type Props = {
   mode: 'custom' | 'default' | 'outside' | 'withStep'
   nextButtonTitle?: string
   onOpenChange?: (open: boolean) => void
-  title?: string
+  title?: ReactNode | string
 }
 
 export const Modal = ({
@@ -30,11 +30,12 @@ export const Modal = ({
 }: Props) => {
   const modalContent = (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
-      <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-50')} />
+      <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-30')} />
       <Dialog.Content
         className={cn(
-          'z-50 fixed top-1/2 left-1/2 max-w-md bg-dark-300 rounded-sm transform border border-dark-100',
+          'z-30 fixed top-1/2 left-1/2 bg-dark-300 rounded-sm transform border border-dark-100',
           '-translate-x-1/2 -translate-y-1/2',
+          maxWidth ? maxWidth : 'max-w-[480px]',
           className
         )}
       >

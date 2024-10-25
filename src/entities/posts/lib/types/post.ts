@@ -6,16 +6,13 @@ export type Post = {
   images: Image[]
   isLiked: boolean
   likesCount: number
-  location?: string
+  location: null | string
   owner: Owner
   ownerId: number
   updatedAt: string
   userName: string
 }
-type Owner = {
-  firstName?: string
-  lastName?: string
-}
+
 type Image = {
   createdAt: string
   fileSize: number
@@ -23,4 +20,9 @@ type Image = {
   uploadId: string
   url: string
   width: number
+}
+
+type Owner = {
+  firstName: string
+  lastName: string
 }

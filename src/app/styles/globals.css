@@ -39,3 +39,10 @@ h1 {
 input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
 }
+
+.truncate-multiline {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
