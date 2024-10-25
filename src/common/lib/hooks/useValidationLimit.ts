@@ -10,15 +10,15 @@ export const useValidationLimit = <T extends HTMLInputElement | HTMLTextAreaElem
   startText,
 }: validationLimit) => {
   const [correct, setCorrect] = useState<boolean>(true)
-  const [text, setText] = useState(startText)
-  const changeText = (e: React.ChangeEvent<T>) => {
-    setText(e.target.value)
-    if (e.target.value.length > 500 || e.target.value.length < 1) {
+  const [value, setValue] = useState(startText)
+  const handleChange = (e: React.ChangeEvent<T>) => {
+    setValue(e.target.value)
+    if (e.target.value.length > limit) {
       setCorrect(false)
     } else {
       setCorrect(true)
     }
   }
 
-  return { changeText, correct, limit, setText, text }
+  return { correct, handleChange, limit, setValue, value }
 }

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { cn } from '@/common/lib/utils/cn'
 import { Button, Modal } from '@/common/ui'
 
 type Props = {
@@ -33,13 +32,7 @@ export const ActionConfirmation = ({
   }
 
   return (
-    <Modal
-      className={'z-[100000]'}
-      isOpen={isOpen}
-      mode={'default'}
-      onOpenChange={setIsOpen}
-      title={title}
-    >
+    <Modal isOpen={isOpen} mode={'default'} onOpenChange={setIsOpen} title={title}>
       <div className={'calc(min-w-[430px]-40px) flex mb-4'}>{message}</div>
       <div className={'w-full flex gap-5 mb-6 items-center justify-end'}>
         <Button className={'h-[37px]'} onClick={handleConfirm} variant={'outline'}>

@@ -3,7 +3,7 @@ import React from 'react'
 import { Button, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { UserProfile } from '@/entities/profile'
-import { useEditPost } from '@/features/posts/edit-post/useEditPost'
+import { useEditPost } from '@/features/posts/edit-post/lib/useEditPost'
 
 type Props = {
   avatarUrl?: string
@@ -14,25 +14,25 @@ type Props = {
   userName?: string
 }
 
-export default function EditPost({
+export const EditPost = ({
   avatarUrl = 'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png',
   changeOpen,
   isOpen,
   postText = 'text text text',
   profileId = 1111,
   userName = 'default',
-}: Props) {
+}: Props) => {
   const {
     changeModalState,
-    changeText,
     confirmOpen,
     correct,
+    handleChange,
     handleConfirm,
     handleReject,
     limit,
     saveChanges,
     setConfirmOpen,
-    text,
+    value,
   } = useEditPost({ changeOpen, postText })
 
   return (
@@ -76,12 +76,12 @@ export default function EditPost({
                 isCorrect={correct}
                 label={'Add publication descriptions'}
                 limitCount={limit}
-                onChange={changeText}
-                value={text}
+                onChange={handleChange}
+                value={value}
               />
             </div>
             <div className={'flex w-full h-2/3 justify-end items-end py-5 '}>
-              <Button className={'max-h-screen'} disabled={!correct} onClick={saveChanges}>
+              <Button disabled={!correct} onClick={saveChanges}>
                 Save changes
               </Button>
             </div>
