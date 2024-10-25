@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 
 export const useHandleLimitedInput = <T extends HTMLInputElement | HTMLTextAreaElement>({
+  callback,
   defaultValue = '',
   limit,
   strict,
-  callback,
 }: {
+  callback?: (value: string) => void
   defaultValue?: string
   limit: number
   strict?: boolean
-  callback?: (value: string) => void
 }) => {
   const [limitCorrect, setCorrect] = useState(true)
   const [value, setValue] = useState(defaultValue)
@@ -25,5 +25,5 @@ export const useHandleLimitedInput = <T extends HTMLInputElement | HTMLTextAreaE
     callback?.(e.target.value)
   }
 
-  return { handleChange, limitCorrect, value, setValue }
+  return { handleChange, limitCorrect, setValue, value }
 }

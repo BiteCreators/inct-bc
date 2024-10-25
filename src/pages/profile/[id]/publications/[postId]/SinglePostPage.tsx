@@ -1,8 +1,8 @@
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
+import { PostDetails } from '@/widgets/post-details'
 import { ProfileHeader } from '@/widgets/profile-header'
 
 import exampleAvatar from '../../../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
-import { PostDetails } from '@/widgets/post-details'
 
 type Post = {
   avatarOwner: string
