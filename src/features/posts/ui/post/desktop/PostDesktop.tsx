@@ -43,7 +43,12 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
               'md:visible'
             )}
           >
-            <Close className={cn('fill-current text-light-100')} />
+            <Close
+              className={cn(
+                'fill-current bg-dark-100 rounded-full text-light-100',
+                'lg-md:bg-transparent'
+              )}
+            />
           </Dialog.Close>
           <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             <PostModalTitle post={post} />
