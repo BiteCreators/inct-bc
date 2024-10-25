@@ -48,7 +48,6 @@ export const ProfileHeader = () => {
               {username}
             </Typography>
             <EditPost changeOpen={setEditMode} isOpen={editMode} />
-            <Button onClick={() => setEditMode(true)}>Open</Button>
             <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
               <Link href={`/profile/${id}/settings`}>{tNav.profileSettings}</Link>
             </Button>
