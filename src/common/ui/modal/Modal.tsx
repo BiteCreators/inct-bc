@@ -8,9 +8,11 @@ import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   children: ReactNode
   className?: string
+  handleBack?: () => void
+  handleNext?: () => void
   isOpen: boolean
-  maxWidth?: string
-  mode: 'custom' | 'default' | 'outside'
+  mode: 'custom' | 'default' | 'outside' | 'withStep'
+  nextButtonTitle?: string
   onOpenChange?: (open: boolean) => void
   title?: ReactNode | string
 }
@@ -18,9 +20,11 @@ type Props = {
 export const Modal = ({
   children,
   className,
+  handleBack,
+  handleNext,
   isOpen,
-  maxWidth = '480px',
   mode,
+  nextButtonTitle,
   onOpenChange,
   title,
 }: Props) => {
@@ -35,7 +39,13 @@ export const Modal = ({
           className
         )}
       >
-        <ModalContent mode={mode} title={title}>
+        <ModalContent
+          handleBack={handleBack}
+          handleNext={handleNext}
+          mode={mode}
+          nextButtonTitle={nextButtonTitle}
+          title={title}
+        >
           {children}
         </ModalContent>
       </Dialog.Content>

@@ -1,3 +1,5 @@
+import { useCookies } from 'react-cookie'
+
 import {
   Bookmark,
   BookmarkOutline,
@@ -15,24 +17,27 @@ import {
   TrendingUpOutline,
 } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import * as jose from 'jose'
 
 import { SideNavbarItem } from './SideNavbarItem'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
+  const [cookies] = useCookies(['accessToken'])
+  const { userId } = jose.decodeJwt(cookies.accessToken)
 
   return (
     <nav className={'flex flex-col gap-[60px]'}>
       <div className={'flex flex-col gap-6'}>
         <SideNavbarItem href={'/'} icon={<HomeOutline />} iconActive={<Home />} label={t.home} />
         <SideNavbarItem
-          href={'/create'}
+          href={`/profile/${userId}/publications/create`}
           icon={<PlusSquareOutline />}
           iconActive={<PlusSquare />}
           label={t.create}
         />
         <SideNavbarItem
-          href={'/profile'}
+          href={`/profile/${userId}`}
           icon={<PersonOutline />}
           iconActive={<Person />}
           label={t.myProfile}
