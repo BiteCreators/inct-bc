@@ -28,11 +28,6 @@ export const PostDescription = ({ post }: Props) => {
           </Typography>
         </div>
       </div>
-      <div className={'flex justify-center items-center mt-4 ml-2 w-4 h-4'}>
-        <button>
-          <HeartOutline height={16} viewBox={'0 0 24 24'} width={16} />
-        </button>
-      </div>
     </div>
   )
 }
