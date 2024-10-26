@@ -2,8 +2,10 @@ import React from 'react'
 
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
 import { Post } from '@/entities/posts'
-import { PostDetailsModal } from '@/features/posts/ui/PostDetailsModal'
+import { PostDetails } from '@/widgets/post-details'
 import { ProfileHeader } from '@/widgets/profile-header'
+
+import exampleAvatar from '../../../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
 
 type Props = {
   post: Post
@@ -15,7 +17,7 @@ export const SinglePostPage = ({ post }: Props) => {
   return (
     <div>
       {isLargeScreen && <ProfileHeader />}
-      <PostDetailsModal post={post} />
+      <PostDetails post={post} />
     </div>
   )
 }

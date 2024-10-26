@@ -7,11 +7,11 @@ import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { authSlice } from '@/entities/auth'
 import { Post } from '@/entities/posts'
-import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
-import { PostActionsBlock } from '@/features/posts/ui/post/commonUi/PostActionsBlock'
-import { PostDescriptionCommentsMap } from '@/features/posts/ui/post/commonUi/PostDescriptionCommentsMap'
-import { PostModalTitle } from '@/features/posts/ui/post/desktop/PostModalTitle'
+import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
+import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
+
+import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
   comments: { id: string; text: string }[]
@@ -53,9 +53,12 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
           <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             <PostModalTitle post={post} />
             <div className={'border-y-[1px] border-dark-100'} />
-            <PostDescriptionCommentsMap comments={comments} post={post} />
+            <DesktopCommentsList
+              comments={comments}
+              description={<PostDescription post={post} />}
+            />
             <PostActionsBlock post={post} />
-            {isAuth && <AddPostTextarea />}
+            {isAuth && <AddCommentTextarea />}
           </div>
         </>
       </div>

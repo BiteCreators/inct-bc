@@ -11,7 +11,7 @@ type Props = {
   error?: null | string
 } & ComponentProps<'textarea'>
 
-export const AddPostTextarea = forwardRef<HTMLTextAreaElement, Props>(
+export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
   ({ disabled, error, id, onChange }: Props, ref) => {
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: true,

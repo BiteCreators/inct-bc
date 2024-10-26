@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { ScrollArea, Typography } from '@/common/ui'
-import { PostComment } from '@/features/posts/ui/post/commonUi/PostComment'
+import { PostComment } from '@/features/comments'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
