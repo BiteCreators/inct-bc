@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
+import { Post } from '@/entities/posts'
 import { PostDesktop } from '@/features/posts/ui/post/desktop/PostDesktop'
 import { PostMobile } from '@/features/posts/ui/post/mobile/PostMobile'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 
 type Props = {
   post: Post
