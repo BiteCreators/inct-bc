@@ -1,4 +1,4 @@
-import { CreatePostModal } from '@/features/create-post/ui/CreatePostModal'
+import { CreatePostModal } from '@/features/create-post'
 
 export default function Create() {
   return (

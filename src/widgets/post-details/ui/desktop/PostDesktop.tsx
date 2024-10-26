@@ -1,15 +1,17 @@
 import React from 'react'
 
 import { Close } from '@/common/assets/icons/components'
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
 import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
-import { AddPostTextarea } from '@/features/posts/ui/post/commonUi/AddPostTextarea'
-import { PostActionsBlock } from '@/features/posts/ui/post/commonUi/PostActionsBlock'
-import { PostDescriptionCommentsMap } from '@/features/posts/ui/post/commonUi/PostDescriptionCommentsMap'
-import { PostModalTitle } from '@/features/posts/ui/post/desktop/PostModalTitle'
-import { Post } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
+import { authSlice } from '@/entities/auth'
+import { Post } from '@/entities/posts'
+import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
+import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
+
+import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
   comments: { id: string; text: string }[]
@@ -18,6 +20,8 @@ type Props = {
 }
 
 export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
+  const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+
   return (
     <Modal
       className={cn(['w-full border-x-8 border-dark-900', 'lg-md:border-none'])}
@@ -28,8 +32,8 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
       <div className={cn(['flex flex-row'])}>
         <Slider
           height={'full'}
-          sliderStyles={'max-w-[500px] min-w-[390px]'}
           slidesUrl={slidesUrl}
+          stylesSlider={'max-w-[500px] min-w-[390px]'}
         />
         <>
           <Dialog.Close
@@ -39,14 +43,22 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
               'md:visible'
             )}
           >
-            <Close className={cn('fill-current text-light-100')} />
+            <Close
+              className={cn(
+                'fill-current bg-dark-100 rounded-full text-light-100',
+                'lg-md:bg-transparent'
+              )}
+            />
           </Dialog.Close>
           <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             <PostModalTitle post={post} />
             <div className={'border-y-[1px] border-dark-100'} />
-            <PostDescriptionCommentsMap comments={comments} post={post} />
+            <DesktopCommentsList
+              comments={comments}
+              description={<PostDescription post={post} />}
+            />
             <PostActionsBlock post={post} />
-            <AddPostTextarea />
+            {isAuth && <AddCommentTextarea />}
           </div>
         </>
       </div>

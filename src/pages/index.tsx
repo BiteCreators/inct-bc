@@ -4,7 +4,7 @@ import { AuthLayout } from '@/app/layouts/AuthLayout'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { InferGetServerSidePropsType } from 'next'
 
 import { NextPageWithLayout } from './_app'
 
@@ -14,18 +14,31 @@ type PublicPostsResponse = {
   totalCount: number
 }
 
-export const getServerSideProps = (async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/,?sortDirection=desc&pageSize=4`
-  )
-  const postsData: PublicPostsResponse = await res.json()
+export const getStaticProps = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=4`
+    )
 
-  return { props: { postsData } }
-}) satisfies GetServerSideProps<{ postsData: PublicPostsResponse }>
+    if (!res.ok) {
+      console.error('Failed to fetch posts data')
+    }
+    const postsData: PublicPostsResponse = await res.json()
+
+    return {
+      props: { postsData },
+      revalidate: 60,
+    }
+  } catch (error) {
+    console.error('Error fetching posts:', error)
+
+    return
+  }
+}
 
 const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
   postsData,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetServerSidePropsType<typeof getStaticProps>) => {
   const { items: posts } = postsData
 
   return (
