@@ -7,6 +7,7 @@ import { useTextArea } from './useTextArea'
 
 export type TextAreaProps = {
   className?: string
+  counter?: number
   error?: string
   isError?: boolean
   label?: string
@@ -17,6 +18,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
     {
       className,
+      counter,
       disabled,
       error,
       id,
@@ -73,6 +75,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           required={required}
           {...props}
         />
+        {counter && (
+          <span className={'text-xs leading-none text-light-900 text-right'}>0/{counter}</span>
+        )}
         {isError && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
       </div>
     )

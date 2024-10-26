@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Button, Typography } from '@/common/ui'
-import { Post } from '@/entities/posts'
 import { PostComment } from '@/features/comments'
-import { PostDescription } from '@/features/posts'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 

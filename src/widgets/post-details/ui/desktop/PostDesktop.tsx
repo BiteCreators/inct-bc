@@ -1,9 +1,11 @@
 import React from 'react'
 
 import { Close } from '@/common/assets/icons/components'
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
 import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
+import { authSlice } from '@/entities/auth'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
@@ -18,6 +20,8 @@ type Props = {
 }
 
 export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
+  const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+
   return (
     <Modal
       className={cn(['w-full border-x-8 border-dark-900', 'lg-md:border-none'])}
@@ -39,7 +43,12 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
               'md:visible'
             )}
           >
-            <Close className={cn('fill-current text-light-100')} />
+            <Close
+              className={cn(
+                'fill-current bg-dark-100 rounded-full text-light-100',
+                'lg-md:bg-transparent'
+              )}
+            />
           </Dialog.Close>
           <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
             <PostModalTitle post={post} />
@@ -49,7 +58,7 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
               description={<PostDescription post={post} />}
             />
             <PostActionsBlock post={post} />
-            <AddCommentTextarea />
+            {isAuth && <AddCommentTextarea />}
           </div>
         </>
       </div>

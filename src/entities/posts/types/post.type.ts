@@ -22,7 +22,7 @@ type Image = {
   width: number
 }
 
-type Owner = {
+export type Owner = {
   firstName: string
   lastName: string
 }

@@ -10,6 +10,12 @@ type Props = {
 }
 
 export const PostActionsBlock = ({ post }: Props) => {
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(new Date(post.createdAt))
+
   return (
     <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
       <div className={cn(['pt-4 px-0', 'md:px-6'])}>
@@ -26,12 +32,12 @@ export const PostActionsBlock = ({ post }: Props) => {
             <BookmarkOutline viewBox={'0 3 24 24'} />
           </button>
         </div>
-        <div className={'mb-2'}>
+        <div className={'mb-3'}>
           {/*--------LIKES-----------*/}
           <p>Likes</p>
           {/*------------------------*/}
           <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
-            {post.createdAt}
+            {formattedDate}
           </Typography>
         </div>
       </div>
