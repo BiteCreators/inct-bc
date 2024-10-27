@@ -75,7 +75,6 @@ export const ProfileHeader = () => {
         </Typography>
         <AboutUser className={'flex sm:hidden text-left text-sm'} text={aboutUser} />
       </div>
-      <Posts />
     </>
   )
 }
