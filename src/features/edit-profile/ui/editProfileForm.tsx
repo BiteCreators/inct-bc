@@ -5,21 +5,31 @@ import { Button, FormInput, FormSelect, FormTextArea, Loader, SelectItem } from 
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
 import { Select } from '@/common/ui/select/Select'
-import { useCountryCity } from '@/features/profile/model/useSelectCountryCity'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { ProfileAvatar } from './avatar/ProfileAvatar'
 
 export const EditProfileForm = () => {
-  const { control, handleSubmit, isError, isLoading, isShowAlert, isValid, message, onClose, t } =
-    useEditProfileForm()
-  const { checkError, cityOptions, countryOptions, handlerCountry } = useCountryCity()
+  const {
+    checkError,
+    cityOptions,
+    control,
+    countryOptions,
+    handleSubmit,
+    handlerCountry,
+    isError,
+    isLoading,
+    isShowAlert,
+    isValid,
+    message,
+    onClose,
+    profile,
+    t,
+  } = useEditProfileForm()
 
   if (isLoading) {
     return <Loader fullScreen />
   }
-
-  console.log('controlEditForm', control)
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
@@ -30,8 +40,6 @@ export const EditProfileForm = () => {
         <FormInput control={control} label={t.userName} name={'userName'} required />
         <FormInput control={control} label={t.firstName} name={'firstName'} required />
         <FormInput control={control} label={t.lastName} name={'lastName'} required />
-        {/*<FormInput control={control} name={'country'} />*/}
-        {/*<FormInput control={control} name={'city'} />*/}
         <FormDatePicker
           className={'w-full p-[0px] bg-inherit'}
           control={control}
@@ -45,17 +53,19 @@ export const EditProfileForm = () => {
           <div className={'w-full'}>
             {/*<FormSelect*/}
             {/*  control={control}*/}
+            {/*  defaultValue={profile?.country}*/}
             {/*  label={t.selectYourCountry}*/}
-            {/*  name={''}*/}
+            {/*  name={'country'}*/}
             {/*  // onChange={e => console.log('eventChange', e)}*/}
             {/*  // onOpenChange={e => console.log('eventOpen', e)}*/}
             {/*  // onValueChange={e => console.log('eventValue', e)}*/}
             {/*  // placeholder={'test select'}*/}
             {/*>*/}
-            {/*  /!*<SearchableOptions options={countryOptions || []} />*!/*/}
+            {/*  <SearchableOptions options={countryOptions || []} />*/}
             {/*</FormSelect>*/}
             <Controller
               control={control}
+              defaultValue={profile?.country}
               name={'country'}
               render={({ field }) => (
                 <Select
@@ -63,11 +73,12 @@ export const EditProfileForm = () => {
                   error={checkError(countryOptions)}
                   label={t.selectYourCountry}
                   onValueChange={optionValue => {
-                    handlerCountry(optionValue), field.onChange(optionValue)
+                    field.onChange(optionValue)
+                    handlerCountry(optionValue)
                   }}
                   placeholder={t.country}
                 >
-                  <SearchableOptions options={countryOptions || []} />
+                  <SearchableOptions options={countryOptions} />
                 </Select>
               )}
             />
@@ -75,6 +86,7 @@ export const EditProfileForm = () => {
           <div className={'w-full'}>
             <Controller
               control={control}
+              defaultValue={profile?.city}
               name={'city'}
               render={({ field }) => (
                 <Select
@@ -84,7 +96,7 @@ export const EditProfileForm = () => {
                   onValueChange={field.onChange}
                   placeholder={t.city}
                 >
-                  <SearchableOptions options={cityOptions || []} />
+                  <SearchableOptions options={cityOptions} />
                 </Select>
               )}
             />

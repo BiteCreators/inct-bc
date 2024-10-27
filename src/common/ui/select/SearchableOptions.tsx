@@ -1,9 +1,10 @@
 import React from 'react'
 
 import { Input, SelectItem } from '@/common/ui'
+import { Options } from '@/features/profile/model/useSelectCountryCity'
 import { useRouter } from 'next/router'
 
-export const SearchableOptions = ({ options }: { options: string[] }) => {
+export const SearchableOptions = ({ options }: { options: Options[] }) => {
   const [searchValue, setSearchValue] = React.useState<string>('')
   const { locale } = useRouter()
 
@@ -16,10 +17,10 @@ export const SearchableOptions = ({ options }: { options: string[] }) => {
         placeholder={locale === 'en' ? ' Search' : ' Поиск'}
       />
       {options
-        .filter(options => options.toLowerCase().includes(searchValue.toLowerCase()))
+        .filter(option => option.value.toLowerCase().includes(searchValue.toLowerCase()))
         .map(option => (
-          <SelectItem key={option} value={option}>
-            {option}
+          <SelectItem key={option.value} value={option.value}>
+            {option.value}
           </SelectItem>
         ))}
     </>
