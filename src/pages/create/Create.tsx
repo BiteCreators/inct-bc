@@ -1,5 +1,9 @@
-const Create = () => {
-  return <div>Create</div>
-}
+import { CreatePostModal } from '@/features/create-post/ui/CreatePostModal'
 
-export default Create
+export default function Create() {
+  return (
+    <div>
+      <CreatePostModal />
+    </div>
+  )
+}

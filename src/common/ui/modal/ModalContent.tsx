@@ -1,16 +1,28 @@
 import { ReactNode } from 'react'
 
-import { Close } from '@/common/assets/icons/components'
+import { ArrowIosBack, Close } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import * as Dialog from '@radix-ui/react-dialog'
 
+import { Button } from '../button/Button'
+
 type Props = {
   children?: ReactNode
-  mode: 'custom' | 'default' | 'outside'
-  title?: string
+  handleBack?: () => void
+  handleNext?: () => void
+  mode: 'custom' | 'default' | 'outside' | 'withStep'
+  nextButtonTitle?: string
+  title?: ReactNode | string
 }
 
-export const ModalContent = ({ children, mode, title }: Props) => {
+export const ModalContent = ({
+  children,
+  handleBack,
+  handleNext,
+  mode,
+  nextButtonTitle,
+  title,
+}: Props) => {
   return (
     <>
       {mode === 'default' && (
@@ -43,7 +55,35 @@ export const ModalContent = ({ children, mode, title }: Props) => {
         </>
       )}
 
-      {mode === 'custom' && <div className={cn('relative px-4 py-3')}>{children}</div>}
+      {mode === 'withStep' && (
+        <>
+          <div className={'flex justify-between items-center py-3 px-6'}>
+            <div className={'flex-1'}>
+              <Button
+                className={'text-white pl-0 focus:outline-0'}
+                onClick={handleBack}
+                variant={'text'}
+              >
+                <ArrowIosBack />
+              </Button>
+            </div>
+            <div className={'text-xl font-bold flex-1 text-center'}>{title}</div>
+            <div className={'flex-1 text-right'}>
+              <Button
+                className={'font-semibold focus:outline-0'}
+                onClick={handleNext}
+                variant={'text'}
+              >
+                {nextButtonTitle}
+              </Button>
+            </div>
+          </div>
+          <div className={'h-px bg-dark-100 w-full'} />
+          <div>{children}</div>
+        </>
+      )}
+
+      {mode === 'custom' && <div className={cn('relative')}>{children}</div>}
     </>
   )
 }
