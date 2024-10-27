@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { Profile, profileApi } from '@/common/api/profile.api'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useCountryCity } from '@/features/profile/model/useSelectCountryCity'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
@@ -18,7 +19,16 @@ export const useEditProfileForm = () => {
   const [message, setMessage] = useState('') //сообщение в алерте
   const [isShowAlert, setIsShowAlert] = useState(false)
 
-  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile
+  const {
+    checkError,
+    cityOptions,
+    countryData,
+    countryOptions,
+    handlerCountry,
+    isLoadingCountryData,
+  } = useCountryCity()
+
+  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile || isLoadingCountryData
 
   const {
     control,
@@ -31,18 +41,21 @@ export const useEditProfileForm = () => {
   })
 
   useEffect(() => {
-    if (profile) {
+    if (profile && countryData) {
       reset({
         aboutMe: profile.aboutMe || '',
         city: profile.city || '',
         country: profile.country || '',
-        dateOfBirth: profile?.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
+        dateOfBirth: profile.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
         firstName: profile.firstName || '',
         lastName: profile.lastName || '',
         userName: profile.userName || '',
       })
+      if (profile.country) {
+        handlerCountry(profile.country)
+      }
     }
-  }, [profile, reset])
+  }, [profile, reset, countryData])
 
   const onSubmit = async (data: EditProfileFormData) => {
     console.log('formData', data)
@@ -63,8 +76,12 @@ export const useEditProfileForm = () => {
   }
 
   return {
+    checkError,
+    cityOptions,
     control,
+    countryOptions,
     handleSubmit: handleSubmit(onSubmit),
+    handlerCountry,
     isError,
     isLoading,
     isShowAlert,
@@ -73,6 +90,7 @@ export const useEditProfileForm = () => {
     onClose: () => {
       setIsShowAlert(false)
     },
+    profile,
     t,
   }
 }
