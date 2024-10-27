@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export type CountryResponse = {
+export type LocationResponse = {
   continentCode: string
   countryCode: string
   division1Code: string
@@ -22,10 +22,10 @@ type ParentRegions = {
   name: string
 }
 
-type RegionsResponse = {
+type ChildResponse = {
   edges: {
     cursor: string
-    node: CountryResponse
+    node: LocationResponse
   }[]
 }
 
@@ -41,13 +41,13 @@ export const locationApi = createApi({
     },
   }),
   endpoints: builder => ({
-    getCity: builder.query<RegionsResponse, { countryCode: string; lng: string }>({
+    getCity: builder.query<ChildResponse, { countryCode: string; lng: string }>({
       query: ({ countryCode, lng }) => ({
         method: 'GET',
         url: `/regions?countryCode=${countryCode}&type=city&lng=${lng}`,
       }),
     }),
-    getCountry: builder.query<CountryResponse[], { lng: string }>({
+    getCountry: builder.query<LocationResponse[], { lng: string }>({
       query: ({ lng }) => ({
         method: 'GET',
         url: `/countries?lng=${lng}`,
