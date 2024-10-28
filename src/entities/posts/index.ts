@@ -7,6 +7,7 @@ export type {
   Like,
   Likes,
   Params,
+  Post,
   PostLikes,
   Posts,
   PublicPostsRequest,
