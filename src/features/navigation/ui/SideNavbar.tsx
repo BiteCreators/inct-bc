@@ -16,15 +16,30 @@ import {
   TrendingUp,
   TrendingUpOutline,
 } from '@/common/assets/icons/components'
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authSlice } from '@/entities/auth'
 import * as jose from 'jose'
+import { useRouter } from 'next/router'
 
 import { SideNavbarItem } from './SideNavbarItem'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
-  const [cookies] = useCookies(['accessToken'])
-  const { userId } = jose.decodeJwt(cookies.accessToken)
+  const accessToken = useAppSelector(authSlice.selectors.selectAccessToken)
+
+  let userId: number = 0
+
+  if (!accessToken) {
+    return null
+  }
+
+  try {
+    userId = jose.decodeJwt(accessToken)
+  } catch (error) {
+    //TODO: handle error
+    alert(error)
+  }
 
   return (
     <nav className={'flex flex-col gap-[60px]'}>
