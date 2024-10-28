@@ -1,15 +1,26 @@
-import { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+import { Image, postsApi } from '@/entities/posts'
 import * as jose from 'jose'
 import { useRouter } from 'next/router'
 
 export const useCreatePost = () => {
-  const [cookies] = useCookies(['accessToken'])
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
+  const [createPostImage] = postsApi.useCreatePostImageMutation()
+  const [createPost] = postsApi.useCreatePostMutation()
+  const [images, setImages] = useState<Image[]>([])
+
+  const [description, setDescription] = useState<string>('')
+
   const [step, setStep] = useState(1)
+
   const router = useRouter()
+  const [cookies] = useCookies(['accessToken'])
   const { userId } = jose.decodeJwt(cookies.accessToken)
+
+  const slidesUrl = images?.map(el => el.url)
+
   let title
   let nextButtonTitle
 
@@ -26,6 +37,23 @@ export const useCreatePost = () => {
     nextButtonTitle = 'Publish'
   }
 
+  const uploadImageForPost = async (file: File) => {
+    try {
+      const res = await createPostImage({ file })
+
+      if (res.data?.images[0]) {
+        setImages([...images, res.data?.images[0]])
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleFirstImageUpload = (file: File) => {
+    uploadImageForPost(file)
+    handleNext()
+  }
+
   const handleNext = () => {
     setStep(step + 1)
   }
@@ -34,7 +62,21 @@ export const useCreatePost = () => {
     setStep(step - 1)
   }
 
+  const handleDeleteImage = (imageId: string) => {
+    setImages(images.filter(el => el.uploadId !== imageId))
+  }
+
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescription(e.target.value)
+  }
+
   const handlePublish = () => {
+    if (images) {
+      createPost({
+        childrenMetadata: images.map(el => ({ uploadId: el.uploadId })),
+        description,
+      })
+    }
     setStep(1)
     setIsOpenCreatePost(false)
     router.push(`/profile/${userId}`)
@@ -42,12 +84,19 @@ export const useCreatePost = () => {
 
   return {
     handleBack,
+    handleDeleteImage,
+    handleDescriptionChange,
+    handleFirstImageUpload,
     handleNext,
     handlePublish,
+    images,
     isOpenCreatePost,
     nextButtonTitle,
     setIsOpenCreatePost,
+    setStep,
+    slidesUrl,
     step,
     title,
+    uploadImageForPost,
   }
 }

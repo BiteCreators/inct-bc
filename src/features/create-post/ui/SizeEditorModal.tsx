@@ -1,18 +1,36 @@
 import React from 'react'
 
-import exampleImage from '../../../../public/examples/image2.png'
+import { Slider } from '@/common/ui/slider/Slider'
+import { Image } from '@/entities/posts'
+
 import { AspectRatio } from './AspectRatio'
 import { Cropping } from './Cropping'
 import { ImageControl } from './ImagesControl'
 
-export const SizeEditorModal = () => {
+type Props = {
+  handleDeleteImage: (imageId: string) => void
+  images: Image[]
+  slidesUrl: string[]
+  uploadImageForPost: (file: File) => void
+}
+
+export const SizeEditorModal = ({
+  handleDeleteImage,
+  images,
+  slidesUrl,
+  uploadImageForPost,
+}: Props) => {
   return (
-    <div className={'h-[502px] relative'}>
-      <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
+    <div className={'h-auto relative'}>
+      <Slider slidesUrl={slidesUrl} />
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
         <AspectRatio />
         <Cropping />
-        <ImageControl className={'ml-auto'} />
+        <ImageControl
+          handleDeleteImage={handleDeleteImage}
+          images={images}
+          uploadImageForPost={uploadImageForPost}
+        />
       </div>
     </div>
   )
