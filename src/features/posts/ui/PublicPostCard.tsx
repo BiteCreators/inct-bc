@@ -20,7 +20,7 @@ export const PublicPostCard = ({ post }: Props) => {
     <div className={'hover:scale-105 duration-75'}>
       <div className={'cursor-pointer'}>
         {post.images.length === 0 ? (
-          <div className={'flex w-full h-full justify-center items-center'}>
+          <div className={'flex w-full justify-center items-center bg-dark-500 h-[234px]'}>
             <Image />
           </div>
         ) : (
