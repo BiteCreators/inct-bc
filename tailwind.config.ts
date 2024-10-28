@@ -80,6 +80,7 @@ const config: Config = {
     screens: {
       'global-hover': { raw: '(hover: hover)' },
       lg: '976px',
+      'lg-md': '1066px',
       md: '768px',
       'no-hover': { raw: '(hover: none)' },
       sm: '480px',

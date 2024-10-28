@@ -1,11 +1,16 @@
+import { ReactNode } from 'react'
+
 import { HeartOutline } from '@/common/assets/icons/components'
 import { Avatar, Typography } from '@/common/ui'
 
-import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
+import exampleAvatar from '../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
 
-type Props = {}
+type Props = {
+  children?: ReactNode
+  text?: string
+}
 
-export const PostComment = ({}: Props) => {
+export const PostComment = ({ children, text }: Props) => {
   return (
     <div className={'flex mb-4 gap-3 items-start'}>
       <div className={'flex-shrink-0 w-9 h-9 pt-1'}>
@@ -14,9 +19,7 @@ export const PostComment = ({}: Props) => {
       <div className={'flex-1'}>
         <Typography variant={'regular-text'}>
           {<span className={'text-base font-weight600 leading-5'}>URLProfile </span>}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          {children || text}
         </Typography>
         <div className={'mt-1 flex gap-3'}>
           <Typography className={'text-light-900'} variant={'small-text'}>

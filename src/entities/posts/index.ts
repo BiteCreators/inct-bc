@@ -1,4 +1,5 @@
 export { postsApi } from './api/posts.api'
+export type { Post } from './lib/types/post'
 
 export type {
   Avatar,
@@ -7,9 +8,10 @@ export type {
   Like,
   Likes,
   Params,
-  Post,
   PostLikes,
   Posts,
+  PublicPostsRequest,
+  PublicPostsResponse,
   Reaction,
   Response,
   SearchParams,
