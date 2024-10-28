@@ -15,7 +15,7 @@ export const SinglePostPage = ({ post }: Props) => {
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
   return (
-    <div>
+    <div className={'px-[15px] md:pl-6 md:pr-16'}>
       {isLargeScreen && <ProfileHeader />}
       <PostDetails post={post} />
     </div>

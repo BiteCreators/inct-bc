@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { HeartOutline } from '@/common/assets/icons/components'
 import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
 import { Avatar, Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
