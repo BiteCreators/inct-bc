@@ -7,12 +7,7 @@ import { Sidebar } from '@/widgets/sidebar'
 
 export const DefaultLayout = (page: React.ReactElement) => {
   return (
-    <PageLayout
-      footer={<div>footer</div>}
-      header={<Header />}
-      mobileMenu={<MobileAppMenu />}
-      sidebar={<Sidebar />}
-    >
+    <PageLayout header={<Header />} mobileMenu={<MobileAppMenu />} sidebar={<Sidebar />}>
       {page}
     </PageLayout>
   )
