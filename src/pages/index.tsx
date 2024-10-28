@@ -17,7 +17,7 @@ type PublicPostsResponse = {
 export const getStaticProps = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=4`
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=400`
     )
 
     if (!res.ok) {
