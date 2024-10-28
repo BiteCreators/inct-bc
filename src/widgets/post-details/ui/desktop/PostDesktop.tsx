@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Close } from '@/common/assets/icons/components'
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
@@ -21,11 +21,12 @@ type Props = {
 
 export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+  const [close, setClose] = useState(true)
 
   return (
     <Modal
       className={cn(['w-full border-x-8 border-dark-900', 'lg-md:border-none'])}
-      isOpen
+      isOpen={close}
       maxWidth={'max-w-[980px]'}
       mode={'custom'}
     >
@@ -42,6 +43,7 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
               'lg-md:-top-14 lg-md:-right-14',
               'md:visible'
             )}
+            onClick={() => setClose(false)}
           >
             <Close
               className={cn(
