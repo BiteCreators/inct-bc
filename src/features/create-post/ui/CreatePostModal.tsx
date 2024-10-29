@@ -50,7 +50,7 @@ export const CreatePostModal = () => {
           step === 3 || step === 4 ? 'md:max-w-[984px]' : 'md:max-w-[492px]'
         } w-full min-h-64`}
         handleBack={step === 2 ? handleBackAndDelete : handleBack}
-        handleInteractOutside={handleInteractOutside}
+        handleInteractOutside={step !== 1 ? handleInteractOutside : () => {}}
         handleNext={step === 4 ? handlePublish : handleNext}
         isOpen={isOpenCreatePost}
         mode={step === 1 ? 'default' : 'withStep'}
