@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { RefObject } from 'react'
 
 import { Slider } from '@/common/ui/slider/Slider'
 import { Image } from '@/entities/posts'
@@ -8,28 +8,34 @@ import { Cropping } from './Cropping'
 import { ImageControl } from './ImagesControl'
 
 type Props = {
+  fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImage: (imageId: string) => void
+  handleFileSelect: (file: File) => void
   images: Image[]
   slidesUrl: string[]
-  uploadImageForPost: (file: File) => void
+  uploadImage: () => void
 }
 
 export const SizeEditorModal = ({
+  fileInputRef,
   handleDeleteImage,
+  handleFileSelect,
   images,
   slidesUrl,
-  uploadImageForPost,
+  uploadImage,
 }: Props) => {
   return (
-    <div className={'h-auto relative'}>
+    <div className={'min-h-[490px] relative'}>
       <Slider slidesUrl={slidesUrl} />
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
         <AspectRatio />
         <Cropping />
         <ImageControl
+          fileInputRef={fileInputRef}
           handleDeleteImage={handleDeleteImage}
+          handleFileSelect={handleFileSelect}
           images={images}
-          uploadImageForPost={uploadImageForPost}
+          uploadImage={uploadImage}
         />
       </div>
     </div>

@@ -1,34 +1,30 @@
 import React from 'react'
 
-import { Modal } from '@/common/ui'
+import { Alert, Modal } from '@/common/ui'
 
 import { useCreatePost } from '../model/useCreatePost'
-import { useFirstImageUpload } from '../model/useFirstImageUpload'
+import { useImageUpload } from '../model/useImageUpload'
+import { useStepControl } from '../model/useStepControl'
 import { AddPhotoModal } from './AddPhotoModal'
 import { ImageFiltersModal } from './ImageFiltersModal'
 import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
 export const CreatePostModal = () => {
+  const { handleBack, handleNext, nextButtonTitle, setStep, step, title } = useStepControl()
   const {
-    handleBack,
     handleDeleteImage,
     handleDescriptionChange,
-    handleFirstImageUpload,
-    handleNext,
     handlePublish,
     images,
     isOpenCreatePost,
-    nextButtonTitle,
     setIsOpenCreatePost,
     slidesUrl,
-    step,
-    title,
     uploadImageForPost,
-  } = useCreatePost()
+  } = useCreatePost({ handleNext, setStep, step })
 
-  const { fileInputRef, handleFileSelect, uploadImage } =
-    useFirstImageUpload(handleFirstImageUpload)
+  const { error, fileInputRef, handleFileSelect, setError, uploadImage } =
+    useImageUpload(uploadImageForPost)
 
   return (
     <div>
@@ -44,6 +40,15 @@ export const CreatePostModal = () => {
         onOpenChange={setIsOpenCreatePost}
         title={title}
       >
+        {error && (
+          <Alert
+            className={'static left-0 right-0 !mb-0 md:left-4 md:right-4'}
+            message={error}
+            onClose={() => setError('')}
+            purpose={'alert'}
+            type={'error'}
+          />
+        )}
         {step === 1 && (
           <AddPhotoModal
             fileInputRef={fileInputRef}
@@ -53,10 +58,12 @@ export const CreatePostModal = () => {
         )}
         {step === 2 && (
           <SizeEditorModal
+            fileInputRef={fileInputRef}
             handleDeleteImage={handleDeleteImage}
+            handleFileSelect={handleFileSelect}
             images={images}
             slidesUrl={slidesUrl}
-            uploadImageForPost={uploadImageForPost}
+            uploadImage={uploadImage}
           />
         )}
         {step === 3 && <ImageFiltersModal slidesUrl={slidesUrl} />}

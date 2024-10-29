@@ -1,11 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 import { Image, postsApi } from '@/entities/posts'
 import * as jose from 'jose'
 import { useRouter } from 'next/router'
 
-export const useCreatePost = () => {
+export const useCreatePost = ({
+  handleNext,
+  setStep,
+  step,
+}: {
+  handleNext: () => void
+  setStep: (step: number) => void
+  step: number
+}) => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
   const [createPostImage] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
@@ -13,53 +21,27 @@ export const useCreatePost = () => {
 
   const [description, setDescription] = useState<string>('')
 
-  const [step, setStep] = useState(1)
-
   const router = useRouter()
   const [cookies] = useCookies(['accessToken'])
   const { userId } = jose.decodeJwt(cookies.accessToken)
 
   const slidesUrl = images?.map(el => el.url)
 
-  let title
-  let nextButtonTitle
+  const uploadImageForPost = async (file: File | null) => {
+    if (file) {
+      try {
+        const res = await createPostImage({ file })
 
-  if (step === 1) {
-    title = 'Add Photo'
-  } else if (step === 2) {
-    title = 'Cropping'
-    nextButtonTitle = 'Next'
-  } else if (step === 3) {
-    title = 'Filters'
-    nextButtonTitle = 'Next'
-  } else {
-    title = 'Publication'
-    nextButtonTitle = 'Publish'
-  }
-
-  const uploadImageForPost = async (file: File) => {
-    try {
-      const res = await createPostImage({ file })
-
-      if (res.data?.images[0]) {
-        setImages([...images, res.data?.images[0]])
+        if (res.data?.images[0]) {
+          setImages([...images, res.data?.images[0]])
+          if (images.length === 0) {
+            handleNext()
+          }
+        }
+      } catch (error) {
+        console.log(error)
       }
-    } catch (error) {
-      console.log(error)
     }
-  }
-
-  const handleFirstImageUpload = (file: File) => {
-    uploadImageForPost(file)
-    handleNext()
-  }
-
-  const handleNext = () => {
-    setStep(step + 1)
-  }
-
-  const handleBack = () => {
-    setStep(step - 1)
   }
 
   const handleDeleteImage = (imageId: string) => {
@@ -82,21 +64,23 @@ export const useCreatePost = () => {
     router.push(`/profile/${userId}`)
   }
 
+  useEffect(() => {
+    if (images.length === 0) {
+      setStep(1)
+    }
+    if (step === 1) {
+      setImages([])
+    }
+  }, [images, step, setStep])
+
   return {
-    handleBack,
     handleDeleteImage,
     handleDescriptionChange,
-    handleFirstImageUpload,
-    handleNext,
     handlePublish,
     images,
     isOpenCreatePost,
-    nextButtonTitle,
     setIsOpenCreatePost,
-    setStep,
     slidesUrl,
-    step,
-    title,
     uploadImageForPost,
   }
 }

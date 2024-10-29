@@ -1,25 +1,22 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-export const useFirstImageUpload = (onUploadSuccess: (file: File) => void) => {
+import { format } from 'path'
+
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+
+export const useImageUpload = (uploadImageForPost: (file: File | null) => Promise<void>) => {
   const [error, setError] = useState('')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const t = useScopedTranslation('Profile')
 
   const handleFileSelect = (file: File) => {
     setError('')
 
     const validFormats = ['image/jpeg', 'image/png']
-
-    if (!validFormats.includes(file.type)) {
-      setError('формат фото не тот')
-      resetFileInput()
-
-      return
-    }
-
     const maxSizeInB = 20000000
 
-    if (file.size > maxSizeInB) {
-      setError('size photo big')
+    if (!validFormats.includes(file.type) || file.size > maxSizeInB) {
+      setError('The photo must be less than 20 Mb and have JPEG or PNG format')
       resetFileInput()
 
       return
@@ -33,18 +30,9 @@ export const useFirstImageUpload = (onUploadSuccess: (file: File) => void) => {
 
       imageElement.src = url
 
-      const onLoadHandler = (e: any) => {
-        const { naturalHeight, naturalWidth } = e.currentTarget
-
-        if (naturalHeight < 150 || naturalWidth < 150) {
-          setError('photo small')
-          resetFileInput()
-
-          return
-        }
-
+      const onLoadHandler = () => {
         setError('')
-        onUploadSuccess(file)
+        uploadImageForPost(file)
         imageElement.removeEventListener('load', onLoadHandler)
       }
 

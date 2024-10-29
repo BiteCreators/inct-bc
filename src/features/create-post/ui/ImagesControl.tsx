@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef } from 'react'
+import React, { RefObject } from 'react'
 
 import {
   CloseOutlineSmall,
@@ -7,29 +7,27 @@ import {
   PlusCircleOutlineBig,
 } from '@/common/assets/icons/components'
 import { Button } from '@/common/ui'
+import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 import { Image } from '@/entities/posts'
 
 import { useImageControl } from '../model/useImageControl'
 
 type Props = {
+  fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImage: (imageId: string) => void
+  handleFileSelect: (file: File) => void
   images: Image[]
-  uploadImageForPost: (file: File) => void
+  uploadImage: () => void
 }
 
-export const ImageControl = ({ handleDeleteImage, images, uploadImageForPost }: Props) => {
+export const ImageControl = ({
+  fileInputRef,
+  handleDeleteImage,
+  handleFileSelect,
+  images,
+  uploadImage,
+}: Props) => {
   const { imagesControlRef, isImagesControlOpen, setIsImagesControlOpen } = useImageControl()
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const handleButtonClick = () => {
-    fileInputRef.current?.click()
-  }
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.currentTarget.files?.[0]
-
-    if (file) {
-      uploadImageForPost(file)
-    }
-  }
 
   return (
     <div className={'relative ml-auto'} ref={imagesControlRef}>
@@ -62,15 +60,11 @@ export const ImageControl = ({ handleDeleteImage, images, uploadImageForPost }: 
             ))}
           </ul>
 
-          <button onClick={handleButtonClick}>
-            <PlusCircleOutlineBig />
-          </button>
-          <input
-            className={'hidden'}
-            onChange={handleFileChange}
-            ref={fileInputRef}
-            type={'file'}
-          />
+          <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
+            <button onClick={uploadImage}>
+              <PlusCircleOutlineBig />
+            </button>
+          </DragAndDropInput>
         </div>
       )}
     </div>
