@@ -5,6 +5,7 @@ import React from 'react'
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
 import { Providers } from '@/app/providers'
 import { wrapper } from '@/app/store'
+import { inter } from '@/fonts/fonts'
 import { NextPage } from 'next'
 
 import '@/app/styles/globals.css'
@@ -22,5 +23,9 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   const { props, store } = wrapper.useWrappedStore(rest)
 
-  return <Providers store={store}>{getLayout(<Component {...props.pageProps} />)}</Providers>
+  return (
+    <Providers store={store}>
+      <div className={inter.className}>{getLayout(<Component {...props.pageProps} />)}</div>
+    </Providers>
+  )
 }
