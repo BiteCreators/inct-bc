@@ -33,9 +33,9 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
     dispatch(changeStatusLoading(true))
     await updatePost({ description: value, postId })
     await refreshData()
-    dispatch(changeStatusLoading(false))
 
     changeEditMode(false)
+    dispatch(changeStatusLoading(false))
   }
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
