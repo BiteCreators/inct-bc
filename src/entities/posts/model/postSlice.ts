@@ -9,7 +9,6 @@ export const postSlice = createSlice({
   name: 'postSlice',
   reducers: {
     changeStatusLoading: (state, action: PayloadAction<boolean>) => {
-      debugger
       state.isLoading = action.payload
     },
   },

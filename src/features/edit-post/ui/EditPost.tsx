@@ -1,9 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-import { RootState } from '@/app/store'
 import { Button, Loader, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { Slider } from '@/common/ui/slider/Slider'
 import { Post } from '@/entities/posts/types/post.type'
 import { UserProfile } from '@/entities/profile'
@@ -50,7 +49,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
         onOpenChange={changeModalState}
         title={'Edit post'}
       >
-        {isLoading && <Loader />}
+        {isLoading && <LoaderBlock />}
         <div className={'w-[920px] h-[460px] flex flex-row'}>
           <div className={'w-1/2 h-full bg-amber-200'}>
             <Slider
