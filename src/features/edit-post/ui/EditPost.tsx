@@ -1,27 +1,22 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-import { Button, Modal, TextArea } from '@/common/ui'
+import { RootState } from '@/app/store'
+import { Button, Loader, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { Slider } from '@/common/ui/slider/Slider'
+import { Post } from '@/entities/posts/types/post.type'
 import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/edit-post/model/useEditPost'
 
 type Props = {
-  avatarUrl?: string
-  changeOpen: (e: boolean) => void
+  changeEditMode: (e: boolean) => void
   isOpen: boolean
-  postText?: string
-  profileId?: number
-  userName?: string
+  post: Post
+  slidesUrl: string[]
 }
 
-export const EditPost = ({
-  avatarUrl = 'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png',
-  changeOpen,
-  isOpen,
-  postText = 'text text text',
-  profileId = 1111,
-  userName = 'default',
-}: Props) => {
+export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => {
   const {
     changeModalState,
     confirmOpen,
@@ -29,11 +24,12 @@ export const EditPost = ({
     handleChange,
     handleConfirm,
     handleReject,
+    isLoading,
     limit,
     saveChanges,
     setConfirmOpen,
     value,
-  } = useEditPost({ changeOpen, postText })
+  } = useEditPost({ changeEditMode, postText: post?.description })
 
   return (
     <>
@@ -54,21 +50,22 @@ export const EditPost = ({
         onOpenChange={changeModalState}
         title={'Edit post'}
       >
-        <div className={'w-[920px] h-[465px] flex flex-row'}>
+        {isLoading && <Loader />}
+        <div className={'w-[920px] h-[460px] flex flex-row'}>
           <div className={'w-1/2 h-full bg-amber-200'}>
-            <img
-              alt={'img'}
-              className={'w-full h-full object-cover '}
-              src={'https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png'}
+            <Slider
+              height={'full'}
+              slidesUrl={slidesUrl}
+              stylesSlider={'max-w-[500px] min-w-[390px]'}
             />
           </div>
           <div className={'w-1/2 h-full pl-4'}>
             <div className={'flex w-full h-1/3 flex-col '}>
               <div className={'flex w-full justify-start items-center gap-5 mb-6'}>
                 <UserProfile
-                  avatarUrl={avatarUrl ?? undefined}
-                  profileId={profileId}
-                  userName={userName}
+                  avatarUrl={post.avatarOwner ?? undefined}
+                  profileId={post?.id}
+                  userName={post?.userName}
                 />
               </div>
               <TextArea
