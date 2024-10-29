@@ -22,7 +22,6 @@ export const ProfileHeader = () => {
   const router = useRouter()
   const locale = router.locale === 'en' ? 'en' : 'ru'
   const t = useScopedTranslation('Profile')
-  const [editMode, setEditMode] = useState(false)
   const tNav = useScopedTranslation('Navigation')
 
   return (
@@ -47,7 +46,6 @@ export const ProfileHeader = () => {
             >
               {username}
             </Typography>
-            <EditPost changeOpen={setEditMode} isOpen={editMode} />
             <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
               <Link href={`/profile/${id}/settings`}>{tNav.profileSettings}</Link>
             </Button>

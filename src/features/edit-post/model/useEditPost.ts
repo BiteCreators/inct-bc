@@ -1,32 +1,48 @@
+import { useDispatch, useSelector } from 'react-redux'
+
+import { RootState } from '@/app/store'
 import { postsApi } from '@/common/api/posts.api'
 import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
+import { changeStatusLoading } from '@/entities/posts/model/postSlice'
 import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 type editPost = {
-  changeOpen: (e: boolean) => void
+  changeEditMode: (e: boolean) => void
   postText: string
 }
-export const useEditPost = ({ changeOpen, postText }: editPost) => {
+export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   const params = useParams()
-  const postId = Number(params?.id) ?? null
-
+  const dispatch = useDispatch()
+  const postId = Number(params?.postId) ?? null
+  const router = useRouter()
+  const isLoading = useSelector((state: RootState) => state.post.isLoading)
   const [updatePost] = postsApi.useUpdatePostMutation()
+  const refreshData = async () => {
+    await router.replace(router.asPath)
+    // dispatch()
+  }
 
   const { correct, handleChange, limit, setValue, value } = useValidationLimit({
     limit: 500,
     startText: postText,
   })
-  const saveChanges = () => {
-    updatePost({ description: value, postId })
-    changeOpen(false)
+
+  const saveChanges = async () => {
+    dispatch(changeStatusLoading(true))
+    await updatePost({ description: value, postId })
+    await refreshData()
+    dispatch(changeStatusLoading(false))
+
+    changeEditMode(false)
   }
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
 
   const changeModalState = async () => {
     if (value === postText) {
-      changeOpen(false)
+      changeEditMode(false)
 
       return
     }
@@ -34,7 +50,7 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
     const isConfirmed = await requestConfirmation()
 
     isConfirmed && setValue(postText)
-    changeOpen(!isConfirmed)
+    changeEditMode(!isConfirmed)
     setConfirmOpen(false)
   }
 
@@ -45,6 +61,7 @@ export const useEditPost = ({ changeOpen, postText }: editPost) => {
     handleChange,
     handleConfirm,
     handleReject,
+    isLoading,
     limit,
     saveChanges,
     setConfirmOpen,

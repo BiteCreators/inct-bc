@@ -1,20 +1,22 @@
 import React from 'react'
 
-import { PersonAdd, PersonAddOutline, PersonRemoveOutline } from '@/common/assets/icons/components'
+import { PersonAddOutline, PersonRemoveOutline } from '@/common/assets/icons/components'
 import { Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import { Post } from '@/entities/posts'
 import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 import { CopyIcon, EditIcon, TrashIcon } from '@storybook/icons'
 
 type Props = {
+  changeEditMode: (e: boolean) => void
   className?: string
-  follow?: boolean
   isMyPost: boolean
-  setEditMode: (mode: boolean) => void
+  post: Post
 }
-export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props) => {
+export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Props) => {
   const forDrop: DropdownItem[] = []
+  const isFollow = false
   const {
     confirmOpen,
     copyLinkHandler,
@@ -30,13 +32,13 @@ export const DropdownPost = ({ className, follow, isMyPost, setEditMode }: Props
         icon: <EditIcon />,
         label: 'Edit post',
         onClick: () => {
-          setEditMode(true)
+          changeEditMode(true)
         },
       },
       { icon: <TrashIcon />, label: 'Delete post', onClick: deletePostHandler }
     )
   } else {
-    if (follow) {
+    if (isFollow) {
       forDrop.push({
         icon: <PersonRemoveOutline />,
         label: 'Unfollow',
