@@ -28,7 +28,7 @@ export const SizeEditorModal = ({
 }: Props) => {
   return (
     <div className={'min-h-[490px] relative'}>
-      <Slider slidesUrl={slidesUrl} />
+      <Slider duration={0} slidesUrl={slidesUrl} />
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
         <AspectRatio />
         <Cropping />

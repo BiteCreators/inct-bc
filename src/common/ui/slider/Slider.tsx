@@ -31,7 +31,7 @@ export const Slider = ({ duration = 4000, height = '560', slidesUrl, stylesSlide
         return () => clearInterval(interval)
       }
     }
-  }, [isPaused])
+  }, [isPaused, duration])
 
   const stylesBtn =
     'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 p-3 cursor-pointer duration-300 ease-in-out md:block hidden hover:bg-gray-700 hover:opacity-85'
@@ -70,7 +70,9 @@ export const Slider = ({ duration = 4000, height = '560', slidesUrl, stylesSlide
       >
         {slidesUrl.map((_, i) => (
           <button
-            className={`w-2 h-2 rounded-full ${i === currentIndex ? 'bg-primary-500' : 'bg-light-100'} hover:bg-primary-500`}
+            className={`w-2 h-2 rounded-full ${
+              i === currentIndex ? 'bg-primary-500' : 'bg-light-100'
+            } hover:bg-primary-500`}
             key={i}
             onClick={() => goToSlide(i)}
           />

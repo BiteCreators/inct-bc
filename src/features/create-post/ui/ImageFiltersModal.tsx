@@ -25,7 +25,7 @@ export const ImageFiltersModal = ({ slidesUrl }: Props) => {
   return (
     <div className={'flex'}>
       <div className={'w-1/2'}>
-        <Slider slidesUrl={slidesUrl} />
+        <Slider duration={0} slidesUrl={slidesUrl} />
       </div>
       <div className={'w-1/2 grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>
         {nameFilters.map((el, index) => (

@@ -68,7 +68,6 @@ export const useCreatePost = ({
     } catch (error) {
       /* empty */
     }
-    await router.push(`/profile/${userId}`)
   }
 
   const handleInteractOutside = (e: any) => {
@@ -79,7 +78,6 @@ export const useCreatePost = ({
   const handleConfirm = async () => {
     setIsOpenCreatePost(false)
     setImages([])
-    await router.push(`/profile/${userId}`)
   }
 
   const handleBackWithoutSave = () => {
@@ -87,6 +85,9 @@ export const useCreatePost = ({
   }
 
   useEffect(() => {
+    if (!isOpenCreatePost) {
+      router.push(`/profile/${userId}`)
+    }
     if (images.length === 0) {
       setStep(1)
     }
@@ -96,10 +97,7 @@ export const useCreatePost = ({
     if (images.length >= 9) {
       setIsDisableInput(true)
     }
-    if (step === 1) {
-      setImages([])
-    }
-  }, [images, step, setStep])
+  }, [images, setStep, isOpenCreatePost, router, userId])
 
   return {
     handleBackAndDelete: handleBackWithoutSave,

@@ -15,7 +15,7 @@ export const PublicationModal = ({ handleDescriptionChange, slidesUrl }: Props) 
   return (
     <div className={'flex'}>
       <div className={'w-1/2'}>
-        <Slider slidesUrl={slidesUrl} />
+        <Slider duration={0} slidesUrl={slidesUrl} />
       </div>
       <div className={'w-1/2 p-6'}>
         <UserProfileUrl className={'mb-6'} />
