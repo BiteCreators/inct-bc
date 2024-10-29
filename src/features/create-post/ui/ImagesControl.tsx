@@ -17,6 +17,7 @@ type Props = {
   handleDeleteImage: (imageId: string) => void
   handleFileSelect: (file: File) => void
   images: Image[]
+  isDisableInput: boolean
   uploadImage: () => void
 }
 
@@ -25,6 +26,7 @@ export const ImageControl = ({
   handleDeleteImage,
   handleFileSelect,
   images,
+  isDisableInput,
   uploadImage,
 }: Props) => {
   const { imagesControlRef, isImagesControlOpen, setIsImagesControlOpen } = useImageControl()
@@ -61,7 +63,7 @@ export const ImageControl = ({
           </ul>
 
           <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
-            <button onClick={uploadImage}>
+            <button disabled={isDisableInput} onClick={uploadImage}>
               <PlusCircleOutlineBig />
             </button>
           </DragAndDropInput>

@@ -12,6 +12,7 @@ type Props = {
   handleDeleteImage: (imageId: string) => void
   handleFileSelect: (file: File) => void
   images: Image[]
+  isDisableInput: boolean
   slidesUrl: string[]
   uploadImage: () => void
 }
@@ -21,6 +22,7 @@ export const SizeEditorModal = ({
   handleDeleteImage,
   handleFileSelect,
   images,
+  isDisableInput,
   slidesUrl,
   uploadImage,
 }: Props) => {
@@ -35,6 +37,7 @@ export const SizeEditorModal = ({
           handleDeleteImage={handleDeleteImage}
           handleFileSelect={handleFileSelect}
           images={images}
+          isDisableInput={isDisableInput}
           uploadImage={uploadImage}
         />
       </div>

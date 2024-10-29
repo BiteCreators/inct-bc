@@ -10,11 +10,14 @@ export const useCreatePost = ({
   setStep,
   step,
 }: {
+  handleBack: () => void
   handleNext: () => void
   setStep: (step: number) => void
   step: number
 }) => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
+  const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
+  const [isDisableInput, setIsDisableInput] = useState(false)
   const [createPostImage] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
   const [images, setImages] = useState<Image[]>([])
@@ -39,7 +42,7 @@ export const useCreatePost = ({
           }
         }
       } catch (error) {
-        console.log(error)
+        /* empty */
       }
     }
   }
@@ -52,21 +55,46 @@ export const useCreatePost = ({
     setDescription(e.target.value)
   }
 
-  const handlePublish = () => {
-    if (images) {
-      createPost({
-        childrenMetadata: images.map(el => ({ uploadId: el.uploadId })),
-        description,
-      })
+  const handlePublish = async () => {
+    try {
+      if (images && images.length < 10) {
+        await createPost({
+          childrenMetadata: images.map(el => ({ uploadId: el.uploadId })),
+          description,
+        })
+        setStep(1)
+        setIsOpenCreatePost(false)
+      }
+    } catch (error) {
+      /* empty */
     }
-    setStep(1)
+    await router.push(`/profile/${userId}`)
+  }
+
+  const handleInteractOutside = (e: any) => {
+    e.preventDefault()
+    setIsOpenActionConfirmation(true)
+  }
+
+  const handleConfirm = async () => {
     setIsOpenCreatePost(false)
-    router.push(`/profile/${userId}`)
+    setImages([])
+    await router.push(`/profile/${userId}`)
+  }
+
+  const handleBackWithoutSave = () => {
+    setIsOpenActionConfirmation(true)
   }
 
   useEffect(() => {
     if (images.length === 0) {
       setStep(1)
+    }
+    if (images.length < 9) {
+      setIsDisableInput(false)
+    }
+    if (images.length >= 9) {
+      setIsDisableInput(true)
     }
     if (step === 1) {
       setImages([])
@@ -74,11 +102,17 @@ export const useCreatePost = ({
   }, [images, step, setStep])
 
   return {
+    handleBackAndDelete: handleBackWithoutSave,
+    handleConfirm,
     handleDeleteImage,
     handleDescriptionChange,
+    handleInteractOutside,
     handlePublish,
     images,
+    isDisableInput,
+    isOpenActionConfirmation,
     isOpenCreatePost,
+    setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     slidesUrl,
     uploadImageForPost,
