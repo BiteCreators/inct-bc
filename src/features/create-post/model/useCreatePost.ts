@@ -8,9 +8,7 @@ import { useRouter } from 'next/router'
 export const useCreatePost = ({
   handleNext,
   setStep,
-  step,
 }: {
-  handleBack: () => void
   handleNext: () => void
   setStep: (step: number) => void
   step: number

@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
-
-import { format } from 'path'
+import { useRef, useState } from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 

@@ -28,7 +28,7 @@ export const CreatePostModal = () => {
     setIsOpenCreatePost,
     slidesUrl,
     uploadImageForPost,
-  } = useCreatePost({ handleBack, handleNext, setStep, step })
+  } = useCreatePost({ handleNext, setStep, step })
 
   const { error, fileInputRef, handleFileSelect, setError, uploadImage } =
     useImageUpload(uploadImageForPost)
