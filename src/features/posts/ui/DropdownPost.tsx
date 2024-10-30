@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PersonAddOutline, PersonRemoveOutline } from '@/common/assets/icons/components'
-import { Dropdown } from '@/common/ui'
+import { Alert, Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { Post } from '@/entities/posts'
@@ -18,6 +18,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
   const forDrop: DropdownItem[] = []
   const isFollow = false
   const {
+    apiError,
     confirmOpen,
     copyLinkHandler,
     deletePostHandler,
@@ -69,6 +70,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
         title={'Delete Post'}
       />
       <Dropdown className={className} items={forDrop} />
+      {<Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />}
     </>
   )
 }
