@@ -3,12 +3,16 @@ import { useEffect, useState } from 'react'
 import { Loader } from '@/common/ui'
 import { postsApi } from '@/entities/posts'
 
-export const Posts = () => {
+type Props = {
+  userId: number
+}
+
+export const Posts = ({ userId }: Props) => {
   const [pageSize, setPageSize] = useState(8)
 
   const { data, isFetching, isLoading } = postsApi.useGetPublicPostsByUserIdQuery({
     pageSize,
-    userId: 1565, // userId получать в props
+    userId: userId,
   })
 
   useEffect(() => {
