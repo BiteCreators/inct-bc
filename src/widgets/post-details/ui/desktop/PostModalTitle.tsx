@@ -24,12 +24,7 @@ export const PostModalTitle = ({ changeEditMode, post }: Props) => {
           </div>
           <Typography variant={'h2'}>{post.userName}</Typography>
         </div>
-        <DropdownPost
-          changeEditMode={changeEditMode}
-          className={'z-50'}
-          isMyPost={isMyPost}
-          post={post}
-        />
+        <DropdownPost changeEditMode={changeEditMode} className={'z-50'} isMyPost post={post} />
       </div>
     </Dialog.Title>
   )

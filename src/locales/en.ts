@@ -13,6 +13,7 @@ export const en = {
   Devices: devicesTranslationsEn,
   Internationalization: internationalizationTranslationEn,
   Navigation: navigationTranslationEn,
+  Posts: {},
   PrivacyPolicy: privacyPolicyTranslationEn,
   Profile: profileTranslationEn,
   TermsService: termsServiceTranslationEn,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Loader, Modal, TextArea } from '@/common/ui'
+import { Alert, Button, Loader, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { Slider } from '@/common/ui/slider/Slider'
@@ -17,6 +17,7 @@ type Props = {
 
 export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => {
   const {
+    apiError,
     changeModalState,
     confirmOpen,
     correct,
@@ -42,6 +43,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
         setIsOpen={setConfirmOpen}
         title={'Close Post'}
       />
+      {<Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />}
       <Modal
         className={'h-[565px] max-w-[960px]'}
         isOpen={isOpen}
