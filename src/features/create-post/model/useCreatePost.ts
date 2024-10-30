@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { Image, postsApi } from '@/entities/posts'
 import * as jose from 'jose'
 import { useRouter } from 'next/router'
@@ -18,7 +19,11 @@ export const useCreatePost = ({
   const [isDisableInput, setIsDisableInput] = useState(false)
   const [createPostImage] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
+  const [deletePostImage] = postsApi.useDeletePostImageMutation()
   const [images, setImages] = useState<Image[]>([])
+
+  const [apiError, setApiError] = useState<string>('')
+  const { handleApiError } = useHandleApiError('Profile')
 
   const [description, setDescription] = useState<string>('')
 
@@ -40,13 +45,14 @@ export const useCreatePost = ({
           }
         }
       } catch (error) {
-        /* empty */
+        handleApiError({ error, setApiError })
       }
     }
   }
 
   const handleDeleteImage = (imageId: string) => {
     setImages(images.filter(el => el.uploadId !== imageId))
+    deletePostImage({ uploadId: imageId })
   }
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -64,7 +70,7 @@ export const useCreatePost = ({
         setIsOpenCreatePost(false)
       }
     } catch (error) {
-      /* empty */
+      handleApiError({ error, setApiError })
     }
   }
 
@@ -73,9 +79,12 @@ export const useCreatePost = ({
     setIsOpenActionConfirmation(true)
   }
 
-  const handleConfirm = async () => {
+  const handleConfirm = () => {
     setIsOpenCreatePost(false)
     setImages([])
+    images.forEach(el => {
+      deletePostImage({ uploadId: el.uploadId })
+    })
   }
 
   const handleBackWithoutSave = () => {
@@ -98,7 +107,8 @@ export const useCreatePost = ({
   }, [images, setStep, isOpenCreatePost, router, userId])
 
   return {
-    handleBackAndDelete: handleBackWithoutSave,
+    apiError,
+    handleBackWithoutSave,
     handleConfirm,
     handleDeleteImage,
     handleDescriptionChange,
@@ -108,6 +118,7 @@ export const useCreatePost = ({
     isDisableInput,
     isOpenActionConfirmation,
     isOpenCreatePost,
+    setApiError,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     slidesUrl,

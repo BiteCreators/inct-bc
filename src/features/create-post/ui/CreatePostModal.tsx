@@ -14,7 +14,8 @@ import { SizeEditorModal } from './SizeEditorModal'
 export const CreatePostModal = () => {
   const { handleBack, handleNext, nextButtonTitle, setStep, step, title } = useStepControl()
   const {
-    handleBackAndDelete,
+    apiError,
+    handleBackWithoutSave,
     handleConfirm,
     handleDeleteImage,
     handleDescriptionChange,
@@ -24,6 +25,7 @@ export const CreatePostModal = () => {
     isDisableInput,
     isOpenActionConfirmation,
     isOpenCreatePost,
+    setApiError,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     slidesUrl,
@@ -49,7 +51,7 @@ export const CreatePostModal = () => {
         className={`max-w-[330px] ${
           step === 3 || step === 4 ? 'md:max-w-[984px]' : 'md:max-w-[492px]'
         } w-full min-h-64`}
-        handleBack={step === 2 ? handleBackAndDelete : handleBack}
+        handleBack={step === 2 ? handleBackWithoutSave : handleBack}
         handleInteractOutside={step !== 1 ? handleInteractOutside : () => {}}
         handleNext={step === 4 ? handlePublish : handleNext}
         isOpen={isOpenCreatePost}
@@ -58,7 +60,7 @@ export const CreatePostModal = () => {
         onOpenChange={setIsOpenCreatePost}
         title={title}
       >
-        {error && (
+        {(error || apiError) && (
           <Alert
             className={'static left-0 right-0 !mb-0 md:left-4 md:right-4'}
             message={error}
