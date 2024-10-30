@@ -1,10 +1,15 @@
 import React from 'react'
 
 import { Typography } from '@/common/ui'
+import { Slider } from '@/common/ui/slider/Slider'
 
 import exampleImage from '../../../../public/examples/image2.png'
 
-export const ImageFiltersModal = () => {
+type Props = {
+  slidesUrl: string[]
+}
+
+export const ImageFiltersModal = ({ slidesUrl }: Props) => {
   const nameFilters = [
     'Normal',
     'Clarendon',
@@ -18,9 +23,9 @@ export const ImageFiltersModal = () => {
   ]
 
   return (
-    <div className={'h-[504px] flex'}>
+    <div className={'flex'}>
       <div className={'w-1/2'}>
-        <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
+        <Slider duration={0} slidesUrl={slidesUrl} />
       </div>
       <div className={'w-1/2 grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>
         {nameFilters.map((el, index) => (

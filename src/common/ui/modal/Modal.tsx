@@ -9,6 +9,7 @@ type Props = {
   children: ReactNode
   className?: string
   handleBack?: () => void
+  handleInteractOutside?: (e: any) => void
   handleNext?: () => void
   isOpen: boolean
   maxWidth?: string
@@ -22,6 +23,7 @@ export const Modal = ({
   children,
   className,
   handleBack,
+  handleInteractOutside,
   handleNext,
   isOpen,
   maxWidth,
@@ -40,6 +42,7 @@ export const Modal = ({
           maxWidth ? maxWidth : 'max-w-[480px]',
           className
         )}
+        onInteractOutside={handleInteractOutside}
       >
         <ModalContent
           handleBack={handleBack}
