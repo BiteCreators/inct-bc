@@ -10,6 +10,7 @@ import { Post } from '@/entities/posts'
 import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
+import { useRouter } from 'next/router'
 
 import { PostModalTitle } from './PostModalTitle'
 
@@ -20,32 +21,47 @@ type Props = {
 }
 
 export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
+  const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+  const postWithPic = post.images.length !== 0
+
+  const handleOpenChange = () => {
+    router.back()
+  }
 
   return (
     <Modal
-      className={cn(['w-full border-x-8 border-dark-900', 'lg-md:border-none'])}
+      className={cn([
+        'w-full border-x-8',
+        postWithPic ? 'border-dark-900' : 'border-none',
+        'lg-md:border-none',
+      ])}
       isOpen
-      maxWidth={'max-w-[980px]'}
+      maxWidth={postWithPic ? 'max-w-[980px]' : ''}
       mode={'custom'}
+      onOpenChange={handleOpenChange}
     >
       <div className={cn(['flex flex-row'])}>
-        <Slider
-          height={'full'}
-          slidesUrl={slidesUrl}
-          stylesSlider={'max-w-[500px] min-w-[390px]'}
-        />
+        {postWithPic && (
+          <Slider
+            height={'full'}
+            slidesUrl={slidesUrl}
+            stylesSlider={'max-w-[500px] min-w-[390px]'}
+          />
+        )}
         <>
           <Dialog.Close
             className={cn(
-              'absolute m-5 focus:outline-none cursor-pointer invisible',
-              'lg-md:-top-14 lg-md:-right-14',
-              'md:visible'
+              'absolute m-5 focus:outline-none cursor-pointer',
+              postWithPic
+                ? 'invisible lg-md:-top-14 lg-md:-right-14 md:visible'
+                : '-top-14 -right-14'
             )}
           >
             <Close
               className={cn(
-                'fill-current bg-dark-100 rounded-full text-light-100',
+                'fill-current rounded-full text-light-100',
+                postWithPic && 'bg-dark-100',
                 'lg-md:bg-transparent'
               )}
             />

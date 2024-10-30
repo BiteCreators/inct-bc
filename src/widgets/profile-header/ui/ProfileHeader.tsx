@@ -1,5 +1,6 @@
 import { useScopedTranslation, useTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
+import { Posts } from '@/features/posts/ui/Posts'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'

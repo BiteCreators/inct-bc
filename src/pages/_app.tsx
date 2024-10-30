@@ -1,13 +1,11 @@
 import type { AppProps } from 'next/app'
 
 import React from 'react'
-import { Provider } from 'react-redux'
 
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
-import { AuthProvider } from '@/app/providers/AuthProvider'
-import { persistedStore, wrapper } from '@/app/store'
+import { Providers } from '@/app/providers'
+import { wrapper } from '@/app/store'
 import { NextPage } from 'next'
-import { PersistGate } from 'redux-persist/integration/react'
 
 import '@/app/styles/globals.css'
 
@@ -24,11 +22,5 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   const { props, store } = wrapper.useWrappedStore(rest)
 
-  return (
-    <Provider store={store}>
-      <PersistGate persistor={persistedStore}>
-        <AuthProvider>{getLayout(<Component {...props.pageProps} />)}</AuthProvider>
-      </PersistGate>
-    </Provider>
-  )
+  return <Providers store={store}>{getLayout(<Component {...props.pageProps} />)}</Providers>
 }

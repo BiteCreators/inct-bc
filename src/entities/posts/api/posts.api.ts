@@ -7,6 +7,8 @@ import {
   Post,
   PostLikes,
   Posts,
+  PublicPostsRequest,
+  PublicPostsResponse,
   Reaction,
   SearchParams,
 } from '../types/posts.type'
@@ -14,6 +16,7 @@ import {
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     createPost: builder.mutation<Post, CreatePostBody>({
+      invalidatesTags: ['Post'],
       query: body => ({
         body,
         method: 'POST',
@@ -21,6 +24,7 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
     }),
     createPostImage: builder.mutation<{ images: Image[] }, { file: File }>({
+      invalidatesTags: ['Post'],
       query: ({ file }) => {
         const formData = new FormData()
 
@@ -34,12 +38,14 @@ export const postsApi = inctagramApi.injectEndpoints({
       },
     }),
     deletePost: builder.mutation<void, { postId: number }>({
+      invalidatesTags: ['Post'],
       query: ({ postId }) => ({
         method: 'DELETE',
         url: `v1/posts/${postId}`,
       }),
     }),
     deletePostImage: builder.mutation<void, { uploadId: string }>({
+      invalidatesTags: ['Post'],
       query: ({ uploadId }) => ({
         method: 'DELETE',
         url: `v1/posts/image/${uploadId}`,
@@ -56,12 +62,24 @@ export const postsApi = inctagramApi.injectEndpoints({
       },
     }),
     getPosts: builder.query<Posts, { userName: string } & Params>({
+      providesTags: ['Post'],
       query: data => {
         const { userName, ...params } = data
 
         return {
           params,
           url: `v1/posts/${userName}`,
+        }
+      },
+    }),
+    getPublicPostsByUserId: builder.query<PublicPostsResponse, PublicPostsRequest>({
+      providesTags: ['Post'],
+      query: data => {
+        const { userId, ...params } = data
+
+        return {
+          params,
+          url: `v1/public-posts/user/${userId}`,
         }
       },
     }),
@@ -73,6 +91,7 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
     }),
     updatePost: builder.mutation<void, { description: string; postId: number }>({
+      invalidatesTags: ['Post'],
       query: ({ description, postId }) => ({
         body: { description },
         method: 'PUT',
