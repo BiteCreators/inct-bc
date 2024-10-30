@@ -35,7 +35,11 @@ export const SideNavbar = () => {
   }
 
   try {
-    userId = jose.decodeJwt(accessToken)
+    const tokenData = jose.decodeJwt(accessToken)
+
+    if ('userId' in tokenData && typeof tokenData.userId === 'number') {
+      userId = tokenData.userId
+    }
   } catch (error) {
     //TODO: handle error
     alert(error)
