@@ -10,10 +10,11 @@ import { Inter } from 'next/font/google'
 
 import '@/app/styles/globals.css'
 
-export const inter = Inter({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
+
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: React.ReactElement) => React.ReactNode
 } & NextPage<P, IP>
