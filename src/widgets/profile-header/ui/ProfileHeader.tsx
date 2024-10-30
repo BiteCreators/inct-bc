@@ -22,6 +22,7 @@ export const ProfileHeader = ({ profile }: Props) => {
   const publications = 345
 
   const { data: currentUser } = authApi.useMeQuery()
+
   const isCurrentUserProfile = currentUser?.userId === profile.id
 
   return (

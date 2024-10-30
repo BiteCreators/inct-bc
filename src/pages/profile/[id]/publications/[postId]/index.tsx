@@ -1,32 +1,45 @@
 import React from 'react'
 
 import { Post } from '@/entities/posts'
-import { SinglePostPage } from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
+import { Profile } from '@/entities/profile'
+import SinglePostPage from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 import { GetServerSideProps } from 'next'
 
 type Props = {
   post: Post
+  profile: Profile
 }
 
-export const getServerSideProps: GetServerSideProps<{ post: Post }> = async context => {
-  const { postId } = context.params as { postId: string }
+export const getServerSideProps: GetServerSideProps<{
+  post: Post
+  profile: Profile
+}> = async context => {
+  const { id, postId } = context.params as { id: string; postId: string }
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/${postId}`)
+    const profileRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/v1/public-user/profile/${id}`
+    )
 
-    if (!res.ok) {
+    if (!profileRes.ok) {
       return { notFound: true }
     }
-    const post: Post = await res.json()
+    const profile: Profile = await profileRes.json()
+    const postRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/${postId}`)
+
+    if (!postRes.ok) {
+      return { notFound: true }
+    }
+    const post: Post = await postRes.json()
 
     return {
-      props: { post },
+      props: { post, profile },
     }
   } catch (error) {
     return { notFound: true }
   }
 }
 
-export default function Page({ post }: Props) {
-  return <SinglePostPage post={post} />
+export default function Page({ post, profile }: Props) {
+  return <SinglePostPage post={post} profile={profile} />
 }
