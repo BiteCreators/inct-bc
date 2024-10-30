@@ -70,7 +70,9 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
         title={'Delete Post'}
       />
       <Dropdown className={className} items={forDrop} />
-      {<Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />}
+      {apiError && (
+        <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
+      )}
     </>
   )
 }

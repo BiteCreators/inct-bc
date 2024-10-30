@@ -24,7 +24,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
     handleChange,
     handleConfirm,
     handleReject,
-    isLoading,
+    isSSRPostLoading,
     limit,
     saveChanges,
     setConfirmOpen,
@@ -43,7 +43,9 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
         setIsOpen={setConfirmOpen}
         title={'Close Post'}
       />
-      {<Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />}
+      {apiError && (
+        <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
+      )}
       <Modal
         className={'h-[565px] max-w-[960px]'}
         isOpen={isOpen}
@@ -51,7 +53,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
         onOpenChange={changeModalState}
         title={'Edit post'}
       >
-        {isLoading && <LoaderBlock />}
+        {isSSRPostLoading && <LoaderBlock />}
         <div className={'w-[920px] h-[460px] flex flex-row'}>
           <div className={'w-1/2 h-full bg-amber-200'}>
             <Slider
