@@ -6,9 +6,7 @@ import { postsApi } from '@/common/api/posts.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
-import { changeStatusLoading } from '@/entities/posts/model/postSlice'
-import { modifyForgotPasswordApiError } from '@/features/auth/lib/modifyForgotPassowrdApiError'
-import { logger } from '@storybook/core/node-logger'
+import { postSlice } from '@/entities/posts/model/postSlice'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -19,10 +17,11 @@ type editPost = {
 export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   const params = useParams()
   const dispatch = useDispatch()
+  const { changeStatusSSRPostLoading } = postSlice.actions
   const postId = Number(params?.postId) ?? null
   const router = useRouter()
   const [apiError, setApiError] = useState('')
-  const isLoading = useSelector((state: RootState) => state.post.isLoading)
+  const isSSRPostLoading = useSelector((state: RootState) => state.post.isSSRPostLoading)
   const [updatePost] = postsApi.useUpdatePostMutation()
   const { handleApiError } = useHandleApiError('Posts')
   const refreshData = async () => {
@@ -36,16 +35,17 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   })
 
   const saveChanges = async () => {
-    dispatch(changeStatusLoading(true))
+    dispatch(changeStatusSSRPostLoading(true))
     try {
-      await updatePost({ description: value, postId })
+      await updatePost({ description: value, postId }).unwrap()
       await refreshData()
       changeEditMode(false)
     } catch (error) {
+      console.log(error)
       handleApiError({ error, setApiError })
     }
 
-    dispatch(changeStatusLoading(false))
+    dispatch(changeStatusSSRPostLoading(false))
   }
 
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
@@ -73,7 +73,7 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
     handleChange,
     handleConfirm,
     handleReject,
-    isLoading,
+    isSSRPostLoading,
     limit,
     saveChanges,
     setConfirmOpen,
