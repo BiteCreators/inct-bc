@@ -27,7 +27,6 @@ export const useDropdownPost = () => {
         await deletePost({ postId }).unwrap()
         await router.push('/')
       } catch (error) {
-        console.log(error)
         handleApiError({ error, setApiError })
       }
     }
