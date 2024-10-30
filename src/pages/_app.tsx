@@ -5,11 +5,15 @@ import React from 'react'
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
 import { Providers } from '@/app/providers'
 import { wrapper } from '@/app/store'
-import { inter } from '@/fonts/fonts'
 import { NextPage } from 'next'
+import { Inter } from 'next/font/google'
 
 import '@/app/styles/globals.css'
 
+export const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: React.ReactElement) => React.ReactNode
 } & NextPage<P, IP>
