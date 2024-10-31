@@ -4,7 +4,7 @@ import { Alert, Button, Loader, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { Slider } from '@/common/ui/slider/Slider'
-import { Post } from '@/entities/posts/types/post.type'
+import { Post } from '@/entities/posts'
 import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/edit-post/model/useEditPost'
 
