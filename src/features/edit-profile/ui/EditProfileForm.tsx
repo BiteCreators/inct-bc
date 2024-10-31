@@ -5,18 +5,16 @@ import { Button, FormInput, FormSelect, FormTextArea, Loader, SelectItem } from 
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
 import { Select } from '@/common/ui/select/Select'
+import { useLocation } from '@/features/profile/model/useLocation'
+import { LocationsProps } from '@/pages/profile/[id]/settings'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { ProfileAvatar } from './avatar/ProfileAvatar'
 
-export const EditProfileForm = () => {
+export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
   const {
-    checkError,
-    cityOptions,
     control,
-    countryOptions,
     handleSubmit,
-    handlerCountry,
     isError,
     isLoading,
     isShowAlert,
@@ -27,9 +25,17 @@ export const EditProfileForm = () => {
     t,
   } = useEditProfileForm()
 
+  const { checkError, cityOptions, countryOptions, handlerCountry } = useLocation(
+    cities,
+    countries,
+    profile
+  )
+
   if (isLoading) {
     return <Loader fullScreen />
   }
+
+  console.log('cityOptions', cityOptions)
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
@@ -72,13 +78,13 @@ export const EditProfileForm = () => {
                   {...field}
                   error={checkError(countryOptions)}
                   label={t.selectYourCountry}
-                  onValueChange={optionValue => {
-                    field.onChange(optionValue)
-                    handlerCountry(optionValue)
+                  onValueChange={countryValue => {
+                    field.onChange(countryValue)
+                    handlerCountry(countryValue)
                   }}
                   placeholder={t.country}
                 >
-                  <SearchableOptions options={countryOptions} />
+                  <SearchableOptions options={countryOptions.length !== 0 ? countryOptions : []} />
                 </Select>
               )}
             />
@@ -96,7 +102,7 @@ export const EditProfileForm = () => {
                   onValueChange={field.onChange}
                   placeholder={t.city}
                 >
-                  <SearchableOptions options={cityOptions} />
+                  <SearchableOptions options={cityOptions.length !== 0 ? cityOptions : []} />
                 </Select>
               )}
             />
