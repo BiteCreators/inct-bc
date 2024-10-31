@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { authSlice } from '@/entities/auth'
 import { Image, postsApi } from '@/entities/posts'
-import * as jose from 'jose'
 import { useRouter } from 'next/router'
 
 export const useCreatePost = ({
@@ -28,8 +29,7 @@ export const useCreatePost = ({
   const [description, setDescription] = useState<string>('')
 
   const router = useRouter()
-  const [cookies] = useCookies(['accessToken'])
-  const { userId } = jose.decodeJwt(cookies.accessToken)
+  const userId = useAppSelector(authSlice.selectors.selectUserId)
 
   const slidesUrl = images?.map(el => el.url)
 
