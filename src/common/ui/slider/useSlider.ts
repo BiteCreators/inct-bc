@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 import { useSwipeable } from 'react-swipeable'
 
-export const useSlider = (slidesUrl: string[]) => {
+export const useSlider = (slidesUrl: ReactNode[]) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
