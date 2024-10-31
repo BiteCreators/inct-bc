@@ -1,12 +1,17 @@
 import React from 'react'
 
-import { PersonAddOutline, PersonRemoveOutline } from '@/common/assets/icons/components'
+import {
+  Copy,
+  Edit2Outline,
+  PersonAddOutline,
+  PersonRemoveOutline,
+  TrashOutline,
+} from '@/common/assets/icons/components'
 import { Alert, Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
 import { Post } from '@/entities/posts'
 import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
-import { CopyIcon, EditIcon, TrashIcon } from '@storybook/icons'
 
 type Props = {
   changeEditMode: (e: boolean) => void
@@ -30,13 +35,13 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
   if (isMyPost) {
     forDrop.push(
       {
-        icon: <EditIcon />,
+        icon: <Edit2Outline />,
         label: 'Edit post',
         onClick: () => {
           changeEditMode(true)
         },
       },
-      { icon: <TrashIcon />, label: 'Delete post', onClick: deletePostHandler }
+      { icon: <TrashOutline />, label: 'Delete post', onClick: deletePostHandler }
     )
   } else {
     if (isFollow) {
@@ -53,7 +58,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
       })
     }
     forDrop.push({
-      icon: <CopyIcon className={'w-[23px] h-[18px]'} viewBox={' 0 0 14 15'} />,
+      icon: <Copy className={'w-[23px] h-[18px]'} viewBox={' 0 0 14 15'} />,
       label: 'Copy link',
       onClick: copyLinkHandler,
     })

@@ -1,7 +1,7 @@
 import { inctagramApi } from '@/common/api/inct.api'
 import { locationApi } from '@/common/api/location.api'
 import { authSlice } from '@/entities/auth'
-import { postSlice } from '@/entities/posts/model/postSlice'
+import { postSlice } from '@/entities/posts'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import {
