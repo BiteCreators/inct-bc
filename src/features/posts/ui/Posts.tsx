@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Loader } from '@/common/ui'
+import { Loader, Typography } from '@/common/ui'
 import { postsApi } from '@/entities/posts'
+import Link from 'next/link'
 
 type Props = {
   userId: number
@@ -40,9 +41,21 @@ export const Posts = ({ userId }: Props) => {
 
   return (
     <div className={'flex gap-5 justify-center flex-wrap'}>
-      {data?.items.map(post => {
-        return <img height={260} key={post.id} src={post.images[0]?.url} width={260} />
-      })}
+      {data?.items && data?.items.length < 1 ? (
+        <Typography> user has no publications yet </Typography>
+      ) : (
+        data?.items.map(post => {
+          return (
+            <Link
+              className={'hover:scale-[1.013] duration-75'}
+              href={`/profile/${userId}/publications/${post.id}`}
+              key={post.id}
+            >
+              <img height={260} src={post.images[0]?.url} width={260} />
+            </Link>
+          )
+        })
+      )}
     </div>
   )
 }
