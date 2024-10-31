@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { postsApi } from '@/common/api/posts.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
+import { postsApi } from '@/entities/posts'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 

@@ -24,7 +24,11 @@ import { SideNavbarItem } from './SideNavbarItem'
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
   const [cookies] = useCookies(['accessToken'])
-  const { userId } = jose.decodeJwt(cookies.accessToken)
+  let userId
+
+  try {
+    userId = jose.decodeJwt(cookies.accessToken).userId
+  } catch (e) {}
 
   return (
     <nav className={'flex flex-col gap-[60px]'}>

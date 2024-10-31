@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootState } from '@/app/store'
-import { postsApi } from '@/common/api/posts.api'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
+import { postsApi } from '@/entities/posts'
 import { postSlice } from '@/entities/posts/model/postSlice'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -26,7 +26,6 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   const { handleApiError } = useHandleApiError('Posts')
   const refreshData = async () => {
     await router.replace(router.asPath)
-    // dispatch()
   }
 
   const { correct, handleChange, limit, setValue, value } = useValidationLimit({
@@ -41,7 +40,6 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
       await refreshData()
       changeEditMode(false)
     } catch (error) {
-      console.log(error)
       handleApiError({ error, setApiError })
     }
 
