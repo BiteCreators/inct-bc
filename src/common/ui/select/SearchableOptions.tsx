@@ -1,10 +1,10 @@
 import React from 'react'
 
+import { LocationResponse } from '@/common/api/location.api'
 import { Input, SelectItem } from '@/common/ui'
-import { Options } from '@/features/profile/model/useSelectCountryCity'
 import { useRouter } from 'next/router'
 
-export const SearchableOptions = ({ options }: { options: Options[] }) => {
+export const SearchableOptions = ({ options }: { options: LocationResponse[] }) => {
   const [searchValue, setSearchValue] = React.useState<string>('')
   const { locale } = useRouter()
 
@@ -17,10 +17,10 @@ export const SearchableOptions = ({ options }: { options: Options[] }) => {
         placeholder={locale === 'en' ? ' Search' : ' Поиск'}
       />
       {options
-        .filter(option => option.value.toLowerCase().includes(searchValue.toLowerCase()))
+        .filter(option => option.name.toLowerCase().includes(searchValue.toLowerCase()))
         .map(option => (
-          <SelectItem key={option.value} value={option.value}>
-            {option.value}
+          <SelectItem key={option.name} value={option.name}>
+            {option.name}
           </SelectItem>
         ))}
     </>
