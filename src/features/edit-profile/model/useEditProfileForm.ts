@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 
 import { Profile, profileApi } from '@/common/api/profile.api'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useCountryCity } from '@/features/profile/model/useSelectCountryCity'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
@@ -16,19 +15,10 @@ export const useEditProfileForm = () => {
   const [trigger, { isError, isLoading: isLoadingUpdateProfile }] =
     profileApi.useEditProfileMutation()
 
-  const [message, setMessage] = useState('') //сообщение в алерте
+  const [message, setMessage] = useState('')
   const [isShowAlert, setIsShowAlert] = useState(false)
 
-  const {
-    checkError,
-    cityOptions,
-    countryData,
-    countryOptions,
-    handlerCountry,
-    isLoadingCountryData,
-  } = useCountryCity()
-
-  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile || isLoadingCountryData
+  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile
 
   const {
     control,
@@ -41,7 +31,7 @@ export const useEditProfileForm = () => {
   })
 
   useEffect(() => {
-    if (profile && countryData) {
+    if (profile) {
       reset({
         aboutMe: profile.aboutMe || '',
         city: profile.city || '',
@@ -51,11 +41,8 @@ export const useEditProfileForm = () => {
         lastName: profile.lastName || '',
         userName: profile.userName || '',
       })
-      if (profile.country) {
-        handlerCountry(profile.country)
-      }
     }
-  }, [profile, reset, countryData])
+  }, [profile, reset])
 
   const onSubmit = async (data: EditProfileFormData) => {
     console.log('formData', data)
@@ -76,12 +63,8 @@ export const useEditProfileForm = () => {
   }
 
   return {
-    checkError,
-    cityOptions,
     control,
-    countryOptions,
     handleSubmit: handleSubmit(onSubmit),
-    handlerCountry,
     isError,
     isLoading,
     isShowAlert,
