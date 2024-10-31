@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
+import { postsApi } from '@/common/api/posts.api'
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'
 import SinglePostPage from '@/pages/profile/[id]/publications/[postId]/SinglePostPage'
 import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
 
 type Props = {
   post: Post

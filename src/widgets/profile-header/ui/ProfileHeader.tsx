@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { EditPost } from '@/features/edit-post'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
