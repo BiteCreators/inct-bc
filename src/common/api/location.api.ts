@@ -22,11 +22,13 @@ type ParentRegions = {
   name: string
 }
 
-type ChildResponse = {
-  edges: {
-    cursor: string
-    node: LocationResponse
-  }[]
+export type ChildResponse = {
+  edges: Edges[]
+}
+
+export type Edges = {
+  cursor: string
+  node: LocationResponse
 }
 
 export const locationApi = createApi({
