@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {
-  Copy,
+  CopyOutline,
   Edit2Outline,
   PersonAddOutline,
   PersonRemoveOutline,
@@ -58,7 +58,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
       })
     }
     forDrop.push({
-      icon: <Copy className={'w-[23px] h-[18px]'} viewBox={' 0 0 14 15'} />,
+      icon: <CopyOutline className={'w-[23px] h-[23px]'} />,
       label: 'Copy link',
       onClick: copyLinkHandler,
     })
