@@ -3,6 +3,7 @@ import React from 'react'
 import { AuthLayout } from '@/app/layouts/AuthLayout'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
+import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
 import { InferGetServerSidePropsType } from 'next'
 
 import { NextPageWithLayout } from './_app'
@@ -41,13 +42,16 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
   const { items: posts } = postsData
 
   return (
-    <div className={'max-w-[972px] pt-6 mx-auto'}>
-      <div className={'grid grid-cols-4 gap-3'}>
-        {posts.map(post => (
-          <PublicPostCard key={post.id} post={post} />
-        ))}
+    <>
+      <RegisteredUsers usersCount={postsData.totalCount} />
+      <div className={'max-w-[972px] pt-6 mx-auto'}>
+        <div className={'grid grid-cols-4 gap-3'}>
+          {posts.map(post => (
+            <PublicPostCard key={post.id} post={post} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

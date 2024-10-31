@@ -1,15 +1,19 @@
 import type { AppProps } from 'next/app'
 
 import React from 'react'
-import { Provider } from 'react-redux'
 
 import { DefaultLayout } from '@/app/layouts/DefautlLayout'
-import { AuthProvider } from '@/app/providers/AuthProvider'
-import { persistedStore, wrapper } from '@/app/store'
+import { Providers } from '@/app/providers'
+import { wrapper } from '@/app/store'
 import { NextPage } from 'next'
-import { PersistGate } from 'redux-persist/integration/react'
+import { Inter } from 'next/font/google'
 
 import '@/app/styles/globals.css'
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-inter',
+})
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -25,10 +29,8 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
   const { props, store } = wrapper.useWrappedStore(rest)
 
   return (
-    <Provider store={store}>
-      <PersistGate persistor={persistedStore}>
-        <AuthProvider>{getLayout(<Component {...props.pageProps} />)}</AuthProvider>
-      </PersistGate>
-    </Provider>
+    <Providers store={store}>
+      <div className={inter.className}>{getLayout(<Component {...props.pageProps} />)}</div>
+    </Providers>
   )
 }

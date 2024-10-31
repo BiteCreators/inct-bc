@@ -1,9 +1,3 @@
-import { CreatePostModal } from '@/features/create-post'
+import Create from './Create'
 
-export default function Create() {
-  return (
-    <div>
-      <CreatePostModal />
-    </div>
-  )
-}
+export default Create

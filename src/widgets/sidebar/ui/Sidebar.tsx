@@ -1,8 +1,16 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
+import { authSlice } from '@/entities/auth'
 import { LogoutButton } from '@/features/auth'
 import { SideNavbar } from '@/features/navigation'
 
 export const Sidebar = () => {
+  const accessToken = useAppSelector(authSlice.selectors.selectAccessToken)
+
+  if (!accessToken) {
+    return null
+  }
+
   return (
     <div
       className={cn(

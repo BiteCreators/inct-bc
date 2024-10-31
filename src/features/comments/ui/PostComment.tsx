@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { HeartOutline } from '@/common/assets/icons/components'
 import { Avatar, Typography } from '@/common/ui'
 
-import exampleAvatar from '../../../../public/examples/0a9f264bc73447e3ce0157c47fae210a (1).jpg'
+import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
 
 type Props = {
   children?: ReactNode
@@ -13,8 +13,8 @@ type Props = {
 export const PostComment = ({ children, text }: Props) => {
   return (
     <div className={'flex mb-4 gap-3 items-start'}>
-      <div className={'flex-shrink-0 w-9 h-9 pt-1'}>
-        <Avatar avatarURL={exampleAvatar.src} imgStyles={'w-full h-full'} />
+      <div className={'flex-shrink-0 pt-1'}>
+        <Avatar avatarURL={exampleAvatar.src} imgStyles={'w-9 h-9 object-cover'} />
       </div>
       <div className={'flex-1'}>
         <Typography variant={'regular-text'}>

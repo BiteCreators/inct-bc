@@ -16,19 +16,19 @@ import {
   TrendingUp,
   TrendingUpOutline,
 } from '@/common/assets/icons/components'
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import * as jose from 'jose'
+import { authSlice } from '@/entities/auth'
 
 import { SideNavbarItem } from './SideNavbarItem'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
-  const [cookies] = useCookies(['accessToken'])
-  let userId
+  const userId = useAppSelector(authSlice.selectors.selectUserId)
 
-  try {
-    userId = jose.decodeJwt(cookies.accessToken).userId
-  } catch (e) {}
+  if (!userId) {
+    return null
+  }
 
   return (
     <nav className={'flex flex-col gap-[60px]'}>

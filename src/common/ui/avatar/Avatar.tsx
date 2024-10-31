@@ -2,9 +2,11 @@ import { Close } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import Link from 'next/link'
 
+import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
 type Props = {
   alt?: string
   avatarURL: string
+  className?: string
   href?: string
   imgStyles?: string
   isNextLink?: boolean
@@ -17,6 +19,7 @@ type Props = {
 export const Avatar = ({
   alt = 'Avatar',
   avatarURL,
+  className,
   href,
   imgStyles,
   isNextLink = false,
@@ -31,8 +34,12 @@ export const Avatar = ({
     }
   }
   const AvatarImage = (
-    <span className={'relative inline-block'}>
-      <img alt={alt} className={cn(imgStyles, [rounded && 'rounded-full'])} src={avatarURL} />
+    <span className={cn(['relative inline-block', className])}>
+      <img
+        alt={alt}
+        className={cn(imgStyles, [rounded && 'rounded-full'])}
+        src={avatarURL ? avatarURL : exampleAvatar.src}
+      />
       {showClose && (
         <span
           className={cn([

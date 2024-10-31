@@ -1,5 +1,4 @@
 export { postsApi } from './api/posts.api'
-export type { Post } from './lib/types/post'
 export { postSlice } from './model/postSlice'
 
 export type {
@@ -9,6 +8,7 @@ export type {
   Like,
   Likes,
   Params,
+  Post,
   PostLikes,
   Posts,
   PublicPostsRequest,

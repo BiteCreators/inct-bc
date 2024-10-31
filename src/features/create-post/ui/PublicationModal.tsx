@@ -2,14 +2,20 @@ import React from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, TextArea, Typography } from '@/common/ui'
+import { Slider } from '@/common/ui/slider/Slider'
 
 import exampleImage from '../../../../public/examples/image2.png'
 
-export const PublicationModal = () => {
+type Props = {
+  handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  slidesUrl: string[]
+}
+
+export const PublicationModal = ({ handleDescriptionChange, slidesUrl }: Props) => {
   return (
-    <div className={'h-[504px] flex'}>
+    <div className={'flex'}>
       <div className={'w-1/2'}>
-        <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
+        <Slider duration={0} slidesUrl={slidesUrl} />
       </div>
       <div className={'w-1/2 p-6'}>
         <UserProfileUrl className={'mb-6'} />
@@ -17,6 +23,7 @@ export const PublicationModal = () => {
           className={'min-h-[120px]'}
           counter={500}
           label={'Add publication descriptions'}
+          onChange={handleDescriptionChange}
           placeholder={'Text-area'}
         />
         <div className={'flex mx-[-24px] mt-5 mb-6'}>
