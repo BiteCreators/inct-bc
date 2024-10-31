@@ -4,10 +4,11 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
+import { LocationsProps } from '@/pages/profile/[id]/settings'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
-export const ProfileSettingsTabs = () => {
+export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('general-information')
   const t = useScopedTranslation('Navigation')
 
@@ -17,7 +18,7 @@ export const ProfileSettingsTabs = () => {
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {
-          content: <EditProfileForm />,
+          content: <EditProfileForm cities={cities} countries={countries} />,
           label: t.generalInfo,
           value: 'general-information',
         },
