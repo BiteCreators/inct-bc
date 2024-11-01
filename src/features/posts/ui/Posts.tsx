@@ -35,9 +35,16 @@ export const Posts = () => {
   }
 
   return (
-    <div className={'flex gap-5 justify-center flex-wrap'}>
+    // <div className={'flex gap-5 justify-center flex-wrap'}>
+    <div
+      className={'grid grid-cols-3 gap-1 sm:gap-3 mt-[30px] xl:mx-[65px] lg:grid-cols-4 md:gap-4'}
+    >
       {data?.items.map(post => {
-        return <img height={260} key={post.id} src={post.images[0]?.url} width={260} />
+        return (
+          <div className={'min-w-[108px] sm:min-w-[150px]'} key={post.id}>
+            <img height={260} src={post.images[0]?.url} width={260} />
+          </div>
+        )
       })}
     </div>
   )
