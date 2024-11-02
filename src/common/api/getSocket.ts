@@ -1,16 +1,20 @@
 import { Socket, io } from 'socket.io-client'
 
-const queryParams = {
-  query: {
-    accessToken: document.cookie.split('accessToken=')[1],
-  },
-}
-
 let socket: Socket
 
 export const getSocket = () => {
   if (!socket) {
-    socket = io('https://inctagram.work', queryParams)
+    const queryParams = {
+      query: {
+        accessToken: document.cookie.split('accessToken=')[1],
+      },
+    }
+
+    socket = io(process.env.NEXT_PUBLIC_WS_API_URL || '', queryParams)
+  }
+
+  if (socket.disconnected) {
+    socket.connect()
   }
 
   return socket
