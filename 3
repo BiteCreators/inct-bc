@@ -1,10 +1,10 @@
 import { getSocket } from '@/common/api/getSocket'
 import { inctagramApi } from '@/common/api/inct.api'
 
-import { NOTIFICATION_MESSAGES } from '../lib/consts'
 import { Notification } from '../types/notification.type'
+import { NotificationsMessages } from '../types/notifications.messages'
 
-//TODO: replace with shared type
+//TODO: replace wity shared type
 type PaginationParams = {
   cursor?: number
   pageSize?: number
@@ -12,7 +12,7 @@ type PaginationParams = {
   sortDirection?: 'asc' | 'desc'
 }
 
-//TODO: replace with shared type
+//TODO: replace wity shared type
 type ResponseWithPagination<T> = {
   items: T[]
   pageSize: number
@@ -34,14 +34,15 @@ export const notificationsApi = inctagramApi.injectEndpoints({
 
           const socket = getSocket()
 
-          socket.on(NOTIFICATION_MESSAGES.NOTIFICATION, (notification: Notification) => {
-            updateCachedData(cur => ({ ...cur, items: [...cur.items, notification] }))
+          //TODO: finish cache update
+          socket.on(NotificationsMessages.NOTIFICATION, (notification: Notification) => {
+            console.log(notification)
+            // updateCachedData(cur => cur.items.push(notification))
           })
 
           await cacheEntryRemoved
-          socket.off(NOTIFICATION_MESSAGES.NOTIFICATION)
+          socket.off(NotificationsMessages.NOTIFICATION)
         } catch (e) {
-          //TODO: handle error
           console.log(e)
         }
       },
