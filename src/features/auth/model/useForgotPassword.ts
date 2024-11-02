@@ -55,6 +55,7 @@ export const useForgotPassword = () => {
 
   const submit: SubmitHandler<ForgotPasswordFormData> = async data => {
     try {
+      console.log('TEST')
       setIsSubmitting(true)
       await forgotPassword(data).unwrap()
       setIsModalOpen(true)
