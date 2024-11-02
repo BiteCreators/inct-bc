@@ -35,14 +35,13 @@ export const notificationsApi = inctagramApi.injectEndpoints({
           const socket = getSocket()
 
           socket.on(NOTIFICATION_MESSAGES.NOTIFICATION, (notification: Notification) => {
-            updateCachedData(cur => ({ ...cur, items: [...cur.items, notification] }))
+            updateCachedData(draft => ({ ...draft, items: [...draft.items, notification] }))
           })
 
           await cacheEntryRemoved
           socket.off(NOTIFICATION_MESSAGES.NOTIFICATION)
         } catch (e) {
-          //TODO: handle error
-          console.log(e)
+          console.error(e)
         }
       },
       query: ({ cursor, ...params }) => ({
