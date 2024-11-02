@@ -2,6 +2,9 @@ import { Socket, io } from 'socket.io-client'
 
 let socket: Socket
 
+/**
+ * @returns socket io instance
+ */
 export const getSocket = () => {
   if (!socket) {
     const queryParams = {
