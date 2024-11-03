@@ -6,24 +6,28 @@ export type SubscriptionsRequest = {
 }
 
 export type CostPaymentResponse = {
-  data: {
-    amount: number
-    typeDescription: string
-  }[]
+  data: CostPayment[]
+}
+export type CostPayment = {
+  amount: number
+  typeDescription: string
 }
 
 export type CurrentPaymentResponse = {
-  data: SubscriptionData[]
+  data: Subscription[]
   hasAutoRenewal: boolean
 }
-export type SubscriptionData = {
+export type Subscription = {
   autoRenewal: boolean
   dateOfPayment: string
   endDateOfSubscription: string
   subscriptionId: string
   userId: number
 }
-export type MyPaymentsResponse = {
+
+export type MyPaymentsResponse = MyPayment[]
+
+export type MyPayment = {
   dateOfPayment: string
   endDateOfSubscription: string
   paymentType: string
@@ -31,4 +35,4 @@ export type MyPaymentsResponse = {
   subscriptionId: string
   subscriptionType: string
   userId: number
-}[]
+}
