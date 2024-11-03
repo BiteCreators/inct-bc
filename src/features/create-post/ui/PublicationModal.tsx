@@ -21,8 +21,8 @@ export const PublicationModal = ({ handleDescriptionChange, slidesUrl }: Props) 
         <UserProfileUrl className={'mb-6'} />
         <TextArea
           className={'min-h-[120px]'}
-          counter={500}
           label={'Add publication descriptions'}
+          limitCount={500}
           onChange={handleDescriptionChange}
           placeholder={'Text-area'}
         />
