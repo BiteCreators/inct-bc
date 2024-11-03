@@ -27,7 +27,7 @@ export const Header = () => {
       </div>
       <div className={cn(['flex', !isAuthPage && 'gap-6', 'md:gap-12'])}>
         {!!accessToken && (
-          <div className={'hidden md:block'}>
+          <div className={'hidden md:flex flex-col items-end gap-2.5'}>
             <NotificationsButton />
           </div>
         )}
