@@ -7,7 +7,7 @@ import { useSlider } from '@/common/ui/slider/useSlider'
 type Props = {
   duration?: number
   height?: string
-  slidesUrl: ReactNode[]
+  slides: ReactNode[]
   stylesSlide?: string
   stylesSlider?: string
 }
@@ -15,7 +15,7 @@ type Props = {
 export const Slider = ({
   duration = 4000,
   height = '560',
-  slidesUrl,
+  slides,
   stylesSlide,
   stylesSlider,
 }: Props) => {
@@ -28,7 +28,7 @@ export const Slider = ({
     isPaused,
     nextSlide,
     prevSlide,
-  } = useSlider(slidesUrl)
+  } = useSlider(slides)
 
   useEffect(() => {
     if (duration !== 0) {
@@ -43,7 +43,7 @@ export const Slider = ({
   const stylesBtn =
     'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 p-3 cursor-pointer duration-300 ease-in-out md:block hidden hover:bg-gray-700 hover:opacity-85'
 
-  const isNavigation = slidesUrl.length > 1
+  const isNavigation = slides.length > 1
 
   return (
     <div
@@ -61,8 +61,8 @@ export const Slider = ({
         className={'flex w-full h-full transition-transform duration-500'}
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {slidesUrl.map((slide, i) => (
-          <li className={cn(`w-full flex-shrink-0 `, stylesSlide)} key={i}>
+        {slides.map((slide, i) => (
+          <li className={cn(`w-full flex-shrink-0`, stylesSlide)} key={i}>
             {slide}
           </li>
         ))}
@@ -79,7 +79,7 @@ export const Slider = ({
         )}
       >
         {isNavigation
-          ? slidesUrl.map((_, i) => (
+          ? slides.map((_, i) => (
               <button
                 className={`w-2 h-2 rounded-full
               ${i === currentIndex ? 'bg-primary-500' : 'bg-light-100'} hover:bg-primary-500`}

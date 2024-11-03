@@ -10,7 +10,7 @@ const meta: Meta<typeof Slider> = {
     height: {
       description: 'Высота слайдера, по умолчанию 560px.',
     },
-    slidesUrl: {
+    slides: {
       description: 'Обязательный Props - массив React Nodes',
     },
     stylesSlide: {
@@ -55,7 +55,7 @@ export const Default: Story = {
   args: {
     duration: 4000,
     height: '560',
-    slidesUrl: slides,
+    slides: slides,
     stylesSlide: 'justify-items-center',
     stylesSlider: 'w-full md:w-[500px]',
   },
