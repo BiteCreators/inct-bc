@@ -4,7 +4,7 @@ import { ScrollArea } from '@/common/ui'
 
 export type NotificationsData = {
   notificationsItems: NotificationItem[]
-  onClickForStorybook: (id: number) => void // for storybook
+  onClickForStorybook?: (id: number) => void // for storybook
 }
 
 export type NotificationItem = {
@@ -16,14 +16,16 @@ export type NotificationItem = {
 
 export const Notifications = ({ notificationsItems, onClickForStorybook }: NotificationsData) => {
   const handlerNotification = (id: number) => {
-    onClickForStorybook(id)
+    if (onClickForStorybook) {
+      onClickForStorybook(id)
+    }
     console.log('notificationId', id)
   }
 
   return (
     <div
       className={
-        'min-w-[280px] sm:min-w-[355px] px-2 py-4 border-dark-100 border-solid border rounded relative'
+        'min-w-[280px] sm:min-w-[355px] px-2 py-4 border-dark-100 border-solid border rounded bg-dark-700 relative'
       }
     >
       <h3
@@ -38,7 +40,7 @@ export const Notifications = ({ notificationsItems, onClickForStorybook }: Notif
           <div className={'py-3 border-t border-dark-100 mx-3'} key={notification.id}>
             <p className={'text-sm font-weight700'}>
               Новое уведомление!
-              {notification.isRead && <span className={'text-primary-700'}> Новое</span>}
+              {!notification.isRead && <span className={'text-primary-700'}> Новое</span>}
             </p>
             <p
               className={'text-sm cursor-pointer'}
