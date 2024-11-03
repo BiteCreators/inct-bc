@@ -23,3 +23,12 @@ export type SubscriptionData = {
   subscriptionId: string
   userId: number
 }
+export type MyPaymentsResponse = {
+  dateOfPayment: string
+  endDateOfSubscription: string
+  paymentType: string
+  price: number
+  subscriptionId: string
+  subscriptionType: string
+  userId: number
+}[]
