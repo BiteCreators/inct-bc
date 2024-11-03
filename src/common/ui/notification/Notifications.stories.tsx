@@ -1,11 +1,19 @@
 import React from 'react'
 
+import { notificationData } from '@/common/ui/notification/notificationsData'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Notifications } from './Notifications'
 
 const meta: Meta<typeof Notifications> = {
-  argTypes: {},
+  argTypes: {
+    notificationsItems: {
+      description: 'Принимает обязательный массив объектов уведомлений',
+    },
+    onClickForStorybook: {
+      description: 'Обработчик для установки статуса isRead в true',
+    },
+  },
   component: Notifications,
   parameters: {
     layout: 'centered',
@@ -15,33 +23,6 @@ const meta: Meta<typeof Notifications> = {
 
 export default meta
 type Story = StoryObj<typeof Notifications>
-
-const notificationData = [
-  {
-    id: 1,
-    isRead: true,
-    message: 'Your next payment will be debited in 1 day',
-    notifyAt: '2024-01-02T12:59:27.088Z',
-  },
-  {
-    id: 2,
-    isRead: false,
-    message: 'Your next payment will be debited in 2 day',
-    notifyAt: '2024-11-20T05:49:07.088Z',
-  },
-  {
-    id: 3,
-    isRead: true,
-    message: 'Your next payment will be debited in 3 day',
-    notifyAt: '2024-04-05T07:22:33.088Z',
-  },
-  {
-    id: 4,
-    isRead: false,
-    message: 'Your next payment will be debited in 4 day',
-    notifyAt: '2024-10-07T01:17:19.088Z',
-  },
-]
 
 export const Default: Story = {
   args: {
@@ -53,17 +34,11 @@ export const Default: Story = {
     const handleClick = (id: number) => {
       setNotifications(prevNotifications =>
         prevNotifications.map(notification =>
-          notification.id === id ? { ...notification, isRead: false } : notification
+          notification.id === id ? { ...notification, isRead: true } : notification
         )
       )
     }
 
-    return (
-      <Notifications
-        {...args}
-        notificationsItems={notifications}
-        onClickForStorybook={handleClick}
-      />
-    )
+    return <Notifications notificationsItems={notifications} onClickForStorybook={handleClick} />
   },
 }
