@@ -1,34 +1,35 @@
 import { inctagramApi } from '@/common/api/inct.api'
-import { builders } from 'ast-types'
+import {
+  CostPaymentResponse,
+  CurrentPaymentResponse,
+  SubscriptionsRequest,
+} from '@/entities/payments/types/payments.type'
 
 export const paymentsApi = inctagramApi.injectEndpoints({
   endpoints: builders => ({
-    cancelAutoRenewal: builders.mutation<any, any>({
+    cancelAutoRenewal: builders.mutation<void, void>({
       query: body => ({
         body,
         method: 'POST',
         url: 'v1/subscriptions/canceled-auto-renewal',
       }),
     }),
-    getCostPayment: builders.query<any, any>({
-      query: body => ({
-        body,
+    getCostPayment: builders.query<CostPaymentResponse, void>({
+      query: () => ({
         url: 'v1/subscriptions/cost-of-payment-subscriptions',
       }),
     }),
-    getCurrentPayment: builders.query<any, any>({
-      query: body => ({
-        body,
+    getCurrentPayment: builders.query<CurrentPaymentResponse, void>({
+      query: () => ({
         url: 'v1/subscriptions/current-payment-subscriptions',
       }),
     }),
-    getMyPayment: builders.query<any, any>({
-      query: body => ({
-        body,
+    getMyPayment: builders.query<void, void>({
+      query: () => ({
         url: 'v1/subscriptions/my-payments',
       }),
     }),
-    subscriptions: builders.mutation<any, any>({
+    subscriptions: builders.mutation<{ url: string }, SubscriptionsRequest>({
       query: body => ({
         body,
         method: 'POST',
