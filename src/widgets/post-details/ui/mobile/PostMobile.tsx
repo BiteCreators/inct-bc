@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
@@ -12,10 +12,10 @@ import { PostActionsBlock, PostDescription } from '@/features/posts'
 type Props = {
   comments: { id: string; text: string }[]
   post: Post
-  slidesUrl: string[]
+  slides: ReactNode[]
 }
 
-export const PostMobile = ({ comments, post, slidesUrl }: Props) => {
+export const PostMobile = ({ comments, post, slides }: Props) => {
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
 
   return (
@@ -29,7 +29,7 @@ export const PostMobile = ({ comments, post, slidesUrl }: Props) => {
         </div>
         <Dropdown className={'-top-0.5 -mr-3'} items={[]} />
       </div>
-      <Slider height={'full'} slidesUrl={slidesUrl} stylesSlider={'max-w-[500px]'} />
+      <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px]'} />
       <div className={'max-w-[480px] max-h-[564px] w-full flex flex-col overflow-hidden'}>
         <PostActionsBlock post={post} />
         <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>

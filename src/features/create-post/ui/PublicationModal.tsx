@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, TextArea, Typography } from '@/common/ui'
@@ -8,14 +8,14 @@ import exampleImage from '../../../../public/examples/image2.png'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  slidesUrl: string[]
+  slides: ReactNode[]
 }
 
-export const PublicationModal = ({ handleDescriptionChange, slidesUrl }: Props) => {
+export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
   return (
     <div className={'flex'}>
       <div className={'w-1/2'}>
-        <Slider duration={0} slidesUrl={slidesUrl} />
+        <Slider duration={0} slides={slides} />
       </div>
       <div className={'w-1/2 p-6'}>
         <UserProfileUrl className={'mb-6'} />
