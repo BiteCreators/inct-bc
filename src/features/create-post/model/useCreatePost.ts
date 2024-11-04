@@ -33,8 +33,6 @@ export const useCreatePost = ({
   const router = useRouter()
   const userId = useAppSelector(authSlice.selectors.selectUserId)
 
-  const slidesUrl = images?.map(el => el.url)
-
   const uploadImageForPost = async (file: File | null) => {
     if (file) {
       try {
@@ -123,7 +121,6 @@ export const useCreatePost = ({
     setApiError,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
-    slidesUrl,
     t,
     uploadImageForPost,
   }

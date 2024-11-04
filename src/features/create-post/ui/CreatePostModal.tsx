@@ -28,13 +28,16 @@ export const CreatePostModal = () => {
     setApiError,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
-    slidesUrl,
     t,
     uploadImageForPost,
   } = useCreatePost({ handleNext, setStep, step })
 
   const { error, fileInputRef, handleFileSelect, setError, uploadImage } =
     useImageUpload(uploadImageForPost)
+
+  const slides = images.map((image, i) => (
+    <img alt={'postImg'} className={'h-full object-cover object-center'} key={i} src={image.url} />
+  ))
 
   return (
     <div>
@@ -82,16 +85,13 @@ export const CreatePostModal = () => {
             handleFileSelect={handleFileSelect}
             images={images}
             isDisableInput={isDisableInput}
-            slidesUrl={slidesUrl}
+            slides={slides}
             uploadImage={uploadImage}
           />
         )}
-        {step === 3 && <ImageFiltersModal slidesUrl={slidesUrl} />}
+        {step === 3 && <ImageFiltersModal slides={slides} />}
         {step === 4 && (
-          <PublicationModal
-            handleDescriptionChange={handleDescriptionChange}
-            slidesUrl={slidesUrl}
-          />
+          <PublicationModal handleDescriptionChange={handleDescriptionChange} slides={slides} />
         )}
       </Modal>
     </div>

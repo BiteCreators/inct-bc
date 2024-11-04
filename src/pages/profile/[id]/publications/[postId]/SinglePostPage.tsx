@@ -3,6 +3,7 @@ import React from 'react'
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'
+import { Posts } from '@/features/posts'
 import { PostDetails } from '@/widgets/post-details'
 import { ProfileHeader } from '@/widgets/profile-header'
 import { GetServerSideProps } from 'next'
@@ -17,7 +18,12 @@ export default function SinglePostPage({ post, profile }: Props) {
 
   return (
     <div className={'px-[15px] md:pl-6 md:pr-16'}>
-      {isLargeScreen && <ProfileHeader profile={profile} />}
+      {isLargeScreen && (
+        <>
+          <ProfileHeader profile={profile} />
+          <Posts userId={profile.id} />
+        </>
+      )}
       <PostDetails post={post} />
     </div>
   )
