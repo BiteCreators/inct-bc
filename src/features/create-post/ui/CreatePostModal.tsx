@@ -28,6 +28,7 @@ export const CreatePostModal = () => {
     setApiError,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
+    t,
     uploadImageForPost,
   } = useCreatePost({ handleNext, setStep, step })
 
@@ -42,13 +43,11 @@ export const CreatePostModal = () => {
     <div>
       <ActionConfirmation
         isOpen={isOpenActionConfirmation}
-        message={
-          'Do you really want to close the creation of a publication? If you close everything will be deleted'
-        }
+        message={t.doYouWantToCloseCreation}
         onConfirm={handleConfirm}
         onReject={() => {}}
         setIsOpen={setIsOpenActionConfirmation}
-        title={'Close'}
+        title={t.close}
       />
       <Modal
         className={`max-w-[330px] ${

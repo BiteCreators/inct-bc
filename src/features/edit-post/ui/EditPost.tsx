@@ -28,6 +28,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
     limit,
     saveChanges,
     setConfirmOpen,
+    t,
     value,
   } = useEditPost({ changeEditMode, postText: post?.description })
 
@@ -35,13 +36,11 @@ export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={
-          'Do you really want to close the edition of the publication? If you close changes won’t be saved'
-        }
+        message={t.doYouWantToCloseEditing}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={'Close Post'}
+        title={t.closeEditing}
       />
       {apiError && (
         <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
@@ -51,7 +50,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
         isOpen={isOpen}
         mode={'default'}
         onOpenChange={changeModalState}
-        title={'Edit post'}
+        title={t.editPost}
       >
         {isSSRPostLoading && <LoaderBlock />}
         <div className={'w-[920px] h-[460px] flex flex-row'}>

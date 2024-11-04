@@ -9,6 +9,7 @@ import { postsApi } from '@/entities/posts'
 import { postSlice } from '@/entities/posts/model/postSlice'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 
 type editPost = {
   changeEditMode: (e: boolean) => void
@@ -24,6 +25,9 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   const isSSRPostLoading = useSelector((state: RootState) => state.post.isSSRPostLoading)
   const [updatePost] = postsApi.useUpdatePostMutation()
   const { handleApiError } = useHandleApiError('Posts')
+  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
+    useConfirmation()
+  const t = useScopedTranslation('Posts')
   const refreshData = async () => {
     await router.replace(router.asPath)
   }
@@ -45,9 +49,6 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
 
     dispatch(changeStatusSSRPostLoading(false))
   }
-
-  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
-    useConfirmation()
 
   const changeModalState = async () => {
     if (value === postText) {
@@ -76,6 +77,7 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
     saveChanges,
     setConfirmOpen,
     setValue,
+    t,
     value,
   }
 }
