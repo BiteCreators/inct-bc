@@ -1,4 +1,4 @@
-import { ProfileAvatars } from './profileAvatars.type'
+import { ProfileAvatars } from '@/entities/profile'
 
 export type Profile = {
   aboutMe?: string

@@ -10,8 +10,11 @@ const meta: Meta<typeof Slider> = {
     height: {
       description: 'Высота слайдера, по умолчанию 560px.',
     },
-    slidesUrl: {
-      description: 'Обязательный Props - массив ссылок на изображения.',
+    slides: {
+      description: 'Обязательный Props - массив React Nodes',
+    },
+    stylesSlide: {
+      description: 'Дополнительные стили для слайда.',
     },
     stylesSlider: {
       description: 'Дополнительные стили для слайдера.',
@@ -25,9 +28,24 @@ const meta: Meta<typeof Slider> = {
 }
 
 const slides = [
-  'https://i1.sndcdn.com/artworks-nO3R0izz9UnXtHhQ-z1R29Q-t500x500.jpg',
-  'https://i1.sndcdn.com/artworks-000066235753-ysrir2-t500x500.jpg',
-  'https://i1.sndcdn.com/artworks-000022548343-t02iuc-t500x500.jpg',
+  <img
+    alt={'sliderImg'}
+    className={'w-full h-full object-cover object-center'}
+    key={1}
+    src={'https://i1.sndcdn.com/artworks-nO3R0izz9UnXtHhQ-z1R29Q-t500x500.jpg'}
+  />,
+  <img
+    alt={'sliderImg'}
+    className={'w-full h-full object-cover object-center'}
+    key={2}
+    src={'https://i1.sndcdn.com/artworks-000066235753-ysrir2-t500x500.jpg'}
+  />,
+  <img
+    alt={'sliderImg'}
+    className={'w-full h-full object-cover object-center'}
+    key={3}
+    src={'https://i1.sndcdn.com/artworks-000022548343-t02iuc-t500x500.jpg'}
+  />,
 ]
 
 export default meta
@@ -37,7 +55,8 @@ export const Default: Story = {
   args: {
     duration: 4000,
     height: '560',
-    slidesUrl: slides,
+    slides: slides,
+    stylesSlide: 'justify-items-center',
     stylesSlider: 'w-full md:w-[500px]',
   },
 }

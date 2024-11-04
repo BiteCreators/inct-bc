@@ -19,26 +19,15 @@ import {
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { authSlice } from '@/entities/auth'
-import * as jose from 'jose'
-import { useRouter } from 'next/router'
 
 import { SideNavbarItem } from './SideNavbarItem'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
-  const accessToken = useAppSelector(authSlice.selectors.selectAccessToken)
+  const userId = useAppSelector(authSlice.selectors.selectUserId)
 
-  let userId: number = 0
-
-  if (!accessToken) {
+  if (!userId) {
     return null
-  }
-
-  try {
-    userId = jose.decodeJwt(accessToken)
-  } catch (error) {
-    //TODO: handle error
-    alert(error)
   }
 
   return (

@@ -1,13 +1,20 @@
 import React from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Dropdown, Typography } from '@/common/ui'
+import { Avatar, Typography } from '@/common/ui'
+import { authApi } from '@/entities/auth'
 import { Post } from '@/entities/posts'
+import { DropdownPost } from '@/features/posts/ui/DropdownPost'
 import * as Dialog from '@radix-ui/react-dialog'
+
 type Props = {
+  changeEditMode: (e: boolean) => void
   post: Post
 }
-export const PostModalTitle = ({ post }: Props) => {
+export const PostModalTitle = ({ changeEditMode, post }: Props) => {
+  const { data } = authApi.useMeQuery()
+  const isMyPost = post.ownerId === data?.userId || false
+
   return (
     <Dialog.Title className={cn('font-bold py-3 px-6')}>
       <div className={'flex justify-between w-full'}>
@@ -17,7 +24,12 @@ export const PostModalTitle = ({ post }: Props) => {
           </div>
           <Typography variant={'h2'}>{post.userName}</Typography>
         </div>
-        <Dropdown className={'-top-0.5 -mr-3'} items={[]} />
+        <DropdownPost
+          changeEditMode={changeEditMode}
+          className={'z-50'}
+          isMyPost={isMyPost}
+          post={post}
+        />
       </div>
     </Dialog.Title>
   )

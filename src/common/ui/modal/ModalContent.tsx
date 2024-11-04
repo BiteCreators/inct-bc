@@ -34,7 +34,7 @@ export const ModalContent = ({
             </Dialog.Close>
           </div>
           <div className={cn('h-px bg-dark-100 w-full')} />
-          <div className={cn('py-3 px-6')}>{children}</div>
+          <div className={cn('py-3 px-6 max-w-full')}>{children}</div>
         </>
       )}
 
@@ -44,7 +44,7 @@ export const ModalContent = ({
             <Dialog.Close
               className={cn('absolute -top-14 -right-14 m-5 focus:outline-none cursor-pointer')}
             >
-              <Close className={cn('fill-current text-light-100')} />
+              <Close className={cn()} />
             </Dialog.Close>
             <div>
               <Dialog.Title className={cn('text-xl font-bold px-4 py-3')}>{title}</Dialog.Title>

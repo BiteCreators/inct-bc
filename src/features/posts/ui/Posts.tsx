@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react'
 
-import { Loader } from '@/common/ui'
+import { Loader, Typography } from '@/common/ui'
+import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { postsApi } from '@/entities/posts'
+import Link from 'next/link'
 
-export const Posts = () => {
+type Props = {
+  userId: number
+}
+
+export const Posts = ({ userId }: Props) => {
   const [pageSize, setPageSize] = useState(8)
 
   const { data, isFetching, isLoading } = postsApi.useGetPublicPostsByUserIdQuery({
     pageSize,
-    userId: 1565, // userId получать в props
+    userId: userId,
   })
 
   useEffect(() => {
@@ -30,22 +36,26 @@ export const Posts = () => {
     }
   }, [isFetching])
 
-  if (isLoading) {
-    return <Loader />
-  }
-
   return (
-    // <div className={'flex gap-5 justify-center flex-wrap'}>
-    <div
-      className={'grid grid-cols-3 gap-1 sm:gap-3 mt-[30px] xl:mx-[65px] lg:grid-cols-4 md:gap-4'}
-    >
-      {data?.items.map(post => {
-        return (
-          <div className={'min-w-[108px] sm:min-w-[150px]'} key={post.id}>
-            <img height={260} src={post.images[0]?.url} width={260} />
-          </div>
-        )
-      })}
-    </div>
+    <>
+      <div className={'flex gap-5 justify-center flex-wrap relative'}>
+        {isLoading && <LoaderBlock />}
+        {!isLoading && data?.items && data?.items.length < 1 ? (
+          <Typography> user has no publications yet </Typography>
+        ) : (
+          data?.items.map(post => {
+            return (
+              <Link
+                className={'hover:scale-[1.013] duration-75'}
+                href={`/profile/${userId}/publications/${post.id}`}
+                key={post.id}
+              >
+                <img height={260} src={post.images[0]?.url} width={260} />
+              </Link>
+            )
+          })
+        )}
+      </div>
+    </>
   )
 }

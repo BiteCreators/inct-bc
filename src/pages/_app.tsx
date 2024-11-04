@@ -6,8 +6,14 @@ import { DefaultLayout } from '@/app/layouts/DefautlLayout'
 import { Providers } from '@/app/providers'
 import { wrapper } from '@/app/store'
 import { NextPage } from 'next'
+import { Inter } from 'next/font/google'
 
 import '@/app/styles/globals.css'
+
+const inter = Inter({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-inter',
+})
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: React.ReactElement) => React.ReactNode
@@ -22,5 +28,9 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   const { props, store } = wrapper.useWrappedStore(rest)
 
-  return <Providers store={store}>{getLayout(<Component {...props.pageProps} />)}</Providers>
+  return (
+    <Providers store={store}>
+      <div className={inter.className}>{getLayout(<Component {...props.pageProps} />)}</div>
+    </Providers>
+  )
 }
