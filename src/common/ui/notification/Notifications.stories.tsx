@@ -1,9 +1,8 @@
 import React from 'react'
 
 import { notificationData } from '@/common/ui/notification/notificationsData'
+import { Notifications } from '@/features/notifications/ui/Notifications'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { Notifications } from './Notifications'
 
 const meta: Meta<typeof Notifications> = {
   argTypes: {
@@ -28,7 +27,7 @@ export const Default: Story = {
   args: {
     notificationsItems: notificationData,
   },
-  render: args => {
+  render: () => {
     const [notifications, setNotifications] = React.useState(notificationData)
 
     const handleClick = (id: number) => {
