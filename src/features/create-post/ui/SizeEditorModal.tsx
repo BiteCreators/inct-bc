@@ -9,9 +9,9 @@ import { ImageControl } from './ImagesControl'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
-  handleDeleteImage: (imageId: string) => void
+  handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: Image[]
+  imagesUrl: string[]
   isDisableInput: boolean
   slidesUrl: string[]
   uploadImage: () => void
@@ -19,9 +19,9 @@ type Props = {
 
 export const SizeEditorModal = ({
   fileInputRef,
-  handleDeleteImage,
+  handleDeleteImageUrl,
   handleFileSelect,
-  images,
+  imagesUrl,
   isDisableInput,
   slidesUrl,
   uploadImage,
@@ -34,9 +34,9 @@ export const SizeEditorModal = ({
         <Cropping />
         <ImageControl
           fileInputRef={fileInputRef}
-          handleDeleteImage={handleDeleteImage}
+          handleDeleteImageUrl={handleDeleteImageUrl}
           handleFileSelect={handleFileSelect}
-          images={images}
+          imagesUrl={imagesUrl}
           isDisableInput={isDisableInput}
           uploadImage={uploadImage}
         />

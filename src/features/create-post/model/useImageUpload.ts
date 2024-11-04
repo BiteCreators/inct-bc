@@ -2,7 +2,13 @@ import { useRef, useState } from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 
-export const useImageUpload = (uploadImageForPost: (file: File | null) => Promise<void>) => {
+export const useImageUpload = ({
+  addImageUrlForPost,
+  handleNext,
+}: {
+  addImageUrlForPost: ({ file, handleNext }: { file: File | null; handleNext: () => void }) => void
+  handleNext: () => void
+}) => {
   const [error, setError] = useState('')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const t = useScopedTranslation('Profile')
@@ -30,7 +36,7 @@ export const useImageUpload = (uploadImageForPost: (file: File | null) => Promis
 
       const onLoadHandler = () => {
         setError('')
-        uploadImageForPost(file)
+        addImageUrlForPost({ file, handleNext })
         imageElement.removeEventListener('load', onLoadHandler)
       }
 

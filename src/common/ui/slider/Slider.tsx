@@ -1,17 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { MutableRefObject, useEffect } from 'react'
 
 import { ArrowIosBack, ArrowIosForward } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { useSlider } from '@/common/ui/slider/useSlider'
 
+import s from '@/app/styles/filters.module.css'
+
 type Props = {
   duration?: number
   height?: string
+  selectedFilters?: string[]
+  setCurrentIndex?: (currentIndex: number) => void
   slidesUrl: string[]
   stylesSlider?: string
+  totalImageRefs?: MutableRefObject<(HTMLImageElement | null)[]>
 }
 
-export const Slider = ({ duration = 4000, height = '560', slidesUrl, stylesSlider }: Props) => {
+export const Slider = ({
+  duration = 4000,
+  height = '560',
+  selectedFilters,
+  setCurrentIndex,
+  slidesUrl,
+  stylesSlider,
+  totalImageRefs,
+}: Props) => {
   const {
     currentIndex,
     goToSlide,
@@ -32,6 +45,12 @@ export const Slider = ({ duration = 4000, height = '560', slidesUrl, stylesSlide
       }
     }
   }, [isPaused, duration])
+
+  useEffect(() => {
+    if (setCurrentIndex) {
+      setCurrentIndex(currentIndex)
+    }
+  }, [currentIndex, setCurrentIndex])
 
   const stylesBtn =
     'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 p-3 cursor-pointer duration-300 ease-in-out md:block hidden hover:bg-gray-700 hover:opacity-85'
@@ -54,7 +73,16 @@ export const Slider = ({ duration = 4000, height = '560', slidesUrl, stylesSlide
           <li className={`w-full flex-shrink-0`} key={i}>
             <img
               alt={'slide'}
-              className={'w-full h-full object-cover object-center'}
+              className={cn(
+                'w-full h-full object-cover object-center',
+                s.filter,
+                selectedFilters && s[selectedFilters?.[i]]
+              )}
+              ref={el => {
+                if (totalImageRefs) {
+                  totalImageRefs.current[i] = el
+                }
+              }}
               src={slideUrl}
             />
           </li>

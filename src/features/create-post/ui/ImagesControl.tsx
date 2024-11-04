@@ -2,30 +2,29 @@ import React, { RefObject } from 'react'
 
 import {
   CloseOutlineSmall,
-  ImageDefault,
+  Image,
   ImageOutline,
   PlusCircleOutlineBig,
 } from '@/common/assets/icons/components'
 import { Button } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
-import { Image } from '@/entities/posts'
 
 import { useImageControl } from '../model/useImageControl'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
-  handleDeleteImage: (imageId: string) => void
+  handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: Image[]
+  imagesUrl: string[]
   isDisableInput: boolean
   uploadImage: () => void
 }
 
 export const ImageControl = ({
   fileInputRef,
-  handleDeleteImage,
+  handleDeleteImageUrl,
   handleFileSelect,
-  images,
+  imagesUrl,
   isDisableInput,
   uploadImage,
 }: Props) => {
@@ -38,7 +37,7 @@ export const ImageControl = ({
         onClick={() => setIsImagesControlOpen(!isImagesControlOpen)}
         variant={'icon'}
       >
-        {isImagesControlOpen ? <ImageDefault /> : <ImageOutline />}
+        {isImagesControlOpen ? <Image /> : <ImageOutline />}
       </Button>
       {isImagesControlOpen && (
         <div
@@ -47,14 +46,14 @@ export const ImageControl = ({
           }
         >
           <ul className={'grid grid-cols-3 min-w-[264px] gap-3'}>
-            {images.map(el => (
-              <li className={'w-20 h-20 rounded-[1px] relative'} key={el.uploadId}>
-                <img alt={'Image'} src={el.url} />
+            {imagesUrl.map((el, i) => (
+              <li className={'w-20 h-20 rounded-[1px] relative'} key={i}>
+                <img alt={'Image'} src={el} />
                 <button
                   className={
                     'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
                   }
-                  onClick={() => handleDeleteImage(el.uploadId)}
+                  onClick={() => handleDeleteImageUrl(i)}
                 >
                   <CloseOutlineSmall />
                 </button>

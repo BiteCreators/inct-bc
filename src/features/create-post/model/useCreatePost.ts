@@ -1,58 +1,64 @@
 import React, { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { Image, postsApi } from '@/entities/posts'
-import * as jose from 'jose'
-import { useRouter } from 'next/router'
+import { postsApi } from '@/entities/posts'
 
-export const useCreatePost = ({
-  handleNext,
-  setStep,
-}: {
-  handleNext: () => void
-  setStep: (step: number) => void
-  step: number
-}) => {
+export const useCreatePost = () => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
   const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
   const [isDisableInput, setIsDisableInput] = useState(false)
+
   const [createPostImage] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
   const [deletePostImage] = postsApi.useDeletePostImageMutation()
-  const [images, setImages] = useState<Image[]>([])
+
+  const [imagesId, setImagesId] = useState<{ uploadId: string }[]>([])
+  const [imagesUrl, setImagesUrl] = useState<string[]>([])
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
 
   const [description, setDescription] = useState<string>('')
 
-  const router = useRouter()
-  const [cookies] = useCookies(['accessToken'])
-  const { userId } = jose.decodeJwt(cookies.accessToken)
-
-  const slidesUrl = images?.map(el => el.url)
+  const addImageUrlForPost = ({
+    file,
+    handleNext,
+  }: {
+    file: File | null
+    handleNext: () => void
+  }) => {
+    if (file) {
+      if (imagesUrl.length === 0) {
+        handleNext()
+      }
+      setImagesUrl(imagesUrl => [...imagesUrl, URL.createObjectURL(file)])
+    }
+  }
 
   const uploadImageForPost = async (file: File | null) => {
     if (file) {
       try {
-        const res = await createPostImage({ file })
+        const res = await createPostImage({ file }).unwrap()
 
-        if (res.data?.images[0]) {
-          setImages([...images, res.data?.images[0]])
-          if (images.length === 0) {
-            handleNext()
-          }
-        }
+        setImagesId(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
       } catch (error) {
         handleApiError({ error, setApiError })
       }
     }
   }
 
-  const handleDeleteImage = (imageId: string) => {
-    setImages(images.filter(el => el.uploadId !== imageId))
-    deletePostImage({ uploadId: imageId })
+  const uploadAllImages = async (files: File[]) => {
+    try {
+      const uploadPromises = files.map(file => uploadImageForPost(file))
+
+      await Promise.all(uploadPromises)
+    } catch (error) {
+      handleApiError({ error, setApiError })
+    }
+  }
+
+  const handleDeleteImageUrl = (index: number) => {
+    setImagesUrl(imagesUrl => imagesUrl.filter((_, i) => i !== index))
   }
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,13 +67,14 @@ export const useCreatePost = ({
 
   const handlePublish = async () => {
     try {
-      if (images && images.length < 10) {
+      if (imagesId && imagesId.length < 10) {
         await createPost({
-          childrenMetadata: images.map(el => ({ uploadId: el.uploadId })),
+          childrenMetadata: imagesId,
           description,
-        })
-        setStep(1)
+        }).unwrap()
         setIsOpenCreatePost(false)
+        setImagesId([])
+        setImagesUrl([])
       }
     } catch (error) {
       handleApiError({ error, setApiError })
@@ -81,10 +88,13 @@ export const useCreatePost = ({
 
   const handleConfirm = () => {
     setIsOpenCreatePost(false)
-    setImages([])
-    images.forEach(el => {
-      deletePostImage({ uploadId: el.uploadId })
-    })
+    setImagesId([])
+    setImagesUrl([])
+    if (imagesId) {
+      imagesId.forEach(el => {
+        deletePostImage({ uploadId: el.uploadId })
+      })
+    }
   }
 
   const handleBackWithoutSave = () => {
@@ -92,36 +102,26 @@ export const useCreatePost = ({
   }
 
   useEffect(() => {
-    if (!isOpenCreatePost) {
-      router.push(`/profile/${userId}`)
-    }
-    if (images.length === 0) {
-      setStep(1)
-    }
-    if (images.length < 9) {
-      setIsDisableInput(false)
-    }
-    if (images.length >= 9) {
-      setIsDisableInput(true)
-    }
-  }, [images, setStep, isOpenCreatePost, router, userId])
+    setIsDisableInput(imagesUrl.length >= 9)
+  }, [imagesUrl])
 
   return {
+    addImageUrlForPost,
     apiError,
     handleBackWithoutSave,
     handleConfirm,
-    handleDeleteImage,
+    handleDeleteImageUrl,
     handleDescriptionChange,
     handleInteractOutside,
     handlePublish,
-    images,
+    imagesUrl,
     isDisableInput,
     isOpenActionConfirmation,
     isOpenCreatePost,
     setApiError,
+    setIsDisableInput,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
-    slidesUrl,
-    uploadImageForPost,
+    uploadAllImages,
   }
 }
