@@ -25,7 +25,7 @@ export const Notifications = ({ notificationsItems, onClickForStorybook }: Notif
   return (
     <div
       className={
-        'min-w-[280px] sm:min-w-[355px] px-2 py-4 border-dark-100 border-solid border rounded bg-dark-700 relative'
+        'min-w-[280px] sm:min-w-[355px] px-2 py-4 border-dark-100 border-solid border rounded bg-dark-500 relative'
       }
     >
       <h3
