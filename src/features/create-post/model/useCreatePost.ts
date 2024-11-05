@@ -8,12 +8,14 @@ export const useCreatePost = () => {
   const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
   const [isDisableInput, setIsDisableInput] = useState(false)
 
-  const [createPostImage] = postsApi.useCreatePostImageMutation()
+  const [createPostImage, { isLoading }] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
   const [deletePostImage] = postsApi.useDeletePostImageMutation()
 
-  const [imagesId, setImagesId] = useState<{ uploadId: string }[]>([])
-  const [imagesUrl, setImagesUrl] = useState<string[]>([])
+  const [uploadIds, setUploadIds] = useState<{ uploadId: string }[]>([])
+  const [images, setImages] = useState<
+    { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  >([])
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
@@ -28,10 +30,13 @@ export const useCreatePost = () => {
     handleNext: () => void
   }) => {
     if (file) {
-      if (imagesUrl.length === 0) {
+      if (images.length === 0) {
         handleNext()
       }
-      setImagesUrl(imagesUrl => [...imagesUrl, URL.createObjectURL(file)])
+      setImages(images => [
+        ...images,
+        { initialUrl: URL.createObjectURL(file), selectedFilter: '', totalUrl: '' },
+      ])
     }
   }
 
@@ -40,7 +45,7 @@ export const useCreatePost = () => {
       try {
         const res = await createPostImage({ file }).unwrap()
 
-        setImagesId(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
+        setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
       } catch (error) {
         handleApiError({ error, setApiError })
       }
@@ -49,16 +54,18 @@ export const useCreatePost = () => {
 
   const uploadAllImages = async (files: File[]) => {
     try {
-      const uploadPromises = files.map(file => uploadImageForPost(file))
+      await files.reduce(async (promise, file) => {
+        await promise // ждём завершения предыдущей загрузки
 
-      await Promise.all(uploadPromises)
+        return uploadImageForPost(file) // загружаем текущее изображение
+      }, Promise.resolve())
     } catch (error) {
       handleApiError({ error, setApiError })
     }
   }
 
   const handleDeleteImageUrl = (index: number) => {
-    setImagesUrl(imagesUrl => imagesUrl.filter((_, i) => i !== index))
+    setImages(images => images.filter((_, i) => i !== index))
   }
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -67,14 +74,14 @@ export const useCreatePost = () => {
 
   const handlePublish = async () => {
     try {
-      if (imagesId && imagesId.length < 10) {
+      if (uploadIds && uploadIds.length < 10) {
         await createPost({
-          childrenMetadata: imagesId,
+          childrenMetadata: uploadIds,
           description,
         }).unwrap()
         setIsOpenCreatePost(false)
-        setImagesId([])
-        setImagesUrl([])
+        setUploadIds([])
+        setImages([])
       }
     } catch (error) {
       handleApiError({ error, setApiError })
@@ -88,10 +95,10 @@ export const useCreatePost = () => {
 
   const handleConfirm = () => {
     setIsOpenCreatePost(false)
-    setImagesId([])
-    setImagesUrl([])
-    if (imagesId) {
-      imagesId.forEach(el => {
+    setUploadIds([])
+    setImages([])
+    if (uploadIds) {
+      uploadIds.forEach(el => {
         deletePostImage({ uploadId: el.uploadId })
       })
     }
@@ -102,8 +109,8 @@ export const useCreatePost = () => {
   }
 
   useEffect(() => {
-    setIsDisableInput(imagesUrl.length >= 9)
-  }, [imagesUrl])
+    setIsDisableInput(images.length >= 9)
+  }, [images])
 
   return {
     addImageUrlForPost,
@@ -114,14 +121,17 @@ export const useCreatePost = () => {
     handleDescriptionChange,
     handleInteractOutside,
     handlePublish,
-    imagesUrl,
+    images,
     isDisableInput,
+    isLoading,
     isOpenActionConfirmation,
     isOpenCreatePost,
     setApiError,
+    setImages,
     setIsDisableInput,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     uploadAllImages,
+    uploadIds,
   }
 }

@@ -8,6 +8,7 @@ import { Button } from '../button/Button'
 
 type Props = {
   children?: ReactNode
+  disabledButton?: boolean
   handleBack?: () => void
   handleNext?: () => void
   mode: 'custom' | 'default' | 'outside' | 'withStep'
@@ -17,6 +18,7 @@ type Props = {
 
 export const ModalContent = ({
   children,
+  disabledButton,
   handleBack,
   handleNext,
   mode,
@@ -71,6 +73,7 @@ export const ModalContent = ({
             <div className={'flex-1 text-right'}>
               <Button
                 className={'font-semibold focus:outline-0'}
+                disabled={disabledButton}
                 onClick={handleNext}
                 variant={'text'}
               >

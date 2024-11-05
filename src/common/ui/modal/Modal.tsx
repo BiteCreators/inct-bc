@@ -8,6 +8,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   children: ReactNode
   className?: string
+  disabledButton?: boolean
   handleBack?: () => void
   handleInteractOutside?: (e: any) => void
   handleNext?: () => void
@@ -22,6 +23,7 @@ type Props = {
 export const Modal = ({
   children,
   className,
+  disabledButton,
   handleBack,
   handleInteractOutside,
   handleNext,
@@ -45,6 +47,7 @@ export const Modal = ({
         onInteractOutside={handleInteractOutside}
       >
         <ModalContent
+          disabledButton={disabledButton}
           handleBack={handleBack}
           handleNext={handleNext}
           mode={mode}

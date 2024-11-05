@@ -15,7 +15,7 @@ type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  imagesUrl: string[]
+  images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
   isDisableInput: boolean
   uploadImage: () => void
 }
@@ -24,7 +24,7 @@ export const ImageControl = ({
   fileInputRef,
   handleDeleteImageUrl,
   handleFileSelect,
-  imagesUrl,
+  images,
   isDisableInput,
   uploadImage,
 }: Props) => {
@@ -46,9 +46,9 @@ export const ImageControl = ({
           }
         >
           <ul className={'grid grid-cols-3 min-w-[264px] gap-3'}>
-            {imagesUrl.map((el, i) => (
+            {images.map((el, i) => (
               <li className={'w-20 h-20 rounded-[1px] relative'} key={i}>
-                <img alt={'Image'} src={el} />
+                <img alt={'Image'} src={el.initialUrl} />
                 <button
                   className={
                     'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'

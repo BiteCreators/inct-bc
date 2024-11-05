@@ -7,13 +7,13 @@ import { useRouter } from 'next/router'
 export const useStepControl = ({
   handleApplyFilters,
   handlePublish,
-  imagesUrl,
+  images,
   isOpenCreatePost,
   uploadAllImages,
 }: {
   handleApplyFilters: () => Promise<{ newFiles: File[] }>
   handlePublish: () => Promise<void>
-  imagesUrl: string[]
+  images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
   isOpenCreatePost: boolean
   uploadAllImages: (files: File[]) => Promise<void>
 }) => {
@@ -54,15 +54,14 @@ export const useStepControl = ({
         try {
           const res = await handleApplyFilters()
 
-          await uploadAllImages(res.newFiles)
           setStep(prevStep => prevStep + 1)
+          await uploadAllImages(res.newFiles)
         } catch (error) {
           console.log(error)
         }
         break
       case 4:
         await handlePublish()
-        //setStep(1)
         break
       default:
         break
@@ -70,17 +69,17 @@ export const useStepControl = ({
   }
 
   const handleBack = () => {
-    setStep(step - 1)
+    setStep(prevStep => prevStep - 1)
   }
 
   useEffect(() => {
     if (!isOpenCreatePost) {
       router.push(`/profile/${userId}`)
     }
-    if (imagesUrl.length === 0) {
+    if (images.length === 0) {
       setStep(1)
     }
-  }, [imagesUrl, setStep, isOpenCreatePost, router, userId])
+  }, [images, setStep, isOpenCreatePost, router, userId])
 
   return {
     handleBack,

@@ -1,7 +1,10 @@
 import React from 'react'
 
+import { cn } from '@/common/lib/utils/cn'
 import { Alert, Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+
+import s from '@/app/styles/filters.module.css'
 
 import { useCreatePost } from '../model/useCreatePost'
 import { useImageFilters } from '../model/useImageFilters'
@@ -22,31 +25,27 @@ export const CreatePostModal = () => {
     handleDescriptionChange,
     handleInteractOutside,
     handlePublish,
-    imagesUrl,
+    images,
     isDisableInput,
+    isLoading,
     isOpenActionConfirmation,
     isOpenCreatePost,
+    setImages,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     uploadAllImages,
   } = useCreatePost()
 
-  const {
-    currentIndex,
-    handleApplyFilters,
-    handleSelectFilter,
-    selectedFilters,
-    setCurrentIndex,
-    totalImageRefs,
-    totalImagesUrls,
-  } = useImageFilters({
-    imagesUrl,
-  })
+  const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
+    useImageFilters({
+      images,
+      setImages,
+    })
 
   const { handleBack, handleNext, nextButtonTitle, step, title } = useStepControl({
     handleApplyFilters,
     handlePublish,
-    imagesUrl,
+    images,
     isOpenCreatePost,
     uploadAllImages,
   })
@@ -55,6 +54,28 @@ export const CreatePostModal = () => {
     addImageUrlForPost,
     handleNext,
   })
+
+  const addedImageSlides = images.map((el, i) => (
+    <img
+      alt={'slide'}
+      className={cn('w-full h-[490px] object-cover object-center', s.filter, s[el.selectedFilter])}
+      key={i}
+      ref={el => {
+        if (totalImageRefs) {
+          totalImageRefs.current[i] = el
+        }
+      }}
+      src={el.initialUrl}
+    />
+  ))
+  const totalImageSlides = images.map((el, i) => (
+    <img
+      alt={'slide'}
+      className={cn('w-full h-full object-cover object-center')}
+      key={i}
+      src={el.totalUrl}
+    />
+  ))
 
   return (
     <div>
@@ -72,6 +93,7 @@ export const CreatePostModal = () => {
         className={`max-w-[330px] ${
           step === 3 || step === 4 ? 'md:max-w-[984px]' : 'md:max-w-[492px]'
         } w-full min-h-64`}
+        disabledButton={isLoading}
         handleBack={step === 2 ? handleBackWithoutSave : handleBack}
         handleInteractOutside={step !== 1 ? handleInteractOutside : () => {}}
         handleNext={handleNext}
@@ -102,9 +124,9 @@ export const CreatePostModal = () => {
             fileInputRef={fileInputRef}
             handleDeleteImageUrl={handleDeleteImageUrl}
             handleFileSelect={handleFileSelect}
-            imagesUrl={imagesUrl}
+            images={images}
             isDisableInput={isDisableInput}
-            slidesUrl={imagesUrl}
+            slides={addedImageSlides}
             uploadImage={uploadImage}
           />
         )}
@@ -112,16 +134,15 @@ export const CreatePostModal = () => {
           <ImageFiltersModal
             currentIndex={currentIndex}
             handleSelectFilter={handleSelectFilter}
-            selectedFilters={selectedFilters}
+            imagesURL={images}
             setCurrentIndex={setCurrentIndex}
-            slidesUrl={imagesUrl}
-            totalImageRefs={totalImageRefs}
+            slides={addedImageSlides}
           />
         )}
         {step === 4 && (
           <PublicationModal
             handleDescriptionChange={handleDescriptionChange}
-            slidesUrl={totalImagesUrls}
+            slides={totalImageSlides}
           />
         )}
       </Modal>

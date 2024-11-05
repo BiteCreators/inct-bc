@@ -1,4 +1,4 @@
-import React, { MutableRefObject, RefObject } from 'react'
+import React, { MutableRefObject, ReactNode, RefObject } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { ScrollArea, Typography } from '@/common/ui'
@@ -11,30 +11,22 @@ import { filterValues } from '../utils/filterValues'
 type Props = {
   currentIndex: number
   handleSelectFilter: (selectedFilter: string) => void
-  selectedFilters: string[]
+  imagesURL: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
   setCurrentIndex: (currentIndex: number) => void
-  slidesUrl: string[]
-  totalImageRefs: MutableRefObject<(HTMLImageElement | null)[]>
+  slides: ReactNode[]
 }
 
 export const ImageFiltersModal = ({
   currentIndex,
   handleSelectFilter,
-  selectedFilters,
+  imagesURL,
   setCurrentIndex,
-  slidesUrl,
-  totalImageRefs,
+  slides,
 }: Props) => {
   return (
-    <div className={'flex'}>
+    <div className={'flex h-[490px]'}>
       <div className={'w-1/2'}>
-        <Slider
-          duration={0}
-          selectedFilters={selectedFilters}
-          setCurrentIndex={setCurrentIndex}
-          slidesUrl={slidesUrl}
-          totalImageRefs={totalImageRefs}
-        />
+        <Slider duration={0} setCurrentIndex={setCurrentIndex} slides={slides} />
       </div>
       <div className={'w-1/2 h-[490px]'}>
         <ScrollArea className={'h-full bg'}>
@@ -49,7 +41,7 @@ export const ImageFiltersModal = ({
                   <img
                     alt={'oops'}
                     className={cn('w-full h-full', s[filterValues[index].class])}
-                    src={slidesUrl[currentIndex]}
+                    src={imagesURL[currentIndex].initialUrl}
                   />
                 </div>
                 <Typography>{el.name}</Typography>

@@ -1,29 +1,25 @@
-import React, { MutableRefObject, useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 
 import { ArrowIosBack, ArrowIosForward } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { useSlider } from '@/common/ui/slider/useSlider'
 
-import s from '@/app/styles/filters.module.css'
-
 type Props = {
   duration?: number
   height?: string
-  selectedFilters?: string[]
   setCurrentIndex?: (currentIndex: number) => void
-  slidesUrl: string[]
+  slides: ReactNode[]
+  stylesSlide?: string
   stylesSlider?: string
-  totalImageRefs?: MutableRefObject<(HTMLImageElement | null)[]>
 }
 
 export const Slider = ({
   duration = 4000,
   height = '560',
-  selectedFilters,
   setCurrentIndex,
-  slidesUrl,
+  slides,
+  stylesSlide,
   stylesSlider,
-  totalImageRefs,
 }: Props) => {
   const {
     currentIndex,
@@ -34,7 +30,7 @@ export const Slider = ({
     isPaused,
     nextSlide,
     prevSlide,
-  } = useSlider(slidesUrl)
+  } = useSlider(slides)
 
   useEffect(() => {
     if (duration !== 0) {
@@ -55,6 +51,8 @@ export const Slider = ({
   const stylesBtn =
     'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 p-3 cursor-pointer duration-300 ease-in-out md:block hidden hover:bg-gray-700 hover:opacity-85'
 
+  const isNavigation = slides.length > 1
+
   return (
     <div
       {...handlers}
@@ -62,49 +60,42 @@ export const Slider = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button className={cn('left-3', stylesBtn)} onClick={prevSlide}>
-        <ArrowIosBack viewBox={'5 5 14 14'} />
-      </button>
+      {isNavigation ? (
+        <button className={cn('left-3', stylesBtn)} onClick={prevSlide}>
+          <ArrowIosBack viewBox={'5 5 14 14'} />
+        </button>
+      ) : null}
       <ul
         className={'flex w-full h-full transition-transform duration-500'}
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {slidesUrl.map((slideUrl, i) => (
-          <li className={`w-full flex-shrink-0`} key={i}>
-            <img
-              alt={'slide'}
-              className={cn(
-                'w-full h-full object-cover object-center',
-                s.filter,
-                selectedFilters && s[selectedFilters?.[i]]
-              )}
-              ref={el => {
-                if (totalImageRefs) {
-                  totalImageRefs.current[i] = el
-                }
-              }}
-              src={slideUrl}
-            />
+        {slides.map((slide, i) => (
+          <li className={cn(`w-full flex-shrink-0`, stylesSlide)} key={i}>
+            {slide}
           </li>
         ))}
       </ul>
-      <button className={cn('right-3', stylesBtn)} onClick={nextSlide}>
-        <ArrowIosForward viewBox={'5 5 14 14'} />
-      </button>
+      {isNavigation ? (
+        <button className={cn('right-3', stylesBtn)} onClick={nextSlide}>
+          <ArrowIosForward viewBox={'5 5 14 14'} />
+        </button>
+      ) : null}
       <div
-        className={
-          'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 p-2 bg-gray-700 bg-opacity-50'
-        }
+        className={cn(
+          'absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 p-2 bg-gray-700',
+          isNavigation ? 'bg-opacity-50' : 'bg-opacity-0'
+        )}
       >
-        {slidesUrl.map((_, i) => (
-          <button
-            className={`w-2 h-2 rounded-full ${
-              i === currentIndex ? 'bg-primary-500' : 'bg-light-100'
-            } hover:bg-primary-500`}
-            key={i}
-            onClick={() => goToSlide(i)}
-          />
-        ))}
+        {isNavigation
+          ? slides.map((_, i) => (
+              <button
+                className={`w-2 h-2 rounded-full
+              ${i === currentIndex ? 'bg-primary-500' : 'bg-light-100'} hover:bg-primary-500`}
+                key={i}
+                onClick={() => goToSlide(i)}
+              />
+            ))
+          : null}
       </div>
     </div>
   )
