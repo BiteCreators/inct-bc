@@ -15,7 +15,8 @@ export const MyPayments = ({}: Props) => {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      accountType: '',
+      currentSubscription: '1',
+      price: '',
     },
     mode: 'onChange',
   })
@@ -51,13 +52,14 @@ export const MyPayments = ({}: Props) => {
         <Card className={'flex flex-col'}>
           <Controller
             control={control}
-            name={'accountType'}
+            name={'currentSubscription'}
             render={({ field }) => (
               <RadioGroup
                 {...field}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                   setCurrentValue(e.currentTarget.value)
-                }
+                  field.onChange(e.currentTarget.value)
+                }}
                 options={[
                   { label: 'Personal', value: '1' },
                   { label: 'Business', value: '2' },
@@ -66,19 +68,28 @@ export const MyPayments = ({}: Props) => {
             )}
           />
         </Card>
-
         {currentValue === '2' && (
           <>
             <Typography className={'font-weight600'} variant={'h3'}>
               Current Subscription:
             </Typography>
             <Card className={'flex flex-col'}>
-              <RadioGroup
-                options={[
-                  { label: '$10 per 1 Day', value: '1' },
-                  { label: '$10 per 1 Day', value: '2' },
-                  { label: '$10 per 1 Day', value: '3' },
-                ]}
+              <Controller
+                control={control}
+                name={'price'}
+                render={({ field }) => (
+                  <RadioGroup
+                    {...field}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                      field.onChange(e.currentTarget.value)
+                    }}
+                    options={[
+                      { label: '$10 per 1 Day', value: '3' },
+                      { label: '$10 per 1 Day', value: '4' },
+                      { label: '$10 per 1 Day', value: '5' },
+                    ]}
+                  />
+                )}
               />
             </Card>
           </>
