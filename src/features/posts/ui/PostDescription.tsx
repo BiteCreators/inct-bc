@@ -9,7 +9,8 @@ type Props = {
 }
 
 export const PostDescription = ({ post }: Props) => {
-  const { relativeTime } = useGetRelativeTime({ time: new Date(post.createdAt).getTime() })
+  const { getRelativeTime } = useGetRelativeTime()
+  const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
 
   return (
     <div className={'flex mb-4 gap-3 items-start'}>
