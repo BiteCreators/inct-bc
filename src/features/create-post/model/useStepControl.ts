@@ -1,22 +1,25 @@
 import { useState } from 'react'
 
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+
 export const useStepControl = () => {
   const [step, setStep] = useState(1)
+  const t = useScopedTranslation('Posts')
 
   let title
   let nextButtonTitle
 
   if (step === 1) {
-    title = 'Add Photo'
+    title = t.addPhoto
   } else if (step === 2) {
-    title = 'Cropping'
-    nextButtonTitle = 'Next'
+    title = t.cropping
+    nextButtonTitle = t.next
   } else if (step === 3) {
-    title = 'Filters'
-    nextButtonTitle = 'Next'
+    title = t.filters
+    nextButtonTitle = t.next
   } else {
-    title = 'Publication'
-    nextButtonTitle = 'Publish'
+    title = t.publication
+    nextButtonTitle = t.publish
   }
 
   const handleNext = () => {

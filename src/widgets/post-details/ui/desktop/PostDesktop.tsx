@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import { Close } from '@/common/assets/icons/components'
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
@@ -18,10 +18,10 @@ import { PostModalTitle } from './PostModalTitle'
 type Props = {
   comments: { id: string; text: string }[]
   post: Post
-  slidesUrl: string[]
+  slides: ReactNode[]
 }
 
-export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
+export const PostDesktop = ({ comments, post, slides }: Props) => {
   const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
@@ -34,7 +34,7 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
 
   return (
     <>
-      <EditPost changeEditMode={setEditMode} isOpen={editMode} post={post} slidesUrl={slidesUrl} />
+      <EditPost changeEditMode={setEditMode} isOpen={editMode} post={post} slides={slides} />
       <Modal
         className={cn([
           'w-full border-x-8',
@@ -48,11 +48,7 @@ export const PostDesktop = ({ comments, post, slidesUrl }: Props) => {
       >
         <div className={cn(['flex flex-row'])}>
           {postWithPic && (
-            <Slider
-              height={'full'}
-              slidesUrl={slidesUrl}
-              stylesSlider={'max-w-[500px] min-w-[390px]'}
-            />
+            <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px] min-w-[390px]'} />
           )}
           <>
             <Dialog.Close

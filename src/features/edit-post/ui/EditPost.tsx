@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { Alert, Button, Loader, Modal, TextArea } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
@@ -12,10 +12,10 @@ type Props = {
   changeEditMode: (e: boolean) => void
   isOpen: boolean
   post: Post
-  slidesUrl: string[]
+  slides: ReactNode[]
 }
 
-export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => {
+export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
   const {
     apiError,
     changeModalState,
@@ -28,6 +28,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
     limit,
     saveChanges,
     setConfirmOpen,
+    t,
     value,
   } = useEditPost({ changeEditMode, postText: post?.description })
 
@@ -35,13 +36,11 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={
-          'Do you really want to close the edition of the publication? If you close changes won’t be saved'
-        }
+        message={t.doYouWantToCloseEditing}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={'Close Post'}
+        title={t.closeEditing}
       />
       {apiError && (
         <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
@@ -51,16 +50,12 @@ export const EditPost = ({ changeEditMode, isOpen, post, slidesUrl }: Props) => 
         isOpen={isOpen}
         mode={'default'}
         onOpenChange={changeModalState}
-        title={'Edit post'}
+        title={t.editPost}
       >
         {isSSRPostLoading && <LoaderBlock />}
         <div className={'w-[920px] h-[460px] flex flex-row'}>
           <div className={'w-1/2 h-full bg-amber-200'}>
-            <Slider
-              height={'full'}
-              slidesUrl={slidesUrl}
-              stylesSlider={'max-w-[500px] min-w-[390px]'}
-            />
+            <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px] min-w-[390px]'} />
           </div>
           <div className={'w-1/2 h-full pl-4'}>
             <div className={'flex w-full h-1/3 flex-col '}>

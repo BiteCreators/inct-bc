@@ -11,7 +11,9 @@ type Props = {
 }
 
 export const PostDetails = ({ post }: Props) => {
-  const slidesUrl = post.images.map((image: Image) => image.url)
+  const slides = post.images.map((image: Image, i) => (
+    <img alt={'postImg'} className={'h-full object-cover object-center'} key={i} src={image.url} />
+  ))
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
   const comments = [
     {
@@ -27,8 +29,8 @@ export const PostDetails = ({ post }: Props) => {
   ]
 
   if (isLargeScreen) {
-    return <PostDesktop comments={comments} post={post} slidesUrl={slidesUrl} />
+    return <PostDesktop comments={comments} post={post} slides={slides} />
   } else {
-    return <PostMobile comments={comments} post={post} slidesUrl={slidesUrl} />
+    return <PostMobile comments={comments} post={post} slides={slides} />
   }
 }
