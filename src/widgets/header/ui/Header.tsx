@@ -5,6 +5,7 @@ import { SignInButton, SignUpButton } from '@/features/auth'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'
+import { StripePaymentButton } from '@/features/payments/ui/StripePaymentButton'
 import { useRouter } from 'next/router'
 
 import { HeaderMenu } from './HeaderMenu'
@@ -32,6 +33,7 @@ export const Header = () => {
           </div>
         )}
         <LanguageSelect />
+        <StripePaymentButton />
         <div className={'block md:hidden'}>
           <HeaderMenu />
         </div>

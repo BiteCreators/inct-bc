@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { EditPost } from '@/features/edit-post'
+
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
 import { Profile } from '@/entities/profile'
+import { EditPost } from '@/features/edit-post'
+import { StripePaymentButton } from '@/features/payments/ui/StripePaymentButton'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
