@@ -1,12 +1,8 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
-import { Button, Card, Checkbox, FormCheckbox, Input, RadioGroup, Typography } from '@/common/ui'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
-import { Radio } from '@/common/ui/radio-group/Radio'
+import { Button, Card, Checkbox, RadioGroup, Typography } from '@/common/ui'
 import { paymentsApi } from '@/entities/payments'
-import { RecoveryPasswordFormData } from '@/features/auth/lib/schemas/recoveryPassword.schema'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 type Props = {}
 export const MyPayments = ({}: Props) => {
