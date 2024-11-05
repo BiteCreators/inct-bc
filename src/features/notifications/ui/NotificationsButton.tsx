@@ -4,7 +4,8 @@ import { FillBell } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { notificationData } from '@/common/ui/notification/notificationsData'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
-import { Notifications } from '@/features/notifications/ui/Notifications'
+
+import { NotificationsList } from './Notifications'
 
 export const NotificationsButton = () => {
   const [viewNotifications, setViewNotifications] = useState(false)
@@ -23,7 +24,7 @@ export const NotificationsButton = () => {
         <FillBell className={cn(viewNotifications ? 'text-primary-500' : 'text-light-100')} />
       </button>
       <div className={'absolute -right-[9px] mt-2'}>
-        {viewNotifications && <Notifications notificationsItems={notificationsCorrectDate} />}
+        {viewNotifications && <NotificationsList notificationsItems={notificationsCorrectDate} />}
       </div>
     </div>
   )

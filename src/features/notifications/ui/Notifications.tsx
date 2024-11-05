@@ -1,24 +1,14 @@
 import React from 'react'
 
 import { ScrollArea } from '@/common/ui'
+import { Notification } from '@/entities/notifications'
 
-export type NotificationsData = {
-  notificationsItems: NotificationItem[]
-  onClickForStorybook?: (id: number) => void // for storybook
+export type Props = {
+  notificationsItems: Notification[]
 }
 
-export type NotificationItem = {
-  id: number
-  isRead: boolean
-  message: string
-  notifyAt: string
-}
-
-export const Notifications = ({ notificationsItems, onClickForStorybook }: NotificationsData) => {
+export const NotificationsList = ({ notificationsItems }: Props) => {
   const handlerNotification = (id: number) => {
-    if (onClickForStorybook) {
-      onClickForStorybook(id)
-    }
     console.log('notificationId', id)
   }
 

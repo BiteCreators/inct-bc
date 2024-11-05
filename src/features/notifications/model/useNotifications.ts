@@ -1,10 +1,10 @@
-import { NotificationItem } from '@/features/notifications/ui/Notifications'
+import { Notification } from '@/entities/notifications'
 import TimeAgo, { DateInput } from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import ru from 'javascript-time-ago/locale/ru'
 import { useRouter } from 'next/router'
 
-export const useNotifications = (notificationsItems: NotificationItem[]) => {
+export const useNotifications = (notificationsItems: Notification[]) => {
   const router = useRouter()
 
   const getRelativeTime = (date: DateInput) => {
