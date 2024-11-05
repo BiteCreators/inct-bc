@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { cn } from '@/common/lib/utils/cn'
@@ -9,9 +9,9 @@ import exampleImage from '../../../../public/examples/image2.png'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  slides: ReactNode[]
+  slides: string[]
 }
-  
+
 export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
   const t = useScopedTranslation('Posts')
 
@@ -21,12 +21,10 @@ export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => 
         <Slider duration={0} slides={slides} />
       </div>
       <div className={'w-1/2 p-6'}>
-        {/* //TODO: replace with userProfile component */}
         <UserProfileUrl className={'mb-6'} />
         <TextArea
           className={'min-h-[120px]'}
           label={t.addPublicationDesctiption}
-          label={'Add publication descriptions'}
           limitCount={500}
           onChange={handleDescriptionChange}
           placeholder={'Text-area'}
