@@ -33,11 +33,11 @@ export const ProfileSettingsTabs = () => {
           value: 'devices',
         },
         {
-          content: <div>account management</div>,
+          content: <MyPayments />,
           label: t.accountManagement,
           value: 'account-management',
         },
-        { content: <MyPayments />, label: t.myPayments, value: 'my-payments' },
+        { content: <div>my paments</div>, label: t.myPayments, value: 'my-payments' },
       ]}
       value={selectedTab}
     />
