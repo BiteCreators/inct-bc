@@ -4,10 +4,14 @@ import { ExpandOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
 
-type Props = { id?: string } & SelectPrimitive.SelectProps
+type Props = {
+  defaultValue: string
+  id?: string
+  onValueChange: (value: string) => void
+} & SelectPrimitive.SelectProps
 
 export const SelectSideTop = forwardRef<HTMLButtonElement, Props>(
-  ({ children, defaultValue, id }, ref) => {
+  ({ children, defaultValue, id, onValueChange }, ref) => {
     const selectId = useId()
     const [isOpenSelect, setIsOpenSelect] = useState(false)
 
@@ -15,6 +19,7 @@ export const SelectSideTop = forwardRef<HTMLButtonElement, Props>(
       <SelectPrimitive.Root
         defaultValue={defaultValue}
         onOpenChange={setIsOpenSelect}
+        onValueChange={onValueChange} // Здесь мы обрабатываем изменение значения
         open={isOpenSelect}
       >
         <SelectPrimitive.Trigger

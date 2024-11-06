@@ -1,9 +1,11 @@
 import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
+import { RangeSlider } from '@/common/ui/range-slider/RangeSlider'
 import { Slider } from '@/common/ui/slider/Slider'
 import { ImageType } from '@/features/create-post/types/types'
 import { getCroppedImg } from '@/features/create-post/utils/getCroppedImg'
+import * as SliderPrimitive from '@radix-ui/react-slider'
 
 import { AspectRatio } from './AspectRatio'
 import { Cropping } from './Cropping'
@@ -34,6 +36,7 @@ export const SizeEditorModal = ({
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
+  const [aspect, setAspect] = useState(1)
 
   const handleCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -60,38 +63,38 @@ export const SizeEditorModal = ({
       {selectedImage !== null && (
         <div className={'w-full bg-primary-100'}>
           <Cropper
-            aspect={1}
+            aspect={aspect}
             crop={crop}
             image={images[selectedImage].initialUrl}
             onCropChange={setCrop}
             onCropComplete={handleCropComplete}
             onZoomChange={setZoom}
-            // style={{
-            //   containerStyle: {
-            //     border: '1px solid black',
-            //     overflow: 'hidden',
-            //     position: 'absolute',
-            //     top: '0',
-            //     width: 'calc(100% - 2px)',
-            //   },
-            //   cropAreaStyle: {
-            //     border: '1px solid black',
-            //     height: '100%',
-            //     position: 'absolute',
-            //     top: '0',
-            //     width: '100%',
-            //   },
-            //   mediaStyle: { display: 'block', height: '100%' },
-            // }}
+            style={{
+              containerStyle: {
+                backgroundColor: '#606060',
+              },
+              cropAreaStyle: {
+                border: '1px solid white',
+              },
+            }}
             zoom={zoom}
           />
+          {/*<div className={'mt-4'}>*/}
+          {/*  <RangeSlider setZoom={setZoom} zoom={zoom} />*/}
+          {/*</div>*/}
+          {/*<div className={'flex justify-between mt-4'}>*/}
+          {/*  /!* Aspect Ratio Controls *!/*/}
+          {/*  <button onClick={() => setAspect(1)}>1:1</button>*/}
+          {/*  <button onClick={() => setAspect(16 / 9)}>16:9</button>*/}
+          {/*  <button onClick={() => setAspect(4 / 5)}>4:5</button>*/}
+          {/*</div>*/}
           <button onClick={onCrop}>Crop</button>
           <button onClick={() => setSelectedImage(null)}>Cancel</button>
         </div>
       )}
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
-        <AspectRatio />
-        <Cropping />
+        <AspectRatio setAspect={setAspect} />
+        <Cropping setZoom={setZoom} zoom={zoom} />
         <ImageControl
           fileInputRef={fileInputRef}
           handleDeleteImageUrl={handleDeleteImageUrl}
