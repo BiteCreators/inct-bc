@@ -35,7 +35,7 @@ export const ImageFiltersModal = ({
             {filterValues.map((el, index) => (
               <li
                 className={'flex flex-col gap-2 items-center cursor-pointer'}
-                key={index}
+                key={el.name}
                 onClick={() => handleSelectFilter(el.class)}
               >
                 <div className={'w-[108px] h-[108px]'}>

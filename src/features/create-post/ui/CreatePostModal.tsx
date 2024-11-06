@@ -59,7 +59,7 @@ export const CreatePostModal = () => {
     <img
       alt={'slide'}
       className={cn('w-full h-[490px] object-cover object-center', s.filter, s[el.selectedFilter])}
-      key={i}
+      key={el.initialUrl}
       ref={el => {
         if (totalImageRefs) {
           totalImageRefs.current[i] = el
@@ -72,7 +72,7 @@ export const CreatePostModal = () => {
     <img
       alt={'slide'}
       className={cn('w-full h-full object-cover object-center')}
-      key={i}
+      key={el.totalUrl}
       src={el.totalUrl}
     />
   ))
