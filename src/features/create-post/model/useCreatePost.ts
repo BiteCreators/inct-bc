@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { authSlice } from '@/entities/auth'
-import { Image, postsApi } from '@/entities/posts'
-import { useRouter } from 'next/router'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { authSlice } from '@/entities/auth'
+import { postsApi } from '@/entities/posts'
+import { useRouter } from 'next/router'
 
 export const useCreatePost = ({
   handleNext,
