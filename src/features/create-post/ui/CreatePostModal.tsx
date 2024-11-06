@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Alert, Modal } from '@/common/ui'
@@ -16,6 +16,7 @@ import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
 export const CreatePostModal = () => {
+  const [selectedImage, setSelectedImage] = useState<null | number>(null) // Управляем текущим индексом изображения
   const {
     addImageUrlForPost,
     apiError,
@@ -52,7 +53,10 @@ export const CreatePostModal = () => {
 
   const { error, fileInputRef, handleFileSelect, setError, uploadImage } = useImageUpload({
     addImageUrlForPost,
-    handleNext,
+    handleNext: () => {
+      handleNext() // Переход к следующему шагу после загрузки
+      setSelectedImage(images.length) // Устанавливаем `selectedImage` на новое изображение
+    },
   })
 
   const addedImageSlides = images.map((el, i) => (
@@ -121,7 +125,9 @@ export const CreatePostModal = () => {
             handleFileSelect={handleFileSelect}
             images={images}
             isDisableInput={isDisableInput}
+            selectedImage={selectedImage}
             setImages={setImages}
+            setSelectedImage={setSelectedImage}
             slides={addedImageSlides}
             uploadImage={uploadImage}
           />
