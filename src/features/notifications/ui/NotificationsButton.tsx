@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import { FillBell } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { notificationData } from '@/common/ui/notification/notificationsData'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
 
 import { NotificationsList } from './Notifications'
+import { notificationData } from './notificationsData'
 
 export const NotificationsButton = () => {
   const [viewNotifications, setViewNotifications] = useState(false)
