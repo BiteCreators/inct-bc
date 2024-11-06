@@ -11,7 +11,7 @@ type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   slides: ReactNode[]
 }
-  
+
 export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
   const t = useScopedTranslation('Posts')
 
@@ -26,7 +26,6 @@ export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => 
         <TextArea
           className={'min-h-[120px]'}
           label={t.addPublicationDesctiption}
-          label={'Add publication descriptions'}
           limitCount={500}
           onChange={handleDescriptionChange}
           placeholder={'Text-area'}
