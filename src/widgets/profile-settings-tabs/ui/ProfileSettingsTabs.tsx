@@ -5,6 +5,7 @@ import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
 import { MyPayments } from '@/features/payments/ui/MyPayments'
+import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
@@ -38,7 +39,7 @@ export const ProfileSettingsTabs = () => {
           value: 'account-management',
         },
         {
-          content: <MyPayments />,
+          content: <MyPaymentsTest />,
           label: t.myPayments,
           value: 'my-payments',
         },

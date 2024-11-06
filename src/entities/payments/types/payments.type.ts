@@ -30,9 +30,20 @@ export type MyPaymentsResponse = MyPayment[]
 export type MyPayment = {
   dateOfPayment: string
   endDateOfSubscription: string
-  paymentType: string
+  paymentType: PaymentType
   price: number
   subscriptionId: string
-  subscriptionType: string
+  subscriptionType: SubscriptionType
   userId: number
+}
+
+enum SubscriptionType {
+  DAY = '1 day',
+  MONTHLY = '1 month',
+  WEEKLY = '7 days',
+}
+enum PaymentType {
+  CREDIT_CARD = 'Credit card',
+  PAYPAL = 'PayPal',
+  STRIPE = 'Stripe',
 }
