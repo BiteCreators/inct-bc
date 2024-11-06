@@ -1,21 +1,25 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, TextArea, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 
 import exampleImage from '../../../../public/examples/image2.png'
+import { ImageData } from '../types'
+import { generateTotalImageSlides } from './ImageSlides'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  slides: ReactNode[]
+  images: ImageData[]
 }
 
-export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
+export const PublicationModal = ({ handleDescriptionChange, images }: Props) => {
+  const totalImageSlides = generateTotalImageSlides(images)
+
   return (
     <div className={'flex'}>
       <div className={'w-1/2'}>
-        <Slider duration={0} slides={slides} />
+        <Slider duration={0} slides={totalImageSlides} />
       </div>
       <div className={'w-1/2 p-6'}>
         <UserProfileUrl className={'mb-6'} />

@@ -1,10 +1,7 @@
 import React from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
 import { Alert, Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-
-import s from '../styles/filters.module.css'
 
 import { useCreatePost } from '../model/useCreatePost'
 import { useImageFilters } from '../model/useImageFilters'
@@ -12,6 +9,7 @@ import { useImageUpload } from '../model/useImageUpload'
 import { useStepControl } from '../model/useStepControl'
 import { AddPhotoModal } from './AddPhotoModal'
 import { ImageFiltersModal } from './ImageFiltersModal'
+import { generateAddedImageSlides } from './ImageSlides'
 import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
@@ -55,27 +53,7 @@ export const CreatePostModal = () => {
     handleNext,
   })
 
-  const addedImageSlides = images.map((el, i) => (
-    <img
-      alt={'slide'}
-      className={cn('w-full h-[490px] object-cover object-center', s.filter, s[el.selectedFilter])}
-      key={el.initialUrl}
-      ref={el => {
-        if (totalImageRefs) {
-          totalImageRefs.current[i] = el
-        }
-      }}
-      src={el.initialUrl}
-    />
-  ))
-  const totalImageSlides = images.map((el, i) => (
-    <img
-      alt={'slide'}
-      className={cn('w-full h-full object-cover object-center')}
-      key={el.totalUrl}
-      src={el.totalUrl}
-    />
-  ))
+  const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
 
   return (
     <div>
@@ -134,16 +112,13 @@ export const CreatePostModal = () => {
           <ImageFiltersModal
             currentIndex={currentIndex}
             handleSelectFilter={handleSelectFilter}
-            imagesURL={images}
+            images={images}
             setCurrentIndex={setCurrentIndex}
             slides={addedImageSlides}
           />
         )}
         {step === 4 && (
-          <PublicationModal
-            handleDescriptionChange={handleDescriptionChange}
-            slides={totalImageSlides}
-          />
+          <PublicationModal handleDescriptionChange={handleDescriptionChange} images={images} />
         )}
       </Modal>
     </div>
