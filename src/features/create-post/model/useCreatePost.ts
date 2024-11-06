@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { postsApi } from '@/entities/posts'
 
+import { ImageData } from '../types'
+
 export const useCreatePost = () => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
   const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
@@ -13,9 +15,7 @@ export const useCreatePost = () => {
   const [deletePostImage] = postsApi.useDeletePostImageMutation()
 
   const [uploadIds, setUploadIds] = useState<{ uploadId: string }[]>([])
-  const [images, setImages] = useState<
-    { initialUrl: string; selectedFilter: string; totalUrl: string }[]
-  >([])
+  const [images, setImages] = useState<ImageData[]>([])
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')

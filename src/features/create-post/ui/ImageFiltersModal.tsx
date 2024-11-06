@@ -6,12 +6,13 @@ import { Slider } from '@/common/ui/slider/Slider'
 
 import s from '@/app/styles/filters.module.css'
 
+import { ImageData } from '../types'
 import { filterValues } from '../utils/filterValues'
 
 type Props = {
   currentIndex: number
   handleSelectFilter: (selectedFilter: string) => void
-  imagesURL: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  imagesURL: ImageData[]
   setCurrentIndex: (currentIndex: number) => void
   slides: ReactNode[]
 }

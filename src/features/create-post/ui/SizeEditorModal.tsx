@@ -2,6 +2,7 @@ import React, { ReactNode, RefObject } from 'react'
 
 import { Slider } from '@/common/ui/slider/Slider'
 
+import { ImageData } from '../types'
 import { AspectRatio } from './AspectRatio'
 import { Cropping } from './Cropping'
 import { ImageControl } from './ImagesControl'
@@ -10,7 +11,7 @@ type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  images: ImageData[]
   isDisableInput: boolean
   slides: ReactNode[]
   uploadImage: () => void
