@@ -3,21 +3,22 @@ import en from 'javascript-time-ago/locale/en'
 import ru from 'javascript-time-ago/locale/ru'
 import { useRouter } from 'next/router'
 
-TimeAgo.addDefaultLocale(en)
+TimeAgo.addLocale(en)
 TimeAgo.addLocale(ru)
 
 /**
  *
- * @param {number} time - time to show relative to
- * @returns relative time
+ * @returns function that takes time and returns relative time
  */
-export const useGetRelativeTime = ({ time }: { time: number }) => {
+export const useGetRelativeTime = () => {
   const router = useRouter()
   const locale = router.locale === 'en' ? 'en-US' : 'ru-RU'
 
   const timeAgo = new TimeAgo(locale)
 
-  const relativeTime = timeAgo.format(time)
+  const getRelativeTime = (time: number) => {
+    return timeAgo.format(time)
+  }
 
-  return { relativeTime }
+  return { getRelativeTime }
 }

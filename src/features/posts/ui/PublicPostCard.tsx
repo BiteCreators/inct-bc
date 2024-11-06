@@ -10,7 +10,8 @@ type Props = {
 }
 
 export const PublicPostCard = ({ post }: Props) => {
-  const { relativeTime } = useGetRelativeTime({ time: new Date(post.createdAt).getTime() })
+  const { getRelativeTime } = useGetRelativeTime()
+  const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
 
   const { collapsable, isCollapsed, textToShow, toggleShowMore } = useShowMore({
     text: post.description,

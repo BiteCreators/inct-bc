@@ -6,6 +6,7 @@ import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { authSlice } from '@/entities/auth'
 import { Image, postsApi } from '@/entities/posts'
 import { useRouter } from 'next/router'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 
 export const useCreatePost = ({
   handleNext,
@@ -22,6 +23,7 @@ export const useCreatePost = ({
   const [createPost] = postsApi.useCreatePostMutation()
   const [deletePostImage] = postsApi.useDeletePostImageMutation()
   const [images, setImages] = useState<Image[]>([])
+  const t = useScopedTranslation('Posts')
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
@@ -30,8 +32,6 @@ export const useCreatePost = ({
 
   const router = useRouter()
   const userId = useAppSelector(authSlice.selectors.selectUserId)
-
-  const slidesUrl = images?.map(el => el.url)
 
   const uploadImageForPost = async (file: File | null) => {
     if (file) {
@@ -121,7 +121,7 @@ export const useCreatePost = ({
     setApiError,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
-    slidesUrl,
+    t,
     uploadImageForPost,
   }
 }
