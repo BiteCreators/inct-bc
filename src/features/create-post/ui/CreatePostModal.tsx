@@ -4,7 +4,7 @@ import { cn } from '@/common/lib/utils/cn'
 import { Alert, Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 
-import s from '@/app/styles/filters.module.css'
+import s from '../styles/filters.module.css'
 
 import { useCreatePost } from '../model/useCreatePost'
 import { useImageFilters } from '../model/useImageFilters'
