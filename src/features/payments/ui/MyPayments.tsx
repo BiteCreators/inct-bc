@@ -2,18 +2,12 @@ import React, { ChangeEvent, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { Button, Card, Checkbox, RadioGroup, Typography } from '@/common/ui'
-import { paymentsApi } from '@/entities/payments'
 
 type Props = {}
 export const MyPayments = ({}: Props) => {
-  const { data, isLoading } = paymentsApi.useGetMyPaymentsQuery()
   const [currentValue, setCurrentValue] = useState('1')
 
-  const {
-    control,
-    formState: { isValid },
-    handleSubmit,
-  } = useForm({
+  const { control, handleSubmit } = useForm({
     defaultValues: {
       currentSubscription: '1',
       price: '',
@@ -30,7 +24,7 @@ export const MyPayments = ({}: Props) => {
         {' '}
         Current Subscription:
       </Typography>
-      <Card className={'flex'}>
+      <Card className={'flex mt-2'}>
         <div className={'flex flex-col mx-4 my-3 gap-5'}>
           <Typography className={'text-light-900'}>Expire at</Typography>
           <Typography className={'font-weight600'}>Expire at</Typography>
@@ -41,15 +35,15 @@ export const MyPayments = ({}: Props) => {
         </div>
       </Card>
       <Checkbox
-        className={'mt-5'}
-        text={<Typography className={'font-weight600 mt-5'}>Auto-Renewal</Typography>}
+        className={'mt-3'}
+        text={<Typography className={'font-weight600 mt-3'}>Auto-Renewal</Typography>}
       />
-      <Typography className={'font-weight600'} variant={'h3'}>
+      <Typography className={'font-weight600 mt-5'} variant={'h3'}>
         {' '}
         Current Subscription:
       </Typography>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Card className={'flex flex-col'}>
+        <Card className={'flex flex-col  mt-2'}>
           <Controller
             control={control}
             name={'currentSubscription'}
@@ -70,10 +64,10 @@ export const MyPayments = ({}: Props) => {
         </Card>
         {currentValue === '2' && (
           <>
-            <Typography className={'font-weight600'} variant={'h3'}>
+            <Typography className={'font-weight600 mt-7'} variant={'h3'}>
               Current Subscription:
             </Typography>
-            <Card className={'flex flex-col'}>
+            <Card className={'flex flex-col mt-2'}>
               <Controller
                 control={control}
                 name={'price'}
@@ -95,7 +89,7 @@ export const MyPayments = ({}: Props) => {
           </>
         )}
       </form>
-      <div className={'h-10 flex gap-3 items-center'}>
+      <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>
         <Button onClick={handleSubmit(onSubmit)} type={'submit'}>
           {' '}
           pipal
