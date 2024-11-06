@@ -58,7 +58,7 @@ export const SizeEditorModal = ({
   }
 
   return (
-    <div className={'h-[490px] relative'}>
+    <div className={'min-h-[400px] relative'}>
       <Slider duration={0} slides={slides} />
       {selectedImage !== null && (
         <div className={'w-full bg-primary-100'}>
@@ -88,13 +88,13 @@ export const SizeEditorModal = ({
           {/*  <button onClick={() => setAspect(16 / 9)}>16:9</button>*/}
           {/*  <button onClick={() => setAspect(4 / 5)}>4:5</button>*/}
           {/*</div>*/}
-          <button onClick={onCrop}>Crop</button>
-          <button onClick={() => setSelectedImage(null)}>Cancel</button>
         </div>
       )}
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
         <AspectRatio setAspect={setAspect} />
         <Cropping setZoom={setZoom} zoom={zoom} />
+        <button onClick={onCrop}>Crop</button>
+        <button onClick={() => setSelectedImage(null)}>Cancel</button>
         <ImageControl
           fileInputRef={fileInputRef}
           handleDeleteImageUrl={handleDeleteImageUrl}

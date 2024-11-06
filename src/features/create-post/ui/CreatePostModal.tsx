@@ -58,7 +58,7 @@ export const CreatePostModal = () => {
   const addedImageSlides = images.map((el, i) => (
     <img
       alt={'slide'}
-      className={cn('w-full h-[490px] object-cover object-center', s.filter, s[el.selectedFilter])}
+      className={cn('w-full', s.filter, s[el.selectedFilter])}
       key={i}
       ref={el => {
         if (totalImageRefs) {
@@ -69,12 +69,7 @@ export const CreatePostModal = () => {
     />
   ))
   const totalImageSlides = images.map((el, i) => (
-    <img
-      alt={'slide'}
-      className={cn('w-full h-full object-cover object-center')}
-      key={i}
-      src={el.totalUrl}
-    />
+    <img alt={'slide'} className={cn('w-full')} key={i} src={el.totalUrl} />
   ))
 
   return (
