@@ -5,7 +5,7 @@ import { Button, Card, Checkbox, RadioGroup, Typography } from '@/common/ui'
 
 type Props = {}
 export const MyPayments = ({}: Props) => {
-  const [currentValue, setCurrentValue] = useState('1')
+  const [currentValue, setCurrentValue] = useState('Personal')
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -55,14 +55,14 @@ export const MyPayments = ({}: Props) => {
                   field.onChange(e.currentTarget.value)
                 }}
                 options={[
-                  { label: 'Personal', value: '1' },
-                  { label: 'Business', value: '2' },
+                  { label: 'Personal', value: 'Personal' },
+                  { label: 'Business', value: 'Business' },
                 ]}
               />
             )}
           />
         </Card>
-        {currentValue === '2' && (
+        {currentValue === 'Business' && (
           <>
             <Typography className={'font-weight600 mt-7'} variant={'h3'}>
               Current Subscription:
@@ -78,9 +78,9 @@ export const MyPayments = ({}: Props) => {
                       field.onChange(e.currentTarget.value)
                     }}
                     options={[
-                      { label: '$10 per 1 Day', value: '3' },
-                      { label: '$10 per 1 Day', value: '4' },
-                      { label: '$10 per 1 Day', value: '5' },
+                      { label: '$10 per 1 Day', value: '$10' },
+                      { label: '$50 per 7 Day', value: '$50' },
+                      { label: '$100 per 1 month', value: '$100' },
                     ]}
                   />
                 )}
