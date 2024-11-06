@@ -1,21 +1,17 @@
 import { inctagramApi } from '@/common/api/inct.api'
+import { Avatar, WithSearchPaginationParams } from '@/common/types/api.types'
 
+import { PostLikesResponse, Reaction } from '../types/likes.types'
 import {
-  CreatePostBody,
-  Image,
-  Params,
+  CreatePostRequest,
   Post,
-  PostLikes,
-  Posts,
   PublicPostsRequest,
   PublicPostsResponse,
-  Reaction,
-  SearchParams,
-} from '../types/posts.type'
+} from '../types/posts.types'
 
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
-    createPost: builder.mutation<Post, CreatePostBody>({
+    createPost: builder.mutation<Post, CreatePostRequest>({
       invalidatesTags: ['Post'],
       query: body => ({
         body,
@@ -23,7 +19,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: 'v1/posts',
       }),
     }),
-    createPostImage: builder.mutation<{ images: Image[] }, { file: File }>({
+    createPostImage: builder.mutation<{ images: { uploadId: string } & Avatar[] }, { file: File }>({
       invalidatesTags: ['Post'],
       query: ({ file }) => {
         const formData = new FormData()
@@ -51,27 +47,29 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: `v1/posts/image/${uploadId}`,
       }),
     }),
-    getPostLikes: builder.query<PostLikes, { postId: number } & SearchParams>({
-      query: data => {
-        const { postId, ...params } = data
+    getPostLikes: builder.query<PostLikesResponse, { postId: number } & WithSearchPaginationParams>(
+      {
+        query: data => {
+          const { postId, ...params } = data
 
-        return {
-          params,
-          url: `v1/posts/${postId}/likes`,
-        }
-      },
-    }),
-    getPosts: builder.query<Posts, { userName: string } & Params>({
-      providesTags: ['Post'],
-      query: data => {
-        const { userName, ...params } = data
+          return {
+            params,
+            url: `v1/posts/${postId}/likes`,
+          }
+        },
+      }
+    ),
+    // getPosts: builder.query<Posts, { userName: string } & Params>({      //не приходит массив с загруженными картинками
+    //   providesTags: ['Post'],
+    //   query: data => {
+    //     const { userName, ...params } = data
 
-        return {
-          params,
-          url: `v1/posts/${userName}`,
-        }
-      },
-    }),
+    //     return {
+    //       params,
+    //       url: `v1/posts/${userName}`,
+    //     }
+    //   },
+    // }),
     getPublicPostsByUserId: builder.query<PublicPostsResponse, PublicPostsRequest>({
       providesTags: ['Post'],
       query: data => {
