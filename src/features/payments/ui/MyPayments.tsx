@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button, Card, Checkbox, RadioGroup, Typography } from '@/common/ui'
 
@@ -9,8 +9,10 @@ export const MyPayments = ({}: Props) => {
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      currentSubscription: '1',
-      price: '',
+      amount: '1',
+      baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+      paymentType: '',
+      typeSubscription: '',
     },
     mode: 'onChange',
   })
@@ -42,7 +44,7 @@ export const MyPayments = ({}: Props) => {
         {' '}
         Current Subscription:
       </Typography>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+
         <Card className={'flex flex-col  mt-2'}>
           <Controller
             control={control}
@@ -63,33 +65,34 @@ export const MyPayments = ({}: Props) => {
           />
         </Card>
         {currentValue === 'Business' && (
-          <>
+            <>
             <Typography className={'font-weight600 mt-7'} variant={'h3'}>
-              Current Subscription:
+                Current Subscription:
             </Typography>
-            <Card className={'flex flex-col mt-2'}>
-              <Controller
-                control={control}
-                name={'price'}
-                render={({ field }) => (
-                  <RadioGroup
-                    {...field}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                      field.onChange(e.currentTarget.value)
-                    }}
-                    options={[
-                      { label: '$10 per 1 Day', value: '$10' },
-                      { label: '$50 per 7 Day', value: '$50' },
-                      { label: '$100 per 1 month', value: '$100' },
-                    ]}
-                  />
-                )}
-              />
-            </Card>
-          </>
-        )}
-      </form>
-      <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
+                <Card className={'flex flex-col mt-2'}>
+                    <Controller
+                        control={control}
+                        name={'price'}
+                        render={({field}) => (
+                            <RadioGroup
+                                {...field}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    field.onChange(e.currentTarget.value)
+                                }}
+                                options={[
+                                    {label: '$10 per 1 Day', value: '$10'},
+                                    {label: '$50 per 7 Day', value: '$50'},
+                                    {label: '$100 per 1 month', value: '$100'},
+                                ]}
+                            />
+                        )}
+                    />
+                </Card>
+            </>
+            )}
+            </form>
+            <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>
         <Button onClick={handleSubmit(onSubmit)} type={'submit'}>
           {' '}
           pipal
