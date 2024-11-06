@@ -126,6 +126,7 @@ export const CreatePostModal = () => {
             handleFileSelect={handleFileSelect}
             images={images}
             isDisableInput={isDisableInput}
+            setImages={setImages}
             slides={addedImageSlides}
             uploadImage={uploadImage}
           />
