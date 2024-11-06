@@ -42,13 +42,9 @@ export const useCreatePost = () => {
 
   const uploadImageForPost = async (file: File | null) => {
     if (file) {
-      try {
-        const res = await createPostImage({ file }).unwrap()
+      const res = await createPostImage({ file }).unwrap()
 
-        setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
-      } catch (error) {
-        handleApiError({ error, setApiError })
-      }
+      setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
     }
   }
 
