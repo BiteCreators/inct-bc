@@ -1,11 +1,9 @@
 import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
-import { RangeSlider } from '@/common/ui/range-slider/RangeSlider'
 import { Slider } from '@/common/ui/slider/Slider'
 import { ImageType } from '@/features/create-post/types/types'
 import { getCroppedImg } from '@/features/create-post/utils/getCroppedImg'
-import * as SliderPrimitive from '@radix-ui/react-slider'
 
 import { AspectRatio } from './AspectRatio'
 import { Cropping } from './Cropping'
