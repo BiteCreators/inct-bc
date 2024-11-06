@@ -16,11 +16,11 @@ type Props = {
   children?: ReactNode
   className?: string
   iconButton?: ReactNode
-  iconColorOpen?: string
+  iconButtonOpen?: ReactNode
   items?: DropdownItem[]
 }
 
-export const Dropdown = ({ children, className, iconButton, iconColorOpen, items }: Props) => {
+export const Dropdown = ({ children, className, iconButton, iconButtonOpen, items }: Props) => {
   const [open, setOpen] = useState(false)
 
   const variants = {
@@ -44,6 +44,8 @@ export const Dropdown = ({ children, className, iconButton, iconColorOpen, items
     },
   }
 
+  const icon = open ? iconButtonOpen : iconButton || <MoreHorizontal />
+
   return (
     <div className={cn('relative', className)}>
       <DropdownMenu.Root onOpenChange={setOpen} open={open}>
@@ -51,11 +53,11 @@ export const Dropdown = ({ children, className, iconButton, iconColorOpen, items
           <button
             className={cn(
               'absolute top-0 right-0 p-2 rounded-full focus:outline-none',
-              open ? `text-primary-700 [&>*]:${iconColorOpen}` : `text-light-100`,
+              open ? 'text-primary-700' : 'text-light-100',
               'global-hover:hover:text-primary-700'
             )}
           >
-            {iconButton ? iconButton : <MoreHorizontal />}
+            {icon}
           </button>
         </DropdownMenu.Trigger>
 
