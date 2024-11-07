@@ -1,17 +1,17 @@
 import React from 'react'
 import { Area } from 'react-easy-crop'
 
-import { ImageType } from '@/features/create-post/types/types'
+import { ImageData } from '@/features/create-post/types'
 import { AspectRatio } from '@/features/create-post/ui/AspectRatio'
 import { ImageZoomControl } from '@/features/create-post/ui/ImageZoomControl'
 import { getCroppedImg } from '@/features/create-post/utils/getCroppedImg'
 
 type Props = {
   croppedAreaPixels: Area | null
-  images: ImageType[]
+  images: ImageData[]
   selectedImage: null | number
   setAspect: (aspect: number) => void
-  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>
+  setImages: React.Dispatch<React.SetStateAction<ImageData[]>>
   setSelectedImage: (selectedImage: null | number) => void
   setZoom: (zoom: number) => void
   zoom: number
@@ -33,7 +33,6 @@ export const CroppingTools = ({
 
     const croppedImageUrl = await getCroppedImg(images[selectedImage].initialUrl, croppedAreaPixels)
 
-    // Обновляем изображение после кроппинга
     setImages(images =>
       images.map((img, i) => (i === selectedImage ? { ...img, initialUrl: croppedImageUrl } : img))
     )
@@ -43,10 +42,10 @@ export const CroppingTools = ({
 
   return (
     <>
-      <AspectRatio setAspect={setAspect} />
-      <ImageZoomControl setZoom={setZoom} zoom={zoom} />
       {selectedImage !== null && (
         <>
+          <AspectRatio setAspect={setAspect} />
+          <ImageZoomControl setZoom={setZoom} zoom={zoom} />
           <div
             className={
               'bg-dark-500 bg-opacity-80 px-[12px] rounded-sm flex justify-center items-center h-9'

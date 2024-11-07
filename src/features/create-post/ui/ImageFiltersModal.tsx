@@ -24,12 +24,12 @@ export const ImageFiltersModal = ({
   slides,
 }: Props) => {
   return (
-    <div className={'flex h-[490px]'}>
+    <div className={'flex min-h-[400px]'}>
       <div className={'w-1/2'}>
         <Slider duration={0} setCurrentIndex={setCurrentIndex} slides={slides} />
       </div>
-      <div className={'w-1/2 h-[490px]'}>
-        <ScrollArea className={'h-full bg'}>
+      <div className={'w-1/2 max-h-[400px]'}>
+        <ScrollArea className={'h-full bg'} scrollbarClassName={'bg-dark-100'}>
           <ul className={'grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>
             {filterValues.map((el, index) => (
               <li

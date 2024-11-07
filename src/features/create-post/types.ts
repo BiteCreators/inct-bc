@@ -1,4 +1,4 @@
-export type ImageType = {
+export type ImageData = {
   initialUrl: string
   selectedFilter: string
   totalUrl: string

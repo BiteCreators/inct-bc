@@ -54,8 +54,8 @@ export const CreatePostModal = () => {
   const { error, fileInputRef, handleFileSelect, setError, uploadImage } = useImageUpload({
     addImageUrlForPost,
     handleNext: () => {
-      handleNext() // Переход к следующему шагу после загрузки
-      setSelectedImage(images.length) // Устанавливаем `selectedImage` на новое изображение
+      handleNext()
+      setSelectedImage(images.length)
     },
   })
 

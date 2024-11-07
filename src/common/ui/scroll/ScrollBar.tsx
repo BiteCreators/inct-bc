@@ -5,8 +5,8 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 
 export const ScrollBar = forwardRef<
   ElementRef<typeof ScrollArea.ScrollAreaScrollbar>,
-  ComponentPropsWithoutRef<typeof ScrollArea.ScrollAreaScrollbar>
->(({ className, orientation = 'vertical', ...props }, ref) => (
+  { scrollbarClassName?: string } & ComponentPropsWithoutRef<typeof ScrollArea.ScrollAreaScrollbar>
+>(({ className, orientation = 'vertical', scrollbarClassName, ...props }, ref) => (
   <ScrollArea.ScrollAreaScrollbar
     className={cn(
       'flex touch-none select-none transition-colors',
@@ -20,7 +20,10 @@ export const ScrollBar = forwardRef<
     {...props}
   >
     <ScrollArea.ScrollAreaThumb
-      className={'relative flex-1 rounded-full bg-dark-300 global-hover:hover:bg-light-900'}
+      className={
+        scrollbarClassName +
+        'relative flex-1 rounded-full bg-dark-300 global-hover:hover:bg-light-900'
+      }
     />
   </ScrollArea.ScrollAreaScrollbar>
 ))

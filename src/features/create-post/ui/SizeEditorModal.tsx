@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import { Slider } from '@/common/ui/slider/Slider'
-import { ImageType } from '@/features/create-post/types/types'
+import { ImageData } from '@/features/create-post/types'
 import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
 
 import { ImageControl } from './ImagesControl'
@@ -11,10 +11,10 @@ type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: ImageType[]
+  images: ImageData[]
   isDisableInput: boolean
   selectedImage: null | number
-  setImages: React.Dispatch<React.SetStateAction<ImageType[]>>
+  setImages: React.Dispatch<React.SetStateAction<ImageData[]>>
   setSelectedImage: (selectedImage: null | number) => void
   slides: ReactNode[]
   uploadImage: () => void
@@ -81,7 +81,7 @@ export const SizeEditorModal = ({
           handleDeleteImageUrl={handleDeleteImageUrl}
           handleFileSelect={file => {
             handleFileSelect(file)
-            setSelectedImage(images.length) // Автоматически открываем кроп для нового изображения
+            setSelectedImage(images.length)
           }}
           images={images}
           isDisableInput={isDisableInput}
