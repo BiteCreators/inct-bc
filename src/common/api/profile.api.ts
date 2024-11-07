@@ -1,6 +1,6 @@
 import { inctagramApi } from '@/common/api/inct.api'
 
-type ProfileResponse = {
+export type ProfileResponse = {
   avatars: Avatars[]
   createdAt: string
   id: number
