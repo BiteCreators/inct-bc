@@ -20,6 +20,7 @@ export const useCreatePost = () => {
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
+  const t = useScopedTranslation('Posts')
 
   const [description, setDescription] = useState<string>('')
 

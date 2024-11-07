@@ -2,7 +2,6 @@ import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import { Slider } from '@/common/ui/slider/Slider'
-import { ImageData } from '@/features/create-post/types'
 import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
 
 import { ImageData } from '../types'

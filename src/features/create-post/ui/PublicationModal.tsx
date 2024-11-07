@@ -3,11 +3,11 @@ import React from 'react'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
+import { UserProfile, profileApi } from '@/entities/profile'
 
 import exampleImage from '../../../../public/examples/image2.png'
 import { ImageData } from '../types'
 import { generateTotalImageSlides } from './ImageSlides'
-import { UserProfile, profileApi } from '@/entities/profile'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
