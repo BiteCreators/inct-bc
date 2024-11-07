@@ -1,19 +1,18 @@
 import React, { ReactNode } from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { cn } from '@/common/lib/utils/cn'
-import { Avatar, TextArea, Typography } from '@/common/ui'
+import { TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
-
-import exampleImage from '../../../../public/examples/image2.png'
+import { UserProfile, profileApi } from '@/entities/profile'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   slides: ReactNode[]
 }
-  
+
 export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
   const t = useScopedTranslation('Posts')
+  const { data: profile } = profileApi.useGetProfileQuery()
 
   return (
     <div className={'flex'}>
@@ -21,12 +20,18 @@ export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => 
         <Slider duration={0} slides={slides} />
       </div>
       <div className={'w-1/2 p-6'}>
-        {/* //TODO: replace with userProfile component */}
-        <UserProfileUrl className={'mb-6'} />
+        <div className={'mb-6'}>
+          {profile && (
+            <UserProfile
+              avatarUrl={profile.avatars[0]?.url || ''}
+              profileId={profile.id}
+              userName={profile.userName}
+            />
+          )}
+        </div>
         <TextArea
           className={'min-h-[120px]'}
           label={t.addPublicationDesctiption}
-          label={'Add publication descriptions'}
           limitCount={500}
           onChange={handleDescriptionChange}
           placeholder={'Text-area'}
@@ -36,17 +41,6 @@ export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => 
         </div>
         <span>LOCATION</span>
       </div>
-    </div>
-  )
-}
-
-const UserProfileUrl = ({ className }: { className?: string }) => {
-  return (
-    <div className={cn('flex items-center gap-3', className)}>
-      <div className={'w-9 h-9'}>
-        <Avatar avatarURL={exampleImage.src} />
-      </div>
-      <Typography className={'font-medium'}>URLProfile</Typography>
     </div>
   )
 }
