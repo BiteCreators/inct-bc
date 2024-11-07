@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
 import { postsApi } from '@/entities/posts'
 
 import { ImageData } from '../types'
@@ -22,7 +23,10 @@ export const useCreatePost = () => {
   const { handleApiError } = useHandleApiError('Profile')
   const t = useScopedTranslation('Posts')
 
-  const [description, setDescription] = useState<string>('')
+  const { correct, handleChange, limit, value } = useValidationLimit({
+    limit: 500,
+    startText: '',
+  })
 
   const addImageUrlForPost = ({
     file,
@@ -66,16 +70,12 @@ export const useCreatePost = () => {
     setImages(images => images.filter((_, i) => i !== index))
   }
 
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value)
-  }
-
   const handlePublish = async () => {
     try {
       if (uploadIds && uploadIds.length < 10) {
         await createPost({
           childrenMetadata: uploadIds,
-          description,
+          description: value,
         }).unwrap()
         setIsOpenCreatePost(false)
         setUploadIds([])
@@ -113,10 +113,11 @@ export const useCreatePost = () => {
   return {
     addImageUrlForPost,
     apiError,
+    correct,
     handleBackWithoutSave,
+    handleChange,
     handleConfirm,
     handleDeleteImageUrl,
-    handleDescriptionChange,
     handleInteractOutside,
     handlePublish,
     images,
@@ -124,13 +125,12 @@ export const useCreatePost = () => {
     isLoading,
     isOpenActionConfirmation,
     isOpenCreatePost,
-    setApiError,
+    limit,
     setImages,
-    setIsDisableInput,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     t,
     uploadAllImages,
-    uploadIds,
+    value,
   }
 }

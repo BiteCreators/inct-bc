@@ -18,10 +18,11 @@ export const CreatePostModal = () => {
   const {
     addImageUrlForPost,
     apiError,
+    correct,
     handleBackWithoutSave,
+    handleChange,
     handleConfirm,
     handleDeleteImageUrl,
-    handleDescriptionChange,
     handleInteractOutside,
     handlePublish,
     images,
@@ -29,11 +30,13 @@ export const CreatePostModal = () => {
     isLoading,
     isOpenActionConfirmation,
     isOpenCreatePost,
+    limit,
     setImages,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     t,
     uploadAllImages,
+    value,
   } = useCreatePost()
 
   const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
@@ -124,7 +127,13 @@ export const CreatePostModal = () => {
           />
         )}
         {step === 4 && (
-          <PublicationModal handleDescriptionChange={handleDescriptionChange} images={images} />
+          <PublicationModal
+            correct={correct}
+            handleChange={handleChange}
+            images={images}
+            limit={limit}
+            value={value}
+          />
         )}
       </Modal>
     </div>
