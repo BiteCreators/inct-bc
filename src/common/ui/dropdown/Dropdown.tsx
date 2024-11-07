@@ -44,7 +44,9 @@ export const Dropdown = ({ children, className, iconButton, iconButtonOpen, item
     },
   }
 
-  const icon = open ? iconButtonOpen : iconButton || <MoreHorizontal />
+  const icon = open
+    ? iconButtonOpen || iconButton || <MoreHorizontal />
+    : iconButton || <MoreHorizontal />
 
   return (
     <div className={cn('relative', className)}>
