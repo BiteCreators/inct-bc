@@ -3,6 +3,7 @@ import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
 import { useShowMore } from '@/common/lib/hooks/useShowMore'
 import { Avatar, Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
+import { UserProfile } from '@/entities/profile'
 import Link from 'next/link'
 
 type Props = {
@@ -10,7 +11,8 @@ type Props = {
 }
 
 export const PublicPostCard = ({ post }: Props) => {
-  const { relativeTime } = useGetRelativeTime({ time: new Date(post.createdAt).getTime() })
+  const { getRelativeTime } = useGetRelativeTime()
+  const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
 
   const { collapsable, isCollapsed, textToShow, toggleShowMore } = useShowMore({
     text: post.description,
@@ -37,13 +39,11 @@ export const PublicPostCard = ({ post }: Props) => {
         )}
       </div>
       <div className={'mt-3 flex gap-3 items-center'}>
-        {/* TODO: add user profile component */}
-        <div className={'w-9 h-9'}>
-          <Avatar avatarURL={post.avatarOwner} />
-        </div>
-        <Link href={`/profile/${post.ownerId}`}>
-          <Typography className={'font-weight600 cursor-pointer'}>{post.userName}</Typography>
-        </Link>
+        <UserProfile
+          avatarUrl={post.avatarOwner}
+          profileId={post.ownerId}
+          userName={post.userName}
+        />
       </div>
       <Typography className={'mt-3 text-light-900'} variant={'small-text'}>
         {relativeTime}

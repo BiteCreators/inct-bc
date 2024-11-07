@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react'
 
 import { ImageOutline } from '@/common/assets/icons/components'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 
@@ -11,6 +12,8 @@ type Props = {
 }
 
 export const AddPhotoModal = ({ fileInputRef, handleFileSelect, uploadImage }: Props) => {
+  const t = useScopedTranslation('Posts')
+
   return (
     <div className={'w-full flex flex-col justify-center items-center'}>
       <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
@@ -23,10 +26,10 @@ export const AddPhotoModal = ({ fileInputRef, handleFileSelect, uploadImage }: P
         </div>
       </DragAndDropInput>
       <Button className={'w-56 bottom-0 mb-7'} onClick={uploadImage}>
-        Select from Computer
+        {t.selectFromComputer}
       </Button>
       <Button className={'w-56 bottom-0 mb-9'} variant={'outline'}>
-        Open Draft
+        {t.openDraft}
       </Button>
     </div>
   )

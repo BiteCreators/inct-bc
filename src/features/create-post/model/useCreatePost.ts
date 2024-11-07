@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { postsApi } from '@/entities/posts'
+
 
 export const useCreatePost = () => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
@@ -16,6 +18,7 @@ export const useCreatePost = () => {
   const [images, setImages] = useState<
     { initialUrl: string; selectedFilter: string; totalUrl: string }[]
   >([])
+  const t = useScopedTranslation('Posts')
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
@@ -131,6 +134,7 @@ export const useCreatePost = () => {
     setIsDisableInput,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
+    t,
     uploadAllImages,
     uploadIds,
   }

@@ -16,7 +16,7 @@ import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
 export const CreatePostModal = () => {
-  const [selectedImage, setSelectedImage] = useState<null | number>(null) // Управляем текущим индексом изображения
+  const [selectedImage, setSelectedImage] = useState<null | number>(null)
   const {
     addImageUrlForPost,
     apiError,
@@ -35,6 +35,8 @@ export const CreatePostModal = () => {
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     uploadAllImages,
+    t,
+    uploadImageForPost,
   } = useCreatePost()
 
   const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
@@ -80,13 +82,11 @@ export const CreatePostModal = () => {
     <div>
       <ActionConfirmation
         isOpen={isOpenActionConfirmation}
-        message={
-          'Do you really want to close the creation of a publication? If you close everything will be deleted'
-        }
+        message={t.doYouWantToCloseCreation}
         onConfirm={handleConfirm}
         onReject={() => {}}
         setIsOpen={setIsOpenActionConfirmation}
-        title={'Close'}
+        title={t.close}
       />
       <Modal
         className={`max-w-[330px] ${

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import * as jose from 'jose'
 import { useRouter } from 'next/router'
 
@@ -18,6 +19,7 @@ export const useStepControl = ({
   uploadAllImages: (files: File[]) => Promise<void>
 }) => {
   const [step, setStep] = useState(1)
+  const t = useScopedTranslation('Posts')
 
   const router = useRouter()
   const [cookies] = useCookies(['accessToken'])
@@ -32,16 +34,16 @@ export const useStepControl = ({
   let nextButtonTitle
 
   if (step === 1) {
-    title = 'Add Photo'
+    title = t.addPhoto
   } else if (step === 2) {
-    title = 'Cropping'
-    nextButtonTitle = 'Next'
+    title = t.cropping
+    nextButtonTitle = t.next
   } else if (step === 3) {
-    title = 'Filters'
-    nextButtonTitle = 'Next'
+    title = t.filters
+    nextButtonTitle = t.next
   } else {
-    title = 'Publication'
-    nextButtonTitle = 'Publish'
+    title = t.publication
+    nextButtonTitle = t.publish
   }
 
   const handleNext = async () => {

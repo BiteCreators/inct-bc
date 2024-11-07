@@ -1,8 +1,11 @@
+import React from 'react'
+
 import { LogOut } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { cn } from '@/common/lib/utils/cn'
 import { Loader } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
 
 export const LogoutButton = () => {
@@ -14,7 +17,7 @@ export const LogoutButton = () => {
   if (isLoading) {
     return (
       <div className={'flex justify-center items-center'}>
-        <Loader />
+        <LoaderBlock portal />
       </div>
     )
   }

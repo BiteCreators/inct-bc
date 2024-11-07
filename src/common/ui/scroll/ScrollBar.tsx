@@ -10,7 +10,7 @@ export const ScrollBar = forwardRef<
   <ScrollArea.ScrollAreaScrollbar
     className={cn(
       'flex touch-none select-none transition-colors',
-      orientation === 'vertical' && 'h-full w-3 border-l-transparent px-1 py-[inherit] ',
+      orientation === 'vertical' && 'h-full w-1 border-l-transparent py-[inherit] ',
       orientation === 'horizontal' &&
         'h-3 flex-col border-t border-t-transparent py-1 px-[inherit]',
       className

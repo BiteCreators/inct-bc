@@ -24,7 +24,7 @@ export const useLogout = () => {
     try {
       await logout().unwrap()
       removeCookie('accessToken', { path: '/' })
-      dispatch(authSlice.actions.setAccessToken(null))
+      dispatch(authSlice.actions.logout())
     } catch (error) {
       handleApiError({
         error,
