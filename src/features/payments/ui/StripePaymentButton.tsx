@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { StripeSvgrepoCom4 } from '@/common/assets/icons/components'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { cn } from '@/common/lib/utils/cn'
+import { Alert } from '@/common/ui'
 import { paymentsApi } from '@/entities/payments'
 import { SubscriptionsRequest } from '@/entities/payments/types/payments.type'
 
@@ -18,6 +20,8 @@ export const StripePaymentButton = ({
 }: Props) => {
   const [createPaymentSubscription, { isLoading }] =
     paymentsApi.useCreatePaymentSubscriptionMutation()
+  const [apiError, setApiError] = useState('')
+  const { handleApiError } = useHandleApiError('Payments')
 
   const handleStripeRedirect = async () => {
     try {
@@ -31,21 +35,24 @@ export const StripePaymentButton = ({
       if (response.url) {
         window.location.href = response.url
       }
-    } catch (err) {
-      console.error('stripe redirect error: ' + err)
+    } catch (error) {
+      handleApiError({ error, setApiError })
     }
   }
 
   return (
-    <button
-      className={cn([
-        'w-20 h-11 bg-dark-500 px-3 rounded border border-dark-300 disabled:opacity-30',
-        className,
-      ])}
-      disabled={isLoading}
-      onClick={handleStripeRedirect}
-    >
-      <StripeSvgrepoCom4 height={30} viewBox={'2 3 24 9'} width={70} />
-    </button>
+    <>
+      <button
+        className={cn([
+          'w-20 h-11 bg-dark-500 px-3 rounded border border-dark-300 disabled:opacity-30',
+          className,
+        ])}
+        disabled={isLoading}
+        onClick={handleStripeRedirect}
+      >
+        <StripeSvgrepoCom4 height={30} viewBox={'2 3 24 9'} width={70} />
+      </button>
+      {!!apiError && <Alert message={apiError} purpose={'toast'} type={'error'} />}
+    </>
   )
 }
