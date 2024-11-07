@@ -1,12 +1,13 @@
 import React from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
-import { Avatar, TextArea, Typography } from '@/common/ui'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 
 import exampleImage from '../../../../public/examples/image2.png'
 import { ImageData } from '../types'
 import { generateTotalImageSlides } from './ImageSlides'
+import { UserProfile, profileApi } from '@/entities/profile'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
@@ -15,6 +16,8 @@ type Props = {
 
 export const PublicationModal = ({ handleDescriptionChange, images }: Props) => {
   const totalImageSlides = generateTotalImageSlides(images)
+  const t = useScopedTranslation('Posts')
+  const { data: profile } = profileApi.useGetProfileQuery()
 
   return (
     <div className={'flex'}>
@@ -22,11 +25,19 @@ export const PublicationModal = ({ handleDescriptionChange, images }: Props) => 
         <Slider duration={0} slides={totalImageSlides} />
       </div>
       <div className={'w-1/2 p-6'}>
-        <UserProfileUrl className={'mb-6'} />
+        <div className={'mb-6'}>
+          {profile && (
+            <UserProfile
+              avatarUrl={profile.avatars[0]?.url || ''}
+              profileId={profile.id}
+              userName={profile.userName}
+            />
+          )}
+        </div>
         <TextArea
           className={'min-h-[120px]'}
-          counter={500}
-          label={'Add publication descriptions'}
+          label={t.addPublicationDesctiption}
+          limitCount={500}
           onChange={handleDescriptionChange}
           placeholder={'Text-area'}
         />
@@ -35,17 +46,6 @@ export const PublicationModal = ({ handleDescriptionChange, images }: Props) => 
         </div>
         <span>LOCATION</span>
       </div>
-    </div>
-  )
-}
-
-const UserProfileUrl = ({ className }: { className?: string }) => {
-  return (
-    <div className={cn('flex items-center gap-3', className)}>
-      <div className={'w-9 h-9'}>
-        <Avatar avatarURL={exampleImage.src} />
-      </div>
-      <Typography className={'font-medium'}>URLProfile</Typography>
     </div>
   )
 }

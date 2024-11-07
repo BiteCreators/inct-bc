@@ -65,7 +65,8 @@ export const Dropdown = ({ children, className, iconButton, items }: Props) => {
                 animate={'open'}
                 className={cn(
                   'bg-dark-500 min-w-40 text-white rounded-sm p-3 gap-3 border border-dark-100',
-                  'relative z-10'
+                  'relative',
+                  className
                 )}
                 initial={'closed'}
                 variants={variants}

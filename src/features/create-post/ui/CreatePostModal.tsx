@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Alert, Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
@@ -14,6 +14,7 @@ import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
 export const CreatePostModal = () => {
+  const [selectedImage, setSelectedImage] = useState<null | number>(null)
   const {
     addImageUrlForPost,
     apiError,
@@ -31,6 +32,7 @@ export const CreatePostModal = () => {
     setImages,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
+    t,
     uploadAllImages,
   } = useCreatePost()
 
@@ -50,7 +52,10 @@ export const CreatePostModal = () => {
 
   const { error, fileInputRef, handleFileSelect, setError, uploadImage } = useImageUpload({
     addImageUrlForPost,
-    handleNext,
+    handleNext: () => {
+      handleNext()
+      setSelectedImage(images.length)
+    },
   })
 
   const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
@@ -59,13 +64,11 @@ export const CreatePostModal = () => {
     <div>
       <ActionConfirmation
         isOpen={isOpenActionConfirmation}
-        message={
-          'Do you really want to close the creation of a publication? If you close everything will be deleted'
-        }
+        message={t.doYouWantToCloseCreation}
         onConfirm={handleConfirm}
         onReject={() => {}}
         setIsOpen={setIsOpenActionConfirmation}
-        title={'Close'}
+        title={t.close}
       />
       <Modal
         className={`max-w-[330px] ${
@@ -104,6 +107,9 @@ export const CreatePostModal = () => {
             handleFileSelect={handleFileSelect}
             images={images}
             isDisableInput={isDisableInput}
+            selectedImage={selectedImage}
+            setImages={setImages}
+            setSelectedImage={setSelectedImage}
             slides={addedImageSlides}
             uploadImage={uploadImage}
           />

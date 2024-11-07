@@ -6,7 +6,7 @@ import {
   ImageOutline,
   PlusCircleOutlineBig,
 } from '@/common/assets/icons/components'
-import { Button } from '@/common/ui'
+import { Button, ScrollArea } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 
 import { useImageControl } from '../model/useImageControl'
@@ -46,21 +46,27 @@ export const ImageControl = ({
             'bg-dark-500 bg-opacity-80 p-[12px] rounded-sm flex justify-center items-start gap-3 absolute right-0 bottom-[38px]'
           }
         >
-          <ul className={'grid grid-cols-3 min-w-[264px] gap-3'}>
-            {images.map((el, i) => (
-              <li className={'w-20 h-20 rounded-[1px] relative'} key={i}>
-                <img alt={'Image'} src={el.initialUrl} />
-                <button
-                  className={
-                    'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
-                  }
-                  onClick={() => handleDeleteImageUrl(i)}
-                >
-                  <CloseOutlineSmall />
-                </button>
-              </li>
-            ))}
-          </ul>
+          <ScrollArea className={'max-w-[300px] w-auto'} orientation={'horizontal'}>
+            <ul className={'flex gap-3'}>
+              {images.map((el, i) => (
+                <li className={'rounded-[1px] relative'} key={i}>
+                  <img
+                    alt={'Image'}
+                    className={'h-20 max-w-52 overflow-hidden'}
+                    src={el.initialUrl}
+                  />
+                  <button
+                    className={
+                      'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
+                    }
+                    onClick={() => handleDeleteImageUrl(i)}
+                  >
+                    <CloseOutlineSmall />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </ScrollArea>
 
           <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
             <button disabled={isDisableInput} onClick={uploadImage}>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { postsApi } from '@/entities/posts'
 
 import { ImageData } from '../types'
@@ -127,6 +128,7 @@ export const useCreatePost = () => {
     setIsDisableInput,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
+    t,
     uploadAllImages,
     uploadIds,
   }

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import ReactDOM from 'react-dom'
 
 import { Close } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
@@ -11,6 +12,7 @@ type Props = {
   duration?: number
   message?: string
   onClose?: () => void
+  portal?: boolean
   purpose?: 'alert' | 'toast'
   type: 'error' | 'info' | 'success'
 }
@@ -21,6 +23,7 @@ export const Alert = ({
   duration = 5000,
   message,
   onClose,
+  portal = false,
   purpose = 'alert',
   type = 'error',
 }: Props) => {
@@ -79,15 +82,15 @@ export const Alert = ({
     return null
   }
 
-  return (
+  const content = (
     <motion.div
       animate={'visible'}
       className={cn(
         'transform -translate-x-1/2 px-4 py-2 border rounded-sm text-white',
-        className,
         purpose === 'alert' && 'mb-3',
         purpose === 'toast' &&
-          'fixed md:bottom-4 bottom-[61px] md:left-[173px] left-5 right-5 min-w-72 md:max-w-[420px] max-w-[350px]',
+          `fixed md:bottom-4 bottom-[61px] md:left-[173px] left-5 right-5 min-w-72 md:max-w-[420px] max-w-[350px] ${className}`,
+        className,
         alertStyles[type]
       )}
       exit={'exit'}
@@ -106,4 +109,6 @@ export const Alert = ({
       </div>
     </motion.div>
   )
+
+  return portal ? ReactDOM.createPortal(content, document.body) : content
 }
