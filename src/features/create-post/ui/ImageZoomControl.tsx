@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Maximize, MaximizeOutline } from '@/common/assets/icons/components'
 import { Button } from '@/common/ui'
+import { RangeSlider } from '@/common/ui/range-slider/RangeSlider'
 
-import { RangeSlider } from '../../../common/ui/range-slider/RangeSlider'
 import { useCropping } from '../model/useCropping'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   zoom: number
 }
 
-export const Cropping = ({ setZoom, zoom }: Props) => {
+export const ImageZoomControl = ({ setZoom, zoom }: Props) => {
   const { croppingRef, isCroppingOpen, setIsCroppingOpen } = useCropping()
 
   return (

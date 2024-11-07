@@ -3,10 +3,8 @@ import Cropper, { Area } from 'react-easy-crop'
 
 import { Slider } from '@/common/ui/slider/Slider'
 import { ImageType } from '@/features/create-post/types/types'
-import { getCroppedImg } from '@/features/create-post/utils/getCroppedImg'
+import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
 
-import { AspectRatio } from './AspectRatio'
-import { Cropping } from './Cropping'
 import { ImageControl } from './ImagesControl'
 
 type Props = {
@@ -17,7 +15,7 @@ type Props = {
   isDisableInput: boolean
   selectedImage: null | number
   setImages: React.Dispatch<React.SetStateAction<ImageType[]>>
-  setSelectedImage: React.Dispatch<React.SetStateAction<null | number>>
+  setSelectedImage: (selectedImage: null | number) => void
   slides: ReactNode[]
   uploadImage: () => void
 }
@@ -34,28 +32,12 @@ export const SizeEditorModal = ({
   slides,
   uploadImage,
 }: Props) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [aspect, setAspect] = useState(1)
-
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
   const handleCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
-  }
-
-  const onCrop = async () => {
-    if (selectedImage === null || croppedAreaPixels === null) {
-      return
-    }
-
-    const croppedImageUrl = await getCroppedImg(images[selectedImage].initialUrl, croppedAreaPixels)
-
-    // Обновляем изображение после кроппинга
-    setImages(images =>
-      images.map((img, i) => (i === selectedImage ? { ...img, initialUrl: croppedImageUrl } : img))
-    )
-
-    setSelectedImage(null)
   }
 
   return (
@@ -84,10 +66,16 @@ export const SizeEditorModal = ({
       )}
 
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
-        <AspectRatio setAspect={setAspect} />
-        <Cropping setZoom={setZoom} zoom={zoom} />
-        <button onClick={onCrop}>Crop</button>
-        <button onClick={() => setSelectedImage(null)}>Cancel</button>
+        <CroppingTools
+          croppedAreaPixels={croppedAreaPixels}
+          images={images}
+          selectedImage={selectedImage}
+          setAspect={setAspect}
+          setImages={setImages}
+          setSelectedImage={setSelectedImage}
+          setZoom={setZoom}
+          zoom={zoom}
+        />
         <ImageControl
           fileInputRef={fileInputRef}
           handleDeleteImageUrl={handleDeleteImageUrl}
