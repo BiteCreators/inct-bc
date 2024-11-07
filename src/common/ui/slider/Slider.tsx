@@ -7,6 +7,7 @@ import { useSlider } from '@/common/ui/slider/useSlider'
 type Props = {
   duration?: number
   height?: string
+  setCurrentIndex?: (currentIndex: number) => void
   slides: ReactNode[]
   stylesSlide?: string
   stylesSlider?: string
@@ -15,6 +16,7 @@ type Props = {
 export const Slider = ({
   duration = 4000,
   height = '560',
+  setCurrentIndex,
   slides,
   stylesSlide,
   stylesSlider,
@@ -39,6 +41,12 @@ export const Slider = ({
       }
     }
   }, [isPaused, duration])
+
+  useEffect(() => {
+    if (setCurrentIndex) {
+      setCurrentIndex(currentIndex)
+    }
+  }, [currentIndex, setCurrentIndex])
 
   const stylesBtn =
     'absolute z-10 bg-gray-800 bg-opacity-40 top-1/2 -translate-y-1/2 p-3 cursor-pointer duration-300 ease-in-out md:block hidden hover:bg-gray-700 hover:opacity-85'

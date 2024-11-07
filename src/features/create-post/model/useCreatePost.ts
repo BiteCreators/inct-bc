@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react'
 
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { authSlice } from '@/entities/auth'
 import { postsApi } from '@/entities/posts'
-import { useRouter } from 'next/router'
 
-export const useCreatePost = ({
-  handleNext,
-  setStep,
-}: {
-  handleNext: () => void
-  setStep: (step: number) => void
-  step: number
-}) => {
+
+export const useCreatePost = () => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
   const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
   const [isDisableInput, setIsDisableInput] = useState(false)
-  const [createPostImage] = postsApi.useCreatePostImageMutation()
+
+  const [createPostImage, { isLoading }] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
   const [deletePostImage] = postsApi.useDeletePostImageMutation()
-  const [images, setImages] = useState<Image[]>([])
+
+  const [uploadIds, setUploadIds] = useState<{ uploadId: string }[]>([])
+  const [images, setImages] = useState<
+    { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  >([])
   const t = useScopedTranslation('Posts')
 
   const [apiError, setApiError] = useState<string>('')
@@ -29,29 +25,50 @@ export const useCreatePost = ({
 
   const [description, setDescription] = useState<string>('')
 
-  const router = useRouter()
-  const userId = useAppSelector(authSlice.selectors.selectUserId)
+  const addImageUrlForPost = ({
+    file,
+    handleNext,
+  }: {
+    file: File | null
+    handleNext: () => void
+  }) => {
+    if (file) {
+      if (images.length === 0) {
+        handleNext()
+      }
+      setImages(images => [
+        ...images,
+        { initialUrl: URL.createObjectURL(file), selectedFilter: '', totalUrl: '' },
+      ])
+    }
+  }
 
   const uploadImageForPost = async (file: File | null) => {
     if (file) {
       try {
-        const res = await createPostImage({ file })
+        const res = await createPostImage({ file }).unwrap()
 
-        if (res.data?.images[0]) {
-          setImages([...images, res.data?.images[0]])
-          if (images.length === 0) {
-            handleNext()
-          }
-        }
+        setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
       } catch (error) {
         handleApiError({ error, setApiError })
       }
     }
   }
 
-  const handleDeleteImage = (imageId: string) => {
-    setImages(images.filter(el => el.uploadId !== imageId))
-    deletePostImage({ uploadId: imageId })
+  const uploadAllImages = async (files: File[]) => {
+    try {
+      await files.reduce(async (promise, file) => {
+        await promise // ждём завершения предыдущей загрузки
+
+        return uploadImageForPost(file) // загружаем текущее изображение
+      }, Promise.resolve())
+    } catch (error) {
+      handleApiError({ error, setApiError })
+    }
+  }
+
+  const handleDeleteImageUrl = (index: number) => {
+    setImages(images => images.filter((_, i) => i !== index))
   }
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,13 +77,14 @@ export const useCreatePost = ({
 
   const handlePublish = async () => {
     try {
-      if (images && images.length < 10) {
+      if (uploadIds && uploadIds.length < 10) {
         await createPost({
-          childrenMetadata: images.map(el => ({ uploadId: el.uploadId })),
+          childrenMetadata: uploadIds,
           description,
-        })
-        setStep(1)
+        }).unwrap()
         setIsOpenCreatePost(false)
+        setUploadIds([])
+        setImages([])
       }
     } catch (error) {
       handleApiError({ error, setApiError })
@@ -80,10 +98,13 @@ export const useCreatePost = ({
 
   const handleConfirm = () => {
     setIsOpenCreatePost(false)
+    setUploadIds([])
     setImages([])
-    images.forEach(el => {
-      deletePostImage({ uploadId: el.uploadId })
-    })
+    if (uploadIds) {
+      uploadIds.forEach(el => {
+        deletePostImage({ uploadId: el.uploadId })
+      })
+    }
   }
 
   const handleBackWithoutSave = () => {
@@ -91,36 +112,30 @@ export const useCreatePost = ({
   }
 
   useEffect(() => {
-    if (!isOpenCreatePost) {
-      router.push(`/profile/${userId}`)
-    }
-    if (images.length === 0) {
-      setStep(1)
-    }
-    if (images.length < 9) {
-      setIsDisableInput(false)
-    }
-    if (images.length >= 9) {
-      setIsDisableInput(true)
-    }
-  }, [images, setStep, isOpenCreatePost, router, userId])
+    setIsDisableInput(images.length >= 9)
+  }, [images])
 
   return {
+    addImageUrlForPost,
     apiError,
     handleBackWithoutSave,
     handleConfirm,
-    handleDeleteImage,
+    handleDeleteImageUrl,
     handleDescriptionChange,
     handleInteractOutside,
     handlePublish,
     images,
     isDisableInput,
+    isLoading,
     isOpenActionConfirmation,
     isOpenCreatePost,
     setApiError,
+    setImages,
+    setIsDisableInput,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
     t,
-    uploadImageForPost,
+    uploadAllImages,
+    uploadIds,
   }
 }

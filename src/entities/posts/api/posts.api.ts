@@ -9,6 +9,8 @@ import {
   PublicPostsResponse,
 } from '../types/posts.types'
 
+type CreatePostImageResponse = { uploadId: string } & Avatar
+
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     createPost: builder.mutation<Post, CreatePostRequest>({
@@ -19,7 +21,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: 'v1/posts',
       }),
     }),
-    createPostImage: builder.mutation<{ images: { uploadId: string } & Avatar[] }, { file: File }>({
+    createPostImage: builder.mutation<{ images: CreatePostImageResponse[] }, { file: File }>({
       invalidatesTags: ['Post'],
       query: ({ file }) => {
         const formData = new FormData()

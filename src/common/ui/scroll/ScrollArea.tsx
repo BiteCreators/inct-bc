@@ -7,10 +7,11 @@ import { ScrollBar } from './ScrollBar'
 
 export const ScrollArea = forwardRef<
   ElementRef<typeof ScrollAreaPrimitive.Root>,
-  { orientation?: 'horizontal' | 'vertical' } & ComponentPropsWithoutRef<
-    typeof ScrollAreaPrimitive.Root
-  >
->(({ children, className, orientation = 'vertical', ...props }, ref) => {
+  {
+    orientation?: 'horizontal' | 'vertical'
+    scrollbarClassName?: string
+  } & ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ children, className, orientation = 'vertical', scrollbarClassName, ...props }, ref) => {
   return (
     <ScrollAreaPrimitive.Root
       className={cn('relative overflow-hidden', className)}
@@ -23,7 +24,7 @@ export const ScrollArea = forwardRef<
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar orientation={orientation} />
+      <ScrollBar orientation={orientation} scrollbarClassName={scrollbarClassName} />
       <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
   )
