@@ -45,21 +45,19 @@ export const useEditProfileForm = () => {
   }, [profile, reset])
 
   const onSubmit = async (data: EditProfileFormData) => {
-    console.log('formData', data)
+    const formData: Profile = {
+      ...data,
+      dateOfBirth: data.dateOfBirth.toLocaleDateString(),
+    }
 
-    // const formData: Profile = {
-    //   ...data,
-    //   dateOfBirth: data.dateOfBirth.toLocaleDateString(),
-    // }
-    //
-    // try {
-    //   await trigger(formData).unwrap()
-    //   setMessage(t.settingsSaved)
-    //   setIsShowAlert(true)
-    // } catch (error) {
-    //   setMessage(t.editProfileError.settingsNotSaved)
-    //   setIsShowAlert(true)
-    // }
+    try {
+      await trigger(formData).unwrap()
+      setMessage(t.settingsSaved)
+      setIsShowAlert(true)
+    } catch (error) {
+      setMessage(t.editProfileError.settingsNotSaved)
+      setIsShowAlert(true)
+    }
   }
 
   return {
