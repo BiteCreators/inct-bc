@@ -34,9 +34,9 @@ export const CreatePostModal = () => {
     setImages,
     setIsOpenActionConfirmation,
     setIsOpenCreatePost,
-    uploadAllImages,
     t,
-    uploadImageForPost,
+    uploadAllImages,
+    // uploadImageForPost,
   } = useCreatePost()
 
   const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
