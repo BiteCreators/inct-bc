@@ -17,8 +17,15 @@ const getCountries = async () => {
       throw new Error('fetch failed')
     }
 
-    const countriesEn: LocationResponse[] = await resCountriesEn.json()
-    const countriesRu: LocationResponse[] = await resCountriesRu.json()
+    const countriesResponseEn: LocationResponse[] = await resCountriesEn.json()
+    const countriesEn: SelectOptions[] = countriesResponseEn.map(country => {
+      return { name: country.name, value: country.countryCode }
+    })
+
+    const countriesResponseRu: LocationResponse[] = await resCountriesRu.json()
+    const countriesRu: SelectOptions[] = countriesResponseRu.map(country => {
+      return { name: country.name, value: country.countryCode }
+    })
 
     return { countriesEn, countriesRu }
   } catch (e) {
@@ -29,8 +36,8 @@ const getCountries = async () => {
 }
 
 const getCities = async (countries: {
-  countriesEn: LocationResponse[]
-  countriesRu: LocationResponse[]
+  countriesEn: SelectOptions[]
+  countriesRu: SelectOptions[]
 }) => {
   try {
     const [citiesEn, citiesRu] = await Promise.all([
@@ -47,7 +54,10 @@ const getCities = async (countries: {
             throw new Error(country.countryCode)
           }
 
-          const cityEn: LocationResponse = await resCityEn.json()
+          const cityResponseEn: ChildResponse = await resCityEn.json()
+          const cityEn: SelectOptions[] = cityResponseEn.edges.map(city => {
+            return { name: city.node.name, value: city.node.id }
+          })
 
           return { [country.countryCode]: cityEn }
         })
@@ -65,7 +75,10 @@ const getCities = async (countries: {
             throw new Error(country.countryCode)
           }
 
-          const cityRu: LocationResponse = await resCityRu.json()
+          const cityResponseRu: ChildResponse = await resCityRu.json()
+          const cityRu: SelectOptions[] = cityResponseRu.edges.map(city => {
+            return { name: city.node.name, value: city.node.id }
+          })
 
           return { [country.countryCode]: cityRu }
         })
@@ -127,8 +140,8 @@ export type LocationsProps = {
 }
 
 export type CountriesLng = {
-  countriesEn: LocationResponse[]
-  countriesRu: LocationResponse[]
+  countriesEn: SelectOptions[]
+  countriesRu: SelectOptions[]
 }
 
 export type CitiesLng = {
@@ -137,5 +150,10 @@ export type CitiesLng = {
 }
 
 export type Cities = {
-  [countryCode: string]: ChildResponse
+  [countryCode: string]: SelectOptions[]
+}
+
+export type SelectOptions = {
+  name: string
+  value: string
 }
