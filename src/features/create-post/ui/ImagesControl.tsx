@@ -10,12 +10,13 @@ import { Button, ScrollArea } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
 
 import { useImageControl } from '../model/useImageControl'
+import { ImageData } from '../types'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  images: ImageData[]
   isDisableInput: boolean
   uploadImage: () => void
 }

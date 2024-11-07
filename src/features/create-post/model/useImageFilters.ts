@@ -2,12 +2,14 @@ import { useRef, useState } from 'react'
 
 import domtoimage from 'dom-to-image'
 
+import { ImageData } from '../types'
+
 export const useImageFilters = ({
   images,
   setImages,
 }: {
-  images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
-  setImages: (images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]) => void
+  images: ImageData[]
+  setImages: (images: ImageData[]) => void
 }) => {
   const totalImageRefs = useRef<(HTMLImageElement | null)[]>(Array(images.length).fill(null))
 

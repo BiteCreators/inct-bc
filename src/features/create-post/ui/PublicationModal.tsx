@@ -1,23 +1,28 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
+
+import exampleImage from '../../../../public/examples/image2.png'
+import { ImageData } from '../types'
+import { generateTotalImageSlides } from './ImageSlides'
 import { UserProfile, profileApi } from '@/entities/profile'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  slides: ReactNode[]
+  images: ImageData[]
 }
 
-export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
+export const PublicationModal = ({ handleDescriptionChange, images }: Props) => {
+  const totalImageSlides = generateTotalImageSlides(images)
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
 
   return (
     <div className={'flex'}>
       <div className={'w-1/2'}>
-        <Slider duration={0} slides={slides} />
+        <Slider duration={0} slides={totalImageSlides} />
       </div>
       <div className={'w-1/2 p-6'}>
         <div className={'mb-6'}>

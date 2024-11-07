@@ -4,6 +4,7 @@ import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { postsApi } from '@/entities/posts'
 
+import { ImageData } from '../types'
 
 export const useCreatePost = () => {
   const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
@@ -15,10 +16,7 @@ export const useCreatePost = () => {
   const [deletePostImage] = postsApi.useDeletePostImageMutation()
 
   const [uploadIds, setUploadIds] = useState<{ uploadId: string }[]>([])
-  const [images, setImages] = useState<
-    { initialUrl: string; selectedFilter: string; totalUrl: string }[]
-  >([])
-  const t = useScopedTranslation('Posts')
+  const [images, setImages] = useState<ImageData[]>([])
 
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
@@ -45,13 +43,9 @@ export const useCreatePost = () => {
 
   const uploadImageForPost = async (file: File | null) => {
     if (file) {
-      try {
-        const res = await createPostImage({ file }).unwrap()
+      const res = await createPostImage({ file }).unwrap()
 
-        setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
-      } catch (error) {
-        handleApiError({ error, setApiError })
-      }
+      setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
     }
   }
 

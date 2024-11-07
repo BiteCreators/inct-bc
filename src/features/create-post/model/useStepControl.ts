@@ -5,6 +5,8 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import * as jose from 'jose'
 import { useRouter } from 'next/router'
 
+import { ImageData } from '../types'
+
 export const useStepControl = ({
   handleApplyFilters,
   handlePublish,
@@ -14,7 +16,7 @@ export const useStepControl = ({
 }: {
   handleApplyFilters: () => Promise<{ newFiles: File[] }>
   handlePublish: () => Promise<void>
-  images: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  images: ImageData[]
   isOpenCreatePost: boolean
   uploadAllImages: (files: File[]) => Promise<void>
 }) => {

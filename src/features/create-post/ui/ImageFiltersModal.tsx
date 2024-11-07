@@ -1,17 +1,18 @@
-import React, { MutableRefObject, ReactNode, RefObject } from 'react'
+import React, { ReactNode } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { ScrollArea, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 
-import s from '@/app/styles/filters.module.css'
+import s from '../styles/filters.module.css'
 
+import { ImageData } from '../types'
 import { filterValues } from '../utils/filterValues'
 
 type Props = {
   currentIndex: number
   handleSelectFilter: (selectedFilter: string) => void
-  imagesURL: { initialUrl: string; selectedFilter: string; totalUrl: string }[]
+  images: ImageData[]
   setCurrentIndex: (currentIndex: number) => void
   slides: ReactNode[]
 }
@@ -19,7 +20,7 @@ type Props = {
 export const ImageFiltersModal = ({
   currentIndex,
   handleSelectFilter,
-  imagesURL,
+  images,
   setCurrentIndex,
   slides,
 }: Props) => {
@@ -34,14 +35,14 @@ export const ImageFiltersModal = ({
             {filterValues.map((el, index) => (
               <li
                 className={'flex flex-col gap-2 items-center cursor-pointer'}
-                key={index}
+                key={el.name}
                 onClick={() => handleSelectFilter(el.class)}
               >
                 <div className={'w-[108px] h-[108px]'}>
                   <img
                     alt={'oops'}
                     className={cn('w-full h-full', s[filterValues[index].class])}
-                    src={imagesURL[currentIndex].initialUrl}
+                    src={images[currentIndex].initialUrl}
                   />
                 </div>
                 <Typography>{el.name}</Typography>

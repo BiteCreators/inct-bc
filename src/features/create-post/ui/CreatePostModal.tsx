@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
 import { Alert, Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-
-import s from '@/app/styles/filters.module.css'
 
 import { useCreatePost } from '../model/useCreatePost'
 import { useImageFilters } from '../model/useImageFilters'
@@ -12,6 +9,7 @@ import { useImageUpload } from '../model/useImageUpload'
 import { useStepControl } from '../model/useStepControl'
 import { AddPhotoModal } from './AddPhotoModal'
 import { ImageFiltersModal } from './ImageFiltersModal'
+import { generateAddedImageSlides } from './ImageSlides'
 import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
@@ -36,7 +34,6 @@ export const CreatePostModal = () => {
     setIsOpenCreatePost,
     t,
     uploadAllImages,
-    // uploadImageForPost,
   } = useCreatePost()
 
   const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
@@ -61,22 +58,7 @@ export const CreatePostModal = () => {
     },
   })
 
-  const addedImageSlides = images.map((el, i) => (
-    <img
-      alt={'slide'}
-      className={cn('w-full', s.filter, s[el.selectedFilter])}
-      key={i}
-      ref={el => {
-        if (totalImageRefs) {
-          totalImageRefs.current[i] = el
-        }
-      }}
-      src={el.initialUrl}
-    />
-  ))
-  const totalImageSlides = images.map((el, i) => (
-    <img alt={'slide'} className={cn('w-full')} key={i} src={el.totalUrl} />
-  ))
+  const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
 
   return (
     <div>
@@ -136,16 +118,13 @@ export const CreatePostModal = () => {
           <ImageFiltersModal
             currentIndex={currentIndex}
             handleSelectFilter={handleSelectFilter}
-            imagesURL={images}
+            images={images}
             setCurrentIndex={setCurrentIndex}
             slides={addedImageSlides}
           />
         )}
         {step === 4 && (
-          <PublicationModal
-            handleDescriptionChange={handleDescriptionChange}
-            slides={totalImageSlides}
-          />
+          <PublicationModal handleDescriptionChange={handleDescriptionChange} images={images} />
         )}
       </Modal>
     </div>
