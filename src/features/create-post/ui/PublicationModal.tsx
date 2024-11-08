@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { TextArea } from '@/common/ui'
+import { ScrollArea, TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { UserProfile, profileApi } from '@/entities/profile'
 
@@ -37,7 +37,7 @@ export const PublicationModal = ({ correct, handleChange, images, limit, value }
           )}
         </div>
         <TextArea
-          className={'min-h-[120px]'}
+          className={'min-h-[120px] max-h-[180px]'}
           isCorrect={correct}
           label={t.addPublicationDesctiption}
           limitCount={limit}
