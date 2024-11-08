@@ -39,6 +39,7 @@ export const ProfileSettingsTabs = () => {
           value: 'account-management',
         },
         {
+          // content: <MyPayments />,
           content: <MyPaymentsTest />,
           label: t.myPayments,
           value: 'my-payments',

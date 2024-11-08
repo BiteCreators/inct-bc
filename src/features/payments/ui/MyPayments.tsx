@@ -4,37 +4,19 @@ import { Pagination, Typography } from '@/common/ui'
 import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
 
+import { useMyPayments } from '../model/useMyPayments'
+
 export const MyPayments = () => {
   const { data, isLoading } = paymentsApi.useGetMyPaymentsQuery()
-  const [currentPage, setCurrentPage] = useState(1)
-  const [paymentsPortion, setPaymentsPortion] = useState(10)
-  const [payments, setPayments] = useState(data?.slice(0, paymentsPortion))
-
-  const handleCurrentPageChange = (page: number) => {
-    setCurrentPage(page)
-    setPayments(data?.slice(paymentsPortion * (page - 1), paymentsPortion * page))
-  }
-
-  const handlePaymentsPortionChange = (portion: string) => {
-    if (data?.length) {
-      const lastPage = data?.length / Number(portion)
-
-      if (currentPage > lastPage) {
-        setCurrentPage(lastPage)
-        setPayments(data?.slice(Number(portion) * (lastPage - 1), Number(portion) * lastPage))
-      } else {
-        setPayments(data?.slice(Number(portion) * (currentPage - 1), Number(portion) * currentPage))
-      }
-      setPaymentsPortion(Number(portion))
-    }
-  }
-  let pagesCount = 0
-  let isShowPagination = false
-
-  if (data?.length) {
-    pagesCount = Math.ceil(data.length / paymentsPortion)
-    isShowPagination = pagesCount > 1
-  }
+  const {
+    currentPage,
+    handleCurrentPageChange,
+    handlePaymentsPortionChange,
+    isShowPagination,
+    pagesCount,
+    payments,
+    paymentsPortion,
+  } = useMyPayments(data)
 
   return (
     <div className={'relative'}>
@@ -75,7 +57,7 @@ export const MyPayments = () => {
 
       {isShowPagination && (
         <Pagination
-          className={'mt-9 w-auto'}
+          className={'mt-9 mb-16 w-auto'}
           currentPage={currentPage}
           onChangePagesPortion={handlePaymentsPortionChange}
           onClickPaginationButton={handleCurrentPageChange}
