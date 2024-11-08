@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
