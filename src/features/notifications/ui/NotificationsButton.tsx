@@ -1,31 +1,36 @@
-import { useState } from 'react'
-
 import { FillBell } from '@/common/assets/icons/components'
+import OutlineBellNoNumber from '@/common/assets/icons/components/OutlineBellNoNumber'
 import { cn } from '@/common/lib/utils/cn'
+import { Dropdown } from '@/common/ui'
+import { notificationData } from '@/common/ui/notification/notificationsData'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
 
 import { NotificationsList } from './Notifications'
-import { notificationData } from './notificationsData'
 
 export const NotificationsButton = () => {
-  const [viewNotifications, setViewNotifications] = useState(false)
-
   const { notificationsCorrectDate, notificationsCount } = useNotifications(notificationData)
+  const wrapIconStyles =
+    'text-[8px] before:text-light-100 before:content-[attr(data-notificationsCount)] before:absolute before:right-0 before:block before:w-3 before:h-3 before:bg-danger-500 before:rounded-full'
 
   return (
     <div className={'relative h-6'}>
-      <button
+      <Dropdown
         className={
-          'text-[8px] before:content-[attr(data-notificationsCount)] before:absolute before:right-0 before:block before:w-3 before:h-3 before:bg-danger-500 before:rounded-full'
+          'p-0 -right-[9px] top-1 [&>button]:p-0 [&>button]:text-light-100 [&>button]:hover:text-light-100'
         }
-        data-notificationsCount={notificationsCount}
-        onClick={() => setViewNotifications(!viewNotifications)}
+        iconButton={
+          <div className={cn(wrapIconStyles)} data-notificationsCount={notificationsCount}>
+            <OutlineBellNoNumber viewBox={'-3 2 24 24'} />
+          </div>
+        }
+        iconButtonOpen={
+          <div className={cn(wrapIconStyles)} data-notificationsCount={notificationsCount}>
+            <FillBell className={'text-primary-500'} />
+          </div>
+        }
       >
-        <FillBell className={cn(viewNotifications ? 'text-primary-500' : 'text-light-100')} />
-      </button>
-      <div className={'absolute -right-[9px] mt-2'}>
-        {viewNotifications && <NotificationsList notificationsItems={notificationsCorrectDate} />}
-      </div>
+        <NotificationsList notificationsItems={notificationsCorrectDate} />
+      </Dropdown>
     </div>
   )
 }
