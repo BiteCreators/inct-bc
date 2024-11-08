@@ -1,10 +1,8 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
 
-import { Button, FormInput, FormSelect, FormTextArea, Loader, SelectItem } from '@/common/ui'
+import { Button, FormInput, FormSelect, FormTextArea, Loader } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
-import { Select } from '@/common/ui/select/Select'
 import { useLocation } from '@/features/profile/model/useLocation'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 
@@ -35,8 +33,6 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
     return <Loader fullScreen />
   }
 
-  console.log('cityOptions', cityOptions)
-
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
       <div className={'flex flex-col gap-6 items-center'}>
@@ -57,55 +53,77 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
         />
         <div className={'flex gap-6'}>
           <div className={'w-full'}>
-            {/*<FormSelect*/}
-            {/*  control={control}*/}
-            {/*  defaultValue={profile?.country}*/}
-            {/*  label={t.selectYourCountry}*/}
-            {/*  name={'country'}*/}
-            {/*  // onChange={e => console.log('eventChange', e)}*/}
-            {/*  // onOpenChange={e => console.log('eventOpen', e)}*/}
-            {/*  // onValueChange={e => console.log('eventValue', e)}*/}
-            {/*  // placeholder={'test select'}*/}
-            {/*>*/}
-            {/*  <SearchableOptions options={countryOptions || []} />*/}
-            {/*</FormSelect>*/}
-            <Controller
+            <FormSelect
               control={control}
-              defaultValue={profile?.country}
+              defaultValue={profile?.country || ''}
+              error={checkError(countryOptions)}
+              label={t.selectYourCountry}
               name={'country'}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  error={checkError(countryOptions)}
-                  label={t.selectYourCountry}
-                  onValueChange={countryValue => {
-                    field.onChange(countryValue)
-                    handlerCountry(countryValue)
-                  }}
-                  placeholder={t.country}
-                >
-                  <SearchableOptions options={countryOptions.length !== 0 ? countryOptions : []} />
-                </Select>
-              )}
-            />
+              onValueChange={countyCode => handlerCountry(countyCode)}
+              placeholder={'Country'}
+            >
+              <SearchableOptions
+                options={countryOptions.length !== 0 ? countryOptions : []}
+                selectedValue={profile?.country || ''}
+              />
+            </FormSelect>
           </div>
           <div className={'w-full'}>
-            <Controller
+            <FormSelect
               control={control}
               defaultValue={profile?.city}
+              label={t.selectYourCity}
               name={'city'}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  disabled={cityOptions.length === 0}
-                  label={t.selectYourCity}
-                  onValueChange={field.onChange}
-                  placeholder={t.city}
-                >
-                  <SearchableOptions options={cityOptions.length !== 0 ? cityOptions : []} />
-                </Select>
-              )}
-            />
+              placeholder={'City'}
+            >
+              <SearchableOptions
+                options={cityOptions.length !== 0 ? cityOptions : []}
+                selectedValue={profile?.city || ''}
+              />
+            </FormSelect>
+          </div>
+          <div>
+            {/*<Controller*/}
+            {/*  control={control}*/}
+            {/*  defaultValue={profile?.country || ''}*/}
+            {/*  name={'country'}*/}
+            {/*  render={({ field }) => (*/}
+            {/*    <Select*/}
+            {/*      {...field}*/}
+            {/*      error={checkError(countryOptions)}*/}
+            {/*      label={t.selectYourCountry}*/}
+            {/*      onValueChange={countryValue => {*/}
+            {/*        field.onChange(countryValue)*/}
+            {/*        handlerCountry(countryValue)*/}
+            {/*      }}*/}
+            {/*      placeholder={t.country}*/}
+            {/*    >*/}
+            {/*      <SearchableOptions*/}
+            {/*        options={countryOptions.length !== 0 ? countryOptions : []}*/}
+            {/*        selectedValue={profile?.country || ''}*/}
+            {/*      />*/}
+            {/*    </Select>*/}
+            {/*  )}*/}
+            {/*/>*/}
+            {/*<Controller*/}
+            {/*  control={control}*/}
+            {/*  defaultValue={profile?.city || ''}*/}
+            {/*  name={'city'}*/}
+            {/*  render={({ field }) => (*/}
+            {/*    <Select*/}
+            {/*      {...field}*/}
+            {/*      disabled={cityOptions.length === 0}*/}
+            {/*      label={t.selectYourCity}*/}
+            {/*      onValueChange={field.onChange}*/}
+            {/*      placeholder={t.city}*/}
+            {/*    >*/}
+            {/*      <SearchableOptions*/}
+            {/*        options={cityOptions.length !== 0 ? cityOptions : []}*/}
+            {/*        selectedValue={profile?.city || ''}*/}
+            {/*      />*/}
+            {/*    </Select>*/}
+            {/*  )}*/}
+            {/*/>*/}
           </div>
         </div>
         <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />
