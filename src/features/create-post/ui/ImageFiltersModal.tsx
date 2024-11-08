@@ -1,43 +1,55 @@
 import React, { ReactNode } from 'react'
 
-import { Typography } from '@/common/ui'
+import { cn } from '@/common/lib/utils/cn'
+import { ScrollArea, Typography } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 
-import exampleImage from '../../../../public/examples/image2.png'
+import s from '../styles/filters.module.css'
+
+import { ImageData } from '../types'
+import { filterValues } from '../utils/filterValues'
 
 type Props = {
+  currentIndex: number
+  handleSelectFilter: (selectedFilter: string) => void
+  images: ImageData[]
+  setCurrentIndex: (currentIndex: number) => void
   slides: ReactNode[]
 }
 
-export const ImageFiltersModal = ({ slides }: Props) => {
-  const nameFilters = [
-    'Normal',
-    'Clarendon',
-    'Lark',
-    'Gingham',
-    'Moon',
-    'Clarendon',
-    'Lark',
-    'Gingham',
-    'Moon',
-  ]
-
+export const ImageFiltersModal = ({
+  currentIndex,
+  handleSelectFilter,
+  images,
+  setCurrentIndex,
+  slides,
+}: Props) => {
   return (
-    <div className={'flex'}>
+    <div className={'flex min-h-[400px]'}>
       <div className={'w-1/2'}>
-        <Slider duration={0} slides={slides} />
+        <Slider duration={0} setCurrentIndex={setCurrentIndex} slides={slides} />
       </div>
-      <div className={'w-1/2 grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>
-        {nameFilters.map((el, index) => (
-          <button key={index}>
-            <div className={'flex flex-col gap-2 items-center'}>
-              <div className={'w-[108px] h-[108px]'}>
-                <img alt={'oops'} className={'w-full h-full'} src={exampleImage.src} />
-              </div>
-              <Typography>{el}</Typography>
-            </div>
-          </button>
-        ))}
+      <div className={'w-1/2 max-h-[400px]'}>
+        <ScrollArea className={'h-full bg'} scrollbarClassName={'bg-dark-100'}>
+          <ul className={'grid grid-cols-3 gap-x-6 gap-y-[18px] px-14 py-6'}>
+            {filterValues.map((el, index) => (
+              <li
+                className={'flex flex-col gap-2 items-center cursor-pointer'}
+                key={el.name}
+                onClick={() => handleSelectFilter(el.class)}
+              >
+                <div className={'w-[108px] h-[108px]'}>
+                  <img
+                    alt={'oops'}
+                    className={cn('w-full h-full', s[filterValues[index].class])}
+                    src={images[currentIndex].initialUrl}
+                  />
+                </div>
+                <Typography>{el.name}</Typography>
+              </li>
+            ))}
+          </ul>
+        </ScrollArea>
       </div>
     </div>
   )

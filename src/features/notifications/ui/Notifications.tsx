@@ -15,12 +15,12 @@ export const NotificationsList = ({ notificationsItems }: Props) => {
   return (
     <div
       className={
-        'min-w-[280px] sm:min-w-[355px] px-2 py-4 border-dark-100 border-solid border rounded bg-dark-500 relative'
+        'min-w-[280px] sm:min-w-[355px] px-2 py-4 border-dark-100 border-solid border rounded bg-dark-500 relative '
       }
     >
       <h3
         className={
-          'text-md font-weight500 mb-3 px-3 before:block before:w-2 before:h-2 before:bg-dark-900 before:absolute before:-top-[4.75px] before:right-4 before:border-t before:border-l before:border-dark-100 before:rotate-45 '
+          'text-md font-weight500 mb-3 px-3 before:block before:w-2 before:h-2 before:bg-dark-500 before:absolute before:-top-[4.75px] before:right-4 before:border-t before:border-l before:border-dark-100 before:rotate-45 '
         }
       >
         Уведомления

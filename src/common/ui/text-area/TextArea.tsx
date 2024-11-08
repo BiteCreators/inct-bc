@@ -1,8 +1,7 @@
-import React, { ComponentProps, forwardRef, useState } from 'react'
+import React, { ComponentProps, forwardRef } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
-import { toArray } from '@vitest/utils'
 
 import { useTextArea } from './useTextArea'
 
