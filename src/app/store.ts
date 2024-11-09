@@ -2,6 +2,7 @@ import { inctagramApi } from '@/common/api/inct.api'
 import { locationApi } from '@/common/api/location.api'
 import { authSlice } from '@/entities/auth'
 import { postSlice } from '@/entities/posts'
+import { paymentsSlice } from '@/features/payments'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 import {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   auth: authSlice.reducer,
   [inctagramApi.reducerPath]: inctagramApi.reducer,
   [locationApi.reducerPath]: locationApi.reducer,
+  payments: paymentsSlice.reducer,
   post: postSlice.reducer,
 })
 
