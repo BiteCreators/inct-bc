@@ -30,36 +30,37 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
     handleConfirm,
     handleReject,
     setConfirmOpen,
+    t,
   } = useDropdownPost()
 
   if (isMyPost) {
     forDrop.push(
       {
         icon: <Edit2Outline />,
-        label: 'Edit post',
+        label: t.editPost,
         onClick: () => {
           changeEditMode(true)
         },
       },
-      { icon: <TrashOutline />, label: 'Delete post', onClick: deletePostHandler }
+      { icon: <TrashOutline />, label: t.deletePost, onClick: deletePostHandler }
     )
   } else {
     if (isFollow) {
       forDrop.push({
         icon: <PersonRemoveOutline />,
-        label: 'Unfollow',
+        label: t.unfollow,
         onClick: () => {},
       })
     } else {
       forDrop.push({
         icon: <PersonAddOutline />,
-        label: 'Follow',
+        label: t.follow,
         onClick: () => {},
       })
     }
     forDrop.push({
       icon: <CopyOutline className={'w-[23px] h-[23px]'} />,
-      label: 'Copy link',
+      label: t.copyLink,
       onClick: copyLinkHandler,
     })
   }

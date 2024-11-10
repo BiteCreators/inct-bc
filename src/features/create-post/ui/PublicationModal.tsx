@@ -1,27 +1,44 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, TextArea, Typography } from '@/common/ui'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
+import { UserProfile, profileApi } from '@/entities/profile'
 
 import exampleImage from '../../../../public/examples/image2.png'
+import { ImageData } from '../types'
+import { generateTotalImageSlides } from './ImageSlides'
 
 type Props = {
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  slides: ReactNode[]
+  images: ImageData[]
 }
 
-export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => {
+export const PublicationModal = ({ handleDescriptionChange, images }: Props) => {
+  const totalImageSlides = generateTotalImageSlides(images)
+  const t = useScopedTranslation('Posts')
+  const { data: profile } = profileApi.useGetProfileQuery()
+
   return (
     <div className={'flex'}>
       <div className={'w-1/2'}>
-        <Slider duration={0} slides={slides} />
+        <Slider duration={0} slides={totalImageSlides} />
       </div>
       <div className={'w-1/2 p-6'}>
-        <UserProfileUrl className={'mb-6'} />
+        <div className={'mb-6'}>
+          {profile && (
+            <UserProfile
+              avatarUrl={profile.avatars[0]?.url || ''}
+              profileId={profile.id}
+              userName={profile.userName}
+            />
+          )}
+        </div>
         <TextArea
           className={'min-h-[120px]'}
-          label={'Add publication descriptions'}
+          label={t.addPublicationDesctiption}
           limitCount={500}
           onChange={handleDescriptionChange}
           placeholder={'Text-area'}
@@ -31,17 +48,6 @@ export const PublicationModal = ({ handleDescriptionChange, slides }: Props) => 
         </div>
         <span>LOCATION</span>
       </div>
-    </div>
-  )
-}
-
-const UserProfileUrl = ({ className }: { className?: string }) => {
-  return (
-    <div className={cn('flex items-center gap-3', className)}>
-      <div className={'w-9 h-9'}>
-        <Avatar avatarURL={exampleImage.src} />
-      </div>
-      <Typography className={'font-medium'}>URLProfile</Typography>
     </div>
   )
 }

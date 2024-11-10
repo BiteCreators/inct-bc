@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { postsApi } from '@/entities/posts'
 import { useParams } from 'next/navigation'
@@ -16,6 +17,7 @@ export const useDropdownPost = () => {
     await navigator.clipboard.writeText(window.location.href)
   }
   const [deletePost] = postsApi.useDeletePostMutation()
+  const t = useScopedTranslation('Posts')
   const params = useParams()
   const postId = Number(params?.postId) ?? null
 
@@ -40,5 +42,6 @@ export const useDropdownPost = () => {
     handleConfirm,
     handleReject,
     setConfirmOpen,
+    t,
   }
 }

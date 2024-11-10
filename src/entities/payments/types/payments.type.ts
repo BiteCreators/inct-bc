@@ -10,7 +10,7 @@ export type CostPaymentResponse = {
 }
 export type CostPayment = {
   amount: number
-  typeDescription: string
+  typeDescription: TYPE_DESCRIPTIONS
 }
 
 export type CurrentPaymentResponse = {
@@ -30,20 +30,22 @@ export type MyPaymentsResponse = MyPayment[]
 export type MyPayment = {
   dateOfPayment: string
   endDateOfSubscription: string
-  paymentType: PaymentType
+  paymentType: string
   price: number
   subscriptionId: string
-  subscriptionType: SubscriptionType
+  subscriptionType: string
   userId: number
 }
 
-enum SubscriptionType {
-  DAY = '1 day',
-  MONTHLY = '1 month',
-  WEEKLY = '7 days',
+export type AccountType = 'Buisness' | 'Personal'
+
+export enum TYPE_DESCRIPTIONS {
+  DAY = 'DAY',
+  MONTHLY = 'MONTHLY',
+  WEEKLY = 'WEEKLY',
 }
-enum PaymentType {
-  CREDIT_CARD = 'Credit card',
-  PAYPAL = 'PayPal',
-  STRIPE = 'Stripe',
+
+export enum PAYMENT_PROVIDERS {
+  PAYPAL = 'PAYPAL',
+  STRIPE = 'STRIPE',
 }

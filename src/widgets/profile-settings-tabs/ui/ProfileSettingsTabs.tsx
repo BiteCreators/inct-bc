@@ -6,6 +6,7 @@ import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
 import { MyPayments } from '@/features/payments/ui/MyPayments'
 import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
+import { AccountManagement } from '@/features/payments'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
@@ -34,7 +35,7 @@ export const ProfileSettingsTabs = () => {
           value: 'devices',
         },
         {
-          content: <div>account management</div>,
+          content: <AccountManagement />,
           label: t.accountManagement,
           value: 'account-management',
         },

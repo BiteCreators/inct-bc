@@ -2,28 +2,28 @@ import React, { RefObject } from 'react'
 
 import {
   CloseOutlineSmall,
-  ImageDefault,
+  Image,
   ImageOutline,
   PlusCircleOutlineBig,
 } from '@/common/assets/icons/components'
-import { Button } from '@/common/ui'
+import { Button, ScrollArea } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
-import { Image } from '@/entities/posts'
 
 import { useImageControl } from '../model/useImageControl'
+import { ImageData } from '../types'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
-  handleDeleteImage: (imageId: string) => void
+  handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: Image[]
+  images: ImageData[]
   isDisableInput: boolean
   uploadImage: () => void
 }
 
 export const ImageControl = ({
   fileInputRef,
-  handleDeleteImage,
+  handleDeleteImageUrl,
   handleFileSelect,
   images,
   isDisableInput,
@@ -38,7 +38,7 @@ export const ImageControl = ({
         onClick={() => setIsImagesControlOpen(!isImagesControlOpen)}
         variant={'icon'}
       >
-        {isImagesControlOpen ? <ImageDefault /> : <ImageOutline />}
+        {isImagesControlOpen ? <Image /> : <ImageOutline />}
       </Button>
       {isImagesControlOpen && (
         <div
@@ -46,21 +46,27 @@ export const ImageControl = ({
             'bg-dark-500 bg-opacity-80 p-[12px] rounded-sm flex justify-center items-start gap-3 absolute right-0 bottom-[38px]'
           }
         >
-          <ul className={'grid grid-cols-3 min-w-[264px] gap-3'}>
-            {images.map(el => (
-              <li className={'w-20 h-20 rounded-[1px] relative'} key={el.uploadId}>
-                <img alt={'Image'} src={el.url} />
-                <button
-                  className={
-                    'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
-                  }
-                  onClick={() => handleDeleteImage(el.uploadId)}
-                >
-                  <CloseOutlineSmall />
-                </button>
-              </li>
-            ))}
-          </ul>
+          <ScrollArea className={'max-w-[300px] w-auto'} orientation={'horizontal'}>
+            <ul className={'flex gap-3'}>
+              {images.map((el, i) => (
+                <li className={'rounded-[1px] relative'} key={i}>
+                  <img
+                    alt={'Image'}
+                    className={'h-20 max-w-52 overflow-hidden'}
+                    src={el.initialUrl}
+                  />
+                  <button
+                    className={
+                      'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
+                    }
+                    onClick={() => handleDeleteImageUrl(i)}
+                  >
+                    <CloseOutlineSmall />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </ScrollArea>
 
           <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
             <button disabled={isDisableInput} onClick={uploadImage}>
