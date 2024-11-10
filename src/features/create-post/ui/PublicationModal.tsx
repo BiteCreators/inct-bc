@@ -3,20 +3,22 @@ import React from 'react'
 import { cn } from '@/common/lib/utils/cn'
 import { Avatar, TextArea, Typography } from '@/common/ui'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { TextArea } from '@/common/ui'
+import { ScrollArea, TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { UserProfile, profileApi } from '@/entities/profile'
 
-import exampleImage from '../../../../public/examples/image2.png'
 import { ImageData } from '../types'
 import { generateTotalImageSlides } from './ImageSlides'
 
 type Props = {
-  handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  correct: boolean
+  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   images: ImageData[]
+  limit: number
+  value: string
 }
 
-export const PublicationModal = ({ handleDescriptionChange, images }: Props) => {
+export const PublicationModal = ({ correct, handleChange, images, limit, value }: Props) => {
   const totalImageSlides = generateTotalImageSlides(images)
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
@@ -37,11 +39,13 @@ export const PublicationModal = ({ handleDescriptionChange, images }: Props) => 
           )}
         </div>
         <TextArea
-          className={'min-h-[120px]'}
+          className={'min-h-[120px] max-h-[180px]'}
+          isCorrect={correct}
           label={t.addPublicationDesctiption}
-          limitCount={500}
-          onChange={handleDescriptionChange}
+          limitCount={limit}
+          onChange={handleChange}
           placeholder={'Text-area'}
+          value={value}
         />
         <div className={'flex mx-[-24px] mt-5 mb-6'}>
           <div className={'h-px bg-dark-100 w-full'} />
