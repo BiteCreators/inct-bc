@@ -6,6 +6,7 @@ import { devicesTranslationsRu } from './devices'
 import { LocaleType } from './en'
 import { internationalizationTranslationRu } from './internationalization'
 import { navigationTranslationRu } from './navigation'
+import { paymentsTranslationsRu } from './payments'
 import { postsTranslationsRu } from './posts'
 import { privacyPolicyTranslationRu } from './privacy-policy'
 import { profileTranslationRu } from './profile'
@@ -17,7 +18,7 @@ export const ru: LocaleType = {
   Devices: devicesTranslationsRu,
   Internationalization: internationalizationTranslationRu,
   Navigation: navigationTranslationRu,
-  Payments: myPaymentsTranslationRu,
+  Payments: paymentsTranslationsRu,
   Posts: postsTranslationsRu,
   PrivacyPolicy: privacyPolicyTranslationRu,
   Profile: profileTranslationRu,

@@ -13,12 +13,13 @@ type RadioOptions = {
 export type RadioGroupProps = {
   disabled?: boolean
   error?: string
+  name?: string
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
   options: RadioOptions[]
 }
 
 export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
-  ({ disabled, error, onChange, options }: RadioGroupProps, ref) => {
+  ({ disabled, error, name = 'radioName', onChange, options }: RadioGroupProps, ref) => {
     return (
       <div className={cn('relative')}>
         {options.map((option, i) => {
@@ -27,7 +28,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
               disabled={disabled}
               key={i}
               label={option.label}
-              name={'radioName'}
+              name={name}
               onChange={onChange}
               ref={ref}
               value={option.value}

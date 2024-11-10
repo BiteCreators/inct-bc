@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { cn } from '@/common/lib/utils/cn'
+import { Avatar, TextArea, Typography } from '@/common/ui'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TextArea } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'

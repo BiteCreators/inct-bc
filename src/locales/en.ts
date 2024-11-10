@@ -8,6 +8,7 @@ import { privacyPolicyTranslationEn } from '@/locales/privacy-policy'
 import { profileTranslationEn } from '@/locales/profile'
 import { termsServiceTranslationEn } from '@/locales/terms-service'
 
+import { paymentsTranslationsEn } from './payments'
 import { postsTranslationsEn } from './posts'
 
 export const en = {
@@ -16,7 +17,7 @@ export const en = {
   Devices: devicesTranslationsEn,
   Internationalization: internationalizationTranslationEn,
   Navigation: navigationTranslationEn,
-  Payments: myPaymentsTranslationEn,
+  Payments: paymentsTranslationsEn,
   Posts: postsTranslationsEn,
   PrivacyPolicy: privacyPolicyTranslationEn,
   Profile: profileTranslationEn,
