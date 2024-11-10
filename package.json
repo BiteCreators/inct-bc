@@ -13,7 +13,8 @@
     "build-storybook": "storybook build",
     "rename-icons": "node scripts/rename-icons.cjs",
     "replace-colors": "node scripts/replace-colors.cjs",
-    "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/common/assets/icons/svg --out-dir src/common/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint"
+    "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/common/assets/icons/svg --out-dir src/common/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint",
+    "test": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -69,15 +70,26 @@
     "@storybook/nextjs": "^8.2.9",
     "@storybook/react": "^8.2.9",
     "@storybook/test": "^8.2.9",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "eslint-plugin-jest-dom": "^5.4.0",
     "eslint-plugin-storybook": "^0.8.0",
+    "eslint-plugin-testing-library": "^6.4.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "storybook": "^8.2.9",
     "stylelint": "^16.9.0",
     "tailwindcss": "^3.4.1",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
