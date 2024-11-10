@@ -22,7 +22,7 @@ export const PageLayout = ({
 }: Props) => {
   return (
     <div className={cn('min-h-[100vh]')}>
-      {!!header && <div className={'sticky top-0 z-10'}>{header}</div>}
+      {!!header && <div className={'sticky top-0'}>{header}</div>}
       <ScrollArea className={'h-[calc(100vh-60px)] flex flex-col'}>
         <div className={cn('grow', !!sidebar && 'md:grid md:grid-cols-[220px_1fr] md:mb-0 mb-16')}>
           {!!sidebar && (
