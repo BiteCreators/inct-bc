@@ -4,6 +4,8 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
+import { MyPayments } from '@/features/payments/ui/MyPayments'
+import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
 import { AccountManagement } from '@/features/payments'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
@@ -37,7 +39,12 @@ export const ProfileSettingsTabs = () => {
           label: t.accountManagement,
           value: 'account-management',
         },
-        { content: <div>my paments</div>, label: t.myPayments, value: 'my-payments' },
+        {
+          // content: <MyPayments />,
+          content: <MyPaymentsTest />,
+          label: t.myPayments,
+          value: 'my-payments',
+        },
       ]}
       value={selectedTab}
     />
