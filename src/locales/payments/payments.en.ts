@@ -1,3 +1,2 @@
-export const myPaymentsTranslationEn = {
+export const myPaymentsTranslationEn = {}
 
-}
