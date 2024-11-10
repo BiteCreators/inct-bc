@@ -6,7 +6,7 @@ import { PostComment } from '@/features/comments'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
-export const PostComments = () => {
+export default function PostComments() {
   // MOCK (remove later)------------//
   const comments = [
     {
