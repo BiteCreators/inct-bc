@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { Pagination, Typography } from '@/common/ui'
 import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'

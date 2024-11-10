@@ -5,4 +5,3 @@ export const paymentsTranslationsRu: LocaleType['Payments'] = {
     test: 'тест',
   },
 }
-

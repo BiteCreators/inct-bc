@@ -3,4 +3,3 @@ export const paymentsTranslationsEn = {
     test: 'test',
   },
 }
-

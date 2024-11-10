@@ -4,9 +4,9 @@ import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
+import { AccountManagement } from '@/features/payments'
 import { MyPayments } from '@/features/payments/ui/MyPayments'
 import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
-import { AccountManagement } from '@/features/payments'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
