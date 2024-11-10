@@ -57,6 +57,7 @@ export const DragAndDropInput: React.FC<DragAndDropInputProps> = ({
         multiple={multiple}
         onChange={handleFileSelect}
         ref={fileInputRef}
+        role={'file-input'}
         type={'file'}
       />
       {children}

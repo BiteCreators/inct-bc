@@ -21,6 +21,7 @@ export const AddPhotoModal = ({ fileInputRef, handleFileSelect, uploadImage }: P
           className={
             'bg-dark-700 w-[300px] h-[300px] md:w-56 md:h-56 mt-3 md:mt-[60px] flex justify-center items-center mb-14'
           }
+          data-testid={'drop-zone'}
         >
           <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
         </div>
