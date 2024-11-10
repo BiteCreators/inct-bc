@@ -2,10 +2,10 @@ import { FillBell } from '@/common/assets/icons/components'
 import OutlineBellNoNumber from '@/common/assets/icons/components/OutlineBellNoNumber'
 import { cn } from '@/common/lib/utils/cn'
 import { Dropdown } from '@/common/ui'
-import { notificationData } from '@/common/ui/notification/notificationsData'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
 
 import { NotificationsList } from './Notifications'
+import { notificationData } from './notificationsData'
 
 export const NotificationsButton = () => {
   const { notificationsCorrectDate, notificationsCount } = useNotifications(notificationData)
