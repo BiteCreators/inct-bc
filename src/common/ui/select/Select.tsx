@@ -101,7 +101,7 @@ export const Select = forwardRef<HTMLButtonElement, SelectProps>(
               className={cn(
                 'border border-light-100 border-t-0 mt-0 rounded-sm rounded-b-sm',
                 'bg-dark-500 w-[var(--radix-select-trigger-width)]',
-                'z-10',
+                'z-10 max-h-[300px] overflow-hidden overflow-y-auto',
                 responsive && [
                   'border md:border-light-100 md:border-t-0 mt-1 md:mt-0 rounded-sm md:rounded-b-sm w-auto md:w-[var(--radix-select-trigger-width)]',
                 ]
