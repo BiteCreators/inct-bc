@@ -17,7 +17,7 @@ export const AccountManagement = () => {
     <div>
       <CurrentSubscriptionCard />
       <AccountTypeCard />
-      {accountType === 'Buisness' && (
+      {accountType === 'Business' && (
         <>
           <SubscriptionTypeCard />
           <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>

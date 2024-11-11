@@ -37,7 +37,7 @@ export type MyPayment = {
   userId: number
 }
 
-export type AccountType = 'Buisness' | 'Personal'
+export type AccountType = 'Business' | 'Personal'
 
 export enum TYPE_DESCRIPTIONS {
   DAY = 'DAY',
