@@ -3,16 +3,18 @@ import React, { InputHTMLAttributes, forwardRef, useId } from 'react'
 import { cn } from '@/common/lib/utils/cn'
 
 type Props = {
+  checked?: boolean
   label: string
 } & InputHTMLAttributes<HTMLInputElement>
 
 export const Radio = forwardRef<HTMLInputElement, Props>(
-  ({ disabled, label, name, onChange, value, ...props }: Props, ref) => {
+  ({ checked, disabled, label, name, onChange, value, ...props }: Props, ref) => {
     const id = useId()
 
     return (
       <div className={'py-2 mb-3'}>
         <input
+          checked={checked}
           className={'peer hidden'}
           disabled={disabled}
           id={id}
@@ -20,7 +22,7 @@ export const Radio = forwardRef<HTMLInputElement, Props>(
           onChange={onChange}
           ref={ref}
           type={'radio'}
-          value={value}
+          value={value as string}
           {...props}
         />
         <label

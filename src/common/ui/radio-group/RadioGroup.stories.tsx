@@ -32,15 +32,15 @@ const radioOptions = [
 
 export const Default: Story = {
   args: {
-    onChange: e => action('value')(e.target.value),
+    onChange: value => action('value')(value),
     options: radioOptions,
   },
 }
 
 export const Disabled: Story = {
-  args: { ...Default, disabled: true, options: radioOptions },
+  args: { ...Default.args, disabled: true },
 }
 
 export const Error: Story = {
-  args: { ...Default, error: 'Error', options: radioOptions },
+  args: { ...Default.args, error: 'Error' },
 }
