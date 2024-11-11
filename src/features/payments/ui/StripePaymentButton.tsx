@@ -44,13 +44,13 @@ export const StripePaymentButton = ({
     <>
       <button
         className={cn([
-          'w-20 h-11 bg-dark-500 px-3 rounded border border-dark-300 disabled:opacity-30',
+          'w-24 h-16 bg-dark-500 px-3 rounded border border-dark-300 disabled:opacity-30',
           className,
         ])}
         disabled={isLoading}
         onClick={handleStripeRedirect}
       >
-        <StripeSvgrepoCom4 height={30} viewBox={'2 3 24 9'} width={70} />
+        <StripeSvgrepoCom4 height={40} viewBox={'3 3 18 10'} width={70} />
       </button>
       {!!apiError && <Alert message={apiError} purpose={'toast'} type={'error'} />}
     </>
