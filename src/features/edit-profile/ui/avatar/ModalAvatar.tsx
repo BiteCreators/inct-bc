@@ -1,17 +1,17 @@
 import React from 'react'
 
-import { Avatars } from '@/common/api/profile.api'
 import { ImageOutline } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Alert, Avatar, Button, Modal } from '@/common/ui'
 import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
+import { ProfileAvatars } from '@/entities/profile'
 import { useCropImage } from '@/features/edit-profile/lib/hooks/useCropImage'
 import { useImageUpload } from '@/features/edit-profile/lib/hooks/useImageUpload'
 
 import { CropImage } from './CropImage'
 
 type Props = {
-  currentAvatar: Avatars | null
+  currentAvatar: ProfileAvatars | null
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
   updateAvatar: (file: File) => void
@@ -64,7 +64,11 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
                 }
               >
                 {currentAvatar ? (
-                  <Avatar avatarURL={currentAvatar.url} rounded={false} />
+                  <Avatar
+                    avatarURL={currentAvatar.url}
+                    imgStyles={'md:w-56 w-[300px]'}
+                    rounded={false}
+                  />
                 ) : (
                   <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
                 )}

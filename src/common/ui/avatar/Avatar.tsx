@@ -2,10 +2,13 @@ import { Close } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import Link from 'next/link'
 
+import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
 type Props = {
   alt?: string
   avatarURL: string
+  className?: string
   href?: string
+  imgStyles?: string
   isNextLink?: boolean
   onClose?: () => void
   rel?: string
@@ -16,7 +19,9 @@ type Props = {
 export const Avatar = ({
   alt = 'Avatar',
   avatarURL,
+  className,
   href,
+  imgStyles,
   isNextLink = false,
   onClose,
   rel = '',
@@ -29,8 +34,12 @@ export const Avatar = ({
     }
   }
   const AvatarImage = (
-    <span className={'relative'}>
-      <img alt={alt} className={cn('w-full', [rounded && 'rounded-full'])} src={avatarURL} />
+    <span className={cn(['relative inline-block', className])}>
+      <img
+        alt={alt}
+        className={cn(imgStyles, [rounded && 'rounded-full'])}
+        src={avatarURL ? avatarURL : exampleAvatar.src}
+      />
       {showClose && (
         <span
           className={cn([
@@ -52,11 +61,11 @@ export const Avatar = ({
   )
 
   return isNextLink && href ? (
-    <Link className={'w-full h-full'} href={href} rel={rel}>
+    <Link className={'max-w-full h-full text-center'} href={href} rel={rel}>
       {AvatarImage}
     </Link>
   ) : (
-    <a className={'w-full h-full'} href={href} rel={rel}>
+    <a className={'max-w-full h-full text-center flex'} href={href} rel={rel}>
       {AvatarImage}
     </a>
   )

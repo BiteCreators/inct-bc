@@ -3,13 +3,17 @@ import React, { ComponentProps, forwardRef } from 'react'
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
 
+import s from './textAreaScroll.module.css'
+
 import { useTextArea } from './useTextArea'
 
 export type TextAreaProps = {
   className?: string
   error?: string
+  isCorrect?: boolean
   isError?: boolean
   label?: string
+  limitCount?: number
   resize?: 'auto' | 'manual-x' | 'manual-y'
 } & ComponentProps<'textarea'>
 
@@ -20,8 +24,10 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       disabled,
       error,
       id,
+      isCorrect,
       isError,
       label,
+      limitCount,
       onChange,
       required,
       resize = 'auto',
@@ -29,10 +35,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     }: TextAreaProps,
     ref
   ) => {
+    if (limitCount) {
+      limitCount = limitCount < 0 ? undefined : limitCount
+    }
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: resize === 'auto',
       onChange,
     })
+    const currentCount = props.value?.toString().length ?? 0
 
     return (
       <div className={'flex flex-col'}>
@@ -61,6 +71,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             'placeholder:text-light-900 placeholder:text-md',
             'overflow-y-hidden resize-none',
             'transition-[outline-color] duration-100',
+            'overflow-y-auto',
+            s['custom-textarea'],
             isError && 'border-danger-500',
             resize === 'manual-y' && 'overflow-y-auto resize-y',
             resize === 'manual-x' && 'overflow-x-auto resize-x',
@@ -73,6 +85,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           required={required}
           {...props}
         />
+        {!!limitCount && (
+          <div
+            className={`flex justify-end text-light-900 text-xs ${!isCorrect && 'text-red-700'}`}
+          >{`${currentCount}/${limitCount}`}</div>
+        )}
         {isError && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
       </div>
     )

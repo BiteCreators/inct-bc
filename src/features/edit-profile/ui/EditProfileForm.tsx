@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, FormInput, FormSelect, FormTextArea, Loader } from '@/common/ui'
+import { Alert, Button, FormInput, FormSelect, FormTextArea, Loader } from '@/common/ui'
 import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
 import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
 import { useLocation } from '@/features/profile/model/useLocation'
@@ -81,49 +81,6 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
                 selectedValue={profile?.city || ''}
               />
             </FormSelect>
-          </div>
-          <div>
-            {/*<Controller*/}
-            {/*  control={control}*/}
-            {/*  defaultValue={profile?.country || ''}*/}
-            {/*  name={'country'}*/}
-            {/*  render={({ field }) => (*/}
-            {/*    <Select*/}
-            {/*      {...field}*/}
-            {/*      error={checkError(countryOptions)}*/}
-            {/*      label={t.selectYourCountry}*/}
-            {/*      onValueChange={countryValue => {*/}
-            {/*        field.onChange(countryValue)*/}
-            {/*        handlerCountry(countryValue)*/}
-            {/*      }}*/}
-            {/*      placeholder={t.country}*/}
-            {/*    >*/}
-            {/*      <SearchableOptions*/}
-            {/*        options={countryOptions.length !== 0 ? countryOptions : []}*/}
-            {/*        selectedValue={profile?.country || ''}*/}
-            {/*      />*/}
-            {/*    </Select>*/}
-            {/*  )}*/}
-            {/*/>*/}
-            {/*<Controller*/}
-            {/*  control={control}*/}
-            {/*  defaultValue={profile?.city || ''}*/}
-            {/*  name={'city'}*/}
-            {/*  render={({ field }) => (*/}
-            {/*    <Select*/}
-            {/*      {...field}*/}
-            {/*      disabled={cityOptions.length === 0}*/}
-            {/*      label={t.selectYourCity}*/}
-            {/*      onValueChange={field.onChange}*/}
-            {/*      placeholder={t.city}*/}
-            {/*    >*/}
-            {/*      <SearchableOptions*/}
-            {/*        options={cityOptions.length !== 0 ? cityOptions : []}*/}
-            {/*        selectedValue={profile?.city || ''}*/}
-            {/*      />*/}
-            {/*    </Select>*/}
-            {/*  )}*/}
-            {/*/>*/}
           </div>
         </div>
         <FormTextArea className={'mb-6'} control={control} label={t.aboutMe} name={'aboutMe'} />

@@ -42,7 +42,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           document.cookie = `accessToken=${token};max-age=2678400;secure;path=/;samesite=lax`
           result = await baseQuery(args, api, extraOptions)
         } else {
-          api.dispatch(authSlice.actions.setAccessToken(null))
+          api.dispatch(authSlice.actions.logout())
           document.cookie = 'accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
         }
       } finally {

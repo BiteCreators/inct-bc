@@ -5,9 +5,10 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { authApi, authSlice } from '@/entities/auth'
+import { authApi, authSlice, decodeAccessToken } from '@/entities/auth'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import * as jose from 'jose'
 import Router from 'next/router'
 
 import { modifySingInApiError } from '../lib/modifySignInApiError'
@@ -44,6 +45,11 @@ export const useSignInForm = () => {
         password,
       }).unwrap()
       const token = res.accessToken
+      const { userId } = decodeAccessToken(token)
+
+      if (!userId) {
+        throw new Error('access token is invalid')
+      }
 
       setCookies('accessToken', res.accessToken, {
         maxAge: 2678400,
@@ -51,8 +57,8 @@ export const useSignInForm = () => {
         sameSite: 'lax',
         secure: true,
       })
-      dispatch(authSlice.actions.setAccessToken(token))
-      Router.push('/profile')
+      dispatch(authSlice.actions.setCredentials({ accessToken: token, userId }))
+      Router.push(`/profile/${userId}`)
     } catch (error) {
       handleApiError({ error, modifyMessage: modifySingInApiError, setApiError, setError })
     }

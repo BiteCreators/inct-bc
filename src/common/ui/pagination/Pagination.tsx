@@ -37,7 +37,7 @@ export const Pagination = ({
   return (
     <div
       className={cn(
-        'mx-auto inline-flex min-h-[35px] w-full justify-center text-sm font-normal text-light-100 items-center',
+        'inline-flex min-h-[35px] w-full justify-center text-sm font-normal text-light-100 items-center',
         className
       )}
     >

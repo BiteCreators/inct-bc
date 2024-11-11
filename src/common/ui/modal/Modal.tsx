@@ -8,24 +8,52 @@ import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   children: ReactNode
   className?: string
+  disabledButton?: boolean
+  handleBack?: () => void
+  handleInteractOutside?: (e: any) => void
+  handleNext?: () => void
   isOpen: boolean
-  mode: 'custom' | 'default' | 'outside'
+  maxWidth?: string
+  mode: 'custom' | 'default' | 'outside' | 'withStep'
+  nextButtonTitle?: string
   onOpenChange?: (open: boolean) => void
-  title?: string
+  title?: ReactNode | string
 }
 
-export const Modal = ({ children, className, isOpen, mode, onOpenChange, title }: Props) => {
+export const Modal = ({
+  children,
+  className,
+  disabledButton,
+  handleBack,
+  handleInteractOutside,
+  handleNext,
+  isOpen,
+  maxWidth,
+  mode,
+  nextButtonTitle,
+  onOpenChange,
+  title,
+}: Props) => {
   const modalContent = (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
-      <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-50')} />
+      <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-30')} />
       <Dialog.Content
         className={cn(
-          'z-50 fixed top-1/2 left-1/2 max-w-md bg-dark-300 rounded-sm transform border border-dark-100',
+          'z-30 fixed top-1/2 left-1/2 bg-dark-300 rounded-sm transform border border-dark-100',
           '-translate-x-1/2 -translate-y-1/2',
+          maxWidth ? maxWidth : 'max-w-[480px]',
           className
         )}
+        onInteractOutside={handleInteractOutside}
       >
-        <ModalContent mode={mode} title={title}>
+        <ModalContent
+          disabledButton={disabledButton}
+          handleBack={handleBack}
+          handleNext={handleNext}
+          mode={mode}
+          nextButtonTitle={nextButtonTitle}
+          title={title}
+        >
           {children}
         </ModalContent>
       </Dialog.Content>

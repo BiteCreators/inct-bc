@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { ImageOutline } from '@/common/assets/icons/components'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
@@ -26,20 +26,19 @@ export const ProfileAvatar = () => {
 
   if (isLoading) {
     return (
-      <div className={'w-1/5 p-2 flex justify-center'}>
-        <div className={'mt-16'}>
-          <Loader />
-        </div>
+      <div className={'flex h-60 justify-center items-center'}>
+        <Loader />
       </div>
     )
   }
 
   return (
-    <div className={'flex flex-col gap-6 max-w-max'}>
+    <div className={'flex flex-col gap-6 items-center'}>
       {currentAvatar ? (
         <>
           <Avatar
             avatarURL={currentAvatar?.url || ''}
+            imgStyles={'w-48'}
             isNextLink={false}
             onClose={removeAvatar}
             showClose={!!currentAvatar?.url}
@@ -62,7 +61,11 @@ export const ProfileAvatar = () => {
           <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
         </div>
       )}
-      <Button className={'w-full'} onClick={() => setIsOpen(true)} variant={'outline'}>
+      <Button
+        className={'w-full max-w-[275px]'}
+        onClick={() => setIsOpen(true)}
+        variant={'outline'}
+      >
         {t.addProfilePhoto}
       </Button>
       {apiError && <Alert duration={3000} message={apiError} purpose={'toast'} type={'error'} />}
