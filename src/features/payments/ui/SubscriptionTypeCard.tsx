@@ -34,7 +34,7 @@ export const SubscriptionTypeCard = () => {
         <Card className={'flex flex-col mt-2'}>
           <form noValidate>
             <RadioGroup<TYPE_DESCRIPTIONS>
-              defaultValue={options[0]?.value as TYPE_DESCRIPTIONS}
+              defaultValue={options[0]?.value}
               onChange={value => dispatch(paymentsSlice.actions.setNewSubscriptionType(value))}
               options={options}
             />

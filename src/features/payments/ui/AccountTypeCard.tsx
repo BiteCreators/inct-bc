@@ -17,7 +17,7 @@ export const AccountTypeCard = () => {
           onChange={value => dispatch(paymentsSlice.actions.setAccountType(value))}
           options={[
             { label: 'Personal', value: 'Personal' },
-            { label: 'Buisness', value: 'Buisness' },
+            { label: 'Business', value: 'Business' },
           ]}
         />
       </Card>
