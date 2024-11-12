@@ -28,10 +28,10 @@ export const SubscriptionTypeCard = () => {
 
     return (
       <>
-        <Typography className={'font-weight600 mt-7'} variant={'h3'}>
+        <Typography className={'font-weight600 mb-2'} variant={'h3'}>
           Your subscription costs:
         </Typography>
-        <Card className={'flex flex-col mt-2'}>
+        <Card className={'flex flex-col mb-6'}>
           <form noValidate>
             <RadioGroup<TYPE_DESCRIPTIONS>
               defaultValue={options[0]?.value}

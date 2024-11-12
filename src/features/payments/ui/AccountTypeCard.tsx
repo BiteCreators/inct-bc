@@ -8,10 +8,10 @@ export const AccountTypeCard = () => {
 
   return (
     <>
-      <Typography className={'font-weight600 mt-5'} variant={'h3'}>
+      <Typography className={'font-weight600 mb-2'} variant={'h3'}>
         Account type:
       </Typography>
-      <Card className={'flex flex-col  mt-2'}>
+      <Card className={'flex flex-col mb-10'}>
         <RadioGroup
           defaultValue={accountType}
           onChange={value => dispatch(paymentsSlice.actions.setAccountType(value))}
