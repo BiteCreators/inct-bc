@@ -20,13 +20,13 @@ export const StripePaymentButton = ({ className }: Props) => {
     <>
       <button
         className={cn([
-          'w-20 h-11 bg-dark-500 px-3 rounded border border-dark-300 disabled:opacity-30',
+          'w-24 h-16 bg-dark-500 p-2.5 rounded border border-dark-300 disabled:opacity-30',
           className,
         ])}
         disabled={isLoading}
         onClick={handleSubmit}
       >
-        <StripeSvgrepoCom4 height={30} viewBox={'2 3 24 9'} width={70} />
+        <StripeSvgrepoCom4 height={43} viewBox={'6 2.5 12 11'} width={75} />
       </button>
       {!!error && <Alert message={error} purpose={'toast'} type={'error'} />}
     </>
