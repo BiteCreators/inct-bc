@@ -125,7 +125,6 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 export default function ProfileSettings({ cities, countries }: LocationsProps) {
-  console.log('countriesResponse', cities, countries)
 
   return (
     <div className={'px-4 lg:pl-6 lg:pr-16 w-screen md:w-full'}>
