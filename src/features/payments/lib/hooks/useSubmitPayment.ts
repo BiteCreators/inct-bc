@@ -8,7 +8,15 @@ import { PAYMENT_PROVIDERS, TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/pa
 import { paymentsSlice } from '../../model/payments.slice'
 import { SubscriptionFormData, createSubscriptionSchema } from '../schemas/subscription.schema'
 
-export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) => {
+export const useSubmitPayment = ({
+  onFailure,
+  onSuccess,
+  provider,
+}: {
+  onFailure: () => void
+  onSuccess: () => void
+  provider: PAYMENT_PROVIDERS
+}) => {
   const subscriptionType = useAppSelector(paymentsSlice.selectors.selectNewSubscriptionType)
   const { data: subscriptionTypes } = paymentsApi.useGetCostPaymentQuery()
   const [createPaymentSubscription, { isLoading }] =
@@ -32,9 +40,12 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
 
       if (response.url) {
         window.location.href = response.url
+      } else {
+        onSuccess()
       }
     } catch (error) {
       handleApiError({ error, setApiError })
+      onFailure()
     }
   }
 
@@ -42,7 +53,9 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
     const paymentData = getPaymentDataByType(subscriptionType)
     const submitData = {
       amount: paymentData?.amount,
-      baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+      baseUrl:
+        process.env.NEXT_PUBLIC_BASE_URL ||
+        'http://localhost:3000/en/profile/1431/settings?tab=account-management',
       paymentType: provider,
       typeSubscription: paymentData?.typeDescription,
     }
@@ -53,6 +66,7 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
       subscribe(data)
     } else {
       setValidationError(error.toString())
+      onFailure()
     }
   }
 

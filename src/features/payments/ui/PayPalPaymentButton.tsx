@@ -9,10 +9,14 @@ import { useSubmitPayment } from '../lib/hooks/useSubmitPayment'
 
 type Props = {
   className?: string
+  onFailure: () => void
+  onSuccess: () => void
 }
 
-export const PayPalPaymentButton = ({ className }: Props) => {
+export const PayPalPaymentButton = ({ className, onFailure, onSuccess }: Props) => {
   const { error, handleSubmit, isLoading } = useSubmitPayment({
+    onFailure,
+    onSuccess,
     provider: PAYMENT_PROVIDERS.PAYPAL,
   })
 

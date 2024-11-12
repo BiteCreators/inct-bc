@@ -9,10 +9,14 @@ import { useSubmitPayment } from '../lib/hooks/useSubmitPayment'
 
 type Props = {
   className?: string
+  onFailure: () => void
+  onSuccess: () => void
 }
 
-export const StripePaymentButton = ({ className }: Props) => {
+export const StripePaymentButton = ({ className, onFailure, onSuccess }: Props) => {
   const { error, handleSubmit, isLoading } = useSubmitPayment({
+    onFailure,
+    onSuccess,
     provider: PAYMENT_PROVIDERS.STRIPE,
   })
 
