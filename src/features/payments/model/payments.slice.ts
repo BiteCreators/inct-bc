@@ -8,7 +8,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   accountType: 'Personal',
-  newSubscriptionType: null,
+  newSubscriptionType: TYPE_DESCRIPTIONS.DAY,
 }
 
 export const paymentsSlice = createSlice({
