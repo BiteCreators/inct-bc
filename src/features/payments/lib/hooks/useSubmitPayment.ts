@@ -33,6 +33,7 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
       if (response.url) {
         window.location.href = response.url
       }
+      console.log(response)
     } catch (error) {
       handleApiError({ error, setApiError })
     }
