@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Typography } from '@/common/ui'
+import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
 
 import { paymentsSlice } from '../model/payments.slice'
@@ -9,41 +10,43 @@ import { PayPalPaymentButton } from './PayPalPaymentButton'
 import { StripePaymentButton } from './StripePaymentButton'
 import { SubscriptionTypeCard } from './SubscriptionTypeCard'
 
+// const data: any = {
+//   data: [
+// {
+//   autoRenewal: true,
+//   dateOfPayment: '2024-11-12',
+//   endDateOfSubscription: '2024-11-19',
+//   subscriptionId: '1',
+//   userId: 1,
+// },
+// {
+//   autoRenewal: false,
+//   dateOfPayment: '2024-11-14',
+//   endDateOfSubscription: '2024-11-15',
+//   subscriptionId: '12',
+//   userId: 2,
+// },
+// {
+//   autoRenewal: true,
+//   dateOfPayment: '2024-11-13',
+//   endDateOfSubscription: '2024-12-13',
+//   subscriptionId: '123',
+//   userId: 3,
+// },
+//   ],
+//   hasAutoRenewal: true,
+// }
+
 export const AccountManagement = () => {
   const { data, isLoading } = paymentsApi.useGetCurrentPaymentQuery()
   const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)
-  //const { handleSubmit } = useSubmitPayment({ provider: PAYMENT_PROVIDERS.PAYPAL })
-
-  // const data: any = {
-  //   data: [
-  //     {
-  //       autoRenewal: true,
-  //       dateOfPayment: '2024-12-30',
-  //       endDateOfSubscription: '2024-12-14',
-  //       subscriptionId: '1',
-  //       userId: 1,
-  //     },
-  //     {
-  //       autoRenewal: false,
-  //       dateOfPayment: '2024-12-30',
-  //       endDateOfSubscription: '2024-11-15',
-  //       subscriptionId: '12',
-  //       userId: 2,
-  //     },
-  //     {
-  //       autoRenewal: true,
-  //       dateOfPayment: '2024-12-30',
-  //       endDateOfSubscription: '2024-11-20',
-  //       subscriptionId: '123',
-  //       userId: 3,
-  //     },
-  //   ],
-  //   hasAutoRenewal: true,
-  // }
 
   const dispatch = useAppDispatch()
 
   let disableAccountTypeOption = false
+
+  const subscriptionTypesText =
+    accountType === 'Business' ? 'Change your subscription:' : 'Your subscription costs:'
 
   if (data?.data.length !== undefined && data?.data.length !== 0) {
     dispatch(paymentsSlice.actions.setAccountType('Business'))
@@ -52,12 +55,12 @@ export const AccountManagement = () => {
 
   return (
     <div className={'relative'}>
-      {/*{isLoading && <LoaderBlock />}*/}
+      {isLoading && <LoaderBlock />}
       {data?.data.length !== 0 && <CurrentSubscriptionCard />}
       <AccountTypeCard disableOption={disableAccountTypeOption} />
       {accountType === 'Business' && (
         <>
-          <SubscriptionTypeCard />
+          <SubscriptionTypeCard text={subscriptionTypesText} />
           <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>
             <PayPalPaymentButton />
             <Typography>or</Typography>

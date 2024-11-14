@@ -1,23 +1,21 @@
 import { Subscription } from '@/entities/payments'
 
 export const getSubscriptionDates = (data: Subscription[]) => {
-  const mlsecondsCount = data.reduce((res, subscription) => {
-    const today = new Date()
-    const endDateOfSubscription = new Date(subscription.endDateOfSubscription)
-    const diffMls = Math.abs(
-      Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) -
-        Date.UTC(
-          endDateOfSubscription.getFullYear(),
-          endDateOfSubscription.getMonth(),
-          endDateOfSubscription.getDate()
-        )
-    )
+  const paymentsDatesArray = data.map(el => {
+    return new Date(el.dateOfPayment).getTime()
+  })
+  const min = Math.min(...paymentsDatesArray)
 
-    return diffMls + res
+  const subscriptionsMlsecondsCount = data.reduce((res, subscription) => {
+    const subscribeMlsecCount =
+      new Date(subscription.endDateOfSubscription).getTime() -
+      new Date(subscription.dateOfPayment).getTime()
+
+    return res + subscribeMlsecCount
   }, 0)
-  const expireAt = new Date(Date.now() + mlsecondsCount).toLocaleDateString()
+  const expireAt = new Date(min + subscriptionsMlsecondsCount).toLocaleDateString()
   const nextPayment = new Date(
-    Date.now() + mlsecondsCount + 24 * 60 * 60 * 1000
+    min + subscriptionsMlsecondsCount + 24 * 60 * 60 * 1000
   ).toLocaleDateString()
 
   return {

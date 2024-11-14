@@ -3,37 +3,37 @@ import { paymentsApi } from '@/entities/payments'
 import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDates'
 import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
 
+// const data: any = {
+// data: [
+//   {
+//     autoRenewal: true,
+//     dateOfPayment: '2024-11-12',
+//     endDateOfSubscription: '2024-11-19',
+//     subscriptionId: '1',
+//     userId: 1,
+//   },
+//   {
+//     autoRenewal: false,
+//     dateOfPayment: '2024-11-14',
+//     endDateOfSubscription: '2024-11-15',
+//     subscriptionId: '12',
+//     userId: 2,
+//   },
+//   {
+//     autoRenewal: true,
+//     dateOfPayment: '2024-11-13',
+//     endDateOfSubscription: '2024-12-13',
+//     subscriptionId: '123',
+//     userId: 3,
+//   },
+// ],
+// hasAutoRenewal: true,
+// }
+
 export const CurrentSubscriptionCard = () => {
-  const { data, isLoading } = paymentsApi.useGetCurrentPaymentQuery()
+  const { data } = paymentsApi.useGetCurrentPaymentQuery()
   const { apiError, autoRenewalAlert, handleCheckboxChange, setAutoRenewalAlert } =
     useSubscriptionManagement()
-
-  // const data: any = {
-  //   data: [
-  //     {
-  //       autoRenewal: true,
-  //       dateOfPayment: '2024-12-30',
-  //       endDateOfSubscription: '2024-12-14',
-  //       subscriptionId: '1',
-  //       userId: 1,
-  //     },
-  //     {
-  //       autoRenewal: false,
-  //       dateOfPayment: '2024-12-30',
-  //       endDateOfSubscription: '2024-11-15',
-  //       subscriptionId: '12',
-  //       userId: 2,
-  //     },
-  //     {
-  //       autoRenewal: true,
-  //       dateOfPayment: '2024-12-30',
-  //       endDateOfSubscription: '2024-11-20',
-  //       subscriptionId: '123',
-  //       userId: 3,
-  //     },
-  //   ],
-  //   hasAutoRenewal: true,
-  // }
 
   const { expireAt, nextPayment } = data?.data
     ? getSubscriptionDates(data.data)
