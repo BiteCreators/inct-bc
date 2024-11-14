@@ -2,13 +2,15 @@ import { FillBell } from '@/common/assets/icons/components'
 import OutlineBellNoNumber from '@/common/assets/icons/components/OutlineBellNoNumber'
 import { cn } from '@/common/lib/utils/cn'
 import { Dropdown } from '@/common/ui'
-import { notificationData } from '@/common/ui/notification/notificationsData'
-import { useNotifications } from '@/features/notifications/model/useNotifications'
+import { notificationsApi } from '@/entities/notifications'
 
 import { NotificationsList } from './Notifications'
 
 export const NotificationsButton = () => {
-  const { notificationsCorrectDate, notificationsCount } = useNotifications(notificationData)
+  const { data } = notificationsApi.useGetNotificationsQuery({})
+  const notificationsItems = data?.items
+  const notificationsCount = notificationsItems?.filter(notification => !notification.isRead).length
+
   const wrapIconStyles =
     'text-[8px] before:text-light-100 before:content-[attr(data-notificationsCount)] before:absolute before:right-0 before:block before:w-3 before:h-3 before:bg-danger-500 before:rounded-full'
 
@@ -29,7 +31,7 @@ export const NotificationsButton = () => {
           </div>
         }
       >
-        <NotificationsList notificationsItems={notificationsCorrectDate} />
+        <NotificationsList notificationsItems={notificationsItems} />
       </Dropdown>
     </div>
   )

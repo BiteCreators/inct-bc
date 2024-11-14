@@ -15,7 +15,10 @@ export const AddPhotoModal = ({ fileInputRef, handleFileSelect, uploadImage }: P
   const t = useScopedTranslation('Posts')
 
   return (
-    <div className={'w-full flex flex-col justify-center items-center'}>
+    <div
+      className={'w-full flex flex-col justify-center items-center'}
+      data-testid={'add-photo-modal'}
+    >
       <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
         <div
           className={
