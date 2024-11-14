@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Card, RadioGroup, Typography } from '@/common/ui'
 import { paymentsSlice } from '@/features/payments'
 
-export const AccountTypeCard = () => {
+export const AccountTypeCard = ({ disableOption }: { disableOption: boolean }) => {
   const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)
   const dispatch = useAppDispatch()
 
@@ -16,7 +16,7 @@ export const AccountTypeCard = () => {
           defaultValue={accountType}
           onChange={value => dispatch(paymentsSlice.actions.setAccountType(value))}
           options={[
-            { label: 'Personal', value: 'Personal' },
+            { disabled: disableOption, label: 'Personal', value: 'Personal' },
             { label: 'Business', value: 'Business' },
           ]}
         />
