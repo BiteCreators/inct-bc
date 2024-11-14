@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Typography } from '@/common/ui'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
 
 import { paymentsSlice } from '../model/payments.slice'
@@ -15,6 +14,33 @@ export const AccountManagement = () => {
   const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)
   //const { handleSubmit } = useSubmitPayment({ provider: PAYMENT_PROVIDERS.PAYPAL })
 
+  // const data: any = {
+  //   data: [
+  //     {
+  //       autoRenewal: true,
+  //       dateOfPayment: '2024-12-30',
+  //       endDateOfSubscription: '2024-12-14',
+  //       subscriptionId: '1',
+  //       userId: 1,
+  //     },
+  //     {
+  //       autoRenewal: false,
+  //       dateOfPayment: '2024-12-30',
+  //       endDateOfSubscription: '2024-11-15',
+  //       subscriptionId: '12',
+  //       userId: 2,
+  //     },
+  //     {
+  //       autoRenewal: true,
+  //       dateOfPayment: '2024-12-30',
+  //       endDateOfSubscription: '2024-11-20',
+  //       subscriptionId: '123',
+  //       userId: 3,
+  //     },
+  //   ],
+  //   hasAutoRenewal: true,
+  // }
+
   const dispatch = useAppDispatch()
 
   let disableAccountTypeOption = false
@@ -26,7 +52,7 @@ export const AccountManagement = () => {
 
   return (
     <div className={'relative'}>
-      {isLoading && <LoaderBlock />}
+      {/*{isLoading && <LoaderBlock />}*/}
       {data?.data.length !== 0 && <CurrentSubscriptionCard />}
       <AccountTypeCard disableOption={disableAccountTypeOption} />
       {accountType === 'Business' && (

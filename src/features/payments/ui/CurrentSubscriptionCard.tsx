@@ -1,5 +1,6 @@
 import { Alert, Card, Checkbox, Typography } from '@/common/ui'
 import { paymentsApi } from '@/entities/payments'
+import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDates'
 import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
 
 export const CurrentSubscriptionCard = () => {
@@ -7,32 +8,38 @@ export const CurrentSubscriptionCard = () => {
   const { apiError, autoRenewalAlert, handleCheckboxChange, setAutoRenewalAlert } =
     useSubscriptionManagement()
 
-  // const { expireAt, nextPayment } = data?.data
-  //   ? getSubscriptionDates(data.data)
-  //   : { expireAt: '', nextPayment: '' }
-
-  //const isCheckboxChecked = data?.hasAutoRenewal
-  // const data: CurrentPaymentResponse = {
+  // const data: any = {
   //   data: [
   //     {
+  //       autoRenewal: true,
+  //       dateOfPayment: '2024-12-30',
+  //       endDateOfSubscription: '2024-12-14',
+  //       subscriptionId: '1',
+  //       userId: 1,
+  //     },
+  //     {
   //       autoRenewal: false,
-  //       dateOfPayment: '2024-11-11T11:08:16.663Z',
-  //       endDateOfSubscription: '2024-12-11T11:08:16.663Z',
-  //       subscriptionId: 'subid1',
-  //       userId: 1431,
+  //       dateOfPayment: '2024-12-30',
+  //       endDateOfSubscription: '2024-11-15',
+  //       subscriptionId: '12',
+  //       userId: 2,
+  //     },
+  //     {
+  //       autoRenewal: true,
+  //       dateOfPayment: '2024-12-30',
+  //       endDateOfSubscription: '2024-11-20',
+  //       subscriptionId: '123',
+  //       userId: 3,
   //     },
   //   ],
   //   hasAutoRenewal: true,
   // }
 
-  if (!data?.data[0]) {
-    return <Typography className={'text-light-900'}>You have no active subscriptions</Typography>
-  }
-  const expireAt = new Date(data.data[0].endDateOfSubscription).toLocaleDateString('ru-RU')
-  const nextPayment = new Date(data.data[0].dateOfPayment).toLocaleDateString('ru-RU')
+  const { expireAt, nextPayment } = data?.data
+    ? getSubscriptionDates(data.data)
+    : { expireAt: '', nextPayment: '' }
 
-  const isCheckboxChecked = data.data[0].autoRenewal
-  const isCheckboxDisabled = !data.hasAutoRenewal
+  const isCheckboxChecked = data?.hasAutoRenewal
 
   return (
     <>
@@ -41,9 +48,8 @@ export const CurrentSubscriptionCard = () => {
       </Typography>
       <Card className={'flex mt-2'}>
         <div className={'flex flex-col mx-4 my-3 gap-5'}>
-          <Typography className={'text-light-900'}>Expire at</Typography>
+          <Typography className={'text-light-900'}>Expire At</Typography>
           <Typography className={'font-weight-600'}>{expireAt}</Typography>
-          <Typography className={'font-weight-600'}>Next payment</Typography>
         </div>
         {isCheckboxChecked && (
           <div className={'flex flex-col ml-12 my-3 gap-5'}>
@@ -51,15 +57,10 @@ export const CurrentSubscriptionCard = () => {
             <Typography className={'font-weight-600'}>{nextPayment}</Typography>
           </div>
         )}
-        <div className={'flex flex-col ml-12 my-3 gap-5'}>
-          <Typography className={'text-light-900'}>{expireAt}</Typography>
-          <Typography className={'font-weight-600'}>{nextPayment}</Typography>
-        </div>
       </Card>
       <Checkbox
         checked={isCheckboxChecked}
         className={'mt-3'}
-        disabled={isCheckboxDisabled}
         onChange={() => handleCheckboxChange(!!isCheckboxChecked)}
         text={<Typography className={'font-weight-600 mt-3'}>Auto-Renewal</Typography>}
       />
