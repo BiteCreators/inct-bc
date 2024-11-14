@@ -1,10 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { Loader, Typography } from '@/common/ui'
+import { Typography } from '@/common/ui'
 import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
-import { CurrentPaymentResponse } from '@/entities/payments/types/payments.type'
 
-import { useSubmitPayment } from '../lib/hooks/useSubmitPayment'
 import { paymentsSlice } from '../model/payments.slice'
 import { AccountTypeCard } from './AccountTypeCard'
 import { CurrentSubscriptionCard } from './CurrentSubscriptionCard'
