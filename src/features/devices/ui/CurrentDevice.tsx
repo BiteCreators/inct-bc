@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { isApiErrorWithArrary } from '@/common/lib/utils/apiHelpers'
+import { isApiErrorWithArray } from '@/common/lib/utils/apiHelpers'
 import { Alert, Button, Loader, Typography } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
 
@@ -32,7 +32,7 @@ export const CurrentDevice = () => {
     }
   }
 
-  if (isApiErrorWithArrary(error)) {
+  if (isApiErrorWithArray(error)) {
     return (
       <Alert
         duration={999999}

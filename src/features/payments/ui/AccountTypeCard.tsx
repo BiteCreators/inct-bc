@@ -1,11 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Card, RadioGroup, Typography } from '@/common/ui'
-import { AccountType } from '@/entities/payments'
+import { paymentsSlice } from '@/features/payments'
 
-import { paymentsSlice } from '../model/payments.slice'
-
-export const AccountTypeCard = () => {
-  //TODO: add defautl value for radio group
+export const AccountTypeCard = ({ disableOption }: { disableOption: boolean }) => {
   const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)
   const dispatch = useAppDispatch()
 
@@ -16,13 +13,11 @@ export const AccountTypeCard = () => {
       </Typography>
       <Card className={'flex flex-col  mt-2'}>
         <RadioGroup
-          onChange={e =>
-            //TODO: add typing for radio group
-            dispatch(paymentsSlice.actions.setAccountType(e.target.value as AccountType))
-          }
+          defaultValue={accountType}
+          onChange={value => dispatch(paymentsSlice.actions.setAccountType(value))}
           options={[
-            { label: 'Personal', value: 'Personal' },
-            { label: 'Buisness', value: 'Buisness' },
+            { disabled: disableOption, label: 'Personal', value: 'Personal' },
+            { label: 'Business', value: 'Business' },
           ]}
         />
       </Card>

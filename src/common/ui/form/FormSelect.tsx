@@ -20,9 +20,15 @@ export const FormSelect = <T extends FieldValues>({
   return (
     <Select
       {...field}
+      defaultValue={defaultValue}
       error={error ?? fieldState.error?.message}
       {...props}
-      onValueChange={field.onChange}
+      onValueChange={value => {
+        field.onChange(value)
+        if (props.onValueChange) {
+          props.onValueChange(value)
+        }
+      }}
     />
   )
 }

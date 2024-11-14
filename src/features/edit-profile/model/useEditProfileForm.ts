@@ -16,7 +16,7 @@ export const useEditProfileForm = () => {
   const [trigger, { isError, isLoading: isLoadingUpdateProfile }] =
     profileApi.useEditProfileMutation()
 
-  const [message, setMessage] = useState('') //сообщение в алерте
+  const [message, setMessage] = useState('')
   const [isShowAlert, setIsShowAlert] = useState(false)
   const { handleApiError } = useHandleApiError('Profile')
 
@@ -39,7 +39,7 @@ export const useEditProfileForm = () => {
         aboutMe: profile.aboutMe || '',
         city: profile.city || '',
         country: profile.country || '',
-        dateOfBirth: profile?.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
+        dateOfBirth: profile.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
         firstName: profile.firstName || '',
         lastName: profile.lastName || '',
         userName: profile.userName || '',
@@ -85,6 +85,7 @@ export const useEditProfileForm = () => {
     onClose: () => {
       setIsShowAlert(false)
     },
+    profile,
     t,
   }
 }

@@ -1,11 +1,9 @@
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { Card, RadioGroup, Typography } from '@/common/ui'
 import { TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
-
-import { paymentsSlice } from '../model/payments.slice'
+import { paymentsSlice } from '@/features/payments'
 
 export const SubscriptionTypeCard = () => {
-  //TODO: add default value for radio group
   const { data: subscriptionTypes } = paymentsApi.useGetCostPaymentQuery()
   const dispatch = useAppDispatch()
 
@@ -35,13 +33,9 @@ export const SubscriptionTypeCard = () => {
         </Typography>
         <Card className={'flex flex-col mt-2'}>
           <form noValidate>
-            <RadioGroup
-              onChange={e =>
-                dispatch(
-                  //TODO: add typings
-                  paymentsSlice.actions.setNewSubscriptionType(e.target.value as TYPE_DESCRIPTIONS)
-                )
-              }
+            <RadioGroup<TYPE_DESCRIPTIONS>
+              defaultValue={options[0]?.value}
+              onChange={value => dispatch(paymentsSlice.actions.setNewSubscriptionType(value))}
               options={options}
             />
           </form>

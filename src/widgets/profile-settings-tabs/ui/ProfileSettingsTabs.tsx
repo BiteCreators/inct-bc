@@ -7,10 +7,11 @@ import { EditProfileForm } from '@/features/edit-profile'
 import { AccountManagement } from '@/features/payments'
 import { MyPayments } from '@/features/payments/ui/MyPayments'
 import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
+import { LocationsProps } from '@/pages/profile/[id]/settings'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
-export const ProfileSettingsTabs = () => {
+export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('general-information')
   const t = useScopedTranslation('Navigation')
 
@@ -20,7 +21,7 @@ export const ProfileSettingsTabs = () => {
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {
-          content: <EditProfileForm />,
+          content: <EditProfileForm cities={cities} countries={countries} />,
           label: t.generalInfo,
           value: 'general-information',
         },

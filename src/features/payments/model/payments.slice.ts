@@ -10,6 +10,8 @@ type InitialState = {
 const initialState: InitialState = {
   accountType: 'Personal',
   autoRenewal: false,
+  newSubscriptionType: TYPE_DESCRIPTIONS.DAY,
+  autoRenewal: false,
   newSubscriptionType: null,
 }
 
