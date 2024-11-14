@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Typography } from '@/common/ui'
+import { paymentsSlice } from '@/features/payments'
 
-import { paymentsSlice } from '../model/payments.slice'
 import { AccountTypeCard } from './AccountTypeCard'
 import { CurrentSubscriptionCard } from './CurrentSubscriptionCard'
 import { PayPalPaymentButton } from './PayPalPaymentButton'
