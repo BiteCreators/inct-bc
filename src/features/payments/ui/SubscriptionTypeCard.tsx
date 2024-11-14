@@ -3,7 +3,7 @@ import { Card, RadioGroup, Typography } from '@/common/ui'
 import { TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
 import { paymentsSlice } from '@/features/payments'
 
-export const SubscriptionTypeCard = () => {
+export const SubscriptionTypeCard = ({ text }: { text: string }) => {
   const { data: subscriptionTypes } = paymentsApi.useGetCostPaymentQuery()
   const dispatch = useAppDispatch()
 
@@ -29,7 +29,7 @@ export const SubscriptionTypeCard = () => {
     return (
       <>
         <Typography className={'font-weight600 mt-7'} variant={'h3'}>
-          Your subscription costs:
+          {text}
         </Typography>
         <Card className={'flex flex-col mt-2'}>
           <form noValidate>

@@ -5,35 +5,35 @@ import { CurrentPaymentResponse } from '@/entities/payments/types/payments.type'
 import { getSubscriptionDates } from '../lib/getSubscriptionDates'
 import { useSubscriptionManagement } from '../lib/hooks/useSubscriptionManagment'
 
-// const data: any = {
-//   data: [
-//     // {
-//     //   autoRenewal: true,
-//     //   dateOfPayment: '2024-12-30',
-//     //   endDateOfSubscription: '2024-12-14',
-//     //   subscriptionId: '1',
-//     //   userId: 1,
-//     // },
-//     // {
-//     //   autoRenewal: false,
-//     //   dateOfPayment: '2024-12-30',
-//     //   endDateOfSubscription: '2024-11-15',
-//     //   subscriptionId: '12',
-//     //   userId: 2,
-//     // },
-//     {
-//       autoRenewal: true,
-//       dateOfPayment: '2024-12-30',
-//       endDateOfSubscription: '2024-11-20',
-//       subscriptionId: '123',
-//       userId: 3,
-//     },
-//   ],
-//   hasAutoRenewal: false,
-// }
+const data: any = {
+  data: [
+    {
+      autoRenewal: true,
+      dateOfPayment: '2024-11-14',
+      endDateOfSubscription: '2024-11-15',
+      subscriptionId: '1',
+      userId: 1,
+    },
+    {
+      autoRenewal: false,
+      dateOfPayment: '2024-11-14',
+      endDateOfSubscription: '2024-11-21',
+      subscriptionId: '12',
+      userId: 2,
+    },
+    // {
+    //   autoRenewal: true,
+    //   dateOfPayment: '2024-12-30',
+    //   endDateOfSubscription: '2024-11-20',
+    //   subscriptionId: '123',
+    //   userId: 3,
+    // },
+  ],
+  hasAutoRenewal: true,
+}
 
 export const CurrentSubscriptionCard = () => {
-  const { data } = paymentsApi.useGetCurrentPaymentQuery()
+  // const { data } = paymentsApi.useGetCurrentPaymentQuery()
   const { apiError, autoRenewalAlert, handleCheckboxChange, setAutoRenewalAlert } =
     useSubscriptionManagement()
 
