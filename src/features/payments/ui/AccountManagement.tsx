@@ -18,7 +18,7 @@ export const AccountManagement = () => {
       {accountType === 'Business' && (
         <>
           <SubscriptionTypeCard />
-          <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>
+          <div className={'flex sm:gap-14 items-center w-full sm:justify-end justify-between'}>
             <PayPalPaymentButton />
             <Typography>or</Typography>
             <StripePaymentButton />
