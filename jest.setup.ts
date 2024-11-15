@@ -1,4 +1,4 @@
-import { handlers } from '@/common/mocks/handlers'
+import { handlers } from '@/entities/handlers'
 import { setupServer } from 'msw/node'
 
 import '@testing-library/jest-dom'

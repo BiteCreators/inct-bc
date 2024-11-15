@@ -1,4 +1,5 @@
 export { postsApi } from './api/posts.api'
+export { postsHandlers } from './api/posts.mocks'
 export { postSlice } from './model/postSlice'
 
 export type {
