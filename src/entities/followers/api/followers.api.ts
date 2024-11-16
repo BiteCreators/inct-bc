@@ -23,13 +23,6 @@ export const followersApi = inctagramApi.injectEndpoints({
         url: `v1/users/${userName}/followers`,
       }),
     }),
-    getUserInfo: builder.query<UsersInfoResponse, WithSearchPaginationParams>({
-      providesTags: ['Followers'],
-      query: params => ({
-        params,
-        url: 'v1/users',
-      }),
-    }),
     getUserProfile: builder.query<WithFollowersCountUserProfile, { userName: string }>({
       providesTags: ['Followers'],
       query: ({ userName }) => ({
@@ -40,6 +33,13 @@ export const followersApi = inctagramApi.injectEndpoints({
       providesTags: ['Followers'],
       query: ({ userName }) => ({
         url: `v1/users/${userName}/following`,
+      }),
+    }),
+    getUsersInfo: builder.query<UsersInfoResponse, WithSearchPaginationParams>({
+      providesTags: ['Followers'],
+      query: params => ({
+        params,
+        url: 'v1/users',
       }),
     }),
     removeFollower: builder.mutation<void, { userId: number }>({
