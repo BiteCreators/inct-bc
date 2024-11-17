@@ -1,10 +1,10 @@
 import { inctagramApi } from '@/common/api/inct.api'
+import { Avatar } from '@/common/types/api.types'
 
 import { EditProfileBody, Profile } from '../types/profile.type'
-import { ProfileAvatars } from '../types/profileAvatars.type'
 
 type ProfileResponse = {
-  avatars: ProfileAvatars[]
+  avatars: Avatar[]
   createdAt: string
   id: number
 }
@@ -49,7 +49,7 @@ export const profileApi = inctagramApi.injectEndpoints({
         url: 'v1/users/profile',
       }),
     }),
-    setAvatarProfile: builder.mutation<ProfileAvatars[], { file: File }>({
+    setAvatarProfile: builder.mutation<Avatar[], { file: File }>({
       invalidatesTags: ['Profile'],
       query: ({ file }) => {
         const formData = new FormData()
