@@ -3,6 +3,8 @@ import React, { ComponentProps, forwardRef } from 'react'
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
 
+import s from './textAreaScroll.module.css'
+
 import { useTextArea } from './useTextArea'
 
 export type TextAreaProps = {
@@ -69,6 +71,8 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             'placeholder:text-light-900 placeholder:text-md',
             'overflow-y-hidden resize-none',
             'transition-[outline-color] duration-100',
+            'overflow-y-auto',
+            s['custom-textarea'],
             isError && 'border-danger-500',
             resize === 'manual-y' && 'overflow-y-auto resize-y',
             resize === 'manual-x' && 'overflow-x-auto resize-x',

@@ -1,41 +1,57 @@
-import React, { ChangeEvent, forwardRef } from 'react'
+import React, { ChangeEvent, forwardRef, useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 
 import { Radio } from './Radio'
 
-type RadioOptions = {
+type RadioOptions<T extends number | string> = {
+  disabled?: boolean
   label: string
   name?: string
-  value: string
+  value: T
 }
 
-export type RadioGroupProps = {
+export type RadioGroupProps<T extends number | string> = {
+  defaultValue?: T
   disabled?: boolean
   error?: string
-  onChange?: (value: ChangeEvent<HTMLInputElement>) => void
-  options: RadioOptions[]
+  name?: string
+  onChange?: (value: T) => void
+  options: RadioOptions<T>[]
 }
 
-export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
-  ({ disabled, error, onChange, options }: RadioGroupProps, ref) => {
-    return (
-      <div className={cn('relative')}>
-        {options.map((option, i) => {
-          return (
-            <Radio
-              disabled={disabled}
-              key={i}
-              label={option.label}
-              name={'radioName'}
-              onChange={onChange}
-              ref={ref}
-              value={option.value}
-            />
-          )
-        })}
-        <span className={cn('absolute text-danger-500 -bottom-4')}>{error && error}</span>
-      </div>
-    )
+export const RadioGroup = forwardRef(function RadioGroup<T extends number | string>(
+  { defaultValue, disabled, error, name = 'radioName', onChange, options }: RadioGroupProps<T>,
+  ref: React.Ref<HTMLInputElement>
+) {
+  const [selectedValue, setSelectedValue] = useState<T | undefined>(defaultValue)
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as T
+
+    setSelectedValue(value)
+    onChange && onChange(value)
   }
-)
+
+  return (
+    <div className={cn('relative')}>
+      {options.map((option, i) => {
+        return (
+          <Radio
+            checked={selectedValue === option.value}
+            disabled={option.disabled || disabled}
+            key={i}
+            label={option.label}
+            name={name}
+            onChange={handleChange}
+            ref={ref}
+            value={option.value as number | string}
+          />
+        )
+      })}
+      <span className={cn('absolute text-danger-500 -bottom-4')}>{error && error}</span>
+    </div>
+  )
+}) as <T extends number | string>(
+  props: { ref?: React.Ref<HTMLInputElement> } & RadioGroupProps<T>
+) => JSX.Element

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
-import { Image, Post } from '@/entities/posts'
+import { Post } from '@/entities/posts'
 
 import { PostDesktop } from './desktop/PostDesktop'
 import { PostMobile } from './mobile/PostMobile'
@@ -11,7 +11,8 @@ type Props = {
 }
 
 export const PostDetails = ({ post }: Props) => {
-  const slides = post.images.map((image: Image, i) => (
+  //TODO: remove any
+  const slides = post.images.map((image: any, i) => (
     <img alt={'postImg'} className={'h-full object-cover object-center'} key={i} src={image.url} />
   ))
   const isLargeScreen = useMediaQuery('(min-width: 768px)')

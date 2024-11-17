@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { StripeSvgrepoCom4 } from '@/common/assets/icons/components'
+import PaypalSvg from '@/common/assets/icons/components/PaypalSvg'
 import { cn } from '@/common/lib/utils/cn'
 import { Alert } from '@/common/ui'
 import { PAYMENT_PROVIDERS } from '@/entities/payments/types/payments.type'
@@ -12,13 +12,13 @@ type Props = {
   className?: string
 }
 
-export const StripePaymentButton = ({ className }: Props) => {
+export const PayPalPaymentButton = ({ className }: Props) => {
   const [paymentSuccess, setPaymentSuccess] = useState(false)
   const [paymentFailed, setPaymentFailed] = useState(false)
   const { error, handleSubmit, isLoading } = useSubmitPayment({
     onFailure: () => setPaymentSuccess(true),
     onSuccess: () => setPaymentFailed(true),
-    provider: PAYMENT_PROVIDERS.STRIPE,
+    provider: PAYMENT_PROVIDERS.PAYPAL,
   })
 
   return (
@@ -31,7 +31,7 @@ export const StripePaymentButton = ({ className }: Props) => {
         disabled={isLoading}
         onClick={handleSubmit}
       >
-        <StripeSvgrepoCom4 height={43} viewBox={'6 2.5 12 11'} width={75} />
+        <PaypalSvg height={43} viewBox={'2 3 20 10'} width={75} />
       </button>
       {!!error && <Alert message={error} purpose={'toast'} type={'error'} />}
       <PaymentsModals

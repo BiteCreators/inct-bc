@@ -1,3 +1,5 @@
-export const myPaymentsTranslationEn = {
-
+export const paymentsTranslationsEn = {
+  errors: {
+    test: 'test',
+  },
 }
