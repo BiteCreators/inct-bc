@@ -1,9 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Typography } from '@/common/ui'
+
 import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
+import { paymentsSlice } from '@/features/payments'
 
-import { paymentsSlice } from '../model/payments.slice'
 import { AccountTypeCard } from './AccountTypeCard'
 import { CurrentSubscriptionCard } from './CurrentSubscriptionCard'
 import { PayPalPaymentButton } from './PayPalPaymentButton'
@@ -61,7 +62,7 @@ export const AccountManagement = () => {
       {accountType === 'Business' && (
         <>
           <SubscriptionTypeCard text={subscriptionTypesText} />
-          <div className={'h-10 flex gap-3 items-center w-full justify-end my-10'}>
+          <div className={'flex sm:gap-14 items-center w-full sm:justify-end justify-between'}>
             <PayPalPaymentButton />
             <Typography>or</Typography>
             <StripePaymentButton />
