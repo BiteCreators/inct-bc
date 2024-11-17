@@ -24,7 +24,7 @@ export const notificationsApi = inctagramApi.injectEndpoints({
     deleteNotificationById: builder.mutation<void, { id: number }>({
       query: ({ id }) => ({
         method: 'DELETE',
-        url: `/v1/notifications/${id}`,
+        url: `v1/notifications/${id}`,
       }),
     }),
     getNotifications: builder.query<ResponseWithPagination<Notification>, PaginationParams>({
@@ -46,14 +46,14 @@ export const notificationsApi = inctagramApi.injectEndpoints({
       },
       query: ({ cursor, ...params }) => ({
         params,
-        url: `/v1/notifications/${cursor}`,
+        url: `v1/notifications/${cursor}`,
       }),
     }),
     markAsRead: builder.mutation<void, { ids: number[] }>({
       query: body => ({
         body,
         method: 'PUT',
-        url: '/v1/notifications/markAsRead',
+        url: 'v1/notifications/mark-as-read',
       }),
     }),
   }),
