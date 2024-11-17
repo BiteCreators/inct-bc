@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/common/lib/utils/cn'
 import { Button, Typography } from '@/common/ui'
+import { Comment } from '@/entities/comments/types/comments.types'
 import { PostComment } from '@/features/comments'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 type Props = {
-  comments: { id: string; text: string }[]
+  comments?: Comment[]
   description: React.ReactNode
 }
 
@@ -22,12 +23,12 @@ export const MobileCommentsList = ({ comments, description }: Props) => {
   useEffect(() => {
     if (commentsContainerRef.current) {
       const containerHeight = commentsContainerRef.current.scrollHeight
-
-      if (comments.length > 1 || containerHeight > 85) {
-        setShowViewAllButton(true)
-      } else {
-        setShowViewAllButton(false)
-      }
+      if (comments)
+        if (comments.length > 1 || containerHeight > 85) {
+          setShowViewAllButton(true)
+        } else {
+          setShowViewAllButton(false)
+        }
     }
   }, [comments])
 
@@ -46,14 +47,18 @@ export const MobileCommentsList = ({ comments, description }: Props) => {
           className={cn('flex flex-col gap-5 overflow-hidden', expanded ? '' : 'max-h-[85px]')}
           ref={commentsContainerRef}
         >
-          {expanded ? (
-            comments.map(comment => <PostComment key={comment.id} text={comment.text} />)
+          {comments && comments.length > 0 ? (
+            expanded ? (
+              comments.map(comment => <PostComment key={comment.id} comment={comment} />)
+            ) : (
+              <PostComment comment={comments[0]} key={comments[0].id}>
+                <Typography className={'truncate-multiline'} variant={'regular-text'}>
+                  {comments[0].content}
+                </Typography>
+              </PostComment>
+            )
           ) : (
-            <PostComment key={comments[0].id}>
-              <Typography className={'truncate-multiline'} variant={'regular-text'}>
-                {comments[0].text}
-              </Typography>
-            </PostComment>
+            'No comments'
           )}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { Close } from '@/common/assets/icons/components'
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
@@ -13,10 +13,11 @@ import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useRouter } from 'next/router'
 
+import { Comment } from '@/entities/comments/types/comments.types'
 import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
-  comments: { id: string; text: string }[]
+  comments?: Comment[]
   post: Post
   slides: ReactNode[]
 }
@@ -67,7 +68,7 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
                 )}
               />
             </Dialog.Close>
-            <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
+            <div className={'max-w-[480px] w-full max-h-[564px] flex flex-col overflow-hidden'}>
               <PostModalTitle changeEditMode={setEditMode} post={post} />
               <div className={'border-y-[1px] border-dark-100'} />
               <DesktopCommentsList
@@ -75,7 +76,7 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
                 description={<PostDescription post={post} />}
               />
               <PostActionsBlock post={post} />
-              {isAuth && <AddCommentTextarea />}
+              {isAuth && <AddCommentTextarea postId={post.id.toString()} />}
             </div>
           </>
         </div>

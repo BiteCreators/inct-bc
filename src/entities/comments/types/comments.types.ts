@@ -1,6 +1,6 @@
 import { Avatar, WithPaginationResponse, WithSortPaginationParams } from '@/common/types/api.types'
 
-type Comment = {
+export type Comment = {
   answerCount: number
   content: string
   createdAt: string

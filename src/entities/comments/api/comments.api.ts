@@ -2,10 +2,18 @@ import { inctagramApi } from '@/common/api/inct.api'
 import { WithSortPaginationParams } from '@/common/types/api.types'
 import { CommentLikesRequest, CommentLikesResponse } from '@/entities/posts/types/likes.types'
 
-import { AnswersRequest, AnswersResponse, CommentsResponse } from '../types/comments.types'
+import { AnswersRequest, AnswersResponse, Comment, CommentsResponse } from '../types/comments.types'
 
 export const commentsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
+    createComment: builder.mutation<Comment, { content: string; postId: string }>({
+      invalidatesTags: ['Comment'],
+      query: ({ content, postId }) => ({
+        body: { content },
+        method: 'POST',
+        url: `v1/posts/${postId}/comments`,
+      }),
+    }),
     getAnswerLikes: builder.query<CommentLikesResponse, { answerId: number } & CommentLikesRequest>(
       {
         query: data => {
@@ -39,6 +47,7 @@ export const commentsApi = inctagramApi.injectEndpoints({
       },
     }),
     getComments: builder.query<CommentsResponse, { postId: number } & WithSortPaginationParams>({
+      providesTags: ['Comment'],
       query: data => {
         const { postId, ...params } = data
 

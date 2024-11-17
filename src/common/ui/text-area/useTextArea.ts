@@ -5,7 +5,7 @@ export const useTextArea = ({
   onChange,
 }: {
   autoResize?: boolean
-  onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>
 }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 

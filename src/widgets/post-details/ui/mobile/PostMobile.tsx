@@ -1,17 +1,18 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { cn } from '@/common/lib/utils/cn'
 import { Dropdown } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { authSlice } from '@/entities/auth'
+import { Comment } from '@/entities/comments/types/comments.types'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, MobileCommentsList } from '@/features/comments'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
 
 type Props = {
-  comments: { id: string; text: string }[]
+  comments?: Comment[]
   post: Post
   slides: ReactNode[]
 }
@@ -33,7 +34,7 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
             <MobileCommentsList comments={comments} description={<PostDescription post={post} />} />
           </div>
         </div>
-        {isAuth && <AddCommentTextarea />}
+        {isAuth && <AddCommentTextarea postId={post.id.toString()} />}
       </div>
     </div>
   )

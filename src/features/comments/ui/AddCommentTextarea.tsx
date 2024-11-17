@@ -1,30 +1,47 @@
-import React, { ComponentProps, forwardRef, useEffect } from 'react'
+import React, { ComponentProps, forwardRef, useEffect, useState } from 'react'
 
 import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
 import { Button, ScrollArea } from '@/common/ui'
 import { useTextArea } from '@/common/ui/text-area/useTextArea'
+import { commentsApi } from '@/entities/comments'
 
 type Props = {
   disabled?: boolean
   error?: null | string
+  postId: string
 } & ComponentProps<'textarea'>
 
 export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
-  ({ disabled, error, id, onChange }: Props, ref) => {
+  ({ disabled, error, id, onChange, postId }: Props, ref) => {
+    const [content, setContent] = useState<string>()
+
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: true,
       onChange,
     })
+    const [createComment] = commentsApi.useCreateCommentMutation()
 
     const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setContent(e.currentTarget.value)
       handleChange(e)
       setTimeout(() => {
         if (textAreaRef.current) {
           textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
         }
       }, 50)
+    }
+
+    const handleCreateComment = async () => {
+      try {
+        if (content) {
+          await createComment({ content, postId })
+          setContent('')
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     useEffect(() => {
@@ -52,6 +69,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 'resize-none',
                 error && 'border-danger-500',
               ])}
+              value={content}
               disabled={disabled}
               id={id ?? textAreaId}
               onChange={handleTextAreaChange}
@@ -74,6 +92,8 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           <Button
             className={cn(['max-h-9 align-bottom ml-6 hidden', 'md:inline-block'])}
             variant={'text'}
+            onClick={handleCreateComment}
+            disabled={!content}
           >
             Publish
           </Button>
