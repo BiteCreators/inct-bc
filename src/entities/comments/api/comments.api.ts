@@ -1,6 +1,10 @@
 import { inctagramApi } from '@/common/api/inct.api'
 import { WithSortPaginationParams } from '@/common/types/api.types'
-import { CommentLikesRequest, CommentLikesResponse } from '@/entities/posts/types/likes.types'
+import {
+  CommentLikesRequest,
+  CommentLikesResponse,
+  Reaction,
+} from '@/entities/posts/types/likes.types'
 
 import { AnswersRequest, AnswersResponse, Comment, CommentsResponse } from '../types/comments.types'
 
@@ -56,6 +60,17 @@ export const commentsApi = inctagramApi.injectEndpoints({
           url: `v1/posts/${postId}/comments`,
         }
       },
+    }),
+    updateLikeStatusComment: builder.mutation<
+      void,
+      { commentId: number; likeStatus: Reaction; postId: number }
+    >({
+      invalidatesTags: ['Comment'],
+      query: ({ commentId, likeStatus, postId }) => ({
+        body: { likeStatus },
+        method: 'PUT',
+        url: `v1/posts/${postId}/comments/${commentId}/like-status`,
+      }),
     }),
   }),
 })
