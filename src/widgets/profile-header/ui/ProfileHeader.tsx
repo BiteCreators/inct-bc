@@ -1,11 +1,12 @@
+import { useState } from 'react'
+
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
-import { ProfileFollowersModal } from '@/features/profile/ui/ProfileFollowersModal'
-import { ProfileFollowingModal } from '@/features/profile/ui/ProfileFollowingModal'
+import { ProfileFollowModal } from '@/features/profile/ui/ProfileFollowModal'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -31,6 +32,13 @@ export const ProfileHeader = ({ profile }: Props) => {
   const { data: followersList } = followersApi.useGetFollowersQuery({
     userName: currentUser?.userName || '',
   })
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalType, setModalType] = useState<'followers' | 'following'>('followers')
+  const handleOpenModal = (type: 'followers' | 'following') => {
+    setModalType(type)
+    setIsModalOpen(true)
+  }
 
   // const [follow, { error, isLoading, isSuccess }] = followersApi.useFollowMutation()
   //
@@ -75,20 +83,31 @@ export const ProfileHeader = ({ profile }: Props) => {
           <div className={'flex gap-5 sm:gap-7 lg:!gap-20 text-sm sm:mb-5'}>
             <ProfileFollowButton
               count={data?.followingCount}
-              href={`#`}
+              // href={`#`}
               label={t.following}
               locale={locale}
+              onClick={() => handleOpenModal('following')}
             />
             <ProfileFollowButton
               count={data?.followersCount}
-              href={`#`}
+              // href={`#`}
               label={t.followers}
               locale={locale}
+              onClick={() => handleOpenModal('followers')}
             />
+            {data && (
+              <ProfileFollowModal
+                currentUserProfile={data}
+                followList={modalType === 'followers' ? followersList : followingList}
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                type={modalType}
+              />
+            )}
             {/*<Button onClick={handleFollow} />*/}
             {/*<ProfileFollowersModal />*/}
             {/*{followingList && <ProfileFollowingModal followingList={followingList} />}*/}
-            {followersList && <ProfileFollowersModal followersList={followersList} />}
+            {/*{followersList && <ProfileFollowersModal followersList={followersList} />}*/}
             <div className={'flex flex-col text-xs sm:text-sm'}>
               <span className={'font-weight700'}>{data?.publicationsCount}</span>
               <span>{t.publications}</span>

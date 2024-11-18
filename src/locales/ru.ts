@@ -1,4 +1,4 @@
-import { myPaymentsTranslationRu } from '@/locales/payments/payments.ru'
+import { followsTranslationRu } from '@/locales/follows'
 
 import { authTranslationRu } from './auth'
 import { commonTranslationRu } from './common'
@@ -16,6 +16,7 @@ export const ru: LocaleType = {
   Auth: authTranslationRu,
   Common: commonTranslationRu,
   Devices: devicesTranslationsRu,
+  Follows: followsTranslationRu,
   Internationalization: internationalizationTranslationRu,
   Navigation: navigationTranslationRu,
   Payments: paymentsTranslationsRu,
