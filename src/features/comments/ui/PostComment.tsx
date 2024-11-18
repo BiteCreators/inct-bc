@@ -1,14 +1,13 @@
 import { ReactNode } from 'react'
 
 import { HeartOutline } from '@/common/assets/icons/components'
-import { Avatar, Typography } from '@/common/ui'
-
 import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
+import { Avatar, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
 
 type Props = {
-  comment: Comment
   children?: ReactNode
+  comment: Comment
 }
 
 export const PostComment = ({ children, comment }: Props) => {

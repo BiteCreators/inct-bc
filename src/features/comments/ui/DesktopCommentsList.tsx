@@ -15,7 +15,7 @@ export const DesktopCommentsList = ({ comments, description }: Props) => {
       <div className={'flex flex-col gap-4 h-[336px]'}>
         {description}
         {comments && comments.length > 0
-          ? comments.map(comment => <PostComment key={comment.id} comment={comment} />)
+          ? comments.map(comment => <PostComment comment={comment} key={comment.id} />)
           : 'No comments'}
       </div>
     </ScrollArea>

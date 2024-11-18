@@ -23,14 +23,34 @@ export const MobileCommentsList = ({ comments, description }: Props) => {
   useEffect(() => {
     if (commentsContainerRef.current) {
       const containerHeight = commentsContainerRef.current.scrollHeight
-      if (comments)
+
+      if (comments) {
         if (comments.length > 1 || containerHeight > 85) {
           setShowViewAllButton(true)
         } else {
           setShowViewAllButton(false)
         }
+      }
     }
   }, [comments])
+
+  let content
+
+  if (comments && comments.length > 0) {
+    if (expanded) {
+      content = comments.map(comment => <PostComment comment={comment} key={comment.id} />)
+    } else {
+      content = (
+        <PostComment comment={comments[0]} key={comments[0].id}>
+          <Typography className={'truncate-multiline'} variant={'regular-text'}>
+            {comments[0].content}
+          </Typography>
+        </PostComment>
+      )
+    }
+  } else {
+    content = 'No comments'
+  }
 
   return (
     <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
@@ -47,19 +67,7 @@ export const MobileCommentsList = ({ comments, description }: Props) => {
           className={cn('flex flex-col gap-5 overflow-hidden', expanded ? '' : 'max-h-[85px]')}
           ref={commentsContainerRef}
         >
-          {comments && comments.length > 0 ? (
-            expanded ? (
-              comments.map(comment => <PostComment key={comment.id} comment={comment} />)
-            ) : (
-              <PostComment comment={comments[0]} key={comments[0].id}>
-                <Typography className={'truncate-multiline'} variant={'regular-text'}>
-                  {comments[0].content}
-                </Typography>
-              </PostComment>
-            )
-          ) : (
-            'No comments'
-          )}
+          {content}
         </div>
       </div>
     </div>

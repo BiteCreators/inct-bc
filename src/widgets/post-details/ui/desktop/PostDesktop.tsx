@@ -6,6 +6,7 @@ import { cn } from '@/common/lib/utils/cn'
 import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { authSlice } from '@/entities/auth'
+import { Comment } from '@/entities/comments/types/comments.types'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
 import { EditPost } from '@/features/edit-post'
@@ -13,7 +14,6 @@ import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useRouter } from 'next/router'
 
-import { Comment } from '@/entities/comments/types/comments.types'
 import { PostModalTitle } from './PostModalTitle'
 
 type Props = {

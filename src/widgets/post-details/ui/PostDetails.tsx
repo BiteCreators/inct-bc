@@ -1,7 +1,7 @@
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
+import { commentsApi } from '@/entities/comments'
 import { Post } from '@/entities/posts'
 
-import { commentsApi } from '@/entities/comments'
 import { PostDesktop } from './desktop/PostDesktop'
 import { PostMobile } from './mobile/PostMobile'
 
@@ -28,7 +28,7 @@ export const PostDetails = ({ post }: Props) => {
   //  },
   //]
 
-  const { data, isLoading, error } = commentsApi.useGetCommentsQuery({ postId: post.id })
+  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post.id })
 
   const comments = data?.items
 

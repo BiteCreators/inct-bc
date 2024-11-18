@@ -25,7 +25,7 @@ export default function PostComments() {
   const id = params?.id
   const postId = params?.postId
 
-  const { data, isLoading, error } = commentsApi.useGetCommentsQuery({ postId: Number(postId) })
+  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: Number(postId) })
 
   const comments = data?.items
 
@@ -45,7 +45,7 @@ export default function PostComments() {
       {/*Comments*/}
       <ScrollArea className={'flex-1 px-6 pt-5 pb-2 w-full'}>
         <div className={'flex flex-col gap-4 h-[336px]'}>
-          {comments?.map(comment => <PostComment key={comment.id} comment={comment} />)}
+          {comments?.map(comment => <PostComment comment={comment} key={comment.id} />)}
         </div>
       </ScrollArea>
     </div>

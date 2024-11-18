@@ -69,12 +69,12 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 'resize-none',
                 error && 'border-danger-500',
               ])}
-              value={content}
               disabled={disabled}
               id={id ?? textAreaId}
               onChange={handleTextAreaChange}
               placeholder={'Add a Comment...'}
               ref={mergeRefs([ref, textAreaRef])}
+              value={content}
             />
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
@@ -91,9 +91,9 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </button>
           <Button
             className={cn(['max-h-9 align-bottom ml-6 hidden', 'md:inline-block'])}
-            variant={'text'}
-            onClick={handleCreateComment}
             disabled={!content}
+            onClick={handleCreateComment}
+            variant={'text'}
           >
             Publish
           </Button>
