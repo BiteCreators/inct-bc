@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 
-import { Profile, ProfileResponse } from '@/common/api/profile.api'
+import { Profile } from '@/entities/profile'
 import { Cities, CitiesLng, CountriesLng, SelectOptions } from '@/pages/profile/[id]/settings'
 import { useRouter } from 'next/router'
 
 export const useLocation = (
   cities: CitiesLng | null,
   countries: CountriesLng | null,
-  profile: (Profile & ProfileResponse) | undefined
+  profile: Profile | undefined
 ) => {
   const { locale } = useRouter()
   const [cityOptions, setCityOptions] = useState<{ name: string; value: string }[]>([])

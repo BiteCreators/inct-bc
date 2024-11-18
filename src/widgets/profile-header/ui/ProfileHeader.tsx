@@ -1,10 +1,8 @@
-import { useState } from 'react'
-
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
+import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
-import { EditPost } from '@/features/edit-post'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -20,10 +18,10 @@ export const ProfileHeader = ({ profile }: Props) => {
   const locale = router.locale === 'en' ? 'en' : 'ru'
   const t = useScopedTranslation('Profile')
   const tNav = useScopedTranslation('Navigation')
-  const followingCount = 2218
-  const followersCount = 234
-  const publications = 345
 
+  const { data } = followersApi.useGetUserProfileQuery({
+    userName: profile.userName,
+  })
   const { data: currentUser } = authApi.useMeQuery()
 
   const isCurrentUserProfile = currentUser?.userId === profile.id
@@ -56,19 +54,19 @@ export const ProfileHeader = ({ profile }: Props) => {
           </div>
           <div className={'flex gap-5 sm:gap-7 lg:!gap-20 text-sm sm:mb-5'}>
             <ProfileFollowButton
-              count={followingCount}
+              count={data?.followingCount}
               href={`#`}
               label={t.following}
               locale={locale}
             />
             <ProfileFollowButton
-              count={followersCount}
+              count={data?.followersCount}
               href={`#`}
               label={t.followers}
               locale={locale}
             />
             <div className={'flex flex-col text-xs sm:text-sm'}>
-              <span className={'font-weight700'}>{publications}</span>
+              <span className={'font-weight700'}>{data?.publicationsCount}</span>
               <span>{t.publications}</span>
             </div>
           </div>

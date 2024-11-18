@@ -1,8 +1,8 @@
-import { ProfileAvatars } from '@/entities/profile'
+import { Avatar } from '@/common/types/api.types'
 
 export type Profile = {
   aboutMe?: string
-  avatars: ProfileAvatars[]
+  avatars: Avatar[]
   city?: string
   country?: string
   dateOfBirth: string

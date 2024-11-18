@@ -45,7 +45,7 @@ const makeStore = () =>
     reducer: persistedReducer,
   })
 
-const store = makeStore()
+export const store = makeStore()
 
 export const persistedStore = persistStore(store)
 export type RootState = ReturnType<typeof rootReducer>

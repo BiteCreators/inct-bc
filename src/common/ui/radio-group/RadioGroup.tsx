@@ -5,6 +5,7 @@ import { cn } from '@/common/lib/utils/cn'
 import { Radio } from './Radio'
 
 type RadioOptions<T extends number | string> = {
+  disabled?: boolean
   label: string
   name?: string
   value: T
@@ -38,7 +39,7 @@ export const RadioGroup = forwardRef(function RadioGroup<T extends number | stri
         return (
           <Radio
             checked={selectedValue === option.value}
-            disabled={disabled}
+            disabled={option.disabled || disabled}
             key={i}
             label={option.label}
             name={name}
