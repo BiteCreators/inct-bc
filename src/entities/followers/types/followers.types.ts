@@ -19,7 +19,7 @@ export type FollowersResponse = {
   prevCursor: number
 } & WithPaginationResponse<Follower>
 
-type Follower = {
+export type Follower = {
   avatars: Avatar[]
   createdAt: string
   id: number

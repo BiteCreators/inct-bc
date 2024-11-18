@@ -1,15 +1,17 @@
+import { cn } from '@/common/lib/utils/cn'
 import { Avatar, Typography } from '@/common/ui'
 import Link from 'next/link'
 
 type Props = {
   avatarUrl: string
+  className?: string
   profileId: number
   userName: string
 }
 
-export const UserProfile = ({ avatarUrl, profileId, userName }: Props) => {
+export const UserProfile = ({ avatarUrl, className, profileId, userName }: Props) => {
   return (
-    <div className={'flex gap-3 items-center'}>
+    <div className={cn(className, 'flex gap-3 items-center')}>
       <div className={'w-9 h-9'}>
         <Avatar avatarURL={avatarUrl} href={`/profile/${profileId}`} isNextLink />
       </div>

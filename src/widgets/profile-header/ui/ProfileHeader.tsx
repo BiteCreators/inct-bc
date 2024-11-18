@@ -4,6 +4,8 @@ import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
+import { ProfileFollowersModal } from '@/features/profile/ui/ProfileFollowersModal'
+import { ProfileFollowingModal } from '@/features/profile/ui/ProfileFollowingModal'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -23,6 +25,24 @@ export const ProfileHeader = ({ profile }: Props) => {
     userName: profile.userName,
   })
   const { data: currentUser } = authApi.useMeQuery()
+  const { data: followingList } = followersApi.useGetUsersFollowingQuery({
+    userName: currentUser?.userName || '',
+  })
+  const { data: followersList } = followersApi.useGetFollowersQuery({
+    userName: currentUser?.userName || '',
+  })
+
+  // const [follow, { error, isLoading, isSuccess }] = followersApi.useFollowMutation()
+  //
+  // const handleFollow = async () => {
+  //   try {
+  //     await follow({ selectedUserId: 1431 }).unwrap()
+  //     alert('Successfully followed the user!')
+  //   } catch (err) {
+  //     console.error('Failed to follow the user:', err)
+  //     alert('An error occurred while trying to follow the user.')
+  //   }
+  // }
 
   const isCurrentUserProfile = currentUser?.userId === profile.id
 
@@ -65,6 +85,10 @@ export const ProfileHeader = ({ profile }: Props) => {
               label={t.followers}
               locale={locale}
             />
+            {/*<Button onClick={handleFollow} />*/}
+            {/*<ProfileFollowersModal />*/}
+            {/*{followingList && <ProfileFollowingModal followingList={followingList} />}*/}
+            {followersList && <ProfileFollowersModal followersList={followersList} />}
             <div className={'flex flex-col text-xs sm:text-sm'}>
               <span className={'font-weight700'}>{data?.publicationsCount}</span>
               <span>{t.publications}</span>
