@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import { Heart, HeartOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Typography } from '@/common/ui'
+import { Alert, Avatar, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
 
 import { useCreateComment } from '../model/useCreateComment'
@@ -33,7 +33,7 @@ export const PostComment = ({ children, comment, handleAnswerClick }: Props) => 
       </div>
       <div className={'col-span-1 row-span-1'}>
         <div className={'flex'}>
-          <div className={'flex-1 max-w-[360px]'}>
+          <div className={'flex-1'}>
             <Typography className={'break-words'} variant={'regular-text'}>
               {
                 <span className={'text-base font-weight600 leading-5 mr-2'}>

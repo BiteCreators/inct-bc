@@ -28,7 +28,7 @@ export const PostDetails = ({ post }: Props) => {
   //  },
   //]
 
-  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post.id })
+  const { data, error } = commentsApi.useGetCommentsQuery({ postId: post.id })
 
   const comments = data?.items
 

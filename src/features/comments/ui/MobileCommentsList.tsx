@@ -70,7 +70,7 @@ export const MobileCommentsList = ({ comments, description, handleAnswerClick }:
             </Link>
           </Button>
         )}
-        <div className={cn('flex flex-col gap-5 overflow-hidden')} ref={commentsContainerRef}>
+        <div className={cn('overflow-hidden')} ref={commentsContainerRef}>
           {content}
         </div>
       </div>

@@ -31,7 +31,7 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
         <Dropdown className={'-top-0.5 -mr-3'} items={[]} />
       </div>
       <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px]'} />
-      <div className={'max-w-[480px] max-h-[564px] w-full flex flex-col overflow-hidden'}>
+      <div className={'max-w-[480px] w-full flex flex-col overflow-hidden'}>
         <PostActionsBlock post={post} />
         <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>
           <div className={cn(['flex flex-col pt-3 gap-5 w-full', !isAuth && 'mb-4'])}>

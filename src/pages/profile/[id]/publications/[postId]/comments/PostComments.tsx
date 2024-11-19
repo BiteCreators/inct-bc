@@ -38,7 +38,7 @@ export default function PostComments() {
       </div>
       {/*Comments*/}
       <div className={'flex-1 px-6 pt-20 pb-10 w-full'}>
-        <div className={'flex flex-col gap-4'}>
+        <div className={'flex flex-col'}>
           {comments?.map(comment => (
             <PostComment comment={comment} handleAnswerClick={handleAnswerClick} key={comment.id} />
           ))}

@@ -32,7 +32,7 @@ export const CommentAnswer = ({
         <Avatar avatarURL={answer.from.avatars[0].url} imgStyles={'w-9 h-9 object-cover'} />
       </div>
       <div className={'flex flex-1'}>
-        <div className={'flex-1 max-w-[312px]'}>
+        <div className={'flex-1'}>
           <Typography className={'break-words'} variant={'regular-text'}>
             {
               <span className={'text-base font-weight600 leading-5 mr-2'}>
