@@ -2,10 +2,10 @@ import { ReactNode } from 'react'
 
 import { Heart, HeartOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { Alert, Avatar, Typography } from '@/common/ui'
+import { Avatar, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
 
-import { useCreateComment } from '../model/useCreateComment'
+import { useCommentInteractions } from '../model/useCommentInteractions'
 import { CommentAnswer } from './CommentAnswer'
 
 type Props = {
@@ -24,7 +24,7 @@ export const PostComment = ({ children, comment, handleAnswerClick }: Props) => 
     isAnswersOpen,
     relativeTime,
     setIsAnswersOpen,
-  } = useCreateComment({ comment })
+  } = useCommentInteractions({ comment })
 
   return (
     <div className={'grid grid-cols-[auto_1fr] grid-flow-row mb-4 last:mb-0 gap-x-3 items-start'}>

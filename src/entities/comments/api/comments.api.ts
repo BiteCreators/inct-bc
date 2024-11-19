@@ -27,7 +27,7 @@ export const commentsApi = inctagramApi.injectEndpoints({
         url: `v1/posts/${postId}/comments/${commentId}/answers`,
       }),
     }),
-    createComment: builder.mutation<Comment, { content: string; postId: string }>({
+    createComment: builder.mutation<Comment, { content: string; postId: number }>({
       invalidatesTags: ['Comment'],
       query: ({ content, postId }) => ({
         body: { content },

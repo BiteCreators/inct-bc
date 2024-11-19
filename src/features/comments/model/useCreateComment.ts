@@ -1,44 +1,48 @@
-import { useState } from 'react'
-
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
 import { commentsApi } from '@/entities/comments'
-import { Answer, Comment } from '@/entities/comments/types/comments.types'
-import { Reaction } from '@/entities/posts/types/likes.types'
 
-export const useCreateComment = ({ comment }: { comment: Comment }) => {
-  const { getRelativeTime } = useGetRelativeTime()
-  const relativeTime = getRelativeTime(new Date(comment.createdAt).getTime())
-  const [updateLikeStatusComment] = commentsApi.useUpdateLikeStatusCommentMutation()
-  const { data } = commentsApi.useGetAnswersQuery({ commentId: comment.id, postId: comment.postId })
-  const answers = data?.items
-  const answersCount = data?.items.length
-  const isAnswersExist = !!data?.items.length
-  const [isAnswersOpen, setIsAnswersOpen] = useState<boolean>(false)
-  const [updateLikeStatusAnswer] = commentsApi.useUpdateLikeStatusAnswerMutation()
-  const handleUpdateLikeStatusAnswer = (answer: Answer) => {
-    updateLikeStatusAnswer({
-      answerId: answer.id,
-      commentId: comment.id,
-      likeStatus: answer.isLiked ? Reaction.DISLIKE : Reaction.LIKE,
-      postId: comment.postId,
-    })
-  }
-  const handleUpdateLikeStatusComment = () => {
-    updateLikeStatusComment({
-      commentId: comment.id,
-      likeStatus: comment.isLiked ? Reaction.DISLIKE : Reaction.LIKE,
-      postId: comment.postId,
-    })
+export const useCreateComment = ({
+  answerData,
+  contentComment,
+  postId,
+  setContentComment,
+}: {
+  answerData?: {
+    commentId: number
+    postId: number
+    userName: string
+  } | null
+  contentComment: string
+  postId: string
+  setContentComment: (text: string) => void
+}) => {
+  const isAnswer = !!answerData
+  const [createComment] = commentsApi.useCreateCommentMutation()
+  const [createAnswerComment] = commentsApi.useCreateAnswerCommentMutation()
+  const handleCreateAnswerComment = async () => {
+    try {
+      if (contentComment && isAnswer) {
+        await createAnswerComment({
+          commentId: answerData.commentId,
+          content: contentComment,
+          postId: answerData.postId,
+        })
+        setContentComment('')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  return {
-    answers,
-    answersCount,
-    handleUpdateLikeStatusAnswer,
-    handleUpdateLikeStatusComment,
-    isAnswersExist,
-    isAnswersOpen,
-    relativeTime,
-    setIsAnswersOpen,
+  const handleCreateComment = async () => {
+    try {
+      if (contentComment) {
+        await createComment({ content: contentComment, postId: Number(postId) })
+        setContentComment('')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  return { handleCreateAnswerComment, handleCreateComment, isAnswer }
 }

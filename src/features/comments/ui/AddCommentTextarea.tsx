@@ -5,7 +5,8 @@ import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
 import { Button, ScrollArea } from '@/common/ui'
 import { useTextArea } from '@/common/ui/text-area/useTextArea'
-import { commentsApi } from '@/entities/comments'
+
+import { useCreateComment } from '../model/useCreateComment'
 
 type Props = {
   answerData?: {
@@ -29,9 +30,13 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       autoResize: true,
       onChange,
     })
-    const isAnswer = !!answerData
-    const [createComment] = commentsApi.useCreateCommentMutation()
-    const [createAnswerComment] = commentsApi.useCreateAnswerCommentMutation()
+
+    const { handleCreateAnswerComment, handleCreateComment, isAnswer } = useCreateComment({
+      answerData,
+      contentComment,
+      postId,
+      setContentComment,
+    })
 
     const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setContentComment(e.currentTarget.value)
@@ -41,32 +46,6 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
         }
       }, 50)
-    }
-
-    const handleCreateAnswerComment = async () => {
-      try {
-        if (contentComment && isAnswer) {
-          await createAnswerComment({
-            commentId: answerData.commentId,
-            content: contentComment,
-            postId: answerData.postId,
-          })
-          setContentComment('')
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    const handleCreateComment = async () => {
-      try {
-        if (contentComment) {
-          await createComment({ content: contentComment, postId })
-          setContentComment('')
-        }
-      } catch (error) {
-        console.log(error)
-      }
     }
 
     useEffect(() => {
