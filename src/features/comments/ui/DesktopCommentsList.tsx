@@ -13,7 +13,7 @@ type Props = {
 export const DesktopCommentsList = ({ comments, description, handleAnswerClick }: Props) => {
   return (
     <ScrollArea className={'flex-1 px-6 w-full'}>
-      <div className={'flex flex-col min-h-[336px] pt-5 pb-2'}>
+      <div className={'flex flex-col min-h-[336px] w-full pt-5 pb-2'}>
         {description}
         {comments && comments.length > 0
           ? comments.map(comment => (
