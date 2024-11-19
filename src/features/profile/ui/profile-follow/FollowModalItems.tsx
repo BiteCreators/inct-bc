@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Alert, Button, Input, ScrollArea, Typography } from '@/common/ui'
 import {
@@ -30,6 +30,12 @@ export const FollowModalItems = ({
   removeLoading,
   type,
 }: Props) => {
+  const [searchValue, setSearchValue] = useState('')
+
+  const filteredUsers = followList.items.filter(user =>
+    user.userName.toLowerCase().includes(searchValue.toLowerCase())
+  )
+
   return (
     <div>
       {followList.items.length === 0 ? (
@@ -41,12 +47,14 @@ export const FollowModalItems = ({
           <Input
             className={'w-full max-w-[596px] mt-4 mb-6'}
             inputType={'search'}
+            onChange={e => setSearchValue(e.target.value)}
             placeholder={'Search'}
+            value={searchValue}
           />
           {apiError && <Alert message={apiError} type={'error'} />}
           <ScrollArea className={'h-[550px]'}>
             <div className={'mr-2 mt-2'}>
-              {followList.items.map((user: Follower) => (
+              {filteredUsers.map((user: Follower) => (
                 <div className={'mb-6 flex justify-between'} key={user.userId}>
                   <UserProfile
                     avatarUrl={user.avatars[0]?.url || example.src}
