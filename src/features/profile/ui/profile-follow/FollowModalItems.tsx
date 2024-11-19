@@ -8,7 +8,7 @@ import {
 } from '@/entities/followers/types/followers.types'
 import { UserProfile } from '@/entities/profile'
 
-import example from '../../../../public/examples/exampleAvatar.png'
+import example from '../../../../../public/examples/exampleAvatar.png'
 
 type Props = {
   apiError: string

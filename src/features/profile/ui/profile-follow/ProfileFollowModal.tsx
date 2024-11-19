@@ -4,7 +4,7 @@ import { Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { WithFollowersCountUserProfile } from '@/entities/followers'
 import { UseProfileFollow } from '@/features/profile/model/useProfileFollow'
-import { FollowModalItems } from '@/features/profile/ui/FollowModalItems'
+import { FollowModalItems } from '@/features/profile/ui/profile-follow/FollowModalItems'
 
 type Props = {
   currentUserProfile: WithFollowersCountUserProfile

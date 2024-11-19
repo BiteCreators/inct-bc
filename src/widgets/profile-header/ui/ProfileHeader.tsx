@@ -1,12 +1,11 @@
-import { useState } from 'react'
-
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
-import { ProfileFollowModal } from '@/features/profile/ui/ProfileFollowModal'
+import { useModalOpen } from '@/features/profile/model/useModalOpen'
+import { ProfileFollowModal } from '@/features/profile/ui/profile-follow/ProfileFollowModal'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -26,19 +25,8 @@ export const ProfileHeader = ({ profile }: Props) => {
     userName: profile.userName,
   })
   const { data: currentUser } = authApi.useMeQuery()
-  // const { data: followingList } = followersApi.useGetUsersFollowingQuery({
-  //   userName: currentUser?.userName || '',
-  // })
-  // const { data: followersList } = followersApi.useGetFollowersQuery({
-  //   userName: currentUser?.userName || '',
-  // })
+  const { handleCloseModal, handleOpenModal, isModalOpen, modalType } = useModalOpen()
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalType, setModalType] = useState<'followers' | 'following'>('followers')
-  const handleOpenModal = (type: 'followers' | 'following') => {
-    setModalType(type)
-    setIsModalOpen(true)
-  }
   const isCurrentUserProfile = currentUser?.userId === profile.id
 
   return (
@@ -70,14 +58,12 @@ export const ProfileHeader = ({ profile }: Props) => {
           <div className={'flex gap-5 sm:gap-7 lg:!gap-20 text-sm sm:mb-5'}>
             <ProfileFollowButton
               count={data?.followingCount}
-              // href={`#`}
               label={t.following}
               locale={locale}
               onClick={() => handleOpenModal('following')}
             />
             <ProfileFollowButton
               count={data?.followersCount}
-              // href={`#`}
               label={t.followers}
               locale={locale}
               onClick={() => handleOpenModal('followers')}
@@ -86,7 +72,7 @@ export const ProfileHeader = ({ profile }: Props) => {
               <ProfileFollowModal
                 currentUserProfile={data}
                 isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={handleCloseModal}
                 type={modalType}
               />
             )}

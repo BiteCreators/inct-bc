@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 type Props = {
   count: number | undefined
-  // href: string
   label: string
   locale: 'en' | 'ru'
   onClick?: () => void
@@ -18,14 +17,12 @@ export const ProfileFollowButton = ({ count, label, locale, onClick }: Props) =>
       onClick={onClick}
       variant={'text'}
     >
-      {/*<Link href={href}>*/}
       <div className={cn('flex flex-col text-xs sm:text-sm')}>
         <span className={cn('font-weight700')}>
           {count && count.toLocaleString(locale === 'ru' ? 'ru-Ru' : 'en-Us')}
         </span>
         <span>{label}</span>
       </div>
-      {/*</Link>*/}
     </Button>
   )
 }
