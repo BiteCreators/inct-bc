@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef, useEffect, useState } from 'react'
+import React, { ComponentProps, forwardRef, useEffect } from 'react'
 
 import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
@@ -8,23 +8,33 @@ import { useTextArea } from '@/common/ui/text-area/useTextArea'
 import { commentsApi } from '@/entities/comments'
 
 type Props = {
+  answerData?: {
+    commentId: number
+    postId: number
+    userName: string
+  } | null
+  contentComment: string
   disabled?: boolean
   error?: null | string
   postId: string
+  setContentComment: (text: string) => void
 } & ComponentProps<'textarea'>
 
 export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
-  ({ disabled, error, id, onChange, postId }: Props, ref) => {
-    const [content, setContent] = useState<string>()
-
+  (
+    { answerData, contentComment, disabled, error, id, onChange, postId, setContentComment }: Props,
+    ref
+  ) => {
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: true,
       onChange,
     })
+    const isAnswer = !!answerData
     const [createComment] = commentsApi.useCreateCommentMutation()
+    const [createAnswerComment] = commentsApi.useCreateAnswerCommentMutation()
 
     const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setContent(e.currentTarget.value)
+      setContentComment(e.currentTarget.value)
       handleChange(e)
       setTimeout(() => {
         if (textAreaRef.current) {
@@ -33,11 +43,26 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       }, 50)
     }
 
+    const handleCreateAnswerComment = async () => {
+      try {
+        if (contentComment && isAnswer) {
+          await createAnswerComment({
+            commentId: answerData.commentId,
+            content: contentComment,
+            postId: answerData.postId,
+          })
+          setContentComment('')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     const handleCreateComment = async () => {
       try {
-        if (content) {
-          await createComment({ content, postId })
-          setContent('')
+        if (contentComment) {
+          await createComment({ content: contentComment, postId })
+          setContentComment('')
         }
       } catch (error) {
         console.log(error)
@@ -53,16 +78,15 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
     }, [textAreaRef])
 
     return (
-      <div className={cn(['flex py-3 px-0', 'md:px-6'])}>
+      <div className={cn(['flex py-2 px-0', 'md:px-6'])}>
         <ScrollArea className={'w-full max-h-44'}>
           <div className={'flex flex-col min-h-4 w-full'}>
             <textarea
               className={cn([
-                'pt-2 pr-2.5 pb-0',
+                'pt-4 pr-2.5 pb-0',
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
                 'bg-transparent',
-                // 'bg-dark-100',
                 'leading-none',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',
@@ -74,13 +98,16 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
               onChange={handleTextAreaChange}
               placeholder={'Add a Comment...'}
               ref={mergeRefs([ref, textAreaRef])}
-              value={content}
+              value={contentComment}
             />
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
         </ScrollArea>
-        <div className={'flex items-end mb-2'}>
-          <button className={'md:hidden ml-6 max-h-9'}>
+        <div className={'flex items-center'}>
+          <button
+            className={'md:hidden ml-6 max-h-9'}
+            onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
+          >
             <ArrowBackOutline
               className={'text-dark-900 bg-light-100 rounded-full'}
               height={20}
@@ -91,8 +118,8 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </button>
           <Button
             className={cn(['max-h-9 align-bottom ml-6 hidden', 'md:inline-block'])}
-            disabled={!content}
-            onClick={handleCreateComment}
+            disabled={!contentComment}
+            onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
             variant={'text'}
           >
             Publish

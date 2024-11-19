@@ -14,6 +14,7 @@ import { PostActionsBlock, PostDescription } from '@/features/posts'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useRouter } from 'next/router'
 
+import { useCommentState } from '../../model/useCommentState'
 import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
@@ -26,6 +27,9 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
   const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
+
+  const { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef } =
+    useCommentState()
 
   const postWithPic = post.images.length !== 0
 
@@ -74,9 +78,18 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
               <DesktopCommentsList
                 comments={comments}
                 description={<PostDescription post={post} />}
+                handleAnswerClick={handleAnswerClick}
               />
               <PostActionsBlock post={post} />
-              {isAuth && <AddCommentTextarea postId={post.id.toString()} />}
+              {isAuth && (
+                <AddCommentTextarea
+                  answerData={answerData}
+                  contentComment={contentComment}
+                  postId={post.id.toString()}
+                  ref={textareaRef}
+                  setContentComment={setContentComment}
+                />
+              )}
             </div>
           </>
         </div>

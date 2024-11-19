@@ -16,7 +16,7 @@ type From = {
   username: string
 }
 
-type Answer = { commentId: number } & Omit<Comment, 'answerCount' | 'postId'>
+export type Answer = { commentId: number } & Omit<Comment, 'answerCount' | 'postId'>
 
 export type AnswersRequest = { commentId: number; postId: number } & WithSortPaginationParams
 

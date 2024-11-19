@@ -10,9 +10,10 @@ import { useParams } from 'next/navigation'
 type Props = {
   comments?: Comment[]
   description: React.ReactNode
+  handleAnswerClick: (data: { commentId: number; postId: number; userName: string }) => void
 }
 
-export const MobileCommentsList = ({ comments, description }: Props) => {
+export const MobileCommentsList = ({ comments, description, handleAnswerClick }: Props) => {
   const [showViewAllButton, setShowViewAllButton] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const commentsContainerRef = useRef<HTMLDivElement>(null)
@@ -36,12 +37,18 @@ export const MobileCommentsList = ({ comments, description }: Props) => {
 
   let content
 
-  if (comments && comments.length > 0) {
+  if (comments && comments.length > 1) {
     if (expanded) {
-      content = comments.map(comment => <PostComment comment={comment} key={comment.id} />)
+      content = comments.map(comment => (
+        <PostComment comment={comment} handleAnswerClick={handleAnswerClick} key={comment.id} />
+      ))
     } else {
       content = (
-        <PostComment comment={comments[0]} key={comments[0].id}>
+        <PostComment
+          comment={comments[0]}
+          handleAnswerClick={handleAnswerClick}
+          key={comments[0].id}
+        >
           <Typography className={'truncate-multiline'} variant={'regular-text'}>
             {comments[0].content}
           </Typography>
@@ -59,14 +66,11 @@ export const MobileCommentsList = ({ comments, description }: Props) => {
         {showViewAllButton && !expanded && (
           <Button className={'mb-2 pt-0 px-0 border-none text-light-900 text-sm'} variant={'text'}>
             <Link href={`/profile/${id}/publications/${postId}/comments`}>
-              View all comments (6)
+              {`View all comments (${comments?.length})`}
             </Link>
           </Button>
         )}
-        <div
-          className={cn('flex flex-col gap-5 overflow-hidden', expanded ? '' : 'max-h-[85px]')}
-          ref={commentsContainerRef}
-        >
+        <div className={cn('flex flex-col gap-5 overflow-hidden')} ref={commentsContainerRef}>
           {content}
         </div>
       </div>

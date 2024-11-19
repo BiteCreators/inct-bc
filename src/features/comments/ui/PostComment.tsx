@@ -1,46 +1,33 @@
 import { ReactNode } from 'react'
-import { useCookies } from 'react-cookie'
 
-import { Heart, HeartOutline, Trash } from '@/common/assets/icons/components'
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
+import { Heart, HeartOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Button, Typography } from '@/common/ui'
-import { decodeAccessToken } from '@/entities/auth'
-import { commentsApi } from '@/entities/comments'
+import { Avatar, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
-import { Reaction } from '@/entities/posts/types/likes.types'
+
+import { useCreateComment } from '../model/useCreateComment'
+import { CommentAnswer } from './CommentAnswer'
 
 type Props = {
   children?: ReactNode
   comment: Comment
+  handleAnswerClick: (data: { commentId: number; postId: number; userName: string }) => void
 }
 
-export const PostComment = ({ children, comment }: Props) => {
-  const { getRelativeTime } = useGetRelativeTime()
-  const relativeTime = getRelativeTime(new Date(comment.createdAt).getTime())
-  //const [cookie] = useCookies(['accessToken'])
-  //const { userId } = decodeAccessToken(cookie.accessToken)
-  //const isCurrentUserComment = comment.from.id === userId
-  const [updateLikeStatus] = commentsApi.useUpdateLikeStatusCommentMutation()
-
-  const handleUpdateLikeStatus = () => {
-    if (comment.isLiked) {
-      updateLikeStatus({
-        commentId: comment.id,
-        likeStatus: Reaction.DISLIKE,
-        postId: comment.postId,
-      })
-    } else {
-      updateLikeStatus({
-        commentId: comment.id,
-        likeStatus: Reaction.LIKE,
-        postId: comment.postId,
-      })
-    }
-  }
+export const PostComment = ({ children, comment, handleAnswerClick }: Props) => {
+  const {
+    answers,
+    answersCount,
+    handleUpdateLikeStatusAnswer,
+    handleUpdateLikeStatusComment,
+    isAnswersExist,
+    isAnswersOpen,
+    relativeTime,
+    setIsAnswersOpen,
+  } = useCreateComment({ comment })
 
   return (
-    <div className={'flex mb-4 gap-3 items-start'}>
+    <div className={'flex mb-4 last:mb-0 gap-3 items-start'}>
       <div className={'flex-shrink-0 pt-1'}>
         <Avatar avatarURL={comment.from.avatars[0].url} imgStyles={'w-9 h-9 object-cover'} />
       </div>
@@ -57,20 +44,49 @@ export const PostComment = ({ children, comment }: Props) => {
           <Typography className={'text-light-900'} variant={'small-text'}>
             {relativeTime}
           </Typography>
-          {
+          {!!comment.likeCount && (
             <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
               Like: {comment.likeCount}
             </Typography>
-          }
+          )}
           <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
-            Answer
-          </Typography>
-          {/*{isCurrentUserComment && (
-            <button className={'p-0 leading-none text-light-900 hover:text-primary-500'}>
-              <Trash height={16} viewBox={'0 0 26 26'} width={16} />
+            <button
+              onClick={() =>
+                handleAnswerClick?.({
+                  commentId: comment.id,
+                  postId: comment.postId,
+                  userName: comment.from.username,
+                })
+              }
+            >
+              Answer
             </button>
-          )}*/}
+          </Typography>
         </div>
+        {isAnswersExist && (
+          <div className={'mt-2'}>
+            <button
+              className={cn(isAnswersOpen && 'mb-3')}
+              onClick={() => setIsAnswersOpen(!isAnswersOpen)}
+            >
+              <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
+                {isAnswersOpen ? 'hide' : 'show'} answers ({answersCount})
+              </Typography>
+            </button>
+            <ul>
+              {isAnswersOpen &&
+                answers?.map(answer => (
+                  <CommentAnswer
+                    answer={answer}
+                    handleAnswerClick={handleAnswerClick}
+                    handleUpdateLikeStatusAnswer={handleUpdateLikeStatusAnswer}
+                    key={answer.id}
+                    postId={comment.postId}
+                  />
+                ))}
+            </ul>
+          </div>
+        )}
       </div>
       <div
         className={cn(
@@ -78,7 +94,7 @@ export const PostComment = ({ children, comment }: Props) => {
           comment.isLiked && 'text-danger-500'
         )}
       >
-        <button onClick={handleUpdateLikeStatus}>
+        <button onClick={handleUpdateLikeStatusComment}>
           {comment.isLiked ? (
             <Heart height={16} viewBox={'0 0 24 24'} width={16} />
           ) : (

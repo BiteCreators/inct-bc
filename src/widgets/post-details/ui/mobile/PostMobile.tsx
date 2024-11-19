@@ -11,6 +11,8 @@ import { AddCommentTextarea, MobileCommentsList } from '@/features/comments'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
 
+import { useCommentState } from '../../model/useCommentState'
+
 type Props = {
   comments?: Comment[]
   post: Post
@@ -19,6 +21,8 @@ type Props = {
 
 export const PostMobile = ({ comments, post, slides }: Props) => {
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+  const { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef } =
+    useCommentState()
 
   return (
     <div className={cn(['-my-8 flex flex-col items-center px-4 max-w-[500px] mx-auto'])}>
@@ -31,10 +35,24 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
         <PostActionsBlock post={post} />
         <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>
           <div className={cn(['flex flex-col pt-3 gap-5 w-full', !isAuth && 'mb-4'])}>
-            <MobileCommentsList comments={comments} description={<PostDescription post={post} />} />
+            <MobileCommentsList
+              comments={comments}
+              description={<PostDescription post={post} />}
+              handleAnswerClick={handleAnswerClick}
+            />
           </div>
         </div>
-        {isAuth && <AddCommentTextarea postId={post.id.toString()} />}
+        <div className={'mb-7'}>
+          {isAuth && (
+            <AddCommentTextarea
+              answerData={answerData}
+              contentComment={contentComment}
+              postId={post.id.toString()}
+              ref={textareaRef}
+              setContentComment={setContentComment}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

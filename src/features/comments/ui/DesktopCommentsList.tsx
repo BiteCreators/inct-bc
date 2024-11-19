@@ -7,15 +7,22 @@ import { PostComment } from '@/features/comments'
 type Props = {
   comments?: Comment[]
   description: React.ReactNode
+  handleAnswerClick: (data: { commentId: number; postId: number; userName: string }) => void
 }
 
-export const DesktopCommentsList = ({ comments, description }: Props) => {
+export const DesktopCommentsList = ({ comments, description, handleAnswerClick }: Props) => {
   return (
-    <ScrollArea className={'flex-1 px-6 pt-5 pb-2 w-full'}>
-      <div className={'flex flex-col gap-4 h-[336px]'}>
+    <ScrollArea className={'flex-1 px-6 w-full'}>
+      <div className={'flex flex-col min-h-[336px] pt-5 pb-2'}>
         {description}
         {comments && comments.length > 0
-          ? comments.map(comment => <PostComment comment={comment} key={comment.id} />)
+          ? comments.map(comment => (
+              <PostComment
+                comment={comment}
+                handleAnswerClick={handleAnswerClick}
+                key={comment.id}
+              />
+            ))
           : 'No comments'}
       </div>
     </ScrollArea>
