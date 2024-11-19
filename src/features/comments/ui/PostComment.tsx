@@ -7,7 +7,6 @@ import { Comment } from '@/entities/comments/types/comments.types'
 
 import { useCommentInteractions } from '../model/useCommentInteractions'
 import { CommentAnswer } from './CommentAnswer'
-
 type Props = {
   children?: ReactNode
   comment: Comment
@@ -85,9 +84,10 @@ export const PostComment = ({ children, comment, handleAnswerClick }: Props) => 
       {isAnswersExist && (
         <div className={'col-span-1 row-span-1'}>
           <button
-            className={cn('mt-3', isAnswersOpen && 'mb-3')}
+            className={cn('mt-3 relative pl-8', isAnswersOpen && 'mb-3')}
             onClick={() => setIsAnswersOpen(!isAnswersOpen)}
           >
+            <span className={'absolute w-6 h-[1px] bg-light-900 left-0 top-1/2'}></span>
             <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
               {isAnswersOpen ? 'hide' : 'show'} answers ({answersCount})
             </Typography>
