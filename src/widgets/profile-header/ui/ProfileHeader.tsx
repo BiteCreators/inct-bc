@@ -5,6 +5,7 @@ import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import { useModalOpen } from '@/features/profile/model/useModalOpen'
+import { FollowProvider } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { ProfileFollowModal } from '@/features/profile/ui/profile-follow/ProfileFollowModal'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -69,12 +70,14 @@ export const ProfileHeader = ({ profile }: Props) => {
               onClick={() => handleOpenModal('followers')}
             />
             {data && (
-              <ProfileFollowModal
-                currentUserProfile={data}
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-                type={modalType}
-              />
+              <FollowProvider currentUserProfile={data}>
+                <ProfileFollowModal
+                  currentUserProfile={data}
+                  isOpen={isModalOpen}
+                  onClose={handleCloseModal}
+                  type={modalType}
+                />
+              </FollowProvider>
             )}
             <div className={'flex flex-col text-xs sm:text-sm'}>
               <span className={'font-weight700'}>{data?.publicationsCount}</span>

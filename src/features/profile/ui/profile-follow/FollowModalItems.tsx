@@ -1,38 +1,30 @@
 import React, { useState } from 'react'
 
-import { Alert, Button, Input, ScrollArea, Typography } from '@/common/ui'
-import {
-  Follower,
-  FollowersResponse,
-  WithFollowersCountUserProfile,
-} from '@/entities/followers/types/followers.types'
+import { Alert, Input, ScrollArea, Typography } from '@/common/ui'
+import { authApi } from '@/entities/auth'
+import { Follower, WithFollowersCountUserProfile } from '@/entities/followers/types/followers.types'
 import { UserProfile } from '@/entities/profile'
+import { FollowModalButtons } from '@/features/profile/ui/profile-follow/FollowModalButtons'
+import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 
 import example from '../../../../../public/examples/exampleAvatar.png'
 
 type Props = {
-  apiError: string
   currentUserProfile: WithFollowersCountUserProfile
-  followList: FollowersResponse
-  followLoading: boolean
-  handleConfirmDeleting: (user: Follower) => void
-  handleFollow: (userId: number) => Promise<void>
-  removeLoading: boolean
   type: 'followers' | 'following'
 }
-export const FollowModalItems = ({
-  apiError,
-  currentUserProfile,
-  followList,
-  followLoading,
-  handleConfirmDeleting,
-  handleFollow,
-  removeLoading,
-  type,
-}: Props) => {
+export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
+  const { apiError, followersList, followingList } = useFollowContext()
+
+  const followList = type === 'followers' ? followersList : followingList
+
   const [searchValue, setSearchValue] = useState('')
 
-  const filteredUsers = followList.items.filter(user =>
+  if (!followList || !followList.items) {
+    return null
+  }
+
+  const filteredUsers = followList.items.filter((user: Follower) =>
     user.userName.toLowerCase().includes(searchValue.toLowerCase())
   )
 
@@ -62,38 +54,11 @@ export const FollowModalItems = ({
                     profileId={user.userId}
                     userName={user.userName}
                   />
-                  <div className={'flex gap-14'}>
-                    {currentUserProfile.id !== user.userId && (
-                      <>
-                        {!user.isFollowing && (
-                          <Button
-                            disabled={followLoading}
-                            onClick={() => handleFollow(user.userId)}
-                          >
-                            Follow
-                          </Button>
-                        )}
-                        {user.isFollowing && (
-                          <Button
-                            disabled={removeLoading}
-                            onClick={() => handleConfirmDeleting(user)}
-                            variant={'outline'}
-                          >
-                            Unfollow
-                          </Button>
-                        )}
-                      </>
-                    )}
-                    {currentUserProfile.id === user.userId && type === 'following' && (
-                      <Button
-                        disabled={removeLoading}
-                        onClick={() => handleConfirmDeleting(user)}
-                        variant={'outline'}
-                      >
-                        Unfollow
-                      </Button>
-                    )}
-                  </div>
+                  <FollowModalButtons
+                    currentUserProfile={currentUserProfile}
+                    type={type}
+                    user={user}
+                  />
                 </div>
               ))}
             </div>

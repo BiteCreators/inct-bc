@@ -3,7 +3,7 @@ import React from 'react'
 import { Modal } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { WithFollowersCountUserProfile } from '@/entities/followers'
-import { UseProfileFollow } from '@/features/profile/model/useProfileFollow'
+import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { FollowModalItems } from '@/features/profile/ui/profile-follow/FollowModalItems'
 
 type Props = {
@@ -14,19 +14,14 @@ type Props = {
 }
 export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }: Props) => {
   const {
-    apiError,
     confirmOpen,
     currentFollowerName,
-    followLoading,
     followersList,
     followingList,
     handleConfirm,
-    handleConfirmDeleting,
-    handleFollow,
     handleReject,
-    removeLoading,
     setConfirmOpen,
-  } = UseProfileFollow(currentUserProfile)
+  } = useFollowContext()
 
   return (
     <>
@@ -51,16 +46,7 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
           }
         >
           {followingList && followersList && (
-            <FollowModalItems
-              apiError={apiError}
-              currentUserProfile={currentUserProfile}
-              followList={type === 'followers' ? followersList : followingList}
-              followLoading={followLoading}
-              handleConfirmDeleting={handleConfirmDeleting}
-              handleFollow={handleFollow}
-              removeLoading={removeLoading}
-              type={type}
-            />
+            <FollowModalItems currentUserProfile={currentUserProfile} type={type} />
           )}
         </Modal>
       }

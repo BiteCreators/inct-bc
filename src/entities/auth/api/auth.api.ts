@@ -32,7 +32,7 @@ type LoginRequest = {
   password: string
 }
 
-type MeResponse = {
+export type MeResponse = {
   email: string
   isBlocked: boolean
   userId: number
