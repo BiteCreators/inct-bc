@@ -2,10 +2,17 @@ import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
-import { followersApi } from '@/entities/followers'
+import { WithFollowersCountUserProfile, followersApi } from '@/entities/followers'
 import { Follower } from '@/entities/followers/types/followers.types'
 
-export const UseProfileFollow = () => {
+export const UseProfileFollow = (currentUserProfile: WithFollowersCountUserProfile) => {
+  const { data: followingList } = followersApi.useGetUsersFollowingQuery({
+    userName: currentUserProfile.userName,
+  })
+  const { data: followersList } = followersApi.useGetFollowersQuery({
+    userName: currentUserProfile.userName,
+  })
+
   const [follow, { isLoading: followLoading }] = followersApi.useFollowMutation()
 
   const [remove, { isLoading: removeLoading }] = followersApi.useRemoveFollowerMutation()
@@ -48,6 +55,8 @@ export const UseProfileFollow = () => {
     confirmOpen,
     currentFollowerName,
     followLoading,
+    followersList,
+    followingList,
     handleConfirm,
     handleConfirmDeleting,
     handleFollow,

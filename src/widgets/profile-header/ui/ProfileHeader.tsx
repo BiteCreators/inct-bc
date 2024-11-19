@@ -26,12 +26,12 @@ export const ProfileHeader = ({ profile }: Props) => {
     userName: profile.userName,
   })
   const { data: currentUser } = authApi.useMeQuery()
-  const { data: followingList } = followersApi.useGetUsersFollowingQuery({
-    userName: currentUser?.userName || '',
-  })
-  const { data: followersList } = followersApi.useGetFollowersQuery({
-    userName: currentUser?.userName || '',
-  })
+  // const { data: followingList } = followersApi.useGetUsersFollowingQuery({
+  //   userName: currentUser?.userName || '',
+  // })
+  // const { data: followersList } = followersApi.useGetFollowersQuery({
+  //   userName: currentUser?.userName || '',
+  // })
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalType, setModalType] = useState<'followers' | 'following'>('followers')
@@ -39,19 +39,6 @@ export const ProfileHeader = ({ profile }: Props) => {
     setModalType(type)
     setIsModalOpen(true)
   }
-
-  // const [follow, { error, isLoading, isSuccess }] = followersApi.useFollowMutation()
-  //
-  // const handleFollow = async () => {
-  //   try {
-  //     await follow({ selectedUserId: 1431 }).unwrap()
-  //     alert('Successfully followed the user!')
-  //   } catch (err) {
-  //     console.error('Failed to follow the user:', err)
-  //     alert('An error occurred while trying to follow the user.')
-  //   }
-  // }
-
   const isCurrentUserProfile = currentUser?.userId === profile.id
 
   return (
@@ -98,16 +85,11 @@ export const ProfileHeader = ({ profile }: Props) => {
             {data && (
               <ProfileFollowModal
                 currentUserProfile={data}
-                followList={modalType === 'followers' ? followersList : followingList}
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 type={modalType}
               />
             )}
-            {/*<Button onClick={handleFollow} />*/}
-            {/*<ProfileFollowersModal />*/}
-            {/*{followingList && <ProfileFollowingModal followingList={followingList} />}*/}
-            {/*{followersList && <ProfileFollowersModal followersList={followersList} />}*/}
             <div className={'flex flex-col text-xs sm:text-sm'}>
               <span className={'font-weight700'}>{data?.publicationsCount}</span>
               <span>{t.publications}</span>
