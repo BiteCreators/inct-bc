@@ -5,20 +5,20 @@ import { cn } from '@/common/lib/utils/cn'
 
 type CheckboxProps = {
   error?: string
-  onChange?: (value: boolean) => void
+  onChecked?: (value: boolean) => void
   text?: ReactNode
 } & ComponentProps<'input'>
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
-    { checked, className, disabled, error, id, onChange, required, text, ...props }: CheckboxProps,
+    { checked, className, disabled, error, id, onChecked, required, text, ...props }: CheckboxProps,
     ref
   ) => {
     const [isChecked, setIsChecked] = useState(checked)
     const checkboxId = useId()
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       setIsChecked(e.target.checked)
-      onChange && onChange(e.target.checked)
+      onChecked && onChecked(e.target.checked)
     }
 
     return (
