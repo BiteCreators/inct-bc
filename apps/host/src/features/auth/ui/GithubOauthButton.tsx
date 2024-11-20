@@ -1,4 +1,4 @@
-import { GithubSvgrepoCom31 } from '@/common/assets/icons/components'
+import { GithubSvgrepoCom31 } from '@packages/shared/assets'
 import Link from 'next/link'
 
 export const GithubOauthButton = () => {

@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { authApi } from '@/entities/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useScopedTranslation } from '@packages/shared/hooks'
 
 import { modifySignUpApiError } from '../lib/modifyAuthApiError'
 import { SignUpFormData, createSignUpSchema } from '../lib/schemas/signUp.schema'

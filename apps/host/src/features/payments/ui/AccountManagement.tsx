@@ -1,7 +1,8 @@
+import { Typography } from '@packages/shared/ui'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
+
 import { paymentsSlice } from '..'
 import { useAppDispatch, useAppSelector } from '../../../common/lib/hooks/reduxHooks'
-import { Typography } from '../../../common/ui'
-import { LoaderBlock } from '../../../common/ui/loader/LoaderBlock'
 import { paymentsApi } from '../../../entities/payments'
 import { AccountTypeCard } from './AccountTypeCard'
 import { CurrentSubscriptionCard } from './CurrentSubscriptionCard'

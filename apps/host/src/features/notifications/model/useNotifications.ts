@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
 import { Notification, notificationsApi } from '@/entities/notifications'
+import { useGetRelativeTime } from '@packages/shared/hooks/useGetRelativeTime'
 
 export const useNotifications = ({
   notificationsItems,

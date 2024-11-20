@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react'
 
-import { Alert, Button, Loader, Modal, TextArea } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
-import { Slider } from '@/common/ui/slider/Slider'
 import { Post } from '@/entities/posts'
 import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/edit-post/model/useEditPost'
+import { Alert, Button, Modal, TextArea } from '@packages/shared/ui'
+import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
+import { Slider } from '@packages/shared/ui/slider/Slider'
 
 type Props = {
   changeEditMode: (e: boolean) => void

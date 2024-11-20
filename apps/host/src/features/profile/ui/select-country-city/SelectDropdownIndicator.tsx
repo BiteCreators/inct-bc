@@ -1,8 +1,8 @@
 import React from 'react'
 import { DropdownIndicatorProps, GroupBase, components } from 'react-select'
 
-import { ArrowIosDownOutline } from '@/common/assets/icons/components'
 import { SelectData } from '@/features/profile/model/useSelectCountryCity'
+import { ArrowIosDownOutline } from '@packages/shared/assets/icons/components'
 
 export const SelectDropdownIndicator = (
   props: DropdownIndicatorProps<SelectData, false, GroupBase<SelectData>>

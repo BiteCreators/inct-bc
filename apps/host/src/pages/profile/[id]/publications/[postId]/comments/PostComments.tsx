@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { ArrowBackOutline } from '@/common/assets/icons/components'
-import { ScrollArea, Typography } from '@/common/ui'
 import { PostComment } from '@/features/comments'
+import { ArrowBackOutline } from '@packages/shared/assets/icons/components'
+import { ScrollArea, Typography } from '@packages/shared/ui'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 

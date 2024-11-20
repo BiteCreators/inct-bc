@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { ScrollArea } from '@/common/ui'
 import { PostComment } from '@/features/comments'
+import { ScrollArea } from '@packages/shared/ui'
 
 type Props = {
   comments: { id: string; text: string }[]

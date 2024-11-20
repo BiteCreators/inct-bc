@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
-import { ScrollArea, Typography } from '@/common/ui'
-import { Slider } from '@/common/ui/slider/Slider'
+import { ScrollArea, Typography } from '@packages/shared/ui'
+import { Slider } from '@packages/shared/ui/slider/Slider'
+import { cn } from '@packages/shared/utils/cn'
 
 import s from '../styles/filters.module.css'
 

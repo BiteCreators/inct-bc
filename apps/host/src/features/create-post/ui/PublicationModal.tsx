@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { TextArea } from '@/common/ui'
-import { Slider } from '@/common/ui/slider/Slider'
 import { UserProfile, profileApi } from '@/entities/profile'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { TextArea } from '@packages/shared/ui'
+import { Slider } from '@packages/shared/ui/slider/Slider'
 
 import { ImageData } from '../types'
 import { generateTotalImageSlides } from './ImageSlides'

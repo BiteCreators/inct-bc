@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { Card, RadioGroup, Typography } from '@/common/ui'
 import { paymentsSlice } from '@/features/payments'
+import { Card, RadioGroup, Typography } from '@packages/shared/ui'
 
 export const AccountTypeCard = ({ disableOption }: { disableOption: boolean }) => {
   const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)

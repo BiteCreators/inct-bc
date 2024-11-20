@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
 import { Post } from '@/entities/posts'
+import { useMediaQuery } from '@packages/shared/hooks/useMediaQuery'
 
 import { PostDesktop } from './desktop/PostDesktop'
 import { PostMobile } from './mobile/PostMobile'

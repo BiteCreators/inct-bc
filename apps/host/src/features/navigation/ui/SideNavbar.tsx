@@ -1,5 +1,5 @@
-import { useCookies } from 'react-cookie'
-
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
 import {
   Bookmark,
   BookmarkOutline,
@@ -15,10 +15,8 @@ import {
   SearchOutline,
   TrendingUp,
   TrendingUpOutline,
-} from '@/common/assets/icons/components'
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { authSlice } from '@/entities/auth'
+} from '@packages/shared/assets/icons/components'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 
 import { SideNavbarItem } from './SideNavbarItem'
 

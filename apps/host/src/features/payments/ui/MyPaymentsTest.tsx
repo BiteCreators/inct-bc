@@ -1,5 +1,5 @@
-import { cn } from '@/common/lib/utils/cn'
-import { Pagination } from '@/common/ui'
+import { Pagination } from '@packages/shared/ui'
+import { cn } from '@packages/shared/utils/cn'
 
 import { useMyPaymentsTest } from '../model/useMyPaymentsTest'
 

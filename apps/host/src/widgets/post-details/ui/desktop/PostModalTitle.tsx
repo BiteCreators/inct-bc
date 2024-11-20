@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
 import { authApi } from '@/entities/auth'
 import { Post } from '@/entities/posts'
 import { DropdownPost } from '@/features/posts/ui/DropdownPost'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
+import { cn } from '@packages/shared/utils/cn'
 import * as Dialog from '@radix-ui/react-dialog'
 
 type Props = {

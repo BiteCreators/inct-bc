@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Crop, ReactCrop, centerCrop, makeAspectCrop } from 'react-image-crop'
 
-import { Button, ScrollArea } from '@/common/ui'
+import { Button, ScrollArea } from '@packages/shared/ui'
 
 import 'react-image-crop/dist/ReactCrop.css'
 type Props = {

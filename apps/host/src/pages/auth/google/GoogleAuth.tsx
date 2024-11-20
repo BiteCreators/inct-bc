@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 
 import { AuthLayout } from '@/application/layouts/AuthLayout'
-import { Loader } from '@/common/ui'
 import { useGoogleAuth } from '@/features/auth/model/useGoogleAuth'
+import { Loader } from '@packages/shared/ui'
 
 function GoogleAuth() {
   const { googleAuthHandler } = useGoogleAuth()

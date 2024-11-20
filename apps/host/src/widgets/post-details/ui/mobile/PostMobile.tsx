@@ -1,14 +1,14 @@
 import React, { ReactNode } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { cn } from '@/common/lib/utils/cn'
-import { Dropdown } from '@/common/ui'
-import { Slider } from '@/common/ui/slider/Slider'
 import { authSlice } from '@/entities/auth'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, MobileCommentsList } from '@/features/comments'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
+import { Dropdown } from '@packages/shared/ui'
+import { Slider } from '@packages/shared/ui/slider/Slider'
+import { cn } from '@packages/shared/utils/cn'
 
 type Props = {
   comments: { id: string; text: string }[]

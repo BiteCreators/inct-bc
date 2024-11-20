@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { postsApi } from '@/entities/posts'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { useConfirmation } from '@packages/shared/ui/action-confirmation/useConfirmation'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 

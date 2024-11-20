@@ -2,9 +2,9 @@ import React from 'react'
 import { FieldValues, Path, UseFormSetError } from 'react-hook-form'
 
 import { LocaleType } from '@/locales/en'
+import { useScopedTranslation } from '@packages/shared/hooks'
 
 import { isApiError, isApiErrorWithArray, isFetchBaseQueryError } from '../utils/apiHelpers'
-import { useScopedTranslation } from './useTranslation'
 
 export const useHandleApiError = <NT extends keyof LocaleType>(namespace: NT) => {
   const internalT = useScopedTranslation('Common')

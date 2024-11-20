@@ -9,7 +9,7 @@ import {
   PlusSquareOutline,
   Search,
   SearchOutline,
-} from '@/common/assets/icons/components'
+} from '@packages/shared/assets/icons/components'
 
 import { MobileAppMenuItem } from './MobileAppMenuItem'
 

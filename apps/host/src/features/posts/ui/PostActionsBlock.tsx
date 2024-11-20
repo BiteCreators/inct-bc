@@ -1,9 +1,13 @@
 import React from 'react'
 
-import { BookmarkOutline, HeartOutline, PaperPlaneOutline } from '@/common/assets/icons/components'
-import { cn } from '@/common/lib/utils/cn'
-import { Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
+import {
+  BookmarkOutline,
+  HeartOutline,
+  PaperPlaneOutline,
+} from '@packages/shared/assets/icons/components'
+import { Typography } from '@packages/shared/ui'
+import { cn } from '@packages/shared/utils/cn'
 
 type Props = {
   post: Post

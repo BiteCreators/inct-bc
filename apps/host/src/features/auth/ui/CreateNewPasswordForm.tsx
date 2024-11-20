@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Button, Card, FormInput, Loader, Typography } from '@/common/ui'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { useCreateNewPassword } from '@/features/auth/model/useCreateNewPassword'
+import { Button, Card, FormInput, Typography } from '@packages/shared/ui'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 
 export const CreateNewPasswordForm = () => {
   const { control, handleSubmit, isValid, loading, t } = useCreateNewPassword()

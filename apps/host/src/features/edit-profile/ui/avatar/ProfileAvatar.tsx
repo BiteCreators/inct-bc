@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ImageOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Alert, Avatar, Button, Loader } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useProfileAvatar } from '@/features/edit-profile/lib/hooks/useProfileAvatar'
+import { ImageOutline } from '@packages/shared/assets/icons/components'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { Alert, Avatar, Button, Loader } from '@packages/shared/ui'
+import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
 
 import { ModalAvatar } from './ModalAvatar'
 

@@ -1,9 +1,9 @@
-import { Image } from '@/common/assets/icons/components'
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
-import { useShowMore } from '@/common/lib/hooks/useShowMore'
-import { Avatar, Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
 import { UserProfile } from '@/entities/profile'
+import { Image } from '@packages/shared/assets/icons/components'
+import { useGetRelativeTime } from '@packages/shared/hooks/useGetRelativeTime'
+import { useShowMore } from '@packages/shared/hooks/useShowMore'
+import { Typography } from '@packages/shared/ui'
 import Link from 'next/link'
 
 type Props = {

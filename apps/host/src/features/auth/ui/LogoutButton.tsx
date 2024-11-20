@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { LogOut } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { cn } from '@/common/lib/utils/cn'
-import { Loader } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
+import { LogOut } from '@packages/shared/assets'
+import { useScopedTranslation } from '@packages/shared/hooks'
+import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
+import { cn } from '@packages/shared/utils'
 
 export const LogoutButton = () => {
   const t = useScopedTranslation('Auth')

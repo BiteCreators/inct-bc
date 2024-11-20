@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { TabsBase } from '@/common/ui'
 import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
 import { AccountManagement } from '@/features/payments'
-import { MyPayments } from '@/features/payments/ui/MyPayments'
 import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { TabsBase } from '@packages/shared/ui'
 import { useRouter } from 'next/router'
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PageLayout } from '@/common/ui'
 import { Header } from '@/widgets/header'
+import { PageLayout } from '@packages/shared/ui'
 
 export const AuthLayout = (page: React.ReactElement) => {
   return (

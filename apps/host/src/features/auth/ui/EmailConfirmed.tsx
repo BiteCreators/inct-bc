@@ -1,4 +1,4 @@
-import { Alert, Button, Loader, Typography } from '@/common/ui'
+import { Alert, Button, Loader, Typography } from '@packages/shared/ui'
 import Image from 'next/image'
 
 import { useEmailConfirmed } from '../model/useEmailConfrmed'

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { Alert, Button, FormInput, FormSelect, FormTextArea, Loader } from '@/common/ui'
-import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
-import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
 import { useLocation } from '@/features/profile/model/useLocation'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
+import { Button, FormInput, FormSelect, FormTextArea, Loader } from '@packages/shared/ui'
+import { FormDatePicker } from '@packages/shared/ui/form/FormDatePicker'
+import { SearchableOptions } from '@packages/shared/ui/select/SearchableOptions'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { ProfileAvatar } from './avatar/ProfileAvatar'

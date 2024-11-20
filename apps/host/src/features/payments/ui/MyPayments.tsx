@@ -1,7 +1,7 @@
-import { cn } from '@/common/lib/utils/cn'
-import { Pagination, Typography } from '@/common/ui'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
+import { Pagination, Typography } from '@packages/shared/ui'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
+import { cn } from '@packages/shared/utils/cn'
 
 import { useMyPayments } from '../model/useMyPayments'
 

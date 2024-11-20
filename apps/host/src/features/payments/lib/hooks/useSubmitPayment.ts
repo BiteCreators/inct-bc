@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { PAYMENT_PROVIDERS, TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 
 import { paymentsSlice } from '../../model/payments.slice'
 import { SubscriptionFormData, createSubscriptionSchema } from '../schemas/subscription.schema'

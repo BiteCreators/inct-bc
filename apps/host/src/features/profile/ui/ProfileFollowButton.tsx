@@ -1,5 +1,5 @@
-import { cn } from '@/common/lib/utils/cn'
-import { Button } from '@/common/ui'
+import { Button } from '@packages/shared/ui'
+import { cn } from '@packages/shared/utils/cn'
 import Link from 'next/link'
 
 type Props = {

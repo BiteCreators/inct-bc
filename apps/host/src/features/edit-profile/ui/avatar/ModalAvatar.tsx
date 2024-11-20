@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { ImageOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Alert, Avatar, Button, Modal } from '@/common/ui'
-import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
-import { ProfileAvatars } from '@/entities/profile'
+import { Avatar as ProfileAvatars } from '@/common/types/api.types'
 import { useCropImage } from '@/features/edit-profile/lib/hooks/useCropImage'
 import { useImageUpload } from '@/features/edit-profile/lib/hooks/useImageUpload'
+import { ImageOutline } from '@packages/shared/assets/icons/components'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { Alert, Avatar, Button, Modal } from '@packages/shared/ui'
+import { DragAndDropInput } from '@packages/shared/ui/drag-and-drop-input/DragAndDropInput'
 
 import { CropImage } from './CropImage'
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-import PaypalSvg from '@/common/assets/icons/components/PaypalSvg'
-import { cn } from '@/common/lib/utils/cn'
-import { Alert } from '@/common/ui'
 import { PAYMENT_PROVIDERS } from '@/entities/payments/types/payments.type'
 import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
+import PaypalSvg from '@packages/shared/assets/icons/components/PaypalSvg'
+import { Alert } from '@packages/shared/ui'
+import { cn } from '@packages/shared/utils/cn'
 
 import { useSubmitPayment } from '../lib/hooks/useSubmitPayment'
 
