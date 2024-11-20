@@ -44,42 +44,9 @@ export const useFollowContext = () => {
   return context
 }
 
+// eslint-disable-next-line no-redeclare
 export const FollowProvider = ({ children, currentUserProfile }: FollowProvider) => {
-  const {
-    apiError,
-    confirmOpen,
-    currentFollowerName,
-    followLoading,
-    followersList,
-    followingList,
-    handleConfirm,
-    handleConfirmDeleting,
-    handleFollow,
-    handleReject,
-    me,
-    removeLoading,
-    setConfirmOpen,
-  } = useProfileFollow(currentUserProfile)
+  const followData = useProfileFollow(currentUserProfile)
 
-  return (
-    <FollowContext.Provider
-      value={{
-        apiError,
-        confirmOpen,
-        currentFollowerName,
-        followLoading,
-        followersList,
-        followingList,
-        handleConfirm,
-        handleConfirmDeleting,
-        handleFollow,
-        handleReject,
-        me,
-        removeLoading,
-        setConfirmOpen,
-      }}
-    >
-      {children}
-    </FollowContext.Provider>
-  )
+  return <FollowContext.Provider value={followData}>{children}</FollowContext.Provider>
 }
