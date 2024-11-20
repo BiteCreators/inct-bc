@@ -1,8 +1,8 @@
 import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Button, Typography } from '@/common/ui'
+import { Alert, Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
-import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
+import { useFollowers } from '@/features/followers/model/useFollowers'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -19,12 +19,17 @@ export const ProfileHeader = ({ profile }: Props) => {
   const t = useScopedTranslation('Profile')
   const tNav = useScopedTranslation('Navigation')
 
-  const { data } = followersApi.useGetUserProfileQuery({
-    userName: profile.userName,
-  })
   const { data: currentUser } = authApi.useMeQuery()
 
-  const isCurrentUserProfile = currentUser?.userId === profile.id
+  const {
+    apiError,
+    handleFollow,
+    isCurrentUserProfile,
+    isFollow,
+    isLoadingFollow,
+    isLoadingUnFollow,
+    userProfile,
+  } = useFollowers(profile, currentUser)
 
   return (
     <>
@@ -54,24 +59,40 @@ export const ProfileHeader = ({ profile }: Props) => {
           </div>
           <div className={'flex gap-5 sm:gap-7 lg:!gap-20 text-sm sm:mb-5'}>
             <ProfileFollowButton
-              count={data?.followingCount}
+              count={userProfile?.followingCount}
               href={`#`}
               label={t.following}
               locale={locale}
             />
             <ProfileFollowButton
-              count={data?.followersCount}
+              count={userProfile?.followersCount}
               href={`#`}
               label={t.followers}
               locale={locale}
             />
             <div className={'flex flex-col text-xs sm:text-sm'}>
-              <span className={'font-weight700'}>{data?.publicationsCount}</span>
+              <span className={'font-weight700'}>{userProfile?.publicationsCount}</span>
               <span>{t.publications}</span>
             </div>
           </div>
           <AboutUser className={'hidden sm:flex text-left'} text={profile.aboutMe || ''} />
         </div>
+        {!isCurrentUserProfile && (
+          <div className={'flex gap-4'}>
+            <Button disabled={isLoadingFollow || isLoadingUnFollow} onClick={handleFollow}>
+              {!isFollow ? t.follow : t.unfollow}
+            </Button>
+            <Button variant={'secondary'}>{t.sendMessage}</Button>
+            {apiError && (
+              <Alert
+                className={'absolute mt-10 right-16'}
+                message={apiError}
+                purpose={'alert'}
+                type={'error'}
+              />
+            )}
+          </div>
+        )}
       </div>
       <div>
         <Typography className={'sm:hidden font-weight700 mb-3'} variant={'regular-text'}>
