@@ -10,20 +10,33 @@ import {
 import { Alert, Dropdown } from '@/common/ui'
 import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import { MeResponse } from '@/entities/auth/api/auth.api'
 import { Post } from '@/entities/posts'
+import { Profile } from '@/entities/profile'
+import { useFollowers } from '@/features/followers/model/useFollowers'
 import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 
 type Props = {
   changeEditMode: (e: boolean) => void
   className?: string
+  currentUser: MeResponse | undefined
   isMyPost: boolean
   post: Post
+  profile: Profile
 }
-export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Props) => {
+
+export const DropdownPost = ({
+  changeEditMode,
+  className,
+  currentUser,
+  isMyPost,
+  profile,
+}: Props) => {
+  const { apiError: apiErrorFollow, handleFollow, isFollow } = useFollowers(profile, currentUser)
+
   const forDrop: DropdownItem[] = []
-  const isFollow = false
   const {
-    apiError,
+    apiError: apiErrorRemovePost,
     confirmOpen,
     copyLinkHandler,
     deletePostHandler,
@@ -49,13 +62,13 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
       forDrop.push({
         icon: <PersonRemoveOutline />,
         label: t.unfollow,
-        onClick: () => {},
+        onClick: handleFollow,
       })
     } else {
       forDrop.push({
         icon: <PersonAddOutline />,
         label: t.follow,
-        onClick: () => {},
+        onClick: handleFollow,
       })
     }
     forDrop.push({
@@ -76,8 +89,14 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
         title={'Delete Post'}
       />
       <Dropdown className={className} items={forDrop} />
-      {apiError && (
-        <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
+      {(apiErrorRemovePost || apiErrorFollow) && (
+        <Alert
+          className={'z-50'}
+          message={apiErrorRemovePost || apiErrorFollow}
+          portal
+          purpose={'toast'}
+          type={'error'}
+        />
       )}
     </>
   )
