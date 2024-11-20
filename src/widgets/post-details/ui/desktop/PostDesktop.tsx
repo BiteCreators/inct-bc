@@ -7,6 +7,7 @@ import { Modal } from '@/common/ui'
 import { Slider } from '@/common/ui/slider/Slider'
 import { authSlice } from '@/entities/auth'
 import { Post } from '@/entities/posts'
+import { Profile } from '@/entities/profile'
 import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
 import { EditPost } from '@/features/edit-post'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
@@ -18,10 +19,11 @@ import { PostModalTitle } from './PostModalTitle'
 type Props = {
   comments: { id: string; text: string }[]
   post: Post
+  profile: Profile
   slides: ReactNode[]
 }
 
-export const PostDesktop = ({ comments, post, slides }: Props) => {
+export const PostDesktop = ({ comments, post, profile, slides }: Props) => {
   const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
@@ -68,7 +70,7 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
               />
             </Dialog.Close>
             <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
-              <PostModalTitle changeEditMode={setEditMode} post={post} />
+              <PostModalTitle changeEditMode={setEditMode} post={post} profile={profile} />
               <div className={'border-y-[1px] border-dark-100'} />
               <DesktopCommentsList
                 comments={comments}

@@ -2,15 +2,17 @@ import React from 'react'
 
 import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
 import { Post } from '@/entities/posts'
+import { Profile } from '@/entities/profile'
 
 import { PostDesktop } from './desktop/PostDesktop'
 import { PostMobile } from './mobile/PostMobile'
 
 type Props = {
   post: Post
+  profile: Profile
 }
 
-export const PostDetails = ({ post }: Props) => {
+export const PostDetails = ({ post, profile }: Props) => {
   //TODO: remove any
   const slides = post.images.map((image: any, i) => (
     <img alt={'postImg'} className={'h-full object-cover object-center'} key={i} src={image.url} />
@@ -30,7 +32,7 @@ export const PostDetails = ({ post }: Props) => {
   ]
 
   if (isLargeScreen) {
-    return <PostDesktop comments={comments} post={post} slides={slides} />
+    return <PostDesktop comments={comments} post={post} profile={profile} slides={slides} />
   } else {
     return <PostMobile comments={comments} post={post} slides={slides} />
   }
