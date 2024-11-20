@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { DefaultLayout } from '@/app/layouts/DefautlLayout'
+import { cn } from '@/common/lib/utils/cn'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
@@ -42,19 +43,21 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
   const { items: posts } = postsData
 
   return (
-    <>
-      <RegisteredUsers usersCount={postsData.totalCount} />
-      <div className={'max-w-[972px] pt-6 mx-auto'}>
+    <div className={cn('max-w-[972px] mr-[20%] ml-[10%]')}>
+      <div>
+        <RegisteredUsers usersCount={postsData.totalCount} />
+      </div>
+      <div className={'pt-6'}>
         <div className={'grid grid-cols-4 gap-3'}>
           {posts.map(post => (
             <PublicPostCard key={post.id} post={post} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
-Main.getLayout = AuthLayout
+Main.getLayout = DefaultLayout
 
 export default Main
