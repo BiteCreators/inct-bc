@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { isApiErrorWithArray } from '@/common/lib/utils/apiHelpers'
-import { Alert, Button, Loader, Typography } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { Alert, Button, Loader, Typography } from '@packages/shared/ui'
 
 import { SessionCard } from './SessionCard'
 

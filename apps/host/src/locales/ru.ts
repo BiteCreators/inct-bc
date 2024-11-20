@@ -1,5 +1,3 @@
-import { myPaymentsTranslationRu } from '@/locales/payments/payments.ru'
-
 import { authTranslationRu } from './auth'
 import { commonTranslationRu } from './common'
 import { devicesTranslationsRu } from './devices'

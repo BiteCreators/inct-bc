@@ -1,11 +1,9 @@
 import React, { ComponentProps, forwardRef, useEffect } from 'react'
 
-import { ArrowBackOutline } from '@/common/assets/icons/components'
-import { cn } from '@/common/lib/utils/cn'
-import { mergeRefs } from '@/common/lib/utils/mergeRefs'
-import { Button, ScrollArea } from '@/common/ui'
-import { useTextArea } from '@/common/ui/text-area/useTextArea'
-
+import { ArrowBackOutline } from '@packages/shared/assets'
+import { Button, ScrollArea } from '@packages/shared/ui'
+import { useTextArea } from '@packages/shared/ui/text-area/useTextArea'
+import { cn, mergeRefs } from '@packages/shared/utils'
 type Props = {
   disabled?: boolean
   error?: null | string

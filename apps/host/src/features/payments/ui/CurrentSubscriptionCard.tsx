@@ -1,7 +1,7 @@
-import { Alert, Card, Checkbox, Typography } from '@/common/ui'
 import { paymentsApi } from '@/entities/payments'
 import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDates'
 import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
+import { Alert, Card, Checkbox, Typography } from '@packages/shared/ui'
 
 // const data: any = {
 // data: [

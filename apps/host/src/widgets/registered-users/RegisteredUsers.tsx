@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Typography } from '@/common/ui'
+import { Typography } from '@packages/shared/ui'
 
 type Props = {
   usersCount: number

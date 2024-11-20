@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { Alert, Modal } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { Alert, Modal } from '@packages/shared/ui'
+import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
 
 import { useCreatePost } from '../model/useCreatePost'
 import { useImageFilters } from '../model/useImageFilters'

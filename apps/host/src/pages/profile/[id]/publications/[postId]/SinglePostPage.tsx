@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'
 import { Posts } from '@/features/posts'
 import { PostDetails } from '@/widgets/post-details'
 import { ProfileHeader } from '@/widgets/profile-header'
+import { useMediaQuery } from '@packages/shared/hooks/useMediaQuery'
 import { GetServerSideProps } from 'next'
 
 type Props = {

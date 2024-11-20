@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { Button, Modal, Typography } from '@/common/ui'
+import { Button, Modal, Typography } from '@packages/shared/ui'
 
 type Props = {
   bodyText: string

@@ -1,4 +1,4 @@
-import { Avatar, Typography } from '@/common/ui'
+import { Avatar, Typography } from '@packages/shared/ui'
 import Link from 'next/link'
 
 type Props = {

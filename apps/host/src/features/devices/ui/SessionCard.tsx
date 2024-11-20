@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Typography } from '@/common/ui'
+import { Card, Typography } from '@packages/shared/ui'
 
 import { useSessionCard } from '../model/useSessionCard'
 

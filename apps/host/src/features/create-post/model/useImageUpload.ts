@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useScopedTranslation } from '@packages/shared/hooks'
 
 export const useImageUpload = ({
   addImageUrlForPost,

@@ -1,5 +1,5 @@
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Button } from '@/common/ui'
+import { useScopedTranslation } from '@packages/shared/hooks'
+import { Button } from '@packages/shared/ui'
 import Link from 'next/link'
 
 type Props = {

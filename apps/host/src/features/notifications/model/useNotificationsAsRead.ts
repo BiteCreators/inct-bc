@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { notificationsApi } from '@/entities/notifications'
 
 export const useNotificationsAsRead = ({ readIds }: { readIds: Set<number> }) => {

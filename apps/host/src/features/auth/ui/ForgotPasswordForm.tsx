@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Alert, Button, Card, FormInput, Modal, Recaptcha, Typography } from '@/common/ui'
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import { LinkSentModal } from '@/features/auth/ui/LinkSentModal'
+import { Alert, Button, Card, FormInput, Recaptcha, Typography } from '@packages/shared/ui'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {

@@ -1,5 +1,5 @@
-import { Button } from '@/common/ui'
 import { useSignInForm } from '@/features/auth/model/useSignInForm'
+import { Button } from '@packages/shared/ui'
 import Link from 'next/link'
 
 type Props = {

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { Crop, convertToPixelCrop } from 'react-image-crop'
 
-import setCanvasPreview from '@/common/ui/avatar/setCanvasPreview'
+import setCanvasPreview from '@packages/shared/ui/avatar/setCanvasPreview'
 
 export const useCropImage = (updateAvatar: (file: File) => void) => {
   const previewImgRef = useRef<HTMLCanvasElement | null>(null)

@@ -1,8 +1,8 @@
-import { Alert, Button, Card, FormInput, Typography } from '@/common/ui'
 import { useSignInForm } from '@/features/auth/model/useSignInForm'
 import { ForgotPassButton } from '@/features/auth/ui/ForgotPassButton'
 import { GithubOauthButton } from '@/features/auth/ui/GithubOauthButton'
 import { GoogleOauthButton } from '@/features/auth/ui/GoogleOauthButton'
+import { Alert, Button, Card, FormInput, Typography } from '@packages/shared/ui'
 
 import { SignUpButton } from './SignUpButton'
 

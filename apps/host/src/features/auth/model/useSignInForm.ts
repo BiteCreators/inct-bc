@@ -4,10 +4,10 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { authApi, authSlice, decodeAccessToken } from '@/entities/auth'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useScopedTranslation } from '@packages/shared/hooks'
 import * as jose from 'jose'
 import Router from 'next/router'
 

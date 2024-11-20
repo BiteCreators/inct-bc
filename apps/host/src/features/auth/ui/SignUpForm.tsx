@@ -1,6 +1,14 @@
 import React from 'react'
 
-import { Alert, Button, Card, FormCheckbox, FormInput, Trans, Typography } from '@/common/ui'
+import {
+  Alert,
+  Button,
+  Card,
+  FormCheckbox,
+  FormInput,
+  Trans,
+  Typography,
+} from '@packages/shared/ui'
 import Link from 'next/link'
 
 import { useSingUpForm } from '../model/useSingUpForm'

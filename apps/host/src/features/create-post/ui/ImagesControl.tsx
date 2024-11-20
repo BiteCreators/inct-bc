@@ -5,9 +5,9 @@ import {
   Image,
   ImageOutline,
   PlusCircleOutlineBig,
-} from '@/common/assets/icons/components'
-import { Button, ScrollArea } from '@/common/ui'
-import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
+} from '@packages/shared/assets'
+import { Button, ScrollArea } from '@packages/shared/ui'
+import { DragAndDropInput } from '@packages/shared/ui/drag-and-drop-input/DragAndDropInput'
 
 import { useImageControl } from '../model/useImageControl'
 import { ImageData } from '../types'

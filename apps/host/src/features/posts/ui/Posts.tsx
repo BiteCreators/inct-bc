@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Loader, Typography } from '@/common/ui'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { postsApi } from '@/entities/posts'
+import { Typography } from '@packages/shared/ui'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 import Link from 'next/link'
 
 type Props = {

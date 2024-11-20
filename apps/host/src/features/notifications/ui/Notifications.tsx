@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { ScrollArea } from '@/common/ui'
 import { Notification } from '@/entities/notifications'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
+import { ScrollArea } from '@packages/shared/ui'
 
 type Props = {
   notificationsItems: Notification[] | undefined

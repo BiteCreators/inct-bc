@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
 import { postsApi } from '@/entities/posts'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { useValidationLimit } from '@packages/shared/hooks/useValidationLimit'
 
 import { ImageData } from '../types'
 

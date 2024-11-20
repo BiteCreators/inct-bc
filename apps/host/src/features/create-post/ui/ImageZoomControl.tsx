@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Maximize, MaximizeOutline } from '@/common/assets/icons/components'
-import { Button } from '@/common/ui'
-import { RangeSlider } from '@/common/ui/range-slider/RangeSlider'
+import { Maximize, MaximizeOutline } from '@packages/shared/assets'
+import { Button } from '@packages/shared/ui'
+import { RangeSlider } from '@packages/shared/ui/range-slider/RangeSlider'
 
 import { useCropping } from '../model/useCropping'
 

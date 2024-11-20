@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
-import { Button, Typography } from '@/common/ui'
 import { PostComment } from '@/features/comments'
+import { Button, Typography } from '@packages/shared/ui'
+import { cn } from '@packages/shared/utils'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 

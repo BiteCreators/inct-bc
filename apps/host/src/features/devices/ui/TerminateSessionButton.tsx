@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import { LogOut } from '@/common/assets/icons/components'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Alert } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
+import { LogOut } from '@packages/shared/assets/icons/components'
+import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
+import { Alert } from '@packages/shared/ui'
 
 export const TerminateSessionButton = ({ deviceId }: { deviceId: number }) => {
   const [logOut] = devicesApi.useTerminateSessionByIdMutation()

@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
-import { Card, RadioGroup, Typography } from '@/common/ui'
 import { TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
 import { paymentsSlice } from '@/features/payments'
+import { Card, RadioGroup, Typography } from '@packages/shared/ui'
 
 export const SubscriptionTypeCard = ({ text }: { text: string }) => {
   const { data: subscriptionTypes } = paymentsApi.useGetCostPaymentQuery()

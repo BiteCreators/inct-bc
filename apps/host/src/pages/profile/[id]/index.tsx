@@ -1,7 +1,7 @@
-import { cn } from '@/common/lib/utils/cn'
 import { Profile } from '@/entities/profile'
 import { Posts } from '@/features/posts'
 import { ProfileHeader } from '@/widgets/profile-header'
+import { cn } from '@packages/shared/utils/cn'
 import { GetServerSideProps } from 'next'
 
 type Props = {
