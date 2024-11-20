@@ -1,0 +1,11 @@
+@media (width <= 768px) {
+  .selectValue span {
+    display: none; /* Или спрячем текст */
+  }
+
+  .selectHidden {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
