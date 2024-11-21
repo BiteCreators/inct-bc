@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const NotificationsList = ({ notificationsItems }: Props) => {
-  const { notificationRefs, notificationsCorrectDate } = useNotifications({ notificationsItems })
+  const { notificationsCorrectDate } = useNotifications({ notificationsItems })
 
   const handlerNotification = (id: number) => {
     console.log('notificationId', id)
@@ -34,9 +34,9 @@ export const NotificationsList = ({ notificationsItems }: Props) => {
             className={'py-3 border-t border-dark-100 mx-3'}
             data-id={notification.id}
             key={notification.id}
-            ref={el => {
-              notificationRefs.current[index] = el
-            }}
+            // ref={el => {
+            //   notificationRefs.current[index] = el
+            // }}
           >
             <p className={'text-sm font-weight700'}>
               Новое уведомление!
