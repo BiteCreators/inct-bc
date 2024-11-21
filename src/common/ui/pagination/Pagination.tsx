@@ -76,6 +76,7 @@ export const Pagination = ({
           />
         </button>
       </div>
+
       <div className={'inline-flex items-center'}>
         <span className={'mr-1 ml-6 '}>Show</span>
         <SelectPagesPortion defaultValue={pagesPortion} onValueChange={onChangePagesPortion}>

@@ -4,30 +4,30 @@ import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDat
 import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
 
 // const data: any = {
-// data: [
-//   {
-//     autoRenewal: true,
-//     dateOfPayment: '2024-11-12',
-//     endDateOfSubscription: '2024-11-19',
-//     subscriptionId: '1',
-//     userId: 1,
-//   },
-//   {
-//     autoRenewal: false,
-//     dateOfPayment: '2024-11-14',
-//     endDateOfSubscription: '2024-11-15',
-//     subscriptionId: '12',
-//     userId: 2,
-//   },
-//   {
-//     autoRenewal: true,
-//     dateOfPayment: '2024-11-13',
-//     endDateOfSubscription: '2024-12-13',
-//     subscriptionId: '123',
-//     userId: 3,
-//   },
-// ],
-// hasAutoRenewal: true,
+//   data: [
+//     {
+//       autoRenewal: true,
+//       dateOfPayment: '2024-11-12',
+//       endDateOfSubscription: '2024-11-19',
+//       subscriptionId: '1',
+//       userId: 1,
+//     },
+//     {
+//       autoRenewal: false,
+//       dateOfPayment: '2024-11-14',
+//       endDateOfSubscription: '2024-11-15',
+//       subscriptionId: '12',
+//       userId: 2,
+//     },
+//     {
+//       autoRenewal: true,
+//       dateOfPayment: '2024-11-13',
+//       endDateOfSubscription: '2024-12-13',
+//       subscriptionId: '123',
+//       userId: 3,
+//     },
+//   ],
+//   hasAutoRenewal: true,
 // }
 
 export const CurrentSubscriptionCard = () => {
@@ -61,7 +61,7 @@ export const CurrentSubscriptionCard = () => {
       <Checkbox
         checked={isCheckboxChecked}
         className={'mt-3'}
-        onChange={() => handleCheckboxChange(!!isCheckboxChecked)}
+        onChecked={() => handleCheckboxChange(!!isCheckboxChecked)}
         text={<Typography className={'font-weight-600 mt-3'}>Auto-Renewal</Typography>}
       />
       {autoRenewalAlert && (

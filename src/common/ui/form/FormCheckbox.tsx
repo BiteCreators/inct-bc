@@ -28,7 +28,7 @@ export const FormCheckbox = <T extends FieldValues>({
   return (
     <Checkbox
       checked={value}
-      onChecked={onChange}
+      onChange={onChange}
       {...field}
       text={text}
       {...props}

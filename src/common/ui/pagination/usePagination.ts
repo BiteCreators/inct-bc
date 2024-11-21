@@ -40,7 +40,9 @@ export const usePagination = ({
     const leftItemCount = 3 + 2 * siblings
     const leftRange = range(1, leftItemCount)
 
-    paginationRange = [...leftRange, ellipsis, pagesCount]
+    // paginationRange = [...leftRange, ellipsis, pagesCount]
+    paginationRange =
+      leftItemCount >= pagesCount ? [...leftRange] : [...leftRange, ellipsis, pagesCount]
   }
   if (shouldShowLeftEllipsis && shouldShowRightEllipsis) {
     const middleRange = range(leftBorderIndex, rightBorderIndex)
@@ -49,9 +51,14 @@ export const usePagination = ({
   }
   if (shouldShowLeftEllipsis && !shouldShowRightEllipsis) {
     const rightItemCount = 3 + 2 * siblings
-    const rightRange = range(pagesCount - rightItemCount + 1, pagesCount)
+    // const rightRange = range(pagesCount - rightItemCount + 1, pagesCount)
+    const rightRange = range(
+      rightItemCount > pagesCount ? 1 : pagesCount - rightItemCount + 1,
+      pagesCount
+    )
 
-    paginationRange = [1, ellipsis, ...rightRange]
+    // paginationRange = [1, ellipsis, ...rightRange]
+    paginationRange = rightItemCount >= pagesCount ? [...rightRange] : [1, ellipsis, ...rightRange]
   }
 
   return {
