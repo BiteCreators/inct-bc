@@ -43,6 +43,7 @@ export const useSubmitPayment = ({
       } else {
         onSuccess()
       }
+      console.log(response)
     } catch (error) {
       handleApiError({ error, setApiError })
       onFailure()

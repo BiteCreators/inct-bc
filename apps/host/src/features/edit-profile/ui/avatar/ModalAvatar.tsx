@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Avatar as ProfileAvatars } from '@/common/types/api.types'
+import { Avatar as AvatarType } from '@/common/types/api.types'
 import { useCropImage } from '@/features/edit-profile/lib/hooks/useCropImage'
 import { useImageUpload } from '@/features/edit-profile/lib/hooks/useImageUpload'
 import { ImageOutline } from '@packages/shared/assets/icons/components'
@@ -11,7 +11,7 @@ import { DragAndDropInput } from '@packages/shared/ui/drag-and-drop-input/DragAn
 import { CropImage } from './CropImage'
 
 type Props = {
-  currentAvatar: ProfileAvatars | null
+  currentAvatar: AvatarType | null
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
   updateAvatar: (file: File) => void
