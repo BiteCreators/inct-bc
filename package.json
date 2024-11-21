@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "concurrently -n host,admin \"pnpm --filter ./apps/host run dev\" \"pnpm --filter ./apps/admin run dev\"",
     "build:production": "concurrently -n host,admin \"pnpm --filter ./apps/host run build\" \"pnpm --filter ./apps/admin run build\"",
-    "start": "next start",
+    "start": "concurrently -n host,admin \"pnpm --filter ./apps/host run start\" \"pnpm --filter ./apps/admin run start\"",
     "format": "prettier --write src",
     "lint": "pnpm -r --workspace-concurrency=1 run lint",
     "test": "jest"
