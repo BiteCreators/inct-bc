@@ -6,7 +6,13 @@
   "types": "src/index.d.ts",
   "noEmit": true,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "rename-icons": "node scripts/rename-icons.cjs",
+    "replace-colors": "node scripts/replace-colors.cjs",
+    "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/assets/icons/svg --out-dir src/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint",
+    "test": "jest"
   },
   "dependencies": {
     "date-fns": "^4.1.0",

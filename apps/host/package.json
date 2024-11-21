@@ -1,20 +1,13 @@
 {
-  "name": "inctagram",
+  "name": "host",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev",
-    "build": "next build",
-    "build:production": "next build",
+    "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3000",
+    "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
     "start": "next start",
     "format": "prettier --write src",
     "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "rename-icons": "node scripts/rename-icons.cjs",
-    "replace-colors": "node scripts/replace-colors.cjs",
-    "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/common/assets/icons/svg --out-dir src/common/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint",
-    "asd": "tsc --noEmit",
     "test": "jest"
   },
   "dependencies": {

@@ -3,17 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:production": "next build",
-    "start": "next start",
+    "dev": "concurrently -n host,admin \"pnpm --filter ./apps/host run dev\" \"pnpm --filter ./apps/admin run dev\"",
+    "build:production": "concurrently -n host,admin \"pnpm --filter ./apps/host run build\" \"pnpm --filter ./apps/admin run build\"",
+    "start": "concurrently -n host,admin \"pnpm --filter ./apps/host run start\" \"pnpm --filter ./apps/admin run start\"",
     "format": "prettier --write src",
     "lint": "pnpm -r --workspace-concurrency=1 run lint",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "rename-icons": "node scripts/rename-icons.cjs",
-    "replace-colors": "node scripts/replace-colors.cjs",
-    "generate-icons": "pnpm run rename-icons && npx @svgr/cli src/common/assets/icons/svg --out-dir src/common/assets/icons/components --jsx-runtime automatic --typescript --ref --memo && pnpm run replace-colors && pnpm run format && pnpm run lint",
     "test": "jest"
   },
   "dependencies": {
@@ -37,6 +31,7 @@
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.15.0",
+    "concurrently": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jest-dom": "^5.4.0",

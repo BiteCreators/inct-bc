@@ -1,22 +1,34 @@
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+RUN npm install -g pnpm
+COPY package.json pnpm-workspace.yaml ./
+COPY apps/*/package.json ./apps/*/
+COPY packages/*/pakcage.json ./packages/*/
+RUN pnpm install --frozen-lockfile
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-RUN npm run build:production
+COPY --from=dependencies /app/apps/*/node_modules ./apps/*/node_modules
+COPY --from=dependencies /app/packages/*/node_modules ./packages/*/node_modules
+RUN pnpm build:production
 
 FROM node:20.11-alpine as runner
 WORKDIR /app
 ENV NODE_ENV production
-# If you are using a custom next.config.js file, uncomment this line.
-COPY --from=builder /app/next.config.mjs ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+#host app
+COPY --from=builder /app/apps/host/next.config.mjs ./apps/host
+COPY --from=builder /app/apps/host/public ./apps/host/public
+COPY --from=builder /app/apps/host/.next ./apps/host/.next
+COPY --from=builder /app/apps/host/node_modules ./apps/host/node_modules
+COPY --from=builder /app/apps/host/package.json ./apps/host/package.json
+#admin app
+COPY --from=builder /app/apps/admin/next.config.mjs ./admin/host
+COPY --from=builder /app/apps/admin/public ./apps/admin/public
+COPY --from=builder /app/apps/admin/.next ./apps/admin/.next
+COPY --from=builder /app/apps/admin/node_modules ./apps/admin/node_modules
+COPY --from=builder /app/apps/admin/package.json ./apps/admin/package.json
+
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]
