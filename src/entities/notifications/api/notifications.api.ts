@@ -44,12 +44,14 @@ export const notificationsApi = inctagramApi.injectEndpoints({
           console.error(e)
         }
       },
+      providesTags: ['NotificationsStory'],
       query: ({ cursor, ...params }) => ({
         params,
         url: `v1/notifications/${cursor}`,
       }),
     }),
     markAsRead: builder.mutation<void, { ids: number[] }>({
+      invalidatesTags: ['NotificationsStory'],
       query: body => ({
         body,
         method: 'PUT',
