@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic'
 
 import { NextPageWithLayout } from './_app'
 
-const ExposedComponent = dynamic(() => import('admin/exposed'), { ssr: false })
+// const ExposedComponent = dynamic(() => import('admin/exposed'), { ssr: false })
 
 type PublicPostsResponse = {
   items: Post[]
@@ -19,14 +19,44 @@ type PublicPostsResponse = {
 }
 
 export const getStaticProps = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=4`
+  //     )
+  //
+  //     if (!res.ok) {
+  //       console.error('Failed to fetch posts data')
+  //     }
+  //     const postsData: PublicPostsResponse = await res.json()
+  //
+  //     return {
+  //       props: { postsData },
+  //       revalidate: 60,
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching posts:', error)
+  //
+  //     return
+  //   }
+  // }
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  if (!apiUrl) {
+    console.error('NEXT_PUBLIC_API_URL is not defined')
+
+    return { props: { postsData: { items: [], pageSize: 0, totalCount: 0 } } }
+  }
+
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=4`
-    )
+    const res = await fetch(`${apiUrl}/v1/public-posts/all/?sortDirection=desc&pageSize=4`)
 
     if (!res.ok) {
       console.error('Failed to fetch posts data')
+
+      return { props: { postsData: { items: [], pageSize: 0, totalCount: 0 } } }
     }
+
     const postsData: PublicPostsResponse = await res.json()
 
     return {
@@ -36,7 +66,7 @@ export const getStaticProps = async () => {
   } catch (error) {
     console.error('Error fetching posts:', error)
 
-    return
+    return { props: { postsData: { items: [], pageSize: 0, totalCount: 0 } } }
   }
 }
 
@@ -55,7 +85,7 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
           ))}
         </div>
       </div>
-      <ExposedComponent />
+      {/*<ExposedComponent />*/}
       <Button>shared button</Button>
     </>
   )
