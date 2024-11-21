@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import { Heart, HeartOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Typography } from '@/common/ui'
+import { Alert, Avatar, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
 
 import { useCommentInteractions } from '../model/useCommentInteractions'
@@ -17,16 +17,27 @@ export const PostComment = ({ children, comment, handleAnswerClick }: Props) => 
   const {
     answers,
     answersCount,
+    apiError,
     handleUpdateLikeStatusAnswer,
     handleUpdateLikeStatusComment,
     isAnswersExist,
     isAnswersOpen,
     relativeTime,
+    setApiError,
     setIsAnswersOpen,
   } = useCommentInteractions({ comment })
 
   return (
     <div className={'grid grid-cols-[auto_1fr] grid-flow-row mb-4 last:mb-0 gap-x-3 items-start'}>
+      {apiError && (
+        <Alert
+          message={apiError}
+          onClose={() => setApiError('')}
+          portal
+          purpose={'toast'}
+          type={'error'}
+        ></Alert>
+      )}
       <div className={'col-span-1 row-span-2 pt-1'}>
         <Avatar avatarURL={comment.from.avatars[0].url} imgStyles={'w-9 h-9 object-cover'} />
       </div>

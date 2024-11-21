@@ -12,7 +12,7 @@ type Props = {
   answer: Answer
   children?: ReactNode
   handleAnswerClick: (data: { commentId: number; postId: number; userName: string }) => void
-  handleUpdateLikeStatusAnswer: (answer: Answer) => void
+  handleUpdateLikeStatusAnswer: (answer: Answer) => Promise<void>
   postId: number
 }
 

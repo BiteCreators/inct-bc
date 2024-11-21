@@ -3,7 +3,7 @@ import React, { ComponentProps, forwardRef, useEffect } from 'react'
 import { ArrowBackOutline } from '@/common/assets/icons/components'
 import { cn } from '@/common/lib/utils/cn'
 import { mergeRefs } from '@/common/lib/utils/mergeRefs'
-import { Button, ScrollArea } from '@/common/ui'
+import { Alert, Button, ScrollArea } from '@/common/ui'
 import { useTextArea } from '@/common/ui/text-area/useTextArea'
 
 import { useCreateComment } from '../model/useCreateComment'
@@ -31,12 +31,13 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       onChange,
     })
 
-    const { handleCreateAnswerComment, handleCreateComment, isAnswer } = useCreateComment({
-      answerData,
-      contentComment,
-      postId,
-      setContentComment,
-    })
+    const { apiError, handleCreateAnswerComment, handleCreateComment, isAnswer, setApiError } =
+      useCreateComment({
+        answerData,
+        contentComment,
+        postId,
+        setContentComment,
+      })
 
     const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setContentComment(e.currentTarget.value)
@@ -58,6 +59,15 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
 
     return (
       <div className={cn(['flex py-2 px-0', 'md:px-6'])}>
+        {apiError && (
+          <Alert
+            message={apiError}
+            onClose={() => setApiError('')}
+            portal
+            purpose={'toast'}
+            type={'error'}
+          ></Alert>
+        )}
         <ScrollArea className={'w-full max-h-44'}>
           <div className={'flex flex-col min-h-4 w-full'}>
             <textarea

@@ -1,3 +1,6 @@
+import { useState } from 'react'
+
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { commentsApi } from '@/entities/comments'
 
 export const useCreateComment = ({
@@ -18,6 +21,8 @@ export const useCreateComment = ({
   const isAnswer = !!answerData
   const [createComment] = commentsApi.useCreateCommentMutation()
   const [createAnswerComment] = commentsApi.useCreateAnswerCommentMutation()
+  const { handleApiError } = useHandleApiError('Posts')
+  const [apiError, setApiError] = useState('')
   const handleCreateAnswerComment = async () => {
     try {
       if (contentComment && isAnswer) {
@@ -29,7 +34,7 @@ export const useCreateComment = ({
         setContentComment('')
       }
     } catch (error) {
-      console.log(error)
+      handleApiError({ error, setApiError })
     }
   }
 
@@ -40,9 +45,9 @@ export const useCreateComment = ({
         setContentComment('')
       }
     } catch (error) {
-      console.log(error)
+      handleApiError({ error, setApiError })
     }
   }
 
-  return { handleCreateAnswerComment, handleCreateComment, isAnswer }
+  return { apiError, handleCreateAnswerComment, handleCreateComment, isAnswer, setApiError }
 }
