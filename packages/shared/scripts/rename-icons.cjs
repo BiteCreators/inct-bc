@@ -2,7 +2,7 @@ const fs = require('fs');
 const { join } = require('node:path');
 const fsp = fs.promises;
 
-const dirWithIcons = 'src/common/assets/icons/svg';
+const dirWithIcons = 'src/assets/icons/svg';
 
 async function main() {
   const files = await fsp.readdir(dirWithIcons);
