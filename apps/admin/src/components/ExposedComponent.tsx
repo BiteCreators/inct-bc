@@ -3,16 +3,19 @@ import { useState } from 'react'
 import { Button } from '@packages/shared/ui'
 import { observer } from 'mobx-react'
 
+import cl from './plugin-test.module.css'
+
 import { TestStore } from './testStore'
 
 const testStore = new TestStore(100)
 
 const ExposedComponent = observer(() => {
+  console.log(cl)
   const [value, setValue] = useState('')
 
   return (
     <div>
-      <div>{testStore.settings.description}</div>
+      <div className={cl.div}>{testStore.settings.description}</div>
       <div>TODO: {testStore.settings.needToBeDone}</div>
       <ul>
         {testStore.tasks.map(task => (
