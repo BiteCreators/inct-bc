@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@packages/shared": "^1.0.0",
     "@module-federation/nextjs-mf": "^8.7.8",
     "mobx": "^6.13.5",
     "mobx-react": "^9.1.1",

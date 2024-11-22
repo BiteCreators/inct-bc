@@ -10,6 +10,7 @@ const nextConfig = {
     locales: ["en", "ru"]
   },
   reactStrictMode: true,
+  transpilePackages: ["@packages/shared"],
   webpack: (config) => {
     config.plugins.push(
       new NextFederationPlugin({

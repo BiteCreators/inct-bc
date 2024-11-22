@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { Button } from '@packages/shared/ui'
 import { observer } from 'mobx-react'
 
 import { TestStore } from './testStore'
@@ -35,6 +36,7 @@ const ExposedComponent = observer(() => {
         value={value}
       />
       <button onClick={() => (testStore.settings.description = value)}>set description</button>
+      <Button>Shared button</Button>
     </div>
   )
 })
