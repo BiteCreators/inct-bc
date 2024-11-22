@@ -1,5 +1,8 @@
 import type { Config } from 'tailwindcss'
 
+import fs from 'fs'
+import path from 'path'
+
 import plugin from 'tailwindcss/plugin'
 
 import baseConfig from '../../tailwind.config.base'
@@ -10,6 +13,8 @@ const config: Config = {
   plugins: [
     ...(baseConfig.plugins || []),
     plugin(({ addBase, theme }) => {
+      let scssVars = ''
+
       const generateCssVars = (config: Record<string, any>, prefix: string) => {
         Object.entries(config).forEach(([property, propertyValue]) => {
           if (property === 'global-hover' || property === 'no-hover') {
@@ -22,6 +27,7 @@ const config: Config = {
           ) {
             Object.entries(propertyValue).forEach(([shade, shadeValue]) => {
               if (typeof shadeValue === 'string') {
+                scssVars += `$${prefix}-${property}-${shade}: ${shadeValue};\n`
                 addBase({
                   ':root': {
                     [`--${prefix}-${property}-${shade}`]: shadeValue,
@@ -32,6 +38,9 @@ const config: Config = {
           } else if (Array.isArray(propertyValue)) {
             const [size, { lineHeight }] = propertyValue
 
+            scssVars += `$${prefix}-${property}: ${size};\n`
+            scssVars += `$${prefix}-${property}-line-height: ${lineHeight};\n`
+
             addBase({
               ':root': {
                 [`--${prefix}-${property}`]: size,
@@ -39,12 +48,15 @@ const config: Config = {
               },
             })
           } else {
+            scssVars += `$${prefix}-${property}: ${propertyValue};\n`
             addBase({
               ':root': {
                 [`--${prefix}-${property}`]: propertyValue,
               },
             })
           }
+
+          fs.writeFileSync(path.resolve(__dirname, 'src', 'styles', 'vars.scss'), scssVars, 'utf8')
         })
       }
 

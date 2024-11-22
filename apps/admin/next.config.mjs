@@ -10,6 +10,9 @@ const nextConfig = {
     locales: ["en", "ru"]
   },
   reactStrictMode: true,
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
+  },
   transpilePackages: ["@packages/shared"],
   webpack: (config) => {
     config.plugins.push(
@@ -23,7 +26,7 @@ const nextConfig = {
     )
 
     return config
-  }
+  },
 };
 
 export default nextConfig;

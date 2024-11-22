@@ -3,19 +3,18 @@ import { useState } from 'react'
 import { Button } from '@packages/shared/ui'
 import { observer } from 'mobx-react'
 
-import cl from './plugin-test.module.css'
+import cl from './plugin-test.module.scss'
 
 import { TestStore } from './testStore'
 
 const testStore = new TestStore(100)
 
 const ExposedComponent = observer(() => {
-  console.log(cl)
   const [value, setValue] = useState('')
 
   return (
     <div>
-      <div className={cl.div}>{testStore.settings.description}</div>
+      <div>{testStore.settings.description}</div>
       <div>TODO: {testStore.settings.needToBeDone}</div>
       <ul>
         {testStore.tasks.map(task => (
@@ -40,6 +39,8 @@ const ExposedComponent = observer(() => {
       />
       <button onClick={() => (testStore.settings.description = value)}>set description</button>
       <Button>Shared button</Button>
+      <div className={cl.cssDiv}>this is set with css</div>
+      <div className={cl.div}>this is set with scss</div>
     </div>
   )
 })
