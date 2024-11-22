@@ -96,6 +96,9 @@ importers:
       stylelint:
         specifier: ^16.9.0
         version: 16.10.0(typescript@5.6.3)
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.15(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))
       ts-jest:
         specifier: ^29.2.5
         version: 29.2.5(@babel/core@7.26.0)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.26.0))(jest@29.7.0(@types/node@20.17.6)(babel-plugin-macros@3.1.0)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3)))(typescript@5.6.3)
