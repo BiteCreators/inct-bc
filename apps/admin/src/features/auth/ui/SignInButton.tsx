@@ -1,6 +1,7 @@
-import { useScopedTranslation } from '@packages/shared/hooks'
-import { Button } from '@packages/shared/ui'
 import Link from 'next/link'
+
+import { useScopedTranslation } from '../../../../../../packages/shared/src/hooks'
+import { Button } from '../../../../../../packages/shared/src/ui'
 
 type Props = {
   variant?: 'primary' | 'text'
