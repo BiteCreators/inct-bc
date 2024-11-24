@@ -28,6 +28,7 @@ export const profileTranslationRu: LocaleType['Profile'] = {
     usernameTaken: 'Это имя пользователя уже занято',
   },
   firstName: 'Имя',
+  follow: 'Подписаться',
   followers: 'Подписчики',
   following: 'Подписки',
   lastName: 'Фамилия',
@@ -36,6 +37,8 @@ export const profileTranslationRu: LocaleType['Profile'] = {
   selectPhoto: 'Выбрать фото',
   selectYourCity: 'Выберите город',
   selectYourCountry: 'Выберите страну',
+  sendMessage: 'Отправить сообщение',
   settingsSaved: 'Настройки профиля сохранены!',
+  unfollow: 'Отписаться',
   userName: 'Имя пользователя',
 }
