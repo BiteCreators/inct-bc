@@ -1,0 +1,9 @@
+@import "../styles/vars.scss";
+
+.div {
+  background-color: $color-primary-500;
+}
+
+.cssDiv {
+  background-color: var(--color-primary-500);
+}
