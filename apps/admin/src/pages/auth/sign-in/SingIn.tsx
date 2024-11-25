@@ -2,9 +2,11 @@ import React from 'react'
 
 import { SignInForm } from '@/features/auth/ui/SignInForm'
 
+import cl from '../sign-in/sign-in.module.scss'
+
 const SignIn = () => {
   return (
-    <div className={'flex gap-4 flex-col justify-center w-full min-w-[290px] max-w-[380px]'}>
+    <div className={cl.container}>
       <SignInForm />
     </div>
   )
