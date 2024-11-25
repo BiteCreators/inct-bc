@@ -8,8 +8,9 @@ import {
   TrendingUp,
   TrendingUpOutline,
 } from '@packages/shared/assets'
-import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 import { SideNavbarItem } from '@packages/shared/ui/sideNavbar/SideNavbarItem'
+
+import cl from '../ui/styles/sideNavbar.module.scss'
 
 export const SideNavbar = () => {
   // const userId = useAppSelector(authSlice.selectors.selectUserId)
@@ -19,8 +20,8 @@ export const SideNavbar = () => {
   // }
 
   return (
-    <nav className={'flex flex-col gap-[60px]'}>
-      <div className={'flex flex-col gap-6'}>
+    <nav className={cl.nav}>
+      <div className={cl.navItemContainer}>
         <SideNavbarItem
           href={'/'}
           icon={<PersonOutline />}
