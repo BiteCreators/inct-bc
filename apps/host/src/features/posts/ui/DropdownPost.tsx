@@ -1,17 +1,17 @@
 import React from 'react'
 
-import { Post } from '@/entities/posts'
-import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 import {
   CopyOutline,
   Edit2Outline,
   PersonAddOutline,
   PersonRemoveOutline,
   TrashOutline,
-} from '@packages/shared/assets/icons/components'
-import { Alert, Dropdown } from '@packages/shared/ui'
-import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
-import { DropdownItem } from '@packages/shared/ui/dropdown/Dropdown'
+} from '@/common/assets/icons/components'
+import { Alert, Dropdown } from '@/common/ui'
+import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+import { Post } from '@/entities/posts'
+import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 
 type Props = {
   changeEditMode: (e: boolean) => void

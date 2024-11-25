@@ -10,6 +10,10 @@ const nextConfig = {
     locales: ["en", "ru"]
   },
   reactStrictMode: true,
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
+  },
+  transpilePackages: ["@packages/shared"],
   webpack: (config) => {
     config.plugins.push(
       new NextFederationPlugin({
@@ -22,7 +26,7 @@ const nextConfig = {
     )
 
     return config
-  }
+  },
 };
 
 export default nextConfig;

@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
+import { Button } from '@packages/shared/ui'
 import { observer } from 'mobx-react'
+
+import cl from './plugin-test.module.scss'
 
 import { TestStore } from './testStore'
 
@@ -35,6 +38,9 @@ const ExposedComponent = observer(() => {
         value={value}
       />
       <button onClick={() => (testStore.settings.description = value)}>set description</button>
+      <Button>Shared button</Button>
+      <div className={cl.cssDiv}>this is set with css</div>
+      <div className={cl.div}>this is set with scss</div>
     </div>
   )
 })
