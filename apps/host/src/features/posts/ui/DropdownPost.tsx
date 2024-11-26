@@ -8,8 +8,8 @@ import {
   TrashOutline,
 } from '@packages/shared/assets/icons/components'
 import { Alert, Dropdown } from '@packages/shared/ui'
-import { ActionConfirmation } from '@packages/shared/ui'
-import { DropdownItem } from '@packages/shared/ui'
+import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
+import { DropdownItem } from '@packages/shared/ui/dropdown/Dropdown'
 import { Post } from '@/entities/posts'
 import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 
