@@ -1,11 +1,10 @@
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink } from '@apollo/client'
 
 const httpLink = createHttpLink({
-  // uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
-  uri: 'https://inctagram.work/api/v1/graphql',
+  uri: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
 })
 
-//todo: fix uri && remove mock Authorization
+//todo: remove mock Authorization
 
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext({

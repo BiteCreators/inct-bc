@@ -12,7 +12,7 @@ type Props = {}
 export const CurrentUser = ({}: Props) => {
   // const router = useRouter()
   // const { id } = router.query
-  const id = 1431 //todo: remove mock
+  const id = 1432 //todo: remove mock
   const { data, error, loading } = useGetUser(Number(id))
   const user = data?.getUser
 
@@ -37,9 +37,9 @@ export const CurrentUser = ({}: Props) => {
       </div>
       <div className={cl.nameAndPhotoContainer}>
         <Avatar avatarURL={user.profile.avatars?.[0]?.url || exampleImg} className={cl.avatar} />
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <Typography variant={'h1'}>
-            {user.profile.firstName || 'No firstName'} {user.profile.lastName || 'No lastName'}
+            {user.profile.firstName || ' '} {user.profile.lastName || ' '}
           </Typography>
           <Typography className={cl.username} variant={'regular-link'}>
             {user?.userName}

@@ -1,9 +1,11 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
+import confDotenv from 'dotenv'
 
+confDotenv.config({ path: './.env.local' })
 const config: CodegenConfig = {
   documents: ['src/**/*.{ts,tsx}'],
   generates: {
-    './src/common/types/': {
+    './src/common/__generated-types__/': {
       plugins: [],
       preset: 'client',
       presetConfig: {
@@ -12,8 +14,7 @@ const config: CodegenConfig = {
     },
   },
   ignoreNoDocuments: true,
-  // schema: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
-  schema: 'https://inctagram.work/api/v1/graphql',
+  schema: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
 }
 
 export default config
