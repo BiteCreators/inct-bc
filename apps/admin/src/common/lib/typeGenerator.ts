@@ -12,7 +12,8 @@ const config: CodegenConfig = {
     },
   },
   ignoreNoDocuments: true,
-  schema: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
+  // schema: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
+  schema: 'https://inctagram.work/api/v1/graphql',
 }
 
 export default config

@@ -1,13 +1,32 @@
 import * as React from 'react'
 
+import { formatDate } from '@/features/users/current-user/lib/utils/formatDate'
+import { useGetUser } from '@/features/users/current-user/model/useGetUser'
 import { CurrentUserTabs } from '@/widgets/current-user-tabs/ui/CurrentUserTabs'
 import { ArrowBackOutline } from '@packages/shared/assets'
-import { Avatar, Typography } from '@packages/shared/ui'
+import { Alert, Avatar, Loader, Typography } from '@packages/shared/ui'
 
 import cl from './styles/CurrentUser.module.scss'
 
 type Props = {}
 export const CurrentUser = ({}: Props) => {
+  // const router = useRouter()
+  // const { id } = router.query
+  const id = 1431 //todo: remove mock
+  const { data, error, loading } = useGetUser(Number(id))
+  const user = data?.getUser
+
+  const exampleImg =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZ6th-oTbkDMbDOPGU_kkRMM55lfvRYgM8JA&s'
+  //todo: remove mock
+
+  if (loading) {
+    return <Loader />
+  }
+  if (!user) {
+    return <Alert message={'User not found'} type={'error'} />
+  }
+
   return (
     <div className={cl.currentUserContainer}>
       <div className={cl.back}>
@@ -17,28 +36,28 @@ export const CurrentUser = ({}: Props) => {
         <Typography>Back to Users List</Typography>
       </div>
       <div className={cl.nameAndPhotoContainer}>
-        <Avatar
-          avatarURL={'https://www.w3schools.com/w3css/img_avatar3.png'}
-          className={cl.avatar}
-        />
+        <Avatar avatarURL={user.profile.avatars?.[0]?.url || exampleImg} className={cl.avatar} />
         <div>
-          <Typography variant={'h1'}>Name Surname</Typography>
+          <Typography variant={'h1'}>
+            {user.profile.firstName || 'No firstName'} {user.profile.lastName || 'No lastName'}
+          </Typography>
           <Typography className={cl.username} variant={'regular-link'}>
-            username
+            {user?.userName}
           </Typography>
         </div>
       </div>
       <div className={cl.userInfoContainer}>
         <div className={cl.userInfo}>
           <Typography className={cl.lightText}>UserID</Typography>
-          <Typography variant={'medium-text'}>21331QErQe21</Typography>
+          <Typography variant={'medium-text'}>{user.id}</Typography>
         </div>
         <div className={cl.userInfo}>
           <Typography className={cl.lightText}>Profile Creation Date</Typography>
-          <Typography variant={'medium-text'}>12.12.2022</Typography>
+          <Typography variant={'medium-text'}>{formatDate(user.createdAt)}</Typography>
         </div>
       </div>
       <CurrentUserTabs />
+      {error && <Alert message={error.message} type={'error'} />}
     </div>
   )
 }
