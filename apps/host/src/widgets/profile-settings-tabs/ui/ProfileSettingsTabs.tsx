@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 
 import { CurrentDevice, SessionsList } from '@/features/devices'
 import { EditProfileForm } from '@/features/edit-profile'
-import { AccountManagement } from '@/features/payments'
-import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
+import { AccountManagement, MyPayments } from '@/features/payments'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 import { TabsBase } from '@packages/shared/ui'
@@ -61,8 +60,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
           value: 'account-management',
         },
         {
-          // content: <MyPayments />,
-          content: <MyPaymentsTest />,
+          content: <MyPayments />,
           label: t.myPayments,
           value: 'my-payments',
         },
