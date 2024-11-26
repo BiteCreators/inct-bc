@@ -6,10 +6,10 @@ import {
   PersonAddOutline,
   PersonRemoveOutline,
   TrashOutline,
-} from '@/common/assets/icons/components'
-import { Alert, Dropdown } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
+} from '@packages/shared/assets/icons/components'
+import { Alert, Dropdown } from '@packages/shared/ui'
+import { ActionConfirmation } from '@packages/shared/ui'
+import { DropdownItem } from '@packages/shared/ui'
 import { Post } from '@/entities/posts'
 import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
 
