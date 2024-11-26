@@ -1,9 +1,11 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
+import confDotenv from 'dotenv'
 
+confDotenv.config({ path: './.env.local' })
 const config: CodegenConfig = {
   documents: ['src/**/*.{ts,tsx}'],
   generates: {
-    './src/common/types/': {
+    './src/common/__generated-types__/': {
       plugins: [],
       preset: 'client',
       presetConfig: {
