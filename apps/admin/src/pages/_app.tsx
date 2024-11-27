@@ -6,6 +6,8 @@ import { ApolloProvider } from '@apollo/client'
 import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
+  // const getLayout = Component.getLayout ?? DefaultLayout
+
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />

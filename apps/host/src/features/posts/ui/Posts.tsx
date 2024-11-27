@@ -19,6 +19,7 @@ export const Posts = ({ userId }: Props) => {
 
   useEffect(() => {
     const scroll = document.querySelector('#scrollAreaViewport')
+
     const handleScroll = () => {
       if (scroll) {
         const value = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight
@@ -29,10 +30,25 @@ export const Posts = ({ userId }: Props) => {
       }
     }
 
+    const handleResize = () => {
+      if (scroll) {
+        const containerHeight = scroll.scrollHeight
+        const viewportHeight = window.innerHeight
+
+        if (containerHeight <= viewportHeight && !isFetching) {
+          setPageSize(prevPageSize => prevPageSize + 8)
+        }
+      }
+    }
+
     scroll?.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
+
+    handleResize()
 
     return () => {
       scroll?.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
     }
   }, [isFetching])
 
@@ -43,8 +59,8 @@ export const Posts = ({ userId }: Props) => {
         {!isLoading && data?.items && data?.items.length < 1 ? (
           <Typography> user has no publications yet </Typography>
         ) : (
-          data?.items.map(post => {
-            return (
+          <>
+            {data?.items.map(post => (
               <Link
                 className={'hover:scale-[1.013] duration-75'}
                 href={`/profile/${userId}/publications/${post.id}`}
@@ -52,8 +68,8 @@ export const Posts = ({ userId }: Props) => {
               >
                 <img height={260} src={post.images[0]?.url} width={260} />
               </Link>
-            )
-          })
+            ))}
+          </>
         )}
       </div>
     </>
