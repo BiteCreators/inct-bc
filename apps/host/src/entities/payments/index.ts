@@ -5,5 +5,6 @@ export type {
   AccountType,
   CostPayment,
   MyPayment,
+  MyPaymentsResponse,
   Subscription,
 } from '@/entities/payments/types/payments.type'

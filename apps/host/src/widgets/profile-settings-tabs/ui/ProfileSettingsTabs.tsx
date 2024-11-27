@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 import { TabsBase } from '@packages/shared/ui'
@@ -79,8 +78,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
           value: 'account-management',
         },
         {
-          // content: <MyPayments />,
-          content: <MyPaymentsTest />,
+          content: <MyPayments />,
           label: t.myPayments,
           value: 'my-payments',
         },

@@ -61,7 +61,7 @@ export const CurrentSubscriptionCard = () => {
       <Checkbox
         checked={isCheckboxChecked}
         className={'mt-3'}
-        onChange={() => handleCheckboxChange(!!isCheckboxChecked)}
+        onChecked={() => handleCheckboxChange(!!isCheckboxChecked)}
         text={<Typography className={'font-weight-600 mt-3'}>Auto-Renewal</Typography>}
       />
       {autoRenewalAlert && (
