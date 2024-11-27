@@ -1,12 +1,30 @@
 import { useEffect } from 'react'
-
-import { CurrentDevice, SessionsList } from '@/features/devices'
-import { EditProfileForm } from '@/features/edit-profile'
-import { AccountManagement, MyPayments } from '@/features/payments'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 import { TabsBase } from '@packages/shared/ui'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+
+const EditProfileForm = dynamic(
+  () => import('@/features/edit-profile').then(mod => mod.EditProfileForm),
+  { ssr: true }
+)
+
+const AccountManagement = dynamic(
+  () => import('@/features/payments').then(mod => mod.AccountManagement),
+  { ssr: true }
+)
+
+const CurrentDevice = dynamic(() => import('@/features/devices').then(mod => mod.CurrentDevice), {
+  ssr: true,
+})
+const SessionsList = dynamic(() => import('@/features/devices').then(mod => mod.SessionsList), {
+  ssr: true,
+})
+const MyPaymentsTest = dynamic(
+  () => import('@/features/payments/ui/MyPaymentsTest').then(mod => mod.MyPaymentsTest),
+  { ssr: true }
+)
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 

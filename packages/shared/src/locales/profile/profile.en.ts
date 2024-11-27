@@ -25,6 +25,7 @@ export const profileTranslationEn = {
     usernameTaken: 'This username is already taken!',
   },
   firstName: 'First name',
+  follow: 'Follow',
   followers: 'Followers',
   following: 'Following',
   lastName: 'Last name',
@@ -33,6 +34,8 @@ export const profileTranslationEn = {
   selectPhoto: 'Select Photo',
   selectYourCity: 'Select your city',
   selectYourCountry: 'Select your country',
+  sendMessage: 'Send Message',
   settingsSaved: 'Your settings are saved!',
+  unfollow: 'Unfollow',
   userName: 'Username',
 }

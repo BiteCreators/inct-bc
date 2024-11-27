@@ -42,7 +42,7 @@ export const PublicationModal = ({ correct, handleChange, images, limit, value }
           label={t.addPublicationDesctiption}
           limitCount={limit}
           onChange={handleChange}
-          placeholder={'Text-area'}
+          placeholder={'Type here...'}
           value={value}
         />
         <div className={'flex mx-[-24px] mt-5 mb-6'}>
