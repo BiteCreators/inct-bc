@@ -24,7 +24,7 @@ export default function SinglePostPage({ post, profile }: Props) {
           <Posts userId={profile.id} />
         </>
       )}
-      <PostDetails post={post} profile={profile} />
+      <PostDetails post={post} />
     </div>
   )
 }
