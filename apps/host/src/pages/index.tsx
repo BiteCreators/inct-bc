@@ -4,13 +4,9 @@ import { AuthLayout } from '@/application/layouts/AuthLayout'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
-import { Button } from '@packages/shared/ui/'
 import { InferGetServerSidePropsType } from 'next'
-import dynamic from 'next/dynamic'
 
 import { NextPageWithLayout } from './_app'
-
-// const ExposedComponent = dynamic(() => import('admin/exposed'), { ssr: false })
 
 type PublicPostsResponse = {
   items: Post[]
@@ -85,8 +81,6 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
           ))}
         </div>
       </div>
-      {/*<ExposedComponent />*/}
-      <Button>shared button</Button>
     </>
   )
 }
