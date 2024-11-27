@@ -13,7 +13,7 @@
     "@packages/shared": "^1.0.0",
     "mobx": "^6.13.5",
     "mobx-react": "^9.1.1",
-    "next": "15.0.3",
+    "next": "14.2.7",
     "webpack": "^5.96.1"
   },
   "devDependencies": {

@@ -8,18 +8,18 @@ import cl from './styles/sign-in-form.module.scss'
 export const SignInForm = () => {
   const [error, setError] = useState<null | string>(null)
 
-  //const t = useScopedTranslation('Auth')
+  const t = useScopedTranslation('Auth')
 
   return (
     <Card className={cl.card}>
       <Typography className={cl.title} variant={'h1'}>
-        {'Sign In'}
+        {t.signIn}
       </Typography>
       <form className={cl.form} onSubmit={() => {}}>
-        <Input className={cl.defaultInput} label={'Email'} name={'email'} required />
-        <Input inputType={'reveal'} label={'Password'} name={'password'} required />
+        <Input className={cl.defaultInput} label={t.email} name={'email'} required />
+        <Input inputType={'reveal'} label={t.password} name={'password'} required />
         <Button className={cl.button} type={'submit'}>
-          {'Sign In'}
+          {t.signIn}
         </Button>
       </form>
       {error && (
