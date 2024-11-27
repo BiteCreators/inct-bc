@@ -1,11 +1,9 @@
 import React from 'react'
 
-import { Pagination } from '../'
 import { TableHeaders } from './TableHeaders'
 import { TableRows } from './TableRows'
-import { useTableWithPagination } from './useTableWithPagination'
 
-export type Header = {
+export type TableHeader = {
   name: string
   onClickSortButton?: () => void
   sort?: 'asc' | 'desc' | null
@@ -16,20 +14,10 @@ export type TableData = {
 type Props = {
   classNameHeadersItem?: string
   classNameTableCell?: string
-  headers: Header[]
-  tableData: TableData[]
+  headers: TableHeader[]
+  tableData: [] | TableData[]
 }
-export const TableWithPagination = (props: Props) => {
-  const {
-    currentPage,
-    dataPortion,
-    dataforDisplay,
-    handleCurrentPageChange,
-    handlePaymentsPortionChange,
-    isShowPagination,
-    pagesCount,
-  } = useTableWithPagination(props.tableData)
-
+export const Table = (props: Props) => {
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>
       <section
@@ -43,19 +31,9 @@ export const TableWithPagination = (props: Props) => {
           </ul>
         </header>
         <div className={'flex flex-col gap-y-3 sm:table-row-group sm:w-full'}>
-          <TableRows className={props.classNameTableCell} tableData={dataforDisplay} />
+          <TableRows className={props.classNameTableCell} tableData={props.tableData} />
         </div>
       </section>
-      {isShowPagination && (
-        <Pagination
-          className={'hidden sm:inline-flex sm:self-start sm:w-auto sm:mt-9 sm:mb-16'}
-          currentPage={currentPage}
-          onChangePagesPortion={handlePaymentsPortionChange}
-          onClickPaginationButton={handleCurrentPageChange}
-          pagesCount={pagesCount}
-          pagesPortion={dataPortion.toString()}
-        />
-      )}
     </div>
   )
 }

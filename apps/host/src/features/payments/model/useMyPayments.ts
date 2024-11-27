@@ -1,19 +1,20 @@
 import { useState } from 'react'
 
-import { TableData } from './TableWithPagination'
+import { paymentsApi } from '@/entities/payments'
 
-export const useTableWithPagination = (data: TableData[]) => {
+export const useMyPayments = () => {
+  const { data, isLoading } = paymentsApi.useGetMyPaymentsQuery()
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPortion, setDataPortion] = useState(10)
-  const [dataforDisplay, setDataForDisplay] = useState(data.slice(0, dataPortion))
+  const [dataforDisplay, setDataForDisplay] = useState(data?.slice(0, dataPortion))
 
   const handleCurrentPageChange = (page: number) => {
     setCurrentPage(page)
-    setDataForDisplay(data.slice(dataPortion * (page - 1), dataPortion * page))
+    setDataForDisplay(data?.slice(dataPortion * (page - 1), dataPortion * page))
   }
 
   const handlePaymentsPortionChange = (portion: string) => {
-    if (data.length) {
+    if (data?.length) {
       const lastPage = Math.round(data.length / Number(portion))
 
       if (currentPage > lastPage) {
@@ -28,11 +29,9 @@ export const useTableWithPagination = (data: TableData[]) => {
     }
   }
   let pagesCount = 0
-  let isShowPagination = false
 
-  if (data.length) {
+  if (data?.length) {
     pagesCount = Math.ceil(data.length / dataPortion)
-    isShowPagination = pagesCount >= 1
   }
 
   return {
@@ -41,7 +40,7 @@ export const useTableWithPagination = (data: TableData[]) => {
     dataforDisplay,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
-    isShowPagination,
+    isLoading,
     pagesCount,
   }
 }
