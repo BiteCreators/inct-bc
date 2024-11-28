@@ -15,6 +15,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 # COPY --from=dependencies /app/apps/admin/node_modules ./apps/admin/node_modules
 # COPY --from=dependencies /app/packages/shared/node_modules ./packages/shared/node_modules
 RUN ln -s /app/node_modules /app/apps/host/node_modules && \
+    ln -s /app/node_modules /app/packages/shared/node_modules && \
     ln -s /app/node_modules /app/apps/admin/node_modules
 RUN pnpm build:production
 
