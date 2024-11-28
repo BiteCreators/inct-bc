@@ -10,8 +10,6 @@ FROM node:20.11-alpine as builder
 WORKDIR /app
 RUN npm install -g pnpm
 COPY . .
-RUN whoami && ls -l /app/apps
-RUN ls -l ./apps/host/public
 COPY --from=dependencies /app/node_modules ./node_modules
 # COPY --from=dependencies /app/apps/host/node_modules ./apps/host/node_modules
 # COPY --from=dependencies /app/apps/admin/node_modules ./apps/admin/node_modules
@@ -31,17 +29,18 @@ WORKDIR /app
 RUN npm install -g pnpm
 ENV NODE_ENV production
 #host app
-COPY --from=builder /app/apps/host/next.config.mjs ./apps/host
-COPY --from=builder /app/apps/host/public ./apps/host/public
-COPY --from=builder /app/apps/host/.next ./apps/host/.next
-COPY --from=builder /app/apps/host/node_modules ./apps/host/node_modules
-COPY --from=builder /app/apps/host/package.json ./apps/host/package.json
+COPY --form=builder . . 
+# COPY --from=builder /app/apps/host/next.config.mjs ./apps/host
+# COPY --from=builder /app/apps/host/public ./apps/host/public
+# COPY --from=builder /app/apps/host/.next ./apps/host/.next
+# COPY --from=builder /app/apps/host/node_modules ./apps/host/node_modules
+# COPY --from=builder /app/apps/host/package.json ./apps/host/package.json
 #admin app
-COPY --from=builder /app/apps/admin/next.config.mjs ./admin/host
-COPY --from=builder /app/apps/admin/public ./apps/admin/public
-COPY --from=builder /app/apps/admin/.next ./apps/admin/.next
-COPY --from=builder /app/apps/admin/node_modules ./apps/admin/node_modules
-COPY --from=builder /app/apps/admin/package.json ./apps/admin/package.json
+# COPY --from=builder /app/apps/admin/next.config.mjs ./admin/host
+# COPY --from=builder /app/apps/admin/public ./apps/admin/public
+# COPY --from=builder /app/apps/admin/.next ./apps/admin/.next
+# COPY --from=builder /app/apps/admin/node_modules ./apps/admin/node_modules
+# COPY --from=builder /app/apps/admin/package.json ./apps/admin/package.json
 
 EXPOSE 3000
 CMD ["pnpm", "start"]
