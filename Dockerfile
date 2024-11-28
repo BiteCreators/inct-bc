@@ -4,7 +4,7 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/*/package.json ./apps/*/
 COPY packages/*/package.json ./packages/*/
-RUN pnpm install --no-frozen-lockfile
+RUN pnpm install --no-frozen-lockfile && ls -al /app/node_modules && ls -al /app/apps/host/node_modules
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
