@@ -14,10 +14,14 @@ COPY --from=dependencies /app/node_modules ./node_modules
 # COPY --from=dependencies /app/apps/host/node_modules ./apps/host/node_modules
 # COPY --from=dependencies /app/apps/admin/node_modules ./apps/admin/node_modules
 # COPY --from=dependencies /app/packages/shared/node_modules ./packages/shared/node_modules
-RUN ln -s /app/node_modules /app/apps/host/node_modules && \
-    ln -s /app/node_modules /app/packages/shared/node_modules && \
-    ln -s /app/node_modules /app/apps/admin/node_modules
-ENV PATH /app/node_modules/.bin:$PATH
+# temporary, for some reason there is no local node_modules being created in the dependencies stage (?)
+WORKDIR /app/apps/host
+RUN pnpm install
+WORKDIR /app/apps/admin
+RUN pnpm install
+WORKDIR /app/packages/shared
+RUN pnpm install
+WORKDIR /app
 RUN pnpm build:production
 
 FROM node:20.11-alpine as runner
