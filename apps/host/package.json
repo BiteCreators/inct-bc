@@ -13,7 +13,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@module-federation/nextjs-mf": "^8.7.8",
-    "@packages/shared": "^1.0.0",
+    "@packages/shared": "workspace:*",
     "@radix-ui/react-dialog": "^1.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@types/dom-to-image": "^2.6.7",

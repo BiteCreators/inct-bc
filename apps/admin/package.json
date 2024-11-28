@@ -16,7 +16,7 @@
     "@graphql-codegen/client-preset": "^4.5.1",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@module-federation/nextjs-mf": "^8.7.8",
-    "@packages/shared": "^1.0.0",
+    "@packages/shared": "workspace:*",
     "dotenv": "^16.4.5",
     "graphql": "^16.9.0",
     "mobx": "^6.13.5",
