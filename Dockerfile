@@ -1,7 +1,7 @@
 FROM node:20.11-alpine as dependencies
 WORKDIR /app
 RUN npm install -g pnpm
-COPY package.json pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/*/package.json ./apps/*/
 COPY packages/*/package.json ./packages/*/
 RUN pnpm install --frozen-lockfile
