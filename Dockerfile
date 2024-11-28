@@ -8,8 +8,7 @@ RUN pnpm install --no-frozen-lockfile
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
-COPY --from=dependencies /root/.npm-global /root/.npm-global
-ENV PATH /root/.npm-global/bin:$PATH
+RUN npm install -g pnpm
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY --from=dependencies /app/apps/*/node_modules ./apps/*/node_modules
@@ -18,8 +17,7 @@ RUN pnpm build:production
 
 FROM node:20.11-alpine as runner
 WORKDIR /app
-COPY --from=dependencies /root/.npm-global /root/.npm-global
-ENV PATH /root/.npm-global/bin:$PATH
+RUN npm install -g pnpm
 ENV NODE_ENV production
 #host app
 COPY --from=builder /app/apps/host/next.config.mjs ./apps/host
