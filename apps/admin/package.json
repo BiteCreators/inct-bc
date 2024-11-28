@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3001",
     "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint",
     "compile": "graphql-codegen --config src/common/lib/typeGenerator.ts",
     "watch": "graphql-codegen -w --config src/common/lib/typeGenerator.ts"
