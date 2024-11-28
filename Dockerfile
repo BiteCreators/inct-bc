@@ -10,6 +10,7 @@ FROM node:20.11-alpine as builder
 WORKDIR /app
 RUN npm install -g pnpm
 COPY . .
+RUN ls -l ./apps/host/public
 COPY --from=dependencies /app/node_modules ./node_modules
 # COPY --from=dependencies /app/apps/host/node_modules ./apps/host/node_modules
 # COPY --from=dependencies /app/apps/admin/node_modules ./apps/admin/node_modules
