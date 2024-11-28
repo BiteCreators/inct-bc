@@ -17,6 +17,7 @@ COPY --from=dependencies /app/node_modules ./node_modules
 RUN ln -s /app/node_modules /app/apps/host/node_modules && \
     ln -s /app/node_modules /app/packages/shared/node_modules && \
     ln -s /app/node_modules /app/apps/admin/node_modules
+ENV PATH /app/node_modules/.bin:$PATH
 RUN pnpm build:production
 
 FROM node:20.11-alpine as runner
