@@ -11,8 +11,9 @@ WORKDIR /app
 RUN npm install -g pnpm
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-COPY --from=dependencies /app/apps/*/node_modules ./apps/*/node_modules
-COPY --from=dependencies /app/packages/*/node_modules ./packages/*/node_modules
+COPY --from=dependencies /app/apps/host/node_modules ./apps/host/node_modules
+COPY --from=dependencies /app/apps/admin/node_modules ./apps/admin/node_modules
+COPY --from=dependencies /app/packages/shared/node_modules ./packages/shared/node_modules
 RUN pnpm build:production
 
 FROM node:20.11-alpine as runner
