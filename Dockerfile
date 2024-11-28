@@ -10,6 +10,7 @@ FROM node:20.11-alpine as builder
 WORKDIR /app
 RUN npm install -g pnpm
 COPY . .
+RUN whoami && ls -l /app/apps
 RUN ls -l ./apps/host/public
 COPY --from=dependencies /app/node_modules ./node_modules
 # COPY --from=dependencies /app/apps/host/node_modules ./apps/host/node_modules
@@ -29,7 +30,6 @@ FROM node:20.11-alpine as runner
 WORKDIR /app
 RUN npm install -g pnpm
 ENV NODE_ENV production
-RUN whoami && ls -l /app/apps
 #host app
 COPY --from=builder /app/apps/host/next.config.mjs ./apps/host
 COPY --from=builder /app/apps/host/public ./apps/host/public
