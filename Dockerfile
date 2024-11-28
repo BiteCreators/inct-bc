@@ -29,7 +29,7 @@ WORKDIR /app
 RUN npm install -g pnpm
 ENV NODE_ENV production
 #host app
-COPY --form=builder . . 
+COPY --from=builder /app . 
 # COPY --from=builder /app/apps/host/next.config.mjs ./apps/host
 # COPY --from=builder /app/apps/host/public ./apps/host/public
 # COPY --from=builder /app/apps/host/.next ./apps/host/.next
