@@ -3,7 +3,7 @@ WORKDIR /app
 RUN npm install -g pnpm
 COPY package.json pnpm-workspace.yaml ./
 COPY apps/*/package.json ./apps/*/
-COPY packages/*/pakcage.json ./packages/*/
+COPY packages/*/package.json ./packages/*/
 RUN pnpm install --frozen-lockfile
 
 FROM node:20.11-alpine as builder
