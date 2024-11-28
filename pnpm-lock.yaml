@@ -263,9 +263,6 @@ importers:
         specifier: ^5.96.1
         version: 5.96.1
     devDependencies:
-      '@chromatic-com/storybook':
-        specifier: 1.8.0
-        version: 1.8.0(react@18.3.1)
       '@types/nprogress':
         specifier: ^0.2.3
         version: 0.2.3
@@ -1097,10 +1094,6 @@ packages:
 
   '@bundled-es-modules/tough-cookie@0.1.6':
     resolution: {integrity: sha512-dvMHbL464C0zI+Yqxbz6kZ5TOEp7GLW+pry/RWndAR8MJQAXZ2rPmIs8tziTZjeIyhSNZgZbCePtfSbdWqStJw==}
-
-  '@chromatic-com/storybook@1.8.0':
-    resolution: {integrity: sha512-vkB9dPVmM2Yvqc/0DJ4MYwOGY1MOjd/KbB9TXTMGN+qshaEyiZtSOgbz9u0ExFALEgDKLmtUnWyUtoGb0pCzUg==}
-    engines: {node: '>=16.0.0', yarn: '>=1.22.18'}
 
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
@@ -3643,18 +3636,6 @@ packages:
     resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
     engines: {node: '>= 14.16.0'}
 
-  chromatic@11.19.0:
-    resolution: {integrity: sha512-3JZ1Tt26N2uDok6nXApsvHmTnkrgE0HClq1bmfF5WmCJ61bMN80CObhuFc7kiBCv5QbE7GOe3rpy3MiuZ4h9IA==}
-    hasBin: true
-    peerDependencies:
-      '@chromatic-com/cypress': ^0.*.* || ^1.0.0
-      '@chromatic-com/playwright': ^0.*.* || ^1.0.0
-    peerDependenciesMeta:
-      '@chromatic-com/cypress':
-        optional: true
-      '@chromatic-com/playwright':
-        optional: true
-
   chrome-trace-event@1.0.4:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
@@ -4577,10 +4558,6 @@ packages:
 
   filelist@1.0.4:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
-
-  filesize@10.1.6:
-    resolution: {integrity: sha512-sJslQKU2uM33qH5nqewAwVB2QgR6w1aMNsYUp3aN5rMRyXEwJGmZvaWzeJFNTOXWlHQyBFCWrdj3fV/fsTOX8w==}
-    engines: {node: '>= 10.4.0'}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -8694,18 +8671,6 @@ snapshots:
       '@types/tough-cookie': 4.0.5
       tough-cookie: 4.1.4
 
-  '@chromatic-com/storybook@1.8.0(react@18.3.1)':
-    dependencies:
-      chromatic: 11.19.0
-      filesize: 10.1.6
-      jsonfile: 6.1.0
-      react-confetti: 6.1.0(react@18.3.1)
-      strip-ansi: 7.1.0
-    transitivePeerDependencies:
-      - '@chromatic-com/cypress'
-      - '@chromatic-com/playwright'
-      - react
-
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
@@ -11895,8 +11860,6 @@ snapshots:
     dependencies:
       readdirp: 4.0.2
 
-  chromatic@11.19.0: {}
-
   chrome-trace-event@1.0.4: {}
 
   ci-info@3.9.0: {}
@@ -12973,8 +12936,6 @@ snapshots:
   filelist@1.0.4:
     dependencies:
       minimatch: 5.1.6
-
-  filesize@10.1.6: {}
 
   fill-range@7.1.1:
     dependencies:
