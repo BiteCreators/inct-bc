@@ -1,5 +1,5 @@
 import { cn } from '../../utils/cn'
-import { TableData } from './TableWithPagination'
+import { TableData } from './Table'
 
 type Props = {
   className?: string

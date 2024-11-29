@@ -1,9 +1,9 @@
 import { cn } from '../../utils/cn'
-import { Header } from './TableWithPagination'
+import { TableHeader } from './Table'
 
 type Props = {
   className?: string
-  headers: Header[]
+  headers: TableHeader[]
 }
 export const TableHeaders = ({ className, headers }: Props) => {
   const headersItemStyle = cn(
