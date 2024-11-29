@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 
+import { AuthProvider } from '@/application/providers/AuthProvider'
 import { client } from '@/common/api/client'
 import { ApolloProvider } from '@apollo/client'
 
@@ -10,7 +11,9 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ApolloProvider>
   )
 }

@@ -12,7 +12,7 @@ type Props = {}
 export const CurrentUser = ({}: Props) => {
   // const router = useRouter()
   // const { id } = router.query
-  const id = 1432 //todo: remove mock
+  const id = 1431 //todo: remove mock
   const { data, error, loading } = useGetUser(Number(id))
   const user = data?.getUser
 
