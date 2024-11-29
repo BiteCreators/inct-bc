@@ -41,6 +41,16 @@ export const SignInForm = () => {
           />
         )}
       </Card>
+      <Alert
+        canClose={false}
+        className={'md:left-0'}
+        message={
+          'Our website uses cookies to improve your site experience, efficiency and usability. By continuing to use inctbc.ru, you agree to the use of cookies.'
+        }
+        portal
+        purpose={'toast'}
+        type={'info'}
+      />
     </>
   )
 }
