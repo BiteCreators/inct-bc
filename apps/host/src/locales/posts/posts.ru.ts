@@ -20,6 +20,6 @@ export const postsTranslationsRu: LocaleType['Posts'] = {
   publication: 'Публикация',
   publish: 'Опубликовать',
   saveChanges: 'Сохранить изменения',
-  selectFromComputer: 'Загрузить с усройства',
+  selectFromComputer: 'Загрузить с устройства',
   unfollow: 'Не отслеживать',
 }

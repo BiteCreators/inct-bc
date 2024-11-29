@@ -1,0 +1,21 @@
+@import '../../../../../styles/vars';
+
+.table {
+  width: 972px;
+  vertical-align: middle;
+
+  &__headers {
+    &:last-child {
+      width: 24px;
+    }
+  }
+
+  &__users {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__bun {
+    width: 24px;
+  }
+}

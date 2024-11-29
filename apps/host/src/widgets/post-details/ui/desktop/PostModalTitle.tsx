@@ -11,9 +11,8 @@ import * as Dialog from '@radix-ui/react-dialog'
 type Props = {
   changeEditMode: (e: boolean) => void
   post: Post
-  profile: Profile
 }
-export const PostModalTitle = ({ changeEditMode, post, profile }: Props) => {
+export const PostModalTitle = ({ changeEditMode, post }: Props) => {
   const { data: currentUser } = authApi.useMeQuery()
   const isMyPost = post.ownerId === currentUser?.userId || false
 
@@ -24,10 +23,8 @@ export const PostModalTitle = ({ changeEditMode, post, profile }: Props) => {
         <DropdownPost
           changeEditMode={changeEditMode}
           className={'z-50'}
-          currentUser={currentUser}
           isMyPost={isMyPost}
           post={post}
-          profile={profile}
         />
       </div>
     </Dialog.Title>

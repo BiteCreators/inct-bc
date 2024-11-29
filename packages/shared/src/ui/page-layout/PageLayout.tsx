@@ -1,8 +1,7 @@
 import React from 'react'
 
-import { ScrollArea } from '@radix-ui/react-scroll-area'
-
 import { cn } from '../../utils'
+import { ScrollArea } from '../scroll/ScrollArea'
 
 type Props = {
   children?: React.ReactNode

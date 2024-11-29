@@ -2,11 +2,16 @@ import React from 'react'
 
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'
-import { Posts } from '@/features/posts'
 import { PostDetails } from '@/widgets/post-details'
-import { ProfileHeader } from '@/widgets/profile-header'
 import { useMediaQuery } from '@packages/shared/hooks/useMediaQuery'
 import { GetServerSideProps } from 'next'
+import dynamic from 'next/dynamic'
+
+const ProfileHeader = dynamic(
+  () => import('@/widgets/profile-header').then(mod => mod.ProfileHeader),
+  { ssr: true }
+)
+const Posts = dynamic(() => import('@/features/posts').then(mod => mod.Posts), { ssr: true })
 
 type Props = {
   post: Post
@@ -24,7 +29,7 @@ export default function SinglePostPage({ post, profile }: Props) {
           <Posts userId={profile.id} />
         </>
       )}
-      <PostDetails post={post} profile={profile} />
+      <PostDetails post={post} />
     </div>
   )
 }

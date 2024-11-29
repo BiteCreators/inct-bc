@@ -19,11 +19,10 @@ import { PostModalTitle } from './PostModalTitle'
 type Props = {
   comments: { id: string; text: string }[]
   post: Post
-  profile: Profile
   slides: ReactNode[]
 }
 
-export const PostDesktop = ({ comments, post, profile, slides }: Props) => {
+export const PostDesktop = ({ comments, post, slides }: Props) => {
   const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
@@ -70,7 +69,7 @@ export const PostDesktop = ({ comments, post, profile, slides }: Props) => {
               />
             </Dialog.Close>
             <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
-              <PostModalTitle changeEditMode={setEditMode} post={post} profile={profile} />
+              <PostModalTitle changeEditMode={setEditMode} post={post} />
               <div className={'border-y-[1px] border-dark-100'} />
               <DesktopCommentsList
                 comments={comments}

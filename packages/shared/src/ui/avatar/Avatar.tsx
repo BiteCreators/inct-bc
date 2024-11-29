@@ -1,7 +1,9 @@
-import { Close } from '@radix-ui/react-dialog'
 import Link from 'next/link'
 
 import { cn } from '../../utils'
+
+import { Close } from '@packages/shared/assets/icons/components'
+
 type Props = {
   alt?: string
   avatarURL: string
