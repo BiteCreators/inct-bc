@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { Block } from '@packages/shared/assets'
-import { TableWithPagination } from '@packages/shared/ui'
-import { Header } from '@packages/shared/ui/table-with-pagination/TableWithPagination'
+import { Table, TableHeader } from '@packages/shared/ui'
 
 import s from './styles.module.scss'
 
@@ -11,7 +10,7 @@ import { exampleUsersPaginationModel } from '../../testData'
 import { Options } from '../options/Options'
 
 export const UsersTable = () => {
-  const headers: Header[] = [
+  const headers: TableHeader[] = [
     {
       name: 'User ID',
     },
@@ -47,7 +46,7 @@ export const UsersTable = () => {
 
   return (
     <div className={s.table}>
-      <TableWithPagination
+      <Table
         classNameHeadersItem={s.table__headers}
         headers={headers}
         tableData={exampleUsersData}
