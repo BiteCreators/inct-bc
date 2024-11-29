@@ -13,8 +13,8 @@ export const AppBar = ({
 }: {
   authContent?: React.ReactNode
   content?: React.ReactNode
-  isAuth: boolean
-  isAuthPage: boolean
+  isAuth?: boolean
+  isAuthPage?: boolean
   logo?: React.ReactNode
   mobileMenu?: React.ReactNode
   unAuthContent?: React.ReactNode
