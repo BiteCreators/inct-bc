@@ -4,6 +4,7 @@ import { SignInButton, SignUpButton } from '@/features/auth'
 import { LanguageSelect } from '@/features/internationalization'
 import { AppLogo } from '@/features/navigation'
 import { NotificationsButton } from '@/features/notifications'
+import { AppBar } from '@packages/shared/ui'
 import { cn } from '@packages/shared/utils/cn'
 import { useRouter } from 'next/router'
 
@@ -15,32 +16,18 @@ export const Header = () => {
   const isAuthPage = router.pathname.startsWith('/auth') && router.pathname !== '/auth'
 
   return (
-    <header
-      className={cn(
-        'flex justify-between align-middle',
-        'md:px-16 px-[15px] py-3 h-[60px]',
-        'border-b border-dark-300 bg-dark-700'
-      )}
-    >
-      <div>
-        <AppLogo />
-      </div>
-      <div className={cn(['flex', !isAuthPage && 'gap-6', 'md:gap-12'])}>
-        {!!accessToken && (
-          <div className={'hidden md:flex items-center'}>
-            <NotificationsButton />
-          </div>
-        )}
-        <LanguageSelect />
-        <div className={'block md:hidden'}>
-          <HeaderMenu />
+    <AppBar
+      authContent={<NotificationsButton />}
+      content={<LanguageSelect />}
+      isAuth={!!accessToken}
+      isAuthPage={isAuthPage}
+      logo={<AppLogo />}
+      mobileMenu={<HeaderMenu />}
+      unAuthContent={
+        <div className={'flex gap-6'}>
+          <SignInButton /> <SignUpButton />
         </div>
-        {!accessToken && (
-          <div className={'gap-6 hidden global-hover:md:flex'}>
-            <SignInButton /> <SignUpButton />
-          </div>
-        )}
-      </div>
-    </header>
+      }
+    />
   )
 }
