@@ -6,9 +6,9 @@ import { Header } from '@packages/shared/ui/table-with-pagination/TableWithPagin
 
 import s from './styles.module.scss'
 
-import { User } from '../../types'
-import { exampleUsersPaginationModel } from '../testData'
-import { Options } from './Options'
+import { User } from '../../../types'
+import { exampleUsersPaginationModel } from '../../testData'
+import { Options } from '../options/Options'
 
 export const UsersTable = () => {
   const headers: Header[] = [
