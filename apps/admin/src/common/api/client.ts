@@ -1,5 +1,3 @@
-import { useCookies } from 'react-cookie'
-
 import { ApolloClient, ApolloLink, InMemoryCache, createHttpLink } from '@apollo/client'
 
 const httpLink = createHttpLink({
@@ -7,19 +5,19 @@ const httpLink = createHttpLink({
 })
 
 const authLink = new ApolloLink((operation, forward) => {
-  // const [cookies] = useCookies(['adminEmail', 'adminPassword'])
+  const accessToken = document.cookie.split('adminAccessToken=')[1]
 
-  // if (cookies.adminEmail && cookies.adminPassword) {
-  operation.setContext({
-    // headers: {
-    //   Authorization: `Basic ${btoa(`${cookies.adminEmail}:${cookies.adminPassword}`)}`,
-    // },
-    headers: {
-      Authorization: `Basic ${document.cookie.split('adminAccessToken=')[1]}`,
-      // Authorization: `Basic ${btoa('admin@gmail.com:admin')}`,
-    },
-  })
-  // }
+  if (accessToken) {
+    const decodedAccessToken = decodeURIComponent(accessToken).split(' ')[1]
+
+    if (decodedAccessToken) {
+      operation.setContext({
+        headers: {
+          Authorization: `Basic ${decodedAccessToken}`,
+        },
+      })
+    }
+  }
 
   return forward(operation)
 })

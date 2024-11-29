@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useCookies } from 'react-cookie'
 import { useForm } from 'react-hook-form'
 
+import { useAuth } from '@/application/providers/AuthProvider'
 import { LOGIN_ADMIN } from '@/features/auth/model/loginAdminQueries'
 import { useMutation } from '@apollo/client'
 import { useScopedTranslation } from '@packages/shared/hooks'
@@ -16,13 +16,13 @@ type SignInFormValues = {
 
 export const SignInForm = () => {
   const [error, setError] = useState<null | string>(null)
-  // const [cookies, setCookie] = useCookies(['adminEmail', 'adminPassword'])
+  const { login } = useAuth()
   const t = useScopedTranslation('Auth')
   const [loginAdmin] = useMutation(LOGIN_ADMIN)
   const { control, handleSubmit, setValue } = useForm<SignInFormValues>({
     defaultValues: {
-      email: '', // Значение по умолчанию для email
-      password: '', // Значение по умолчанию для password
+      email: '',
+      password: '',
     },
   })
 
@@ -33,52 +33,50 @@ export const SignInForm = () => {
       })
 
       if (loginData?.loginAdmin?.logged) {
-        console.log('login success')
-        // setCookie('adminEmail', data.email, { maxAge: 7 * 24 * 60 * 60, path: '/' })
-        // setCookie('adminPassword', data.password, { maxAge: 7 * 24 * 60 * 60, path: '/' })
+        login(data.email, data.password)
       } else {
         setError('Invalid credentials')
       }
     } catch (err) {
-      console.error(err)
-      setError('An error occurred during authentication')
+      setError('An error occurred during authentication: ' + err)
     }
   }
 
   return (
-    <Card className={cl.card}>
-      <Typography className={cl.title} variant={'h1'}>
-        {t.signIn}
-      </Typography>
-      <form className={cl.form} onSubmit={handleSubmit(onSubmit)}>
-        {/* Передаем control в FormInput */}
-        <FormInput
-          className={cl.defaultInput}
-          control={control}
-          label={t.email}
-          name={'email'}
-          required
-        />
-        <FormInput
-          control={control}
-          inputType={'reveal'}
-          label={t.password}
-          name={'password'}
-          required
-        />
-        <Button className={cl.button} type={'submit'}>
+    <>
+      <Card className={cl.card}>
+        <Typography className={cl.title} variant={'h1'}>
           {t.signIn}
-        </Button>
-      </form>
-      {error && (
-        <Alert
-          canClose={false}
-          message={error}
-          onClose={() => setError('')}
-          purpose={'alert'}
-          type={'error'}
-        />
-      )}
-    </Card>
+        </Typography>
+        <form className={cl.form} onSubmit={handleSubmit(onSubmit)}>
+          <FormInput
+            className={cl.defaultInput}
+            control={control}
+            label={t.email}
+            name={'email'}
+            required
+          />
+          <FormInput
+            control={control}
+            inputType={'reveal'}
+            label={t.password}
+            name={'password'}
+            required
+          />
+          <Button className={cl.button} type={'submit'}>
+            {t.signIn}
+          </Button>
+        </form>
+        {error && (
+          <Alert
+            canClose={false}
+            message={error}
+            onClose={() => setError('')}
+            purpose={'alert'}
+            type={'error'}
+          />
+        )}
+      </Card>
+    </>
   )
 }
