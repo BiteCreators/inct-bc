@@ -1,3 +1,4 @@
+import { followersAdminEn } from '../../../../apps/admin/src/locales/followers'
 import { authTranslationEn } from './auth'
 import { commonTranslationEn } from './common'
 import { devicesTranslationsEn } from './devices'
@@ -13,6 +14,7 @@ export const en = {
   Auth: authTranslationEn,
   Common: commonTranslationEn,
   Devices: devicesTranslationsEn,
+  FollowersAdmin: followersAdminEn,
   Internationalization: internationalizationTranslationEn,
   Navigation: navigationTranslationEn,
   Payments: paymentsTranslationsEn,

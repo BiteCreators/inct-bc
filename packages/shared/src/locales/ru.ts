@@ -1,3 +1,4 @@
+import { followersAdminRu } from '../../../../apps/admin/src/locales/followers'
 import { authTranslationRu } from './auth'
 import { commonTranslationRu } from './common'
 import { devicesTranslationsRu } from './devices'
@@ -14,6 +15,7 @@ export const ru: LocaleType = {
   Auth: authTranslationRu,
   Common: commonTranslationRu,
   Devices: devicesTranslationsRu,
+  FollowersAdmin: followersAdminRu,
   Internationalization: internationalizationTranslationRu,
   Navigation: navigationTranslationRu,
   Payments: paymentsTranslationsRu,
