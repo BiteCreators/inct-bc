@@ -16,7 +16,7 @@ export const TableRows = ({ className, tableData }: Props) => {
 
     for (const key in element) {
       rowCells.push(
-        <li className={tableCellStyle}>
+        <li className={tableCellStyle} key={key}>
           <span className={'font-bold sm:font-normal'}>{element[key]}</span>
         </li>
       )
