@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 import { useRouter } from 'next/router'
 
 type AuthContextType = {
@@ -27,7 +28,7 @@ type AuthProviderProps = {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [cookies, setCookie, removeCookie] = useCookies(['adminAccessToken'])
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -41,6 +42,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
           if (email && password) {
             setIsAuthenticated(true)
+            if (router.pathname === '/') {
+              router.push('/users')
+            }
           } else {
             setIsAuthenticated(false)
           }
@@ -52,20 +56,28 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
     } else {
       setIsAuthenticated(false)
+      if (router.pathname !== '/auth/sign-in') {
+        router.push('/auth/sign-in')
+      }
     }
-  }, [cookies])
+  }, [cookies, router])
 
   const login = (email: string, password: string) => {
     const authString = `Basic ${btoa(`${email}:${password}`)}`
 
     setCookie('adminAccessToken', authString, { maxAge: 7 * 24 * 60 * 60, path: '/' })
     setIsAuthenticated(true)
+    router.push('/users')
   }
 
   const logout = () => {
     removeCookie('adminAccessToken', { path: '/' })
     setIsAuthenticated(false)
     router.push('/auth/sign-in')
+  }
+
+  if (isAuthenticated === null) {
+    return <LoaderBlock />
   }
 
   return (

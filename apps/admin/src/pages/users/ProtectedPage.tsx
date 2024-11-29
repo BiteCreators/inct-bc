@@ -9,6 +9,10 @@ const ProtectedPage = () => {
   const router = useRouter()
 
   useEffect(() => {
+    if (isAuthenticated === null) {
+      return
+    }
+
     if (!isAuthenticated) {
       router.push('/auth/sign-in')
     }

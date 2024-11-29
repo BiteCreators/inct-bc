@@ -1,5 +1,3 @@
-import { useAuth } from '@/application/providers/AuthProvider'
-import { SignInForm } from '@/features/auth'
 import ProtectedPage from '@/pages/users'
 import localFont from 'next/font/local'
 
