@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { cn } from '@packages/shared/utils/cn'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+
+import { cn } from '../../utils'
 
 type Props = {
   disabled?: boolean

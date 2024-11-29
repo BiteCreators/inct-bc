@@ -17,8 +17,7 @@ import {
   TrendingUpOutline,
 } from '@packages/shared/assets/icons/components'
 import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
-
-import { SideNavbarItem } from './SideNavbarItem'
+import { SideNavbarItem } from '@packages/shared/ui/sideNavbar/SideNavbarItem'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
