@@ -1,7 +1,7 @@
 import { useSignIn } from '@/features/auth/model/useSignIn'
 import { Alert, Button, Card, FormInput, Typography } from '@packages/shared/ui'
 
-import cl from './styles/sign-in-form.module.scss'
+import cl from './sign-in-form.module.scss'
 
 export const SignInForm = () => {
   const { control, error, handleSubmit, onSubmit, setError, t } = useSignIn()

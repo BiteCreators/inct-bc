@@ -7,8 +7,8 @@
     "build": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next build",
     "start": "next start -p 3001",
     "lint": "next lint",
-    "compile": "graphql-codegen --config src/common/lib/typeGenerator.ts",
-    "watch": "graphql-codegen -w --config src/common/lib/typeGenerator.ts"
+    "compile": "graphql-codegen --config src/common/lib/utils/typeGenerator.ts",
+    "watch": "graphql-codegen -w --config src/common/lib/utils/typeGenerator.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",

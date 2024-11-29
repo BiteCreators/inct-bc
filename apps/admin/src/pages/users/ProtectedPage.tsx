@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { useAuth } from '@/application/providers/AuthProvider'
+import { useAuth } from '@/common/lib/hooks/useAuth'
 import { CurrentUser } from '@/features/users/current-user/ui/CurrentUser'
 import { useRouter } from 'next/router'
 
