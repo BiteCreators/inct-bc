@@ -14,8 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
-    "\n  query GetUsers($pageNumber: Int, $pageSize: Int, $sortDirection: SortDirection, $sortBy: String) {\n    getUsers(pageSize: $pageSize, pageNumber: $pageNumber,sortDirection:$sortDirection, sortBy: $sortBy ) {\n      pagination{\n      totalCount  \n      }\n      users{\n        createdAt\n        email\n        id\n        userName\n      }\n    }\n  }": types.GetUsersDocument,
     "\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }": types.GetPaymentsByUserDocument,
+    "\n    query GetPostsByUser($userId: Int!) {\n        getPostsByUser(userId: $userId) {\n        items{\n        height\n        width\n        url\n        }\n      }\n    }": types.GetPostsByUserDocument,
     "\nquery GetUser($userId: Int!) {\n    getUser(userId: $userId) {\n      id\n      userName\n      email\n      createdAt\n      profile {\n        firstName\n        lastName\n        avatars {\n          url\n        }\n      }\n      userBan {\n        createdAt\n        reason\n      }\n    }\n  }": types.GetUserDocument,
 };
 
@@ -36,11 +36,11 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetUsers($pageNumber: Int, $pageSize: Int, $sortDirection: SortDirection, $sortBy: String) {\n    getUsers(pageSize: $pageSize, pageNumber: $pageNumber,sortDirection:$sortDirection, sortBy: $sortBy ) {\n      pagination{\n      totalCount  \n      }\n      users{\n        createdAt\n        email\n        id\n        userName\n      }\n    }\n  }"): (typeof documents)["\n  query GetUsers($pageNumber: Int, $pageSize: Int, $sortDirection: SortDirection, $sortBy: String) {\n    getUsers(pageSize: $pageSize, pageNumber: $pageNumber,sortDirection:$sortDirection, sortBy: $sortBy ) {\n      pagination{\n      totalCount  \n      }\n      users{\n        createdAt\n        email\n        id\n        userName\n      }\n    }\n  }"];
+export function gql(source: "\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }"): (typeof documents)["\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }"): (typeof documents)["\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }"];
+export function gql(source: "\n    query GetPostsByUser($userId: Int!) {\n        getPostsByUser(userId: $userId) {\n        items{\n        height\n        width\n        url\n        }\n      }\n    }"): (typeof documents)["\n    query GetPostsByUser($userId: Int!) {\n        getPostsByUser(userId: $userId) {\n        items{\n        height\n        width\n        url\n        }\n      }\n    }"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
