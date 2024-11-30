@@ -5,6 +5,7 @@ import { ImageData } from '@/features/create-post/types'
 import { AspectRatio } from '@/features/create-post/ui/AspectRatio'
 import { ImageZoomControl } from '@/features/create-post/ui/ImageZoomControl'
 import { getCroppedImg } from '@/features/create-post/utils/getCroppedImg'
+import { useRouter } from 'next/router'
 
 type Props = {
   croppedAreaPixels: Area | null
@@ -26,6 +27,7 @@ export const CroppingTools = ({
   setZoom,
   zoom,
 }: Props) => {
+  const { locale } = useRouter()
   const onCrop = async () => {
     if (selectedImage === null || croppedAreaPixels === null) {
       return
@@ -52,7 +54,7 @@ export const CroppingTools = ({
             }
           >
             <button className={'hover:text-primary-500'} onClick={onCrop}>
-              Crop
+              {locale === 'en' ? 'Crop' : 'Обрезать'}
             </button>
           </div>
           <div
@@ -61,7 +63,7 @@ export const CroppingTools = ({
             }
           >
             <button className={'hover:text-primary-500'} onClick={() => setSelectedImage(null)}>
-              Cancel
+              {locale === 'en' ? 'Cancel' : 'Отмена'}
             </button>
           </div>
         </>
