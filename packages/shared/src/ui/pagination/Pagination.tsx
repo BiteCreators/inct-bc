@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useRouter } from 'next/router'
+
 import { ArrowIosBack, ArrowIosForward } from '../../assets/icons/components'
 import { cn } from '../../utils'
 import { MainPaginationButtons, SelectPagesPortion, SelectPortion } from './PaginationContent'
@@ -24,6 +26,7 @@ export const Pagination = ({
   pagesPortion = '10',
   siblings = 1,
 }: Props) => {
+  const { locale } = useRouter()
   const {
     isFirstPage,
     isLastPage,
@@ -76,7 +79,7 @@ export const Pagination = ({
         </button>
       </div>
       <div className={'inline-flex items-center'}>
-        <span className={'mr-1 ml-6 '}>Show</span>
+        <span className={'mr-1 ml-6 '}>{locale === 'en' ? 'Show' : 'Показать'}</span>
         <SelectPagesPortion defaultValue={pagesPortion} onValueChange={onChangePagesPortion}>
           <SelectPortion value={'10'}>10</SelectPortion>
           <SelectPortion value={'20'}>20</SelectPortion>
@@ -84,7 +87,7 @@ export const Pagination = ({
           <SelectPortion value={'50'}>50</SelectPortion>
           <SelectPortion value={'100'}>100</SelectPortion>
         </SelectPagesPortion>
-        <span className={'ml-1'}>on page</span>
+        <span className={'ml-1'}>{locale === 'en' ? 'on page' : 'на странице'}</span>
       </div>
     </div>
   )
