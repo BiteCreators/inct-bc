@@ -8,6 +8,7 @@ export const postsTranslationsRu: LocaleType['Posts'] = {
   copyLink: 'Копировать ссылку',
   cropping: 'Редактирование',
   deletePost: 'Удалить пост',
+  deletePostQuestion: 'Вы действительно хотите удалить этот пост?',
   doYouWantToCloseCreation:
     'Вы действительно хотите закрыть окно создания? Если это сделать изменения не будут сохранены',
   doYouWantToCloseEditing:
