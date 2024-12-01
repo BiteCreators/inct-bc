@@ -16,12 +16,16 @@ const nextConfig = {
 
     config.plugins.push(
       new NextFederationPlugin({
+        exposes: {
+          './language-select' : './src/features/internationalization/ui/LanguageSelect.tsx'
+        },
         filename: 'static/chunks/remoteEntry.js',
         name: 'host',
         remotes: {
-          // admin: `admin@http://localhost:3001/_next/static/${isServer ? 'ssr' : 'chunks'}/remoteEntry.js`
-          admin: `admin@http://localhost:3001/_next/static/chunks/remoteEntry.js`
+          admin: `admin@http://localhost:3001/_next/static/${isServer ? 'ssr' : 'chunks'}/remoteEntry.js`
+          // admin: `admin@http://localhost:3001/_next/static/chunks/remoteEntry.js`
         },
+        
       })
     )
 

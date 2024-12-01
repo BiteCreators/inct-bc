@@ -1,4 +1,5 @@
 export { Alert } from './alert/Alert'
+export { AppBar } from './app-bar/AppBar'
 export { Avatar } from './avatar/Avatar'
 export { Button } from './button/Button'
 export { Card } from './card/Card'
