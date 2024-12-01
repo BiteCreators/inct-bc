@@ -4,7 +4,7 @@ import { TableData } from '@packages/shared/ui/table/Table'
 
 import style from './payments.module.scss'
 
-import { usePayments } from './usePayments'
+import { usePayments } from '../../model/usePayments'
 
 export const Payments = () => {
   // const router = useRouter()

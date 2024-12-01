@@ -3,7 +3,7 @@ import { Alert, Loader, Typography } from '@packages/shared/ui'
 
 import style from './uploadedPhotos.module.scss'
 
-import { GET_POSTS_BY_USER } from './postsQuery'
+import { GET_POSTS_BY_USER } from '../../api/postsQuery'
 
 export const UploadedPhotos = () => {
   // const router = useRouter()

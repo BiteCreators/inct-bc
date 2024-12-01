@@ -1,2 +1,2 @@
-export { Payments } from './payments/Payments'
-export { UploadedPhotos } from './uploadedPhotos/UploadedPhotos'
+export { Payments } from './ui/payments/Payments'
+export { UploadedPhotos } from './ui/uploadedPhotos/UploadedPhotos'

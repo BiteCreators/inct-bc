@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { useQuery } from '@apollo/client'
 
-import { GET_PAYMENTS_BY_USER } from './paymentsQuery'
+import { GET_PAYMENTS_BY_USER } from '../api/paymentsQuery'
 
 export const usePayments = (userId: number) => {
   const [currentPage, setCurrentPage] = useState(1)
