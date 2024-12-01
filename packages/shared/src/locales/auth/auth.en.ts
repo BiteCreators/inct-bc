@@ -26,7 +26,7 @@ export const authTranslationEn = {
     passwordNotStrongEnoughError:
       'Password must contain at least one special character, one uppercase letter, and one number',
     passwordRequiredError: 'Password is required',
-    passwordTooLongError: 'Maximum number of characters 30',
+    passwordTooLongError: 'Maximum number of characters 20',
     passwordTooShortError: 'Minimum number of characters 6',
     privacyPolicyRequiredError: 'You must agree to privacy policy',
     recaptcha: 'Please verify that you are not a robot',
