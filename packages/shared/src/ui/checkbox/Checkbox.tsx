@@ -14,10 +14,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     { checked, className, disabled, error, id, onChecked, required, text, ...props }: CheckboxProps,
     ref
   ) => {
-    const [isChecked, setIsChecked] = useState(checked)
     const checkboxId = useId()
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      setIsChecked(e.target.checked)
       onChecked && onChecked(e.target.checked)
     }
 
@@ -25,7 +23,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <div className={'flex flex-col justify-start'}>
         <div className={'inline-flex items-center'}>
           <input
-            checked={isChecked}
+            checked={checked}
             className={'absolute z-[-1] opacity-0'}
             disabled={disabled}
             id={id ?? checkboxId}
@@ -45,15 +43,15 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
               'before:w-[18px] before:h-[18px]',
               'before:border-solid before:border-2  before:rounded-sm',
               disabled && '!bg-inherit',
-              isChecked && !disabled && 'before:bg-light-100 before:border-none',
-              isChecked && disabled && 'before:bg-dark-100 before:border-none',
-              !isChecked && disabled && 'before:border-light-900',
-              !isChecked && !disabled && 'before:border-light-500',
+              checked && !disabled && 'before:bg-light-100 before:border-none',
+              checked && disabled && 'before:bg-dark-100 before:border-none',
+              !checked && disabled && 'before:border-light-900',
+              !checked && !disabled && 'before:border-light-500',
               className
             )}
             htmlFor={id ?? checkboxId}
           >
-            {isChecked && (
+            {checked && (
               <CheckmarkOutline
                 className={cn(
                   'absolute left-[6px] top-[6px]',
