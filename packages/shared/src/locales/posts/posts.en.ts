@@ -4,6 +4,8 @@ export const postsTranslationsEn = {
   close: 'Close',
   closeEditing: 'Close editing',
   copyLink: 'Copy link',
+  crop: 'Crop',
+  cropCancel: 'Cancel',
   cropping: 'Cropping',
   deletePost: 'Delete post',
   deletePostQuestion: 'Are you sure you want to delete this post?',

@@ -6,6 +6,8 @@ export const postsTranslationsRu: LocaleType['Posts'] = {
   close: 'Закрыть',
   closeEditing: 'Закрыть',
   copyLink: 'Копировать ссылку',
+  crop: 'Обрезать',
+  cropCancel: 'Отмена',
   cropping: 'Редактирование',
   deletePost: 'Удалить пост',
   deletePostQuestion: 'Вы действительно хотите удалить этот пост?',
