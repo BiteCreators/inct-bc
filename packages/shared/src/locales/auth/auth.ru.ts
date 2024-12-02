@@ -26,7 +26,7 @@ export const authTranslationRu = {
     passwordNotStrongEnoughError:
       'Пароль должен содержать хотя бы один специальный символ, одну заглавную букву и одну цифру',
     passwordRequiredError: 'Пароль обязателен',
-    passwordTooLongError: 'Максимальная длина пароля — 30 символов',
+    passwordTooLongError: 'Максимальная длина пароля — 20 символов',
     passwordTooShortError: 'Минимальная длина пароля — 6 символов',
     privacyPolicyRequiredError: 'Вы должны согласиться с политикой конфиденциальности',
     recaptcha: 'Пожалуйста, подтвердите, что вы не робот',
