@@ -14,6 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "\n  query GetFollowers(\n    $pageSize: Int = 10\n    $pageNumber: Int = 1\n    $sortBy: String = \"createdAt\"\n    $sortDirection: SortDirection = desc\n    $userId: Int!\n  ){\n    getFollowers(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      sortBy: $sortBy\n      sortDirection: $sortDirection\n      userId: $userId,\n  ) {\n    pagesCount\n    totalCount\n    pageSize\n    page\n    items{\n      id\n      userId\n      userName\n      createdAt\n      }\n  }\n}\n": types.GetFollowersDocument,
+    "\nquery GetUser($userId: Int!) {\n    getUser(userId: $userId) {\n      id\n      userName\n      email\n      createdAt\n      profile {\n        firstName\n        lastName\n        avatars {\n          url\n        }\n      }\n      userBan {\n        createdAt\n        reason\n      }\n    }\n  }": types.GetUserDocument,
+};
   '\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }':
     types.GetPaymentsByUserDocument,
   '\n    query GetPostsByUser($userId: Int!) {\n        getPostsByUser(userId: $userId) {\n        items{\n        height\n        width\n        url\n        }\n      }\n    }':
@@ -41,6 +44,11 @@ export function gql(source: string): unknown
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function gql(source: "\n  query GetFollowers(\n    $pageSize: Int = 10\n    $pageNumber: Int = 1\n    $sortBy: String = \"createdAt\"\n    $sortDirection: SortDirection = desc\n    $userId: Int!\n  ){\n    getFollowers(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      sortBy: $sortBy\n      sortDirection: $sortDirection\n      userId: $userId,\n  ) {\n    pagesCount\n    totalCount\n    pageSize\n    page\n    items{\n      id\n      userId\n      userName\n      createdAt\n      }\n  }\n}\n"): (typeof documents)["\n  query GetFollowers(\n    $pageSize: Int = 10\n    $pageNumber: Int = 1\n    $sortBy: String = \"createdAt\"\n    $sortDirection: SortDirection = desc\n    $userId: Int!\n  ){\n    getFollowers(\n      pageSize: $pageSize\n      pageNumber: $pageNumber\n      sortBy: $sortBy\n      sortDirection: $sortDirection\n      userId: $userId,\n  ) {\n    pagesCount\n    totalCount\n    pageSize\n    page\n    items{\n      id\n      userId\n      userName\n      createdAt\n      }\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery GetUser($userId: Int!) {\n    getUser(userId: $userId) {\n      id\n      userName\n      email\n      createdAt\n      profile {\n        firstName\n        lastName\n        avatars {\n          url\n        }\n      }\n      userBan {\n        createdAt\n        reason\n      }\n    }\n  }"): (typeof documents)["\nquery GetUser($userId: Int!) {\n    getUser(userId: $userId) {\n      id\n      userName\n      email\n      createdAt\n      profile {\n        firstName\n        lastName\n        avatars {\n          url\n        }\n      }\n      userBan {\n        createdAt\n        reason\n      }\n    }\n  }"];
 export function gql(
   source: '\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }'
 ): (typeof documents)['\n  query GetPaymentsByUser($userId: Int!, $pageNumber: Int, $pageSize: Int) {\n    getPaymentsByUser(userId: $userId,pageSize: $pageSize, pageNumber: $pageNumber) {\n      totalCount  \n      items{\n      dateOfPayment\n      endDate\n      price\n      type\n      paymentType\n      }\n    }\n  }']
