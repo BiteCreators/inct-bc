@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Payments, UploadedPhotos } from '@/features/users/current-user'
+import { Payments, UploadedPhotos } from '@/features/current-user'
 import { TabsBase } from '@packages/shared/ui'
 
 type TabValues = 'followers' | 'following' | 'payments' | 'uploaded-photos'

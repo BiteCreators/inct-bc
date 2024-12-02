@@ -1,5 +1,4 @@
-import ExposedComponent from '@/components/ExposedComponent'
-import { CurrentUser } from '@/features/users/current-user/ui/CurrentUser'
+import { CurrentUser } from '@/features/current-user'
 import localFont from 'next/font/local'
 import Image from 'next/image'
 
