@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { AuthLayout } from '@/application/layouts/AuthLayout'
+import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
+import { cn } from '@packages/shared/utils'
 import { InferGetServerSidePropsType } from 'next'
 
 import { NextPageWithLayout } from './_app'
@@ -15,27 +16,6 @@ type PublicPostsResponse = {
 }
 
 export const getStaticProps = async () => {
-  //   try {
-  //     const res = await fetch(
-  //       `${process.env.NEXT_PUBLIC_API_URL}/v1/public-posts/all/?sortDirection=desc&pageSize=4`
-  //     )
-  //
-  //     if (!res.ok) {
-  //       console.error('Failed to fetch posts data')
-  //     }
-  //     const postsData: PublicPostsResponse = await res.json()
-  //
-  //     return {
-  //       props: { postsData },
-  //       revalidate: 60,
-  //     }
-  //   } catch (error) {
-  //     console.error('Error fetching posts:', error)
-  //
-  //     return
-  //   }
-  // }
-
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   if (!apiUrl) {
@@ -72,19 +52,21 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
   const { items: posts } = postsData
 
   return (
-    <>
-      <RegisteredUsers usersCount={postsData.totalCount} />
-      <div className={'max-w-[972px] pt-6 mx-auto'}>
+    <div className={cn('max-w-[972px] mr-[20%] ml-[10%]')}>
+      <div>
+        <RegisteredUsers usersCount={postsData.totalCount} />
+      </div>
+      <div className={'pt-6'}>
         <div className={'grid grid-cols-4 gap-3'}>
           {posts.map(post => (
             <PublicPostCard key={post.id} post={post} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
-Main.getLayout = AuthLayout
+Main.getLayout = DefaultLayout
 
 export default Main
