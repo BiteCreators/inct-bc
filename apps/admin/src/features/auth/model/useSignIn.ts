@@ -16,6 +16,7 @@ export const useSignIn = () => {
   const { login } = useAuth()
   const t = useScopedTranslation('Auth')
   const [loginAdmin] = useMutation(LOGIN_ADMIN)
+  const [useCookie, setUseCookie] = useState(true)
   const { control, handleSubmit, setValue } = useForm<SignInFormValues>({
     defaultValues: {
       email: '',
@@ -25,6 +26,9 @@ export const useSignIn = () => {
 
   const onSubmit = async (data: { email: string; password: string }) => {
     try {
+      if (!useCookie) {
+        return
+      }
       const { data: loginData } = await loginAdmin({
         variables: { email: data.email, password: data.password },
       })
@@ -45,6 +49,8 @@ export const useSignIn = () => {
     handleSubmit,
     onSubmit,
     setError,
+    setUseCookie,
     t,
+    useCookie,
   }
 }

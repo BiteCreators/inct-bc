@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import { motion } from 'framer-motion'
@@ -8,31 +8,40 @@ import { cn } from '../../utils'
 import { Typography } from '../typography/Typography'
 
 type Props = {
+  alertContent?: ReactNode
   canClose?: boolean
   className?: string
   duration?: number
   message?: string
   onClose?: () => void
+  open?: boolean
   portal?: boolean
   purpose?: 'alert' | 'toast'
-  type: 'error' | 'info' | 'success'
+  type: 'error' | 'info' | 'modal' | 'success'
 }
 
 export const Alert = ({
+  alertContent,
   canClose = true,
   className,
   duration = 5000,
   message,
   onClose,
+  open = true,
   portal = false,
   purpose = 'alert',
   type = 'error',
 }: Props) => {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(open)
+
+  useEffect(() => {
+    setIsVisible(open)
+  }, [open])
 
   const alertStyles = {
     error: 'bg-danger-900 border-danger-500',
     info: 'bg-primary-900 border-primary-500',
+    modal: 'bg-dark-300 border-dark-100',
     success: 'bg-success-900 border-success-500',
   }
 
@@ -60,17 +69,16 @@ export const Alert = ({
   }
 
   useEffect(() => {
-    if (!canClose) {
+    if (!canClose || !open) {
       return
     }
-
     const timer = setTimeout(() => {
       setIsVisible(false)
       onClose?.()
     }, duration)
 
     return () => clearTimeout(timer)
-  }, [duration, canClose, onClose])
+  }, [duration, canClose, onClose, open])
 
   const onCloseHandler = () => {
     setIsVisible(false)
@@ -82,7 +90,6 @@ export const Alert = ({
   if (!isVisible) {
     return null
   }
-
   const content = (
     <motion.div
       animate={'visible'}
@@ -99,9 +106,11 @@ export const Alert = ({
       variants={variants}
     >
       <div className={cn(['flex justify-between items-center z-250'])}>
+        {alertContent}
         <Typography className={'whitespace-normal'} variant={'medium-text'}>
           {message}
         </Typography>
+
         {!canClose && (
           <button className={'text-xl focus:outline-none ml-2'} onClick={onCloseHandler}>
             <Close viewBox={'0 -1 24 24'} />

@@ -1,10 +1,12 @@
 import { useSignIn } from '@/features/auth/model/useSignIn'
+import { AcceptCookieAlert } from '@/features/auth/ui/AcceptCookieAlert'
 import { Alert, Button, Card, FormInput, Typography } from '@packages/shared/ui'
 
-import cl from './sign-in-form.module.scss'
+import cl from './styles/sign-in-form.module.scss'
 
 export const SignInForm = () => {
-  const { control, error, handleSubmit, onSubmit, setError, t } = useSignIn()
+  const { control, error, handleSubmit, onSubmit, setError, setUseCookie, t, useCookie } =
+    useSignIn()
 
   return (
     <>
@@ -41,16 +43,7 @@ export const SignInForm = () => {
           />
         )}
       </Card>
-      <Alert
-        canClose={false}
-        className={'md:left-0'}
-        message={
-          'Our website uses cookies to improve your site experience, efficiency and usability. By continuing to use inctbc.ru, you agree to the use of cookies.'
-        }
-        portal
-        purpose={'toast'}
-        type={'info'}
-      />
+      <AcceptCookieAlert setUseCookie={setUseCookie} useCookie={useCookie} />
     </>
   )
 }
