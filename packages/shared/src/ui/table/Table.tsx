@@ -5,23 +5,16 @@ import { TableRows } from './TableRows'
 
 export type TableHeader = {
   name: string
-
   onClickSortButton?: () => void
-
   sort?: 'asc' | 'desc' | null
 }
-
 export type TableData = {
   [key: number]: React.ReactNode | number | string
 }
-
 type Props = {
   classNameHeadersItem?: string
-
   classNameTableCell?: string
-
   headers: TableHeader[]
-
   tableData: [] | TableData[]
 }
 
@@ -38,7 +31,6 @@ export const Table = (props: Props) => {
             <TableHeaders className={props.classNameHeadersItem} headers={props.headers} />
           </ul>
         </header>
-
         <div className={'flex flex-col gap-y-3 sm:table-row-group sm:w-full'}>
           <TableRows className={props.classNameTableCell} tableData={props.tableData} />
         </div>

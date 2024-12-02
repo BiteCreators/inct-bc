@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import * as Dialog from '@radix-ui/react-dialog'
@@ -35,6 +35,11 @@ export const Modal = ({
   onOpenChange,
   title,
 }: Props) => {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   const modalContent = (
     <Dialog.Root onOpenChange={onOpenChange} open={isOpen}>
       <Dialog.Overlay className={cn('fixed inset-0 bg-black/50 z-30')} />
@@ -60,6 +65,10 @@ export const Modal = ({
       </Dialog.Content>
     </Dialog.Root>
   )
+
+  if (!isMounted) {
+    return null
+  }
 
   return ReactDOM.createPortal(modalContent, document.body)
 }

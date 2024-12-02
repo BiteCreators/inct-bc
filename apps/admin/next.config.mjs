@@ -14,7 +14,9 @@ const nextConfig = {
     silenceDeprecations: ["legacy-js-api"],
   },
   transpilePackages: ["@packages/shared"],
-  webpack: (config) => {
+  webpack: (config, options) => {
+    const {isServer} = options
+
     config.plugins.push(
       new NextFederationPlugin({
         exposes: {
@@ -22,6 +24,10 @@ const nextConfig = {
         },
         filename: 'static/chunks/remoteEntry.js',
         name: 'admin',
+        remotes: {
+          host: `host@http://localhost:3000/_next/static/${isServer ? 'ssr' : 'chunks'}/remoteEntry.js`
+          // admin: `admin@http://localhost:3001/_next/static/chunks/remoteEntry.js`
+        },
       })
     )
 

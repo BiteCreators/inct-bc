@@ -22,8 +22,12 @@ const CurrentDevice = dynamic(() => import('@/features/devices').then(mod => mod
 const SessionsList = dynamic(() => import('@/features/devices').then(mod => mod.SessionsList), {
   ssr: true,
 })
-const MyPaymentsTest = dynamic(
-  () => import('@/features/payments/ui/MyPaymentsTest').then(mod => mod.MyPaymentsTest),
+// const MyPaymentsTest = dynamic(
+//   () => import('@/features/payments/ui/MyPaymentsTest').then(mod => mod.MyPaymentsTest),
+//   { ssr: true }
+// )
+const MyPayments = dynamic(
+  () => import('@/features/payments/ui/MyPayments').then(mod => mod.MyPayments),
   { ssr: true }
 )
 
@@ -79,8 +83,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
           value: 'account-management',
         },
         {
-          // content: <MyPayments />,
-          content: <MyPaymentsTest />,
+          content: <MyPayments />,
           label: t.myPayments,
           value: 'my-payments',
         },
