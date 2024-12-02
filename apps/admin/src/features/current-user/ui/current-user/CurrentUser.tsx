@@ -1,18 +1,18 @@
 import * as React from 'react'
 
-import { formatDate } from '@/features/users/current-user/lib/utils/formatDate'
-import { useGetUser } from '@/features/users/current-user/model/useGetUser'
+import { formatDate } from '@/features/current-user/lib/utils/formatDate'
+import { useGetUser } from '@/features/current-user/model/useGetUser'
 import { CurrentUserTabs } from '@/widgets/current-user-tabs/ui/CurrentUserTabs'
 import { ArrowBackOutline } from '@packages/shared/assets'
 import { Alert, Avatar, Loader, Typography } from '@packages/shared/ui'
 
-import cl from './styles/CurrentUser.module.scss'
+import cl from './CurrentUser.module.scss'
 
 type Props = {}
 export const CurrentUser = ({}: Props) => {
   // const router = useRouter()
   // const { id } = router.query
-  const id = 1432 //todo: remove mock
+  const id = 1431 //todo: remove mock
   const { data, error, loading } = useGetUser(Number(id))
   const user = data?.getUser
 

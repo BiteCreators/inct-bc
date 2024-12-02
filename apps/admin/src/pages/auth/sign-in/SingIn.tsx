@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SignInForm } from '@/features/auth/ui/SignInForm'
+import { SignInForm } from '@/features/auth'
 
 import cl from '../sign-in/sign-in.module.scss'
 

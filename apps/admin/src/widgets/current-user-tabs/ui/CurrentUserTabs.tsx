@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Followers } from '@/features/user/followers/ui/Followers'
+import { Payments, UploadedPhotos } from '@/features/current-user'
 import { TabsBase } from '@packages/shared/ui'
 
 type TabValues = 'followers' | 'following' | 'payments' | 'uploaded-photos'
@@ -16,12 +17,12 @@ export const CurrentUserTabs = ({}: Props) => {
       onClick={value => setSelectedTab(value)}
       tabsData={[
         {
-          content: <div>Uploaded photos</div>,
+          content: <UploadedPhotos />,
           label: 'Uploaded photos',
           value: 'uploaded-photos',
         },
         {
-          content: <div>Payments</div>,
+          content: <Payments />,
           label: 'Payments',
           value: 'payments',
         },

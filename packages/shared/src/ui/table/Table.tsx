@@ -17,6 +17,7 @@ type Props = {
   headers: TableHeader[]
   tableData: [] | TableData[]
 }
+
 export const Table = (props: Props) => {
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>

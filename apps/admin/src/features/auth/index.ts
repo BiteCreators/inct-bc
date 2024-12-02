@@ -1,5 +1,1 @@
-export { ForgotPasswordForm } from './ui/ForgotPasswordForm'
-export { LogoutButton } from './ui/LogoutButton'
-export { SignInButton } from './ui/SignInButton'
-export { SignUpButton } from './ui/SignUpButton'
-export { SignUpForm } from './ui/SignUpForm'
+export { SignInForm } from './ui/SignInForm'

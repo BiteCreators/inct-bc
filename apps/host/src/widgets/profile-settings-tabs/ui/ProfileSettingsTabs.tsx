@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import { useScopedTranslation } from '@packages/shared/hooks/useTranslation'
 import { TabsBase } from '@packages/shared/ui'
@@ -21,8 +22,12 @@ const CurrentDevice = dynamic(() => import('@/features/devices').then(mod => mod
 const SessionsList = dynamic(() => import('@/features/devices').then(mod => mod.SessionsList), {
   ssr: true,
 })
-const MyPaymentsTest = dynamic(
-  () => import('@/features/payments/ui/MyPaymentsTest').then(mod => mod.MyPaymentsTest),
+// const MyPaymentsTest = dynamic(
+//   () => import('@/features/payments/ui/MyPaymentsTest').then(mod => mod.MyPaymentsTest),
+//   { ssr: true }
+// )
+const MyPayments = dynamic(
+  () => import('@/features/payments/ui/MyPayments').then(mod => mod.MyPayments),
   { ssr: true }
 )
 

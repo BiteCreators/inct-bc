@@ -1,36 +1,56 @@
-import { useState } from 'react'
+import { useSignIn } from '@/features/auth/model/useSignIn'
+import { Alert, Button, Card, FormInput, Typography } from '@packages/shared/ui'
 
-import { useScopedTranslation } from '@packages/shared/hooks'
-import { Alert, Button, Card, Input, Typography } from '@packages/shared/ui'
-
-import cl from './styles/sign-in-form.module.scss'
+import cl from './sign-in-form.module.scss'
 
 export const SignInForm = () => {
-  const [error, setError] = useState<null | string>(null)
-
-  const t = useScopedTranslation('Auth')
+  const { control, error, handleSubmit, onSubmit, setError, t } = useSignIn()
 
   return (
-    <Card className={cl.card}>
-      <Typography className={cl.title} variant={'h1'}>
-        {t.signIn}
-      </Typography>
-      <form className={cl.form} onSubmit={() => {}}>
-        <Input className={cl.defaultInput} label={t.email} name={'email'} required />
-        <Input inputType={'reveal'} label={t.password} name={'password'} required />
-        <Button className={cl.button} type={'submit'}>
+    <>
+      <Card className={cl.card}>
+        <Typography className={cl.title} variant={'h1'}>
           {t.signIn}
-        </Button>
-      </form>
-      {error && (
-        <Alert
-          canClose={false}
-          message={error}
-          onClose={() => setError('')}
-          purpose={'alert'}
-          type={'error'}
-        />
-      )}
-    </Card>
+        </Typography>
+        <form className={cl.form} onSubmit={handleSubmit(onSubmit)}>
+          <FormInput
+            className={cl.defaultInput}
+            control={control}
+            label={t.email}
+            name={'email'}
+            required
+          />
+          <FormInput
+            control={control}
+            inputType={'reveal'}
+            label={t.password}
+            name={'password'}
+            required
+          />
+          <Button className={cl.button} type={'submit'}>
+            {t.signIn}
+          </Button>
+        </form>
+        {error && (
+          <Alert
+            canClose={false}
+            message={error}
+            onClose={() => setError('')}
+            purpose={'alert'}
+            type={'error'}
+          />
+        )}
+      </Card>
+      <Alert
+        canClose={false}
+        className={'md:left-0'}
+        message={
+          'Our website uses cookies to improve your site experience, efficiency and usability. By continuing to use inctbc.ru, you agree to the use of cookies.'
+        }
+        portal
+        purpose={'toast'}
+        type={'info'}
+      />
+    </>
   )
 }

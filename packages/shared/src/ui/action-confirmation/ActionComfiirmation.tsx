@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { Button, Modal } from '..'
 import { useScopedTranslation } from '../../hooks'
+import { cn } from '../../utils/'
 
 type Props = {
+  children?: ReactNode
+  classNameButtons?: string
+  classNameMessage?: string
   isOpen: boolean
-  message: string
+  message: ReactNode | string
   onConfirm: () => void
   onReject: () => void
   setIsOpen: (isOpen: boolean) => void
@@ -13,6 +17,9 @@ type Props = {
 }
 
 export const ActionConfirmation = ({
+  children,
+  classNameButtons,
+  classNameMessage,
   isOpen = false,
   message = 'test message with question',
   onConfirm,
@@ -33,8 +40,9 @@ export const ActionConfirmation = ({
 
   return (
     <Modal isOpen={isOpen} mode={'default'} onOpenChange={setIsOpen} title={title}>
-      <div className={'calc(min-w-[430px]-40px) flex mb-4'}>{message}</div>
-      <div className={'w-full flex gap-5 mb-6 items-center justify-end'}>
+      <div className={cn('calc(min-w-[430px]-40px) flex mb-4', classNameMessage)}>{message}</div>
+      {children}
+      <div className={cn('w-full flex gap-5 mb-6 items-center justify-end', classNameButtons)}>
         <Button className={'h-[37px]'} onClick={handleConfirm} variant={'outline'}>
           {t.yes}
         </Button>

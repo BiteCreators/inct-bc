@@ -15,6 +15,9 @@ export const useShowMore = ({
   isDefaultCollapsed?: boolean
   text: string
 }) => {
+  if (defaultVisibleLength < 0) {
+    throw new Error('Default length should not be negative, please provide a correct value')
+  }
   const collapsable = text.length > defaultVisibleLength
   const defautlVisible: string = collapsable ? text.slice(0, defaultVisibleLength) + '...' : text
   const [textToShow, setTextToShow] = useState<string>(() =>
