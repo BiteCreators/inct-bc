@@ -20,7 +20,6 @@ const nextConfig = {
     config.plugins.push(
       new NextFederationPlugin({
         exposes: {
-          './exposed': './src/components/ExposedComponent.tsx'
         },
         filename: 'static/chunks/remoteEntry.js',
         name: 'admin',
