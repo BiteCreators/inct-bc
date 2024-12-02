@@ -69,11 +69,11 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={'Are you sure you want to delete this post?'}
+        message={t.deletePostQuestion}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={'Delete Post'}
+        title={t.deletePost}
       />
       <Dropdown className={className} items={forDrop} />
       {apiError && (

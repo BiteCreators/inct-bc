@@ -8,6 +8,8 @@ export const navigationTranslationEn = {
   messenger: 'Messenger',
   myPayments: 'My payments',
   myProfile: 'My Profile',
+  paginationOnPage: 'on page',
+  paginationShow: 'Show',
   profileSettings: 'Profile Settings',
   search: 'Search',
   statistics: 'Statistics',

@@ -1,9 +1,11 @@
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
 import { paymentsSlice } from '@/features/payments'
+import { useScopedTranslation } from '@packages/shared/hooks'
 import { Card, RadioGroup, Typography } from '@packages/shared/ui'
 
 export const SubscriptionTypeCard = ({ text }: { text: string }) => {
+  const t = useScopedTranslation('Payments')
   const { data: subscriptionTypes } = paymentsApi.useGetCostPaymentQuery()
   const dispatch = useAppDispatch()
 
@@ -13,13 +15,13 @@ export const SubscriptionTypeCard = ({ text }: { text: string }) => {
 
       switch (type.typeDescription) {
         case TYPE_DESCRIPTIONS.DAY:
-          label = `$${type.amount} per 1 day`
+          label = `$${type.amount} ${t.oneDay}`
           break
         case TYPE_DESCRIPTIONS.WEEKLY:
-          label = `$${type.amount} per 7 days`
+          label = `$${type.amount} ${t.sevenDays}`
           break
         case TYPE_DESCRIPTIONS.MONTHLY:
-          label = `$${type.amount} per 1 month`
+          label = `$${type.amount} ${t.oneMonth}`
           break
       }
 
@@ -29,7 +31,7 @@ export const SubscriptionTypeCard = ({ text }: { text: string }) => {
     return (
       <>
         <Typography className={'font-weight600 mb-2'} variant={'h3'}>
-          Your subscription costs:
+          {t.yourSubscriptionCosts}
         </Typography>
         <Card className={'flex flex-col mb-6'}>
           <form noValidate>

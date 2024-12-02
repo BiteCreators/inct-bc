@@ -1,9 +1,11 @@
 import { MyPayment } from '@/entities/payments'
+import { useScopedTranslation } from '@packages/shared/hooks'
 import { Loader, Pagination, Table, TableData, Typography } from '@packages/shared/ui'
 
 import { useMyPayments } from '../model/useMyPayments'
 
 export const MyPayments = () => {
+  const t = useScopedTranslation('Payments')
   // const isLoading = false //для тестов
   // const arr = getArray(0, 73, 73) //для тестов
   // const data: any = [...arr] //для тестов
@@ -39,19 +41,19 @@ export const MyPayments = () => {
 
   const headers = [
     {
-      name: 'Date of Payment',
+      name: t.dateOfPayment,
     },
     {
-      name: 'End date of subscription',
+      name: t.endDateOfSubscription,
     },
     {
-      name: 'Price',
+      name: t.price,
     },
     {
-      name: 'Subscription Type',
+      name: t.subscriptionType,
     },
     {
-      name: 'Payment Type',
+      name: t.paymentType,
     },
   ]
 
