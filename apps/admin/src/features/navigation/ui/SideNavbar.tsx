@@ -1,3 +1,6 @@
+import { useContext } from 'react'
+
+import { AuthContext, AuthContextType } from '@/common/lib/hooks/useAuth'
 import {
   CreditCard,
   CreditCardOutline,
@@ -13,35 +16,29 @@ import { SideNavbarItem } from '@packages/shared/ui/sideNavbar/SideNavbarItem'
 import cl from '../ui/styles/sideNavbar.module.scss'
 
 export const SideNavbar = () => {
-  // const userId = useAppSelector(authSlice.selectors.selectUserId)
-  //
-  // if (!userId) {
-  //   return null
-  // }
-
   return (
     <nav className={cl.nav}>
       <div className={cl.navItemContainer}>
         <SideNavbarItem
-          href={'/'}
+          href={'/users'}
           icon={<PersonOutline />}
           iconActive={<Person />}
           label={'Users list'}
         />
         <SideNavbarItem
-          href={`/`}
+          href={`/statistics`}
           icon={<TrendingUpOutline />}
           iconActive={<TrendingUp />}
           label={'Statistics'}
         />
         <SideNavbarItem
-          href={'/messenger'}
+          href={'/payments'}
           icon={<CreditCardOutline />}
           iconActive={<CreditCard />}
           label={'Payments list'}
         />
         <SideNavbarItem
-          href={'/search'}
+          href={'/posts'}
           icon={<ImageOutline />}
           iconActive={<Image />}
           label={'Posts list'}
