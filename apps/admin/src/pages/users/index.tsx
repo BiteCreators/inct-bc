@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { UsersTable } from '@/features/users'
+import { UsersPage } from './UsersPage'
 
 export default function Users() {
-  return <UsersTable />
+  return <UsersPage />
 }

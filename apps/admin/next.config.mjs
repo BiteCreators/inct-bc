@@ -20,12 +20,18 @@ const nextConfig = {
     config.plugins.push(
       new NextFederationPlugin({
         exposes: {
+          './payments-page': './src/pages/payments/PaymentsPage.tsx',
+          './posts-page': './src/pages/posts/PostsPage.tsx',
+          './providers': './src/application/providers/Providers.tsx',
+          './sign-in-page': './src/pages/auth/sign-in/SingIn.tsx',
+          './single-user-page': './src/pages/users/[id]/SingleUserPage.tsx',
+          './statistics-page': './src/pages/statistics/StatisticsPage.tsx',
+          './users-page': './src/pages/users/UsersPage.tsx',
         },
         filename: 'static/chunks/remoteEntry.js',
         name: 'admin',
         remotes: {
           host: `host@http://localhost:3000/_next/static/${isServer ? 'ssr' : 'chunks'}/remoteEntry.js`
-          // admin: `admin@http://localhost:3001/_next/static/chunks/remoteEntry.js`
         },
       })
     )

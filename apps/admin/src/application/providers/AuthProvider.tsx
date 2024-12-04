@@ -14,36 +14,36 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
   const router = useRouter()
 
-  useEffect(() => {
-    if (cookies.adminAccessToken) {
-      const authString = cookies.adminAccessToken.split(' ')[1]
-
-      if (authString) {
-        try {
-          const decoded = atob(authString)
-          const [email, password] = decoded.split(':')
-
-          if (email && password) {
-            setIsAuthenticated(true)
-            if (router.pathname === '/') {
-              router.push('/users')
-            }
-          } else {
-            setIsAuthenticated(false)
-          }
-        } catch (e) {
-          setIsAuthenticated(false)
-        }
-      } else {
-        setIsAuthenticated(false)
-      }
-    } else {
-      setIsAuthenticated(false)
-      if (router.pathname !== '/auth/sign-in') {
-        router.push('/auth/sign-in')
-      }
-    }
-  }, [cookies, router])
+  // useEffect(() => {
+  //   if (cookies.adminAccessToken) {
+  //     const authString = cookies.adminAccessToken.split(' ')[1]
+  //
+  //     if (authString) {
+  //       try {
+  //         const decoded = atob(authString)
+  //         const [email, password] = decoded.split(':')
+  //
+  //         if (email && password) {
+  //           setIsAuthenticated(true)
+  //           if (router.pathname === '/') {
+  //             router.push('/users')
+  //           }
+  //         } else {
+  //           setIsAuthenticated(false)
+  //         }
+  //       } catch (e) {
+  //         setIsAuthenticated(false)
+  //       }
+  //     } else {
+  //       setIsAuthenticated(false)
+  //     }
+  //   } else {
+  //     setIsAuthenticated(false)
+  //     if (router.pathname !== '/auth/sign-in') {
+  //       router.push('/auth/sign-in')
+  //     }
+  //   }
+  // }, [cookies, router])
 
   const login = (email: string, password: string) => {
     const authString = `Basic ${btoa(`${email}:${password}`)}`
@@ -59,9 +59,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     router.push('/auth/sign-in')
   }
 
-  if (isAuthenticated === null) {
-    return <LoaderBlock />
-  }
+  // if (isAuthenticated === null) {
+  //   return <LoaderBlock />
+  // }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
