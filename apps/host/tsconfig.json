@@ -6,7 +6,8 @@
       "@/*": [
         "./src/*"
       ],
-      "@packages/shared/*": ["node_modules/@packages/shared/src/*"]
+      "@packages/shared/*": ["node_modules/@packages/shared/src/*"],
+      "admin/*": ["./src/application/types/admin.d.ts"]
     }
   },
   "include": [
