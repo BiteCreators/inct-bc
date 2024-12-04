@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useAuth } from '@/common/lib/hooks/useAuth'
-import { CurrentUser } from '@/features/users/current-user/ui/CurrentUser'
+import { CurrentUser } from '@/features/current-user'
 import { useRouter } from 'next/router'
 
 const ProtectedPage = () => {

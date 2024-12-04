@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { Followers } from '@/features/user/followers/ui/Followers'
 import { Payments, UploadedPhotos } from '@/features/current-user'
+import { Followers } from '@/features/user/followers/ui/Followers'
 import { TabsBase } from '@packages/shared/ui'
 
 type TabValues = 'followers' | 'following' | 'payments' | 'uploaded-photos'
