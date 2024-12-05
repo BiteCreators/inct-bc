@@ -6,12 +6,12 @@ import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/Acti
 import s from './styles.module.scss'
 
 type Props = {
-  firstName?: string
+  firstName?: null | string
   handleConfirmBan: () => void
   handleConfirmDelete: () => void
   isOpenBanModal: boolean
   isOpenDeleteModal: boolean
-  lastName?: string
+  lastName?: null | string
   setIsOpenBanModal: (isOpen: boolean) => void
   setIsOpenDeleteModal: (isOpen: boolean) => void
 }

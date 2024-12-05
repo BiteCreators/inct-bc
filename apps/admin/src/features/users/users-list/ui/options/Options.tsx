@@ -8,8 +8,8 @@ import { useOptions } from '../../model/useOptions'
 import { ActionConfirmations } from '../modals/ActionConfirmations'
 
 type Props = {
-  firstName?: string
-  lastName?: string
+  firstName?: null | string
+  lastName?: null | string
 }
 
 export const Options = ({ firstName, lastName }: Props) => {

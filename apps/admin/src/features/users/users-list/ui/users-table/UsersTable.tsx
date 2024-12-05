@@ -1,35 +1,26 @@
 import React from 'react'
 
 import { Block } from '@packages/shared/assets'
-import { Table, TableHeader } from '@packages/shared/ui'
+import { Alert, Pagination, Table } from '@packages/shared/ui'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 
 import s from './styles.module.scss'
 
-import { User } from '../../../types'
-import { exampleUsersPaginationModel } from '../../testData'
+import { useUsers } from '../../model/useUsers'
 import { Options } from '../options/Options'
 
 export const UsersTable = () => {
-  const headers: TableHeader[] = [
-    {
-      name: 'User ID',
-    },
-    {
-      name: 'Username',
-      sort: 'desc',
-    },
-    {
-      name: 'Profile link',
-    },
-    {
-      name: 'Date added',
-      sort: null,
-    },
-    {
-      name: '',
-    },
-  ]
-  const exampleUsersData = exampleUsersPaginationModel.users?.map((el: User) => {
+  const {
+    data,
+    error,
+    handlerPageNumber,
+    handlerPageSize,
+    loading,
+    pageNumber,
+    pageSize,
+    tableHeaderData,
+  } = useUsers()
+  const tableData = data?.getUsers.users?.map(el => {
     return {
       1: (
         <div className={s.table__users}>
@@ -46,11 +37,25 @@ export const UsersTable = () => {
 
   return (
     <div className={s.table}>
+      {loading && <LoaderBlock />}
       <Table
         classNameHeadersItem={s.table__headers}
-        headers={headers}
-        tableData={exampleUsersData}
+        headers={tableHeaderData}
+        tableData={tableData || []}
       />
+      {data
+        ? data?.getUsers.pagination.totalCount > 10 && (
+            <Pagination
+              className={'justify-start'}
+              currentPage={pageNumber}
+              onChangePagesPortion={handlerPageSize}
+              onClickPaginationButton={handlerPageNumber}
+              pagesCount={data?.getUsers.pagination.pagesCount}
+              pagesPortion={String(pageSize)}
+            />
+          )
+        : null}
+      {error?.message && <Alert message={error?.message} purpose={'alert'} type={'error'}></Alert>}
     </div>
   )
 }
