@@ -1,15 +1,18 @@
 import React from 'react'
 
+import { useUsers } from '@/features/users/users-list/model/useUsers'
 import { Block } from '@packages/shared/assets'
-import { Table, TableHeader } from '@packages/shared/ui'
+import { Pagination, Table, TableHeader } from '@packages/shared/ui'
+import Link from 'next/link'
 
 import s from './styles.module.scss'
 
-import { User } from '../../../types'
-import { exampleUsersPaginationModel } from '../../testData'
 import { Options } from '../options/Options'
 
 export const UsersTable = () => {
+  const { handlerPageNumber, handlerPageSize, usersListData, usersListError, usersListLoading } =
+    useUsers()
+
   const headers: TableHeader[] = [
     {
       name: 'User ID',
@@ -29,18 +32,18 @@ export const UsersTable = () => {
       name: '',
     },
   ]
-  const exampleUsersData = exampleUsersPaginationModel.users?.map((el: User) => {
+  const exampleUsersData = usersListData?.getUsers.users.map(user => {
     return {
       1: (
         <div className={s.table__users}>
-          <div className={s.table__bun}>{!!el.userBan?.reason && <Block />}</div>
-          {el.id}
+          <div className={s.table__bun}>{!!user.userBan?.reason && <Block />}</div>
+          {user.id}
         </div>
       ),
-      2: <span>{`${el.profile.firstName} ${el.profile.lastName}`}</span>,
-      3: el.userName,
-      4: new Date(el.createdAt).toLocaleDateString(),
-      5: <Options firstName={el.profile.firstName} lastName={el.profile.lastName} />,
+      2: <span>{user.userName}</span>,
+      3: <Link href={`user/${user.id}`}>{user.userName}</Link>,
+      4: new Date(user.createdAt).toLocaleDateString(),
+      5: <Options userName={user.userName} />,
     }
   })
 
@@ -49,7 +52,14 @@ export const UsersTable = () => {
       <Table
         classNameHeadersItem={s.table__headers}
         headers={headers}
-        tableData={exampleUsersData}
+        tableData={exampleUsersData || []}
+      />
+      <Pagination
+        currentPage={usersListData?.getUsers.pagination.page || 1}
+        onChangePagesPortion={handlerPageSize}
+        onClickPaginationButton={handlerPageNumber}
+        pagesCount={usersListData?.getUsers.pagination.pagesCount || 1}
+        pagesPortion={String(usersListData?.getUsers.pagination.pageSize || 10)}
       />
     </div>
   )
