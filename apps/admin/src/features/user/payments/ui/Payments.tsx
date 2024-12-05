@@ -1,15 +1,14 @@
 import { SubscriptionByPaymentModel } from '@/common/__generated-types__/graphql'
+import { usePayments } from '@/features/user/payments'
 import { Alert, Loader, Pagination, Table, Typography } from '@packages/shared/ui'
-import { TableData } from '@packages/shared/ui/table/Table'
+import { useRouter } from 'next/router'
 
 import style from './payments.module.scss'
 
-import { usePayments } from '../../model/usePayments'
+import { TableData } from '../../../../../../../packages/shared/src/ui/table/Table'
 
 export const Payments = () => {
-  // const router = useRouter()
-  // const { id } = router.query
-  const id = 1435
+  const { query } = useRouter()
 
   const {
     currentPage,
@@ -20,7 +19,7 @@ export const Payments = () => {
     handlePaymentsPortionChange,
     loading,
     pagesCount,
-  } = usePayments(id)
+  } = usePayments(Number(query.id))
 
   let payments = [] as TableData[]
 

@@ -1,19 +1,17 @@
 import * as React from 'react'
 
-import { formatDate } from '@/features/current-user/lib/utils/formatDate'
-import { useGetUser } from '@/features/current-user/model/useGetUser'
-import { CurrentUserTabs } from '@/widgets/current-user-tabs/ui/CurrentUserTabs'
+import { useGetUser } from '@/features/user/header/'
+import { formatDate } from '@/features/user/utils/formatDate'
 import { ArrowBackOutline } from '@packages/shared/assets'
 import { Alert, Avatar, Loader, Typography } from '@packages/shared/ui'
+import { useRouter } from 'next/router'
 
-import cl from './CurrentUser.module.scss'
+import cl from './userHeader.module.scss'
 
 type Props = {}
-export const CurrentUser = ({}: Props) => {
-  // const router = useRouter()
-  // const { id } = router.query
-  const id = 1431 //todo: remove mock
-  const { data, error, loading } = useGetUser(Number(id))
+export const UserHeader = ({}: Props) => {
+  const { query } = useRouter()
+  const { data, error, loading } = useGetUser(Number(query.id))
   const user = data?.getUser
 
   const exampleImg =
@@ -56,7 +54,6 @@ export const CurrentUser = ({}: Props) => {
           <Typography variant={'medium-text'}>{formatDate(user.createdAt)}</Typography>
         </div>
       </div>
-      <CurrentUserTabs />
       {error && <Alert message={error.message} type={'error'} />}
     </div>
   )

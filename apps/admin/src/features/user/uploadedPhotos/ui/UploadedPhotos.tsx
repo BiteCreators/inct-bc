@@ -1,16 +1,14 @@
+import { GET_POSTS_BY_USER } from '@/features/user/uploadedPhotos/model/postsQuery'
 import { useQuery } from '@apollo/client'
 import { Alert, Loader, Typography } from '@packages/shared/ui'
+import { useRouter } from 'next/router'
 
 import style from './uploadedPhotos.module.scss'
 
-import { GET_POSTS_BY_USER } from '../../api/postsQuery'
-
 export const UploadedPhotos = () => {
-  // const router = useRouter()
-  // const { id } = router.query
-  const userId = 1565
+  const { query } = useRouter()
   const { data, error, loading } = useQuery(GET_POSTS_BY_USER, {
-    variables: { userId },
+    variables: { userId: Number(query.id) },
   })
 
   return (
