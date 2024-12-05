@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useAuth } from '@/common/lib/hooks/useAuth'
-import { CurrentUser } from '@/features/current-user'
+import { UserHeader } from '@/features/user/header'
 import { useRouter } from 'next/router'
 
 const ProtectedPage = () => {
@@ -25,7 +25,7 @@ const ProtectedPage = () => {
   return (
     <div>
       <h1>Users page</h1>
-      <CurrentUser />
+      <UserHeader />
     </div>
   )
 }

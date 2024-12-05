@@ -1,7 +1,9 @@
 import { useState } from 'react'
 
-import { Payments, UploadedPhotos } from '@/features/current-user'
-import { Followers } from '@/features/user/followers/ui/Followers'
+import { Followers } from '@/features/user/followers'
+import { Following } from '@/features/user/following/'
+import { Payments } from '@/features/user/payments/'
+import { UploadedPhotos } from '@/features/user/uploadedPhotos/'
 import { TabsBase } from '@packages/shared/ui'
 
 type TabValues = 'followers' | 'following' | 'payments' | 'uploaded-photos'
@@ -32,7 +34,7 @@ export const CurrentUserTabs = ({}: Props) => {
           value: 'followers',
         },
         {
-          content: <div>Following</div>,
+          content: <Following />,
           label: 'Following',
           value: 'following',
         },

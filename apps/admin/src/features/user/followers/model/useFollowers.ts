@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client'
 import { useScopedTranslation } from '@packages/shared/hooks'
 import { useRouter } from 'next/router'
 
-export const UseFollowers = () => {
+export const useFollowers = () => {
   const { query } = useRouter()
   const t = useScopedTranslation('FollowersAdmin')
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { UserFollowing } from '@/features/users'
+import { Following } from '@/features/users'
 
 export default function Users() {
-  return <UserFollowing />
+  return <Following />
 }
