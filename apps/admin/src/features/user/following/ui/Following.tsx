@@ -4,10 +4,10 @@ import { Table, TableHeader } from '@packages/shared/ui'
 
 import s from './styles.module.scss'
 
-import { Follow } from '../../types'
-import { exampleFollowPaginationModel } from '../testData'
+import { Follow } from '../../../users/types'
+import { exampleFollowPaginationModel } from '../model/testData'
 
-export const UserFollowing = () => {
+export const Following = () => {
   const headers: TableHeader[] = [
     {
       name: 'User ID',

@@ -1,4 +1,4 @@
-import { FollowPaginationModel } from '../types'
+import { FollowPaginationModel } from '../../../users/types'
 
 export const exampleFollowPaginationModel: FollowPaginationModel = {
   items: [
