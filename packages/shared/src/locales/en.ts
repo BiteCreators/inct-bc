@@ -1,7 +1,7 @@
-import { followersAdminEn } from '../../../../apps/admin/src/locales/followers'
 import { authTranslationEn } from './auth'
 import { commonTranslationEn } from './common'
 import { devicesTranslationsEn } from './devices'
+import { followersAdminEn } from './followers'
 import { internationalizationTranslationEn } from './internationalization'
 import { navigationTranslationEn } from './navigation'
 import { paymentsTranslationsEn } from './payments'
