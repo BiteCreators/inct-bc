@@ -41,7 +41,7 @@ export const UsersTable = () => {
         </div>
       ),
       2: <span>{user.userName}</span>,
-      3: <Link href={`user/${user.id}`}>{user.userName}</Link>,
+      3: <Link href={`users/${user.id}`}>{user.userName}</Link>,
       4: new Date(user.createdAt).toLocaleDateString(),
       5: <Options userName={user.userName} />,
     }

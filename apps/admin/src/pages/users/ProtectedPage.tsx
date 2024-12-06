@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useAuth } from '@/common/lib/hooks/useAuth'
-import { UserHeader } from '@/features/user/header'
+import { UserHeader } from '@/features/user/ui/UserHeader'
 import { useRouter } from 'next/router'
 
 const ProtectedPage = () => {

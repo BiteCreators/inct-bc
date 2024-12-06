@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { Followers } from '@/features/user/followers'
-import { Following } from '@/features/user/following/'
-import { Payments } from '@/features/user/payments/'
-import { UploadedPhotos } from '@/features/user/uploadedPhotos/'
+import { Followers } from '@/features/user/ui/Followers'
+import { Following } from '@/features/user/ui/Following'
+import { Payments } from '@/features/user/ui/Payments'
+import { UploadedPhotos } from '@/features/user/ui/UploadedPhotos'
 import { TabsBase } from '@packages/shared/ui'
 
 type TabValues = 'followers' | 'following' | 'payments' | 'uploaded-photos'
