@@ -20,6 +20,7 @@ const nextConfig = {
     config.plugins.push(
       new NextFederationPlugin({
         exposes: {
+          './middleware': './src/application/middleware/index.ts',
           './payments-page': './src/pages/payments/PaymentsPage.tsx',
           './posts-page': './src/pages/posts/PostsPage.tsx',
           './providers': './src/application/providers/Providers.tsx',
