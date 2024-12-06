@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import { useGetUser } from '@/features/user/header/'
-import { formatDate } from '@/features/user/utils/formatDate'
+import { formatDate } from '@/common/lib/utils/formatDate'
+import { useGetUser } from '@/features/user/model/useGetUser'
 import { ArrowBackOutline } from '@packages/shared/assets'
 import { Alert, Avatar, Loader, Typography } from '@packages/shared/ui'
 import { useRouter } from 'next/router'
 
-import cl from './userHeader.module.scss'
+import cl from '../styles/userHeader.module.scss'
 
 type Props = {}
 export const UserHeader = ({}: Props) => {

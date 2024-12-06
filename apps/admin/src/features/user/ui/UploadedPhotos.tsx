@@ -1,9 +1,9 @@
-import { GET_POSTS_BY_USER } from '@/features/user/uploadedPhotos/model/postsQuery'
+import { GET_POSTS_BY_USER } from '@/features/user/api/postsQuery'
 import { useQuery } from '@apollo/client'
 import { Alert, Loader, Typography } from '@packages/shared/ui'
 import { useRouter } from 'next/router'
 
-import style from './uploadedPhotos.module.scss'
+import style from '../styles/uploadedPhotos.module.scss'
 
 export const UploadedPhotos = () => {
   const { query } = useRouter()

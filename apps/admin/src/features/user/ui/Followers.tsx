@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { useFollowers } from '@/features/user/followers'
+import { useFollowers } from '@/features/user/model/useFollowers'
 import { Alert, Pagination, Table } from '@packages/shared/ui'
-import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 import Link from 'next/link'
+
+import { LoaderBlock } from '../../../../../../packages/shared/src/ui/loader/LoaderBlock'
 
 export const Followers = () => {
   const {

@@ -1,11 +1,11 @@
 import { SubscriptionByPaymentModel } from '@/common/__generated-types__/graphql'
-import { usePayments } from '@/features/user/payments'
+import { usePayments } from '@/features/user/model/usePayments'
 import { Alert, Loader, Pagination, Table, Typography } from '@packages/shared/ui'
 import { useRouter } from 'next/router'
 
-import style from './payments.module.scss'
+import style from '../styles/payments.module.scss'
 
-import { TableData } from '../../../../../../../packages/shared/src/ui/table/Table'
+import { TableData } from '../../../../../../packages/shared/src/ui/table/Table'
 
 export const Payments = () => {
   const { query } = useRouter()
