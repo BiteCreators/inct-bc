@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { GET_PAYMENTS_BY_USER } from '@/features/user/payments/model/paymentsQuery'
+import { GET_PAYMENTS_BY_USER } from '@/features/user/api/paymentsQuery'
 import { useQuery } from '@apollo/client'
 
 export const usePayments = (userId: number) => {

@@ -1,4 +1,4 @@
-import { GET_USER } from '@/features/user/header/model/userQueries'
+import { GET_USER } from '@/features/user/api/userQueries'
 import { useQuery } from '@apollo/client'
 
 export const useGetUser = (userId: number) => {

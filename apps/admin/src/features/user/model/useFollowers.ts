@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { SortDirection } from '@/common/__generated-types__/graphql'
-import { GET_FOLLOWERS } from '@/features/user/followers/model/followersQueries'
+import { GET_FOLLOWERS } from '@/features/user/api/followersQueries'
 import { useQuery } from '@apollo/client'
 import { useScopedTranslation } from '@packages/shared/hooks'
 import { useRouter } from 'next/router'
