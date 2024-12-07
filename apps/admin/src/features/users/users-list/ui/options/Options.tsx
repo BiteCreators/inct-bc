@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react'
-
 import { Block, MoreHorizontalOutline, PersonRemoveOutline } from '@packages/shared/assets'
 
 import s from './style.module.scss'
@@ -8,11 +6,10 @@ import { useOptions } from '../../model/useOptions'
 import { ActionConfirmations } from '../modals/ActionConfirmations'
 
 type Props = {
-  firstName?: string
-  lastName?: string
+  userName?: string
 }
 
-export const Options = ({ firstName, lastName }: Props) => {
+export const Options = ({ userName }: Props) => {
   const {
     handleConfirmBan,
     handleConfirmDelete,
@@ -64,14 +61,13 @@ export const Options = ({ firstName, lastName }: Props) => {
         </li>
       </ul>
       <ActionConfirmations
-        firstName={firstName}
         handleConfirmBan={handleConfirmBan}
         handleConfirmDelete={handleConfirmDelete}
         isOpenBanModal={isOpenBanModal}
         isOpenDeleteModal={isOpenDeleteModal}
-        lastName={lastName}
         setIsOpenBanModal={setIsOpenBanModal}
         setIsOpenDeleteModal={setIsOpenDeleteModal}
+        userName={userName}
       />
     </div>
   )

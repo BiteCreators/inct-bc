@@ -6,36 +6,34 @@ import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/Acti
 import s from './styles.module.scss'
 
 type Props = {
-  firstName?: string
   handleConfirmBan: () => void
   handleConfirmDelete: () => void
   isOpenBanModal: boolean
   isOpenDeleteModal: boolean
-  lastName?: string
   setIsOpenBanModal: (isOpen: boolean) => void
   setIsOpenDeleteModal: (isOpen: boolean) => void
+  userName?: string
 }
 
 export const ActionConfirmations = ({
-  firstName,
   handleConfirmBan,
   handleConfirmDelete,
   isOpenBanModal,
   isOpenDeleteModal,
-  lastName,
   setIsOpenBanModal,
   setIsOpenDeleteModal,
+  userName,
 }: Props) => {
   const messageDeleteModal = (
     <>
       Are you sure to delete user&nbsp;
-      <span className={s.name}>{`${firstName} ${lastName}`}</span>?
+      <span className={s.name}>{userName}</span>?
     </>
   )
   const messageBanModal = (
     <>
       Are you sure to ban this user,&nbsp;
-      <span className={s.name}>{`${firstName} ${lastName}`}</span>?
+      <span className={s.name}>{userName}</span>?
     </>
   )
 

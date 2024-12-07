@@ -1,9 +1,10 @@
-@import '../../../../styles/vars.scss';
+@import '@/styles/vars';
 
 .currentUserContainer {
   width: 100%;
   padding: 20px;
 }
+
 .back {
   display: flex;
   gap: 12px;
