@@ -6,7 +6,7 @@ import { ArrowBackOutline } from '@packages/shared/assets'
 import { Alert, Avatar, Loader, Typography } from '@packages/shared/ui'
 import { useRouter } from 'next/router'
 
-import cl from '../styles/userHeader.module.scss'
+import cl from './userHeader.module.scss'
 
 type Props = {}
 export const UserHeader = ({}: Props) => {

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { Alert, Loader, Typography } from '@packages/shared/ui'
 import { useRouter } from 'next/router'
 
-import style from '../styles/uploadedPhotos.module.scss'
+import style from './uploadedPhotos.module.scss'
 
 export const UploadedPhotos = () => {
   const { query } = useRouter()

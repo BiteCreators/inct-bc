@@ -1,13 +1,13 @@
 import React from 'react'
 
-import { UserHeader } from '@/features/user/ui/UserHeader'
-import { CurrentUserTabs } from '@/widgets/current-user-tabs/ui/CurrentUserTabs'
+import { UserTabs } from '@/features/user'
+import { UserHeader } from '@/features/user/ui/user-header/UserHeader'
 
 export default function User() {
   return (
     <>
       <UserHeader />
-      <CurrentUserTabs />
+      <UserTabs />
     </>
   )
 }

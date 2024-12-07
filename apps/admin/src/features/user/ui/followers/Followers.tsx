@@ -4,7 +4,7 @@ import { useFollowers } from '@/features/user/model/useFollowers'
 import { Alert, Pagination, Table } from '@packages/shared/ui'
 import Link from 'next/link'
 
-import { LoaderBlock } from '../../../../../../packages/shared/src/ui/loader/LoaderBlock'
+import { LoaderBlock } from '../../../../../../../packages/shared/src/ui/loader/LoaderBlock'
 
 export const Followers = () => {
   const {

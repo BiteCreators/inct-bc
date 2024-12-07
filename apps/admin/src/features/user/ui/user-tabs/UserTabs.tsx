@@ -1,16 +1,15 @@
 import { useState } from 'react'
 
-import { Followers } from '@/features/user/ui/Followers'
-import { Following } from '@/features/user/ui/Following'
-import { Payments } from '@/features/user/ui/Payments'
-import { UploadedPhotos } from '@/features/user/ui/UploadedPhotos'
 import { TabsBase } from '@packages/shared/ui'
+
+import { Followers } from '../followers/Followers'
+import { Following } from '../following/Following'
+import { Payments } from '../payments/Payments'
+import { UploadedPhotos } from '../uploaded-photos/UploadedPhotos'
 
 type TabValues = 'followers' | 'following' | 'payments' | 'uploaded-photos'
 
-type Props = {}
-
-export const CurrentUserTabs = ({}: Props) => {
+export const UserTabs = () => {
   const [selectedTab, setSelectedTab] = useState<TabValues>('uploaded-photos')
 
   return (
