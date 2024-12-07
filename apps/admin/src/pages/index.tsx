@@ -1,4 +1,5 @@
-import ProtectedPage from '@/pages/users'
+import { DefaultLayout } from '@/application/DefautlLayout'
+import Users from '@/pages/users'
 import localFont from 'next/font/local'
 
 const geistSans = localFont({
@@ -12,12 +13,16 @@ const geistMono = localFont({
   weight: '100 900',
 })
 
-export default function Home() {
+function Home() {
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} font-[family-name:var(--font-geist-sans)]`}
     >
-      <ProtectedPage />
+      <Users />
     </div>
   )
 }
+
+Home.getLayout = DefaultLayout
+
+export default Home
