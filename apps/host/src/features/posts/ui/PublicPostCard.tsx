@@ -48,7 +48,7 @@ export const PublicPostCard = ({ post }: Props) => {
       <Typography className={'mt-3 text-light-900'} variant={'small-text'}>
         {relativeTime}
       </Typography>
-      <Typography className={'mt-[3px]'}>
+      <Typography className={'mt-[3px] break-all'}>
         {textToShow}
         {collapsable && (
           <span

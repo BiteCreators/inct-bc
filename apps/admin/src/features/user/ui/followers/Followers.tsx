@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { UseFollowers } from '@/features/user/followers/model/useFollowers'
+import { useFollowers } from '@/features/user/model/useFollowers'
 import { Alert, Pagination, Table } from '@packages/shared/ui'
-import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 import Link from 'next/link'
+
+import { LoaderBlock } from '../../../../../../../packages/shared/src/ui/loader/LoaderBlock'
 
 export const Followers = () => {
   const {
@@ -15,7 +16,7 @@ export const Followers = () => {
     pageNumber,
     pageSize,
     tableHeaderData,
-  } = UseFollowers()
+  } = useFollowers()
 
   const tableData = data?.getFollowers.items.map(follower => ({
     1: follower.userId,
@@ -23,6 +24,10 @@ export const Followers = () => {
     3: <Link href={`profile/${follower.userId}`}>{follower.userName}</Link>,
     4: new Date(follower.createdAt).toLocaleDateString(),
   }))
+
+  if (data?.getFollowers.totalCount === 0) {
+    return <p>No Followers</p>
+  }
 
   return (
     <>

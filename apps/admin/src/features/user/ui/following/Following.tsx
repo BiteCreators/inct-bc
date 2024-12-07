@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Table, TableHeader } from '@packages/shared/ui'
 
-import s from './styles.module.scss'
+import s from './following.module.scss'
 
-import { Follow } from '../../types'
-import { exampleFollowPaginationModel } from '../testData'
+import { Follow } from '../../../users/types'
+import { exampleFollowPaginationModel } from '../../model/testFollowingData'
 
-export const UserFollowing = () => {
+export const Following = () => {
   const headers: TableHeader[] = [
     {
       name: 'User ID',
