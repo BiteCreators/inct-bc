@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useMutation } from '@apollo/client'
 
 import { BAN_USER } from '../api/banUserQuery'
+import { REMOVE_USER } from '../api/removeUserQuery'
 import { UNBAN_USER } from '../api/unbanUserQuery'
 
 export const useOptions = ({
@@ -29,9 +30,19 @@ export const useOptions = ({
       refetchUsers()
     },
   })
+  const [removeUser] = useMutation(REMOVE_USER, {
+    onCompleted: () => {
+      refetchUsers()
+    },
+  })
 
-  const handleConfirmDelete = () => {
-    setIsOpenDeleteModal(false)
+  const handleConfirmDelete = async () => {
+    try {
+      await removeUser({ variables: { userId } })
+      setIsOpenDeleteModal(false)
+    } catch (error) {
+      setError('This user has banned you')
+    }
   }
   const handleConfirmBan = async (banReason: string) => {
     try {
