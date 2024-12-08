@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { SortDirection } from '@/common/__generated-types__/graphql'
+import { useSortUsers } from '@/common/lib/hooks/useSortUsers'
 import { GET_FOLLOWERS } from '@/features/user/api/followersQueries'
 import { useQuery } from '@apollo/client'
 import { useScopedTranslation } from '@packages/shared/hooks'
@@ -10,12 +10,14 @@ export const useFollowers = () => {
   const { query } = useRouter()
   const t = useScopedTranslation('FollowersAdmin')
 
-  const [sortBy, setSortBy] = useState('createdAt')
-  const [sortDirection, setSortDirection] = useState<SortDirection>(SortDirection.Desc)
-  const [sortDirectionBtnUserName, setSortDirectionBtnUserName] = useState<'asc' | 'desc' | null>(
-    null
-  )
-  const [sortDirectionBtnDate, setSortDirectionBtnDate] = useState<'asc' | 'desc' | null>('desc')
+  const {
+    sortBy,
+    sortDate,
+    sortDirection,
+    sortDirectionBtnDate,
+    sortDirectionBtnUserName,
+    sortName,
+  } = useSortUsers()
 
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
@@ -31,27 +33,13 @@ export const useFollowers = () => {
     },
     {
       name: t.userName,
-      onClickSortButton: () => {
-        setSortBy('userName')
-        setSortDirection(
-          sortDirection === SortDirection.Desc ? SortDirection.Asc : SortDirection.Desc
-        )
-        setSortDirectionBtnUserName(sortDirection === SortDirection.Desc ? 'desc' : 'asc')
-        setSortDirectionBtnDate(null)
-      },
+      onClickSortButton: sortName,
       sort: sortDirectionBtnUserName,
     },
     { name: t.profileLink },
     {
       name: t.subscriptionDate,
-      onClickSortButton: () => {
-        setSortBy('createdAt')
-        setSortDirection(
-          sortDirection === SortDirection.Desc ? SortDirection.Asc : SortDirection.Desc
-        )
-        setSortDirectionBtnDate(sortDirection === SortDirection.Desc ? 'asc' : 'desc')
-        setSortDirectionBtnUserName(null)
-      },
+      onClickSortButton: sortDate,
       sort: sortDirectionBtnDate,
     },
   ]

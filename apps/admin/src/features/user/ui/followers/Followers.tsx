@@ -4,6 +4,8 @@ import { useFollowers } from '@/features/user/model/useFollowers'
 import { Alert, Pagination, Table } from '@packages/shared/ui'
 import Link from 'next/link'
 
+import s from './followers.module.scss'
+
 import { LoaderBlock } from '../../../../../../../packages/shared/src/ui/loader/LoaderBlock'
 
 export const Followers = () => {
@@ -36,7 +38,7 @@ export const Followers = () => {
       {data
         ? data?.getFollowers.totalCount > 10 && (
             <Pagination
-              className={'justify-start'}
+              className={s.pagination}
               currentPage={pageNumber}
               onChangePagesPortion={handlerPageSize}
               onClickPaginationButton={handlerPageNumber}

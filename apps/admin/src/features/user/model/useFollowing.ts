@@ -1,11 +1,15 @@
 import { useState } from 'react'
 
 import { useSortUsers } from '@/common/lib/hooks/useSortUsers'
-import { GET_USERS_FOR_LIST } from '@/features/users/users-list/model/usersQueries'
 import { useQuery } from '@apollo/client'
 import { TableHeader } from '@packages/shared/ui'
+import { useRouter } from 'next/router'
 
-export const useUsers = () => {
+import { GET_FOLLOWING } from '../api/followingQuery'
+
+export const useFollowing = () => {
+  const { query } = useRouter()
+
   const {
     sortBy,
     sortDate,
@@ -17,13 +21,10 @@ export const useUsers = () => {
 
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(10)
-  const {
-    data: usersListData,
-    error: usersListError,
-    loading: usersListLoading,
-  } = useQuery(GET_USERS_FOR_LIST, {
+
+  const { data, error, loading } = useQuery(GET_FOLLOWING, {
     fetchPolicy: 'no-cache',
-    variables: { pageNumber, pageSize, sortBy, sortDirection },
+    variables: { pageNumber, pageSize, sortBy, sortDirection, userId: query.id ? +query.id : 1 },
   })
 
   const tableHeaderData: TableHeader[] = [
@@ -39,29 +40,23 @@ export const useUsers = () => {
       name: 'Profile link',
     },
     {
-      name: 'Date added',
+      name: 'Subscription Date',
       onClickSortButton: sortDate,
       sort: sortDirectionBtnDate,
     },
-    {
-      name: '',
-    },
   ]
 
-  const handlerPageNumber = (pageNumber: number) => {
-    setPageNumber(pageNumber)
-  }
-
-  const handlerPageSize = (pageSize: string) => {
-    setPageSize(+pageSize)
-  }
+  const handlerPageSize = (pagesPortion: string) => setPageSize(+pagesPortion)
+  const handlerPageNumber = (page: number) => setPageNumber(page)
 
   return {
+    data,
+    error,
     handlerPageNumber,
     handlerPageSize,
+    loading,
+    pageNumber,
+    pageSize,
     tableHeaderData,
-    usersListData,
-    usersListError,
-    usersListLoading,
   }
 }
