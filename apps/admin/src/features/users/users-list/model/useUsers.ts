@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import { GET_USERS_FOR_LIST } from '@/features/users/users-list/model/usersQueries'
 import { useQuery } from '@apollo/client'
+
+import { GET_USERS_FOR_LIST } from './usersQueries'
 
 export const useUsers = () => {
   const [pageNumber, setPageNumber] = useState<number>(1)
@@ -10,6 +11,7 @@ export const useUsers = () => {
     data: usersListData,
     error: usersListError,
     loading: usersListLoading,
+    refetch,
   } = useQuery(GET_USERS_FOR_LIST, {
     fetchPolicy: 'no-cache',
     variables: { pageNumber, pageSize },
@@ -23,9 +25,14 @@ export const useUsers = () => {
     setPageSize(+pageSize)
   }
 
+  const refetchUsers = () => {
+    refetch({ pageNumber, pageSize })
+  }
+
   return {
     handlerPageNumber,
     handlerPageSize,
+    refetchUsers,
     usersListData,
     usersListError,
     usersListLoading,

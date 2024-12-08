@@ -10,8 +10,14 @@ import s from './styles.module.scss'
 import { Options } from '../options/Options'
 
 export const UsersTable = () => {
-  const { handlerPageNumber, handlerPageSize, usersListData, usersListError, usersListLoading } =
-    useUsers()
+  const {
+    handlerPageNumber,
+    handlerPageSize,
+    refetchUsers,
+    usersListData,
+    usersListError,
+    usersListLoading,
+  } = useUsers()
 
   const headers: TableHeader[] = [
     {
@@ -43,7 +49,14 @@ export const UsersTable = () => {
       2: <span>{user.userName}</span>,
       3: <Link href={`users/${user.id}`}>{user.userName}</Link>,
       4: new Date(user.createdAt).toLocaleDateString(),
-      5: <Options userName={user.userName} />,
+      5: (
+        <Options
+          isBan={!!user.userBan?.reason}
+          refetchUsers={refetchUsers}
+          userId={user.id}
+          userName={user.userName}
+        />
+      ),
     }
   })
 
