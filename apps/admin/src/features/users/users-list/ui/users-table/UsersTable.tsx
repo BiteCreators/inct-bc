@@ -2,7 +2,8 @@ import React from 'react'
 
 import { useUsers } from '@/features/users/users-list/model/useUsers'
 import { Block } from '@packages/shared/assets'
-import { Pagination, Table, TableHeader } from '@packages/shared/ui'
+import { Alert, Pagination, Table } from '@packages/shared/ui'
+import { LoaderBlock } from '@packages/shared/ui/loader/LoaderBlock'
 import Link from 'next/link'
 
 import s from './styles.module.scss'
@@ -10,33 +11,20 @@ import s from './styles.module.scss'
 import { Options } from '../options/Options'
 
 export const UsersTable = () => {
-  const { handlerPageNumber, handlerPageSize, usersListData, usersListError, usersListLoading } =
-    useUsers()
+  const {
+    handlerPageNumber,
+    handlerPageSize,
+    tableHeaderData,
+    usersListData,
+    usersListError,
+    usersListLoading,
+  } = useUsers()
 
-  const headers: TableHeader[] = [
-    {
-      name: 'User ID',
-    },
-    {
-      name: 'Username',
-      sort: 'desc',
-    },
-    {
-      name: 'Profile link',
-    },
-    {
-      name: 'Date added',
-      sort: null,
-    },
-    {
-      name: '',
-    },
-  ]
   const exampleUsersData = usersListData?.getUsers.users.map(user => {
     return {
       1: (
-        <div className={s.table__users}>
-          <div className={s.table__bun}>{!!user.userBan?.reason && <Block />}</div>
+        <div className={s.users}>
+          <div className={s.bun}>{!!user.userBan?.reason && <Block />}</div>
           {user.id}
         </div>
       ),
@@ -49,18 +37,28 @@ export const UsersTable = () => {
 
   return (
     <div className={s.table}>
+      {usersListLoading && <LoaderBlock />}
       <Table
-        classNameHeadersItem={s.table__headers}
-        headers={headers}
+        classNameHeadersItem={s.headers}
+        headers={tableHeaderData}
         tableData={exampleUsersData || []}
       />
-      <Pagination
-        currentPage={usersListData?.getUsers.pagination.page || 1}
-        onChangePagesPortion={handlerPageSize}
-        onClickPaginationButton={handlerPageNumber}
-        pagesCount={usersListData?.getUsers.pagination.pagesCount || 1}
-        pagesPortion={String(usersListData?.getUsers.pagination.pageSize || 10)}
-      />
+      {usersListData
+        ? usersListData?.getUsers.pagination.totalCount > 10 && (
+            <Pagination
+              className={s.pagination}
+              currentPage={usersListData?.getUsers.pagination.page || 1}
+              onChangePagesPortion={handlerPageSize}
+              onClickPaginationButton={handlerPageNumber}
+              pagesCount={usersListData?.getUsers.pagination.pagesCount || 1}
+              pagesPortion={String(usersListData?.getUsers.pagination.pageSize || 10)}
+            />
+          )
+        : null}
+
+      {usersListError?.message && (
+        <Alert message={usersListError?.message} purpose={'alert'} type={'error'}></Alert>
+      )}
     </div>
   )
 }
