@@ -10,8 +10,18 @@ import s from './styles.module.scss'
 import { Options } from '../options/Options'
 
 export const UsersTable = () => {
-  const { handlerPageNumber, handlerPageSize, usersListData, usersListError, usersListLoading } =
-    useUsers()
+  const {
+    handlerPageNumber,
+    handlerPageSize,
+    handlerSortByCreatedAt,
+    handlerSortByName,
+    sortDirection,
+    sortDirectionBtnDate,
+    sortDirectionBtnUsername,
+    usersListData,
+    usersListError,
+    usersListLoading,
+  } = useUsers()
 
   const headers: TableHeader[] = [
     {
@@ -19,14 +29,16 @@ export const UsersTable = () => {
     },
     {
       name: 'Username',
-      sort: 'desc',
+      onClickSortButton: handlerSortByName,
+      sort: sortDirectionBtnUsername,
     },
     {
       name: 'Profile link',
     },
     {
       name: 'Date added',
-      sort: null,
+      onClickSortButton: handlerSortByCreatedAt,
+      sort: sortDirectionBtnDate,
     },
     {
       name: '',
