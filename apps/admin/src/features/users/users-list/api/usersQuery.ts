@@ -19,6 +19,9 @@ export const GET_USERS = gql(`
   ) {
     pagination{
       totalCount
+      pageSize
+      pagesCount
+      page
     }
     users{
       userName

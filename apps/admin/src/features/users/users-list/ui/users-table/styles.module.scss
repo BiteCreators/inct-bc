@@ -3,19 +3,23 @@
 .table {
   width: 972px;
   vertical-align: middle;
+}
 
-  &__headers {
-    &:last-child {
-      width: 24px;
-    }
-  }
-
-  &__users {
-    display: flex;
-    gap: 12px;
-  }
-
-  &__bun {
+.headers {
+  &:last-child {
     width: 24px;
   }
+}
+
+.users {
+  display: flex;
+  gap: 12px;
+}
+
+.bun {
+  width: 24px;
+}
+
+.pagination {
+  justify-content: flex-start;
 }

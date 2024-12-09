@@ -1,38 +1,47 @@
 import React from 'react'
 
-import { SortButton, SortBy } from '@/features/search-params/sort/ui/SortButton'
+import { SortButton, SortBy } from '@/features/search-params'
+import { useUsers } from '@/features/users/users-list/model/useUsers'
 import { Block } from '@packages/shared/assets'
-import { Alert, Loader, Pagination, Table, TableData, TableHeader } from '@packages/shared/ui'
+import { Pagination, Table } from '@packages/shared/ui'
+import { TableHeader } from '@packages/shared/ui'
 import Link from 'next/link'
 
 import s from './styles.module.scss'
 
-import { useUsersTable } from '../../model/useUsersTable'
 import { Options } from '../options/Options'
-
-type User = {
-  createdAt: any
-  id: number
-  profile: {
-    firstName?: null | string
-    lastName?: null | string
-  }
-  userBan?: {
-    reason: string
-  } | null
-  userName: string
-}
 
 export const UsersTable = () => {
   const {
-    currentPage,
-    data,
-    error,
-    handleDataPortionChange,
-    handlePaginationButtonClick,
-    loading,
-    pagesCount,
-  } = useUsersTable()
+    handlerPageNumber,
+    handlerPageSize,
+    refetchUsers,
+    usersListData,
+    usersListError,
+    usersListLoading,
+  } = useUsers()
+
+  const exampleUsersData = usersListData?.getUsers.users.map(user => {
+    return {
+      1: (
+        <div className={s.table__users}>
+          <div className={s.table__bun}>{!!user.userBan?.reason && <Block />}</div>
+          {user.id}
+        </div>
+      ),
+      2: <span>{user.userName}</span>,
+      3: <Link href={`users/${user.id}`}>{user.userName}</Link>,
+      4: new Date(user.createdAt).toLocaleDateString(),
+      5: (
+        <Options
+          isBan={!!user.userBan?.reason}
+          refetchUsers={refetchUsers}
+          userId={user.id}
+          userName={user.userName}
+        />
+      ),
+    }
+  })
   const headers: TableHeader[] = [
     {
       name: 'User ID',
@@ -52,36 +61,21 @@ export const UsersTable = () => {
       name: '',
     },
   ]
-  let usersData = [] as TableData[]
-
-  if (data?.getUsers.users) {
-    usersData = data.getUsers.users.map((el: User) => {
-      return {
-        1: (
-          <div className={s.table__users}>
-            <div className={s.table__bun}>{!!el.userBan?.reason && <Block />}</div>
-            {el.id}
-          </div>
-        ),
-        2: <span>{el.userName}</span>,
-        3: <Link href={`/users/${el.id}`}>{el.userName}</Link>,
-        4: new Date(el.createdAt).toLocaleDateString(),
-        5: <Options userName={el.profile.firstName || el.userName} />,
-      }
-    })
-  }
 
   return (
     <div className={s.table}>
-      {loading && <Loader fullScreen />}
-      <Table classNameHeadersItem={s.table__headers} headers={headers} tableData={usersData} />
-      <Pagination
-        currentPage={currentPage}
-        onChangePagesPortion={handleDataPortionChange}
-        onClickPaginationButton={handlePaginationButtonClick}
-        pagesCount={pagesCount}
+      <Table
+        classNameHeadersItem={s.table__headers}
+        headers={headers}
+        tableData={exampleUsersData || []}
       />
-      {error && <Alert message={error.message} type={'error'} />}
+      <Pagination
+        currentPage={usersListData?.getUsers.pagination.page || 1}
+        onChangePagesPortion={handlerPageSize}
+        onClickPaginationButton={handlerPageNumber}
+        pagesCount={usersListData?.getUsers.pagination.pagesCount || 1}
+        pagesPortion={String(usersListData?.getUsers.pagination.pageSize || 10)}
+      />
     </div>
   )
 }
