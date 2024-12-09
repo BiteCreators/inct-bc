@@ -5,8 +5,7 @@ import { TableRows } from './TableRows'
 
 export type TableHeader = {
   name: string
-  onClickSortButton?: () => void
-  sort?: 'asc' | 'desc' | null
+  sort?: React.ReactNode
 }
 export type TableData = {
   [key: number]: React.ReactNode | number | string
