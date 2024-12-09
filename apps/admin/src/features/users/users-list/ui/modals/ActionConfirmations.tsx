@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Select, SelectItem } from '@packages/shared/ui'
 import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/ActionComfiirmation'
@@ -6,24 +6,29 @@ import { ActionConfirmation } from '@packages/shared/ui/action-confirmation/Acti
 import s from './styles.module.scss'
 
 type Props = {
-  handleConfirmBan: () => void
+  handleConfirmBan: (banReason: string) => Promise<void>
   handleConfirmDelete: () => void
+  handleConfirmUnBan: () => void
+  isBan: boolean
   isOpenBanModal: boolean
   isOpenDeleteModal: boolean
   setIsOpenBanModal: (isOpen: boolean) => void
   setIsOpenDeleteModal: (isOpen: boolean) => void
   userName?: string
 }
-
 export const ActionConfirmations = ({
   handleConfirmBan,
   handleConfirmDelete,
+  handleConfirmUnBan,
+  isBan,
   isOpenBanModal,
   isOpenDeleteModal,
   setIsOpenBanModal,
   setIsOpenDeleteModal,
   userName,
 }: Props) => {
+  const [reason, setReason] = useState<string>('Another reason')
+
   const messageDeleteModal = (
     <>
       Are you sure to delete user&nbsp;
@@ -32,10 +37,17 @@ export const ActionConfirmations = ({
   )
   const messageBanModal = (
     <>
-      Are you sure to ban this user,&nbsp;
+      Are you sure to {isBan ? `unban` : 'ban'} this user,&nbsp;
       <span className={s.name}>{userName}</span>?
     </>
   )
+  const handleConfirmStatusBan = () => {
+    if (isBan) {
+      handleConfirmUnBan()
+    } else {
+      handleConfirmBan(reason)
+    }
+  }
 
   return (
     <>
@@ -54,16 +66,18 @@ export const ActionConfirmations = ({
         classNameMessage={s.message}
         isOpen={isOpenBanModal}
         message={messageBanModal}
-        onConfirm={handleConfirmBan}
+        onConfirm={handleConfirmStatusBan}
         onReject={() => {}}
         setIsOpen={setIsOpenBanModal}
         title={'Ban user'}
       >
-        <Select placeholder={'Reason for ban'}>
-          <SelectItem value={'1'}>Bad behavior</SelectItem>
-          <SelectItem value={'2'}>Advertising placement</SelectItem>
-          <SelectItem value={'3'}>Another reason</SelectItem>
-        </Select>
+        {!isBan && (
+          <Select onValueChange={setReason} value={reason}>
+            <SelectItem value={'Bad behavior'}>Bad behavior</SelectItem>
+            <SelectItem value={'Advertising placement'}>Advertising placement</SelectItem>
+            <SelectItem value={'Another reason'}>Another reason</SelectItem>
+          </Select>
+        )}
       </ActionConfirmation>
     </>
   )

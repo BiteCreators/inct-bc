@@ -1,4 +1,5 @@
 import { Block, MoreHorizontalOutline, PersonRemoveOutline } from '@packages/shared/assets'
+import { Alert } from '@packages/shared/ui'
 
 import s from './style.module.scss'
 
@@ -6,13 +7,18 @@ import { useOptions } from '../../model/useOptions'
 import { ActionConfirmations } from '../modals/ActionConfirmations'
 
 type Props = {
+  isBan: boolean
+  refetchUsers: () => void
+  userId: number
   userName?: string
 }
 
-export const Options = ({ userName }: Props) => {
+export const Options = ({ isBan, refetchUsers, userId, userName }: Props) => {
   const {
+    error,
     handleConfirmBan,
     handleConfirmDelete,
+    handleConfirmUnBan,
     isOpen,
     isOpenBanModal,
     isOpenDeleteModal,
@@ -21,7 +27,7 @@ export const Options = ({ userName }: Props) => {
     setIsOpenBanModal,
     setIsOpenDeleteModal,
     toggleOptions,
-  } = useOptions()
+  } = useOptions({ refetchUsers, userId })
 
   return (
     <div className={s.options} ref={optionsRef}>
@@ -50,7 +56,7 @@ export const Options = ({ userName }: Props) => {
             }}
           >
             <Block />
-            Ban in the system
+            {isBan ? 'Unban' : 'Ban in the system'}
           </button>
         </li>
         <li>
@@ -63,12 +69,15 @@ export const Options = ({ userName }: Props) => {
       <ActionConfirmations
         handleConfirmBan={handleConfirmBan}
         handleConfirmDelete={handleConfirmDelete}
+        handleConfirmUnBan={handleConfirmUnBan}
+        isBan={isBan}
         isOpenBanModal={isOpenBanModal}
         isOpenDeleteModal={isOpenDeleteModal}
         setIsOpenBanModal={setIsOpenBanModal}
         setIsOpenDeleteModal={setIsOpenDeleteModal}
         userName={userName}
       />
+      {error && <Alert message={error} purpose={'alert'} type={'error'}></Alert>}
     </div>
   )
 }
