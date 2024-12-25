@@ -9,7 +9,7 @@ import { NextPage } from "next";
 import { Inter } from "next/font/google";
 
 import "@/application/styles/globals.css";
-// import "@byte-creators/ui-kit/dist/ui/styles.css";
+import "@byte-creators/ui-kit/styles";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
