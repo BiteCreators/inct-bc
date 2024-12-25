@@ -6,11 +6,10 @@ import { Post } from "@/entities/posts";
 import { AddCommentTextarea, DesktopCommentsList } from "@/features/comments";
 import { EditPost } from "@/features/edit-post";
 import { PostActionsBlock, PostDescription } from "@/features/posts";
-import { Modal } from "@byte-creators/ui-kit";
+import { Button, Modal } from "@byte-creators/ui-kit";
 import { Close } from "@byte-creators/ui-kit/icons";
 import { Slider } from "@byte-creators/ui-kit";
 import { cn } from "@byte-creators/utils";
-import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/router";
 
 import { PostModalTitle } from "./PostModalTitle";
@@ -51,6 +50,19 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
         mode={"custom"}
         onOpenChange={handleOpenChange}
       >
+        <Button
+          variant="icon"
+          className={"absolute -top-8 -right-8 bg-transparent p-0"}
+          onClick={handleOpenChange}
+        >
+          <Close
+            className={cn(
+              "fill-current rounded-full text-light-100",
+              postWithPic && "bg-dark-100",
+              "lg-md:bg-transparent",
+            )}
+          />
+        </Button>
         <div className={cn(["flex flex-row"])}>
           {postWithPic && (
             <Slider
@@ -60,22 +72,6 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
             />
           )}
           <>
-            <Dialog.Close
-              className={cn(
-                "absolute m-5 focus:outline-none cursor-pointer",
-                postWithPic
-                  ? "invisible lg-md:-top-14 lg-md:-right-14 md:visible"
-                  : "-top-14 -right-14",
-              )}
-            >
-              <Close
-                className={cn(
-                  "fill-current rounded-full text-light-100",
-                  postWithPic && "bg-dark-100",
-                  "lg-md:bg-transparent",
-                )}
-              />
-            </Dialog.Close>
             <div
               className={
                 "max-w-[480px] max-h-[564px] flex flex-col overflow-hidden"

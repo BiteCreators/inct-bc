@@ -16,16 +16,18 @@ export const PostModalTitle = ({ changeEditMode, post }: Props) => {
   const isMyPost = post.ownerId === currentUser?.userId || false;
 
   return (
-    <Dialog.Title className={cn("font-bold py-3 px-6")}>
-      <div className={"flex justify-between w-full"}>
-        <PostOwnerProfile post={post} />
-        <DropdownPost
-          changeEditMode={changeEditMode}
-          className={"z-50"}
-          isMyPost={isMyPost}
-          post={post}
-        />
-      </div>
-    </Dialog.Title>
+    <Dialog.Root>
+      <Dialog.Title className={cn("font-bold py-3 px-6")}>
+        <div className={"flex justify-between w-full"}>
+          <PostOwnerProfile post={post} />
+          <DropdownPost
+            changeEditMode={changeEditMode}
+            className={"z-50"}
+            isMyPost={isMyPost}
+            post={post}
+          />
+        </div>
+      </Dialog.Title>
+    </Dialog.Root>
   );
 };
