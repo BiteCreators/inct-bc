@@ -1,12 +1,17 @@
 import React, { ReactNode } from 'react'
 
-import { Alert, Button, Loader, Modal, TextArea } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
-import { Slider } from '@/common/ui/slider/Slider'
 import { Post } from '@/entities/posts'
 import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/edit-post/model/useEditPost'
+import {
+  ActionConfirmation,
+  Alert,
+  Button,
+  LoaderBlock,
+  Modal,
+  Slider,
+  TextArea,
+} from '@byte-creators/ui-kit'
 
 type Props = {
   changeEditMode: (e: boolean) => void

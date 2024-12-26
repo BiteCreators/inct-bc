@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-import { StripeSvgrepoCom4 } from '@/common/assets/icons/components'
-import { cn } from '@/common/lib/utils/cn'
-import { Alert } from '@/common/ui'
 import { PAYMENT_PROVIDERS } from '@/entities/payments/types/payments.type'
 import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
+import { Alert } from '@byte-creators/ui-kit'
+import { StripeSvgrepoCom4 } from '@byte-creators/ui-kit/icons'
+import { cn } from '@byte-creators/utils'
 
 import { useSubmitPayment } from '../lib/hooks/useSubmitPayment'
 

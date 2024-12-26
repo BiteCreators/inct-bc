@@ -1,8 +1,7 @@
-import { FillBell } from '@/common/assets/icons/components'
-import OutlineBellNoNumber from '@/common/assets/icons/components/OutlineBellNoNumber'
-import { cn } from '@/common/lib/utils/cn'
-import { Dropdown } from '@/common/ui'
 import { notificationsApi } from '@/entities/notifications'
+import { Dropdown } from '@byte-creators/ui-kit'
+import { FillBell, OutlineBellNoNumber } from '@byte-creators/ui-kit/icons'
+import { cn } from '@byte-creators/utils'
 
 import { NotificationsList } from './Notifications'
 

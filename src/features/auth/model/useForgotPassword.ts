@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { authApi } from '@/entities/auth'
 import {
   ForgotPasswordFormData,
   createForgotPasswordSchema,
 } from '@/features/auth/lib/schemas/forgotPassword.schema'
+import { useScopedTranslation } from '@byte-creators/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
 
@@ -60,7 +60,12 @@ export const useForgotPassword = () => {
       setIsModalOpen(true)
     } catch (error) {
       setIsModalOpen(false)
-      handleApiError({ error, modifyMessage: modifyForgotPasswordApiError, setApiError, setError })
+      handleApiError({
+        error,
+        modifyMessage: modifyForgotPasswordApiError,
+        setApiError,
+        setError,
+      })
     } finally {
       setIsSubmitting(false)
     }

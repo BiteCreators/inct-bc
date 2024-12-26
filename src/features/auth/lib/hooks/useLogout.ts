@@ -2,8 +2,8 @@ import { useCookies } from 'react-cookie'
 
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { authApi, authSlice } from '@/entities/auth'
+import { useConfirmation } from '@byte-creators/utils'
 
 export const useLogout = () => {
   const [__, _, removeCookie] = useCookies(['accessToken'])

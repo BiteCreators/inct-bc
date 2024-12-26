@@ -1,4 +1,4 @@
-import { GoogleSvgrepoCom1 } from '@/common/assets/icons/components'
+import { GoogleSvgrepoCom1 } from '@byte-creators/ui-kit/icons'
 import Link from 'next/link'
 
 export const GoogleOauthButton = () => {

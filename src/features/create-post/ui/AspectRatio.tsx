@@ -1,12 +1,7 @@
 import React from 'react'
 
-import {
-  HorizontalOrientation,
-  Square,
-  VerticalOrientation,
-} from '@/common/assets/icons/components'
-
-import { SelectItem, SelectSideTop } from '../../../common/ui/select-side-top/SelectSideTop'
+import { SelectItem, SelectSideTop } from '@byte-creators/ui-kit'
+import { HorizontalOrientation, Square, VerticalOrientation } from '@byte-creators/ui-kit/icons'
 
 type Props = {
   setAspect: (aspect: number) => void

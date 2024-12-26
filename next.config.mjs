@@ -2,9 +2,9 @@
 const nextConfig = {
   i18n: {
     defaultLocale: "ru",
-    locales: ["en", "ru"]
+    locales: ["en", "ru"],
   },
-  reactStrictMode: true
+  reactStrictMode: true,
 };
 
 export default nextConfig;

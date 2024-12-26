@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { ArrowBackOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { PageLayout, Typography } from '@/common/ui'
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
+import { ArrowBackOutline, PageLayout, Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 import Link from 'next/link'
 
 const TermsService: NextPageWithLayout = () => {

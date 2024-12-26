@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { BookmarkOutline, HeartOutline, PaperPlaneOutline } from '@/common/assets/icons/components'
-import { cn } from '@/common/lib/utils/cn'
-import { Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
+import { Typography } from '@byte-creators/ui-kit'
+import { BookmarkOutline, HeartOutline, PaperPlaneOutline } from '@byte-creators/ui-kit/icons'
+import { cn } from '@byte-creators/utils'
 
 type Props = {
   post: Post

@@ -1,5 +1,5 @@
-import { Button } from '@/common/ui'
 import { useSignInForm } from '@/features/auth/model/useSignInForm'
+import { Button } from '@byte-creators/ui-kit'
 import Link from 'next/link'
 
 type Props = {

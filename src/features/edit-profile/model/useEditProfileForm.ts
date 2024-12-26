@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Profile, profileApi } from '@/entities/profile'
+import { profileApi } from '@/entities/profile'
+import {
+  EditProfileFormData,
+  createEditProfileSchema,
+} from '@/features/edit-profile/lib/schemas/editProfileForm.schema'
+import { useScopedTranslation } from '@byte-creators/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-
-import { EditProfileFormData, createEditProfileSchema } from '../lib/schemas/editProfileForm.schema'
 
 export const useEditProfileForm = () => {
   const t = useScopedTranslation('Profile')

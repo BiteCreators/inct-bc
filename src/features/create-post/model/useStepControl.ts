@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useScopedTranslation } from '@byte-creators/utils'
 import * as jose from 'jose'
 import { useRouter } from 'next/router'
 

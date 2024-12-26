@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { AuthLayout } from '@/application/layouts/AuthLayout'
 import { CreateNewPasswordForm } from '@/features/auth/ui/CreateNewPasswordForm'
 import { NextPageWithLayout } from '@/pages/_app'
 

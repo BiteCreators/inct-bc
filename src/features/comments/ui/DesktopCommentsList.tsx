@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { ScrollArea } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
 import { PostComment } from '@/features/comments'
+import { ScrollArea } from '@byte-creators/ui-kit'
 
 type Props = {
   comments?: Comment[]
@@ -17,12 +17,12 @@ export const DesktopCommentsList = ({ comments, description, handleAnswerClick }
         {description}
         {comments && comments.length > 0
           ? comments.map(comment => (
-              <PostComment
-                comment={comment}
-                handleAnswerClick={handleAnswerClick}
-                key={comment.id}
-              />
-            ))
+            <PostComment
+              comment={comment}
+              handleAnswerClick={handleAnswerClick}
+              key={comment.id}
+            />
+          ))
           : 'No comments'}
       </div>
     </ScrollArea>

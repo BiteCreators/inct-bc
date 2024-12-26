@@ -1,9 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { Typography } from '@/common/ui'
-import { LoaderBlock } from '@/common/ui/loader/LoaderBlock'
 import { paymentsApi } from '@/entities/payments'
-import { paymentsSlice } from '@/features/payments'
+import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
 
+import { paymentsSlice } from '..'
 import { AccountTypeCard } from './AccountTypeCard'
 import { CurrentSubscriptionCard } from './CurrentSubscriptionCard'
 import { PayPalPaymentButton } from './PayPalPaymentButton'

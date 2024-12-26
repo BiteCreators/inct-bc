@@ -1,7 +1,7 @@
-import { Alert, Card, Checkbox, Typography } from '@/common/ui'
 import { paymentsApi } from '@/entities/payments'
 import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDates'
 import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
+import { Alert, Card, Checkbox, Typography } from '@byte-creators/ui-kit'
 
 // const data: any = {
 // data: [
@@ -61,7 +61,7 @@ export const CurrentSubscriptionCard = () => {
       <Checkbox
         checked={isCheckboxChecked}
         className={'mt-3'}
-        onChange={() => handleCheckboxChange(!!isCheckboxChecked)}
+        onChecked={() => handleCheckboxChange(!!isCheckboxChecked)}
         text={<Typography className={'font-weight-600 mt-3'}>Auto-Renewal</Typography>}
       />
       {autoRenewalAlert && (

@@ -1,6 +1,6 @@
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Typography } from '@/common/ui'
 import { devicesApi } from '@/entities/devices'
+import { Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 import { SessionCard } from './SessionCard'
 import { TerminateSessionButton } from './TerminateSessionButton'

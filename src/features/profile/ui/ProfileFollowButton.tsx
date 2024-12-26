@@ -1,5 +1,5 @@
-import { cn } from '@/common/lib/utils/cn'
-import { Button } from '@/common/ui'
+import { Button } from '@byte-creators/ui-kit'
+import { cn } from '@byte-creators/utils'
 import Link from 'next/link'
 
 type Props = {

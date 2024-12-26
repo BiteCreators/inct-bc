@@ -1,14 +1,31 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { TabsBase } from '@/common/ui'
-import { CurrentDevice, SessionsList } from '@/features/devices'
-import { EditProfileForm } from '@/features/edit-profile'
-import { AccountManagement } from '@/features/payments'
-import { MyPayments } from '@/features/payments/ui/MyPayments'
-import { MyPaymentsTest } from '@/features/payments/ui/MyPaymentsTest'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
+import { TabsBase } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+
+const EditProfileForm = dynamic(
+  () => import('@/features/edit-profile').then(mod => mod.EditProfileForm),
+  { ssr: true }
+)
+
+const AccountManagement = dynamic(
+  () => import('@/features/payments').then(mod => mod.AccountManagement),
+  { ssr: true }
+)
+
+const CurrentDevice = dynamic(() => import('@/features/devices').then(mod => mod.CurrentDevice), {
+  ssr: true,
+})
+const SessionsList = dynamic(() => import('@/features/devices').then(mod => mod.SessionsList), {
+  ssr: true,
+})
+const MyPayments = dynamic(
+  () => import('@/features/payments/ui/MyPayments').then(mod => mod.MyPayments),
+  { ssr: true }
+)
 
 type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
 
@@ -62,8 +79,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
           value: 'account-management',
         },
         {
-          // content: <MyPayments />,
-          content: <MyPaymentsTest />,
+          content: <MyPayments />,
           label: t.myPayments,
           value: 'my-payments',
         },

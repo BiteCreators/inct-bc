@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { PAYMENT_PROVIDERS, TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
+import { paymentsSlice } from '@/features/payments'
+import { useScopedTranslation } from '@byte-creators/utils'
 
-import { paymentsSlice } from '../../model/payments.slice'
 import { SubscriptionFormData, createSubscriptionSchema } from '../schemas/subscription.schema'
 
 export const useSubmitPayment = ({
@@ -43,6 +43,7 @@ export const useSubmitPayment = ({
       } else {
         onSuccess()
       }
+      console.log(response)
     } catch (error) {
       handleApiError({ error, setApiError })
       onFailure()

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
+import { cn } from '@byte-creators/utils'
 
 import s from '../styles/filters.module.css'
 

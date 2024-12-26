@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
-import { Avatar, Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
+import { Avatar, Typography } from '@byte-creators/ui-kit'
+import { useGetRelativeTime } from '@byte-creators/utils'
 
 type Props = {
   post: Post

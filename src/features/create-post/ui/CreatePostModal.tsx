@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
-import { Alert, Modal } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import { ActionConfirmation, Alert, Modal } from '@byte-creators/ui-kit'
 
 import { useCreatePost } from '../model/useCreatePost'
 import { useImageFilters } from '../model/useImageFilters'
@@ -62,6 +61,8 @@ export const CreatePostModal = () => {
   })
 
   const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
+
+  //TODO: fix types fileInputRef={fileInputRef}
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
 import { Notification, notificationsApi } from '@/entities/notifications'
+import { useGetRelativeTime } from '@byte-creators/utils'
 
 export const useNotifications = ({
   notificationsItems,
@@ -15,7 +15,10 @@ export const useNotifications = ({
   const notificationRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const notificationsCorrectDate = notificationsItems?.map(notification => {
-    return { ...notification, notifyAt: getRelativeTime(new Date(notification.notifyAt).getTime()) }
+    return {
+      ...notification,
+      notifyAt: getRelativeTime(new Date(notification.notifyAt).getTime()),
+    }
   })
 
   useEffect(() => {

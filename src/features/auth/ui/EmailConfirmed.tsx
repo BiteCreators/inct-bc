@@ -1,4 +1,4 @@
-import { Alert, Button, Loader, Typography } from '@/common/ui'
+import { Alert, Button, Loader, Typography } from '@byte-creators/ui-kit'
 import Image from 'next/image'
 
 import { useEmailConfirmed } from '../model/useEmailConfrmed'

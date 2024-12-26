@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
+import { authApi } from '@/entities/auth'
 import { postsApi } from '@/entities/posts'
+import { useConfirmation, useScopedTranslation } from '@byte-creators/utils'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
@@ -16,6 +16,8 @@ export const useDropdownPost = () => {
   const copyLinkHandler = async () => {
     await navigator.clipboard.writeText(window.location.href)
   }
+  const { data: me } = authApi.useMeQuery()
+  const userId = me ? me.userId : ''
   const [deletePost] = postsApi.useDeletePostMutation()
   const t = useScopedTranslation('Posts')
   const params = useParams()
@@ -27,7 +29,7 @@ export const useDropdownPost = () => {
     if (isConfirmed) {
       try {
         await deletePost({ postId }).unwrap()
-        await router.push('/')
+        await router.push(`/profile/${userId}`)
       } catch (error) {
         handleApiError({ error, setApiError })
       }

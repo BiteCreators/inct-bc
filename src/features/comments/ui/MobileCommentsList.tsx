@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { cn } from '@/common/lib/utils/cn'
-import { Button, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
 import { PostComment } from '@/features/comments'
+import { Button, Typography } from '@byte-creators/ui-kit'
+import { cn } from '@byte-creators/utils'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 

@@ -2,13 +2,15 @@ import type { AppProps } from 'next/app'
 
 import React from 'react'
 
-import { DefaultLayout } from '@/app/layouts/DefautlLayout'
-import { Providers } from '@/app/providers'
-import { wrapper } from '@/app/store'
+import { DefaultLayout } from '@/application/layouts/DefautlLayout'
+import { Providers } from '@/application/providers'
+import { wrapper } from '@/application/store'
 import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 
-import '@/app/styles/globals.css'
+import '@/application/styles/globals.css'
+// eslint-disable-next-line import/extensions
+import '@byte-creators/ui-kit/styles'
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],

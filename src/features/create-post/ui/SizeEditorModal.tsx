@@ -1,8 +1,8 @@
 import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
-import { Slider } from '@/common/ui/slider/Slider'
 import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
+import { Slider } from '@byte-creators/ui-kit'
 
 import { ImageData } from '../types'
 import { ImageControl } from './ImagesControl'

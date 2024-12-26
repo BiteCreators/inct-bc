@@ -1,17 +1,15 @@
 import React from 'react'
 
+import { Post } from '@/entities/posts'
+import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
+import { ActionConfirmation, Alert, Dropdown, DropdownItem } from '@byte-creators/ui-kit'
 import {
   CopyOutline,
   Edit2Outline,
   PersonAddOutline,
   PersonRemoveOutline,
   TrashOutline,
-} from '@/common/assets/icons/components'
-import { Alert, Dropdown } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
-import { Post } from '@/entities/posts'
-import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
+} from '@byte-creators/ui-kit/icons'
 
 type Props = {
   changeEditMode: (e: boolean) => void
@@ -19,7 +17,7 @@ type Props = {
   isMyPost: boolean
   post: Post
 }
-export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Props) => {
+export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => {
   const forDrop: DropdownItem[] = []
   const isFollow = false
   const {
@@ -42,7 +40,11 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
           changeEditMode(true)
         },
       },
-      { icon: <TrashOutline />, label: t.deletePost, onClick: deletePostHandler }
+      {
+        icon: <TrashOutline />,
+        label: t.deletePost,
+        onClick: deletePostHandler,
+      }
     )
   } else {
     if (isFollow) {
@@ -69,11 +71,11 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost, post }: Prop
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={'Are you sure you want to delete this post?'}
+        message={t.deletePostQuestion}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={'Delete Post'}
+        title={t.deletePost}
       />
       <Dropdown className={className} items={forDrop} />
       {apiError && (

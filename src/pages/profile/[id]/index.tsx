@@ -1,8 +1,13 @@
-import { cn } from '@/common/lib/utils/cn'
 import { Profile } from '@/entities/profile'
-import { Posts } from '@/features/posts'
-import { ProfileHeader } from '@/widgets/profile-header'
+import { cn } from '@byte-creators/utils'
 import { GetServerSideProps } from 'next'
+import dynamic from 'next/dynamic'
+
+const ProfileHeader = dynamic(
+  () => import('@/widgets/profile-header').then(mod => mod.ProfileHeader),
+  { ssr: true }
+)
+const Posts = dynamic(() => import('@/features/posts').then(mod => mod.Posts), { ssr: true })
 
 type Props = {
   profile: Profile

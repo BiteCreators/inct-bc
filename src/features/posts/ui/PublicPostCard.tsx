@@ -1,9 +1,8 @@
-import { Image } from '@/common/assets/icons/components'
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
-import { useShowMore } from '@/common/lib/hooks/useShowMore'
-import { Avatar, Typography } from '@/common/ui'
 import { Post } from '@/entities/posts'
 import { UserProfile } from '@/entities/profile'
+import { Typography } from '@byte-creators/ui-kit'
+import { Image } from '@byte-creators/ui-kit/icons'
+import { useGetRelativeTime, useShowMore } from '@byte-creators/utils'
 import Link from 'next/link'
 
 type Props = {
@@ -48,7 +47,7 @@ export const PublicPostCard = ({ post }: Props) => {
       <Typography className={'mt-3 text-light-900'} variant={'small-text'}>
         {relativeTime}
       </Typography>
-      <Typography className={'mt-[3px]'}>
+      <Typography className={'mt-[3px] break-all'}>
         {textToShow}
         {collapsable && (
           <span

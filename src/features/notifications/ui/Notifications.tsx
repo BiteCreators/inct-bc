@@ -1,15 +1,17 @@
 import React from 'react'
 
-import { ScrollArea } from '@/common/ui'
 import { Notification } from '@/entities/notifications'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
+import { ScrollArea } from '@byte-creators/ui-kit'
 
 type Props = {
   notificationsItems: Notification[] | undefined
 }
 
 export const NotificationsList = ({ notificationsItems }: Props) => {
-  const { notificationRefs, notificationsCorrectDate } = useNotifications({ notificationsItems })
+  const { notificationRefs, notificationsCorrectDate } = useNotifications({
+    notificationsItems,
+  })
 
   const handlerNotification = (id: number) => {
     console.log('notificationId', id)

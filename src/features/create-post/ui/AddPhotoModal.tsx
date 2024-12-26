@@ -1,9 +1,8 @@
 import React, { RefObject } from 'react'
 
-import { ImageOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Button } from '@/common/ui'
-import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
+import { Button, DragAndDropInput } from '@byte-creators/ui-kit'
+import { ImageOutline } from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>

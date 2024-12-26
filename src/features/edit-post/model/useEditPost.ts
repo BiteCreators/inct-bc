@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { RootState } from '@/app/store'
+import { RootState } from '@/application/store'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { postsApi } from '@/entities/posts'
 import { postSlice } from '@/entities/posts/model/postSlice'
+import { useConfirmation, useScopedTranslation, useValidationLimit } from '@byte-creators/utils'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 

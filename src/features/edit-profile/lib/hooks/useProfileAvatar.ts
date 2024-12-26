@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useConfirmation } from '@/common/ui/action-confirmation/useConfirmation'
 import { profileApi } from '@/entities/profile'
+import { useConfirmation, useScopedTranslation } from '@byte-creators/utils'
 
 export const useProfileAvatar = () => {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 export const useImageUpload = () => {
   const [imageUrl, setImageUrl] = useState<null | string>(null)

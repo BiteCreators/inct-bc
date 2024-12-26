@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { AuthLayout } from '@/application/layouts/AuthLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 import Router, { useRouter } from 'next/router'
 

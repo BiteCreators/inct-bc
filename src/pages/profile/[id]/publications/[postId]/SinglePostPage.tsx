@@ -1,12 +1,17 @@
 import React from 'react'
 
-import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'
-import { Posts } from '@/features/posts'
 import { PostDetails } from '@/widgets/post-details'
-import { ProfileHeader } from '@/widgets/profile-header'
+import { useMediaQuery } from '@byte-creators/utils'
 import { GetServerSideProps } from 'next'
+import dynamic from 'next/dynamic'
+
+const ProfileHeader = dynamic(
+  () => import('@/widgets/profile-header').then(mod => mod.ProfileHeader),
+  { ssr: true }
+)
+const Posts = dynamic(() => import('@/features/posts').then(mod => mod.Posts), { ssr: true })
 
 type Props = {
   post: Post

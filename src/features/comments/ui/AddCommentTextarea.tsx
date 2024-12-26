@@ -1,12 +1,8 @@
+import { cn, mergeRefs, useTextArea } from '@byte-creators/utils'
 import React, { ComponentProps, forwardRef, useEffect } from 'react'
-
-import { ArrowBackOutline } from '@/common/assets/icons/components'
-import { cn } from '@/common/lib/utils/cn'
-import { mergeRefs } from '@/common/lib/utils/mergeRefs'
-import { Alert, Button, ScrollArea } from '@/common/ui'
-import { useTextArea } from '@/common/ui/text-area/useTextArea'
-
 import { useCreateComment } from '../model/useCreateComment'
+import { Alert, Button, ScrollArea } from '@byte-creators/ui-kit'
+import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 
 type Props = {
   answerData?: {
@@ -66,7 +62,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
             portal
             purpose={'toast'}
             type={'error'}
-          ></Alert>
+          />
         )}
         <ScrollArea className={'w-full max-h-44'}>
           <div className={'flex flex-col min-h-4 w-full'}>
@@ -76,6 +72,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
                 'bg-transparent',
+                'bg-dark-100',
                 'leading-none',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',

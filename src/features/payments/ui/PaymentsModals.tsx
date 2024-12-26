@@ -1,4 +1,4 @@
-import { Button, Modal, Typography } from '@/common/ui'
+import { Button, Modal, Typography } from '@byte-creators/ui-kit'
 
 type Props = {
   paymentFailed: boolean

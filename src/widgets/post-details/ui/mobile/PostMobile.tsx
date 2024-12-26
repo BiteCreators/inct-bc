@@ -1,15 +1,14 @@
 import { ReactNode } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { cn } from '@/common/lib/utils/cn'
-import { Dropdown } from '@/common/ui'
-import { Slider } from '@/common/ui/slider/Slider'
 import { authSlice } from '@/entities/auth'
 import { Comment } from '@/entities/comments/types/comments.types'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, MobileCommentsList } from '@/features/comments'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
+import { Dropdown, Slider } from '@byte-creators/ui-kit'
+import { cn } from '@byte-creators/utils'
 
 import { useCommentState } from '../../model/useCommentState'
 

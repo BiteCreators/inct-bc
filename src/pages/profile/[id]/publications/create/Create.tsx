@@ -1,9 +1,9 @@
-import { useMediaQuery } from '@/common/lib/hooks/useMediaQuery'
-import { Loader } from '@/common/ui'
 import { profileApi } from '@/entities/profile'
 import { CreatePostModal } from '@/features/create-post/ui/CreatePostModal'
 import { Posts } from '@/features/posts'
 import { ProfileHeader } from '@/widgets/profile-header'
+import { Loader } from '@byte-creators/ui-kit'
+import { useMediaQuery } from '@byte-creators/utils'
 
 export default function Create() {
   const isLargeScreen = useMediaQuery('(min-width: 768px)')

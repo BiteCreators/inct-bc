@@ -1,13 +1,12 @@
 import React, { RefObject } from 'react'
 
+import { Button, DragAndDropInput, ScrollArea } from '@byte-creators/ui-kit'
 import {
   CloseOutlineSmall,
   Image,
   ImageOutline,
   PlusCircleOutlineBig,
-} from '@/common/assets/icons/components'
-import { Button, ScrollArea } from '@/common/ui'
-import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
+} from '@byte-creators/ui-kit/icons'
 
 import { useImageControl } from '../model/useImageControl'
 import { ImageData } from '../types'

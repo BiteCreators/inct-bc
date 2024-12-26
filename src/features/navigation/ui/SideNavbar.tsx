@@ -1,5 +1,6 @@
-import { useCookies } from 'react-cookie'
-
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
+import { SideNavbarItem } from '@byte-creators/ui-kit'
 import {
   Bookmark,
   BookmarkOutline,
@@ -15,12 +16,8 @@ import {
   SearchOutline,
   TrendingUp,
   TrendingUpOutline,
-} from '@/common/assets/icons/components'
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { authSlice } from '@/entities/auth'
-
-import { SideNavbarItem } from './SideNavbarItem'
+} from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')

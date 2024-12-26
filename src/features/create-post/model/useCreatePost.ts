@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { useValidationLimit } from '@/common/lib/hooks/useValidationLimit'
 import { postsApi } from '@/entities/posts'
+import { useScopedTranslation, useValidationLimit } from '@byte-creators/utils'
 
 import { ImageData } from '../types'
 
@@ -41,7 +40,11 @@ export const useCreatePost = () => {
       }
       setImages(images => [
         ...images,
-        { initialUrl: URL.createObjectURL(file), selectedFilter: '', totalUrl: '' },
+        {
+          initialUrl: URL.createObjectURL(file),
+          selectedFilter: '',
+          totalUrl: '',
+        },
       ])
     }
   }

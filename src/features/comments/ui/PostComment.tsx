@@ -1,12 +1,14 @@
 import { ReactNode } from 'react'
 
-import { Heart, HeartOutline } from '@/common/assets/icons/components'
-import { cn } from '@/common/lib/utils/cn'
-import { Alert, Avatar, Typography } from '@/common/ui'
 import { Comment } from '@/entities/comments/types/comments.types'
+import { Alert, Avatar, Typography } from '@byte-creators/ui-kit'
+import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
+
+import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
 
 import { useCommentInteractions } from '../model/useCommentInteractions'
 import { CommentAnswer } from './CommentAnswer'
+import { cn } from '@byte-creators/utils'
 type Props = {
   children?: ReactNode
   comment: Comment

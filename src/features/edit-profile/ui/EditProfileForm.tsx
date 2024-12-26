@@ -1,10 +1,16 @@
 import React from 'react'
 
-import { Alert, Button, FormInput, FormSelect, FormTextArea, Loader } from '@/common/ui'
-import { FormDatePicker } from '@/common/ui/form/FormDatePicker'
-import { SearchableOptions } from '@/common/ui/select/SearchableOptions'
 import { useLocation } from '@/features/profile/model/useLocation'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
+import {
+  Button,
+  FormDatePicker,
+  FormInput,
+  FormSelect,
+  FormTextArea,
+  Loader,
+  SearchableOptions,
+} from '@byte-creators/ui-kit'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
 import { ProfileAvatar } from './avatar/ProfileAvatar'

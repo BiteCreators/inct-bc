@@ -1,9 +1,9 @@
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Button, Typography } from '@/common/ui'
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
 import { AboutUser, ProfileFollowButton } from '@/features/profile'
+import { Button, Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
