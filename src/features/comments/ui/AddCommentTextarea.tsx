@@ -1,22 +1,42 @@
-import React, { ComponentProps, forwardRef, useEffect } from 'react'
-
-import { Button, ScrollArea } from '@byte-creators/ui-kit'
-import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 import { cn, mergeRefs, useTextArea } from '@byte-creators/utils'
+import React, { ComponentProps, forwardRef, useEffect } from 'react'
+import { useCreateComment } from '../model/useCreateComment'
+import { Alert, Button, ScrollArea } from '@byte-creators/ui-kit'
+import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 
 type Props = {
+  answerData?: {
+    commentId: number
+    postId: number
+    userName: string
+  } | null
+  contentComment: string
   disabled?: boolean
   error?: null | string
+  postId: string
+  setContentComment: (text: string) => void
 } & ComponentProps<'textarea'>
 
 export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
-  ({ disabled, error, id, onChange }: Props, ref) => {
+  (
+    { answerData, contentComment, disabled, error, id, onChange, postId, setContentComment }: Props,
+    ref
+  ) => {
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: true,
       onChange,
     })
 
+    const { apiError, handleCreateAnswerComment, handleCreateComment, isAnswer, setApiError } =
+      useCreateComment({
+        answerData,
+        contentComment,
+        postId,
+        setContentComment,
+      })
+
     const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setContentComment(e.currentTarget.value)
       handleChange(e)
       setTimeout(() => {
         if (textAreaRef.current) {
@@ -34,12 +54,21 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
     }, [textAreaRef])
 
     return (
-      <div className={cn(['flex py-3 px-0', 'md:px-6'])}>
+      <div className={cn(['flex py-2 px-0', 'md:px-6'])}>
+        {apiError && (
+          <Alert
+            message={apiError}
+            onClose={() => setApiError('')}
+            portal
+            purpose={'toast'}
+            type={'error'}
+          />
+        )}
         <ScrollArea className={'w-full max-h-44'}>
           <div className={'flex flex-col min-h-4 w-full'}>
             <textarea
               className={cn([
-                'pt-2 pr-2.5 pb-0',
+                'pt-4 pr-2.5 pb-0',
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
                 'bg-transparent',
@@ -55,12 +84,16 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
               onChange={handleTextAreaChange}
               placeholder={'Add a Comment...'}
               ref={mergeRefs([ref, textAreaRef])}
+              value={contentComment}
             />
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
         </ScrollArea>
-        <div className={'flex items-end mb-2'}>
-          <button className={'md:hidden ml-6 max-h-9'}>
+        <div className={'flex items-center'}>
+          <button
+            className={'md:hidden ml-6 max-h-9'}
+            onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
+          >
             <ArrowBackOutline
               className={'text-dark-900 bg-light-100 rounded-full'}
               height={20}
@@ -71,6 +104,8 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </button>
           <Button
             className={cn(['max-h-9 align-bottom ml-6 hidden', 'md:inline-block'])}
+            disabled={!contentComment}
+            onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
             variant={'text'}
           >
             Publish

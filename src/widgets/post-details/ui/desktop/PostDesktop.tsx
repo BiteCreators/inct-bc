@@ -1,7 +1,8 @@
-import React, { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { authSlice } from '@/entities/auth'
+import { Comment } from '@/entities/comments/types/comments.types'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
 import { EditPost } from '@/features/edit-post'
@@ -11,10 +12,11 @@ import { Close } from '@byte-creators/ui-kit/icons'
 import { cn } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
+import { useCommentState } from '../../model/useCommentState'
 import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
-  comments: { id: string; text: string }[]
+  comments?: Comment[]
   post: Post
   slides: ReactNode[]
 }
@@ -23,6 +25,9 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
   const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
+
+  const { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef } =
+    useCommentState()
 
   const postWithPic = post.images.length !== 0
 
@@ -68,9 +73,18 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
               <DesktopCommentsList
                 comments={comments}
                 description={<PostDescription post={post} />}
+                handleAnswerClick={handleAnswerClick}
               />
               <PostActionsBlock post={post} />
-              {isAuth && <AddCommentTextarea />}
+              {isAuth && (
+                <AddCommentTextarea
+                  answerData={answerData}
+                  contentComment={contentComment}
+                  postId={post.id.toString()}
+                  ref={textareaRef}
+                  setContentComment={setContentComment}
+                />
+              )}
             </div>
           </>
         </div>

@@ -1,6 +1,6 @@
 import { Avatar, WithPaginationResponse, WithSortPaginationParams } from '@/common/types/api.types'
 
-type Comment = {
+export type Comment = {
   answerCount: number
   content: string
   createdAt: string
@@ -16,7 +16,7 @@ type From = {
   username: string
 }
 
-type Answer = { commentId: number } & Omit<Comment, 'answerCount' | 'postId'>
+export type Answer = { commentId: number } & Omit<Comment, 'answerCount' | 'postId'>
 
 export type AnswersRequest = { commentId: number; postId: number } & WithSortPaginationParams
 

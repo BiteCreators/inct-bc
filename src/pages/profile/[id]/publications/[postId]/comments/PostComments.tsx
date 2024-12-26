@@ -1,36 +1,34 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
+import { commentsApi } from '@/entities/comments'
+import { AddCommentTextarea, PostComment } from '@/features/comments'
+import { useCommentState } from '@/widgets/post-details/model/useCommentState'
 import React from 'react'
-
-import { PostComment } from '@/features/comments'
-import { ScrollArea, Typography } from '@byte-creators/ui-kit'
+import { Typography } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 export default function PostComments() {
-  // MOCK (remove later)------------//
-  const comments = [
-    {
-      id: '1',
-      text: 'eiusmodcididunt ut laboreagna aliquaeiusmod tempor incididunt ut labore et dolore magna aliquaeiusmod tempor incididunt ut labore et dolore magna aliquaeiusmod tempor incididunt ut labore et dolore magna aliqua',
-    },
-    { id: '2', text: 'eiusmod' },
-    { id: '3', text: 'eiusmod tempor labore et dolore magna aliqua' },
-    {
-      id: '4',
-      text: 'eiusmod tempor incididunt ut labore et dolore magna aliquadolore magna aliqua',
-    },
-  ]
-  //-------------------------------------------------------
+  const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+  const { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef } =
+    useCommentState()
 
   const params = useParams<{ id: string; postId: string }>()
   const id = params?.id
   const postId = params?.postId
 
+  const { data } = commentsApi.useGetCommentsQuery({ postId: Number(postId) })
+
+  const comments = data?.items
+
   return (
-    <div className={'-my-6 md:hidden'}>
+    <div className={'-my-9 md:hidden'}>
       {/*Header*/}
-      <div className={'flex items-center justify-center'}>
-        <button className={'absolute left-4'}>
+      <div
+        className={'bg-dark-700 border-dark-300 border-b-[1px] text-center fixed w-full z-[1] py-4'}
+      >
+        <button className={'absolute left-4 top-[18px]'}>
           <Link href={`/profile/${id}/publications/${postId}/`}>
             <ArrowBackOutline viewBox={'0 -2 24 24'} />
           </Link>
@@ -40,13 +38,22 @@ export default function PostComments() {
         </Typography>
       </div>
       {/*Comments*/}
-      <ScrollArea className={'flex-1 px-6 pt-5 pb-2 w-full'}>
-        <div className={'flex flex-col gap-4 h-[336px]'}>
-          {comments.map(el => (
-            <PostComment key={el.id} text={el.text} />
+      <div className={'flex-1 px-6 pt-20 pb-10 w-full'}>
+        <div className={'flex flex-col'}>
+          {comments?.map(comment => (
+            <PostComment comment={comment} handleAnswerClick={handleAnswerClick} key={comment.id} />
           ))}
         </div>
-      </ScrollArea>
+        {isAuth && (
+          <AddCommentTextarea
+            answerData={answerData}
+            contentComment={contentComment}
+            postId={postId!}
+            ref={textareaRef}
+            setContentComment={setContentComment}
+          />
+        )}
+      </div>
     </div>
   )
 }
