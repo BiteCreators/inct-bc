@@ -1,56 +1,49 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { profileApi } from "@/entities/profile";
-import { useConfirmation, useScopedTranslation } from "@byte-creators/utils";
+import { profileApi } from '@/entities/profile'
+import { useConfirmation, useScopedTranslation } from '@byte-creators/utils'
 
 export const useProfileAvatar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
-  const { data: profile, isLoading: isProfileLoading } =
-    profileApi.useGetProfileQuery();
-  const [setAvatarProfile, { isLoading: isLoadingSet }] =
-    profileApi.useSetAvatarProfileMutation();
+  const { data: profile, isLoading: isProfileLoading } = profileApi.useGetProfileQuery()
+  const [setAvatarProfile, { isLoading: isLoadingSet }] = profileApi.useSetAvatarProfileMutation()
   const [deleteAvatarProfile, { isLoading: isLoadingDelete }] =
-    profileApi.useDeleteAvatarProfileMutation();
-  const {
-    confirmOpen,
-    handleConfirm,
-    handleReject,
-    requestConfirmation,
-    setConfirmOpen,
-  } = useConfirmation();
-  const t = useScopedTranslation("Profile");
-  const [apiError, setApiError] = useState<null | string>(null);
+    profileApi.useDeleteAvatarProfileMutation()
+  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
+    useConfirmation()
+  const t = useScopedTranslation('Profile')
+  const [apiError, setApiError] = useState<null | string>(null)
 
-  const isLoading = isProfileLoading || isLoadingSet || isLoadingDelete;
-  const currentAvatar = profile?.avatars?.[0] || null;
+  const isLoading = isProfileLoading || isLoadingSet || isLoadingDelete
+  const currentAvatar = profile?.avatars?.[0] || null
 
   const updateAvatar = async (file: File) => {
-    setApiError(null);
+    setApiError(null)
     try {
-      await setAvatarProfile({ file }).unwrap();
+      await setAvatarProfile({ file }).unwrap()
     } catch (error) {
-      setApiError(t.editProfileError.settingsNotSaved);
+      setApiError(t.editProfileError.settingsNotSaved)
     }
-  };
+  }
 
   const removeAvatar = async () => {
     if (!currentAvatar) {
-      return;
+      return
     }
 
-    const confirmed = await requestConfirmation();
+    const confirmed = await requestConfirmation()
 
     if (!confirmed) {
-      return;
+      return
     }
 
     try {
-      await deleteAvatarProfile().unwrap();
+      await deleteAvatarProfile().unwrap()
     } catch (error) {
-      setApiError(t.editProfileError.settingsNotSaved);
+      setApiError(t.editProfileError.settingsNotSaved)
     }
-  };
+  }
 
   return {
     apiError,
@@ -64,5 +57,5 @@ export const useProfileAvatar = () => {
     setConfirmOpen,
     setIsOpen,
     updateAvatar,
-  };
-};
+  }
+}

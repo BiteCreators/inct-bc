@@ -1,29 +1,28 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import { useHandleApiError } from "@/common/lib/hooks/useHanldeApiError";
-import { profileApi } from "@/entities/profile";
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { profileApi } from '@/entities/profile'
 import {
   EditProfileFormData,
   createEditProfileSchema,
-} from "@/features/edit-profile/lib/schemas/editProfileForm.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useScopedTranslation } from "@byte-creators/utils";
+} from '@/features/edit-profile/lib/schemas/editProfileForm.schema'
+import { useScopedTranslation } from '@byte-creators/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useEditProfileForm = () => {
-  const t = useScopedTranslation("Profile");
-  const editProfileSchema = createEditProfileSchema(t);
+  const t = useScopedTranslation('Profile')
+  const editProfileSchema = createEditProfileSchema(t)
 
-  const { data: profile, isLoading: isLoadingGetProfile } =
-    profileApi.useGetProfileQuery();
+  const { data: profile, isLoading: isLoadingGetProfile } = profileApi.useGetProfileQuery()
   const [trigger, { isError, isLoading: isLoadingUpdateProfile }] =
-    profileApi.useEditProfileMutation();
+    profileApi.useEditProfileMutation()
 
-  const [message, setMessage] = useState("");
-  const [isShowAlert, setIsShowAlert] = useState(false);
-  const { handleApiError } = useHandleApiError("Profile");
+  const [message, setMessage] = useState('')
+  const [isShowAlert, setIsShowAlert] = useState(false)
+  const { handleApiError } = useHandleApiError('Profile')
 
-  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile;
+  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile
 
   const {
     control,
@@ -32,55 +31,50 @@ export const useEditProfileForm = () => {
     reset,
     setError,
   } = useForm<EditProfileFormData>({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: zodResolver(editProfileSchema),
-  });
+  })
 
   useEffect(() => {
     if (profile) {
       reset({
-        aboutMe: profile.aboutMe || "",
-        city: profile.city || "",
-        country: profile.country || "",
-        dateOfBirth: profile.dateOfBirth
-          ? new Date(profile?.dateOfBirth)
-          : new Date(),
-        firstName: profile.firstName || "",
-        lastName: profile.lastName || "",
-        userName: profile.userName || "",
-      });
+        aboutMe: profile.aboutMe || '',
+        city: profile.city || '',
+        country: profile.country || '',
+        dateOfBirth: profile.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
+        firstName: profile.firstName || '',
+        lastName: profile.lastName || '',
+        userName: profile.userName || '',
+      })
     }
-  }, [profile, reset]);
+  }, [profile, reset])
 
   const onSubmit = async (data: EditProfileFormData) => {
     const formData = {
       ...data,
       dateOfBirth: data.dateOfBirth.toLocaleDateString(),
-    };
+    }
 
     try {
-      await trigger(formData).unwrap();
-      setMessage(t.settingsSaved);
-      setIsShowAlert(true);
+      await trigger(formData).unwrap()
+      setMessage(t.settingsSaved)
+      setIsShowAlert(true)
     } catch (error) {
       handleApiError({
         error,
         modifyMessage(message, t) {
-          if (
-            message.includes("already exists") &&
-            message.includes("User with userName")
-          ) {
-            return { message: t.editProfileError.usernameTaken };
+          if (message.includes('already exists') && message.includes('User with userName')) {
+            return { message: t.editProfileError.usernameTaken }
           }
 
-          return { message };
+          return { message }
         },
         setApiError: setMessage,
         setError,
-      });
-      setIsShowAlert(true);
+      })
+      setIsShowAlert(true)
     }
-  };
+  }
 
   return {
     control,
@@ -91,9 +85,9 @@ export const useEditProfileForm = () => {
     isValid,
     message,
     onClose: () => {
-      setIsShowAlert(false);
+      setIsShowAlert(false)
     },
     profile,
     t,
-  };
-};
+  }
+}

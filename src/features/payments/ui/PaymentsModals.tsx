@@ -1,11 +1,11 @@
-import { Button, Modal, Typography } from "@byte-creators/ui-kit";
+import { Button, Modal, Typography } from '@byte-creators/ui-kit'
 
 type Props = {
-  paymentFailed: boolean;
-  paymentSuccess: boolean;
-  setPaymentFailed: (failed: boolean) => void;
-  setPaymentSuccess: (success: boolean) => void;
-};
+  paymentFailed: boolean
+  paymentSuccess: boolean
+  setPaymentFailed: (failed: boolean) => void
+  setPaymentSuccess: (success: boolean) => void
+}
 
 export const PaymentsModals = ({
   paymentFailed,
@@ -17,24 +17,22 @@ export const PaymentsModals = ({
     <>
       <Modal
         isOpen={paymentSuccess}
-        mode={"default"}
+        mode={'default'}
         onOpenChange={() => setPaymentSuccess(false)}
-        title={"Success"}
+        title={'Success'}
       >
-        <Typography variant={"medium-text"}>Payment was successful!</Typography>
-        <Button className={"w-80 mt-12 mb-3"}>OK</Button>
+        <Typography variant={'medium-text'}>Payment was successful!</Typography>
+        <Button className={'w-80 mt-12 mb-3'}>OK</Button>
       </Modal>
       <Modal
         isOpen={paymentFailed}
-        mode={"default"}
+        mode={'default'}
         onOpenChange={() => setPaymentFailed(false)}
-        title={"Error"}
+        title={'Error'}
       >
-        <Typography variant={"medium-text"}>
-          Transaction failed, please try again
-        </Typography>
-        <Button className={"w-80 mt-12 mb-3"}>Back to payment</Button>
+        <Typography variant={'medium-text'}>Transaction failed, please try again</Typography>
+        <Button className={'w-80 mt-12 mb-3'}>Back to payment</Button>
       </Modal>
     </>
-  );
-};
+  )
+}

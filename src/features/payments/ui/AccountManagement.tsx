@@ -1,14 +1,13 @@
-import { Typography } from "@byte-creators/ui-kit";
-import { LoaderBlock } from "@byte-creators/ui-kit";
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { paymentsApi } from '@/entities/payments'
+import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
 
-import { paymentsSlice } from "..";
-import { useAppDispatch, useAppSelector } from "@/common/lib/hooks/reduxHooks";
-import { paymentsApi } from "@/entities/payments";
-import { AccountTypeCard } from "./AccountTypeCard";
-import { CurrentSubscriptionCard } from "./CurrentSubscriptionCard";
-import { PayPalPaymentButton } from "./PayPalPaymentButton";
-import { StripePaymentButton } from "./StripePaymentButton";
-import { SubscriptionTypeCard } from "./SubscriptionTypeCard";
+import { paymentsSlice } from '..'
+import { AccountTypeCard } from './AccountTypeCard'
+import { CurrentSubscriptionCard } from './CurrentSubscriptionCard'
+import { PayPalPaymentButton } from './PayPalPaymentButton'
+import { StripePaymentButton } from './StripePaymentButton'
+import { SubscriptionTypeCard } from './SubscriptionTypeCard'
 
 // const data: any = {
 //   data: [
@@ -38,36 +37,30 @@ import { SubscriptionTypeCard } from "./SubscriptionTypeCard";
 // }
 
 export const AccountManagement = () => {
-  const { data, isLoading } = paymentsApi.useGetCurrentPaymentQuery();
-  const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType);
+  const { data, isLoading } = paymentsApi.useGetCurrentPaymentQuery()
+  const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  let disableAccountTypeOption = false;
+  let disableAccountTypeOption = false
 
   const subscriptionTypesText =
-    accountType === "Business"
-      ? "Change your subscription:"
-      : "Your subscription costs:";
+    accountType === 'Business' ? 'Change your subscription:' : 'Your subscription costs:'
 
   if (data?.data.length !== undefined && data?.data.length !== 0) {
-    dispatch(paymentsSlice.actions.setAccountType("Business"));
-    disableAccountTypeOption = true;
+    dispatch(paymentsSlice.actions.setAccountType('Business'))
+    disableAccountTypeOption = true
   }
 
   return (
-    <div className={"relative"}>
+    <div className={'relative'}>
       {isLoading && <LoaderBlock />}
       {data?.data.length !== 0 && <CurrentSubscriptionCard />}
       <AccountTypeCard disableOption={disableAccountTypeOption} />
-      {accountType === "Business" && (
+      {accountType === 'Business' && (
         <>
           <SubscriptionTypeCard text={subscriptionTypesText} />
-          <div
-            className={
-              "flex sm:gap-14 items-center w-full sm:justify-end justify-between"
-            }
-          >
+          <div className={'flex sm:gap-14 items-center w-full sm:justify-end justify-between'}>
             <PayPalPaymentButton />
             <Typography>or</Typography>
             <StripePaymentButton />
@@ -75,5 +68,5 @@ export const AccountManagement = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}

@@ -1,70 +1,67 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { postsApi } from "@/entities/posts";
-import { Typography } from "@byte-creators/ui-kit";
-import { LoaderBlock } from "@byte-creators/ui-kit";
-import Link from "next/link";
+import { postsApi } from '@/entities/posts'
+import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
+import Link from 'next/link'
 
 type Props = {
-  userId: number;
-};
+  userId: number
+}
 
 export const Posts = ({ userId }: Props) => {
-  const [pageSize, setPageSize] = useState(8);
+  const [pageSize, setPageSize] = useState(8)
 
-  const { data, isFetching, isLoading } =
-    postsApi.useGetPublicPostsByUserIdQuery({
-      pageSize,
-      userId: userId,
-    });
+  const { data, isFetching, isLoading } = postsApi.useGetPublicPostsByUserIdQuery({
+    pageSize,
+    userId: userId,
+  })
 
   useEffect(() => {
-    const scroll = document.querySelector("#scrollAreaViewport");
+    const scroll = document.querySelector('#scrollAreaViewport')
 
     const handleScroll = () => {
       if (scroll) {
-        const value =
-          scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight;
+        const value = scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight
 
         if (value <= 1 && !isFetching) {
-          setPageSize((prevPageSize) => prevPageSize + 8);
+          setPageSize(prevPageSize => prevPageSize + 8)
         }
       }
-    };
+    }
 
     const handleResize = () => {
       if (scroll) {
-        const containerHeight = scroll.scrollHeight;
-        const viewportHeight = window.innerHeight;
+        const containerHeight = scroll.scrollHeight
+        const viewportHeight = window.innerHeight
 
         if (containerHeight <= viewportHeight && !isFetching) {
-          setPageSize((prevPageSize) => prevPageSize + 8);
+          setPageSize(prevPageSize => prevPageSize + 8)
         }
       }
-    };
+    }
 
-    scroll?.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
+    scroll?.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
 
-    handleResize();
+    handleResize()
 
     return () => {
-      scroll?.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isFetching]);
+      scroll?.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [isFetching])
 
   return (
     <>
-      <div className={"flex gap-5 justify-center flex-wrap relative"}>
+      <div className={'flex gap-5 justify-center flex-wrap relative'}>
         {isLoading && <LoaderBlock />}
         {!isLoading && data?.items && data?.items.length < 1 ? (
           <Typography> user has no publications yet </Typography>
         ) : (
           <>
-            {data?.items.map((post) => (
+            {data?.items.map(post => (
               <Link
-                className={"hover:scale-[1.013] duration-75"}
+                className={'hover:scale-[1.013] duration-75'}
                 href={`/profile/${userId}/publications/${post.id}`}
                 key={post.id}
               >
@@ -75,5 +72,5 @@ export const Posts = ({ userId }: Props) => {
         )}
       </div>
     </>
-  );
-};
+  )
+}

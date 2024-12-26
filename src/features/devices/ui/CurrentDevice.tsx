@@ -1,79 +1,74 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useHandleApiError } from "@/common/lib/hooks/useHanldeApiError";
-import { isApiErrorWithArray } from "@/common/lib/utils/apiHelpers";
-import { devicesApi } from "@/entities/devices";
-import { useScopedTranslation } from "@byte-creators/utils";
-import { Alert, Button, Loader, Typography } from "@byte-creators/ui-kit";
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { isApiErrorWithArray } from '@/common/lib/utils/apiHelpers'
+import { devicesApi } from '@/entities/devices'
+import { Alert, Button, Loader, Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
-import { SessionCard } from "./SessionCard";
+import { SessionCard } from './SessionCard'
 
 export const CurrentDevice = () => {
-  const { data, error, isLoading, isSuccess } =
-    devicesApi.useGetSessionsQuery();
+  const { data, error, isLoading, isSuccess } = devicesApi.useGetSessionsQuery()
   const [terminateAllSessions, { isLoading: isTerminateLoading }] =
-    devicesApi.useTerminateAllSessionsMutation();
-  const [terminateError, setTerminateError] = useState("");
-  const { handleApiError } = useHandleApiError("Devices");
-  const t = useScopedTranslation("Devices");
+    devicesApi.useTerminateAllSessionsMutation()
+  const [terminateError, setTerminateError] = useState('')
+  const { handleApiError } = useHandleApiError('Devices')
+  const t = useScopedTranslation('Devices')
 
   if (isLoading) {
     return (
-      <div className={"flex justify-center pt-11"}>
+      <div className={'flex justify-center pt-11'}>
         <Loader />
       </div>
-    );
+    )
   }
 
   const handleClick = async () => {
     try {
-      terminateAllSessions().unwrap();
+      terminateAllSessions().unwrap()
     } catch (error) {
-      handleApiError({ error, setApiError: setTerminateError });
+      handleApiError({ error, setApiError: setTerminateError })
     }
-  };
+  }
 
   if (isApiErrorWithArray(error)) {
     return (
       <Alert
         duration={999999}
         message={error.data.messages[0].message}
-        purpose={"alert"}
-        type={"error"}
+        purpose={'alert'}
+        type={'error'}
       />
-    );
+    )
   }
 
   if (isSuccess) {
-    const { current } = data;
+    const { current } = data
 
     return (
-      <div className={"flex flex-col"}>
-        <Typography className={"mb-[6px]"} variant={"h1"}>
+      <div className={'flex flex-col'}>
+        <Typography className={'mb-[6px]'} variant={'h1'}>
           {t.currentDevice}
         </Typography>
-        <SessionCard
-          browserName={current.browserName}
-          ip={current.ip}
-          type={"browser"}
-        />
+        <SessionCard browserName={current.browserName} ip={current.ip} type={'browser'} />
         <Button
-          className={"mt-6 self-end"}
+          className={'mt-6 self-end'}
           disabled={isTerminateLoading}
           onClick={handleClick}
-          variant={"outline"}
+          variant={'outline'}
         >
           {t.terminateOtherSessions}
         </Button>
         {!!terminateError && (
           <Alert
             message={terminateError}
-            onClose={() => setTerminateError("")}
-            purpose={"toast"}
-            type={"error"}
+            onClose={() => setTerminateError('')}
+            purpose={'toast'}
+            type={'error'}
           />
         )}
       </div>
-    );
+    )
   }
-};
+}

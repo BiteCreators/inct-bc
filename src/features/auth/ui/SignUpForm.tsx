@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 import {
   Alert,
@@ -8,14 +8,14 @@ import {
   FormInput,
   Trans,
   Typography,
-} from "@byte-creators/ui-kit";
-import Link from "next/link";
+} from '@byte-creators/ui-kit'
+import Link from 'next/link'
 
-import { useSingUpForm } from "../model/useSingUpForm";
-import { GithubOauthButton } from "./GithubOauthButton";
-import { GoogleOauthButton } from "./GoogleOauthButton";
-import { LinkSentModal } from "./LinkSentModal";
-import { SignInButton } from "./SignInButton";
+import { useSingUpForm } from '../model/useSingUpForm'
+import { GithubOauthButton } from './GithubOauthButton'
+import { GoogleOauthButton } from './GoogleOauthButton'
+import { LinkSentModal } from './LinkSentModal'
+import { SignInButton } from './SignInButton'
 
 export const SignUpForm = () => {
   const {
@@ -29,68 +29,59 @@ export const SignUpForm = () => {
     setIsModalOpen,
     t,
     userEmail,
-  } = useSingUpForm();
+  } = useSingUpForm()
 
   return (
     <Card
       className={
-        "px-6 py-0 -mt-5 sm:mt-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300"
+        'px-6 py-0 -mt-5 sm:mt-0 sm:p-6 flex flex-col bg-transparent sm:bg-dark-500 sm:border-2 border-transparent sm:border-dark-300'
       }
     >
-      <Typography className={"text-center"} variant={"h1"}>
+      <Typography className={'text-center'} variant={'h1'}>
         {t.signUp}
       </Typography>
-      <div className={"flex gap-[60px] mx-auto mt-5 sm:mt-3"}>
+      <div className={'flex gap-[60px] mx-auto mt-5 sm:mt-3'}>
         <GoogleOauthButton />
         <GithubOauthButton />
       </div>
-      <form
-        className={"flex flex-col gap-6 mt-3 sm:mt-6"}
-        noValidate
-        onSubmit={handleSubmit}
-      >
+      <form className={'flex flex-col gap-6 mt-3 sm:mt-6'} noValidate onSubmit={handleSubmit}>
+        <FormInput control={control} label={t.username} name={'userName'} required />
+        <FormInput control={control} label={t.email} name={'email'} required />
         <FormInput
           control={control}
-          label={t.username}
-          name={"userName"}
-          required
-        />
-        <FormInput control={control} label={t.email} name={"email"} required />
-        <FormInput
-          control={control}
-          inputType={"reveal"}
+          inputType={'reveal'}
           label={t.password}
-          name={"password"}
+          name={'password'}
           required
         />
         <FormInput
           control={control}
-          inputType={"reveal"}
+          inputType={'reveal'}
           label={t.passwordConfirmation}
-          name={"passwordConfirmation"}
+          name={'passwordConfirmation'}
           required
         />
         <FormCheckbox
-          className={"-mt-3 sm:mt-0"}
+          className={'-mt-3 sm:mt-0'}
           control={control}
-          name={"agreedToPrivacyPolicy"}
+          name={'agreedToPrivacyPolicy'}
           required
           text={
-            <Typography className={"-mt-3 sm:mt-0"} variant={"small-text"}>
+            <Typography className={'-mt-3 sm:mt-0'} variant={'small-text'}>
               <Trans
                 tags={{
-                  "1": (str) => (
+                  '1': str => (
                     <Link
-                      className={"underline text-primary-300"}
-                      href={"/auth/sign-up/terms-of-service"}
+                      className={'underline text-primary-300'}
+                      href={'/auth/sign-up/terms-of-service'}
                     >
                       {str}
                     </Link>
                   ),
-                  "2": (str) => (
+                  '2': str => (
                     <Link
-                      className={"underline text-primary-300"}
-                      href={"/auth/sign-up/privacy-policy"}
+                      className={'underline text-primary-300'}
+                      href={'/auth/sign-up/privacy-policy'}
                     >
                       {str}
                     </Link>
@@ -104,23 +95,17 @@ export const SignUpForm = () => {
         {!!apiError && (
           <Alert
             message={apiError}
-            onClose={() => setApiError("")}
-            purpose={"alert"}
-            type={"error"}
+            onClose={() => setApiError('')}
+            purpose={'alert'}
+            type={'error'}
           />
         )}
-        <Button
-          className={"mt-0 py-3 sm:py-2"}
-          disabled={isLoading || !isValid}
-          type={"submit"}
-        >
+        <Button className={'mt-0 py-3 sm:py-2'} disabled={isLoading || !isValid} type={'submit'}>
           {t.signUp}
         </Button>
       </form>
-      <div className={"mt-[18px] flex gap-[6px] flex-col"}>
-        <Typography className={"text-center"}>
-          {t.doYouHaveAnAccount}
-        </Typography>
+      <div className={'mt-[18px] flex gap-[6px] flex-col'}>
+        <Typography className={'text-center'}>{t.doYouHaveAnAccount}</Typography>
         <SignInButton />
       </div>
       <LinkSentModal
@@ -130,5 +115,5 @@ export const SignUpForm = () => {
         title={t.emailSent}
       />
     </Card>
-  );
-};
+  )
+}

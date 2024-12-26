@@ -1,42 +1,37 @@
-import { useCookies } from "react-cookie";
+import { useCookies } from 'react-cookie'
 
-import { useAppDispatch } from "@/common/lib/hooks/reduxHooks";
-import { useHandleApiError } from "@/common/lib/hooks/useHanldeApiError";
-import { authApi, authSlice } from "@/entities/auth";
-import { useConfirmation } from "@byte-creators/utils";
+import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
+import { authApi, authSlice } from '@/entities/auth'
+import { useConfirmation } from '@byte-creators/utils'
 
 export const useLogout = () => {
-  const [__, _, removeCookie] = useCookies(["accessToken"]);
-  const dispatch = useAppDispatch();
-  const [logout, { isLoading }] = authApi.useLogoutMutation();
-  const {
-    confirmOpen,
-    handleConfirm,
-    handleReject,
-    requestConfirmation,
-    setConfirmOpen,
-  } = useConfirmation();
-  const { data: me } = authApi.useMeQuery();
+  const [__, _, removeCookie] = useCookies(['accessToken'])
+  const dispatch = useAppDispatch()
+  const [logout, { isLoading }] = authApi.useLogoutMutation()
+  const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
+    useConfirmation()
+  const { data: me } = authApi.useMeQuery()
 
-  const { handleApiError } = useHandleApiError("Auth");
+  const { handleApiError } = useHandleApiError('Auth')
 
   const handleLogout = async () => {
-    const confirmed = await requestConfirmation();
+    const confirmed = await requestConfirmation()
 
     if (!confirmed) {
-      return;
+      return
     }
     try {
-      await logout().unwrap();
-      removeCookie("accessToken", { path: "/" });
-      dispatch(authSlice.actions.logout());
+      await logout().unwrap()
+      removeCookie('accessToken', { path: '/' })
+      dispatch(authSlice.actions.logout())
     } catch (error) {
       handleApiError({
         error,
-        setApiError: () => console.log("log out error: " + error),
-      });
+        setApiError: () => console.log('log out error: ' + error),
+      })
     }
-  };
+  }
 
   return {
     confirmOpen,
@@ -46,5 +41,5 @@ export const useLogout = () => {
     isLoading,
     me,
     setConfirmOpen,
-  };
-};
+  }
+}

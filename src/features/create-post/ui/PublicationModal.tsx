@@ -1,61 +1,54 @@
-import React from "react";
+import React from 'react'
 
-import { UserProfile, profileApi } from "@/entities/profile";
-import { useScopedTranslation } from "@byte-creators/utils";
-import { TextArea } from "@byte-creators/ui-kit";
-import { Slider } from "@byte-creators/ui-kit";
+import { UserProfile, profileApi } from '@/entities/profile'
+import { Slider, TextArea } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
-import { ImageData } from "../types";
-import { generateTotalImageSlides } from "./ImageSlides";
+import { ImageData } from '../types'
+import { generateTotalImageSlides } from './ImageSlides'
 
 type Props = {
-  correct: boolean;
-  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  images: ImageData[];
-  limit: number;
-  value: string;
-};
+  correct: boolean
+  handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  images: ImageData[]
+  limit: number
+  value: string
+}
 
-export const PublicationModal = ({
-  correct,
-  handleChange,
-  images,
-  limit,
-  value,
-}: Props) => {
-  const totalImageSlides = generateTotalImageSlides(images);
-  const t = useScopedTranslation("Posts");
-  const { data: profile } = profileApi.useGetProfileQuery();
+export const PublicationModal = ({ correct, handleChange, images, limit, value }: Props) => {
+  const totalImageSlides = generateTotalImageSlides(images)
+  const t = useScopedTranslation('Posts')
+  const { data: profile } = profileApi.useGetProfileQuery()
 
   return (
-    <div className={"flex"}>
-      <div className={"w-1/2"}>
+    <div className={'flex'}>
+      <div className={'w-1/2'}>
         <Slider duration={0} slides={totalImageSlides} />
       </div>
-      <div className={"w-1/2 p-6"}>
-        <div className={"mb-6"}>
+      <div className={'w-1/2 p-6'}>
+        <div className={'mb-6'}>
           {profile && (
             <UserProfile
-              avatarUrl={profile.avatars[0]?.url || ""}
+              avatarUrl={profile.avatars[0]?.url || ''}
               profileId={profile.id}
               userName={profile.userName}
             />
           )}
         </div>
         <TextArea
-          className={"min-h-[120px] max-h-[180px]"}
+          className={'min-h-[120px] max-h-[180px]'}
           isCorrect={correct}
           label={t.addPublicationDesctiption}
           limitCount={limit}
           onChange={handleChange}
-          placeholder={"Type here..."}
+          placeholder={'Type here...'}
           value={value}
         />
-        <div className={"flex mx-[-24px] mt-5 mb-6"}>
-          <div className={"h-px bg-dark-100 w-full"} />
+        <div className={'flex mx-[-24px] mt-5 mb-6'}>
+          <div className={'h-px bg-dark-100 w-full'} />
         </div>
         <span>LOCATION</span>
       </div>
     </div>
-  );
-};
+  )
+}

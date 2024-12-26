@@ -1,33 +1,28 @@
-import { Post } from "@/entities/posts";
-import { UserProfile } from "@/entities/profile";
-import { Image } from "@byte-creators/ui-kit/icons";
-import { useGetRelativeTime } from "@byte-creators/utils";
-import { useShowMore } from "@byte-creators/utils";
-import { Typography } from "@byte-creators/ui-kit";
-import Link from "next/link";
+import { Post } from '@/entities/posts'
+import { UserProfile } from '@/entities/profile'
+import { Typography } from '@byte-creators/ui-kit'
+import { Image } from '@byte-creators/ui-kit/icons'
+import { useGetRelativeTime, useShowMore } from '@byte-creators/utils'
+import Link from 'next/link'
 
 type Props = {
-  post: Post;
-};
+  post: Post
+}
 
 export const PublicPostCard = ({ post }: Props) => {
-  const { getRelativeTime } = useGetRelativeTime();
-  const relativeTime = getRelativeTime(new Date(post.createdAt).getTime());
+  const { getRelativeTime } = useGetRelativeTime()
+  const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
 
   const { collapsable, isCollapsed, textToShow, toggleShowMore } = useShowMore({
     text: post.description,
-  });
+  })
 
   return (
-    <div className={"hover:scale-105 duration-75"}>
-      <div className={"cursor-pointer"}>
+    <div className={'hover:scale-105 duration-75'}>
+      <div className={'cursor-pointer'}>
         {post.images.length === 0 ? (
           <Link href={`/profile/${post.ownerId}/publications/${post.id}`}>
-            <div
-              className={
-                "flex w-full justify-center items-center bg-dark-500 h-[234px]"
-              }
-            >
+            <div className={'flex w-full justify-center items-center bg-dark-500 h-[234px]'}>
               <Image />
             </div>
           </Link>
@@ -42,29 +37,29 @@ export const PublicPostCard = ({ post }: Props) => {
           </Link>
         )}
       </div>
-      <div className={"mt-3 flex gap-3 items-center"}>
+      <div className={'mt-3 flex gap-3 items-center'}>
         <UserProfile
           avatarUrl={post.avatarOwner}
           profileId={post.ownerId}
           userName={post.userName}
         />
       </div>
-      <Typography className={"mt-3 text-light-900"} variant={"small-text"}>
+      <Typography className={'mt-3 text-light-900'} variant={'small-text'}>
         {relativeTime}
       </Typography>
-      <Typography className={"mt-[3px] break-all"}>
+      <Typography className={'mt-[3px] break-all'}>
         {textToShow}
         {collapsable && (
           <span
             className={
-              "text-primary-500 underline underline-offset-2 cursor-pointer hover:text-primary-300"
+              'text-primary-500 underline underline-offset-2 cursor-pointer hover:text-primary-300'
             }
             onClick={toggleShowMore}
           >
-            {isCollapsed ? "Show more" : "Hide"}
+            {isCollapsed ? 'Show more' : 'Hide'}
           </span>
         )}
       </Typography>
     </div>
-  );
-};
+  )
+}

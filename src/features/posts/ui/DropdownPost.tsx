@@ -1,34 +1,25 @@
-import React from "react";
+import React from 'react'
 
-import { Post } from "@/entities/posts";
-import { useDropdownPost } from "@/features/posts/model/useDropdownPost";
+import { Post } from '@/entities/posts'
+import { useDropdownPost } from '@/features/posts/model/useDropdownPost'
+import { ActionConfirmation, Alert, Dropdown, DropdownItem } from '@byte-creators/ui-kit'
 import {
   CopyOutline,
   Edit2Outline,
   PersonAddOutline,
   PersonRemoveOutline,
   TrashOutline,
-} from "@byte-creators/ui-kit/icons";
-import {
-  Alert,
-  Dropdown,
-  DropdownItem,
-  ActionConfirmation,
-} from "@byte-creators/ui-kit";
+} from '@byte-creators/ui-kit/icons'
 
 type Props = {
-  changeEditMode: (e: boolean) => void;
-  className?: string;
-  isMyPost: boolean;
-  post: Post;
-};
-export const DropdownPost = ({
-  changeEditMode,
-  className,
-  isMyPost,
-}: Props) => {
-  const forDrop: DropdownItem[] = [];
-  const isFollow = false;
+  changeEditMode: (e: boolean) => void
+  className?: string
+  isMyPost: boolean
+  post: Post
+}
+export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => {
+  const forDrop: DropdownItem[] = []
+  const isFollow = false
   const {
     apiError,
     confirmOpen,
@@ -38,7 +29,7 @@ export const DropdownPost = ({
     handleReject,
     setConfirmOpen,
     t,
-  } = useDropdownPost();
+  } = useDropdownPost()
 
   if (isMyPost) {
     forDrop.push(
@@ -46,34 +37,34 @@ export const DropdownPost = ({
         icon: <Edit2Outline />,
         label: t.editPost,
         onClick: () => {
-          changeEditMode(true);
+          changeEditMode(true)
         },
       },
       {
         icon: <TrashOutline />,
         label: t.deletePost,
         onClick: deletePostHandler,
-      },
-    );
+      }
+    )
   } else {
     if (isFollow) {
       forDrop.push({
         icon: <PersonRemoveOutline />,
         label: t.unfollow,
         onClick: () => {},
-      });
+      })
     } else {
       forDrop.push({
         icon: <PersonAddOutline />,
         label: t.follow,
         onClick: () => {},
-      });
+      })
     }
     forDrop.push({
-      icon: <CopyOutline className={"w-[23px] h-[23px]"} />,
+      icon: <CopyOutline className={'w-[23px] h-[23px]'} />,
       label: t.copyLink,
       onClick: copyLinkHandler,
-    });
+    })
   }
 
   return (
@@ -88,14 +79,8 @@ export const DropdownPost = ({
       />
       <Dropdown className={className} items={forDrop} />
       {apiError && (
-        <Alert
-          className={"z-50"}
-          message={apiError}
-          portal
-          purpose={"toast"}
-          type={"error"}
-        />
+        <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
       )}
     </>
-  );
-};
+  )
+}

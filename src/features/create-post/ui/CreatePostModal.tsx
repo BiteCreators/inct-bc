@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { Alert, Modal } from "@byte-creators/ui-kit";
-import { ActionConfirmation } from "@byte-creators/ui-kit";
+import { ActionConfirmation, Alert, Modal } from '@byte-creators/ui-kit'
 
-import { useCreatePost } from "../model/useCreatePost";
-import { useImageFilters } from "../model/useImageFilters";
-import { useImageUpload } from "../model/useImageUpload";
-import { useStepControl } from "../model/useStepControl";
-import { AddPhotoModal } from "./AddPhotoModal";
-import { ImageFiltersModal } from "./ImageFiltersModal";
-import { generateAddedImageSlides } from "./ImageSlides";
-import { PublicationModal } from "./PublicationModal";
-import { SizeEditorModal } from "./SizeEditorModal";
+import { useCreatePost } from '../model/useCreatePost'
+import { useImageFilters } from '../model/useImageFilters'
+import { useImageUpload } from '../model/useImageUpload'
+import { useStepControl } from '../model/useStepControl'
+import { AddPhotoModal } from './AddPhotoModal'
+import { ImageFiltersModal } from './ImageFiltersModal'
+import { generateAddedImageSlides } from './ImageSlides'
+import { PublicationModal } from './PublicationModal'
+import { SizeEditorModal } from './SizeEditorModal'
 
 export const CreatePostModal = () => {
-  const [selectedImage, setSelectedImage] = useState<null | number>(null);
+  const [selectedImage, setSelectedImage] = useState<null | number>(null)
   const {
     addImageUrlForPost,
     apiError,
@@ -37,38 +36,33 @@ export const CreatePostModal = () => {
     t,
     uploadAllImages,
     value,
-  } = useCreatePost();
+  } = useCreatePost()
 
-  const {
-    currentIndex,
-    handleApplyFilters,
-    handleSelectFilter,
-    setCurrentIndex,
-    totalImageRefs,
-  } = useImageFilters({
-    images,
-    setImages,
-  });
-
-  const { handleBack, handleNext, nextButtonTitle, step, title } =
-    useStepControl({
-      handleApplyFilters,
-      handlePublish,
+  const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
+    useImageFilters({
       images,
-      isOpenCreatePost,
-      uploadAllImages,
-    });
+      setImages,
+    })
 
-  const { error, fileInputRef, handleFileSelect, setError, uploadImage } =
-    useImageUpload({
-      addImageUrlForPost,
-      handleNext: () => {
-        handleNext();
-        setSelectedImage(images.length);
-      },
-    });
+  const { handleBack, handleNext, nextButtonTitle, step, title } = useStepControl({
+    handleApplyFilters,
+    handlePublish,
+    images,
+    isOpenCreatePost,
+    uploadAllImages,
+  })
 
-  const addedImageSlides = generateAddedImageSlides(images, totalImageRefs);
+  const { error, fileInputRef, handleFileSelect, setError, uploadImage } = useImageUpload({
+    addImageUrlForPost,
+    handleNext: () => {
+      handleNext()
+      setSelectedImage(images.length)
+    },
+  })
+
+  const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
+
+  //TODO: fix types fileInputRef={fileInputRef}
 
   return (
     <div>
@@ -82,25 +76,25 @@ export const CreatePostModal = () => {
       />
       <Modal
         className={`max-w-[330px] ${
-          step === 3 || step === 4 ? "md:max-w-[984px]" : "md:max-w-[492px]"
+          step === 3 || step === 4 ? 'md:max-w-[984px]' : 'md:max-w-[492px]'
         } w-full min-h-64`}
         disabledButton={isLoading}
         handleBack={step === 2 ? handleBackWithoutSave : handleBack}
         handleInteractOutside={step !== 1 ? handleInteractOutside : () => {}}
         handleNext={handleNext}
         isOpen={isOpenCreatePost}
-        mode={step === 1 ? "default" : "withStep"}
+        mode={step === 1 ? 'default' : 'withStep'}
         nextButtonTitle={nextButtonTitle}
         onOpenChange={setIsOpenCreatePost}
         title={title}
       >
         {(error || apiError) && (
           <Alert
-            className={"static left-0 right-0 !mb-0 md:left-4 md:right-4"}
+            className={'static left-0 right-0 !mb-0 md:left-4 md:right-4'}
             message={error}
-            onClose={() => setError("")}
-            purpose={"alert"}
-            type={"error"}
+            onClose={() => setError('')}
+            purpose={'alert'}
+            type={'error'}
           />
         )}
         {step === 1 && (
@@ -144,5 +138,5 @@ export const CreatePostModal = () => {
         )}
       </Modal>
     </div>
-  );
-};
+  )
+}

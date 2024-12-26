@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react'
 
-import { AuthLayout } from "@/application/layouts/AuthLayout";
-import { useGoogleAuth } from "@/features/auth/model/useGoogleAuth";
-import { Loader } from "@byte-creators/ui-kit";
+import { AuthLayout } from '@/application/layouts/AuthLayout'
+import { useGoogleAuth } from '@/features/auth/model/useGoogleAuth'
+import { Loader } from '@byte-creators/ui-kit'
 
 function GoogleAuth() {
-  const { googleAuthHandler } = useGoogleAuth();
+  const { googleAuthHandler } = useGoogleAuth()
 
   useEffect(() => {
-    googleAuthHandler();
-  }, [googleAuthHandler]);
+    googleAuthHandler()
+  }, [googleAuthHandler])
 
-  return <Loader />;
+  return <Loader />
 }
 
-GoogleAuth.getLayout = AuthLayout;
+GoogleAuth.getLayout = AuthLayout
 
-export default GoogleAuth;
+export default GoogleAuth

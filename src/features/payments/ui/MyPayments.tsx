@@ -1,17 +1,11 @@
-import { MyPayment } from "@/entities/payments";
-import { useScopedTranslation } from "@byte-creators/utils";
-import {
-  Loader,
-  Pagination,
-  Table,
-  TableData,
-  Typography,
-} from "@byte-creators/ui-kit";
+import { MyPayment } from '@/entities/payments'
+import { Loader, Pagination, Table, TableData, Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
-import { useMyPayments } from "../model/useMyPayments";
+import { useMyPayments } from '../model/useMyPayments'
 
 export const MyPayments = () => {
-  const t = useScopedTranslation("Payments");
+  const t = useScopedTranslation('Payments')
   const {
     currentPage,
     dataPortion,
@@ -20,17 +14,17 @@ export const MyPayments = () => {
     handlePaymentsPortionChange,
     isLoading,
     pagesCount,
-  } = useMyPayments();
+  } = useMyPayments()
 
-  let payments = [] as TableData[];
+  let payments = [] as TableData[]
 
   if (dataforDisplay) {
-    const paymentsForDisplay = [...dataforDisplay] as Partial<MyPayment>[];
+    const paymentsForDisplay = [...dataforDisplay] as Partial<MyPayment>[]
 
-    paymentsForDisplay.forEach((el) => {
-      delete el.userId;
-      delete el.subscriptionId;
-    });
+    paymentsForDisplay.forEach(el => {
+      delete el.userId
+      delete el.subscriptionId
+    })
     payments = dataforDisplay?.map((el: any) => {
       return {
         1: new Date(el.dateOfPayment).toLocaleDateString(),
@@ -38,8 +32,8 @@ export const MyPayments = () => {
         3: `$${el.price}`,
         4: el.subscriptionType,
         5: el.paymentType,
-      };
-    });
+      }
+    })
   }
 
   const headers = [
@@ -58,10 +52,10 @@ export const MyPayments = () => {
     {
       name: t.paymentType,
     },
-  ];
+  ]
 
   return (
-    <div className={"relative mb-12 sm:flex sm:flex-col"}>
+    <div className={'relative mb-12 sm:flex sm:flex-col'}>
       {isLoading && <Loader />}
       {!isLoading && dataforDisplay && dataforDisplay.length === 0 ? (
         <Typography> You do not have any subscriptions yet</Typography>
@@ -69,9 +63,7 @@ export const MyPayments = () => {
         <div>
           <Table headers={headers} tableData={payments} />
           <Pagination
-            className={
-              "hidden sm:inline-flex sm:self-start sm:w-auto sm:mt-9 sm:mb-16"
-            }
+            className={'hidden sm:inline-flex sm:self-start sm:w-auto sm:mt-9 sm:mb-16'}
             currentPage={currentPage}
             onChangePagesPortion={handlePaymentsPortionChange}
             onClickPaginationButton={handleCurrentPageChange}
@@ -81,8 +73,8 @@ export const MyPayments = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 // для тестир-ия:
 // function getArray(start: number, end: number, total: number) {

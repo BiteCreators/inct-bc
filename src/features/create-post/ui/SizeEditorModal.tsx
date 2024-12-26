@@ -1,24 +1,24 @@
-import React, { ReactNode, RefObject, useState } from "react";
-import Cropper, { Area } from "react-easy-crop";
+import React, { ReactNode, RefObject, useState } from 'react'
+import Cropper, { Area } from 'react-easy-crop'
 
-import { CroppingTools } from "@/features/create-post/ui/CroppingTools";
-import { Slider } from "@byte-creators/ui-kit";
+import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
+import { Slider } from '@byte-creators/ui-kit'
 
-import { ImageData } from "../types";
-import { ImageControl } from "./ImagesControl";
+import { ImageData } from '../types'
+import { ImageControl } from './ImagesControl'
 
 type Props = {
-  fileInputRef: RefObject<HTMLInputElement>;
-  handleDeleteImageUrl: (index: number) => void;
-  handleFileSelect: (file: File) => void;
-  images: ImageData[];
-  isDisableInput: boolean;
-  selectedImage: null | number;
-  setImages: React.Dispatch<React.SetStateAction<ImageData[]>>;
-  setSelectedImage: (selectedImage: null | number) => void;
-  slides: ReactNode[];
-  uploadImage: () => void;
-};
+  fileInputRef: RefObject<HTMLInputElement>
+  handleDeleteImageUrl: (index: number) => void
+  handleFileSelect: (file: File) => void
+  images: ImageData[]
+  isDisableInput: boolean
+  selectedImage: null | number
+  setImages: React.Dispatch<React.SetStateAction<ImageData[]>>
+  setSelectedImage: (selectedImage: null | number) => void
+  slides: ReactNode[]
+  uploadImage: () => void
+}
 
 export const SizeEditorModal = ({
   fileInputRef,
@@ -32,19 +32,19 @@ export const SizeEditorModal = ({
   slides,
   uploadImage,
 }: Props) => {
-  const [zoom, setZoom] = useState(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null);
-  const [aspect, setAspect] = useState(1);
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
+  const [aspect, setAspect] = useState(1)
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
   const handleCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  };
+    setCroppedAreaPixels(croppedAreaPixels)
+  }
 
   return (
-    <div className={"min-h-[400px] relative"}>
+    <div className={'min-h-[400px] relative'}>
       <Slider duration={0} slides={slides} />
       {selectedImage !== null && images[selectedImage] && (
-        <div className={"w-full bg-primary-100"}>
+        <div className={'w-full bg-primary-100'}>
           <Cropper
             aspect={aspect}
             crop={crop}
@@ -54,10 +54,10 @@ export const SizeEditorModal = ({
             onZoomChange={setZoom}
             style={{
               containerStyle: {
-                backgroundColor: "#606060",
+                backgroundColor: '#606060',
               },
               cropAreaStyle: {
-                border: "1px solid white",
+                border: '1px solid white',
               },
             }}
             zoom={zoom}
@@ -65,7 +65,7 @@ export const SizeEditorModal = ({
         </div>
       )}
 
-      <div className={"w-full p-3 flex gap-6 absolute bottom-0"}>
+      <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
         <CroppingTools
           croppedAreaPixels={croppedAreaPixels}
           images={images}
@@ -79,9 +79,9 @@ export const SizeEditorModal = ({
         <ImageControl
           fileInputRef={fileInputRef}
           handleDeleteImageUrl={handleDeleteImageUrl}
-          handleFileSelect={(file) => {
-            handleFileSelect(file);
-            setSelectedImage(images.length);
+          handleFileSelect={file => {
+            handleFileSelect(file)
+            setSelectedImage(images.length)
           }}
           images={images}
           isDisableInput={isDisableInput}
@@ -89,5 +89,5 @@ export const SizeEditorModal = ({
         />
       </div>
     </div>
-  );
-};
+  )
+}

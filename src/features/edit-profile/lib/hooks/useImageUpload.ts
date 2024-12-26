@@ -1,76 +1,76 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react'
 
-import { useScopedTranslation } from "@byte-creators/utils";
+import { useScopedTranslation } from '@byte-creators/utils'
 
 export const useImageUpload = () => {
-  const [imageUrl, setImageUrl] = useState<null | string>(null);
-  const [error, setError] = useState("");
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const t = useScopedTranslation("Profile");
+  const [imageUrl, setImageUrl] = useState<null | string>(null)
+  const [error, setError] = useState('')
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const t = useScopedTranslation('Profile')
 
   const handleFileSelect = (file: File) => {
-    setError("");
+    setError('')
 
-    const validFormats = ["image/jpeg", "image/png"];
+    const validFormats = ['image/jpeg', 'image/png']
 
     if (!validFormats.includes(file.type)) {
-      setError(t.editProfileError.incorrectPhotoFormat);
-      resetFileInput();
+      setError(t.editProfileError.incorrectPhotoFormat)
+      resetFileInput()
 
-      return;
+      return
     }
 
-    const maxSizeInB = 10000000;
+    const maxSizeInB = 10000000
 
     if (file.size > maxSizeInB) {
-      setError(t.editProfileError.photoTooBig);
-      resetFileInput();
+      setError(t.editProfileError.photoTooBig)
+      resetFileInput()
 
-      return;
+      return
     }
 
-    const reader = new FileReader();
+    const reader = new FileReader()
 
-    reader.addEventListener("load", () => {
-      const url = reader.result?.toString() || "";
-      const imageElement = document.createElement("img");
+    reader.addEventListener('load', () => {
+      const url = reader.result?.toString() || ''
+      const imageElement = document.createElement('img')
 
-      imageElement.src = url;
+      imageElement.src = url
 
       const onLoadHandler = (e: any) => {
-        const { naturalHeight, naturalWidth } = e.currentTarget;
+        const { naturalHeight, naturalWidth } = e.currentTarget
 
         if (naturalHeight < 150 || naturalWidth < 150) {
-          setError(t.editProfileError.photoTooSmall);
-          resetFileInput();
-          setImageUrl("");
+          setError(t.editProfileError.photoTooSmall)
+          resetFileInput()
+          setImageUrl('')
 
-          return;
+          return
         }
 
-        setImageUrl(url);
-        setSelectedFile(file);
-        setError("");
-        imageElement.removeEventListener("load", onLoadHandler);
-      };
+        setImageUrl(url)
+        setSelectedFile(file)
+        setError('')
+        imageElement.removeEventListener('load', onLoadHandler)
+      }
 
-      imageElement.addEventListener("load", onLoadHandler);
-    });
-    reader.readAsDataURL(file);
-  };
+      imageElement.addEventListener('load', onLoadHandler)
+    })
+    reader.readAsDataURL(file)
+  }
 
   const resetFileInput = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+      fileInputRef.current.value = ''
     }
-  };
+  }
 
   const uploadImage = () => {
     if (fileInputRef.current) {
-      fileInputRef.current.click();
+      fileInputRef.current.click()
     }
-  };
+  }
 
   return {
     error,
@@ -80,5 +80,5 @@ export const useImageUpload = () => {
     selectedFile,
     setError,
     uploadImage,
-  };
-};
+  }
+}

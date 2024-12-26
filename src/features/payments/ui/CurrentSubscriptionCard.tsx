@@ -1,7 +1,7 @@
-import { paymentsApi } from "@/entities/payments";
-import { getSubscriptionDates } from "@/features/payments/lib/getSubscriptionDates";
-import { useSubscriptionManagement } from "@/features/payments/lib/hooks/useSubscriptionManagement";
-import { Alert, Card, Checkbox, Typography } from "@byte-creators/ui-kit";
+import { paymentsApi } from '@/entities/payments'
+import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDates'
+import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
+import { Alert, Card, Checkbox, Typography } from '@byte-creators/ui-kit'
 
 // const data: any = {
 // data: [
@@ -31,58 +31,48 @@ import { Alert, Card, Checkbox, Typography } from "@byte-creators/ui-kit";
 // }
 
 export const CurrentSubscriptionCard = () => {
-  const { data } = paymentsApi.useGetCurrentPaymentQuery();
-  const {
-    apiError,
-    autoRenewalAlert,
-    handleCheckboxChange,
-    setAutoRenewalAlert,
-  } = useSubscriptionManagement();
+  const { data } = paymentsApi.useGetCurrentPaymentQuery()
+  const { apiError, autoRenewalAlert, handleCheckboxChange, setAutoRenewalAlert } =
+    useSubscriptionManagement()
 
   const { expireAt, nextPayment } = data?.data
     ? getSubscriptionDates(data.data)
-    : { expireAt: "", nextPayment: "" };
+    : { expireAt: '', nextPayment: '' }
 
-  const isCheckboxChecked = data?.hasAutoRenewal;
+  const isCheckboxChecked = data?.hasAutoRenewal
 
   return (
     <>
-      <Typography className={"font-weight-600"} variant={"h3"}>
+      <Typography className={'font-weight-600'} variant={'h3'}>
         Current Subscription:
       </Typography>
-      <Card className={"flex mt-2"}>
-        <div className={"flex flex-col mx-4 my-3 gap-5"}>
-          <Typography className={"text-light-900"}>Expire At</Typography>
-          <Typography className={"font-weight-600"}>{expireAt}</Typography>
+      <Card className={'flex mt-2'}>
+        <div className={'flex flex-col mx-4 my-3 gap-5'}>
+          <Typography className={'text-light-900'}>Expire At</Typography>
+          <Typography className={'font-weight-600'}>{expireAt}</Typography>
         </div>
         {isCheckboxChecked && (
-          <div className={"flex flex-col ml-12 my-3 gap-5"}>
-            <Typography className={"text-light-900"}>Next payment</Typography>
-            <Typography className={"font-weight-600"}>{nextPayment}</Typography>
+          <div className={'flex flex-col ml-12 my-3 gap-5'}>
+            <Typography className={'text-light-900'}>Next payment</Typography>
+            <Typography className={'font-weight-600'}>{nextPayment}</Typography>
           </div>
         )}
       </Card>
       <Checkbox
         checked={isCheckboxChecked}
-        className={"mt-3"}
+        className={'mt-3'}
         onChecked={() => handleCheckboxChange(!!isCheckboxChecked)}
-        text={
-          <Typography className={"font-weight-600 mt-3"}>
-            Auto-Renewal
-          </Typography>
-        }
+        text={<Typography className={'font-weight-600 mt-3'}>Auto-Renewal</Typography>}
       />
       {autoRenewalAlert && (
         <Alert
-          message={"Automatic subscription renewal has been cancelled"}
+          message={'Automatic subscription renewal has been cancelled'}
           onClose={() => setAutoRenewalAlert(false)}
-          purpose={"alert"}
-          type={"success"}
+          purpose={'alert'}
+          type={'success'}
         />
       )}
-      {!!apiError && (
-        <Alert message={apiError} purpose={"toast"} type={"error"} />
-      )}
+      {!!apiError && <Alert message={apiError} purpose={'toast'} type={'error'} />}
     </>
-  );
-};
+  )
+}
