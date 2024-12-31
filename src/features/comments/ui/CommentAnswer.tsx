@@ -1,12 +1,9 @@
 import React, { ReactNode } from 'react'
 
-import { Heart, HeartOutline } from '@/common/assets/icons/components'
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
-import { cn } from '@/common/lib/utils/cn'
-import { Avatar, Typography } from '@/common/ui'
-import { commentsApi } from '@/entities/comments'
+import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
+import { cn, useGetRelativeTime } from '@byte-creators/utils'
+import { Avatar, Typography } from '@byte-creators/ui-kit'
 import { Answer } from '@/entities/comments/types/comments.types'
-import { Reaction } from '@/entities/posts/types/likes.types'
 
 type Props = {
   answer: Answer
