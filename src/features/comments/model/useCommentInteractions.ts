@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useGetRelativeTime } from '@/common/lib/hooks/useGetRelativeTime'
+import { useGetRelativeTime } from '@byte-creators/utils'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { commentsApi } from '@/entities/comments'
 import { Answer, Comment } from '@/entities/comments/types/comments.types'
