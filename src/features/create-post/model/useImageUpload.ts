@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react'
 
-import { useScopedTranslation } from '@byte-creators/utils'
-
 export const useImageUpload = ({
   addImageUrlForPost,
   handleNext,
@@ -11,7 +9,6 @@ export const useImageUpload = ({
 }) => {
   const [error, setError] = useState('')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const t = useScopedTranslation('Profile')
 
   const handleFileSelect = (file: File) => {
     setError('')

@@ -62,8 +62,6 @@ export const CreatePostModal = () => {
 
   const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
 
-  //TODO: fix types fileInputRef={fileInputRef}
-
   return (
     <div>
       <ActionConfirmation
@@ -99,14 +97,14 @@ export const CreatePostModal = () => {
         )}
         {step === 1 && (
           <AddPhotoModal
-            fileInputRef={fileInputRef}
+            fileInputRef={fileInputRef as React.RefObject<HTMLInputElement>}
             handleFileSelect={handleFileSelect}
             uploadImage={uploadImage}
           />
         )}
         {step === 2 && (
           <SizeEditorModal
-            fileInputRef={fileInputRef}
+            fileInputRef={fileInputRef as React.RefObject<HTMLInputElement>}
             handleDeleteImageUrl={handleDeleteImageUrl}
             handleFileSelect={handleFileSelect}
             images={images}
@@ -129,6 +127,7 @@ export const CreatePostModal = () => {
         )}
         {step === 4 && (
           <PublicationModal
+            isLoading={isLoading}
             correct={correct}
             handleChange={handleChange}
             images={images}
