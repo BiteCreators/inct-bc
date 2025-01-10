@@ -3,12 +3,11 @@ import { ReactNode } from 'react'
 import { Comment } from '@/entities/comments/types/comments.types'
 import { Alert, Avatar, Typography } from '@byte-creators/ui-kit'
 import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
-
-import exampleAvatar from '../../../../public/examples/exampleAvatar.png'
+import { cn } from '@byte-creators/utils'
 
 import { useCommentInteractions } from '../model/useCommentInteractions'
 import { CommentAnswer } from './CommentAnswer'
-import { cn } from '@byte-creators/utils'
+
 type Props = {
   children?: ReactNode
   comment: Comment
@@ -41,7 +40,7 @@ export const PostComment = ({ children, comment, handleAnswerClick }: Props) => 
         ></Alert>
       )}
       <div className={'col-span-1 row-span-2 pt-1'}>
-        <Avatar avatarURL={comment.from.avatars[0].url} imgStyles={'w-9 h-9 object-cover'} />
+        <Avatar avatarURL={comment.from.avatars[0]?.url} imgStyles={'w-9 h-9 object-cover'} />
       </div>
       <div className={'col-span-1 row-span-1'}>
         <div className={'flex'}>

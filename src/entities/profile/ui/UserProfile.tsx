@@ -1,17 +1,19 @@
 import { Avatar, Typography } from '@byte-creators/ui-kit'
+import { cn } from '@byte-creators/utils'
 import Link from 'next/link'
 
 type Props = {
   avatarUrl: string
+  className?: string
   profileId: number
   userName: string
 }
 
-export const UserProfile = ({ avatarUrl, profileId, userName }: Props) => {
+export const UserProfile = ({ avatarUrl, className, profileId, userName }: Props) => {
   return (
-    <div className={'flex gap-3 items-center'}>
+    <div className={cn(className, 'flex gap-3 items-center')}>
       <div className={'w-9 h-9'}>
-        <Avatar avatarURL={avatarUrl} href={`/profile/${profileId}`} isNextLink />
+        <Avatar avatarURL={avatarUrl || ''} href={`/profile/${profileId}`} isNextLink />
       </div>
       <Link
         className={'hover:text-primary-300 text-light-100 duration-75'}
