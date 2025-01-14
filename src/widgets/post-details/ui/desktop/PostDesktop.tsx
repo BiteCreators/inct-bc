@@ -67,7 +67,7 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
             <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px] min-w-[390px]'} />
           )}
           <>
-            <div className={'max-w-[480px] max-h-[564px] flex flex-col overflow-hidden'}>
+            <div className={'w-full max-h-[564px] flex flex-col overflow-hidden'}>
               <PostModalTitle changeEditMode={setEditMode} post={post} />
               <div className={'border-y-[1px] border-dark-100'} />
               <DesktopCommentsList
