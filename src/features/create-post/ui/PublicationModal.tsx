@@ -1,11 +1,10 @@
-import React from 'react'
+import React, {ReactNode} from 'react'
 
 import { UserProfile, profileApi } from '@/entities/profile'
-import { Slider, TextArea, Loader } from '@byte-creators/ui-kit'
+import {LoaderBlock, Slider, TextArea} from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 
 import { ImageData } from '../types'
-import { generateTotalImageSlides } from './ImageSlides'
 
 type Props = {
   correct: boolean
@@ -14,6 +13,7 @@ type Props = {
   images: ImageData[]
   limit: number
   value: string
+  slides: ReactNode[]
 }
 
 export const PublicationModal = ({
@@ -23,20 +23,15 @@ export const PublicationModal = ({
   limit,
   value,
   isLoading,
+  slides
 }: Props) => {
-  const totalImageSlides = generateTotalImageSlides(images)
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
 
   return (
     <div className={'flex'}>
-      {isLoading && (
-        <div className={'absolute top-2 right-10 w-16 h-12 flex justify-center bg-dark-300'}>
-          <Loader />
-        </div>
-      )}
       <div className={'w-1/2'}>
-        <Slider duration={0} slides={totalImageSlides} />
+        <Slider duration={0} slides={slides} />
       </div>
       <div className={'w-1/2 p-6'}>
         <div className={'mb-6'}>
@@ -62,6 +57,7 @@ export const PublicationModal = ({
         </div>
         <span>LOCATION</span>
       </div>
+      { isLoading && <LoaderBlock /> }
     </div>
   )
 }

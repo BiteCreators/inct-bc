@@ -27,6 +27,12 @@ export const useCreatePost = () => {
     startText: '',
   })
 
+  useEffect(() => {
+    if(uploadIds.length > 0){
+      handlePublish()
+    }
+  }, [uploadIds]);
+
   const addImageUrlForPost = ({
     file,
     handleNext,

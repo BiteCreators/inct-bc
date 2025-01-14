@@ -24,14 +24,3 @@ export const generateAddedImageSlides = (
     />
   ))
 }
-
-export const generateTotalImageSlides = (images: ImageData[]): React.ReactNode[] => {
-  return images.map(el => (
-    <img
-      alt={'slide'}
-      className={cn('w-full h-full object-cover object-center')}
-      key={el.totalUrl}
-      src={el.totalUrl}
-    />
-  ))
-}
