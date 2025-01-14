@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@byte-creators/config": "^1.0.5",
-    "@byte-creators/ui-kit": "^1.4.0",
-    "@byte-creators/utils": "^1.7.0",
+    "@byte-creators/ui-kit": "^1.4.3",
+    "@byte-creators/utils": "^1.7.1",
     "@hookform/resolvers": "^3.9.0",
     "@module-federation/nextjs-mf": "^8.7.8",
     "@radix-ui/react-dialog": "^1.1.1",
