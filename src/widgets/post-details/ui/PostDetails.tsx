@@ -2,7 +2,10 @@ import React from 'react'
 
 import { commentsApi } from '@/entities/comments'
 import { Post } from '@/entities/posts'
-import { useMediaQuery } from '@byte-creators/utils'
+import { Button } from '@byte-creators/ui-kit'
+import { EyeOutline } from '@byte-creators/ui-kit/icons'
+import { cn, useMediaQuery } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 import { PostDesktop } from './desktop/PostDesktop'
 import { PostMobile } from './mobile/PostMobile'
@@ -12,9 +15,32 @@ type Props = {
 }
 
 export const PostDetails = ({ post }: Props) => {
+  // Обработка навигации к PostImageView
+  const router = useRouter()
+  const handleNavigateToImage = (imageUrl: string) => {
+    const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
+
+    router.push({
+      pathname: `/profile/${post.ownerId}/publications/${post.id}/view`,
+      query: { image: proxyUrl },
+    })
+  }
   //TODO: remove any
   const slides = post.images.map((image: any, i) => (
-    <img alt={'postImg'} className={'h-full object-cover object-center'} key={i} src={image.url} />
+    <div className={'w-full h-full relative'} key={i}>
+      <img alt={'postImg'} className={'h-full object-cover object-center sc'} src={image.url} />
+      <Button
+        className={cn(
+          'text-2xl absolute inset-0 m-auto opacity-0',
+          'transition-opacity duration-300 hover:opacity-100',
+          'px-36 focus:outline-none active:outline-none !outline-none'
+        )}
+        onClick={() => handleNavigateToImage(image.url)}
+        variant={'text'}
+      >
+        <EyeOutline className={'text-light-900'} transform={'scale(2)'} />
+      </Button>
+    </div>
   ))
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 

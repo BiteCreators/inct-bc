@@ -1,0 +1,54 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 90vh;
+  padding: 1rem 4rem;
+}
+
+.image {
+  position: relative;
+  z-index: 5;
+  right: 20%;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  width: auto;
+  height: 60vh;
+
+  border-radius: 0.5rem;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.image img {
+  width: calc(100% + 1rem);
+  height: calc(100% + 0.5rem);
+  border-radius: 0.5rem;
+}
+
+.blob {
+  position: absolute;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+
+  opacity: 0.8;
+
+  animation: spinBlob 20s linear infinite;
+}
+
+@keyframes spinBlob {
+  0% {
+    transform: rotate(0deg) scale(2);
+  }
+
+  100% {
+    transform: rotate(1turn) scale(2);
+  }
+}
