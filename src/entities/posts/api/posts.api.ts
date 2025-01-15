@@ -21,12 +21,12 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: 'v1/posts',
       }),
     }),
-    createPostImage: builder.mutation<{ images: CreatePostImageResponse[] }, { file: File }>({
+    createPostImage: builder.mutation<{ images: CreatePostImageResponse[] }, { file: File[] }>({
       invalidatesTags: ['Post'],
       query: ({ file }) => {
         const formData = new FormData()
 
-        formData.append('file', file)
+        file.forEach((el) => formData.append('file', el))
 
         return {
           body: formData,

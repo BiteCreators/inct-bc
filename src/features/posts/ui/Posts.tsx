@@ -57,7 +57,7 @@ export const Posts = ({ userId }: Props) => {
 
   return (
     <div className={'flex gap-5 justify-center flex-wrap relative'}>
-      {isFetching && <LoaderBlock className={'items-end pb-12'}/>}
+      {isFetching && <LoaderBlock portal />}
       {!isLoading && data?.items && data?.items.length < 1 ? (
         <Typography> user has no publications yet </Typography>
       ) : (

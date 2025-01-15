@@ -19,7 +19,6 @@ type Props = {
 export const PublicationModal = ({
   correct,
   handleChange,
-  images,
   limit,
   value,
   isLoading,
