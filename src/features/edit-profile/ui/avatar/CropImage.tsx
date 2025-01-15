@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { Crop, ReactCrop, centerCrop, makeAspectCrop } from 'react-image-crop'
 
 import { Button, ScrollArea } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 import 'react-image-crop/dist/ReactCrop.css'
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 
 export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) => {
   const imgRef = useRef<HTMLImageElement | null>(null)
+  const t = useScopedTranslation('Profile')
 
   const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const { height, width } = e.currentTarget
@@ -59,7 +61,7 @@ export const CropImage = ({ crop, imageUrl, saveCroppedImage, setCrop }: Props) 
           />
         </ReactCrop>
         <Button className={'mt-6 mb-4 px-7 z-10 self-end'} onClick={saveCroppedImageHandler}>
-          Save
+          {t.save}
         </Button>
       </div>
     </ScrollArea>

@@ -2,6 +2,7 @@ import { paymentsApi } from '@/entities/payments'
 import { getSubscriptionDates } from '@/features/payments/lib/getSubscriptionDates'
 import { useSubscriptionManagement } from '@/features/payments/lib/hooks/useSubscriptionManagement'
 import { Alert, Card, Checkbox, Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 // const data: any = {
 // data: [
@@ -35,6 +36,8 @@ export const CurrentSubscriptionCard = () => {
   const { apiError, autoRenewalAlert, handleCheckboxChange, setAutoRenewalAlert } =
     useSubscriptionManagement()
 
+  const t = useScopedTranslation('Payments')
+
   const { expireAt, nextPayment } = data?.data
     ? getSubscriptionDates(data.data)
     : { expireAt: '', nextPayment: '' }
@@ -44,16 +47,16 @@ export const CurrentSubscriptionCard = () => {
   return (
     <>
       <Typography className={'font-weight-600'} variant={'h3'}>
-        Current Subscription:
+        {t.currentSubscription}
       </Typography>
       <Card className={'flex mt-2'}>
         <div className={'flex flex-col mx-4 my-3 gap-5'}>
-          <Typography className={'text-light-900'}>Expire At</Typography>
+          <Typography className={'text-light-900'}>{t.expireAt}</Typography>
           <Typography className={'font-weight-600'}>{expireAt}</Typography>
         </div>
         {isCheckboxChecked && (
           <div className={'flex flex-col ml-12 my-3 gap-5'}>
-            <Typography className={'text-light-900'}>Next payment</Typography>
+            <Typography className={'text-light-900'}>{t.nextPayment}</Typography>
             <Typography className={'font-weight-600'}>{nextPayment}</Typography>
           </div>
         )}
@@ -62,11 +65,11 @@ export const CurrentSubscriptionCard = () => {
         checked={isCheckboxChecked}
         className={'mt-3'}
         onChecked={() => handleCheckboxChange(!!isCheckboxChecked)}
-        text={<Typography className={'font-weight-600 mt-3'}>Auto-Renewal</Typography>}
+        text={<Typography className={'font-weight-600 mt-3'}>{t.autoRenewal}</Typography>}
       />
       {autoRenewalAlert && (
         <Alert
-          message={'Automatic subscription renewal has been cancelled'}
+          message={t.errors.cancelled}
           onClose={() => setAutoRenewalAlert(false)}
           purpose={'alert'}
           type={'success'}
