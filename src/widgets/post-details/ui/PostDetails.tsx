@@ -38,7 +38,16 @@ export const PostDetails = ({ post }: Props) => {
         onClick={() => handleNavigateToImage(image.url)}
         variant={'text'}
       >
-        <EyeOutline className={'text-light-900'} transform={'scale(2)'} />
+        <div
+          style={{
+            backgroundColor: '#4B4B4B',
+            borderRadius: '50%',
+            display: 'inline-block',
+            padding: '8px',
+          }}
+        >
+          <EyeOutline className={'text-light-100 transform scale-150'} />
+        </div>
       </Button>
     </div>
   ))
