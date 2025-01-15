@@ -55,17 +55,15 @@ export const useStepControl = ({
         setStep(prevStep => prevStep + 1)
         break
       case 3:
+          setStep(prevStep => prevStep + 1)
+        break
+      case 4:
         try {
           const res = await handleApplyFilters()
-
-          setStep(prevStep => prevStep + 1)
           await uploadAllImages(res.newFiles)
         } catch (error) {
           console.log(error)
         }
-        break
-      case 4:
-        await handlePublish()
         break
       default:
         break

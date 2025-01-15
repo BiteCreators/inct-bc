@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { postsApi } from '@/entities/posts'
@@ -27,6 +27,12 @@ export const useCreatePost = () => {
     startText: '',
   })
 
+  useEffect(() => {
+    if(uploadIds.length > 0){
+      handlePublish()
+    }
+  }, [uploadIds]);
+
   const addImageUrlForPost = ({
     file,
     handleNext,
@@ -49,24 +55,15 @@ export const useCreatePost = () => {
     }
   }
 
-  const uploadImageForPost = async (file: File | null) => {
-    if (file) {
-      const res = await createPostImage({ file }).unwrap()
+  const uploadAllImages = async (file: File[]) => {
 
-      setUploadIds(imagesId => [...imagesId, { uploadId: res.images[0].uploadId }])
-    }
-  }
+    const res = await createPostImage({ file }).unwrap()
 
-  const uploadAllImages = async (files: File[]) => {
-    try {
-      await files.reduce(async (promise, file) => {
-        await promise // ждём завершения предыдущей загрузки
+    const uploadIds = res.images.map((image) => ({
+      ...image, uploadId: image.uploadId
+    }))
 
-        return uploadImageForPost(file) // загружаем текущее изображение
-      }, Promise.resolve())
-    } catch (error) {
-      handleApiError({ error, setApiError })
-    }
+    setUploadIds( uploadIds )
   }
 
   const handleDeleteImageUrl = (index: number) => {
