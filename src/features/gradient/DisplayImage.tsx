@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { Button } from '@byte-creators/ui-kit'
-import { useRouter } from 'next/router'
+import { ImageZoom } from '@/features/gradient/ImageZoom'
 
 import styles from './styles.module.css'
 
@@ -11,8 +10,6 @@ type Props = {
 }
 
 const DisplayImage = ({ colorPalette, uploadedImage }: Props) => {
-  const router = useRouter()
-
   const toHex = (rgb: number) => {
     let hex = rgb.toString(16)
 
@@ -26,7 +23,9 @@ const DisplayImage = ({ colorPalette, uploadedImage }: Props) => {
   return (
     <div>
       <div className={styles.image}>
-        {uploadedImage ? <img alt={'uploaded'} src={uploadedImage} /> : <div>No image</div>}
+        <div className={styles.imageContainer}>
+          {uploadedImage ? <ImageZoom uploadedImage={uploadedImage} /> : <div>No image</div>}
+        </div>
       </div>
 
       {colorPalette && (
@@ -41,9 +40,6 @@ const DisplayImage = ({ colorPalette, uploadedImage }: Props) => {
           })}
         </div>
       )}
-      <Button onClick={() => router.back()} style={{ margin: '20px 120px' }} variant={'text'}>
-        Back
-      </Button>
     </div>
   )
 }

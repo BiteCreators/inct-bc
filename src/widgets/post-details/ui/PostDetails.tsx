@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const PostDetails = ({ post }: Props) => {
-  // Обработка навигации к PostImageView
   const router = useRouter()
   const handleNavigateToImage = (imageUrl: string) => {
     const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
@@ -38,14 +37,7 @@ export const PostDetails = ({ post }: Props) => {
         onClick={() => handleNavigateToImage(image.url)}
         variant={'text'}
       >
-        <div
-          style={{
-            backgroundColor: '#4B4B4B',
-            borderRadius: '50%',
-            display: 'inline-block',
-            padding: '8px',
-          }}
-        >
+        <div className={'bg-dark-100 rounded-full inline-block p-2'}>
           <EyeOutline className={'text-light-100 transform scale-150'} />
         </div>
       </Button>
