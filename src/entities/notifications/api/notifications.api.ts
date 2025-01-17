@@ -1,8 +1,8 @@
 import { getSocket } from '@/common/api/getSocket'
 import { inctagramApi } from '@/common/api/inct.api'
+import { Notification } from '@/entities/notifications'
 
 import { NOTIFICATION_MESSAGES } from '../lib/consts'
-import { Notification } from '../types/notification.type'
 
 //TODO: replace with shared type
 type PaginationParams = {
@@ -22,6 +22,7 @@ type ResponseWithPagination<T> = {
 export const notificationsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     deleteNotificationById: builder.mutation<void, { id: number }>({
+      invalidatesTags: ['Notifications'],
       query: ({ id }) => ({
         method: 'DELETE',
         url: `v1/notifications/${id}`,
@@ -44,12 +45,14 @@ export const notificationsApi = inctagramApi.injectEndpoints({
           console.error(e)
         }
       },
+      providesTags: ['Notifications'],
       query: ({ cursor, ...params }) => ({
         params,
         url: `v1/notifications/${cursor}`,
       }),
     }),
     markAsRead: builder.mutation<void, { ids: number[] }>({
+      invalidatesTags: ['Notifications'],
       query: body => ({
         body,
         method: 'PUT',

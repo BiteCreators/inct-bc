@@ -28,10 +28,10 @@ export const useCreatePost = () => {
   })
 
   useEffect(() => {
-    if(uploadIds.length > 0){
+    if (uploadIds.length > 0) {
       handlePublish()
     }
-  }, [uploadIds]);
+  }, [uploadIds])
 
   const addImageUrlForPost = ({
     file,
@@ -56,14 +56,13 @@ export const useCreatePost = () => {
   }
 
   const uploadAllImages = async (file: File[]) => {
-
     const res = await createPostImage({ file }).unwrap()
 
-    const uploadIds = res.images.map((image) => ({
-      ...image, uploadId: image.uploadId
+    const uploadIds = res.images.map(image => ({
+      uploadId: image.uploadId,
     }))
 
-    setUploadIds( uploadIds )
+    setUploadIds(uploadIds)
   }
 
   const handleDeleteImageUrl = (index: number) => {
