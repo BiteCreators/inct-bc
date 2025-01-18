@@ -48,10 +48,26 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
   }
 
   useEffect(() => {
-    if (router.query.success === 'false') {
-      console.error('Transaction failed, please try again')
+    if (router.query.tab) {
+      if (router.query.tab.includes('success=true')) {
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              ...router.query,
+              success: true,
+              tab: 'my-payments',
+            },
+          },
+          undefined,
+          { shallow: true }
+        )
+      }
+      if (router.query.tab.includes('success=false')) {
+        console.error('Transaction failed, please try again')
+      }
     }
-  }, [router.query.success])
+  }, [router.query.tab])
 
   return (
     <TabsBase<TabValues>
