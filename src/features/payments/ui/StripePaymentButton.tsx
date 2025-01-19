@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { PAYMENT_PROVIDERS } from '@/entities/payments/types/payments.type'
-import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
 import { Alert } from '@byte-creators/ui-kit'
 import { StripeSvgrepoCom4 } from '@byte-creators/ui-kit/icons'
 import { cn } from '@byte-creators/utils'
@@ -13,11 +12,7 @@ type Props = {
 }
 
 export const StripePaymentButton = ({ className }: Props) => {
-  const [paymentSuccess, setPaymentSuccess] = useState(false)
-  const [paymentFailed, setPaymentFailed] = useState(false)
   const { error, handleSubmit, isLoading } = useSubmitPayment({
-    onFailure: () => setPaymentSuccess(true),
-    onSuccess: () => setPaymentFailed(true),
     provider: PAYMENT_PROVIDERS.STRIPE,
   })
 
@@ -34,12 +29,6 @@ export const StripePaymentButton = ({ className }: Props) => {
         <StripeSvgrepoCom4 height={43} viewBox={'6 2.5 12 11'} width={75} />
       </button>
       {!!error && <Alert message={error} purpose={'toast'} type={'error'} />}
-      <PaymentsModals
-        paymentFailed={paymentFailed}
-        paymentSuccess={paymentSuccess}
-        setPaymentFailed={setPaymentFailed}
-        setPaymentSuccess={setPaymentSuccess}
-      />
     </>
   )
 }
