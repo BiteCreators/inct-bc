@@ -4,7 +4,7 @@ import React from 'react'
 
 import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { Providers } from '@/application/providers'
-import { wrapper } from '@/application/store'
+import { wrapper } from '@/application/store/store'
 import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 

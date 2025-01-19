@@ -1,28 +1,29 @@
+import { wrapper } from '@/application/store/store'
+import { provideAuthState } from '@/entities/auth'
 import { Profile } from '@/entities/profile'
+import { Posts } from '@/features/posts'
+import { ProfileHeader } from '@/widgets/profile-header'
 import { cn } from '@byte-creators/utils'
-import { GetServerSideProps } from 'next'
-import dynamic from 'next/dynamic'
-
-const ProfileHeader = dynamic(
-  () => import('@/widgets/profile-header').then(mod => mod.ProfileHeader),
-  { ssr: true }
-)
-const Posts = dynamic(() => import('@/features/posts').then(mod => mod.Posts), { ssr: true })
 
 type Props = {
   profile: Profile
 }
 
+//TODO: fix posts component and rewrite it to use ssr
 export default function CurrentProfile({ profile }: Props) {
   return (
     <div className={cn('px-[15px] md:pl-6 md:pr-16')}>
       <ProfileHeader profile={profile} />
-      <Posts userId={profile.id} />
+      {/* <Posts userId={profile.id} /> */}
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
+  const accessToken = context.req.cookies.accessToken
+
+  provideAuthState({ accessToken, dispatch: store.dispatch })
+
   const { id } = context.params as { id: string }
 
   try {
@@ -39,4 +40,4 @@ export const getServerSideProps: GetServerSideProps = async context => {
   } catch (error) {
     return { notFound: true }
   }
-}
+})

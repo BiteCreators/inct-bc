@@ -1,6 +1,8 @@
 import React from 'react'
 
 import { DefaultLayout } from '@/application/layouts/DefautlLayout'
+import { wrapper } from '@/application/store/store'
+import { authSlice, provideAuthState } from '@/entities/auth'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
@@ -15,7 +17,7 @@ type PublicPostsResponse = {
   totalCount: number
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps = wrapper.getStaticProps(store => async context => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   if (!apiUrl) {
@@ -46,7 +48,7 @@ export const getStaticProps = async () => {
 
     return { props: { postsData: { items: [], pageSize: 0, totalCount: 0 } } }
   }
-}
+})
 
 const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
   postsData,

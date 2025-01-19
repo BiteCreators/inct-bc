@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'
 import { PostDetails } from '@/widgets/post-details'
@@ -19,6 +21,10 @@ type Props = {
 }
 
 export default function SinglePostPage({ post, profile }: Props) {
+  const accessToken = useAppSelector(authSlice.selectors.selectAccessToken)
+
+  console.log(accessToken)
+
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
   return (
