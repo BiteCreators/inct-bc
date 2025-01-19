@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 type InitialState = {
   accessToken: null | string
@@ -11,6 +12,12 @@ const initialState: InitialState = {
 }
 
 export const authSlice = createSlice({
+  extraReducers: builder => {
+    builder.addCase(HYDRATE, (state, action) => {
+      state.userId = action.payload.auth.userId
+      state.accessToken = action.payload.auth.accessToken
+    })
+  },
   initialState,
   name: 'auth',
   reducers: {
