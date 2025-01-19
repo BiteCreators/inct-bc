@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { wrapper } from '@/application/store/store'
+import { wrapper } from '@/application/store'
 import { provideAuthState } from '@/entities/auth'
 import { Post } from '@/entities/posts'
 import { Profile } from '@/entities/profile'

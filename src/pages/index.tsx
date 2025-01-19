@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { DefaultLayout } from '@/application/layouts/DefautlLayout'
-import { wrapper } from '@/application/store/store'
-import { authSlice, provideAuthState } from '@/entities/auth'
+import { wrapper } from '@/application/store'
 import { Post } from '@/entities/posts'
 import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'

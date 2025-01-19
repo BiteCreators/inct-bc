@@ -1,4 +1,4 @@
-import { wrapper } from '@/application/store/store'
+import { wrapper } from '@/application/store'
 import { provideAuthState } from '@/entities/auth'
 import { Profile } from '@/entities/profile'
 import { Posts } from '@/features/posts'
