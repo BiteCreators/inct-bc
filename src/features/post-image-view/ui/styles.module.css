@@ -1,19 +1,13 @@
-.content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 90vh;
-  padding: 1rem 4rem;
-}
-
 .image-container {
+  position: relative;
+
+  overflow: hidden;
+
   width: 200px;
   height: 200px;
-  overflow: hidden;
+
   border: 2px solid #ccc;
   border-radius: 8px;
-  position: relative;
 }
 
 .image-container img {
@@ -25,23 +19,14 @@
 .image {
   position: relative;
   z-index: 5;
-  right: 5%;
+  right: 15%;
 
   overflow: hidden;
   align-items: center;
 
-  width: 80vh;
-  height: 80vh;
-
   border-radius: 0.5rem;
 
   transition: all 0.2s ease-in-out;
-}
-
-.image img {
-  width: calc(100% + 1rem);
-  height: calc(100% + 0.5rem);
-  border-radius: 0.5rem;
 }
 
 .blob {
