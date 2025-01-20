@@ -8,10 +8,13 @@ import { NotificationsList } from './Notifications'
 export const NotificationsButton = () => {
   const { data } = notificationsApi.useGetNotificationsQuery({})
   const notificationsItems = data?.items
-  const notificationsCount = notificationsItems?.filter(notification => !notification.isRead).length
+  const notificationsCount =
+    notificationsItems?.filter(notification => !notification.isRead).length || 0
 
   const wrapIconStyles =
-    'text-[8px] before:text-light-100 before:content-[attr(data-notificationsCount)] before:absolute before:right-0 before:block before:w-3 before:h-3 before:bg-danger-500 before:rounded-full'
+    notificationsCount > 0
+      ? 'text-[8px] before:text-light-100 before:content-[attr(data-notificationsCount)] before:absolute before:right-0 before:block before:w-3 before:h-3 before:bg-danger-500 before:rounded-full'
+      : ''
 
   return (
     <div className={'relative h-6'}>
