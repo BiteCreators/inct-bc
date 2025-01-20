@@ -5,23 +5,6 @@ import { postSlice } from '@/entities/posts'
 import { paymentsSlice } from '@/features/payments'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-  persistReducer,
-  persistStore,
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-
-const persistConfig = {
-  blacklist: ['inctagramApi', 'locationApi'],
-  key: 'root',
-  storage,
-}
 
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
@@ -31,23 +14,22 @@ const rootReducer = combineReducers({
   post: postSlice.reducer,
 })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
 const makeStore = () =>
   configureStore({
     devTools: true,
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-      }).concat(inctagramApi.middleware, locationApi.middleware),
-    reducer: persistedReducer,
+      getDefaultMiddleware().concat(inctagramApi.middleware, locationApi.middleware),
+    reducer: {
+      auth: authSlice.reducer,
+      [inctagramApi.reducerPath]: inctagramApi.reducer,
+      [locationApi.reducerPath]: locationApi.reducer,
+      payments: paymentsSlice.reducer,
+      post: postSlice.reducer,
+    },
   })
 
 export const store = makeStore()
 
-export const persistedStore = persistStore(store)
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof makeStore>
 export type AppState = ReturnType<AppStore['getState']>

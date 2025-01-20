@@ -9,6 +9,7 @@ import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 
 import '@/application/styles/globals.css'
+//TODO: remove this
 // eslint-disable-next-line import/extensions
 import '@byte-creators/ui-kit/styles'
 

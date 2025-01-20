@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 
 import { postsApi } from '@/entities/posts'
 import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
+//TODO: (?)
+import debounce from 'lodash/debounce'
 import Link from 'next/link'
-import debounce from "lodash/debounce";
 
 type Props = {
   userId: number
@@ -21,28 +22,28 @@ export const Posts = ({ userId }: Props) => {
     const scroll = document.querySelector('#scrollAreaViewport')
 
     const handleScroll = debounce(() => {
-      if(scroll){
+      if (scroll) {
         if (
           scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight <= 50 &&
           !isFetching &&
           data?.items?.length === pageSize
         ) {
-          setPageSize((prevPageSize) => prevPageSize + 8);
+          setPageSize(prevPageSize => prevPageSize + 8)
         }
       }
-    }, 200);
+    }, 200)
 
     const handleResize = debounce(() => {
-    if(scroll){
+      if (scroll) {
         if (
           scroll.scrollHeight <= window.innerHeight &&
           !isFetching &&
           data?.items?.length === pageSize
         ) {
-          setPageSize((prevPageSize) => prevPageSize + 8);
+          setPageSize(prevPageSize => prevPageSize + 8)
         }
       }
-    }, 200);
+    }, 200)
 
     scroll?.addEventListener('scroll', handleScroll)
     window.addEventListener('resize', handleResize)
@@ -68,7 +69,7 @@ export const Posts = ({ userId }: Props) => {
               href={`/profile/${userId}/publications/${post.id}`}
               key={post.id}
             >
-              <img height={260} src={post.images[0]?.url} width={260} alt={'post-img'}/>
+              <img alt={'post-img'} height={260} src={post.images[0]?.url} width={260} />
             </Link>
           ))}
         </>

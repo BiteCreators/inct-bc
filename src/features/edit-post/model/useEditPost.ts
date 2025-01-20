@@ -20,6 +20,7 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   const postId = Number(params?.postId) ?? null
   const router = useRouter()
   const [apiError, setApiError] = useState('')
+  //TODO: make a selector for this
   const isSSRPostLoading = useSelector((state: RootState) => state.post.isSSRPostLoading)
   const [updatePost] = postsApi.useUpdatePostMutation()
   const { handleApiError } = useHandleApiError('Posts')

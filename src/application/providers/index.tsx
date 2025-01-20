@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Store } from '@reduxjs/toolkit'
 
+import { ReduxProvider } from '../store/ReduxProvider'
 import { AuthProvider } from './AuthProvider'
-import { ReduxProvider } from './ReduxProvider'
 
 type Props = {
   children: React.ReactNode
