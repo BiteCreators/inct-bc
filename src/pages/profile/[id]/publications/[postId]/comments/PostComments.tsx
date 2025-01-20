@@ -1,9 +1,10 @@
+import React from 'react'
+
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { authSlice } from '@/entities/auth'
 import { commentsApi } from '@/entities/comments'
 import { AddCommentTextarea, PostComment } from '@/features/comments'
 import { useCommentState } from '@/widgets/post-details/model/useCommentState'
-import React from 'react'
 import { Typography } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 import Link from 'next/link'

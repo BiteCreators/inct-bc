@@ -1,6 +1,10 @@
+import React, { useEffect } from 'react'
+
 import { MyPayment } from '@/entities/payments'
+import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
 import { Loader, Pagination, Table, TableData, Typography } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 import { useMyPayments } from '../model/useMyPayments'
 
@@ -8,24 +12,34 @@ export const MyPayments = () => {
   const t = useScopedTranslation('Payments')
   const {
     currentPage,
+    dataForDisplay,
     dataPortion,
-    dataforDisplay,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
     pagesCount,
+    paymentFailed,
+    paymentSuccess,
+    setPaymentFailed,
+    setPaymentSuccess,
   } = useMyPayments()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query.success === 'true') {
+      setPaymentSuccess(true)
+    }
+
+    if (router.query.success === 'false') {
+      setPaymentFailed(true)
+    }
+  }, [router.query.success])
 
   let payments = [] as TableData[]
 
-  if (dataforDisplay) {
-    const paymentsForDisplay = [...dataforDisplay] as Partial<MyPayment>[]
-
-    paymentsForDisplay.forEach(el => {
-      delete el.userId
-      delete el.subscriptionId
-    })
-    payments = dataforDisplay?.map((el: any) => {
+  if (dataForDisplay) {
+    payments = dataForDisplay?.map((el: MyPayment) => {
       return {
         1: new Date(el.dateOfPayment).toLocaleDateString(),
         2: new Date(el.endDateOfSubscription).toLocaleDateString(),
@@ -57,7 +71,7 @@ export const MyPayments = () => {
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>
       {isLoading && <Loader />}
-      {!isLoading && dataforDisplay && dataforDisplay.length === 0 ? (
+      {!isLoading && dataForDisplay && dataForDisplay.length === 0 ? (
         <Typography> You do not have any subscriptions yet</Typography>
       ) : (
         <div>
@@ -70,23 +84,14 @@ export const MyPayments = () => {
             pagesCount={pagesCount}
             pagesPortion={dataPortion.toString()}
           />
+          <PaymentsModals
+            paymentFailed={paymentFailed}
+            paymentSuccess={paymentSuccess}
+            setPaymentFailed={setPaymentFailed}
+            setPaymentSuccess={setPaymentSuccess}
+          />
         </div>
       )}
     </div>
   )
 }
-
-// для тестир-ия:
-// function getArray(start: number, end: number, total: number) {
-//   const payments = Array.from({ length: total }, (_, ind) => ({
-//     dateOfPayment: '2024-11-05T18:42:55.367Z',
-//     endDateOfSubscription: '2024-11-05T18:42:55.367Z',
-//     paymentType: `${ind % 2 === 0 ? 'Paypal' : 'Stripe'}`,
-//     price: ind,
-//     subscriptionId: '',
-//     subscriptionType: `${ind % 2 === 0 ? '1 day' : '1 month'}`,
-//     userId: 0,
-//   }))
-
-//   return payments.slice(start, end)
-// }

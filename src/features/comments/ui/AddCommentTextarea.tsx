@@ -64,16 +64,16 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
             type={'error'}
           />
         )}
-        <ScrollArea className={'w-full max-h-44'}>
+        <ScrollArea className={'w-full max-h-44'} scrollbarClassName={'!bg-light-900 '}>
           <div className={'flex flex-col min-h-4 w-full'}>
             <textarea
               className={cn([
-                'pt-4 pr-2.5 pb-0',
+                'px-2.5 py-2',
                 'outline-none outline-offset-0',
                 'text-light-100 text-md',
                 'bg-transparent',
                 'bg-dark-100',
-                'leading-none',
+                'leading-tight',
                 'disabled:text-dark-100 disabled:active:border-dark-100',
                 'placeholder:text-light-900 placeholder:text-md',
                 'resize-none',

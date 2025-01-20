@@ -1,21 +1,34 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { Notification } from '@/entities/notifications'
 import { useNotifications } from '@/features/notifications/model/useNotifications'
 import { ScrollArea } from '@byte-creators/ui-kit'
+import { cn } from '@byte-creators/utils'
 
 type Props = {
   notificationsItems: Notification[] | undefined
 }
 
 export const NotificationsList = ({ notificationsItems }: Props) => {
-  const { notificationRefs, notificationsCorrectDate } = useNotifications({
+  const { markAsRead, notReadNotificationsIds, notificationsCorrectDate } = useNotifications({
     notificationsItems,
   })
 
-  const handlerNotification = (id: number) => {
-    console.log('notificationId', id)
-  }
+  const isMounted = useRef(false)
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true
+
+      return
+    }
+
+    return () => {
+      if (notReadNotificationsIds && notReadNotificationsIds.length > 0) {
+        markAsRead({ ids: notReadNotificationsIds })
+      }
+    }
+  }, [])
 
   return (
     <div
@@ -30,29 +43,31 @@ export const NotificationsList = ({ notificationsItems }: Props) => {
       >
         Уведомления
       </h3>
-      <ScrollArea className={'h-[355px]'}>
-        {notificationsCorrectDate?.map((notification, index) => (
-          <div
-            className={'py-3 border-t border-dark-100 mx-3'}
-            data-id={notification.id}
-            key={notification.id}
-            ref={el => {
-              notificationRefs.current[index] = el
-            }}
-          >
-            <p className={'text-sm font-weight700'}>
-              Новое уведомление!
-              {!notification.isRead && <span className={'text-primary-700'}> Новое</span>}
-            </p>
-            <p
-              className={'text-sm cursor-pointer'}
-              onClick={() => handlerNotification(notification.id)}
+      <ScrollArea
+        className={cn(
+          notificationsCorrectDate && notificationsCorrectDate?.length > 3
+            ? 'h-[290px]'
+            : 'max-h-[290px]'
+        )}
+      >
+        {notificationsCorrectDate ? (
+          notificationsCorrectDate.map((notification, index) => (
+            <div
+              className={'py-3 border-t border-dark-100 mx-3'}
+              data-id={notification.id}
+              key={notification.id}
             >
-              {notification.message}
-            </p>
-            <span className={'text-xs text-light-900'}>{notification.notifyAt}</span>
-          </div>
-        ))}
+              <p className={'text-sm font-weight700'}>
+                {!notification.isRead && <span className={'text-primary-700'}>Новое </span>}
+                Уведомление.
+              </p>
+              <p className={'text-sm cursor-pointer'}>{notification.message}</p>
+              <span className={'text-xs text-light-900'}>{notification.createdAt}</span>
+            </div>
+          ))
+        ) : (
+          <p>No notifications</p>
+        )}
       </ScrollArea>
     </div>
   )

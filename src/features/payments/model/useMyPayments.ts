@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { paymentsApi } from '@/entities/payments'
+import { MyPayment, paymentsApi } from '@/entities/payments'
 
 export const useMyPayments = () => {
   const { data, isLoading } = paymentsApi.useGetMyPaymentsQuery()
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPortion, setDataPortion] = useState(10)
-  const [dataforDisplay, setDataForDisplay] = useState(data?.slice(0, dataPortion))
+  const [dataForDisplay, setDataForDisplay] = useState<MyPayment[] | undefined>([])
+
+  const [paymentSuccess, setPaymentSuccess] = useState(false)
+  const [paymentFailed, setPaymentFailed] = useState(false)
+
+  useEffect(() => {
+    setDataForDisplay(data?.slice(0, dataPortion))
+  }, [data])
 
   const handleCurrentPageChange = (page: number) => {
     setCurrentPage(page)
@@ -36,11 +43,15 @@ export const useMyPayments = () => {
 
   return {
     currentPage,
+    dataForDisplay,
     dataPortion,
-    dataforDisplay,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
     pagesCount,
+    paymentFailed,
+    paymentSuccess,
+    setPaymentFailed,
+    setPaymentSuccess,
   }
 }

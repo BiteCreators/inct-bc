@@ -3,6 +3,7 @@ import React from 'react'
 import { useLocation } from '@/features/profile/model/useLocation'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import {
+  Alert,
   Button,
   FormDatePicker,
   FormInput,
@@ -94,6 +95,15 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
           {t.saveChangesBtn}
         </Button>
       </form>
+      {isShowAlert && (
+        <Alert
+          canClose={false}
+          message={message}
+          onClose={onClose}
+          purpose={'toast'}
+          type={isError ? 'error' : 'success'}
+        />
+      )}
       <hr className={'border-dark-300 w-full absolute bottom-[60px]'}></hr>
     </div>
   )

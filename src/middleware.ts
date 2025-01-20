@@ -14,7 +14,12 @@ export default function middleware(req: NextRequest) {
       return NextResponse.next()
     }
   }
+
   if (req.nextUrl.pathname === '/') {
+    if (isAuth) {
+      return NextResponse.redirect(new URL('/feed', req.url))
+    }
+
     if (req.nextUrl.searchParams.has('code')) {
       return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
     } else {
@@ -38,5 +43,6 @@ export const config = {
     '/create',
     '/',
     '/profile/:id/settings',
+    '/feed',
   ],
 }

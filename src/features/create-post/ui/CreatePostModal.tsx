@@ -133,6 +133,7 @@ export const CreatePostModal = () => {
             images={images}
             limit={limit}
             value={value}
+            slides={addedImageSlides}
           />
         )}
       </Modal>
