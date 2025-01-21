@@ -17,11 +17,12 @@ import { PostModalTitle } from './PostModalTitle'
 
 type Props = {
   comments?: Comment[]
+  isLoading?: boolean
   post: Post
   slides: ReactNode[]
 }
 
-export const PostDesktop = ({ comments, post, slides }: Props) => {
+export const PostDesktop = ({ comments, isLoading = false, post, slides }: Props) => {
   const router = useRouter()
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
@@ -74,6 +75,7 @@ export const PostDesktop = ({ comments, post, slides }: Props) => {
                 comments={comments}
                 description={<PostDescription post={post} />}
                 handleAnswerClick={handleAnswerClick}
+                isLoading={isLoading}
               />
               <PostActionsBlock post={post} />
               {isAuth && (

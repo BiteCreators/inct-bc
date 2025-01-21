@@ -7,10 +7,11 @@ import { Follower } from '@/entities/followers/types/followers.types'
 import { useConfirmation } from '@byte-creators/utils'
 
 export const useProfileFollow = (currentUserProfile: WithFollowersCountUserProfile) => {
-  const { data: followingList } = followersApi.useGetUsersFollowingQuery({
-    userName: currentUserProfile.userName,
-  })
-  const { data: followersList } = followersApi.useGetFollowersQuery({
+  const { data: followingList, isLoading: isFollowingLoading } =
+    followersApi.useGetUsersFollowingQuery({
+      userName: currentUserProfile.userName,
+    })
+  const { data: followersList, isLoading: isFollowersLoading } = followersApi.useGetFollowersQuery({
     userName: currentUserProfile.userName,
   })
 
@@ -66,6 +67,8 @@ export const useProfileFollow = (currentUserProfile: WithFollowersCountUserProfi
     handleConfirmDeleting,
     handleFollow,
     handleReject,
+    isFollowersLoading,
+    isFollowingLoading,
     me,
     removeLoading,
     setConfirmOpen,

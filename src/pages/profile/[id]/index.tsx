@@ -14,7 +14,7 @@ export default function CurrentProfile({ profile }: Props) {
   return (
     <div className={cn('px-[15px] md:pl-6 md:pr-16')}>
       <ProfileHeader profile={profile} />
-      {/* <Posts userId={profile.id} /> */}
+      <Posts userId={profile.id} />
     </div>
   )
 }

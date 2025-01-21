@@ -18,12 +18,12 @@ export const PostDetails = ({ post }: Props) => {
   ))
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
-  const { data, error } = commentsApi.useGetCommentsQuery({ postId: post.id })
+  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post.id })
 
   const comments = data?.items
 
   if (isLargeScreen) {
-    return <PostDesktop comments={comments} post={post} slides={slides} />
+    return <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides} />
   } else {
     return <PostMobile comments={comments} post={post} slides={slides} />
   }
