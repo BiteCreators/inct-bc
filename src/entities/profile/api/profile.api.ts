@@ -1,7 +1,7 @@
 import { inctagramApi } from '@/common/api/inct.api'
 import { Avatar } from '@/common/types/api.types'
 
-import { EditProfileBody, Profile } from '../types/profile.type'
+import { EditProfileBody, Profile, PublicProfileResponse } from '../types/profile.type'
 
 type ProfileResponse = {
   avatars: Avatar[]
@@ -47,6 +47,11 @@ export const profileApi = inctagramApi.injectEndpoints({
       query: () => ({
         method: 'GET',
         url: 'v1/users/profile',
+      }),
+    }),
+    getPublicProfile: builder.query<PublicProfileResponse, { id: number }>({
+      query: ({ id }) => ({
+        url: `v1/public-user/profile/${id}`,
       }),
     }),
     setAvatarProfile: builder.mutation<Avatar[], { file: File }>({
