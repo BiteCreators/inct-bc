@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useProfileAvatar } from '@/features/edit-profile/lib/hooks/useProfileAvatar'
-import { ActionConfirmation, Alert, Avatar, Button, TopLoader } from '@byte-creators/ui-kit'
+import { ActionConfirmation, Alert, Avatar, Button, LinearLoader } from '@byte-creators/ui-kit'
 import { ImageOutline } from '@byte-creators/ui-kit/icons'
 import { useScopedTranslation } from '@byte-creators/utils'
 
@@ -26,7 +26,7 @@ export const ProfileAvatar = () => {
   if (isLoading) {
     return (
       <div className={'flex h-60 justify-center items-center'}>
-        <TopLoader isLoading={isLoading} />
+        <LinearLoader isLoading={isLoading} />
       </div>
     )
   }

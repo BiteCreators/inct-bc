@@ -21,11 +21,7 @@
 body {
   font-family: Inter, sans-serif;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
     rgb(var(--background-start-rgb));
 }
 
@@ -33,13 +29,17 @@ h1 {
   font-size: 2rem;
 }
 
-/*@layer utilities {*/
-/*  .text-balance {*/
-/*    text-wrap: none;*/
-/*  }*/
-/*}*/
+/* @layer utilities { */
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+/*  .text-balance { */
+
+/*    text-wrap: none; */
+
+/*  } */
+
+/* } */
+
+input[type='date']::-webkit-calendar-picker-indicator {
   display: none;
 }
 
@@ -48,4 +48,51 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+}
+
+.linear-loader {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 4px;
+
+  background-color: transparent;
+}
+
+.linear-loader-bar {
+  --c: linear-gradient(90deg, #397df6 0%, #234e99 100%);
+
+  width: 100%;
+  height: 100%;
+
+  background: var(--c), var(--c), #171717;
+  background-repeat: no-repeat;
+  background-size: 60% 100%;
+
+  animation: loadBar 3s infinite;
+}
+
+@keyframes loadBar {
+  0% {
+    background-position:
+      -150% 0,
+      -150% 0;
+  }
+
+  66% {
+    background-position:
+      250% 0,
+      -150% 0;
+  }
+
+  100% {
+    background-position:
+      250% 0,
+      250% 0;
+  }
 }

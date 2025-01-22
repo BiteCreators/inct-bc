@@ -20,14 +20,10 @@ export const UserProfile = ({
   userName,
 }: Props) => {
   return (
-    <SkeletonTheme baseColor={'#2b2b2b'} highlightColor={'#575656'}>
+    <SkeletonTheme baseColor={'#3f3e3e'} highlightColor={'#575656'}>
       <div className={cn(className, 'flex gap-3 items-center')}>
         <div className={'w-9 h-9'}>
-          {isLoading ? (
-            <Skeleton className={'aspect-square !rounded-full'} />
-          ) : (
-            <Avatar avatarURL={avatarUrl || ''} href={`/profile/${profileId}`} isNextLink />
-          )}
+          <Avatar avatarURL={avatarUrl || ''} href={`/profile/${profileId}`} isNextLink />
         </div>
         <div>
           {isLoading ? (
