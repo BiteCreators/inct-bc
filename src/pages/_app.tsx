@@ -5,11 +5,12 @@ import React from 'react'
 import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { Providers } from '@/application/providers'
 import { wrapper } from '@/application/store'
+//TODO: remove this
+import { cn } from '@byte-creators/utils'
 import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 
 import '@/application/styles/globals.css'
-//TODO: remove this
 // eslint-disable-next-line import/extensions
 import '@byte-creators/ui-kit/styles'
 
@@ -33,7 +34,9 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
 
   return (
     <Providers store={store}>
-      <div className={inter.className}>{getLayout(<Component {...props.pageProps} />)}</div>
+      <div className={cn(inter.className, 'bg-dark-700')}>
+        {getLayout(<Component {...props.pageProps} />)}
+      </div>
     </Providers>
   )
 }
