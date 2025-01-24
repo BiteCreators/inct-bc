@@ -5,22 +5,17 @@ import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { PAYMENT_PROVIDERS, TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
 import { paymentsSlice } from '@/features/payments'
 import { useScopedTranslation } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 import { SubscriptionFormData, createSubscriptionSchema } from '../schemas/subscription.schema'
 
-export const useSubmitPayment = ({
-  onFailure,
-  onSuccess,
-  provider,
-}: {
-  onFailure: () => void
-  onSuccess: () => void
-  provider: PAYMENT_PROVIDERS
-}) => {
+export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) => {
   const subscriptionType = useAppSelector(paymentsSlice.selectors.selectNewSubscriptionType)
   const { data: subscriptionTypes } = paymentsApi.useGetCostPaymentQuery()
   const [createPaymentSubscription, { isLoading }] =
     paymentsApi.useCreatePaymentSubscriptionMutation()
+
+  const { query } = useRouter()
 
   const [validationError, setValidationError] = useState('')
   const [apiError, setApiError] = useState('')
@@ -41,12 +36,10 @@ export const useSubmitPayment = ({
       if (response.url) {
         window.location.href = response.url
       } else {
-        onSuccess()
+        setValidationError('url failed')
       }
-      console.log(response)
     } catch (error) {
       handleApiError({ error, setApiError })
-      onFailure()
     }
   }
 
@@ -55,8 +48,8 @@ export const useSubmitPayment = ({
     const submitData = {
       amount: paymentData?.amount,
       baseUrl:
-        process.env.NEXT_PUBLIC_BASE_URL ||
-        'http://localhost:3000/en/profile/1431/settings?tab=account-management',
+        process.env.NEXT_PUBLIC_BASE_URL +
+        `/en/profile/${query.id}/settings?tab=account-management`,
       paymentType: provider,
       typeSubscription: paymentData?.typeDescription,
     }
@@ -67,7 +60,6 @@ export const useSubmitPayment = ({
       subscribe(data)
     } else {
       setValidationError(error.toString())
-      onFailure()
     }
   }
 

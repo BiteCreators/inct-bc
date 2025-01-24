@@ -1,8 +1,12 @@
 import Skeleton from 'react-loading-skeleton'
+import React, { useEffect } from 'react'
+
 
 import { MyPayment } from '@/entities/payments'
+import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
 import { Loader, Pagination, Table, TableData, Typography } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 import { useMyPayments } from '../model/useMyPayments'
 
@@ -10,24 +14,34 @@ export const MyPayments = () => {
   const t = useScopedTranslation('Payments')
   const {
     currentPage,
+    dataForDisplay,
     dataPortion,
-    dataforDisplay,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
     pagesCount,
+    paymentFailed,
+    paymentSuccess,
+    setPaymentFailed,
+    setPaymentSuccess,
   } = useMyPayments()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query.success === 'true') {
+      setPaymentSuccess(true)
+    }
+
+    if (router.query.success === 'false') {
+      setPaymentFailed(true)
+    }
+  }, [router.query.success])
 
   let payments = [] as TableData[]
 
-  if (dataforDisplay) {
-    const paymentsForDisplay = [...dataforDisplay] as Partial<MyPayment>[]
-
-    paymentsForDisplay.forEach(el => {
-      delete el.userId
-      delete el.subscriptionId
-    })
-    payments = dataforDisplay?.map((el: any) => {
+  if (dataForDisplay) {
+    payments = dataForDisplay?.map((el: MyPayment) => {
       return {
         1: new Date(el.dateOfPayment).toLocaleDateString(),
         2: new Date(el.endDateOfSubscription).toLocaleDateString(),

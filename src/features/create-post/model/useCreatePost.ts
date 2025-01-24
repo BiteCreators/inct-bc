@@ -60,7 +60,6 @@ export const useCreatePost = () => {
     const res = await createPostImage({ file }).unwrap()
 
     const uploadIds = res.images.map(image => ({
-      ...image,
       uploadId: image.uploadId,
     }))
 
