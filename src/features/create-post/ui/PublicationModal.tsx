@@ -57,7 +57,7 @@ export const PublicationModal = ({
         </div>
         <span>LOCATION</span>
       </div>
-      {isLoading && <LoaderBlock />}
+      {isLoading && <LoaderBlock portal />}
     </div>
   )
 }
