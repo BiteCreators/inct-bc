@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-import { useGetRelativeTime } from '@byte-creators/utils'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { commentsApi } from '@/entities/comments'
 import { Answer, Comment } from '@/entities/comments/types/comments.types'
 import { Reaction } from '@/entities/posts/types/likes.types'
+import { useGetRelativeTime } from '@byte-creators/utils'
 
 export const useCommentInteractions = ({ comment }: { comment: Comment }) => {
   const { getRelativeTime } = useGetRelativeTime()

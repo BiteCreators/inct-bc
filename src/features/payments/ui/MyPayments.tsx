@@ -1,4 +1,6 @@
+import Skeleton from 'react-loading-skeleton'
 import React, { useEffect } from 'react'
+
 
 import { MyPayment } from '@/entities/payments'
 import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
@@ -68,30 +70,33 @@ export const MyPayments = () => {
     },
   ]
 
+  const renderLoader = () => (
+    <div className={'flex justify-center pt-11'}>
+      <Loader />
+    </div>
+  )
+
+  const renderEmptyMessage = () => <Typography>You do not have any subscriptions yet</Typography>
+
+  const renderTableWithPagination = () => (
+    <div>
+      <Table headers={headers} tableData={payments} />
+      <Pagination
+        className={'hidden sm:inline-flex sm:self-start sm:w-auto sm:mt-9 sm:mb-16'}
+        currentPage={1}
+        onChangePagesPortion={() => {}}
+        onClickPaginationButton={() => {}}
+        pagesCount={2}
+        pagesPortion={'5'}
+      />
+    </div>
+  )
+
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>
-      {isLoading && <Loader />}
-      {!isLoading && dataForDisplay && dataForDisplay.length === 0 ? (
-        <Typography> You do not have any subscriptions yet</Typography>
-      ) : (
-        <div>
-          <Table headers={headers} tableData={payments} />
-          <Pagination
-            className={'hidden sm:inline-flex sm:self-start sm:w-auto sm:mt-9 sm:mb-16'}
-            currentPage={currentPage}
-            onChangePagesPortion={handlePaymentsPortionChange}
-            onClickPaginationButton={handleCurrentPageChange}
-            pagesCount={pagesCount}
-            pagesPortion={dataPortion.toString()}
-          />
-          <PaymentsModals
-            paymentFailed={paymentFailed}
-            paymentSuccess={paymentSuccess}
-            setPaymentFailed={setPaymentFailed}
-            setPaymentSuccess={setPaymentSuccess}
-          />
-        </div>
-      )}
+      {isLoading && renderLoader()}
+      {!isLoading && dataforDisplay && dataforDisplay.length === 0 && renderEmptyMessage()}
+      {!isLoading && dataforDisplay && dataforDisplay.length > 0 && renderTableWithPagination()}
     </div>
   )
 }

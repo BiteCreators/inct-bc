@@ -22,8 +22,6 @@ export const useEditProfileForm = () => {
   const [isShowAlert, setIsShowAlert] = useState(false)
   const { handleApiError } = useHandleApiError('Profile')
 
-  const isLoading = isLoadingGetProfile || isLoadingUpdateProfile
-
   const {
     control,
     formState: { isValid },
@@ -80,7 +78,8 @@ export const useEditProfileForm = () => {
     control,
     handleSubmit: handleSubmit(onSubmit),
     isError,
-    isLoading,
+    isLoadingGetProfile,
+    isLoadingUpdateProfile,
     isShowAlert,
     isValid,
     message,

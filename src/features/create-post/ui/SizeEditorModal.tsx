@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
-import { Slider } from '@byte-creators/ui-kit'
+import { LoaderBlock, Slider } from '@byte-creators/ui-kit'
 
 import { ImageData } from '../types'
 import { ImageControl } from './ImagesControl'
@@ -13,6 +13,7 @@ type Props = {
   handleFileSelect: (file: File) => void
   images: ImageData[]
   isDisableInput: boolean
+  isLoading: boolean
   selectedImage: null | number
   setImages: React.Dispatch<React.SetStateAction<ImageData[]>>
   setSelectedImage: (selectedImage: null | number) => void
@@ -26,6 +27,7 @@ export const SizeEditorModal = ({
   handleFileSelect,
   images,
   isDisableInput,
+  isLoading,
   selectedImage,
   setImages,
   setSelectedImage,
@@ -88,6 +90,7 @@ export const SizeEditorModal = ({
           uploadImage={uploadImage}
         />
       </div>
+      {isLoading && <LoaderBlock />}
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import Skeleton from 'react-loading-skeleton'
+
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Profile } from '@/entities/profile'
@@ -21,7 +23,7 @@ export const ProfileHeader = ({ profile }: Props) => {
   const t = useScopedTranslation('Profile')
   const tNav = useScopedTranslation('Navigation')
 
-  const { data } = followersApi.useGetUserProfileQuery({
+  const { data, isLoading } = followersApi.useGetUserProfileQuery({
     userName: profile.userName,
   })
   const { data: currentUser } = authApi.useMeQuery()
@@ -34,11 +36,15 @@ export const ProfileHeader = ({ profile }: Props) => {
       <div className={'flex items-center sm:items-start gap-5 sm:gap-7 md:!gap-9 mb-2 sm:mb-12'}>
         <div className={'self-start'}>
           <div className={'w-20 sm:w-36 lg:!w-52'}>
-            <img
-              alt={'Avatar'}
-              className={'rounded-full object-cover w-full h-full'}
-              src={profile.avatars[0]?.url || exampleImage.src}
-            />
+            {isLoading ? (
+              <Skeleton className={'aspect-square !rounded-full'} />
+            ) : (
+              <img
+                alt={'Avatar'}
+                className={'rounded-full object-cover w-full h-full'}
+                src={profile.avatars[0]?.url || exampleImage.src}
+              />
+            )}
           </div>
         </div>
         <div className={'flex-1 text-white'}>
@@ -47,7 +53,7 @@ export const ProfileHeader = ({ profile }: Props) => {
               className={'whitespace-nowrap overflow-hidden text-ellipsis'}
               variant={'h1'}
             >
-              {profile.userName}
+              {isLoading ? <Skeleton width={160} /> : profile.userName}
             </Typography>
             {isCurrentUserProfile && (
               <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
@@ -57,13 +63,15 @@ export const ProfileHeader = ({ profile }: Props) => {
           </div>
           <div className={'flex gap-5 sm:gap-7 lg:!gap-20 text-sm sm:mb-5'}>
             <ProfileFollowButton
-              count={data?.followingCount}
+              count={isLoading ? undefined : data?.followingCount}
+              isLoading={isLoading}
               label={t.following}
               locale={locale}
               onClick={() => handleOpenModal('following')}
             />
             <ProfileFollowButton
-              count={data?.followersCount}
+              count={isLoading ? undefined : data?.followersCount}
+              isLoading={isLoading}
               label={t.followers}
               locale={locale}
               onClick={() => handleOpenModal('followers')}
@@ -79,11 +87,21 @@ export const ProfileHeader = ({ profile }: Props) => {
               </FollowProvider>
             )}
             <div className={'flex flex-col text-xs sm:text-sm'}>
-              <span className={'font-weight700'}>{data?.publicationsCount}</span>
-              <span>{t.publications}</span>
+              {isLoading ? (
+                <Skeleton height={50} width={90} />
+              ) : (
+                <>
+                  <span className={'font-weight700'}>{data?.publicationsCount}</span>
+                  <span>{t.publications}</span>
+                </>
+              )}
             </div>
           </div>
-          <AboutUser className={'hidden sm:flex text-left'} text={profile.aboutMe || ''} />
+          {isLoading ? (
+            <Skeleton count={2} />
+          ) : (
+            <AboutUser className={'hidden sm:flex text-left'} text={profile.aboutMe || ''} />
+          )}
         </div>
       </div>
       <div>

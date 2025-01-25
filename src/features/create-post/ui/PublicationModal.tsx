@@ -1,28 +1,28 @@
-import React, {ReactNode} from 'react'
+import React, { ReactNode } from 'react'
 
 import { UserProfile, profileApi } from '@/entities/profile'
-import {LoaderBlock, Slider, TextArea} from '@byte-creators/ui-kit'
+import { LoaderBlock, Slider, TextArea } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 
 import { ImageData } from '../types'
 
 type Props = {
   correct: boolean
-  isLoading: boolean
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   images: ImageData[]
+  isLoading: boolean
   limit: number
-  value: string
   slides: ReactNode[]
+  value: string
 }
 
 export const PublicationModal = ({
   correct,
   handleChange,
-  limit,
-  value,
   isLoading,
-  slides
+  limit,
+  slides,
+  value,
 }: Props) => {
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
@@ -37,6 +37,7 @@ export const PublicationModal = ({
           {profile && (
             <UserProfile
               avatarUrl={profile.avatars[0]?.url || ''}
+              isLoading={isLoading}
               profileId={profile.id}
               userName={profile.userName}
             />
@@ -56,7 +57,7 @@ export const PublicationModal = ({
         </div>
         <span>LOCATION</span>
       </div>
-      { isLoading && <LoaderBlock /> }
+      {isLoading && <LoaderBlock portal />}
     </div>
   )
 }

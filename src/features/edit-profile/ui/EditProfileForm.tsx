@@ -1,5 +1,7 @@
 import React from 'react'
+import Skeleton from 'react-loading-skeleton'
 
+import { EditProfileFormSkeletons } from '@/features/edit-profile/ui/EditProfileFormSkeletons'
 import { useLocation } from '@/features/profile/model/useLocation'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import {
@@ -11,6 +13,7 @@ import {
   FormTextArea,
   Loader,
   SearchableOptions,
+  TopLoader,
 } from '@byte-creators/ui-kit'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
@@ -21,7 +24,8 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
     control,
     handleSubmit,
     isError,
-    isLoading,
+    isLoadingGetProfile,
+    isLoadingUpdateProfile,
     isShowAlert,
     isValid,
     message,
@@ -36,12 +40,13 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
     profile
   )
 
-  if (isLoading) {
-    return <Loader fullScreen />
+  if (isLoadingGetProfile) {
+    return <EditProfileFormSkeletons />
   }
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
+      {isLoadingUpdateProfile && <TopLoader isLoading={isLoadingUpdateProfile} />}
       <div className={'flex flex-col gap-6 min-w-[275px]'}>
         <ProfileAvatar />
       </div>

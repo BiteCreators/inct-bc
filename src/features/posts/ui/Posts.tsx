@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { postsApi } from '@/entities/posts'
+import { ImageWithSkeleton } from '@/features/posts/ui/ImageWithSkeleton'
 import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
 //TODO: (?)
 import debounce from 'lodash/debounce'
@@ -56,9 +58,14 @@ export const Posts = ({ userId }: Props) => {
     }
   }, [isFetching, pageSize])
 
+  const skeletonItems = Array.from({ length: 5 }, (_, index) => (
+    <Skeleton className={'!w-64 !h-64 rounded-md'} key={index} />
+  ))
+
+  //todo: check whether need to use the ImageWithSkeleton utility here
   return (
     <div className={'flex gap-5 justify-center flex-wrap relative'}>
-      {isFetching && <LoaderBlock portal />}
+      {(isFetching || isLoading) && skeletonItems}
       {!isLoading && data?.items && data?.items.length < 1 ? (
         <Typography> user has no publications yet </Typography>
       ) : (

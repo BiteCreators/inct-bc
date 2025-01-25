@@ -1,8 +1,10 @@
-import { cn, mergeRefs, useTextArea } from '@byte-creators/utils'
 import React, { ComponentProps, forwardRef, useEffect } from 'react'
-import { useCreateComment } from '../model/useCreateComment'
+
 import { Alert, Button, ScrollArea } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
+import { cn, mergeRefs, useTextArea } from '@byte-creators/utils'
+
+import { useCreateComment } from '../model/useCreateComment'
 
 type Props = {
   answerData?: {
