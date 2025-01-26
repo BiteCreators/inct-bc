@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
-import { UserProfile, profileApi } from '@/entities/profile'
-import { LoaderBlock, Slider, TextArea } from '@byte-creators/ui-kit'
+import { profileApi } from '@/entities/profile'
+import { LoaderBlock, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 
 import { ImageData } from '../types'

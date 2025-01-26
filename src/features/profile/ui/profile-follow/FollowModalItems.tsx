@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import { authApi } from '@/entities/auth'
 import { Follower, WithFollowersCountUserProfile } from '@/entities/followers/types/followers.types'
-import { UserProfile } from '@/entities/profile'
 import { FollowModalButtons } from '@/features/profile/ui/profile-follow/FollowModalButtons'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
-import { Alert, Input, ScrollArea, Typography } from '@byte-creators/ui-kit'
+import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creators/ui-kit'
 
 import example from '../../../../../public/examples/exampleAvatar.png'
 

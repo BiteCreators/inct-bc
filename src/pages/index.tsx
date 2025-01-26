@@ -1,10 +1,8 @@
-import React from 'react'
-
 import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { wrapper } from '@/application/store'
 import { Post } from '@/entities/posts'
-import { PublicPostCard } from '@/features/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
+import { PostCard } from '@byte-creators/ui-kit'
 import { cn } from '@byte-creators/utils'
 import { InferGetServerSidePropsType } from 'next'
 
@@ -62,7 +60,18 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
       <div className={'pt-6'}>
         <div className={'grid grid-cols-4 gap-3'}>
           {posts.map(post => (
-            <PublicPostCard key={post.id} post={post} />
+            <PostCard
+              avatarOwner={post.avatarOwner}
+              createdAt={post.createdAt}
+              description={post.description}
+              key={post.id}
+              ownerId={post.ownerId}
+              postId={post.id}
+              postImageHight={post.images[0].height}
+              postImageUrl={post.images[0].url}
+              postImageWidth={post.images[0].width}
+              userName={post.userName}
+            />
           ))}
         </div>
       </div>

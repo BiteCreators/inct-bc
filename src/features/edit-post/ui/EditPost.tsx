@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import { Post } from '@/entities/posts'
-import { UserProfile } from '@/entities/profile'
 import { useEditPost } from '@/features/edit-post/model/useEditPost'
 import {
   ActionConfirmation,
@@ -11,6 +10,7 @@ import {
   Modal,
   Slider,
   TextArea,
+  UserProfile,
 } from '@byte-creators/ui-kit'
 
 type Props = {

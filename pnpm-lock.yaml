@@ -12,11 +12,11 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       '@byte-creators/ui-kit':
-        specifier: ^1.4.4
-        version: 1.4.4(pswtot6nrgevzv3b6vvu2yvgzy)
+        specifier: ^1.6.0
+        version: 1.6.0(pswtot6nrgevzv3b6vvu2yvgzy)
       '@byte-creators/utils':
-        specifier: ^1.7.0
-        version: 1.7.0(eyvz6zxhtps2nrlo74dvv34dwq)
+        specifier: ^1.7.1
+        version: 1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.1(react-hook-form@7.54.1(react@18.3.1))
@@ -29,6 +29,9 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.2.7
         version: 2.5.0(react-redux@9.2.0(@types/react@19.0.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      '@types/lodash':
+        specifier: ^4.17.14
+        version: 4.17.14
       async-mutex:
         specifier: ^0.5.0
         version: 0.5.0
@@ -50,6 +53,9 @@ importers:
       jose:
         specifier: ^5.9.4
         version: 5.9.6
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       next:
         specifier: 14.2.20
         version: 14.2.20(@babel/core@7.26.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -422,8 +428,8 @@ packages:
       tailwindcss: ^3.4.1
       typescript: ^5
 
-  '@byte-creators/ui-kit@1.4.4':
-    resolution: {integrity: sha512-wfqZQ7pAySPKQo/CwrVU1MPpvGa3f52QrJem+THwnENEqap5PFgldjt2mLRglbQWoww5meFnC6z5CXO2e+fs5Q==}
+  '@byte-creators/ui-kit@1.6.0':
+    resolution: {integrity: sha512-O7QwwlJmDPfDVGS2aqPQ00NSkxHu030dg4OJJl7lWOAH2J2P1DN8AblQN3E/R2iNiQ+O5rG1Yej6MVDh2NhLbw==}
     peerDependencies:
       '@rollup/plugin-commonjs': ^26.0.1
       '@rollup/plugin-node-resolve': ^15.2.3
@@ -446,8 +452,8 @@ packages:
       rollup-plugin-postcss: ^4.0.2
       tailwind-merge: ^2.5.2
 
-  '@byte-creators/utils@1.7.0':
-    resolution: {integrity: sha512-D1CpdadIQIUQoi+Uufc445+RDFcUesrN5ma86YLzgIo2Bu/jLEEIn112aBaaCnwYEPPnUctxLaJ2rIftUCm44g==}
+  '@byte-creators/utils@1.8.2':
+    resolution: {integrity: sha512-aZGwwuJfiPE2XaWv1nowTrFY4/UxiU3ERjSYnjkCo1MRBTyMBdv6Q8pN5i0H8s2YlcS3sapxwYqu+YUiKioutA==}
     peerDependencies:
       next: 14.2.20
       react: ^18
@@ -1753,6 +1759,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/lodash@4.17.14':
+    resolution: {integrity: sha512-jsxagdikDiDBeIRaPYtArcT8my4tN1og7MtMRquFT3XNA6axxyHDRUemqDz/taRDdOUn0GnGHRCuff4q48sW9A==}
 
   '@types/ndarray@1.0.14':
     resolution: {integrity: sha512-oANmFZMnFQvb219SSBIhI1Ih/r4CvHDOzkWyJS/XRqkMrGH5/kaPSA1hQhdIBzouaE+5KpE/f5ylI9cujmckQg==}
@@ -4704,6 +4713,11 @@ packages:
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
+  react-loading-skeleton@3.5.0:
+    resolution: {integrity: sha512-gxxSyLbrEAdXTKgfbpBEFZCO/P153DnqSCQau2+o6lNy1jgMRr2MmRmOzMmyrwSaSYLRB8g7b0waYPmUjz7IhQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+
   react-redux@9.2.0:
     resolution: {integrity: sha512-ROY9fvHhwOD9ySfrF0wmvu//bKCQ6AeZZq1nJNtbDC+kk5DuSuNX/n6YWYF/SYy7bSba4D4FSz8DJeKY/S/r+g==}
     peerDependencies:
@@ -5972,11 +5986,11 @@ snapshots:
       tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.7.2))
       typescript: 5.7.2
 
-  '@byte-creators/ui-kit@1.4.4(pswtot6nrgevzv3b6vvu2yvgzy)':
+  '@byte-creators/ui-kit@1.6.0(pswtot6nrgevzv3b6vvu2yvgzy)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
-      '@byte-creators/utils': 1.7.0(eyvz6zxhtps2nrlo74dvv34dwq)
+      '@byte-creators/utils': 1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)
       '@hookform/resolvers': 3.9.1(react-hook-form@7.54.1(react@18.3.1))
       '@radix-ui/react-dialog': 1.1.4(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-dropdown-menu': 2.1.4(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6002,6 +6016,7 @@ snapshots:
       react-google-recaptcha-v3: 1.10.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-hook-form: 7.54.1(react@18.3.1)
       react-image-crop: 11.0.7(react@18.3.1)
+      react-loading-skeleton: 3.5.0(react@18.3.1)
       react-swipeable: 7.0.2(react@18.3.1)
       rollup: 4.31.0
       rollup-plugin-dts: 6.1.1(rollup@4.31.0)(typescript@5.7.2)
@@ -6024,7 +6039,7 @@ snapshots:
       - tailwindcss
       - typescript
 
-  '@byte-creators/utils@1.7.0(eyvz6zxhtps2nrlo74dvv34dwq)':
+  '@byte-creators/utils@1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)':
     dependencies:
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       clsx: 2.1.1
@@ -7463,6 +7478,8 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/lodash@4.17.14': {}
 
   '@types/ndarray@1.0.14': {}
 
@@ -10832,6 +10849,10 @@ snapshots:
   react-is@17.0.2: {}
 
   react-is@18.3.1: {}
+
+  react-loading-skeleton@3.5.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-redux@9.2.0(@types/react@19.0.1)(react@18.3.1)(redux@5.0.1):
     dependencies:
