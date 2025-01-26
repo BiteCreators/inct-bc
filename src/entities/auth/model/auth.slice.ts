@@ -35,3 +35,5 @@ export const authSlice = createSlice({
     selectUserId: state => state.userId,
   },
 })
+
+export const { selectAccessToken, selectUserId } = authSlice.selectors
