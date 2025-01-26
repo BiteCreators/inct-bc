@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
 import { useScopedTranslation } from '@byte-creators/utils'
-import * as jose from 'jose'
 import { useRouter } from 'next/router'
 
 import { ImageData } from '../types'
@@ -12,25 +12,21 @@ export const useStepControl = ({
   handlePublish,
   images,
   isOpenCreatePost,
+  setIsOpenCreatePost,
   uploadAllImages,
 }: {
   handleApplyFilters: () => Promise<{ newFiles: File[] }>
   handlePublish: () => Promise<void>
   images: ImageData[]
   isOpenCreatePost: boolean
+  setIsOpenCreatePost: Dispatch<SetStateAction<boolean>>
   uploadAllImages: (files: File[]) => Promise<void>
 }) => {
   const [step, setStep] = useState(1)
   const t = useScopedTranslation('Posts')
 
   const router = useRouter()
-  const [cookies] = useCookies(['accessToken'])
-  const tokenData = jose.decodeJwt(cookies.accessToken)
-  let userId: number = 0
-
-  if ('userId' in tokenData && typeof tokenData.userId === 'number') {
-    userId = tokenData.userId
-  }
+  const userId = useAppSelector(authSlice.selectors.selectUserId)
 
   let title
   let nextButtonTitle
@@ -55,11 +51,13 @@ export const useStepControl = ({
         setStep(prevStep => prevStep + 1)
         break
       case 3:
-          setStep(prevStep => prevStep + 1)
+        setStep(prevStep => prevStep + 1)
         break
       case 4:
         try {
+          //setIsOpenCreatePost(false)
           const res = await handleApplyFilters()
+
           await uploadAllImages(res.newFiles)
         } catch (error) {
           console.log(error)

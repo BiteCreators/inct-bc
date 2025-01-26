@@ -49,6 +49,7 @@ export const CreatePostModal = () => {
     handlePublish,
     images,
     isOpenCreatePost,
+    setIsOpenCreatePost,
     uploadAllImages,
   })
 
