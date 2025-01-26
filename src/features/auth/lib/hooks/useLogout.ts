@@ -4,6 +4,7 @@ import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { authApi, authSlice } from '@/entities/auth'
 import { useConfirmation } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 export const useLogout = () => {
   const [__, _, removeCookie] = useCookies(['accessToken'])
@@ -15,6 +16,8 @@ export const useLogout = () => {
 
   const { handleApiError } = useHandleApiError('Auth')
 
+  const router = useRouter()
+
   const handleLogout = async () => {
     const confirmed = await requestConfirmation()
 
@@ -25,6 +28,7 @@ export const useLogout = () => {
       await logout().unwrap()
       removeCookie('accessToken', { path: '/' })
       dispatch(authSlice.actions.logout())
+      router.push('/')
     } catch (error) {
       handleApiError({
         error,
