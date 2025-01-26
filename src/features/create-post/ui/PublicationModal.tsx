@@ -37,6 +37,7 @@ export const PublicationModal = ({
           {profile && (
             <UserProfile
               avatarUrl={profile.avatars[0]?.url || ''}
+              isLoading={isLoading}
               profileId={profile.id}
               userName={profile.userName}
             />
@@ -56,7 +57,7 @@ export const PublicationModal = ({
         </div>
         <span>LOCATION</span>
       </div>
-      {isLoading && <LoaderBlock />}
+      {isLoading && <LoaderBlock portal />}
     </div>
   )
 }

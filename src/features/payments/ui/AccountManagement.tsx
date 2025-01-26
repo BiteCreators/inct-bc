@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { paymentsApi } from '@/entities/payments'
-import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
+import { Loader, LoaderBlock, Typography } from '@byte-creators/ui-kit'
 
 import { paymentsSlice } from '..'
 import { AccountTypeCard } from './AccountTypeCard'
@@ -52,9 +52,16 @@ export const AccountManagement = () => {
     disableAccountTypeOption = true
   }
 
+  if (isLoading) {
+    return (
+      <div className={'flex justify-center pt-11'}>
+        <Loader />
+      </div>
+    )
+  }
+
   return (
     <div className={'relative'}>
-      {isLoading && <LoaderBlock />}
       {data?.data.length !== 0 && <CurrentSubscriptionCard />}
       <AccountTypeCard disableOption={disableAccountTypeOption} />
       {accountType === 'Business' && (

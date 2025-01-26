@@ -12,7 +12,8 @@ type Props = {
   type: 'followers' | 'following'
 }
 export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
-  const { apiError, followersList, followingList } = useFollowContext()
+  const { apiError, followersList, followingList, isFollowersLoading, isFollowingLoading } =
+    useFollowContext()
 
   const followList = type === 'followers' ? followersList : followingList
 
@@ -49,6 +50,7 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
                   <UserProfile
                     avatarUrl={user.avatars[0]?.url || example.src}
                     className={'w-72'}
+                    isLoading={isFollowingLoading || isFollowersLoading}
                     profileId={user.userId}
                     userName={user.userName}
                   />
