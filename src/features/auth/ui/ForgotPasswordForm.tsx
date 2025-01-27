@@ -2,7 +2,8 @@ import React from 'react'
 
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import { LinkSentModal } from '@/features/auth/ui/LinkSentModal'
-import { Alert, Button, Card, FormInput, Recaptcha, Typography } from '@byte-creators/ui-kit'
+import { Recaptcha } from '@/features/reCaptcha/Recaptcha'
+import { Alert, Button, Card, FormInput, Typography } from '@byte-creators/ui-kit'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
@@ -15,6 +16,7 @@ export const ForgotPasswordForm = () => {
     isSubmitting,
     isValid,
     onRecaptchaChange,
+    recaptchaRef,
     setApiError,
     setIsModalOpen,
     t,
@@ -44,6 +46,7 @@ export const ForgotPasswordForm = () => {
         <Recaptcha
           className={'self-center sm:order-3 order-1'}
           onChange={onRecaptchaChange}
+          ref={recaptchaRef}
           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY!}
           theme={'dark'}
         />
