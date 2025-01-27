@@ -26,7 +26,7 @@ export const postsApi = inctagramApi.injectEndpoints({
       query: ({ file }) => {
         const formData = new FormData()
 
-        file.forEach((el) => formData.append('file', el))
+        file.forEach(el => formData.append('file', el))
 
         return {
           body: formData,
