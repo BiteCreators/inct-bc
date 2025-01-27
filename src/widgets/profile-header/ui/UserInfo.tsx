@@ -1,4 +1,5 @@
 import React from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { authApi } from '@/entities/auth'
 import { profileApi } from '@/entities/profile'
@@ -9,7 +10,12 @@ import { skipToken } from '@reduxjs/toolkit/query'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
-export const UserInfo = ({ userMetadata }: { userMetadata: React.ReactNode }) => {
+type Props = {
+  isLoading: boolean
+  userMetadata: React.ReactNode
+}
+
+export const UserInfo = ({ isLoading, userMetadata }: Props) => {
   const params = useParams<{ id: string }>()
 
   const { data: profile } = profileApi.useGetPublicProfileQuery(
@@ -26,7 +32,7 @@ export const UserInfo = ({ userMetadata }: { userMetadata: React.ReactNode }) =>
       <div className={'flex-1 text-white'}>
         <div className={'hidden justify-between mb-5 sm:flex gap-5'}>
           <Typography className={'whitespace-nowrap overflow-hidden text-ellipsis'} variant={'h1'}>
-            {profile.userName}
+            {isLoading ? <Skeleton width={160} /> : profile.userName}
           </Typography>
           {isCurrentUserProfile && (
             <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
@@ -35,7 +41,11 @@ export const UserInfo = ({ userMetadata }: { userMetadata: React.ReactNode }) =>
           )}
         </div>
         {userMetadata}
-        <AboutUser className={'hidden sm:flex text-left'} text={profile.aboutMe || ''} />
+        {isLoading ? (
+          <Skeleton count={2} />
+        ) : (
+          <AboutUser className={'hidden sm:flex text-left'} text={profile.aboutMe || ''} />
+        )}
       </div>
     )
   }
