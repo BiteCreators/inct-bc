@@ -1,62 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
 import { postsApi } from '@/entities/posts'
 import { ImageWithSkeleton } from '@/features/posts/ui/ImageWithSkeleton'
 import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
-//TODO: (?)
-import debounce from 'lodash/debounce'
+import { useIntersectionObserver } from '@byte-creators/utils'
+import { skipToken } from '@reduxjs/toolkit/query'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 
-type Props = {
-  userId: number
-}
-
-export const Posts = ({ userId }: Props) => {
+export const Posts = () => {
   const [pageSize, setPageSize] = useState(8)
+  const params = useParams<{ id: string }>()
+  const paginationRef = useRef<HTMLDivElement>(null)
 
-  const { data, isFetching, isLoading } = postsApi.useGetPublicPostsByUserIdQuery({
-    pageSize,
-    userId: userId,
-  })
-
-  useEffect(() => {
-    const scroll = document.querySelector('#scrollAreaViewport')
-
-    const handleScroll = debounce(() => {
-      if (scroll) {
-        if (
-          scroll.scrollHeight - scroll.scrollTop - scroll.clientHeight <= 50 &&
-          !isFetching &&
-          data?.items?.length === pageSize
-        ) {
-          setPageSize(prevPageSize => prevPageSize + 8)
+  const { data, isFetching, isLoading } = postsApi.useGetPublicPostsByUserIdQuery(
+    params !== null
+      ? {
+          pageSize,
+          userId: Number(params.id),
         }
-      }
-    }, 200)
+      : skipToken
+  )
 
-    const handleResize = debounce(() => {
-      if (scroll) {
-        if (
-          scroll.scrollHeight <= window.innerHeight &&
-          !isFetching &&
-          data?.items?.length === pageSize
-        ) {
-          setPageSize(prevPageSize => prevPageSize + 8)
-        }
-      }
-    }, 200)
-
-    scroll?.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', handleResize)
-
-    handleResize()
-
-    return () => {
-      scroll?.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
+  //TODO: remove ts ignore
+  //@ts-ignore
+  useIntersectionObserver(paginationRef, () => {
+    if (!isFetching && data?.totalCount !== data?.items.length) {
+      setPageSize(prev => prev + 8)
     }
-  }, [isFetching, pageSize])
+  })
 
   const skeletonItems = Array.from({ length: 5 }, (_, index) => (
     <Skeleton className={'!w-64 !h-64 rounded-md'} key={index} />
@@ -73,12 +46,13 @@ export const Posts = ({ userId }: Props) => {
           {data?.items.map(post => (
             <Link
               className={'hover:scale-[1.013] duration-75'}
-              href={`/profile/${userId}/publications/${post.id}`}
+              href={`/profile/${params.id}/publications/${post.id}`}
               key={post.id}
             >
               <img alt={'post-img'} height={260} src={post.images[0]?.url} width={260} />
             </Link>
           ))}
+          <div ref={paginationRef}></div>
         </>
       )}
     </div>

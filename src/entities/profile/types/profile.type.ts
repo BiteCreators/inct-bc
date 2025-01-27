@@ -13,4 +13,12 @@ export type Profile = {
   userName: string
 }
 
+export type PublicProfileResponse = {
+  userMetadata: {
+    followers: number
+    following: number
+    publications: number
+  }
+} & Pick<Profile, 'aboutMe' | 'avatars' | 'id' | 'userName'>
+
 export type EditProfileBody = Omit<Profile, 'avatars' | 'id'>
