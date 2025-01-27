@@ -3,7 +3,7 @@ import { AboutUser } from '@/features/profile'
 import { Alert, LoaderBlock, Typography } from '@byte-creators/ui-kit'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
-
+        
 import { UserAvatar } from './UserAvatar'
 import { UserInfo } from './UserInfo'
 import { UserMetadata } from './UserMetadata'
@@ -17,16 +17,17 @@ export const ProfileHeader = () => {
     isError,
     isLoading,
   } = profileApi.useGetPublicProfileQuery(params !== null ? { id: Number(params.id) } : skipToken)
-
+  
   if (isError) {
     //TODO: handle error
     return <Alert message={JSON.stringify(error)} purpose={'alert'} type={'error'} />
   }
-
+        
   if (isLoading) {
     return <LoaderBlock />
   }
-
+        
+  //TODO: add skeletons (again)
   if (profile) {
     return (
       <>

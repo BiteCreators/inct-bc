@@ -21,6 +21,8 @@ type FollowContextValue = {
   handleFollow: (userId: number) => Promise<void>
   handleReject: () => void
 
+  isFollowersLoading: boolean
+  isFollowingLoading: boolean
   me: MeResponse | undefined
   removeLoading: boolean
 

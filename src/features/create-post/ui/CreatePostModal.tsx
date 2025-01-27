@@ -49,6 +49,7 @@ export const CreatePostModal = () => {
     handlePublish,
     images,
     isOpenCreatePost,
+    setIsOpenCreatePost,
     uploadAllImages,
   })
 
@@ -109,6 +110,7 @@ export const CreatePostModal = () => {
             handleFileSelect={handleFileSelect}
             images={images}
             isDisableInput={isDisableInput}
+            isLoading={isLoading}
             selectedImage={selectedImage}
             setImages={setImages}
             setSelectedImage={setSelectedImage}
@@ -127,13 +129,13 @@ export const CreatePostModal = () => {
         )}
         {step === 4 && (
           <PublicationModal
-            isLoading={isLoading}
             correct={correct}
             handleChange={handleChange}
             images={images}
+            isLoading={isLoading}
             limit={limit}
-            value={value}
             slides={addedImageSlides}
+            value={value}
           />
         )}
       </Modal>

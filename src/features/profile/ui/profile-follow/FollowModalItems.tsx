@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
-import { authApi } from '@/entities/auth'
 import { Follower, WithFollowersCountUserProfile } from '@/entities/followers/types/followers.types'
-import { UserProfile } from '@/entities/profile'
 import { FollowModalButtons } from '@/features/profile/ui/profile-follow/FollowModalButtons'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
-import { Alert, Input, ScrollArea, Typography } from '@byte-creators/ui-kit'
+import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creators/ui-kit'
 
 import example from '../../../../../public/examples/exampleAvatar.png'
 
@@ -14,7 +12,8 @@ type Props = {
   type: 'followers' | 'following'
 }
 export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
-  const { apiError, followersList, followingList } = useFollowContext()
+  const { apiError, followersList, followingList, isFollowersLoading, isFollowingLoading } =
+    useFollowContext()
 
   const followList = type === 'followers' ? followersList : followingList
 
@@ -51,6 +50,7 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
                   <UserProfile
                     avatarUrl={user.avatars[0]?.url || example.src}
                     className={'w-72'}
+                    isLoading={isFollowingLoading || isFollowersLoading}
                     profileId={user.userId}
                     userName={user.userName}
                   />

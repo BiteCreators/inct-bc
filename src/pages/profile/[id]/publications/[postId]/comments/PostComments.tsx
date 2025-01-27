@@ -1,4 +1,5 @@
 import React from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { authSlice } from '@/entities/auth'
@@ -22,6 +23,13 @@ export default function PostComments() {
   const { data } = commentsApi.useGetCommentsQuery({ postId: Number(postId) })
 
   const comments = data?.items
+  const isLoading = true
+  const skeletonComments = Array.from({ length: 5 }).map((_, index) => (
+    <div className={'mb-4'} key={index}>
+      <Skeleton className={'h-6 mb-2'} />
+      <Skeleton className={'h-4 w-3/5'} />
+    </div>
+  ))
 
   return (
     <div className={'-my-9 md:hidden'}>
@@ -41,9 +49,15 @@ export default function PostComments() {
       {/*Comments*/}
       <div className={'flex-1 px-6 pt-20 pb-10 w-full'}>
         <div className={'flex flex-col'}>
-          {comments?.map(comment => (
-            <PostComment comment={comment} handleAnswerClick={handleAnswerClick} key={comment.id} />
-          ))}
+          {isLoading
+            ? skeletonComments
+            : comments?.map(comment => (
+                <PostComment
+                  comment={comment}
+                  handleAnswerClick={handleAnswerClick}
+                  key={comment.id}
+                />
+              ))}
         </div>
         {isAuth && (
           <AddCommentTextarea

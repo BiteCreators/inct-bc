@@ -18,7 +18,7 @@ export type Post = {
   createdAt: string
   description: string
   id: number
-  images: { uploadId: string } & Avatar[]
+  images: ({ uploadId: string } & Avatar)[]
   isLiked: boolean
   likesCount: number
   location?: string

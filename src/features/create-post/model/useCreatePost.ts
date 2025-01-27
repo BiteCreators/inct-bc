@@ -11,9 +11,9 @@ export const useCreatePost = () => {
   const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
   const [isDisableInput, setIsDisableInput] = useState(false)
 
-  const [createPostImage, { isLoading }] = postsApi.useCreatePostImageMutation()
+  const [createPostImage, { isLoading: isLoadingCreate }] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
-  const [deletePostImage] = postsApi.useDeletePostImageMutation()
+  const [deletePostImage, { isLoading: isLoadingDelete }] = postsApi.useDeletePostImageMutation()
 
   const [uploadIds, setUploadIds] = useState<{ uploadId: string }[]>([])
   const [images, setImages] = useState<ImageData[]>([])
@@ -21,6 +21,7 @@ export const useCreatePost = () => {
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
   const t = useScopedTranslation('Posts')
+  const isLoading = isLoadingCreate || isLoadingDelete
 
   const { correct, handleChange, limit, value } = useValidationLimit({
     limit: 500,
@@ -28,10 +29,10 @@ export const useCreatePost = () => {
   })
 
   useEffect(() => {
-    if(uploadIds.length > 0){
+    if (uploadIds.length > 0) {
       handlePublish()
     }
-  }, [uploadIds]);
+  }, [uploadIds])
 
   const addImageUrlForPost = ({
     file,
@@ -56,14 +57,13 @@ export const useCreatePost = () => {
   }
 
   const uploadAllImages = async (file: File[]) => {
-
     const res = await createPostImage({ file }).unwrap()
 
-    const uploadIds = res.images.map((image) => ({
-      ...image, uploadId: image.uploadId
+    const uploadIds = res.images.map(image => ({
+      uploadId: image.uploadId,
     }))
 
-    setUploadIds( uploadIds )
+    setUploadIds(uploadIds)
   }
 
   const handleDeleteImageUrl = (index: number) => {
