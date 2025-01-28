@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       '@byte-creators/ui-kit':
-        specifier: ^1.6.0
-        version: 1.6.0(pswtot6nrgevzv3b6vvu2yvgzy)
+        specifier: ^1.6.1
+        version: 1.6.1(pswtot6nrgevzv3b6vvu2yvgzy)
       '@byte-creators/utils':
         specifier: ^1.7.1
         version: 1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)
@@ -92,6 +92,9 @@ importers:
       react-image-crop:
         specifier: ^11.0.7
         version: 11.0.7(react@18.3.1)
+      react-loading-skeleton:
+        specifier: ^3.5.0
+        version: 3.5.0(react@18.3.1)
       react-redux:
         specifier: ^9.1.2
         version: 9.2.0(@types/react@19.0.1)(react@18.3.1)(redux@5.0.1)
@@ -428,8 +431,8 @@ packages:
       tailwindcss: ^3.4.1
       typescript: ^5
 
-  '@byte-creators/ui-kit@1.6.0':
-    resolution: {integrity: sha512-O7QwwlJmDPfDVGS2aqPQ00NSkxHu030dg4OJJl7lWOAH2J2P1DN8AblQN3E/R2iNiQ+O5rG1Yej6MVDh2NhLbw==}
+  '@byte-creators/ui-kit@1.6.1':
+    resolution: {integrity: sha512-4cvZD/LpEfSerpbVIocCPq37jSgxQLHEIaY/YWAeeCQ4BBiV46kL7g9A+8MNWWpY5m012swQAqJSu9jWMKKH/Q==}
     peerDependencies:
       '@rollup/plugin-commonjs': ^26.0.1
       '@rollup/plugin-node-resolve': ^15.2.3
@@ -5986,7 +5989,7 @@ snapshots:
       tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.7.2))
       typescript: 5.7.2
 
-  '@byte-creators/ui-kit@1.6.0(pswtot6nrgevzv3b6vvu2yvgzy)':
+  '@byte-creators/ui-kit@1.6.1(pswtot6nrgevzv3b6vvu2yvgzy)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
