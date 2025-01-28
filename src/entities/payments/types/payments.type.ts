@@ -1,3 +1,5 @@
+import { SUBSCRIPTION_TYPES } from '@byte-creators/utils'
+
 export type SubscriptionsRequest = {
   amount: number
   baseUrl: string
@@ -10,7 +12,7 @@ export type CostPaymentResponse = {
 }
 export type CostPayment = {
   amount: number
-  typeDescription: TYPE_DESCRIPTIONS
+  typeDescription: SUBSCRIPTION_TYPES
 }
 
 export type CurrentPaymentResponse = {
@@ -38,14 +40,3 @@ export type MyPayment = {
 }
 
 export type AccountType = 'Business' | 'Personal'
-
-export enum TYPE_DESCRIPTIONS {
-  DAY = 'DAY',
-  MONTHLY = 'MONTHLY',
-  WEEKLY = 'WEEKLY',
-}
-
-export enum PAYMENT_PROVIDERS {
-  PAYPAL = 'PAYPAL',
-  STRIPE = 'STRIPE',
-}
