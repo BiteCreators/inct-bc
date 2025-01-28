@@ -56,6 +56,8 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
         )}
         {!imageUrl && (
           <div className={'w-full flex flex-col justify-center items-center gap-9 md:gap-14'}>
+            {/*TODO: remove ts ignore*/}
+            {/* @ts-ignore */}
             <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
               <div
                 className={

@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react'
 
+import { Answer } from '@/entities/comments/types/comments.types'
+import { Avatar, Typography } from '@byte-creators/ui-kit'
 import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
 import { cn, useGetRelativeTime } from '@byte-creators/utils'
-import { Avatar, Typography } from '@byte-creators/ui-kit'
-import { Answer } from '@/entities/comments/types/comments.types'
 
 type Props = {
   answer: Answer

@@ -5,30 +5,19 @@ import { Profile } from '@/entities/profile'
 import { PostDetails } from '@/widgets/post-details'
 import { useMediaQuery } from '@byte-creators/utils'
 import { GetServerSideProps } from 'next'
-import dynamic from 'next/dynamic'
-
-const ProfileHeader = dynamic(
-  () => import('@/widgets/profile-header').then(mod => mod.ProfileHeader),
-  { ssr: true }
-)
-const Posts = dynamic(() => import('@/features/posts').then(mod => mod.Posts), { ssr: true })
 
 type Props = {
   post: Post
   profile: Profile
 }
 
+//TODO: remove this
 export default function SinglePostPage({ post, profile }: Props) {
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
   return (
     <div className={'px-[15px] md:pl-6 md:pr-16'}>
-      {isLargeScreen && (
-        <>
-          <ProfileHeader profile={profile} />
-          <Posts userId={profile.id} />
-        </>
-      )}
+      {isLargeScreen && <></>}
       <PostDetails post={post} />
     </div>
   )

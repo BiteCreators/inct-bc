@@ -64,6 +64,8 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
               avatarOwner={post.avatarOwner}
               createdAt={post.createdAt}
               description={post.description}
+              //TODO: make this partial
+              isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
               postId={post.id}
