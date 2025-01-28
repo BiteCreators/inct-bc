@@ -27,7 +27,6 @@ export const ProfileHeader = () => {
     return <LoaderBlock />
   }
 
-  //TODO: add skeletons (again)
   if (profile) {
     return (
       <>
