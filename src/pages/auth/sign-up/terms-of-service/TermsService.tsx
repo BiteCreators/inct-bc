@@ -2,7 +2,8 @@ import React from 'react'
 
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
-import { ArrowBackOutline, PageLayout, Typography } from '@byte-creators/ui-kit'
+import { PageLayout, Typography } from '@byte-creators/ui-kit'
+import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 import { useScopedTranslation } from '@byte-creators/utils'
 import Link from 'next/link'
 

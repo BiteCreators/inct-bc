@@ -5,6 +5,7 @@ import { ProfileHeader } from '@/widgets/profile-header'
 import { Loader } from '@byte-creators/ui-kit'
 import { useMediaQuery } from '@byte-creators/utils'
 
+//TODO: add ssr
 export default function Create() {
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
   const { data: profile, isLoading, isSuccess } = profileApi.useGetProfileQuery()
@@ -14,8 +15,8 @@ export default function Create() {
       {isLoading && <Loader fullScreen />}
       {isLargeScreen && isSuccess && (
         <>
-          <ProfileHeader profile={profile} />
-          <Posts userId={profile.id} />
+          <ProfileHeader />
+          <Posts />
         </>
       )}
       <CreatePostModal />

@@ -19,8 +19,8 @@ export const DesktopCommentsList = ({
   isLoading = false,
 }: Props) => {
   const skeletonComments = Array.from({ length: 3 }).map((_, index) => (
-    <SkeletonTheme baseColor={'#3f3e3e'} highlightColor={'#575656'}>
-      <div className={'mb-4'} key={index}>
+    <SkeletonTheme baseColor={'#3f3e3e'} highlightColor={'#575656'} key={index}>
+      <div className={'mb-4'}>
         <Skeleton className={'h-6 mb-2'} />
         <Skeleton className={'h-4 w-3/5'} />
       </div>

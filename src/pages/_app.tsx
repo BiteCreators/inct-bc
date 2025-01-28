@@ -6,12 +6,11 @@ import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { Providers } from '@/application/providers'
 import { wrapper } from '@/application/store'
 import { LinearLoader } from '@byte-creators/ui-kit'
-
 import { cn } from '@byte-creators/utils'
-
 import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
+
 import '@/application/styles/globals.css'
 
 //TODO: remove this

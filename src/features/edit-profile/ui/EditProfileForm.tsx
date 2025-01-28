@@ -11,9 +11,9 @@ import {
   FormInput,
   FormSelect,
   FormTextArea,
+  LinearLoader,
   Loader,
   SearchableOptions,
-  TopLoader,
 } from '@byte-creators/ui-kit'
 
 import { useEditProfileForm } from '../model/useEditProfileForm'
@@ -46,7 +46,7 @@ export const EditProfileForm = ({ cities, countries }: LocationsProps) => {
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
-      {isLoadingUpdateProfile && <TopLoader isLoading={isLoadingUpdateProfile} />}
+      {isLoadingUpdateProfile && <LinearLoader isLoading={isLoadingUpdateProfile} />}
       <div className={'flex flex-col gap-6 min-w-[275px]'}>
         <ProfileAvatar />
       </div>

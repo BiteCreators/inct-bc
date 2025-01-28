@@ -1,6 +1,5 @@
-import Skeleton from 'react-loading-skeleton'
 import React, { useEffect } from 'react'
-
+import Skeleton from 'react-loading-skeleton'
 
 import { MyPayment } from '@/entities/payments'
 import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
@@ -95,8 +94,8 @@ export const MyPayments = () => {
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>
       {isLoading && renderLoader()}
-      {!isLoading && dataforDisplay && dataforDisplay.length === 0 && renderEmptyMessage()}
-      {!isLoading && dataforDisplay && dataforDisplay.length > 0 && renderTableWithPagination()}
+      {!isLoading && dataForDisplay && dataForDisplay.length === 0 && renderEmptyMessage()}
+      {!isLoading && dataForDisplay && dataForDisplay.length > 0 && renderTableWithPagination()}
     </div>
   )
 }

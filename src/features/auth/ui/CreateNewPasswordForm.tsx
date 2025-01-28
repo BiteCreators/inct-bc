@@ -1,8 +1,7 @@
 import React from 'react'
 
 import { useCreateNewPassword } from '@/features/auth/model/useCreateNewPassword'
-import { Button, Card, FormInput, Typography } from '@byte-creators/ui-kit'
-import { LoaderBlock } from '@byte-creators/ui-kit/dist/ui/loader/LoaderBlock'
+import { Button, Card, FormInput, LoaderBlock, Typography } from '@byte-creators/ui-kit'
 
 export const CreateNewPasswordForm = () => {
   const { control, handleSubmit, isValid, loading, t } = useCreateNewPassword()

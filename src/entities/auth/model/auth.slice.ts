@@ -13,8 +13,11 @@ const initialState: InitialState = {
 
 export const authSlice = createSlice({
   extraReducers: builder => {
+    //TODO: remove ts ignore
     builder.addCase(HYDRATE, (state, action) => {
+      //@ts-ignore
       state.userId = action.payload.auth.userId
+      //@ts-ignore
       state.accessToken = action.payload.auth.accessToken
     })
   },
