@@ -2,61 +2,6 @@ import { RefObject } from 'react'
 
 import { Filters } from '../types'
 
-export const filtersData: { image: string; name: Filters }[] = [
-  {
-    image: '',
-    name: 'original',
-  },
-  {
-    image: '',
-    name: 'posterize',
-  },
-  {
-    image: '',
-    name: 'vignette',
-  },
-  {
-    image: '',
-    name: 'heatmap',
-  },
-  {
-    image: '',
-    name: 'contrast',
-  },
-  {
-    image: '',
-    name: 'brightness',
-  },
-  {
-    image: '',
-    name: 'pixelate',
-  },
-  {
-    image: '',
-    name: 'sepia',
-  },
-  {
-    image: '',
-    name: 'grayscale',
-  },
-  {
-    image: '',
-    name: 'negative',
-  },
-  {
-    image: '',
-    name: 'threshold',
-  },
-  {
-    image: '',
-    name: 'sharpen',
-  },
-  {
-    image: 'blur',
-    name: 'sharpen',
-  },
-]
-
 export const applyFilter = ({
   canvas,
   ctx,
@@ -65,7 +10,7 @@ export const applyFilter = ({
 }: {
   canvas: HTMLCanvasElement
   ctx: CanvasRenderingContext2D
-  filter: string
+  filter: Filters
   imgRef: RefObject<HTMLImageElement | null>
 }) => {
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)

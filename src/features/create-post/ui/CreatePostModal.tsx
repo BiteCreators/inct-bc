@@ -38,12 +38,6 @@ export const CreatePostModal = () => {
     value,
   } = useCreatePost()
 
-  const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
-    useImageFilters({
-      images,
-      setImages,
-    })
-
   const { handleBack, handleNext, nextButtonTitle, step, title } = useStepControl({
     handlePublish,
     images,
@@ -118,16 +112,7 @@ export const CreatePostModal = () => {
             uploadImage={uploadImage}
           />
         )}
-        {step === 3 && (
-          <ImageFiltersModal
-            currentIndex={currentIndex}
-            handleSelectFilter={handleSelectFilter}
-            images={images}
-            setCurrentIndex={setCurrentIndex}
-            setImages={setImages}
-            slides={addedImageSlides}
-          />
-        )}
+        {step === 3 && <ImageFiltersModal images={images} setImages={setImages} />}
         {step === 4 && (
           <PublicationModal
             correct={correct}

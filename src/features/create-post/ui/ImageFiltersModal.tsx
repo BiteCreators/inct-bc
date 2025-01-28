@@ -1,50 +1,23 @@
-import { Dispatch, ReactNode, SetStateAction, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 
 import { ScrollArea, Slider } from '@byte-creators/ui-kit'
 
-import { Filters, ImageData } from '../types'
-import { applyFilter, filtersData } from '../utils/applyFilter'
+import { useImageFilters } from '../model/useImageFilters'
+import { ImageData } from '../types'
+import { Slide } from './Slide'
 
 type Props = {
-  currentIndex: number
-  handleSelectFilter: (selectedFilter: Filters) => void
   images: ImageData[]
-  setCurrentIndex: (currentIndex: number) => void
   setImages: Dispatch<SetStateAction<ImageData[]>>
-  slides: ReactNode[]
 }
 
-export const ImageFiltersModal = ({
-  currentIndex,
-  handleSelectFilter,
-  images,
-  setCurrentIndex,
-  setImages,
-}: Props) => {
-  const [filters, setFilters] = useState<{ image: string; name: Filters }[]>(filtersData)
-
-  useEffect(() => {
-    filters.forEach(filter => {
-      const canvas = document.createElement('canvas')
-      const img = new Image()
-
-      img.src = images[currentIndex].initialUrl
-      const ctx = canvas.getContext('2d')
-
-      if (!ctx) {
-        return
-      }
-      canvas.width = img.width
-      canvas.height = img.height
-      ctx.drawImage(img, 0, 0)
-      applyFilter({ canvas, ctx, filter: filter.name, imgRef: { current: img } })
-      setFilters(prevState =>
-        prevState.map(el =>
-          el.name === filter.name ? { ...el, image: canvas.toDataURL('image/png') } : el
-        )
-      )
-    })
-  }, [])
+export const ImageFiltersModal = ({ images, setImages }: Props) => {
+  const canvasRef = useRef<(HTMLCanvasElement | null)[]>([])
+  const { filters, handleSelectFilter, setCurrentIndex, setFilters } = useImageFilters({
+    canvasRef,
+    images,
+    setImages,
+  })
 
   return (
     <div className={'flex min-h-[400px]'}>
@@ -76,91 +49,18 @@ export const ImageFiltersModal = ({
                 key={`${filter.name}${index}`}
                 onClick={() => handleSelectFilter(filter.name)}
               >
-                <img alt={'oops'} src={filter.image} />
+                <canvas
+                  className={'w-full'}
+                  ref={el => {
+                    canvasRef.current[index] = el
+                  }}
+                />
                 <span className={'first-letter:uppercase'}>{filter.name}</span>
               </button>
             ))}
           </div>
         </ScrollArea>
       </div>
-    </div>
-  )
-}
-
-type SlideProps = {
-  currentIndex: number
-  filter: string
-  imageUrl: string
-  setFilters: Dispatch<
-    SetStateAction<
-      {
-        image: string
-        name: Filters
-      }[]
-    >
-  >
-  setImages: Dispatch<SetStateAction<ImageData[]>>
-}
-
-const Slide = ({ currentIndex, filter, imageUrl, setImages }: SlideProps) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const imgRef = useRef<HTMLImageElement | null>(null)
-
-  useEffect(() => {
-    if (!canvasRef || !canvasRef.current || !imgRef.current) {
-      return
-    }
-
-    const canvas = canvasRef.current
-    const img = imgRef.current
-    const ctx = canvas.getContext('2d', { willReadFrequently: true })
-
-    if (!ctx) {
-      return
-    }
-
-    canvas.width = img.width
-    canvas.height = img.height
-    ctx.drawImage(img, 0, 0)
-
-    applyFilter({ canvas, ctx, filter, imgRef })
-
-    saveFilteredImage(canvas)
-  }, [filter])
-
-  const saveFilteredImage = (canvas: HTMLCanvasElement) => {
-    if (!canvas) {
-      return
-    }
-
-    const filteredDataURL = canvas.toDataURL('image/png')
-
-    fetch(filteredDataURL)
-      .then(res => res.blob())
-      .then(blob => {
-        const filteredFile = new File([blob], `filteredImage-${currentIndex}.png`, {
-          type: 'image/png',
-        })
-
-        setImages(prevState =>
-          prevState.map((image, index) =>
-            index === currentIndex
-              ? { ...image, totalFile: filteredFile, totalUrl: filteredDataURL }
-              : image
-          )
-        )
-      })
-  }
-
-  return (
-    <div style={{ width: '800px' }}>
-      <img
-        alt={'slide'}
-        ref={imgRef}
-        src={imageUrl}
-        style={{ display: 'none', height: '600', width: '800px' }}
-      />
-      <canvas className={'w-[490px]'} ref={canvasRef} />
     </div>
   )
 }
