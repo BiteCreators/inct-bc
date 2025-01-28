@@ -32,7 +32,6 @@ export const ImageFiltersModal = ({ images, setImages }: Props) => {
                 filter={image.selectedFilter}
                 imageUrl={image.initialUrl}
                 key={image.initialUrl}
-                setFilters={setFilters}
                 setImages={setImages}
               />
             )

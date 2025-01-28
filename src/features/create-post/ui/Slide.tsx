@@ -2,13 +2,11 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { useCanvasFilter } from '../model/useCanvasFilter'
 import { Filters, ImageData } from '../types'
-import { FilterValues } from '../utils/filterValues'
 
 type SlideProps = {
   currentIndex: number
   filter: Filters
   imageUrl: string
-  setFilters: Dispatch<SetStateAction<FilterValues[]>>
   setImages: Dispatch<SetStateAction<ImageData[]>>
 }
 
@@ -16,14 +14,12 @@ export const Slide = ({ currentIndex, filter, imageUrl, setImages }: SlideProps)
   const { canvasRef, imgRef } = useCanvasFilter({ currentIndex, filter, setImages })
 
   return (
-    <div style={{ width: '800px' }}>
-      <img
-        alt={'slide'}
-        ref={imgRef}
-        src={imageUrl}
-        style={{ display: 'none', height: '600', width: '800px' }}
+    <div className={'w-[490px] pb-[100%] overflow-hidden relative'}>
+      <img alt={'slide'} className={'hidden'} ref={imgRef} src={imageUrl} />
+      <canvas
+        className={'w-full h-full object-contain object-center absolute top-0 left-0'}
+        ref={canvasRef}
       />
-      <canvas className={'w-[490px]'} ref={canvasRef} />
     </div>
   )
 }
