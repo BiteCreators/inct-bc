@@ -6,21 +6,14 @@ import s from '../styles/filters.module.css'
 
 import { ImageData } from '../types'
 
-export const generateAddedImageSlides = (
-  images: ImageData[],
-  totalImageRefs: React.RefObject<(HTMLImageElement | null)[]>
-): React.ReactNode[] => {
+export const generateAddedImageSlides = (images: ImageData[]): React.ReactNode[] => {
   return images.map((el, i) => (
-    <img
-      alt={'slide'}
-      className={cn('w-full h-[490px] object-cover object-center', s.filter, s[el.selectedFilter])}
-      key={el.initialUrl}
-      ref={el => {
-        if (totalImageRefs.current) {
-          totalImageRefs.current[i] = el
-        }
-      }}
-      src={el.initialUrl}
-    />
+    <div className={'h-[490px]'} key={el.initialUrl}>
+      <img
+        alt={'slide'}
+        className={cn('', s.filter, s[el.selectedFilter])}
+        src={el.totalUrl || el.initialUrl}
+      />
+    </div>
   ))
 }

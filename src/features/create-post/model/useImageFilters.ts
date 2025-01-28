@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 
 import domtoimage from 'dom-to-image'
 
-import { ImageData } from '../types'
+import { Filters, ImageData } from '../types'
 
 export const useImageFilters = ({
   images,
@@ -15,7 +15,7 @@ export const useImageFilters = ({
 
   const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-  const handleSelectFilter = (selectedFilter: string) => {
+  const handleSelectFilter = (selectedFilter: Filters) => {
     setImages(images.map((el, i) => (i === currentIndex ? { ...el, selectedFilter } : el)))
   }
 

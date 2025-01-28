@@ -28,12 +28,6 @@ export const useCreatePost = () => {
     startText: '',
   })
 
-  useEffect(() => {
-    if (uploadIds.length > 0) {
-      handlePublish()
-    }
-  }, [uploadIds])
-
   const addImageUrlForPost = ({
     file,
     handleNext,
@@ -49,7 +43,8 @@ export const useCreatePost = () => {
         ...images,
         {
           initialUrl: URL.createObjectURL(file),
-          selectedFilter: '',
+          selectedFilter: 'original',
+          totalFile: new File([], ''),
           totalUrl: '',
         },
       ])
@@ -63,14 +58,14 @@ export const useCreatePost = () => {
       uploadId: image.uploadId,
     }))
 
-    setUploadIds(uploadIds)
+    return uploadIds
   }
 
   const handleDeleteImageUrl = (index: number) => {
     setImages(images => images.filter((_, i) => i !== index))
   }
 
-  const handlePublish = async () => {
+  const handlePublish = async (uploadIds: { uploadId: string }[]) => {
     try {
       if (uploadIds && uploadIds.length < 10) {
         await createPost({

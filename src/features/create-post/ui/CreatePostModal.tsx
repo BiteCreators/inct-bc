@@ -45,10 +45,10 @@ export const CreatePostModal = () => {
     })
 
   const { handleBack, handleNext, nextButtonTitle, step, title } = useStepControl({
-    handleApplyFilters,
     handlePublish,
     images,
     isOpenCreatePost,
+    setImages,
     setIsOpenCreatePost,
     uploadAllImages,
   })
@@ -61,7 +61,7 @@ export const CreatePostModal = () => {
     },
   })
 
-  const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
+  const addedImageSlides = generateAddedImageSlides(images)
 
   return (
     <div>
@@ -124,6 +124,7 @@ export const CreatePostModal = () => {
             handleSelectFilter={handleSelectFilter}
             images={images}
             setCurrentIndex={setCurrentIndex}
+            setImages={setImages}
             slides={addedImageSlides}
           />
         )}
