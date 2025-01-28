@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import { LinkSentModal } from '@/features/auth/ui/LinkSentModal'
-import { Recaptcha } from '@/features/reCaptcha/Recaptcha'
+import { Recaptcha } from '@/features/reCaptcha/ui/Recaptcha'
 import { Alert, Button, Card, FormInput, Typography } from '@byte-creators/ui-kit'
 import Link from 'next/link'
 
