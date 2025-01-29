@@ -56,9 +56,7 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
   return (
     <Providers store={store}>
       <LinearLoader isLoading={isLoading} />
-      <div className={cn(inter.className, 'bg-dark-700')}>
-        {getLayout(<Component {...props.pageProps} />)}
-      </div>
+      <div className={cn(inter.className)}>{getLayout(<Component {...props.pageProps} />)}</div>
     </Providers>
   )
 }

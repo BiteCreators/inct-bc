@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton'
 
 import { MyPayment } from '@/entities/payments'
-import { PaymentsModals } from '@/features/payments/ui/PaymentsModals'
 import { Loader, Pagination, Table, TableData, Typography } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'

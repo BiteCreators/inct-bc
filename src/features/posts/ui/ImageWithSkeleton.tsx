@@ -13,8 +13,6 @@ type Props = {
   wrapperClassName?: string
 }
 
-//todo: put in utils
-
 export const ImageWithSkeleton = ({
   alt,
   className = '',

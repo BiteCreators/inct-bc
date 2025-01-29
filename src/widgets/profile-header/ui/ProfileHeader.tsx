@@ -27,13 +27,12 @@ export const ProfileHeader = () => {
     return <LoaderBlock />
   }
 
-  //TODO: add skeletons (again)
   if (profile) {
     return (
       <>
         <div className={'flex items-center sm:items-start gap-5 sm:gap-7 md:!gap-9 mb-2 sm:mb-12'}>
-          <UserAvatar src={profile.avatars[0]?.url} />
-          <UserInfo userMetadata={<UserMetadata />} />
+          <UserAvatar isLoading={isLoading} src={profile.avatars[0]?.url} />
+          <UserInfo isLoading={isLoading} userMetadata={<UserMetadata isLoading={isLoading} />} />
         </div>
         <div>
           <Typography className={'sm:hidden font-weight700 mb-3'} variant={'regular-text'}>
