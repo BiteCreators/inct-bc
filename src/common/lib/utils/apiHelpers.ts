@@ -38,7 +38,7 @@ export const isApiError = (error: unknown): error is ApiErrorResponse => {
   )
 }
 
-export const isApiErrorWithArrary = (error: unknown): error is ApiErrorResponseWithArray => {
+export const isApiErrorWithArray = (error: unknown): error is ApiErrorResponseWithArray => {
   return (
     typeof error === 'object' &&
     error !== null &&

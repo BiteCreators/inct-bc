@@ -14,8 +14,17 @@ export default function middleware(req: NextRequest) {
       return NextResponse.next()
     }
   }
-  if (req.nextUrl.pathname === '/' && req.nextUrl.searchParams.has('code')) {
-    return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
+
+  if (req.nextUrl.pathname === '/') {
+    if (isAuth) {
+      return NextResponse.redirect(new URL('/feed', req.url))
+    }
+
+    if (req.nextUrl.searchParams.has('code')) {
+      return NextResponse.redirect(new URL(`/auth/google${req.nextUrl.search}`, req.url))
+    } else {
+      return NextResponse.next()
+    }
   }
 
   if (!isAuth) {
@@ -27,5 +36,13 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
   //all protected routes should go after '/auth/sing-up'
-  matcher: ['/auth/sign-in', '/auth/sign-up', '/auth/google', '/create', '/', '/profile/:path*'],
+  matcher: [
+    '/auth/sign-in',
+    '/auth/sign-up',
+    '/auth/google',
+    '/create',
+    '/',
+    '/profile/:id/settings',
+    '/feed',
+  ],
 }

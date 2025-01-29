@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/AuthLayout'
+import { AuthLayout } from '@/application/layouts/AuthLayout'
 import { SignInForm } from '@/features/auth/ui/SignInForm'
 import { NextPageWithLayout } from '@/pages/_app'
 

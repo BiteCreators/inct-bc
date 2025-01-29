@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { ImageOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Alert, Avatar, Button, Loader } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
 import { useProfileAvatar } from '@/features/edit-profile/lib/hooks/useProfileAvatar'
+import { ActionConfirmation, Alert, Avatar, Button, LinearLoader } from '@byte-creators/ui-kit'
+import { ImageOutline } from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 import { ModalAvatar } from './ModalAvatar'
 
@@ -27,7 +26,7 @@ export const ProfileAvatar = () => {
   if (isLoading) {
     return (
       <div className={'flex h-60 justify-center items-center'}>
-        <Loader />
+        <LinearLoader isLoading={isLoading} />
       </div>
     )
   }

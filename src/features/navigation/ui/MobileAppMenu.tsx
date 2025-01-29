@@ -9,7 +9,7 @@ import {
   PlusSquareOutline,
   Search,
   SearchOutline,
-} from '@/common/assets/icons/components'
+} from '@byte-creators/ui-kit/icons'
 
 import { MobileAppMenuItem } from './MobileAppMenuItem'
 

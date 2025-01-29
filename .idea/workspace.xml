@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c63bb88b-b08b-4720-b01b-f9da91c7afbd" name="Changes" comment="add lint config + fix linter">
+      <change afterPath="$PROJECT_DIR$/.prettierrc.cjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.stylelintrc.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/layouts/AuthLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/layouts/AuthLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/application/layouts/DefautlLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/layouts/DefautlLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/common/lib/hooks/useHanldeApiError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/lib/hooks/useHanldeApiError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/profile/ui/UserProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/profile/ui/UserProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/lib/hooks/useLogout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/lib/hooks/useLogout.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/model/useCreateNewPassword.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/model/useCreateNewPassword.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/model/useEmailConfrmed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/model/useEmailConfrmed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/model/useForgotPassword.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/model/useForgotPassword.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/model/useSignInForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/model/useSignInForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/model/useSingUpForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/model/useSingUpForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/CreateNewPasswordForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/CreateNewPasswordForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/EmailConfirmed.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/EmailConfirmed.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/ForgotPassButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/ForgotPassButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/ForgotPasswordForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/ForgotPasswordForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/GithubOauthButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/GithubOauthButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/GoogleOauthButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/GoogleOauthButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/LinkExpiredWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/LinkExpiredWrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/LinkSentModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/LinkSentModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/LogoutButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/LogoutButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/SignInButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/SignInButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/SignInForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/SignInForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/SignUpButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/SignUpButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/auth/ui/SignUpForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/ui/SignUpForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/comments/ui/AddCommentTextarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/comments/ui/AddCommentTextarea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/comments/ui/DesktopCommentsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/comments/ui/DesktopCommentsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/comments/ui/MobileCommentsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/comments/ui/MobileCommentsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/comments/ui/PostComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/comments/ui/PostComment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/model/useCreatePost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/model/useCreatePost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/model/useImageUpload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/model/useImageUpload.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/model/useStepControl.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/model/useStepControl.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/AddPhotoModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/AddPhotoModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/AspectRatio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/AspectRatio.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/CreatePostModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/CreatePostModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/CroppingTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/CroppingTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/ImageFiltersModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/ImageFiltersModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/ImageSlides.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/ImageSlides.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/ImageZoomControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/ImageZoomControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/ImagesControl.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/ImagesControl.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/PublicationModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/PublicationModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/create-post/ui/SizeEditorModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/create-post/ui/SizeEditorModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/devices/model/useSessionCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/devices/model/useSessionCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/devices/ui/CurrentDevice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/devices/ui/CurrentDevice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/devices/ui/SessionCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/devices/ui/SessionCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/devices/ui/SessionsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/devices/ui/SessionsList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/devices/ui/TerminateSessionButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/devices/ui/TerminateSessionButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-post/model/useEditPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-post/model/useEditPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-post/ui/EditPost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-post/ui/EditPost.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/lib/hooks/useCropImage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/lib/hooks/useCropImage.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/lib/hooks/useImageUpload.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/lib/hooks/useImageUpload.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/lib/hooks/useProfileAvatar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/lib/hooks/useProfileAvatar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/model/useEditProfileForm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/model/useEditProfileForm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/ui/EditProfileForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/ui/EditProfileForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/ui/avatar/CropImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/ui/avatar/CropImage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/ui/avatar/ModalAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/ui/avatar/ModalAvatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/edit-profile/ui/avatar/ProfileAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/edit-profile/ui/avatar/ProfileAvatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/internationalization/ui/LanguageSelect.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/internationalization/ui/LanguageSelect.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/navigation/ui/MobileAppMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/navigation/ui/MobileAppMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/navigation/ui/MobileAppMenuItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/navigation/ui/MobileAppMenuItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/navigation/ui/SideNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/navigation/ui/SideNavbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/notifications/model/useNotifications.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/notifications/model/useNotifications.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/notifications/ui/Notifications.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/notifications/ui/Notifications.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/notifications/ui/NotificationsButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/notifications/ui/NotificationsButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/lib/hooks/useSubmitPayment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/lib/hooks/useSubmitPayment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/AccountManagement.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/AccountManagement.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/AccountTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/AccountTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/CurrentSubscriptionCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/CurrentSubscriptionCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/MyPayments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/MyPayments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/PayPalPaymentButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/PayPalPaymentButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/PaymentsModals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/PaymentsModals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/StripePaymentButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/StripePaymentButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/payments/ui/SubscriptionTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/payments/ui/SubscriptionTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/model/useDropdownPost.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/model/useDropdownPost.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/ui/DropdownPost.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/ui/DropdownPost.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/ui/PostActionsBlock.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/ui/PostActionsBlock.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/ui/PostDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/ui/PostDescription.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/ui/PostOwnerProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/ui/PostOwnerProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/ui/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/ui/Posts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/posts/ui/PublicPostCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/posts/ui/PublicPostCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features/profile/ui/ProfileFollowButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/profile/ui/ProfileFollowButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/google/GoogleAuth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/google/GoogleAuth.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/link-expired/LinkExpired.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/link-expired/LinkExpired.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/sign-in/SingIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/sign-in/SingIn.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/sign-up/privacy-policy/PrivacyPolicy.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/sign-up/privacy-policy/PrivacyPolicy.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth/sign-up/terms-of-service/TermsService.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth/sign-up/terms-of-service/TermsService.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/[id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/[id]/publications/[postId]/SinglePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/[id]/publications/[postId]/SinglePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/[id]/publications/[postId]/comments/PostComments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/[id]/publications/[postId]/comments/PostComments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/profile/[id]/publications/create/Create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/profile/[id]/publications/create/Create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/header/ui/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/header/ui/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/header/ui/HeaderMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/header/ui/HeaderMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/post-details/ui/PostDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/post-details/ui/PostDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/post-details/ui/desktop/PostDesktop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/post-details/ui/desktop/PostDesktop.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/post-details/ui/desktop/PostModalTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/post-details/ui/desktop/PostModalTitle.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/post-details/ui/mobile/PostMobile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/post-details/ui/mobile/PostMobile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/profile-header/ui/ProfileHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/profile-header/ui/ProfileHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/profile-settings-tabs/ui/ProfileSettingsTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/profile-settings-tabs/ui/ProfileSettingsTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/registered-users/RegisteredUsers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/registered-users/RegisteredUsers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/widgets/sidebar/ui/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/widgets/sidebar/ui/Sidebar.tsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="IN-295" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DePacos&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BiteCreators/inct-bc.git&quot;,
+    &quot;accountId&quot;: &quot;5bc33dd3-ba09-4fb5-a4e6-e112c136b4f5&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;BiteCreators&quot;,
+    &quot;repository&quot;: &quot;inct-bc&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;201e21ff&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2piHDvBN9H2YuFvjHKXFcaHL9qV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#90 on development&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Development/Incubator-proj/incubator-inctagram/inct-host/inct-bc&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;C:\\Development\\Incubator-proj\\incubator-inctagram\\inct-host\\inct-bc\\node_modules\\eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;C:\\Development\\Incubator-proj\\incubator-inctagram\\inct-host\\inct-bc\\node_modules\\stylelint&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.admin &gt; compile.executor&quot;: &quot;Run&quot;,
+    &quot;npm.admin &gt; watch.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Development\\Incubator-proj\\incubator-inctagram\\inct-host\\inct-bc\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Development\\Incubator-proj\\incubator-inctagram\\inct-host\\inct-bc\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Development\Incubator-proj\incubator-inctagram\inct-host\inct-bc" />
+      <recent name="P:\dev\inctagram" />
+      <recent name="P:\dev\inctagram\apps\admin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="P:\dev\inctagram\removeFolder" />
+      <recent name="P:\dev\inctagram" />
+      <recent name="P:\dev\inctagram\apps\admin\src\features\user\ui" />
+      <recent name="P:\dev\inctagram\apps\admin\src\features\user\styles" />
+      <recent name="P:\dev\inctagram\apps\admin\src\features\user\api" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="access" />
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.dev">
+    <configuration name="admin &gt; compile" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/admin/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="compile" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="admin &gt; watch" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/admin/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="watch" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.admin &gt; watch" />
+        <item itemvalue="npm.admin &gt; compile" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.admin &gt; watch" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-WS-242.20224.342" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c63bb88b-b08b-4720-b01b-f9da91c7afbd" name="Changes" comment="" />
+      <created>1733241860197</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733241860197</updated>
+      <workItem from="1733241861798" duration="46000" />
+      <workItem from="1733398090623" duration="4788000" />
+      <workItem from="1733403573458" duration="210000" />
+      <workItem from="1733403797941" duration="3569000" />
+      <workItem from="1733407418881" duration="24779000" />
+      <workItem from="1733502601407" duration="6988000" />
+      <workItem from="1733670240212" duration="18774000" />
+      <workItem from="1733605943140" duration="826000" />
+      <workItem from="1733646409864" duration="707000" />
+      <workItem from="1733747197349" duration="1137000" />
+      <workItem from="1733749075457" duration="4767000" />
+      <workItem from="1733756860045" duration="12847000" />
+      <workItem from="1733828932089" duration="641000" />
+      <workItem from="1733829586899" duration="3227000" />
+      <workItem from="1733832861260" duration="1288000" />
+      <workItem from="1733843725861" duration="1334000" />
+      <workItem from="1733920178759" duration="4845000" />
+      <workItem from="1734001717957" duration="526000" />
+      <workItem from="1734002296850" duration="61000" />
+      <workItem from="1734002401098" duration="4347000" />
+      <workItem from="1734186968426" duration="1169000" />
+      <workItem from="1734192504773" duration="1249000" />
+      <workItem from="1734193815154" duration="2940000" />
+      <workItem from="1734199609572" duration="768000" />
+      <workItem from="1734200403340" duration="3392000" />
+      <workItem from="1734205239010" duration="16000" />
+      <workItem from="1734353798998" duration="1520000" />
+      <workItem from="1734355466548" duration="2947000" />
+      <workItem from="1734358715983" duration="2039000" />
+      <workItem from="1734449197417" duration="527000" />
+      <workItem from="1734455638245" duration="2586000" />
+      <workItem from="1734519780198" duration="2185000" />
+      <workItem from="1734522041314" duration="4243000" />
+      <workItem from="1734530108889" duration="5849000" />
+      <workItem from="1734536386982" duration="718000" />
+      <workItem from="1734539924623" duration="2625000" />
+      <workItem from="1734615574085" duration="2219000" />
+      <workItem from="1734619917348" duration="1460000" />
+      <workItem from="1734623064448" duration="273000" />
+      <workItem from="1735212378752" duration="7605000" />
+    </task>
+    <task id="LOCAL-00001" summary="fix: removed first &amp; last name, added username">
+      <option name="closed" value="true" />
+      <created>1733431398242</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733431398242</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix: regenerate files">
+      <option name="closed" value="true" />
+      <created>1733428314884</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733428314884</updated>
+    </task>
+    <task id="LOCAL-00003" summary="created index files">
+      <option name="closed" value="true" />
+      <created>1733428372550</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733428372550</updated>
+    </task>
+    <task id="LOCAL-00004" summary="removed files">
+      <option name="closed" value="true" />
+      <created>1733432041381</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733432041381</updated>
+    </task>
+    <task id="LOCAL-00005" summary="moved files">
+      <option name="closed" value="true" />
+      <created>1733432474505</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733432474505</updated>
+    </task>
+    <task id="LOCAL-00006" summary="moved files &amp; added useRouter">
+      <option name="closed" value="true" />
+      <created>1733432543613</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733432543613</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added for users list, usersQuery">
+      <option name="closed" value="true" />
+      <created>1733432702485</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733432702485</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix: naming &amp; imports">
+      <option name="closed" value="true" />
+      <created>1733432783080</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1733432783080</updated>
+    </task>
+    <task id="LOCAL-00009" summary="remove index">
+      <option name="closed" value="true" />
+      <created>1733514404001</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1733514404001</updated>
+    </task>
+    <task id="LOCAL-00010" summary="remove styles">
+      <option name="closed" value="true" />
+      <created>1733514445085</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1733514445085</updated>
+    </task>
+    <task id="LOCAL-00011" summary="moved queries">
+      <option name="closed" value="true" />
+      <created>1733514633575</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1733514633575</updated>
+    </task>
+    <task id="LOCAL-00012" summary="moved hooks">
+      <option name="closed" value="true" />
+      <created>1733514717419</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733514717419</updated>
+    </task>
+    <task id="LOCAL-00013" summary="moved components">
+      <option name="closed" value="true" />
+      <created>1733514760205</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733514760205</updated>
+    </task>
+    <task id="LOCAL-00014" summary="moved translations">
+      <option name="closed" value="true" />
+      <created>1733514947194</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733514947194</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: url &amp; imports">
+      <option name="closed" value="true" />
+      <created>1733515024778</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733515024778</updated>
+    </task>
+    <task id="LOCAL-00016" summary="moved">
+      <option name="closed" value="true" />
+      <created>1733515101613</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1733515101613</updated>
+    </task>
+    <task id="LOCAL-00017" summary="added sort &amp; search param">
+      <option name="closed" value="true" />
+      <created>1733732146006</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1733732146006</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added sort &amp; search param">
+      <option name="closed" value="true" />
+      <created>1733732178634</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1733732178634</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix: removed first &amp; last name, added username" />
+    <MESSAGE value="fix: regenerate files" />
+    <MESSAGE value="created index files" />
+    <MESSAGE value="removed files" />
+    <MESSAGE value="moved files" />
+    <MESSAGE value="moved files &amp; added useRouter" />
+    <MESSAGE value="added for users list, usersQuery" />
+    <MESSAGE value="fix: naming &amp; imports" />
+    <MESSAGE value="removed index" />
+    <MESSAGE value="moved styles" />
+    <MESSAGE value="removed index" />
+    <MESSAGE value="moved styles" />
+    <MESSAGE value="moved queries" />
+    <MESSAGE value="moved hooks" />
+    <MESSAGE value="moved components" />
+    <MESSAGE value="moved translations" />
+    <MESSAGE value="fix: url &amp; imports" />
+    <MESSAGE value="moved" />
+    <MESSAGE value="added sort &amp; search param" />
+    <MESSAGE value="add lint config + fix linter" />
+    <option name="LAST_COMMIT_MESSAGE" value="add lint config + fix linter" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/apps/admin/src/features/users/users-list/model/usersQueries.ts</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

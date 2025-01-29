@@ -1,13 +1,35 @@
 import { authSlice } from '@/entities/auth'
-import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import {
+  BaseQueryApi,
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
+
+type AppExtra = {
+  req?: {
+    cookies?: Record<string, string>
+  }
+}
+
+const isAppExtra = (extra: unknown): extra is AppExtra => {
+  return typeof extra === 'object' && extra !== null
+}
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://inctagram.work/api/',
   credentials: 'include',
-  prepareHeaders: headers => {
-    const accessToken = document.cookie.split('accessToken=')[1]
+  prepareHeaders: (headers, { extra }) => {
+    let accessToken: string | undefined
+
+    if (typeof window === 'undefined' && isAppExtra(extra) && extra?.req) {
+      accessToken = extra.req.cookies?.accessToken
+    } else if (typeof document !== 'undefined') {
+      accessToken = document.cookie.split('accessToken=')[1]
+    }
 
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
@@ -42,7 +64,7 @@ export const baseQueryWithReauth: BaseQueryFn<
           document.cookie = `accessToken=${token};max-age=2678400;secure;path=/;samesite=lax`
           result = await baseQuery(args, api, extraOptions)
         } else {
-          api.dispatch(authSlice.actions.setAccessToken(null))
+          api.dispatch(authSlice.actions.logout())
           document.cookie = 'accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
         }
       } finally {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
 import { authApi } from '@/entities/auth'
+import { useScopedTranslation } from '@byte-creators/utils'
 import { useSearchParams } from 'next/navigation'
 
 import { modifySignUpApiError } from '../lib/modifyAuthApiError'
@@ -44,7 +44,11 @@ export const useEmailConfirmed = () => {
         email: params?.get('email') ?? '',
       }).unwrap()
     } catch (error) {
-      handleApiError({ error, modifyMessage: modifySignUpApiError, setApiError })
+      handleApiError({
+        error,
+        modifyMessage: modifySignUpApiError,
+        setApiError,
+      })
     }
   }
 

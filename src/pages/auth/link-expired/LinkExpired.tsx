@@ -1,11 +1,10 @@
 import React from 'react'
 
-import { AuthLayout } from '@/app/layouts/AuthLayout'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { cn } from '@/common/lib/utils/cn'
-import { Button } from '@/common/ui'
+import { AuthLayout } from '@/application/layouts/AuthLayout'
 import { LinkExpiredWrapper } from '@/features/auth/ui/LinkExpiredWrapper'
 import { NextPageWithLayout } from '@/pages/_app'
+import { Button } from '@byte-creators/ui-kit'
+import { cn, useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
 export const LinkExpired: NextPageWithLayout = () => {

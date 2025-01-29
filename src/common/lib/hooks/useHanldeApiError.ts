@@ -2,9 +2,9 @@ import React from 'react'
 import { FieldValues, Path, UseFormSetError } from 'react-hook-form'
 
 import { LocaleType } from '@/locales/en'
+import { useScopedTranslation } from '@byte-creators/utils'
 
-import { isApiError, isApiErrorWithArrary, isFetchBaseQueryError } from '../utils/apiHelpers'
-import { useScopedTranslation } from './useTranslation'
+import { isApiError, isApiErrorWithArray, isFetchBaseQueryError } from '../utils/apiHelpers'
 
 export const useHandleApiError = <NT extends keyof LocaleType>(namespace: NT) => {
   const internalT = useScopedTranslation('Common')
@@ -36,7 +36,7 @@ export const useHandleApiError = <NT extends keyof LocaleType>(namespace: NT) =>
         return
       }
     }
-    if (isApiErrorWithArrary(error)) {
+    if (isApiErrorWithArray(error)) {
       error.data.messages.forEach(m => {
         const { field, message } = modifyMessage
           ? modifyMessage(m.message, t)

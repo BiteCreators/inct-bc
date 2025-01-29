@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { isApiErrorWithArrary } from '@/common/lib/utils/apiHelpers'
-import { Alert, Button, Loader, Typography } from '@/common/ui'
+import { isApiErrorWithArray } from '@/common/lib/utils/apiHelpers'
 import { devicesApi } from '@/entities/devices'
+import { Alert, Button, Loader, Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 import { SessionCard } from './SessionCard'
 
@@ -32,7 +32,7 @@ export const CurrentDevice = () => {
     }
   }
 
-  if (isApiErrorWithArrary(error)) {
+  if (isApiErrorWithArray(error)) {
     return (
       <Alert
         duration={999999}

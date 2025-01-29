@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Typography } from '@/common/ui'
+import { Card, Typography } from '@byte-creators/ui-kit'
 
 import { useSessionCard } from '../model/useSessionCard'
 
@@ -14,7 +14,12 @@ type Props = {
 }
 
 export const SessionCard = ({ action, browserName, ip, lastVisit, osName, type }: Props) => {
-  const { icon, lastVisitDate, t, title } = useSessionCard({ browserName, lastVisit, osName, type })
+  const { icon, lastVisitDate, t, title } = useSessionCard({
+    browserName,
+    lastVisit,
+    osName,
+    type,
+  })
 
   return (
     <Card className={'flex p-6 pt-[18px] justify-between'}>

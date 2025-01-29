@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ArrowBackOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { PageLayout, Typography } from '@/common/ui'
 import { NextPageWithLayout } from '@/pages/_app'
 import { Header } from '@/widgets/header'
+import { PageLayout, Typography } from '@byte-creators/ui-kit'
+import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 import Link from 'next/link'
 
 const PrivacyPolicy: NextPageWithLayout = () => {

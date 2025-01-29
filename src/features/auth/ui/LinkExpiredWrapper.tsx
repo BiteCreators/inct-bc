@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Typography } from '@/common/ui'
+import { Typography } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 import Image from 'next/image'
 
 type Props = {

@@ -1,3 +1,6 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
+import { SideNavbarItem } from '@byte-creators/ui-kit'
 import {
   Bookmark,
   BookmarkOutline,
@@ -13,26 +16,29 @@ import {
   SearchOutline,
   TrendingUp,
   TrendingUpOutline,
-} from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-
-import { SideNavbarItem } from './SideNavbarItem'
+} from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
+  const userId = useAppSelector(authSlice.selectors.selectUserId)
+
+  if (!userId) {
+    return null
+  }
 
   return (
     <nav className={'flex flex-col gap-[60px]'}>
       <div className={'flex flex-col gap-6'}>
         <SideNavbarItem href={'/'} icon={<HomeOutline />} iconActive={<Home />} label={t.home} />
         <SideNavbarItem
-          href={'/create'}
+          href={`/profile/${userId}/publications/create`}
           icon={<PlusSquareOutline />}
           iconActive={<PlusSquare />}
           label={t.create}
         />
         <SideNavbarItem
-          href={'/profile'}
+          href={`/profile/${userId}`}
           icon={<PersonOutline />}
           iconActive={<Person />}
           label={t.myProfile}

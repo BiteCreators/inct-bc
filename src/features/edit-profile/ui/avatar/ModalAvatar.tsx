@@ -1,17 +1,16 @@
 import React from 'react'
 
-import { Avatars } from '@/common/api/profile.api'
-import { ImageOutline } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Alert, Avatar, Button, Modal } from '@/common/ui'
-import { DragAndDropInput } from '@/common/ui/drag-and-drop-input/DragAndDropInput'
+import { Avatar as AvatarType } from '@/common/types/api.types'
 import { useCropImage } from '@/features/edit-profile/lib/hooks/useCropImage'
 import { useImageUpload } from '@/features/edit-profile/lib/hooks/useImageUpload'
+import { Alert, Avatar, Button, DragAndDropInput, Modal } from '@byte-creators/ui-kit'
+import { ImageOutline } from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 import { CropImage } from './CropImage'
 
 type Props = {
-  currentAvatar: Avatars | null
+  currentAvatar: AvatarType | null
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
   updateAvatar: (file: File) => void
@@ -57,6 +56,8 @@ export const ModalAvatar = ({ currentAvatar, isOpen, setIsOpen, updateAvatar }: 
         )}
         {!imageUrl && (
           <div className={'w-full flex flex-col justify-center items-center gap-9 md:gap-14'}>
+            {/*TODO: remove ts ignore*/}
+            {/* @ts-ignore */}
             <DragAndDropInput fileInputRef={fileInputRef} onFileSelect={handleFileSelect}>
               <div
                 className={

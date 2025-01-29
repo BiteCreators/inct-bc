@@ -1,3 +1,8 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { authSlice } from '@/entities/auth'
+import { useLogout } from '@/features/auth/lib/hooks/useLogout'
+import { ActionConfirmation, Dropdown } from '@byte-creators/ui-kit'
+import { DropdownItem } from '@byte-creators/ui-kit/'
 import {
   BookmarkOutline,
   LogOut,
@@ -5,14 +10,8 @@ import {
   PlusSquareOutline,
   SettingsOutline,
   TrendingUp,
-} from '@/common/assets/icons/components'
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Dropdown } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
-import { DropdownItem } from '@/common/ui/dropdown/Dropdown'
-import { authSlice } from '@/entities/auth'
-import { useLogout } from '@/features/auth/lib/hooks/useLogout'
+} from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
 export const HeaderMenu = () => {

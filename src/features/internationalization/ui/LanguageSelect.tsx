@@ -1,6 +1,6 @@
-import { FlagRussia, FlagUnitedKingdom } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { Select, SelectItem } from '@/common/ui'
+import { Select, SelectItem } from '@byte-creators/ui-kit'
+import { FlagRussia, FlagUnitedKingdom } from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
 export const LanguageSelect = () => {

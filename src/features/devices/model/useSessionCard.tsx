@@ -13,8 +13,8 @@ import {
   Safari,
   UcBrowser,
   Yandex,
-} from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+} from '@byte-creators/ui-kit/icons'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 export const useSessionCard = ({
   browserName,

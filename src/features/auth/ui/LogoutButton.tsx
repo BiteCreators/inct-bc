@@ -1,9 +1,9 @@
-import { LogOut } from '@/common/assets/icons/components'
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
-import { cn } from '@/common/lib/utils/cn'
-import { Loader } from '@/common/ui'
-import { ActionConfirmation } from '@/common/ui/action-confirmation/ActionComfiirmation'
+import React from 'react'
+
 import { useLogout } from '@/features/auth/lib/hooks/useLogout'
+import { ActionConfirmation, LoaderBlock } from '@byte-creators/ui-kit'
+import { LogOut } from '@byte-creators/ui-kit/icons'
+import { cn, useScopedTranslation } from '@byte-creators/utils'
 
 export const LogoutButton = () => {
   const t = useScopedTranslation('Auth')
@@ -14,7 +14,7 @@ export const LogoutButton = () => {
   if (isLoading) {
     return (
       <div className={'flex justify-center items-center'}>
-        <Loader />
+        <LoaderBlock portal />
       </div>
     )
   }

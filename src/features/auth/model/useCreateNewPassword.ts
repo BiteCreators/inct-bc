@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { useScopedTranslation } from '@/common/lib/hooks/useTranslation'
+import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { authApi } from '@/entities/auth'
 import {
   RecoveryPasswordFormData,
   createRecoveryPasswordSchema,
 } from '@/features/auth/lib/schemas/recoveryPassword.schema'
+import { useScopedTranslation } from '@byte-creators/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -16,6 +17,8 @@ export const useCreateNewPassword = () => {
   const searchParams = useSearchParams()
   const code = searchParams?.get('code') ?? null
   const email = searchParams?.get('email') ?? null
+  const [apiError, setApiError] = useState('')
+  const { handleApiError } = useHandleApiError('Auth')
   const t = useScopedTranslation('Auth')
   const recoveryPasswordSchema = createRecoveryPasswordSchema(t.errors)
 
@@ -58,8 +61,13 @@ export const useCreateNewPassword = () => {
       recoveryCode: code as string,
     }
 
-    await newPassword(dataForRequest)
-    await router.push(`/auth`)
+    try {
+      setLoading(true)
+      await newPassword(dataForRequest)
+      await router.push(`/auth`)
+    } catch (error) {
+      handleApiError({ error, setApiError })
+    }
   }
 
   return {
