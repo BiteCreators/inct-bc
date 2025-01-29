@@ -41,7 +41,4 @@ export const filterValues: FilterValues[] = [
   {
     name: 'sharpen',
   },
-  {
-    name: 'sharpen',
-  },
 ]
