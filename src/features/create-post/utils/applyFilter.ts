@@ -13,6 +13,10 @@ export const applyFilter = ({
   filter: Filters
   imgRef: RefObject<HTMLImageElement | null>
 }) => {
+  if (canvas.width === 0 || canvas.height === 0) {
+    return
+  }
+
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
 
   const vignetteData = ctx.createImageData(imageData)

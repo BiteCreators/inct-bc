@@ -36,7 +36,7 @@ export const useImageFilters = ({
       }
       canvas.width = img.width
       canvas.height = img.height
-      ctx.drawImage(img, 0, 0)
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
       applyFilter({ canvas, ctx, filter: filter.name, imgRef: { current: img } })
     })
   }, [currentIndex])

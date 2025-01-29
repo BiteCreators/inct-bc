@@ -16,11 +16,12 @@ export const useCanvasFilter = ({
   const imgRef = useRef<HTMLImageElement | null>(null)
 
   useEffect(() => {
-    if (!canvasRef || !canvasRef.current || !imgRef.current) {
+    const canvas = canvasRef.current
+
+    if (!canvas || !imgRef.current) {
       return
     }
 
-    const canvas = canvasRef.current
     const img = imgRef.current
     const ctx = canvas.getContext('2d', { willReadFrequently: true })
 
@@ -30,7 +31,7 @@ export const useCanvasFilter = ({
 
     canvas.width = img.width
     canvas.height = img.height
-    ctx.drawImage(img, 0, 0)
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
     applyFilter({ canvas, ctx, filter, imgRef })
 
