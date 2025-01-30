@@ -1,8 +1,8 @@
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
-import { TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
+import { paymentsApi } from '@/entities/payments'
 import { paymentsSlice } from '@/features/payments'
 import { Card, RadioGroup, Typography } from '@byte-creators/ui-kit'
-import { useScopedTranslation } from '@byte-creators/utils'
+import { SUBSCRIPTION_TYPES, useScopedTranslation } from '@byte-creators/utils'
 
 export const SubscriptionTypeCard = ({ text }: { text: string }) => {
   const t = useScopedTranslation('Payments')
@@ -14,13 +14,13 @@ export const SubscriptionTypeCard = ({ text }: { text: string }) => {
       let label = ''
 
       switch (type.typeDescription) {
-        case TYPE_DESCRIPTIONS.DAY:
+        case SUBSCRIPTION_TYPES.DAY:
           label = `$${type.amount} ${t.oneDay}`
           break
-        case TYPE_DESCRIPTIONS.WEEKLY:
+        case SUBSCRIPTION_TYPES.WEEKLY:
           label = `$${type.amount} ${t.sevenDays}`
           break
-        case TYPE_DESCRIPTIONS.MONTHLY:
+        case SUBSCRIPTION_TYPES.MONTHLY:
           label = `$${type.amount} ${t.oneMonth}`
           break
       }
@@ -35,7 +35,7 @@ export const SubscriptionTypeCard = ({ text }: { text: string }) => {
         </Typography>
         <Card className={'flex flex-col mb-6'}>
           <form noValidate>
-            <RadioGroup<TYPE_DESCRIPTIONS>
+            <RadioGroup<SUBSCRIPTION_TYPES>
               defaultValue={options[0]?.value}
               onChange={value => dispatch(paymentsSlice.actions.setNewSubscriptionType(value))}
               options={options}

@@ -50,8 +50,8 @@ export const NotificationsList = ({ notificationsItems }: Props) => {
             : 'max-h-[290px]'
         )}
       >
-        {notificationsCorrectDate ? (
-          notificationsCorrectDate.map((notification, index) => (
+        {notificationsCorrectDate && notificationsCorrectDate?.length > 0 ? (
+          notificationsCorrectDate.map(notification => (
             <div
               className={'py-3 border-t border-dark-100 mx-3'}
               data-id={notification.id}

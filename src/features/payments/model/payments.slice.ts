@@ -1,16 +1,17 @@
-import { AccountType, TYPE_DESCRIPTIONS } from '@/entities/payments'
+import { AccountType } from '@/entities/payments'
+import { SUBSCRIPTION_TYPES } from '@byte-creators/utils'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 type InitialState = {
   accountType: AccountType
   autoRenewal: boolean
-  newSubscriptionType: TYPE_DESCRIPTIONS | null
+  newSubscriptionType: SUBSCRIPTION_TYPES | null
 }
 
 const initialState: InitialState = {
   accountType: 'Personal',
   autoRenewal: false,
-  newSubscriptionType: TYPE_DESCRIPTIONS.DAY,
+  newSubscriptionType: SUBSCRIPTION_TYPES.DAY,
 }
 
 export const paymentsSlice = createSlice({
@@ -23,7 +24,7 @@ export const paymentsSlice = createSlice({
     setAutoRenewal: (state, action: PayloadAction<boolean>) => {
       state.autoRenewal = action.payload
     },
-    setNewSubscriptionType: (state, action: PayloadAction<TYPE_DESCRIPTIONS | null>) => {
+    setNewSubscriptionType: (state, action: PayloadAction<SUBSCRIPTION_TYPES | null>) => {
       state.newSubscriptionType = action.payload
     },
     // toggleAutoRenewal: state => {

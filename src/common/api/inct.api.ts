@@ -1,6 +1,5 @@
 import { baseQueryWithReauth } from '@/common/api/base-query'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { HYDRATE } from 'next-redux-wrapper'
 
 import { isHydrateAction } from '../lib/utils/isHydrateAction'
 
@@ -13,5 +12,15 @@ export const inctagramApi = createApi({
     }
   },
   reducerPath: 'inctagramApi',
-  tagTypes: ['Me', 'Profile', 'Devices', 'Post', 'Followers', 'Comment', 'Answer', 'Notifications'],
+  tagTypes: [
+    'Me',
+    'Profile',
+    'Devices',
+    'Posts',
+    'Post',
+    'Followers',
+    'Comment',
+    'Answer',
+    'Notifications',
+  ],
 })
