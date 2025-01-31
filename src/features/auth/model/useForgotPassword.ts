@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
@@ -23,6 +24,7 @@ export const useForgotPassword = () => {
   const forgotPasswordSchema = createForgotPasswordSchema(t.errors)
   const [apiError, setApiError] = useState('')
   const [forgotPassword] = authApi.useForgotPasswordMutation()
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,6 +45,9 @@ export const useForgotPassword = () => {
     mode: 'onChange',
     resolver: zodResolver(forgotPasswordSchema),
   })
+  const resetRecaptcha = () => {
+    recaptchaRef.current?.reset()
+  }
   const { handleApiError } = useHandleApiError('Auth')
   const onRecaptchaChange = (token: null | string) => {
     if (token) {
@@ -60,6 +65,7 @@ export const useForgotPassword = () => {
       setIsModalOpen(true)
     } catch (error) {
       setIsModalOpen(false)
+      resetRecaptcha()
       handleApiError({
         error,
         modifyMessage: modifyForgotPasswordApiError,
@@ -80,6 +86,7 @@ export const useForgotPassword = () => {
     isSubmitting,
     isValid,
     onRecaptchaChange,
+    recaptchaRef,
     setApiError,
     setError,
     setIsModalOpen,
