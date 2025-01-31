@@ -1,60 +1,50 @@
-import { useRef, useState } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
-import domtoimage from 'dom-to-image'
-
-import { ImageData } from '../types'
+import { Filters, ImageData } from '../types'
+import { applyFilter } from '../utils/applyFilter'
+import { FilterValues, filterValues } from '../utils/filterValues'
 
 export const useImageFilters = ({
+  canvasRef,
   images,
   setImages,
 }: {
+  canvasRef: RefObject<(HTMLCanvasElement | null)[]>
   images: ImageData[]
   setImages: (images: ImageData[]) => void
 }) => {
-  const totalImageRefs = useRef<(HTMLImageElement | null)[]>(Array(images.length).fill(null))
-
+  const [filters, setFilters] = useState<FilterValues[]>(filterValues)
   const [currentIndex, setCurrentIndex] = useState<number>(0)
 
-  const handleSelectFilter = (selectedFilter: string) => {
+  const handleSelectFilter = (selectedFilter: Filters) => {
     setImages(images.map((el, i) => (i === currentIndex ? { ...el, selectedFilter } : el)))
   }
 
-  const urlToFile = async (url: string, fileName: string) => {
-    const res = await fetch(url)
-    const blob = await res.blob()
+  useEffect(() => {
+    filters.forEach((filter, index) => {
+      const canvas = canvasRef.current[index]
+      const img = new Image()
 
-    return new File([blob], fileName, { type: blob.type })
-  }
+      if (!canvas) {
+        return
+      }
+      img.src = images[currentIndex].initialUrl
+      const ctx = canvas.getContext('2d')
 
-  const handleApplyFilters = async (): Promise<{ newFiles: File[] }> => {
-    const newUrls: string[] = []
-    const newFiles: File[] = []
-
-    try {
-      await totalImageRefs.current.reduce(async (promise, el, index) => {
-        await promise
-
-        if (el) {
-          const url = await domtoimage.toPng(el)
-          const file = await urlToFile(url, index.toString())
-
-          newFiles.unshift(file)
-          newUrls.push(url)
-        }
-      }, Promise.resolve())
-      setImages(images.map((el, index) => ({ ...el, totalUrl: newUrls[index] })))
-    } catch (error) {
-      console.error('Error applying filters:', error)
-    }
-
-    return { newFiles }
-  }
+      if (!ctx) {
+        return
+      }
+      canvas.width = img.width
+      canvas.height = img.height
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+      applyFilter({ canvas, ctx, filter: filter.name, imgRef: { current: img } })
+    })
+  }, [currentIndex])
 
   return {
-    currentIndex,
-    handleApplyFilters,
+    filters,
     handleSelectFilter,
     setCurrentIndex,
-    totalImageRefs,
+    setFilters,
   }
 }

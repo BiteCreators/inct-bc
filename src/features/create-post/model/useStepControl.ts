@@ -8,19 +8,26 @@ import { useRouter } from 'next/router'
 import { ImageData } from '../types'
 
 export const useStepControl = ({
-  handleApplyFilters,
   handlePublish,
   images,
   isOpenCreatePost,
   setIsOpenCreatePost,
   uploadAllImages,
 }: {
-  handleApplyFilters: () => Promise<{ newFiles: File[] }>
-  handlePublish: () => Promise<void>
+  handlePublish: (
+    uploadIds: {
+      uploadId: string
+    }[]
+  ) => Promise<void>
   images: ImageData[]
   isOpenCreatePost: boolean
+  setImages: Dispatch<SetStateAction<ImageData[]>>
   setIsOpenCreatePost: Dispatch<SetStateAction<boolean>>
-  uploadAllImages: (files: File[]) => Promise<void>
+  uploadAllImages: (files: File[]) => Promise<
+    {
+      uploadId: string
+    }[]
+  >
 }) => {
   const [step, setStep] = useState(1)
   const t = useScopedTranslation('Posts')
@@ -55,10 +62,10 @@ export const useStepControl = ({
         break
       case 4:
         try {
-          //setIsOpenCreatePost(false)
-          const res = await handleApplyFilters()
+          setIsOpenCreatePost(false)
+          const uploadIds = await uploadAllImages(images.map(el => el.totalFile))
 
-          await uploadAllImages(res.newFiles)
+          handlePublish(uploadIds)
         } catch (error) {
           console.log(error)
         }
