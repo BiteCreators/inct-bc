@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 export const useModalOpen = () => {
   const router = useRouter()
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(true)
   const [modalType, setModalType] = useState<'followers' | 'following'>('followers')
   const handleOpenModal = (type: 'followers' | 'following') => {
     setModalType(type)
