@@ -45,3 +45,17 @@ export type WithFollowersCountUserProfile = {
   region: null | string
   userName: string
 }
+
+type UserMetadata = {
+  followers: number
+  following: number
+  publications: number
+}
+
+export type UserProfile = {
+  aboutMe: string
+  avatars: Avatar[]
+  id: number
+  userMetadata: UserMetadata
+  userName: string
+}
