@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { authApi } from '@/entities/auth'
 import { WithFollowersCountUserProfile, followersApi } from '@/entities/followers'
-import { Follower } from '@/entities/followers/types/followers.types'
+import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
 import { useConfirmation } from '@byte-creators/utils'
 
-export const useProfileFollow = (currentUserProfile: WithFollowersCountUserProfile) => {
+export const useProfileFollow = (currentUserProfile: UserProfile) => {
   const { data: followingList, isLoading: isFollowingLoading } =
     followersApi.useGetUsersFollowingQuery({
       userName: currentUserProfile.userName,

@@ -4,7 +4,7 @@ import { MeResponse } from '@/entities/auth/api/auth.api'
 import {
   Follower,
   FollowersResponse,
-  WithFollowersCountUserProfile,
+  UserProfile,
 } from '@/entities/followers/types/followers.types'
 import { useProfileFollow } from '@/features/profile/model/useProfileFollow'
 
@@ -33,7 +33,7 @@ const FollowContext = createContext<FollowContextValue | null>(null)
 
 type FollowProvider = {
   children: ReactNode
-  currentUserProfile: WithFollowersCountUserProfile
+  currentUserProfile: UserProfile
 }
 
 export const useFollowContext = () => {
