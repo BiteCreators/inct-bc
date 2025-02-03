@@ -14,7 +14,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async cont
 
   await store
     .dispatch(
-      postsApi.endpoints.getAllPublicPosts.initiate(endCursorPostId ? { endCursorPostId } : {})
+      postsApi.endpoints.getAllPublicPosts.initiate(
+        endCursorPostId ? { endCursorPostId } : { pageSize: 4 }
+      )
     )
     .unwrap()
 
