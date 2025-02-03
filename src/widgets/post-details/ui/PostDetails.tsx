@@ -1,7 +1,6 @@
 import { commentsApi } from '@/entities/comments'
 import { postsApi } from '@/entities/posts'
-import { PostMobile } from '@/widgets/post-details/ui/mobile/PostMobile'
-import { useMediaQuery } from '@byte-creators/utils'
+import { Alert } from '@byte-creators/ui-kit'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -30,17 +29,14 @@ export const PostDetails = () => {
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))
 
-  const isLargeScreen = useMediaQuery('(min-width: 768px)')
-
   const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post?.id || 0 })
 
   const comments = data?.items
 
-  if (isLargeScreen) {
-    return (
+  return (
+    <>
       <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
-    )
-  } else {
-    return <PostMobile comments={comments} post={post} slides={slides || []} />
-  }
+      {error && <Alert message={'Comments loaded failed'} type={'error'} />}
+    </>
+  )
 }
