@@ -16,7 +16,7 @@ import {
 type Props = {
   changeEditMode: (e: boolean) => void
   isOpen: boolean
-  post: Post
+  post: Post | undefined
   slides: ReactNode[]
 }
 
@@ -35,7 +35,7 @@ export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
     setConfirmOpen,
     t,
     value,
-  } = useEditPost({ changeEditMode, postText: post?.description })
+  } = useEditPost({ changeEditMode, postText: post ? post.description : 'No description' })
 
   return (
     <>
@@ -65,11 +65,15 @@ export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
           <div className={'w-1/2 h-full pl-4'}>
             <div className={'flex w-full h-1/3 flex-col '}>
               <div className={'flex w-full justify-start items-center gap-5 mb-6'}>
-                <UserProfile
-                  avatarUrl={post.avatarOwner ?? undefined}
-                  profileId={post?.id}
-                  userName={post?.userName}
-                />
+                {post ? (
+                  <UserProfile
+                    avatarUrl={post.avatarOwner ?? undefined}
+                    profileId={post?.id}
+                    userName={post?.userName}
+                  />
+                ) : (
+                  'Post no found'
+                )}
               </div>
               <TextArea
                 className={'min-h-32 max-h-72'}
