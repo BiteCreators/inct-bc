@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
-import { Follower, WithFollowersCountUserProfile } from '@/entities/followers/types/followers.types'
+import {
+  Follower,
+  UserProfile as UserProfileType,
+} from '@/entities/followers/types/followers.types'
 import { FollowModalButtons } from '@/features/profile/ui/profile-follow/FollowModalButtons'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creators/ui-kit'
@@ -8,7 +11,7 @@ import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creator
 import example from '../../../../../public/examples/exampleAvatar.png'
 
 type Props = {
-  currentUserProfile: WithFollowersCountUserProfile
+  currentUserProfile: UserProfileType
   type: 'followers' | 'following'
 }
 export const FollowModalItems = ({ currentUserProfile, type }: Props) => {

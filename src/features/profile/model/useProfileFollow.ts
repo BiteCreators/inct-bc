@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { authApi } from '@/entities/auth'
-import { WithFollowersCountUserProfile, followersApi } from '@/entities/followers'
+import { followersApi } from '@/entities/followers'
 import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
 import { useConfirmation } from '@byte-creators/utils'
 

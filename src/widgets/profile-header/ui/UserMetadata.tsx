@@ -3,6 +3,8 @@ import Skeleton from 'react-loading-skeleton'
 import { profileApi } from '@/entities/profile'
 import { ProfileFollowButton } from '@/features/profile'
 import { useModalOpen } from '@/features/profile/model/useModalOpen'
+import { FollowProvider } from '@/features/profile/ui/profile-follow/FollowModalContext'
+import { ProfileFollowModal } from '@/features/profile/ui/profile-follow/ProfileFollowModal'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
@@ -40,17 +42,16 @@ export const UserMetadata = ({ isLoading }: Props) => {
           locale={locale}
           onClick={() => handleOpenModal('followers')}
         />
-        {/* TODO: refactor this */}
-        {/* {data && ( */}
-        {/*   <FollowProvider currentUserProfile={data}> */}
-        {/*     <ProfileFollowModal */}
-        {/*       currentUserProfile={data} */}
-        {/*       isOpen={isModalOpen} */}
-        {/*       onClose={handleCloseModal} */}
-        {/*       type={modalType} */}
-        {/*     /> */}
-        {/*   </FollowProvider> */}
-        {/* )} */}
+
+        <FollowProvider currentUserProfile={profile}>
+          <ProfileFollowModal
+            currentUserProfile={profile}
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            type={modalType}
+          />
+        </FollowProvider>
+
         <div className={'flex flex-col text-xs sm:text-sm'}>
           {isLoading ? (
             <Skeleton height={50} width={90} />
