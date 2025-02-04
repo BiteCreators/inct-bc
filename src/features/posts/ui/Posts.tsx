@@ -37,7 +37,6 @@ export const Posts = () => {
 
   return (
     <div className={'flex gap-5 justify-center flex-wrap relative'}>
-      {(isFetching || isLoading) && skeletonItems}
       {!isLoading && data?.items && data?.items.length < 1 ? (
         <Typography> user has no publications yet </Typography>
       ) : (
@@ -54,6 +53,7 @@ export const Posts = () => {
           <div ref={paginationRef}></div>
         </>
       )}
+      {(isFetching || isLoading) && skeletonItems}
     </div>
   )
 }
