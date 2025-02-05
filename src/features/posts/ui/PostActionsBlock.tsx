@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Post, postsApi } from '@/entities/posts'
 import { Reaction } from '@/entities/posts/types/likes.types'
+import { LikesAvatars } from '@/features/posts/ui/LikesAvatars'
 import { Typography } from '@byte-creators/ui-kit'
 import {
   BookmarkOutline,
@@ -57,12 +58,19 @@ export const PostActionsBlock = ({ post }: Props) => {
         </div>
         <div className={'mb-3'}>
           {/*--------LIKES-----------*/}
-          <div className={'flex'}>
-            <Typography variant={'regular-text'}>{post.likesCount}</Typography>
-            <Typography className={'font-bold ml-1'} variant={'regular-text'}>
-              &#34;Like&#34;
-            </Typography>
+          <div className={'flex mb-2'}>
+            {postLikes?.items && postLikes.items.length > 0 && (
+              <LikesAvatars items={postLikes.items} />
+            )}
+
+            <div className={cn(['flex pt-1', postLikes?.items?.length === 1 && '-ml-3'])}>
+              <Typography variant={'regular-text'}>{post.likesCount}</Typography>
+              <Typography className={'font-bold ml-1'} variant={'regular-text'}>
+                &#34;Like&#34;
+              </Typography>
+            </div>
           </div>
+
           {/*------------------------*/}
           <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
             {formattedDate}
