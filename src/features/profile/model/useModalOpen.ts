@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useRouter } from 'next/router'
@@ -8,6 +8,12 @@ export const useModalOpen = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalType, setModalType] = useState<'followers' | 'following'>('followers')
   const isAuthorized = useSelector((state: any) => !!state.auth.accessToken)
+  const { id } = router.query
+
+  useEffect(() => {
+    setIsModalOpen(false)
+  }, [id])
+  console.log(id)
   const handleOpenModal = (type: 'followers' | 'following') => {
     if (!isAuthorized) {
       router.replace(`/auth/sign-in`)
