@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
+import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
+import { profileApi } from '@/entities/profile'
 import { useConfirmation } from '@byte-creators/utils'
 
 export const useProfileFollow = (currentUserProfile: UserProfile) => {
@@ -13,7 +15,7 @@ export const useProfileFollow = (currentUserProfile: UserProfile) => {
   const { data: followersList, isLoading: isFollowersLoading } = followersApi.useGetFollowersQuery({
     userName: currentUserProfile.userName,
   })
-
+  const dispatch = useAppDispatch()
   const { data: me } = authApi.useMeQuery()
 
   const [follow, { isLoading: followLoading }] = followersApi.useFollowMutation()
@@ -32,6 +34,7 @@ export const useProfileFollow = (currentUserProfile: UserProfile) => {
   const handleFollow = async (userId: number) => {
     try {
       await follow({ selectedUserId: userId }).unwrap()
+      dispatch(profileApi.util.invalidateTags([{ id: userId, type: 'PublicProfile' }]))
     } catch (error) {
       // handleApiError({ error, setApiError })
     }

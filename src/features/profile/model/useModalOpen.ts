@@ -13,7 +13,6 @@ export const useModalOpen = () => {
   useEffect(() => {
     setIsModalOpen(false)
   }, [id])
-  console.log(id)
   const handleOpenModal = (type: 'followers' | 'following') => {
     if (!isAuthorized) {
       router.replace(`/auth/sign-in`)
