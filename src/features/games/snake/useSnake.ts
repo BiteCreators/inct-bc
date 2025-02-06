@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type SnakeType = FieldSegmentType[]
 type FieldType = number[][]
@@ -16,6 +16,10 @@ export const useSnake = () => {
   // Инициализация еды
   const [foodPosition, setFoodPosition] = useState<FieldSegmentType>(startFoodPosition)
 
+  // Инициализация направления
+  const [direction, setDirection] = useState<string>('left')
+  const [gameRunning, setGameRunning] = useState<boolean>(true)
+
   const fieldWidth = 40
   const fieldHeight = 20
   // Инициализация поля
@@ -32,10 +36,10 @@ export const useSnake = () => {
   // Размещение еды на поле
   field[foodPosition.y][foodPosition.x] = 2 // 2 означает, что это еда
   const restartGame = () => {
-    console.log('Рестарт игры!')
     setSnakePosition(startSnakePosition)
     setFoodPosition(startFoodPosition)
     setField(startField)
+    setGameRunning(true)
   }
 
   const updateField = () => {
@@ -56,7 +60,28 @@ export const useSnake = () => {
     // Обновляем состояние поля
     setField(newField)
   }
-  const moveSnake = (newHeadPosition: { x: number; y: number }) => {
+  const moveSnake = () => {
+    const head = snakePosition[0]
+    let newHeadPosition: FieldSegmentType
+
+    // Определяем новую позицию головы в зависимости от направления
+    switch (direction) {
+      case 'up':
+        newHeadPosition = { x: head.x, y: head.y - 1 }
+        break
+      case 'down':
+        newHeadPosition = { x: head.x, y: head.y + 1 }
+        break
+      case 'left':
+        newHeadPosition = { x: head.x - 1, y: head.y }
+        break
+      case 'right':
+        newHeadPosition = { x: head.x + 1, y: head.y }
+        break
+      default:
+        return
+    }
+
     // Проверяем, что новая позиция головы в пределах поля
     if (
       newHeadPosition.x < 0 ||
@@ -69,27 +94,17 @@ export const useSnake = () => {
 
       return
     }
-    // Создаем копию массива змейки и поля
-    const nextSnakePosition = [newHeadPosition, ...snakePosition.slice(0, snakePosition.length - 1)] // Двигаем змейку
+    const nextSnakePosition = [newHeadPosition, ...snakePosition.slice(0, snakePosition.length - 1)]
 
-    // Копируем поле, чтобы не изменять напрямую старое состояние
-    const newField = field.map(row => [...row])
+    if (newHeadPosition.x === foodPosition.x && newHeadPosition.y === foodPosition.y) {
+      const newSnakePositionWithFood = [newHeadPosition, ...snakePosition]
 
-    // Очищаем старые позиции змейки на поле (ставим 0)
-    snakePosition.forEach(segment => {
-      newField[segment.y][segment.x] = 0
-    })
+      setSnakePosition(newSnakePositionWithFood)
+      eatFood()
+    } else {
+      setSnakePosition(nextSnakePosition)
+    }
 
-    // Размещение новой головы на поле
-    newField[newHeadPosition.y][newHeadPosition.x] = 1
-    setInterval(() => {
-      newField[snakePosition[0].y][snakePosition[0].x - 1] = 1
-    }, 1000)
-
-    // Обновляем состояние змейки и поля
-    setSnakePosition(nextSnakePosition)
-    setField(newField)
-    eatFood()
     updateField()
   }
   const eatFood = () => {
@@ -123,6 +138,65 @@ export const useSnake = () => {
   if (snakePosition[0]['x'] === foodPosition['x'] && snakePosition[0]['y'] === foodPosition['y']) {
     eatFood()
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (gameRunning) {
+        moveSnake()
+      }
+    }, 500)
+
+    return () => clearInterval(interval)
+  }, [snakePosition, direction, gameRunning])
+
+  // Обработчик нажатий клавиш
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented) {
+        return
+      }
+
+      switch (event.key) {
+        case 'ArrowUp':
+          if (gameRunning) {
+            setDirection('up')
+          }
+          break
+        case 'ArrowDown':
+          if (gameRunning) {
+            setDirection('down')
+          }
+          break
+        case 'ArrowLeft':
+          if (gameRunning) {
+            setDirection('left')
+          }
+          break
+        case 'ArrowRight':
+          if (gameRunning) {
+            setDirection('right')
+          }
+          break
+        case ' ':
+          setGameRunning(prev => !prev)
+          break
+        case 'Enter':
+          restartGame()
+          break
+        default:
+          return
+      }
+
+      event.preventDefault()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   const currentHeadPosition: FieldSegmentType = {
     x: snakePosition[0]['x'],
     y: snakePosition[0]['y'],
@@ -137,6 +211,7 @@ export const useSnake = () => {
     currentTailEndPosition,
     field,
     foodPosition,
+    gameRunning,
     moveSnake,
     snakePosition,
     updateField,
