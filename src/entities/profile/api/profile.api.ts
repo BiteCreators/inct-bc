@@ -51,6 +51,7 @@ export const profileApi = inctagramApi.injectEndpoints({
       }),
     }),
     getPublicProfile: builder.query<UserProfile, { id: number }>({
+      providesTags: (result, error, { id }) => [{ id, type: 'PublicProfile' }],
       query: ({ id }) => ({
         url: `v1/public-user/profile/${id}`,
       }),
