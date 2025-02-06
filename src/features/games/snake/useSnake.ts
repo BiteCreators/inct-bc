@@ -4,12 +4,12 @@ type SnakeType = FieldSegmentType[]
 type FieldType = number[][]
 type FieldSegmentType = { x: number; y: number }
 
-export const useSnake = () => {
+export const useSnake = (fieldWidth: number, fieldHeight: number) => {
   // Инициализация змейки
   const startSnakePosition = [
-    { x: 20, y: 2 },
-    { x: 21, y: 2 },
-    { x: 22, y: 2 },
+    { x: 5, y: 2 },
+    { x: 4, y: 2 },
+    { x: 3, y: 2 },
   ]
   const startFoodPosition = { x: 5, y: 5 }
   const [snakePosition, setSnakePosition] = useState<SnakeType>(startSnakePosition)
@@ -17,11 +17,9 @@ export const useSnake = () => {
   const [foodPosition, setFoodPosition] = useState<FieldSegmentType>(startFoodPosition)
 
   // Инициализация направления
-  const [direction, setDirection] = useState<string>('left')
+  const [direction, setDirection] = useState<string>('right')
   const [gameRunning, setGameRunning] = useState<boolean>(true)
 
-  const fieldWidth = 40
-  const fieldHeight = 20
   // Инициализация поля
   const startField: FieldType = Array(fieldHeight)
     .fill(null)
@@ -36,6 +34,7 @@ export const useSnake = () => {
   // Размещение еды на поле
   field[foodPosition.y][foodPosition.x] = 2 // 2 означает, что это еда
   const restartGame = () => {
+    setDirection('right')
     setSnakePosition(startSnakePosition)
     setFoodPosition(startFoodPosition)
     setField(startField)
@@ -144,7 +143,7 @@ export const useSnake = () => {
       if (gameRunning) {
         moveSnake()
       }
-    }, 500)
+    }, 300)
 
     return () => clearInterval(interval)
   }, [snakePosition, direction, gameRunning])
@@ -209,6 +208,7 @@ export const useSnake = () => {
   return {
     currentHeadPosition,
     currentTailEndPosition,
+    direction,
     field,
     foodPosition,
     gameRunning,

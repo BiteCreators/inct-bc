@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { profileApi } from '@/entities/profile'
+import { SnakeGame } from '@/features/games/snake/SnakeGame'
 import { LoaderBlock, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 
@@ -26,6 +27,17 @@ export const PublicationModal = ({
 }: Props) => {
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
+  // const isLoading = true
+
+  if (isLoading) {
+    return (
+      <SnakeGame
+        cellsClassName={'h-10 w-10'}
+        fieldWidth={23}
+        title={'Help the dragon catch the egg while the post is loading!'}
+      />
+    )
+  }
 
   return (
     <div className={'flex'}>
@@ -57,7 +69,7 @@ export const PublicationModal = ({
         </div>
         <span>LOCATION</span>
       </div>
-      {isLoading && <LoaderBlock portal />}
+      {/*{isLoading && <LoaderBlock portal />}*/}
     </div>
   )
 }

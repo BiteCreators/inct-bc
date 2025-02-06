@@ -10,6 +10,8 @@ import {
   MessageCircleOutline,
   Person,
   PersonOutline,
+  PlayCircle,
+  PlayCircleOutline,
   PlusSquare,
   PlusSquareOutline,
   Search,
@@ -68,6 +70,12 @@ export const SideNavbar = () => {
           icon={<BookmarkOutline />}
           iconActive={<Bookmark />}
           label={t.favorites}
+        />
+        <SideNavbarItem
+          href={'/games'}
+          icon={<PlayCircleOutline />}
+          iconActive={<PlayCircle />}
+          label={'Games'}
         />
       </div>
     </nav>

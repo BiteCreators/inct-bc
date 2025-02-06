@@ -1,10 +1,28 @@
 import { useSnake } from '@/features/games/snake/useSnake'
 import { Typography } from '@byte-creators/ui-kit'
+import { DragonEgg, DragonHead } from '@byte-creators/ui-kit/icons'
 
-type Props = {}
-export const SnakeGame = ({}: Props) => {
-  const { currentHeadPosition, currentTailEndPosition, field, gameRunning, snakePosition } =
-    useSnake()
+type Props = {
+  cellsClassName?: string
+  fieldHeight?: number
+  fieldWidth?: number
+  title?: string
+}
+export const SnakeGame = ({
+  cellsClassName = 'h-16 w-16',
+  fieldHeight = 10,
+  fieldWidth = 20,
+  title,
+}: Props) => {
+  const {
+    currentHeadPosition,
+    currentTailEndPosition,
+    direction,
+    field,
+    gameRunning,
+    snakePosition,
+  } = useSnake(fieldWidth, fieldHeight)
+
   const generateFieldCells = (field: number[][], snakePosition: { x: number; y: number }[]) => {
     return field.map((segment, rowIndex) =>
       segment.map((el, colIndex) => {
@@ -12,27 +30,50 @@ export const SnakeGame = ({}: Props) => {
         const isSnake = snakePosition.some(
           segment => segment.x === colIndex && segment.y === rowIndex
         )
-        let className = 'h-9 w-9'
+        let className = cellsClassName
 
         if (isSnake) {
-          // Стиль для части змейки
-          className += ' bg-emerald-700 rounded-full'
+          className += ' bg-white rounded-[30%]'
 
           // Проверяем, является ли текущая клетка головой змейки
           if (currentHeadPosition.x === colIndex && currentHeadPosition.y === rowIndex) {
-            className += ' bg-emerald-950' // Голова змейки
+            let rotationStyle = ''
+
+            if (direction === 'left') {
+              rotationStyle = 'scaleX(-1)'
+            } else if (direction === 'up') {
+              rotationStyle = 'rotate(270deg) scaleY(-1)'
+            } else if (direction === 'down') {
+              rotationStyle = 'rotate(90deg)'
+            }
+
+            return (
+              <DragonHead
+                className={className + ' !bg-transparent'}
+                key={`${rowIndex}-${colIndex}`}
+                style={{ transform: rotationStyle }}
+              />
+            )
           }
 
           // Проверяем, является ли текущая клетка хвостом змейки
           if (currentTailEndPosition.x === colIndex && currentTailEndPosition.y === rowIndex) {
-            className += ' bg-emerald-700' // Хвост змейки
+            //className += ' !rounded-full' // Хвост змейки
+
+            return <span className={className} key={`${rowIndex}-${colIndex}`} />
           }
         } else if (el === 2) {
           // Стиль для еды
-          className += ' bg-red-800 rounded-full'
+          return (
+            <DragonEgg
+              className={className}
+              fill={'text-danger-500'}
+              key={`${rowIndex}-${colIndex}`}
+            />
+          )
         } else {
           // Стиль для пустого пространства
-          className += ' bg-transparent border border-gray-500'
+          className += ' bg-transparent border border-dark-500'
         }
 
         return <span className={className} key={`${rowIndex}-${colIndex}`} />
@@ -40,15 +81,14 @@ export const SnakeGame = ({}: Props) => {
     )
   }
 
-  // Стиль и визуализация поля
   return (
     <div className={'m-6 w-fit'}>
-      <Typography className={'my-2'} variant={'h1'}>
-        Snake game
+      <Typography className={'my-2 flex justify-center'} variant={'h1'}>
+        {title ? title : '"There is no snake. Now there is a dragon!" game'}
       </Typography>
       <div>{gameRunning ? 'Game is running' : 'Game is paused'}</div>
       <div
-        className={'grid bg-dark-100'}
+        className={'grid bg-dark-300'}
         style={{
           gridTemplateColumns: `repeat(${field[0].length}, 1fr)`,
           gridTemplateRows: `repeat(${field.length}, 1fr)`,
