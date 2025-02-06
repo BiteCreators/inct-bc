@@ -40,6 +40,7 @@ export const PostActionsBlock = ({ post }: Props) => {
             <BookmarkOutline viewBox={'0 3 24 24'} />
           </button>
         </div>
+
         <div className={'mb-3'}>
           <div className={'flex mb-2'}>
             {postLikes?.items && postLikes.items.length > 0 && (
