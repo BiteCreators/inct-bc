@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { Post, postsApi } from '@/entities/posts'
-import { Reaction } from '@/entities/posts/types/likes.types'
+import { Post } from '@/entities/posts'
+import { useLikePost } from '@/features/posts/model/useLikePost'
 import { LikesAvatars } from '@/features/posts/ui/LikesAvatars'
-import { Typography } from '@byte-creators/ui-kit'
+import { Alert, Typography } from '@byte-creators/ui-kit'
 import {
   BookmarkOutline,
   Heart,
@@ -22,23 +22,7 @@ export const PostActionsBlock = ({ post }: Props) => {
     month: 'long',
     year: 'numeric',
   }).format(new Date(post.createdAt))
-
-  const [updateLikeStatusPost] = postsApi.useUpdateLikeStatusPostMutation()
-  const { data: postLikes, refetch } = postsApi.useGetPostLikesQuery({ postId: post.id })
-
-  const handleLike = async () => {
-    const newLikeStatus = postLikes?.isLiked ? 'NONE' : 'LIKE'
-
-    try {
-      await updateLikeStatusPost({
-        likeStatus: newLikeStatus as Reaction,
-        postId: post.id,
-      }).unwrap()
-      refetch()
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  const { apiError, handleLike, postLikes } = useLikePost(post)
 
   return (
     <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
@@ -57,7 +41,6 @@ export const PostActionsBlock = ({ post }: Props) => {
           </button>
         </div>
         <div className={'mb-3'}>
-          {/*--------LIKES-----------*/}
           <div className={'flex mb-2'}>
             {postLikes?.items && postLikes.items.length > 0 && (
               <LikesAvatars items={postLikes.items} />
@@ -70,8 +53,15 @@ export const PostActionsBlock = ({ post }: Props) => {
               </Typography>
             </div>
           </div>
-
-          {/*------------------------*/}
+          {apiError && (
+            <Alert
+              canClose={false}
+              message={apiError}
+              portal={false}
+              purpose={'alert'}
+              type={'error'}
+            />
+          )}
           <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
             {formattedDate}
           </Typography>

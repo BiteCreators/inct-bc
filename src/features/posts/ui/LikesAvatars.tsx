@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const LikesAvatars = ({ items }: Props) => {
-  const avatarsToShow = items.slice(0, 3)
+  const avatarsToShow = items.slice(-3)
 
   return (
     <div className={'flex mr-5'}>
