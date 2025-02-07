@@ -1,5 +1,7 @@
 import Skeleton from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
 
+import { store } from '@/application/store'
 import { profileApi } from '@/entities/profile'
 import { ProfileFollowButton } from '@/features/profile'
 import { useModalOpen } from '@/features/profile/model/useModalOpen'

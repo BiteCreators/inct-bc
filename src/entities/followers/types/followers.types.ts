@@ -56,6 +56,7 @@ export type UserProfile = {
   aboutMe: string
   avatars: Avatar[]
   id: number
+  onClick: () => void
   userMetadata: UserMetadata
   userName: string
 }
