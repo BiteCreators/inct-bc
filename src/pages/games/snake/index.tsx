@@ -1,4 +1,4 @@
-import { SnakeGame } from '@/features/games/snake/SnakeGame'
+import { SnakeGame } from '@/features/games/ui/SnakeGame'
 
 export default function Snake() {
   return <SnakeGame />

@@ -1,4 +1,4 @@
-import { useSnake } from '@/features/games/snake/useSnake'
+import { useSnake } from '@/features/games/model/useSnake'
 import { Typography } from '@byte-creators/ui-kit'
 import { DragonEgg, DragonHead } from '@byte-creators/ui-kit/icons'
 

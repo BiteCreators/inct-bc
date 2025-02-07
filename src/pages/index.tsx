@@ -68,10 +68,10 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
               isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
+              postContainerHeight={post.images[0].height}
               postId={post.id}
-              postImageHight={post.images[0].height}
               postImageUrl={post.images[0].url}
-              postImageWidth={post.images[0].width}
+              postSize={post.images[0].width}
               userName={post.userName}
             />
           ))}

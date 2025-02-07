@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 
 import { profileApi } from '@/entities/profile'
-import { SnakeGame } from '@/features/games/snake/SnakeGame'
+import { SnakeGame } from '@/features/games/ui/SnakeGame'
 import { LoaderBlock, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 

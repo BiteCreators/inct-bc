@@ -71,12 +71,12 @@ export const SideNavbar = () => {
           iconActive={<Bookmark />}
           label={t.favorites}
         />
-        <SideNavbarItem
-          href={'/games'}
-          icon={<PlayCircleOutline />}
-          iconActive={<PlayCircle />}
-          label={'Games'}
-        />
+        {/*<SideNavbarItem*/}
+        {/*  href={'/games'}*/}
+        {/*  icon={<PlayCircleOutline />}*/}
+        {/*  iconActive={<PlayCircle />}*/}
+        {/*  label={'Games'}*/}
+        {/*/>*/}
       </div>
     </nav>
   )
