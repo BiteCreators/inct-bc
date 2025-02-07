@@ -6,11 +6,22 @@ import {
 
 export type PostLikesResponse = {
   isLiked: boolean
-  nextCursor?: number
+  items: Like[]
+  nextCursor: null | number
+  page: number
+  pageSize: number
+  pagesCount: number
   prevCursor: number
-} & WithPaginationResponse<Like>
+  totalCount: number
+}
 
-type Like = {
+// export type PostLikesResponse = {
+//   isLiked: boolean
+//   nextCursor?: number
+//   prevCursor: number
+// } & WithPaginationResponse<Like>
+
+export type Like = {
   avatars: Avatar[]
   createdAt: string
   id: number
@@ -19,10 +30,12 @@ type Like = {
   userId: number
   userName: string
 }
+
 export enum Reaction {
   DISLIKE = 'DISLIKE',
   LIKE = 'LIKE',
   NONE = 'NONE',
 }
+
 export type CommentLikesResponse = Omit<PostLikesResponse, 'isLiked'>
 export type CommentLikesRequest = { commentId: number; postId: number } & WithSearchPaginationParams

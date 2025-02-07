@@ -6,15 +6,17 @@ export type PublicPostsResponse = {
   totalCount: number
   totalUsers: number
 }
-export type PublicPostsRequest = {
+export type UserPublicPostsRequest = {
   endCursorPostId?: number
   pageSize?: number
   sortBy?: string
   sortDirection?: 'asc' | 'desc'
   userId: number
 }
+export type AllPublicPostsRequest = Omit<UserPublicPostsRequest, 'userId'>
 export type Post = {
   avatarOwner: string
+  avatarWhoLikes: false
   createdAt: string
   description: string
   id: number
