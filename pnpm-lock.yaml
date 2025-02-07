@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5(3uhz7xy7wkngoaum2dsjgy3tq4)
       '@byte-creators/ui-kit':
-        specifier: ^1.7.2
-        version: 1.7.2(yp3nvixdfrd7rekicqdqiew3aa)
+        specifier: ^1.8.1
+        version: 1.8.1(yp3nvixdfrd7rekicqdqiew3aa)
       '@byte-creators/utils':
         specifier: ^1.9.0
         version: 1.9.0(6wsw2azhxt3mcntto4wsargf5m)
@@ -431,8 +431,8 @@ packages:
       tailwindcss: ^3.4.1
       typescript: ^5
 
-  '@byte-creators/ui-kit@1.7.2':
-    resolution: {integrity: sha512-KKnEXRORPcDu3+XMbhHiVYewwfjzFbJwNS1t2M6QEMSEjUcT3ExbTGMB12z4saq/m4A6klAFPH/6BmUYFKnvng==}
+  '@byte-creators/ui-kit@1.8.1':
+    resolution: {integrity: sha512-DQ91X3ZoQI1/iv+SUAY1IRikjlI74eEKlCDGMbmX7jXDlcT/grIdmF2SZLbKNxcU3tiIrzAIGwvHOzyBeNz8WQ==}
     peerDependencies:
       '@rollup/plugin-commonjs': ^26.0.1
       '@rollup/plugin-node-resolve': ^15.2.3
@@ -6002,7 +6002,7 @@ snapshots:
       tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.7.2))
       typescript: 5.7.2
 
-  '@byte-creators/ui-kit@1.7.2(yp3nvixdfrd7rekicqdqiew3aa)':
+  '@byte-creators/ui-kit@1.8.1(yp3nvixdfrd7rekicqdqiew3aa)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(3uhz7xy7wkngoaum2dsjgy3tq4)
