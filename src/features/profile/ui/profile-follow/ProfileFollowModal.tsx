@@ -1,12 +1,11 @@
 import React from 'react'
 
-import { WithFollowersCountUserProfile } from '@/entities/followers'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { FollowModalItems } from '@/features/profile/ui/profile-follow/FollowModalItems'
 import { ActionConfirmation, Modal } from '@byte-creators/ui-kit'
 
 type Props = {
-  currentUserProfile: WithFollowersCountUserProfile
+  currentUserProfile: { followers: number; following: number; id: number }
   isOpen: boolean
   onClose: () => void
   type: 'followers' | 'following'
@@ -40,8 +39,8 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
           onOpenChange={onClose}
           title={
             type === 'followers'
-              ? `${currentUserProfile.followersCount} Followers`
-              : `${currentUserProfile.followingCount} Following`
+              ? `${currentUserProfile.followers} Followers`
+              : `${currentUserProfile.following} Following`
           }
         >
           {followingList && followersList && (
