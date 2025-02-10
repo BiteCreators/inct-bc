@@ -5,7 +5,7 @@ import { authApi } from '@/entities/auth'
 import { profileApi } from '@/entities/profile'
 import { AboutUser } from '@/features/profile'
 import { useProfileFollow } from '@/features/profile/model/useProfileFollow'
-import { Button, Typography } from '@byte-creators/ui-kit'
+import { Alert, Button, Typography } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import Link from 'next/link'
@@ -29,6 +29,7 @@ export const UserInfo = ({ isLoading, userMetadata }: Props) => {
   const isCurrentUserProfile = currentUser?.userId === profile?.id
 
   const {
+    error,
     followLoading,
     handleDeleteFollower,
     handleFollow,
@@ -73,6 +74,7 @@ export const UserInfo = ({ isLoading, userMetadata }: Props) => {
         ) : (
           <AboutUser className={'hidden sm:flex text-left'} text={profile.aboutMe || ''} />
         )}
+        {error && <Alert message={error} type={'error'} />}
       </div>
     )
   }

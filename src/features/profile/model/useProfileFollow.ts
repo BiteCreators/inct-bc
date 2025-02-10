@@ -6,6 +6,8 @@ import { Follower } from '@/entities/followers/types/followers.types'
 import { useConfirmation } from '@byte-creators/utils'
 
 export const useProfileFollow = (currentUserProfile: { userName: string }) => {
+  const [error, setError] = useState<null | string>(null)
+
   const { data: followingList, isLoading: isFollowingLoading } =
     followersApi.useGetUsersFollowingQuery({
       userName: currentUserProfile.userName,
@@ -24,10 +26,6 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
     useConfirmation()
 
   const [currentFollowerName, setCurrentFollowerName] = useState('')
-  const [apiError, setApiError] = useState('')
-  //todo: use handleAPiError
-
-  // const { handleApiError } = useHandleApiError('Follows')
 
   const isFollow = followersList?.items.map(item => item.userId).includes(me?.userId || 0)
 
@@ -35,7 +33,7 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
     try {
       await follow({ selectedUserId: userId }).unwrap()
     } catch (error) {
-      // handleApiError({ error, setApiError })
+      setError('follow request error')
     }
   }
 
@@ -51,7 +49,7 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
     try {
       await remove({ userId }).unwrap()
     } catch (error) {
-      // handleApiError({ error, setApiError })
+      setError('unfollow request error')
     }
   }
 
@@ -61,9 +59,9 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
   }
 
   return {
-    apiError,
     confirmOpen,
     currentFollowerName,
+    error,
     followLoading,
     followersList,
     followingList,
