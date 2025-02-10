@@ -12,7 +12,7 @@ type Props = {
   type: 'followers' | 'following'
 }
 export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
-  const { apiError, followersList, followingList, isFollowersLoading, isFollowingLoading } =
+  const { error, followersList, followingList, isFollowersLoading, isFollowingLoading } =
     useFollowContext()
 
   const followList = type === 'followers' ? followersList : followingList
@@ -42,7 +42,7 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
             placeholder={'Search'}
             value={searchValue}
           />
-          {apiError && <Alert message={apiError} type={'error'} />}
+          {error && <Alert message={error} type={'error'} />}
           <ScrollArea className={'h-[550px]'}>
             <div className={'mr-2 mt-2'}>
               {filteredUsers.map((user: Follower) => (
