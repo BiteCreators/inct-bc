@@ -1,5 +1,6 @@
 import { profileApi } from '@/entities/profile'
 import { AboutUser } from '@/features/profile'
+import { FollowProvider } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { Alert, LoaderBlock, Typography } from '@byte-creators/ui-kit'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
@@ -32,7 +33,9 @@ export const ProfileHeader = () => {
       <>
         <div className={'flex items-center sm:items-start gap-5 sm:gap-7 md:!gap-9 mb-2 sm:mb-12'}>
           <UserAvatar isLoading={isLoading} src={profile.avatars[0]?.url} />
-          <UserInfo isLoading={isLoading} userMetadata={<UserMetadata isLoading={isLoading} />} />
+          <FollowProvider currentUserProfile={{ userName: profile.userName }}>
+            <UserInfo isLoading={isLoading} userMetadata={<UserMetadata isLoading={isLoading} />} />
+          </FollowProvider>
         </div>
         <div>
           <Typography className={'sm:hidden font-weight700 mb-3'} variant={'regular-text'}>
