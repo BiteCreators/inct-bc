@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Follower, WithFollowersCountUserProfile } from '@/entities/followers/types/followers.types'
+import { Follower } from '@/entities/followers/types/followers.types'
 import { FollowModalButtons } from '@/features/profile/ui/profile-follow/FollowModalButtons'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creators/ui-kit'
@@ -8,11 +8,11 @@ import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creator
 import example from '../../../../../public/examples/exampleAvatar.png'
 
 type Props = {
-  currentUserProfile: WithFollowersCountUserProfile
+  currentUserProfile: { followers: number; following: number; id: number }
   type: 'followers' | 'following'
 }
 export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
-  const { apiError, followersList, followingList, isFollowersLoading, isFollowingLoading } =
+  const { error, followersList, followingList, isFollowersLoading, isFollowingLoading } =
     useFollowContext()
 
   const followList = type === 'followers' ? followersList : followingList
@@ -42,7 +42,7 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
             placeholder={'Search'}
             value={searchValue}
           />
-          {apiError && <Alert message={apiError} type={'error'} />}
+          {error && <Alert message={error} type={'error'} />}
           <ScrollArea className={'h-[550px]'}>
             <div className={'mr-2 mt-2'}>
               {filteredUsers.map((user: Follower) => (

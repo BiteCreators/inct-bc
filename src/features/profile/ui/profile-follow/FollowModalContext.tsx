@@ -1,23 +1,20 @@
 import React, { ReactNode, createContext, useContext } from 'react'
 
 import { MeResponse } from '@/entities/auth/api/auth.api'
-import {
-  Follower,
-  FollowersResponse,
-  WithFollowersCountUserProfile,
-} from '@/entities/followers/types/followers.types'
+import { Follower, FollowersResponse } from '@/entities/followers/types/followers.types'
 import { useProfileFollow } from '@/features/profile/model/useProfileFollow'
 
 type FollowContextValue = {
-  apiError: string
   confirmOpen: boolean
   currentFollowerName: string
+  error: null | string
   followLoading: boolean
 
   followersList: FollowersResponse | undefined
   followingList: FollowersResponse | undefined
   handleConfirm: () => void
   handleConfirmDeleting: (user: Follower) => void
+  handleDeleteFollower: (userId: number) => Promise<void>
   handleFollow: (userId: number) => Promise<void>
   handleReject: () => void
 
@@ -33,7 +30,7 @@ const FollowContext = createContext<FollowContextValue | null>(null)
 
 type FollowProvider = {
   children: ReactNode
-  currentUserProfile: WithFollowersCountUserProfile
+  currentUserProfile: { userName: string }
 }
 
 export const useFollowContext = () => {

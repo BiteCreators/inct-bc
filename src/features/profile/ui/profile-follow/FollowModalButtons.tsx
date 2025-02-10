@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Follower, WithFollowersCountUserProfile } from '@/entities/followers/types/followers.types'
+import { Follower } from '@/entities/followers/types/followers.types'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { Button } from '@byte-creators/ui-kit'
 
 type Props = {
-  currentUserProfile: WithFollowersCountUserProfile
+  currentUserProfile: { followers: number; following: number; id: number }
   type: 'followers' | 'following'
   user: Follower
 }
