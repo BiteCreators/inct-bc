@@ -5,9 +5,9 @@ import { Follower, FollowersResponse } from '@/entities/followers/types/follower
 import { useProfileFollow } from '@/features/profile/model/useProfileFollow'
 
 type FollowContextValue = {
-  apiError: string
   confirmOpen: boolean
   currentFollowerName: string
+  error: null | string
   followLoading: boolean
 
   followersList: FollowersResponse | undefined
