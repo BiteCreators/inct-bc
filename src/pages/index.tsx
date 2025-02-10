@@ -2,7 +2,8 @@ import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { wrapper } from '@/application/store'
 import { postsApi } from '@/entities/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
-import { LinearLoader, PostCard } from '@byte-creators/ui-kit'
+import { LinearLoader } from '@byte-creators/ui-kit'
+import { PostCard } from '@byte-creators/ui-kit/components'
 import { cn } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
@@ -75,10 +76,10 @@ const Main = () => {
               isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
-              postContainerHeight={post.images[0].height}
+              postContainerHeight={post.images[0]?.height}
               postId={post.id}
-              postImageUrl={post.images[0].url}
-              postSize={post.images[0].width}
+              postImageUrl={post.images[0]?.url}
+              postSize={post.images[0]?.width}
               userName={post.userName}
             />
           ))}
