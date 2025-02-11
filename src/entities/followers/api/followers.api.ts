@@ -35,13 +35,43 @@ export const followersApi = inctagramApi.injectEndpoints({
         url: `v1/users/${userName}/following`,
       }),
     }),
+    // getUsersInfo: builder.query<UsersInfoResponse, WithSearchPaginationParams>({
+    //   providesTags: ['Followers'],
+    //   query: params => ({
+    //     params,
+    //     url: 'v1/users',
+    //   }),
+    // }),
     getUsersInfo: builder.query<UsersInfoResponse, WithSearchPaginationParams>({
+      // Сравниваем параметры запроса на основе search и cursor
+      forceRefetch: ({ currentArg, previousArg }) => {
+        const isSearchChanged = currentArg?.search !== previousArg?.search
+        const isCursorChanged = currentArg?.cursor !== previousArg?.cursor
+
+        return isSearchChanged || isCursorChanged
+      },
+      merge: (currentData, newData) => {
+        if (!newData.items || newData.items.length === 0) {
+          return
+        }
+
+        currentData.items = [...currentData.items, ...newData.items]
+        currentData.nextCursor = newData.nextCursor
+      },
       providesTags: ['Followers'],
       query: params => ({
         params,
         url: 'v1/users',
       }),
+      //query: params => `v1/users?search=${params.search}`,
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return {
+          endpointName,
+          queryArgs: `${queryArgs.search}-${queryArgs.cursor}`,
+        }
+      },
     }),
+
     removeFollower: builder.mutation<void, { userId: number }>({
       invalidatesTags: ['Followers'],
       query: ({ userId }) => ({

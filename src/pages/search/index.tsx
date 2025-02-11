@@ -4,18 +4,18 @@ import { UsersSearch } from '@/features/users-search/ui/UsersSearch'
 import { useRouter } from 'next/router'
 
 export default function Search() {
-  const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
-  const router = useRouter()
-
-  const handleRedirect = async () => {
-    await router.push('/auth/sign-in')
-  }
-
-  if (!isAuth) {
-    handleRedirect()
-
-    return
-  }
+  // const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
+  // const router = useRouter()
+  //
+  // const handleRedirect = async () => {
+  //   await router.push('/auth/sign-in')
+  // }
+  //
+  // if (!isAuth) {
+  //   handleRedirect()
+  //
+  //   return
+  // }
 
   return <UsersSearch />
 }
