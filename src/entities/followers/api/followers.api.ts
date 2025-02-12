@@ -43,7 +43,6 @@ export const followersApi = inctagramApi.injectEndpoints({
     //   }),
     // }),
     getUsersInfo: builder.query<UsersInfoResponse, WithSearchPaginationParams>({
-      // Сравниваем параметры запроса на основе search и cursor
       forceRefetch: ({ currentArg, previousArg }) => {
         const isSearchChanged = currentArg?.search !== previousArg?.search
         const isCursorChanged = currentArg?.cursor !== previousArg?.cursor
@@ -63,12 +62,8 @@ export const followersApi = inctagramApi.injectEndpoints({
         params,
         url: 'v1/users',
       }),
-      //query: params => `v1/users?search=${params.search}`,
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        return {
-          endpointName,
-          queryArgs: `${queryArgs.search}-${queryArgs.cursor}`,
-        }
+        return `${queryArgs.search}-${queryArgs.cursor}`
       },
     }),
 
