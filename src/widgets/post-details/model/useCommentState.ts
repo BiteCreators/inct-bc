@@ -1,7 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { useValidationLimit } from '@byte-creators/utils'
+
 export const useCommentState = () => {
-  const [contentComment, setContentComment] = useState<string>('')
+  const {
+    correct,
+    limit,
+    setValue: setContentComment,
+    value: contentComment,
+  } = useValidationLimit({
+    limit: 300,
+    startText: '',
+  })
   const [answerData, setAnswerData] = useState<{
     commentId: number
     postId: number
@@ -34,5 +44,13 @@ export const useCommentState = () => {
     }
   }, [contentComment, answerData])
 
-  return { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef }
+  return {
+    answerData,
+    contentComment,
+    correct,
+    handleAnswerClick,
+    limit,
+    setContentComment,
+    textareaRef,
+  }
 }

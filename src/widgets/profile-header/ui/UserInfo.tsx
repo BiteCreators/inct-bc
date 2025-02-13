@@ -28,6 +28,8 @@ export const UserInfo = ({ isLoading, userMetadata }: Props) => {
 
   const isCurrentUserProfile = currentUser?.userId === profile?.id
 
+  const isNotCurrentUser = currentUser !== undefined && currentUser?.userId !== profile?.id
+
   const {
     error,
     followLoading,
@@ -53,11 +55,12 @@ export const UserInfo = ({ isLoading, userMetadata }: Props) => {
           <Typography className={'whitespace-nowrap overflow-hidden text-ellipsis'} variant={'h1'}>
             {isLoading ? <Skeleton width={160} /> : profile.userName}
           </Typography>
-          {isCurrentUserProfile ? (
+          {isCurrentUserProfile && (
             <Button asChild className={'hidden md:flex text-center'} variant={'secondary'}>
               <Link href={`/profile/${profile.id}/settings`}>{t.profileSettings}</Link>
             </Button>
-          ) : (
+          )}
+          {isNotCurrentUser && (
             <div className={'flex gap-3'}>
               {isLoading || removeLoading || followLoading || isFollowingLoading ? (
                 <Skeleton width={100} />
