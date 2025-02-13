@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { commentsApi } from '@/entities/comments'
 import { postsApi } from '@/entities/posts'
 import { Alert } from '@byte-creators/ui-kit'
@@ -10,6 +12,8 @@ import { PostDesktop } from './desktop/PostDesktop'
 
 export const PostDetails = () => {
   const params = useParams()
+
+  const currentUserId = useAppSelector(selectUserId)
 
   const { data: post } = postsApi.useGetPublicPostByIdQuery(
     params !== null ? { postId: Number(params.postId) } : skipToken
@@ -31,7 +35,18 @@ export const PostDetails = () => {
 
   const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post?.id || 0 })
 
-  const comments = data?.items
+  let comments = data?.items
+
+  if (currentUserId) {
+    const currentUserComments = data?.items.filter(comment => comment.from.id === currentUserId)[0]
+    const commentsWithoutCurrentUser = data?.items.filter(
+      comment => comment.from.id !== currentUserId
+    )
+
+    if (currentUserComments && commentsWithoutCurrentUser) {
+      comments = [currentUserComments, ...commentsWithoutCurrentUser]
+    }
+  }
 
   return (
     <>
