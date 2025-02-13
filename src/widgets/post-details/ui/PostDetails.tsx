@@ -38,13 +38,13 @@ export const PostDetails = () => {
   let comments = data?.items
 
   if (currentUserId) {
-    const currentUserComments = data?.items.filter(comment => comment.from.id === currentUserId)[0]
+    const currentUserComments = data?.items.filter(comment => comment.from.id === currentUserId)
     const commentsWithoutCurrentUser = data?.items.filter(
       comment => comment.from.id !== currentUserId
     )
 
     if (currentUserComments && commentsWithoutCurrentUser) {
-      comments = [currentUserComments, ...commentsWithoutCurrentUser]
+      comments = [...currentUserComments, ...commentsWithoutCurrentUser]
     }
   }
 
