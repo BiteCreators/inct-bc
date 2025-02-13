@@ -7,6 +7,7 @@ export default function Games() {
     <div className={'flex gap-4 flex-col m-6'}>
       <h1>Games</h1>
       <Link href={'/games/snake'}>Snake (Zmeika)</Link>
+      <Link href={'/games/platformer'}>Platformer</Link>
     </div>
   )
 }
