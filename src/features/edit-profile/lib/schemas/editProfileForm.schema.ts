@@ -31,13 +31,11 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
           const now = new Date()
           const age = now.getFullYear() - data.dateOfBirth.getFullYear()
 
-          // Проверка месяца и дня рождения
           const isBeforeBirthdayThisYear =
             now.getMonth() < data.dateOfBirth.getMonth() ||
             (now.getMonth() === data.dateOfBirth.getMonth() &&
               now.getDate() < data.dateOfBirth.getDate())
 
-          // Возраст должен быть 13 или больше
           return age > 13 || (age === 13 && !isBeforeBirthdayThisYear)
         }
 
