@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { useRouter } from 'next/router'
@@ -15,7 +15,7 @@ export const useModalOpen = () => {
   }, [id])
   const handleOpenModal = (type: 'followers' | 'following') => {
     if (!isAuthorized) {
-      router.replace(`/auth/sign-in`)
+      router.push(`/auth/sign-in`)
 
       return
     }
