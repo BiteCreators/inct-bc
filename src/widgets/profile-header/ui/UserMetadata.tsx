@@ -1,8 +1,14 @@
 import Skeleton from 'react-loading-skeleton'
+import { useSelector } from 'react-redux'
+
 import { profileApi } from '@/entities/profile'
 import { ProfileFollowButton } from '@/features/profile'
 import { useModalOpen } from '@/features/profile/model/useModalOpen'
-import { FollowProvider } from '@/features/profile/ui/profile-follow/FollowModalContext'
+import { useProfileFollow } from '@/features/profile/model/useProfileFollow'
+import {
+  FollowProvider,
+  useFollowContext,
+} from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { ProfileFollowModal } from '@/features/profile/ui/profile-follow/ProfileFollowModal'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
@@ -20,6 +26,13 @@ export const UserMetadata = ({ isLoading }: Props) => {
   const { data: profile } = profileApi.useGetPublicProfileQuery(
     params !== null ? { id: Number(params.id) } : skipToken
   )
+
+  if (profile) {
+    const followData = useProfileFollow(profile)
+
+    console.log(followData?.followersList?.items.length)
+    console.log(followData?.followersList?.items.length)
+  }
 
   const { handleCloseModal, handleOpenModal, isModalOpen, modalType } = useModalOpen()
   const t = useScopedTranslation('Profile')
