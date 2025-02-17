@@ -28,7 +28,15 @@ export const createEditProfileSchema = (t: LocaleType['Profile']) => {
     .refine(
       data => {
         if (data.dateOfBirth !== null && data.dateOfBirth !== undefined) {
-          return new Date().getFullYear() - data.dateOfBirth.getFullYear() >= 13
+          const now = new Date()
+          const age = now.getFullYear() - data.dateOfBirth.getFullYear()
+
+          const isBeforeBirthdayThisYear =
+            now.getMonth() < data.dateOfBirth.getMonth() ||
+            (now.getMonth() === data.dateOfBirth.getMonth() &&
+              now.getDate() < data.dateOfBirth.getDate())
+
+          return age > 13 || (age === 13 && !isBeforeBirthdayThisYear)
         }
 
         return false
