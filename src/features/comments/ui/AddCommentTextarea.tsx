@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef, useEffect } from 'react'
+import React, { ComponentProps, forwardRef, useEffect, useRef } from 'react'
 
 import { Alert, Button, ScrollArea } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
@@ -17,13 +17,25 @@ type Props = {
   error?: null | string
   postId: string
   setContentComment: (text: string) => void
+  transparent?: boolean
 } & ComponentProps<'textarea'>
 
 export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
   (
-    { answerData, contentComment, disabled, error, id, onChange, postId, setContentComment }: Props,
+    {
+      answerData,
+      contentComment,
+      disabled,
+      error,
+      id,
+      onChange,
+      postId,
+      setContentComment,
+      transparent,
+    }: Props,
     ref
   ) => {
+    const transparentTextareaRef = useRef<HTMLTextAreaElement | null>(null)
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: true,
       onChange,
@@ -47,6 +59,22 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       }, 50)
     }
 
+    const autoResizeTextArea = () => {
+      if (transparentTextareaRef.current) {
+        const textarea = transparentTextareaRef.current
+
+        textarea.style.height = `auto`
+        textarea.style.height = `${Math.min(
+          textarea.scrollHeight,
+          4 * parseFloat(getComputedStyle(textarea).lineHeight)
+        )}px`
+      }
+    }
+
+    useEffect(() => {
+      autoResizeTextArea()
+    }, [contentComment])
+
     useEffect(() => {
       setTimeout(() => {
         if (textAreaRef.current) {
@@ -56,7 +84,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
     }, [textAreaRef])
 
     return (
-      <div className={cn(['flex py-2 px-0', 'md:px-6'])}>
+      <div className={cn(['flex py-2 px-0', 'md:px-6', transparent ? 'p-0 md:p-0' : ''])}>
         {apiError && (
           <Alert
             message={apiError}
@@ -68,26 +96,44 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
         )}
         <ScrollArea className={'w-full max-h-44'} scrollbarClassName={'!bg-light-900 '}>
           <div className={'flex flex-col min-h-4 w-full'}>
-            <textarea
-              className={cn([
-                'px-2.5 py-2',
-                'outline-none outline-offset-0',
-                'text-light-100 text-md',
-                'bg-transparent',
-                'bg-dark-100',
-                'leading-tight',
-                'disabled:text-dark-100 disabled:active:border-dark-100',
-                'placeholder:text-light-900 placeholder:text-md',
-                'resize-none',
-                error && 'border-danger-500',
-              ])}
-              disabled={disabled}
-              id={id ?? textAreaId}
-              onChange={handleTextAreaChange}
-              placeholder={'Add a Comment...'}
-              ref={mergeRefs([ref, textAreaRef])}
-              value={contentComment}
-            />
+            {transparent ? (
+              <textarea
+                className={cn(
+                  'py-2 bg-transparent resize-none',
+                  'outline-none outline-offset-0',
+                  'min-h-[1.5em] max-h-[6em] overflow-y-auto',
+                  'text-sm'
+                )}
+                id={id ?? textAreaId}
+                onChange={handleTextAreaChange}
+                placeholder={'Add a Comment...'}
+                ref={transparentTextareaRef}
+                rows={1}
+                spellCheck={false}
+                value={contentComment}
+              />
+            ) : (
+              <textarea
+                className={cn([
+                  'px-2.5 py-2',
+                  'outline-none outline-offset-0',
+                  'text-light-100 text-md',
+                  'bg-transparent',
+                  'bg-dark-100',
+                  'leading-tight',
+                  'disabled:text-dark-100 disabled:active:border-dark-100',
+                  'placeholder:text-light-900 placeholder:text-md',
+                  'resize-none',
+                  error && 'border-danger-500',
+                ])}
+                disabled={disabled}
+                id={id ?? textAreaId}
+                onChange={handleTextAreaChange}
+                placeholder={'Add a Comment...'}
+                ref={mergeRefs([ref, textAreaRef])}
+                value={contentComment}
+              />
+            )}
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
           </div>
         </ScrollArea>

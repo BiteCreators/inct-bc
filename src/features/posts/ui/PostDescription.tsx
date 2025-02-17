@@ -6,9 +6,10 @@ import { useGetRelativeTime } from '@byte-creators/utils'
 
 type Props = {
   post: Post
+  withTime?: boolean
 }
 
-export const PostDescription = ({ post }: Props) => {
+export const PostDescription = ({ post, withTime = true }: Props) => {
   const { getRelativeTime } = useGetRelativeTime()
   const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
 
@@ -22,11 +23,13 @@ export const PostDescription = ({ post }: Props) => {
           <span className={'text-base font-weight600 leading-5'}>{post.userName} </span>
           {post.description}
         </Typography>
-        <div className={'mt-1 flex gap-3'}>
-          <Typography className={'text-light-900'} variant={'small-text'}>
-            {relativeTime}
-          </Typography>
-        </div>
+        {withTime && (
+          <div className={'mt-1 flex gap-3'}>
+            <Typography className={'text-light-900'} variant={'small-text'}>
+              {relativeTime}
+            </Typography>
+          </div>
+        )}
       </div>
     </div>
   )
