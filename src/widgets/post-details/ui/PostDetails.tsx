@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { commentsApi } from '@/entities/comments'
