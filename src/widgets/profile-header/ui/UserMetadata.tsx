@@ -27,12 +27,14 @@ export const UserMetadata = ({ isLoading }: Props) => {
     params !== null ? { id: Number(params.id) } : skipToken
   )
 
-  if (profile) {
-    const followData = useProfileFollow(profile)
+  //eslint-disable-next-line react-hooks/rules-of-hooks
 
-    console.log(followData?.followersList?.items.length)
-    console.log(followData?.followersList?.items.length)
-  }
+  // @ts-ignore
+  console.log(profile)
+  const followData = useProfileFollow(profile)
+
+  console.log(followData?.followersList?.items.length)
+  console.log(followData?.followersList?.items.length)
 
   const { handleCloseModal, handleOpenModal, isModalOpen, modalType } = useModalOpen()
   const t = useScopedTranslation('Profile')
