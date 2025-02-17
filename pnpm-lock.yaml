@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       '@byte-creators/ui-kit':
-        specifier: ^1.9.3
-        version: 1.9.3(6ouivb7fwuldpo25jnieyeggba)
+        specifier: ^1.9.4
+        version: 1.9.4(6ouivb7fwuldpo25jnieyeggba)
       '@byte-creators/utils':
         specifier: ^1.9.0
         version: 1.9.0(eyvz6zxhtps2nrlo74dvv34dwq)
@@ -431,8 +431,8 @@ packages:
       tailwindcss: ^3.4.1
       typescript: ^5
 
-  '@byte-creators/ui-kit@1.9.3':
-    resolution: {integrity: sha512-AfB4saAUwm2DnLfVDnomuwXQal76si8vY0RlItrAS0FaD+yT9pjC9BYpJGwlEUQGaQ7k+oenXQ1iJWyuVUpVQg==}
+  '@byte-creators/ui-kit@1.9.4':
+    resolution: {integrity: sha512-8CaA1UB+b/gL8txCyVQn7fRMbFwnTULVggoksdooADxzbV1UFK5Vucgy6fNGtoezsIT7FcVCKPeyTkAxuTo+8Q==}
     peerDependencies:
       '@rollup/plugin-commonjs': ^26.0.1
       '@rollup/plugin-node-resolve': ^15.2.3
@@ -6060,7 +6060,7 @@ snapshots:
       tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.7.2))
       typescript: 5.7.2
 
-  '@byte-creators/ui-kit@1.9.3(6ouivb7fwuldpo25jnieyeggba)':
+  '@byte-creators/ui-kit@1.9.4(6ouivb7fwuldpo25jnieyeggba)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
@@ -6071,7 +6071,7 @@ snapshots:
       '@radix-ui/react-scroll-area': 1.2.3(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-select': 2.1.6(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slider': 1.2.3(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-slot': 1.1.1(@types/react@19.0.1)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.2(@types/react@19.0.1)(react@18.3.1)
       '@radix-ui/react-tabs': 1.1.3(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@rollup/plugin-commonjs': 26.0.3(rollup@4.34.6)
       '@rollup/plugin-node-resolve': 15.3.1(rollup@4.34.6)
