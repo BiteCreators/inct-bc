@@ -47,7 +47,7 @@ export const ForgotPasswordForm = () => {
           className={'self-center sm:order-3 order-1'}
           onChange={onRecaptchaChange}
           ref={recaptchaRef}
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY!}
+          sitekey={'6LdHxG4qAAAAAPKRxEHrlV5VvLFHIf2BO5NMI8YM'}
           theme={'dark'}
         />
 
