@@ -53,13 +53,13 @@ export const MyPayments = () => {
     },
   ]
 
-  const renderLoader = () => (
+  const renderLoader = (
     <div className={'flex justify-center pt-11'}>
       <Loader />
     </div>
   )
 
-  const renderEmptyMessage = () => (
+  const renderEmptyMessage = (
     <div className={'flex justify-center items-center'}>
       <Button
         className={'bg-transparent'}
@@ -72,7 +72,7 @@ export const MyPayments = () => {
     </div>
   )
 
-  const renderTableWithPagination = () => (
+  const renderTableWithPagination = (
     <div>
       <Table headers={headers} tableData={payments} />
       <Pagination
@@ -88,9 +88,9 @@ export const MyPayments = () => {
 
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>
-      {isLoading && renderLoader()}
-      {!isLoading && dataForDisplay && dataForDisplay.length === 0 && renderEmptyMessage()}
-      {!isLoading && dataForDisplay && dataForDisplay.length > 0 && renderTableWithPagination()}
+      {isLoading && renderLoader}
+      {!isLoading && dataForDisplay && dataForDisplay.length === 0 && renderEmptyMessage}
+      {!isLoading && dataForDisplay && dataForDisplay.length > 0 && renderTableWithPagination}
     </div>
   )
 }
