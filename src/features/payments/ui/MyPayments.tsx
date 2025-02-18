@@ -9,7 +9,6 @@ export const MyPayments = () => {
   const {
     currentPage,
     dataForDisplay,
-    dataPortion,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
@@ -20,8 +19,6 @@ export const MyPayments = () => {
     t,
     userId,
   } = useMyPayments()
-  
-  const router = useRouter()
 
   const headers = [
     {

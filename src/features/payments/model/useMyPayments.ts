@@ -17,9 +17,9 @@ export const useMyPayments = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [dataPortion, setDataPortion] = useState(step)
   const [dataForDisplay, setDataForDisplay] = useState<MyPayment[] | undefined>([])
-  
+
   const pagesPortionOptions = ['6', '8', '10', '20', '30', '50']
-  
+
   useEffect(() => {
     setDataForDisplay(data?.slice(0, dataPortion))
   }, [data])
@@ -68,7 +68,6 @@ export const useMyPayments = () => {
   return {
     currentPage,
     dataForDisplay,
-    dataPortion,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
