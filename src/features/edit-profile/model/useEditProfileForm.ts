@@ -39,7 +39,7 @@ export const useEditProfileForm = () => {
         aboutMe: profile.aboutMe || '',
         city: profile.city || '',
         country: profile.country || '',
-        dateOfBirth: profile.dateOfBirth ? new Date(profile?.dateOfBirth) : new Date(),
+        dateOfBirth: profile.dateOfBirth ? new Date(profile?.dateOfBirth) : undefined,
         firstName: profile.firstName || '',
         lastName: profile.lastName || '',
         userName: profile.userName || '',
