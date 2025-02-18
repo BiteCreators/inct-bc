@@ -9,10 +9,6 @@ export const useMyPayments = () => {
   const [dataPortion, setDataPortion] = useState(10)
   const [dataForDisplay, setDataForDisplay] = useState<MyPayment[] | undefined>([])
 
-  const [paymentModal, setPaymentModal] = useState({ isOpen: false, status: '' })
-
-  const router = useRouter()
-
   useEffect(() => {
     setDataForDisplay(data?.slice(0, dataPortion))
   }, [data])
@@ -38,24 +34,6 @@ export const useMyPayments = () => {
     }
   }
 
-  const handelModalClose = () => {
-    setPaymentModal({ isOpen: false, status: '' })
-
-    if (router.query.success !== undefined) {
-      router.push(
-        {
-          pathname: router.pathname,
-          query: {
-            id: router.query.id,
-            tab: 'my-payments',
-          },
-        },
-        undefined,
-        { shallow: true }
-      )
-    }
-  }
-
   let pagesCount = 0
 
   if (data?.length) {
@@ -66,12 +44,9 @@ export const useMyPayments = () => {
     currentPage,
     dataForDisplay,
     dataPortion,
-    handelModalClose,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
     pagesCount,
-    paymentModal,
-    setPaymentModal,
   }
 }

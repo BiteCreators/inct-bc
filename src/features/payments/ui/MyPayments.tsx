@@ -1,15 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { MyPayment } from '@/entities/payments'
-import {
-  Button,
-  Loader,
-  Modal,
-  Pagination,
-  Table,
-  TableData,
-  Typography,
-} from '@byte-creators/ui-kit'
+import { Loader, Pagination, Table, TableData, Typography } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
@@ -21,26 +13,13 @@ export const MyPayments = () => {
     currentPage,
     dataForDisplay,
     dataPortion,
-    handelModalClose,
     handleCurrentPageChange,
     handlePaymentsPortionChange,
     isLoading,
     pagesCount,
-    paymentModal,
-    setPaymentModal,
   } = useMyPayments()
 
   const router = useRouter()
-
-  useEffect(() => {
-    if (router.query.success === 'true') {
-      setPaymentModal({ isOpen: true, status: 'Success' })
-    }
-
-    if (router.query.success === 'false') {
-      setPaymentModal({ isOpen: true, status: 'Error' })
-    }
-  }, [router.query.success])
 
   let payments = [] as TableData[]
 
@@ -96,32 +75,11 @@ export const MyPayments = () => {
     </div>
   )
 
-  const renderModalPaymentStatus = () => (
-    <Modal
-      className={'mim-w-[360px]'}
-      handleInteractOutside={handelModalClose}
-      isOpen={paymentModal.isOpen}
-      mode={'default'}
-      onOpenChange={handelModalClose}
-      title={paymentModal.status}
-    >
-      {paymentModal.status === 'Success' ? (
-        <p className={'mb-16'}>Payment was successful!</p>
-      ) : (
-        <p className={'mb-16'}>Transaction failed. Please, write to support</p>
-      )}
-      <Button className={'w-full mb-6'} onClick={handelModalClose} variant={'primary'}>
-        <span>OK</span>
-      </Button>
-    </Modal>
-  )
-
   return (
     <div className={'relative mb-12 sm:flex sm:flex-col'}>
       {isLoading && renderLoader()}
       {!isLoading && dataForDisplay && dataForDisplay.length === 0 && renderEmptyMessage()}
       {!isLoading && dataForDisplay && dataForDisplay.length > 0 && renderTableWithPagination()}
-      {renderModalPaymentStatus()}
     </div>
   )
 }
