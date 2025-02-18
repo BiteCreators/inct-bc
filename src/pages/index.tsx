@@ -76,10 +76,8 @@ const Main = () => {
               isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
-              postContainerHeight={post.images[0]?.height}
               postId={post.id}
-              postImageUrl={post.images[0]?.url}
-              postSize={post.images[0]?.width}
+              postImageUrl={post.images[0].url}
               userName={post.userName}
             />
           ))}

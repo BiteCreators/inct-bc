@@ -1,6 +1,7 @@
 [![Header](https://github.com/BiteCreators/inct-bc/blob/development/public/images/inct.png)]()
 
-# INCTAGRAM      
+# INCTAGRAM
+
 <a href="https://inctbc.ru/">
     inctbc.ru
 </a>
@@ -19,6 +20,7 @@
 <img height="30"></div>
 
 ## Our team
+
 <div>
     <img src="https://img.freepik.com/free-vector/stem-camp-teens-background-with-programming-study-symbols-flat-vector-illustration_1284-77823.jpg?ga=GA1.1.208176612.1728310344&semt=ais_hybrid"
              title="" alt="" height="300"/>
@@ -76,7 +78,6 @@
 
 <img height="30"></div>
 
-
 ## Technologies we use:
 
 <table border="2" cellpadding="10" cellspacing="0">
@@ -93,14 +94,14 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9W1xTscEcGKYWa8Ksx4eU7mOh-Tyk-uRVvw&s" alt="Icon" height="50"/>
          </a>
         <br/>
-        <span>React</span>
+        <span>React </span>
     </td>
           <td align="center">
                   <a href="https://nextjs.org/">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj13DpXfc1_RayzN0ecY0-p_ws7TK3sxpO6w&s" alt="Icon" height="50"/>
          </a>
         <br/>
-        <span>Next js</span>
+        <span>Next js </span>
     </td>
           <td align="center">
                   <a href="https://redux-toolkit.js.org/rtk-query/overview">
