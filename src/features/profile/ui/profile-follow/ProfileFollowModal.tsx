@@ -15,7 +15,9 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
   const {
     confirmOpen,
     currentFollowerName,
+    followers,
     followersList,
+    following,
     followingList,
     handleConfirm,
     handleReject,
@@ -38,11 +40,7 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
           maxWidth={'w-[640px]'}
           mode={'default'}
           onOpenChange={onClose}
-          title={
-            type === 'followers'
-              ? `${currentUserProfile.userMetadata.followers} Followers`
-              : `${currentUserProfile.userMetadata.following} Following`
-          }
+          title={type === 'followers' ? `${following} Followers` : `${followers} Following`}
         >
           {followingList && followersList && (
             <FollowModalItems currentUserProfile={currentUserProfile} type={type} />
