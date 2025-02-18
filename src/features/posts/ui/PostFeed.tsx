@@ -25,7 +25,6 @@ type Props = {
 
 export const PostFeed = ({ post }: Props) => {
   const [isCommented, setIsCommented] = useState(false)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [contentComment, setContentComment] = useState<string>('')
 
   const { getRelativeTime } = useGetRelativeTime()
@@ -35,8 +34,8 @@ export const PostFeed = ({ post }: Props) => {
 
   const {
     data: comments,
-    error,
-    isLoading,
+    isError: commentsIsError,
+    isLoading: commentsIsLoading,
   } = commentsApi.useGetCommentsQuery({ postId: post.id || 0 })
 
   useEffect(() => {
@@ -58,11 +57,15 @@ export const PostFeed = ({ post }: Props) => {
   }
 
   return (
-    <div
-      className={
-        'mb-9 px-6 max-w-[490px] relative mx-auto md:mx-0 md:left-0 lg:!mx-auto lg:!left-[-110px] '
-      }
-    >
+    <div className={'mb-9'}>
+      {(apiError || commentsIsError) && (
+        <Alert
+          canClose={false}
+          message={apiError || 'Failed to load comments'}
+          purpose={'alert'}
+          type={'error'}
+        />
+      )}
       <div className={'flex items-center gap-5 mb-3'}>
         <UserProfile
           avatarUrl={post.avatarOwner}
@@ -113,15 +116,6 @@ export const PostFeed = ({ post }: Props) => {
             </Typography>
           </div>
         </div>
-        {apiError && (
-          <Alert
-            canClose={false}
-            message={apiError}
-            portal={false}
-            purpose={'alert'}
-            type={'error'}
-          />
-        )}
       </div>
       {isCommented ? (
         <Button
