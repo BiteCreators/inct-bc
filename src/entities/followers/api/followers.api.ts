@@ -50,12 +50,15 @@ export const followersApi = inctagramApi.injectEndpoints({
         return isSearchChanged || isCursorChanged
       },
       merge: (currentData, newData) => {
-        if (!newData.items || newData.items.length === 0) {
-          return
+        if (currentData.prevCursor === newData.prevCursor) {
+          return newData
         }
 
-        currentData.items = [...currentData.items, ...newData.items]
-        currentData.nextCursor = newData.nextCursor
+        return {
+          ...currentData,
+          items: [...currentData.items, ...newData.items],
+          nextCursor: newData.nextCursor,
+        }
       },
       providesTags: ['Followers'],
       query: params => ({
@@ -63,7 +66,7 @@ export const followersApi = inctagramApi.injectEndpoints({
         url: 'v1/users',
       }),
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        return `${queryArgs.search}-${queryArgs.cursor}`
+        return `${queryArgs.search}`
       },
     }),
 

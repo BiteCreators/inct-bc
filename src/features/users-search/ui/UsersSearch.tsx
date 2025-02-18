@@ -13,14 +13,14 @@ export const UsersSearch = () => {
       <div className={'mt-4'}>
         <SearchComponent fullWidth paramName={'search'} />
       </div>
-      {users.length === 0 && !isLoading && (
+      {users?.items.length === 0 && !isLoading && (
         <Typography className={'text-light-900 leading-[24px] mt-5'}>
           {tCommon.errors.noItemsFound}
         </Typography>
       )}
       {users && (
         <div className={'mt-5'}>
-          {users.map(user => (
+          {users?.items.map(user => (
             <div className={'flex gap-3 mb-4'} key={user.id}>
               <UserAvatar
                 className={'w-12'}
@@ -44,7 +44,7 @@ export const UsersSearch = () => {
           ))}
         </div>
       )}
-      <div className={'h-3'} ref={triggerRef} />
+      <div className={'h-2'} ref={triggerRef} />
     </div>
   )
 }
