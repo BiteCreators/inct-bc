@@ -1,4 +1,4 @@
-import React, { ReactNode, createContext, useContext } from 'react'
+import React, { ReactNode, createContext, useContext, useState } from 'react'
 
 import { MeResponse } from '@/entities/auth/api/auth.api'
 import {
@@ -14,18 +14,21 @@ type FollowContextValue = {
   currentFollowerName: string
   followLoading: boolean
 
+  followers?: null | number
   followersList: FollowersResponse | undefined
+  following?: null | number
   followingList: FollowersResponse | undefined
   handleConfirm: () => void
   handleConfirmDeleting: (user: Follower) => void
+
   handleFollow: (userId: number) => Promise<void>
   handleReject: () => void
-
   isFollowersLoading: boolean
   isFollowingLoading: boolean
-  me: MeResponse | undefined
-  removeLoading: boolean
 
+  me: MeResponse | undefined
+
+  removeLoading: boolean
   setConfirmOpen: (open: boolean) => void
 }
 
