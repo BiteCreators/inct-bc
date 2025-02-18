@@ -1,6 +1,9 @@
+import React from 'react'
+
 import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { paymentsApi } from '@/entities/payments'
-import { Loader, LoaderBlock, Typography } from '@byte-creators/ui-kit'
+import { useAccountManagement } from '@/features/payments/model/useAccountManagement'
+import { Button, Loader, Modal, Typography } from '@byte-creators/ui-kit'
 
 import { paymentsSlice } from '..'
 import { AccountTypeCard } from './AccountTypeCard'
@@ -9,38 +12,13 @@ import { PayPalPaymentButton } from './PayPalPaymentButton'
 import { StripePaymentButton } from './StripePaymentButton'
 import { SubscriptionTypeCard } from './SubscriptionTypeCard'
 
-// const data: any = {
-//   data: [
-// {
-//   autoRenewal: true,
-//   dateOfPayment: '2024-11-12',
-//   endDateOfSubscription: '2024-11-19',
-//   subscriptionId: '1',
-//   userId: 1,
-// },
-// {
-//   autoRenewal: false,
-//   dateOfPayment: '2024-11-14',
-//   endDateOfSubscription: '2024-11-15',
-//   subscriptionId: '12',
-//   userId: 2,
-// },
-// {
-//   autoRenewal: true,
-//   dateOfPayment: '2024-11-13',
-//   endDateOfSubscription: '2024-12-13',
-//   subscriptionId: '123',
-//   userId: 3,
-// },
-//   ],
-//   hasAutoRenewal: true,
-// }
-
 export const AccountManagement = () => {
   const { data, isLoading } = paymentsApi.useGetCurrentPaymentQuery()
   const accountType = useAppSelector(paymentsSlice.selectors.selectAccountType)
 
   const dispatch = useAppDispatch()
+
+  const { handelModalClose, paymentModal } = useAccountManagement()
 
   let disableAccountTypeOption = false
 
@@ -74,6 +52,23 @@ export const AccountManagement = () => {
           </div>
         </>
       )}
+      <Modal
+        className={'min-w-[360px]'}
+        handleInteractOutside={handelModalClose}
+        isOpen={paymentModal.isOpen}
+        mode={'default'}
+        onOpenChange={handelModalClose}
+        title={paymentModal.status}
+      >
+        {paymentModal.status === 'Success' ? (
+          <p className={'mb-16'}>Payment was successful!</p>
+        ) : (
+          <p className={'mb-16'}>Transaction failed. Please, write to support</p>
+        )}
+        <Button className={'w-full mb-6'} onClick={handelModalClose} variant={'primary'}>
+          <span>OK</span>
+        </Button>
+      </Modal>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { Button, Loader, Pagination, Table, Typography } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
@@ -15,25 +15,13 @@ export const MyPayments = () => {
     isLoading,
     pagesCount,
     pagesPortionOptions,
-    paymentFailed,
-    paymentSuccess,
     payments,
     router,
-    setPaymentFailed,
-    setPaymentSuccess,
     t,
     userId,
   } = useMyPayments()
-
-  useEffect(() => {
-    if (router.query.success === 'true') {
-      setPaymentSuccess(true)
-    }
-
-    if (router.query.success === 'false') {
-      setPaymentFailed(true)
-    }
-  }, [router.query.success])
+  
+  const router = useRouter()
 
   const headers = [
     {

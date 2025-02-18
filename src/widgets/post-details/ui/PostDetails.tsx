@@ -12,6 +12,7 @@ import { PostDesktop } from './desktop/PostDesktop'
 
 export const PostDetails = () => {
   const params = useParams()
+  const router = useRouter()
 
   const currentUserId = useAppSelector(selectUserId)
 
@@ -19,7 +20,11 @@ export const PostDetails = () => {
     params !== null ? { postId: Number(params.postId) } : skipToken
   )
 
-  const router = useRouter()
+  const {
+    data: commentsData,
+    error,
+    isLoading,
+  } = commentsApi.useGetCommentsQuery(currentUserId ? { postId: post?.id || 0 } : skipToken)
 
   const handleNavigateToImage = (imageUrl: string) => {
     const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
@@ -33,13 +38,13 @@ export const PostDetails = () => {
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))
 
-  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post?.id || 0 })
-
-  let comments = data?.items
+  let comments = commentsData?.items
 
   if (currentUserId) {
-    const currentUserComments = data?.items.filter(comment => comment.from.id === currentUserId)
-    const commentsWithoutCurrentUser = data?.items.filter(
+    const currentUserComments = commentsData?.items.filter(
+      comment => comment.from.id === currentUserId
+    )
+    const commentsWithoutCurrentUser = commentsData?.items.filter(
       comment => comment.from.id !== currentUserId
     )
 
