@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useAppDispatch } from '@/common/lib/hooks/reduxHooks'
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
 import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
-import { profileApi } from '@/entities/profile'
 import { useConfirmation } from '@byte-creators/utils'
 
 export const useProfileFollow = (currentUserProfile: UserProfile) => {
@@ -15,9 +14,22 @@ export const useProfileFollow = (currentUserProfile: UserProfile) => {
   const { data: followersList, isLoading: isFollowersLoading } = followersApi.useGetFollowersQuery({
     userName: currentUserProfile.userName,
   })
+
+  const [following, setFollowing] = useState<number>(0)
+  const [followers, setFollowers] = useState<number>(0)
+
+  useEffect(() => {
+    if (followingList?.items) {
+      setFollowing(followingList.items.length)
+    }
+    if (followersList?.items) {
+      setFollowers(followersList.items.length)
+    }
+  }, [followingList, followersList])
+
+  console.log(following, followers)
   const dispatch = useAppDispatch()
   const { data: me } = authApi.useMeQuery()
-
   const [follow, { isLoading: followLoading }] = followersApi.useFollowMutation()
 
   const [remove, { isLoading: removeLoading }] = followersApi.useRemoveFollowerMutation()
@@ -34,7 +46,6 @@ export const useProfileFollow = (currentUserProfile: UserProfile) => {
   const handleFollow = async (userId: number) => {
     try {
       await follow({ selectedUserId: userId }).unwrap()
-      dispatch(profileApi.util.invalidateTags([{ id: userId, type: 'PublicProfile' }]))
     } catch (error) {
       // handleApiError({ error, setApiError })
     }
@@ -63,7 +74,9 @@ export const useProfileFollow = (currentUserProfile: UserProfile) => {
     confirmOpen,
     currentFollowerName,
     followLoading,
+    followers,
     followersList,
+    following,
     followingList,
     handleConfirm,
     handleConfirmDeleting,
