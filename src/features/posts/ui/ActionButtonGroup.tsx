@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { PostLikesResponse } from '@/entities/posts'
 import { Button } from '@byte-creators/ui-kit'
 import {

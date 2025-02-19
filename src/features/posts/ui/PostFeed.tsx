@@ -1,16 +1,14 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 
 import { Avatar } from '@/common/types/api.types'
-import { commentsApi } from '@/entities/comments'
 import { type Post } from '@/entities/posts'
 import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
-import { useLikePost } from '@/features/posts/model/useLikePost'
 import { Alert, Button, LinearLoader, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
 import { MoreHorizontal } from '@byte-creators/ui-kit/icons'
-import { useGetRelativeTime } from '@byte-creators/utils'
 import Link from 'next/link'
 
+import { usePostFeed } from '../model/usePostFeed'
 import { ActionButtonGroup } from './ActionButtonGroup'
 import { Likes } from './Likes'
 
@@ -19,29 +17,21 @@ type Props = {
 }
 
 export const PostFeed = ({ post }: Props) => {
-  const [isCommented, setIsCommented] = useState(false)
-  const [contentComment, setContentComment] = useState<string>('')
-
-  const { getRelativeTime } = useGetRelativeTime()
-  const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
-
-  const { apiError, handleLike, postLikes } = useLikePost(post)
-
   const {
-    data: comments,
-    isError: commentsIsError,
-    isLoading: commentsIsLoading,
-  } = commentsApi.useGetCommentsQuery({ postId: post.id || 0 })
-
-  useEffect(() => {
-    if (comments) {
-      if (comments.items.length > 0) {
-        setIsCommented(true)
-      } else {
-        setIsCommented(false)
-      }
-    }
-  }, [comments])
+    apiError,
+    comments,
+    commentsIsError,
+    commentsIsLoading,
+    contentComment,
+    handleLike,
+    hasImages,
+    isCommented,
+    postLikes,
+    relativeTime,
+    setContentComment,
+  } = usePostFeed({
+    post,
+  })
 
   const getSlides = (
     images: ({
@@ -50,8 +40,6 @@ export const PostFeed = ({ post }: Props) => {
   ): ReactNode[] => {
     return images.map(image => <img key={image.uploadId} src={image.url} />)
   }
-
-  const hasImages = post.images.length !== 0
 
   return (
     <div className={'mb-9'}>
