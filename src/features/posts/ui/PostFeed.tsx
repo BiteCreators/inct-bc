@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import { Avatar } from '@/common/types/api.types'
 import { commentsApi } from '@/entities/comments'
@@ -6,18 +6,13 @@ import { type Post } from '@/entities/posts'
 import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
 import { useLikePost } from '@/features/posts/model/useLikePost'
-import { LikesAvatars } from '@/features/posts/ui/LikesAvatars'
-import { Alert, Button, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
-import {
-  BookmarkOutline,
-  Heart,
-  HeartOutline,
-  MessageCircleOutline,
-  MoreHorizontal,
-  PaperPlaneOutline,
-} from '@byte-creators/ui-kit/icons'
-import { cn, useGetRelativeTime } from '@byte-creators/utils'
+import { Alert, Button, LinearLoader, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
+import { MoreHorizontal } from '@byte-creators/ui-kit/icons'
+import { useGetRelativeTime } from '@byte-creators/utils'
 import Link from 'next/link'
+
+import { ActionButtonGroup } from './ActionButtonGroup'
+import { Likes } from './Likes'
 
 type Props = {
   post: Post
@@ -56,8 +51,11 @@ export const PostFeed = ({ post }: Props) => {
     return images.map(image => <img key={image.uploadId} src={image.url} />)
   }
 
+  const hasImages = post.images.length !== 0
+
   return (
     <div className={'mb-9'}>
+      {<LinearLoader isLoading={commentsIsLoading} />}
       {(apiError || commentsIsError) && (
         <Alert
           canClose={false}
@@ -83,40 +81,24 @@ export const PostFeed = ({ post }: Props) => {
           <MoreHorizontal />
         </Button>
       </div>
-      <Slider slides={getSlides(post.images)} />
-      <div className={'flex justify-between mt-3 mb-4'}>
-        <div className={'flex gap-5'}>
-          <Button className={'p-0 bg-transparent'} onClick={handleLike} variant={'icon'}>
-            {postLikes?.isLiked ? <Heart className={'text-danger-500'} /> : <HeartOutline />}
-          </Button>
-          <Button className={'p-0 bg-transparent'} variant={'icon'}>
-            <Link href={`/profile/${post.ownerId}/publications/${post.id}`}>
-              <MessageCircleOutline />
-            </Link>
-          </Button>
-          <Button className={'p-0 bg-transparent'} variant={'icon'}>
-            <PaperPlaneOutline />
-          </Button>
-        </div>
-        <Button className={'p-0 bg-transparent'} variant={'icon'}>
-          <BookmarkOutline />
-        </Button>
-      </div>
-      <PostDescription post={post} withTime={false} />
-      <div className={'mb-5'}>
-        <div className={'flex'}>
-          {postLikes?.items && postLikes.items.length > 0 && (
-            <LikesAvatars items={postLikes.items} />
-          )}
-
-          <div className={cn(['flex pt-1', postLikes?.items?.length === 1 && '-ml-3'])}>
-            <Typography variant={'regular-text'}>{postLikes?.totalCount}</Typography>
-            <Typography className={'font-bold ml-1'} variant={'regular-text'}>
-              &#34;Like&#34;
-            </Typography>
-          </div>
-        </div>
-      </div>
+      <Link href={`/profile/${post.ownerId}/publications/${post.id}`}>
+        <Slider slides={getSlides(post.images)} />
+      </Link>
+      {!hasImages && (
+        <Typography variant={'regular-text'}>
+          {/*TODO: add splitLongWords*/}
+          {post.description}
+        </Typography>
+      )}
+      <ActionButtonGroup
+        handleLike={handleLike}
+        postId={post.id}
+        postLikes={postLikes}
+        userId={post.ownerId}
+        withComments
+      />
+      {hasImages && <PostDescription post={post} withTime={false} />}
+      <Likes className={'mb-5'} postLikes={postLikes} />
       {isCommented ? (
         <Button
           className={'mb-1 p-0 border-none text-light-900 text-sm font-weight700'}
