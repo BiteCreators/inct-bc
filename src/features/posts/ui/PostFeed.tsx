@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Avatar } from '@/common/types/api.types'
+import { authSlice } from '@/entities/auth'
 import { type Post } from '@/entities/posts'
 import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
@@ -10,8 +12,8 @@ import Link from 'next/link'
 
 import { usePostFeed } from '../model/usePostFeed'
 import { ActionButtonGroup } from './ActionButtonGroup'
+import { DropdownPost } from './DropdownPost'
 import { Likes } from './Likes'
-import { PostFeedOptions } from './PostFeedOptions'
 
 type Props = {
   post: Post
@@ -34,6 +36,8 @@ export const PostFeed = ({ post }: Props) => {
     post,
   })
   const t = useScopedTranslation('Posts')
+  const userId = useAppSelector(authSlice.selectors.selectUserId)
+  const isMyPost = post.ownerId === userId || false
 
   const getSlides = (
     images: ({
@@ -67,7 +71,16 @@ export const PostFeed = ({ post }: Props) => {
         <Typography className={'text-light-900  flex-grow'} variant={'small-text'}>
           {relativeTime}
         </Typography>
-        <PostFeedOptions />
+        <div className={'w-10 h-10'}>
+          <DropdownPost
+            changeEditMode={() => {}}
+            className={' top-[calc(50%-12px)]'}
+            classNameButton={'p-0 outline-none'}
+            isFollow
+            isMyPost={isMyPost}
+            post={post}
+          />
+        </div>
       </div>
       <Slider slides={getSlides(post.images)} />
       {!hasImages && (

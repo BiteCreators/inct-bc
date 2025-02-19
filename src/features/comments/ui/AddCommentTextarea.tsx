@@ -2,7 +2,7 @@ import React, { ComponentProps, forwardRef, useEffect, useRef } from 'react'
 
 import { Alert, Button, ScrollArea } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
-import { cn, mergeRefs, useTextArea } from '@byte-creators/utils'
+import { cn, mergeRefs, useScopedTranslation, useTextArea } from '@byte-creators/utils'
 
 import { useCreateComment } from '../model/useCreateComment'
 
@@ -37,6 +37,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
     ref
   ) => {
     const transparentTextareaRef = useRef<HTMLTextAreaElement | null>(null)
+    const t = useScopedTranslation('Posts')
     const { handleChange, textAreaId, textAreaRef } = useTextArea({
       autoResize: true,
       onChange,
@@ -102,7 +103,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 className={cn(
                   'py-2 bg-transparent resize-none',
                   'outline-none outline-offset-0',
-                  'min-h-[1.5em] max-h-[6em] overflow-y-auto',
+                  'min-h-[1.5em] max-h-[calc(6em + 4px)] overflow-y-auto',
                   'text-sm'
                 )}
                 id={id ?? textAreaId}
@@ -159,7 +160,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
             onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
             variant={'text'}
           >
-            Publish
+            {t.publish}
           </Button>
         </div>
       </div>
