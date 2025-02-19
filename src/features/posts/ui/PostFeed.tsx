@@ -6,6 +6,7 @@ import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
 import { Alert, Button, LinearLoader, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
 import { MoreHorizontal } from '@byte-creators/ui-kit/icons'
+import { wordWrapping } from '@byte-creators/utils'
 import Link from 'next/link'
 
 import { usePostFeed } from '../model/usePostFeed'
@@ -73,7 +74,7 @@ export const PostFeed = ({ post }: Props) => {
       {!hasImages && (
         <Typography variant={'regular-text'}>
           {/*TODO: add splitLongWords*/}
-          {post.description}
+          {wordWrapping(post.description)}
         </Typography>
       )}
       <ActionButtonGroup

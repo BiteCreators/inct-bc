@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Post } from '@/entities/posts'
 import { Avatar, Typography } from '@byte-creators/ui-kit'
-import { useGetRelativeTime } from '@byte-creators/utils'
+import { useGetRelativeTime, wordWrapping } from '@byte-creators/utils'
 
 type Props = {
   post: Post
@@ -13,26 +13,6 @@ export const PostDescription = ({ post, withTime = true }: Props) => {
   const { getRelativeTime } = useGetRelativeTime()
   const relativeTime = getRelativeTime(new Date(post.createdAt).getTime())
 
-  //TODO: move function to utils
-  const splitLongWords = (text: string, maxLength: number = 35): string => {
-    return text
-      .split(' ')
-      .map(word => {
-        if (word.length > maxLength) {
-          let result = ''
-
-          for (let i = 0; i < word.length; i += maxLength) {
-            result += word.slice(i, i + maxLength) + ' '
-          }
-
-          return result.trim()
-        }
-
-        return word
-      })
-      .join(' ')
-  }
-
   return (
     <div className={'flex mb-4 gap-3 items-start'}>
       <div className={'flex-shrink-0 pt-1'}>
@@ -41,7 +21,7 @@ export const PostDescription = ({ post, withTime = true }: Props) => {
       <div className={'flex-1'}>
         <Typography variant={'regular-text'}>
           <span className={'text-base font-weight600 leading-5'}>{post.userName} </span>
-          {splitLongWords(post.description)}
+          {wordWrapping(post.description)}
         </Typography>
         {withTime && (
           <div className={'mt-1 flex gap-3'}>
