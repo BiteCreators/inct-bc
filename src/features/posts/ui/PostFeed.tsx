@@ -5,13 +5,13 @@ import { type Post } from '@/entities/posts'
 import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
 import { Alert, Button, LinearLoader, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
-import { MoreHorizontal } from '@byte-creators/ui-kit/icons'
 import { useScopedTranslation, wordWrapping } from '@byte-creators/utils'
 import Link from 'next/link'
 
 import { usePostFeed } from '../model/usePostFeed'
 import { ActionButtonGroup } from './ActionButtonGroup'
 import { Likes } from './Likes'
+import { PostFeedOptions } from './PostFeedOptions'
 
 type Props = {
   post: Post
@@ -54,7 +54,7 @@ export const PostFeed = ({ post }: Props) => {
           type={'error'}
         />
       )}
-      <div className={'flex items-center gap-5 mb-3'}>
+      <div className={'flex items-center gap-5 mb-3 relative'}>
         <UserProfile
           avatarUrl={post.avatarOwner}
           className={'relative'}
@@ -67,9 +67,7 @@ export const PostFeed = ({ post }: Props) => {
         <Typography className={'text-light-900  flex-grow'} variant={'small-text'}>
           {relativeTime}
         </Typography>
-        <Button className={'p-0 bg-transparent'} variant={'icon'}>
-          <MoreHorizontal />
-        </Button>
+        <PostFeedOptions />
       </div>
       <Slider slides={getSlides(post.images)} />
       {!hasImages && (

@@ -4,9 +4,7 @@ import { postsApi } from '@/entities/posts'
 import { PostFeed } from '@/features/posts'
 import { LinearLoader } from '@byte-creators/ui-kit'
 import { useIntersectionObserver, useScopedTranslation } from '@byte-creators/utils'
-import { skipToken } from '@reduxjs/toolkit/query'
 import dynamic from 'next/dynamic'
-import { useParams } from 'next/navigation'
 
 const Alert = dynamic(() => import('@byte-creators/ui-kit').then(mod => mod.Alert), {
   ssr: false,
@@ -14,32 +12,23 @@ const Alert = dynamic(() => import('@byte-creators/ui-kit').then(mod => mod.Aler
 
 const Feed = () => {
   const [pageSize, setPageSize] = useState(8)
-  const params = useParams<{ endCursorPostId: string }>()
   const triggerRef = useRef<HTMLDivElement>(null)
   const t = useScopedTranslation('Posts')
 
-  let queryParams
-
-  if (params !== null) {
-    if (params.endCursorPostId) {
-      queryParams = { endCursorPostId: Number(params.endCursorPostId), pageSize }
-    } else {
-      queryParams = { pageSize }
-    }
-  } else {
-    queryParams = skipToken
-  }
   const {
     data: postsData,
     isError: postsIsError,
     isFetching,
     isLoading,
     isSuccess,
-  } = postsApi.useGetAllPublicPostsQuery(queryParams, {
-    pollingInterval: 60000,
-    refetchOnFocus: true,
-    refetchOnMountOrArgChange: true,
-  })
+  } = postsApi.useGetFollowerPublicationsQuery(
+    { pageSize },
+    {
+      pollingInterval: 60000,
+      refetchOnFocus: true,
+      refetchOnMountOrArgChange: true,
+    }
+  )
 
   //TODO: remove ts ignore
   //@ts-ignore
