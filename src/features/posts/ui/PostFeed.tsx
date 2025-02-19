@@ -69,9 +69,7 @@ export const PostFeed = ({ post }: Props) => {
           <MoreHorizontal />
         </Button>
       </div>
-      <Link href={`/profile/${post.ownerId}/publications/${post.id}`}>
-        <Slider slides={getSlides(post.images)} />
-      </Link>
+      <Slider slides={getSlides(post.images)} />
       {!hasImages && (
         <Typography variant={'regular-text'}>
           {/*TODO: add splitLongWords*/}
@@ -92,7 +90,7 @@ export const PostFeed = ({ post }: Props) => {
           className={'mb-1 p-0 border-none text-light-900 text-sm font-weight700'}
           variant={'text'}
         >
-          <Link href={`/publications/${post.id}`}>
+          <Link href={`/profile/${post.ownerId}/publications/${post.id}`}>
             {`View all comments (${comments?.items.length})`}
           </Link>
         </Button>
