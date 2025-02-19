@@ -27,7 +27,6 @@ export const useProfileFollow = (currentUserProfile: UserProfile) => {
     }
   }, [followingList, followersList])
 
-  console.log(following, followers)
   const dispatch = useAppDispatch()
   const { data: me } = authApi.useMeQuery()
   const [follow, { isLoading: followLoading }] = followersApi.useFollowMutation()
