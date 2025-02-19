@@ -5,14 +5,25 @@ import { useRouter } from 'next/router'
 
 export const useModalOpen = () => {
   const router = useRouter()
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalType, setModalType] = useState<'followers' | 'following'>('followers')
   const isAuthorized = useSelector((state: any) => !!state.auth.accessToken)
-  const { id } = router.query
+  const { id, modal } = router.query
 
   useEffect(() => {
     setIsModalOpen(false)
   }, [id])
+
+  useEffect(() => {
+    if (modal === 'followers' || modal === 'following') {
+      setModalType(modal)
+      setIsModalOpen(true)
+    } else {
+      setIsModalOpen(false)
+    }
+  }, [modal])
+
   const handleOpenModal = (type: 'followers' | 'following') => {
     if (!isAuthorized) {
       router.push(`/auth/sign-in`)
