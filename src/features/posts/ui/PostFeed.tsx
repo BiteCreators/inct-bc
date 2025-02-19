@@ -6,7 +6,7 @@ import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
 import { Alert, Button, LinearLoader, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
 import { MoreHorizontal } from '@byte-creators/ui-kit/icons'
-import { wordWrapping } from '@byte-creators/utils'
+import { useScopedTranslation, wordWrapping } from '@byte-creators/utils'
 import Link from 'next/link'
 
 import { usePostFeed } from '../model/usePostFeed'
@@ -33,6 +33,7 @@ export const PostFeed = ({ post }: Props) => {
   } = usePostFeed({
     post,
   })
+  const t = useScopedTranslation('Posts')
 
   const getSlides = (
     images: ({
@@ -48,7 +49,7 @@ export const PostFeed = ({ post }: Props) => {
       {(apiError || commentsIsError) && (
         <Alert
           canClose={false}
-          message={apiError || 'Failed to load comments'}
+          message={apiError || t.errors.failedToLoadComments}
           purpose={'alert'}
           type={'error'}
         />
@@ -72,10 +73,7 @@ export const PostFeed = ({ post }: Props) => {
       </div>
       <Slider slides={getSlides(post.images)} />
       {!hasImages && (
-        <Typography variant={'regular-text'}>
-          {/*TODO: add splitLongWords*/}
-          {wordWrapping(post.description)}
-        </Typography>
+        <Typography variant={'regular-text'}>{wordWrapping(post.description)}</Typography>
       )}
       <ActionButtonGroup
         handleLike={handleLike}
@@ -85,21 +83,20 @@ export const PostFeed = ({ post }: Props) => {
         withComments
       />
       {hasImages && <PostDescription post={post} withTime={false} />}
-      <Likes className={'mb-5'} postLikes={postLikes} />
-      {isCommented ? (
+      <Likes className={`${isCommented ? 'mb-5' : 'mb-2'}`} postLikes={postLikes} />
+      {isCommented && (
         <Button
           className={'mb-1 p-0 border-none text-light-900 text-sm font-weight700'}
           variant={'text'}
         >
           <Link href={`/profile/${post.ownerId}/publications/${post.id}`}>
-            {`View all comments (${comments?.items.length})`}
+            {`${t.viewAllComments} (${comments?.items.length})`}
           </Link>
         </Button>
-      ) : (
-        <span className={'block mb-1 text-light-900 text-sm font-weight700'}> No comments yet</span>
       )}
       <AddCommentTextarea
         contentComment={contentComment}
+        placeholder={t.addComment}
         postId={post.id.toString()}
         setContentComment={setContentComment}
         transparent

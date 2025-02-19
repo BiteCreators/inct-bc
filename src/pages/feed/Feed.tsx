@@ -3,7 +3,7 @@ import { useRef, useState } from 'react'
 import { postsApi } from '@/entities/posts'
 import { PostFeed } from '@/features/posts'
 import { LinearLoader } from '@byte-creators/ui-kit'
-import { useIntersectionObserver } from '@byte-creators/utils'
+import { useIntersectionObserver, useScopedTranslation } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import dynamic from 'next/dynamic'
 import { useParams } from 'next/navigation'
@@ -16,6 +16,7 @@ const Feed = () => {
   const [pageSize, setPageSize] = useState(8)
   const params = useParams<{ endCursorPostId: string }>()
   const triggerRef = useRef<HTMLDivElement>(null)
+  const t = useScopedTranslation('Posts')
 
   let queryParams
 
@@ -30,7 +31,7 @@ const Feed = () => {
   }
   const {
     data: postsData,
-    isError: postsError,
+    isError: postsIsError,
     isFetching,
     isLoading,
     isSuccess,
@@ -55,12 +56,11 @@ const Feed = () => {
       }
     >
       {<LinearLoader isLoading={isLoading || isFetching} />}
-      {postsError && (
+      {postsIsError && (
         <Alert
           canClose={false}
           className={'mb-9'}
-          //TODO: add translation of the message
-          message={'Failed to load posts. Try again later.'}
+          message={t.errors.failedToLoadPosts}
           purpose={'alert'}
           type={'error'}
         />

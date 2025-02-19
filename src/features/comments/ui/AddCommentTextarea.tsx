@@ -32,6 +32,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       postId,
       setContentComment,
       transparent,
+      ...restProps
     }: Props,
     ref
   ) => {
@@ -111,6 +112,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 rows={1}
                 spellCheck={false}
                 value={contentComment}
+                {...restProps}
               />
             ) : (
               <textarea
@@ -132,6 +134,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
                 placeholder={'Add a Comment...'}
                 ref={mergeRefs([ref, textAreaRef])}
                 value={contentComment}
+                {...restProps}
               />
             )}
             {error && <p className={'text-danger-500 text-sm'}>{error ?? 'invalid data'}</p>}
