@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { UserProfile } from '@/entities/followers/types/followers.types'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { FollowModalItems } from '@/features/profile/ui/profile-follow/FollowModalItems'
 import { ActionConfirmation, Modal } from '@byte-creators/ui-kit'
@@ -14,40 +15,43 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
   const {
     confirmOpen,
     currentFollowerName,
+    followers,
     followersList,
+    following,
     followingList,
     handleConfirm,
     handleReject,
+    isFollowersLoading,
+    isFollowingLoading,
     setConfirmOpen,
   } = useFollowContext()
-
-  return (
-    <>
-      <ActionConfirmation
-        isOpen={confirmOpen}
-        message={`Do you really want to delete a Following ${currentFollowerName}?`}
-        onConfirm={handleConfirm}
-        onReject={handleReject}
-        setIsOpen={setConfirmOpen}
-        title={'Delete Following'}
-      />
-      {
-        <Modal
-          isOpen={isOpen}
-          maxWidth={'w-[640px]'}
-          mode={'default'}
-          onOpenChange={onClose}
-          title={
-            type === 'followers'
-              ? `${currentUserProfile.followers} Followers`
-              : `${currentUserProfile.following} Following`
-          }
-        >
-          {followingList && followersList && (
-            <FollowModalItems currentUserProfile={currentUserProfile} type={type} />
-          )}
-        </Modal>
-      }
-    </>
-  )
+  
+  //TODO: separate followers and following queries
+  if (!isFollowingLoading && !isFollowersLoading) {
+    return (
+      <>
+        <ActionConfirmation
+          isOpen={confirmOpen}
+          message={`Do you really want to delete a Following ${currentFollowerName}?`}
+          onConfirm={handleConfirm}
+          onReject={handleReject}
+          setIsOpen={setConfirmOpen}
+          title={'Delete Following'}
+        />
+        {
+          <Modal
+            isOpen={isOpen}
+            maxWidth={'w-[640px]'}
+            mode={'default'}
+            onOpenChange={onClose}
+            title={type === 'followers' ? `${followers} Followers` : `${following} Following`}
+          >
+            {followingList && followersList && (
+              <FollowModalItems currentUserProfile={currentUserProfile} type={type} />
+            )}
+          </Modal>
+        }
+      </>
+    )
+  }
 }

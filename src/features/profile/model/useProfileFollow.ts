@@ -2,12 +2,11 @@ import { useState } from 'react'
 
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
-import { Follower } from '@/entities/followers/types/followers.types'
+import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
 import { useConfirmation } from '@byte-creators/utils'
 
 export const useProfileFollow = (currentUserProfile: { userName: string }) => {
   const [error, setError] = useState<null | string>(null)
-
   const { data: followingList, isLoading: isFollowingLoading } =
     followersApi.useGetUsersFollowingQuery({
       userName: currentUserProfile.userName,
@@ -17,7 +16,6 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
   })
 
   const { data: me } = authApi.useMeQuery()
-
   const [follow, { isLoading: followLoading }] = followersApi.useFollowMutation()
 
   const [remove, { isLoading: removeLoading }] = followersApi.useRemoveFollowerMutation()
@@ -26,6 +24,9 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
     useConfirmation()
 
   const [currentFollowerName, setCurrentFollowerName] = useState('')
+  
+  const following = followingList?.items.length
+  const followers = followersList?.items.length
 
   const isFollow = followersList?.items.map(item => item.userId).includes(me?.userId || 0)
 
@@ -63,7 +64,9 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
     currentFollowerName,
     error,
     followLoading,
+    followers,
     followersList,
+    following,
     followingList,
     handleConfirm,
     handleConfirmDeleting,

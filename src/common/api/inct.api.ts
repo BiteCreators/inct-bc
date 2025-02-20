@@ -15,6 +15,7 @@ export const inctagramApi = createApi({
   tagTypes: [
     'Me',
     'Profile',
+    'PublicProfile',
     'Devices',
     'Posts',
     'Post',

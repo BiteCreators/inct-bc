@@ -1,9 +1,13 @@
 import { useState } from 'react'
 
-import { Follower } from '@/entities/followers/types/followers.types'
+import {
+  Follower,
+  UserProfile as UserProfileType,
+} from '@/entities/followers/types/followers.types'
 import { FollowModalButtons } from '@/features/profile/ui/profile-follow/FollowModalButtons'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { Alert, Input, ScrollArea, Typography, UserProfile } from '@byte-creators/ui-kit'
+import { useScopedTranslation } from '@byte-creators/utils'
 
 import example from '../../../../../public/examples/exampleAvatar.png'
 
@@ -18,6 +22,7 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
   const followList = type === 'followers' ? followersList : followingList
 
   const [searchValue, setSearchValue] = useState('')
+  const t = useScopedTranslation('Profile')
 
   if (!followList || !followList.items) {
     return null
@@ -31,7 +36,7 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
     <div>
       {followList.items.length === 0 ? (
         <div className={'mr-2 mt-2 h-[550px]'}>
-          <Typography variant={'regular-text'}>The list is empty</Typography>
+          <Typography variant={'regular-text'}>{t.modal.listIsEmpty}</Typography>
         </div>
       ) : (
         <div>
