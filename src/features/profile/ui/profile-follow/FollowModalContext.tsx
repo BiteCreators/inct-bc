@@ -1,13 +1,7 @@
 import React, { ReactNode, createContext, useContext } from 'react'
 
 import { MeResponse } from '@/entities/auth/api/auth.api'
-
-import {
-  Follower,
-  FollowersResponse,
-  UserProfile,
-} from '@/entities/followers/types/followers.types'
-
+import { Follower, FollowersResponse } from '@/entities/followers/types/followers.types'
 import { useProfileFollow } from '@/features/profile/model/useProfileFollow'
 
 type FollowContextValue = {
@@ -15,7 +9,6 @@ type FollowContextValue = {
   currentFollowerName: string
   error: null | string
   followLoading: boolean
-
   followers?: null | number
   followersList: FollowersResponse | undefined
   following?: null | number
