@@ -21,32 +21,36 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
     followingList,
     handleConfirm,
     handleReject,
+    isFollowersLoading,
+    isFollowingLoading,
     setConfirmOpen,
   } = useFollowContext()
 
-  return (
-    <>
-      <ActionConfirmation
-        isOpen={confirmOpen}
-        message={`Do you really want to delete a Following ${currentFollowerName}?`}
-        onConfirm={handleConfirm}
-        onReject={handleReject}
-        setIsOpen={setConfirmOpen}
-        title={'Delete Following'}
-      />
-      {
-        <Modal
-          isOpen={isOpen}
-          maxWidth={'w-[640px]'}
-          mode={'default'}
-          onOpenChange={onClose}
-          title={type === 'followers' ? `${followers} Followers` : `${following} Following`}
-        >
-          {followingList && followersList && (
-            <FollowModalItems currentUserProfile={currentUserProfile} type={type} />
-          )}
-        </Modal>
-      }
-    </>
-  )
+  if (!isFollowingLoading && !isFollowersLoading) {
+    return (
+      <>
+        <ActionConfirmation
+          isOpen={confirmOpen}
+          message={`Do you really want to delete a Following ${currentFollowerName}?`}
+          onConfirm={handleConfirm}
+          onReject={handleReject}
+          setIsOpen={setConfirmOpen}
+          title={'Delete Following'}
+        />
+        {
+          <Modal
+            isOpen={isOpen}
+            maxWidth={'w-[640px]'}
+            mode={'default'}
+            onOpenChange={onClose}
+            title={type === 'followers' ? `${followers} Followers` : `${following} Following`}
+          >
+            {followingList && followersList && (
+              <FollowModalItems currentUserProfile={currentUserProfile} type={type} />
+            )}
+          </Modal>
+        }
+      </>
+    )
+  }
 }
