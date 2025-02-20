@@ -3,10 +3,13 @@ import { Avatar, WithSearchPaginationParams } from '@/common/types/api.types'
 
 import { PostLikesResponse, Reaction } from '../types/likes.types'
 import {
+  AllPublicPostsRequest,
   CreatePostRequest,
+  FollowerPublicationsRequest,
+  FollowerPublicationsResponse,
   Post,
-  PublicPostsRequest,
   PublicPostsResponse,
+  UserPublicPostsRequest,
 } from '../types/posts.types'
 
 type CreatePostImageResponse = { uploadId: string } & Avatar
@@ -14,7 +17,7 @@ type CreatePostImageResponse = { uploadId: string } & Avatar
 export const postsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     createPost: builder.mutation<Post, CreatePostRequest>({
-      invalidatesTags: ['Post'],
+      invalidatesTags: [{ id: 'LIST', type: 'Posts' }],
       query: body => ({
         body,
         method: 'POST',
@@ -22,7 +25,6 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
     }),
     createPostImage: builder.mutation<{ images: CreatePostImageResponse[] }, { file: File[] }>({
-      invalidatesTags: ['Post'],
       query: ({ file }) => {
         const formData = new FormData()
 
@@ -43,10 +45,50 @@ export const postsApi = inctagramApi.injectEndpoints({
       }),
     }),
     deletePostImage: builder.mutation<void, { uploadId: string }>({
-      invalidatesTags: ['Post'],
       query: ({ uploadId }) => ({
         method: 'DELETE',
         url: `v1/posts/image/${uploadId}`,
+      }),
+    }),
+    getAllPublicPosts: builder.query<PublicPostsResponse, AllPublicPostsRequest>({
+      providesTags: res =>
+        res
+          ? [
+              ...res.items.map(post => ({ id: post.id, type: 'Posts' as const })),
+              { id: 'LIST', type: 'Posts' },
+            ]
+          : [{ id: 'LIST', type: 'Posts' }],
+      query: data => {
+        const { endCursorPostId, ...params } = data
+
+        return {
+          params,
+          url: endCursorPostId ? `v1/public-posts/all/${endCursorPostId}` : `v1/public-posts/all`,
+        }
+      },
+    }),
+    getFollowerPublications: builder.query<
+      FollowerPublicationsResponse,
+      FollowerPublicationsRequest
+    >({
+      providesTags: ['Posts'],
+      query: data => {
+        const { endCursorPostId, pageNumber, pageSize } = data
+
+        return {
+          params: {
+            endCursorPostId,
+            pageNumber,
+            pageSize,
+          },
+          url: `v1/home/publications-followers`,
+        }
+      },
+    }),
+    getPostById: builder.query<Post, { postId: number }>({
+      providesTags: ['Post'],
+      query: ({ postId }) => ({
+        url: `v1/posts/id/${postId}`,
       }),
     }),
     getPostLikes: builder.query<PostLikesResponse, { postId: number } & WithSearchPaginationParams>(
@@ -61,19 +103,20 @@ export const postsApi = inctagramApi.injectEndpoints({
         },
       }
     ),
-    // getPosts: builder.query<Posts, { userName: string } & Params>({      //не приходит массив с загруженными картинками
-    //   providesTags: ['Post'],
-    //   query: data => {
-    //     const { userName, ...params } = data
-
-    //     return {
-    //       params,
-    //       url: `v1/posts/${userName}`,
-    //     }
-    //   },
-    // }),
-    getPublicPostsByUserId: builder.query<PublicPostsResponse, PublicPostsRequest>({
+    getPublicPostById: builder.query<Post, { postId: number }>({
       providesTags: ['Post'],
+      query: ({ postId }) => ({
+        url: `v1/public-posts/${postId}`,
+      }),
+    }),
+    getPublicPostsByUserId: builder.query<PublicPostsResponse, UserPublicPostsRequest>({
+      providesTags: res =>
+        res
+          ? [
+              ...res.items.map(post => ({ id: post.id, type: 'Posts' as const })),
+              { id: 'LIST', type: 'Posts' },
+            ]
+          : [{ id: 'LIST', type: 'Posts' }],
       query: data => {
         const { userId, ...params } = data
 
@@ -84,6 +127,7 @@ export const postsApi = inctagramApi.injectEndpoints({
       },
     }),
     updateLikeStatusPost: builder.mutation<void, { likeStatus: Reaction; postId: number }>({
+      invalidatesTags: ['Post'],
       query: ({ likeStatus, postId }) => ({
         body: { likeStatus },
         method: 'PUT',

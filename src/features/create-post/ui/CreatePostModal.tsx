@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import { ActionConfirmation, Alert, Modal } from '@byte-creators/ui-kit'
 
 import { useCreatePost } from '../model/useCreatePost'
@@ -13,10 +15,8 @@ import { PublicationModal } from './PublicationModal'
 import { SizeEditorModal } from './SizeEditorModal'
 
 export const CreatePostModal = () => {
-  const [selectedImage, setSelectedImage] = useState<null | number>(null)
   const {
     addImageUrlForPost,
-    apiError,
     correct,
     handleBackWithoutSave,
     handleChange,
@@ -24,32 +24,25 @@ export const CreatePostModal = () => {
     handleDeleteImageUrl,
     handleInteractOutside,
     handlePublish,
-    images,
-    isDisableInput,
     isLoading,
-    isOpenActionConfirmation,
-    isOpenCreatePost,
     limit,
-    setImages,
-    setIsOpenActionConfirmation,
-    setIsOpenCreatePost,
     t,
     uploadAllImages,
     value,
   } = useCreatePost()
 
-  const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
-    useImageFilters({
-      images,
-      setImages,
-    })
+  const { apiError, images, isOpenActionConfirmation, isOpenCreatePost, step } = useAppSelector(
+    state => state.createPost
+  )
 
-  const { handleBack, handleNext, nextButtonTitle, step, title } = useStepControl({
+  const dispatch = useAppDispatch()
+
+  const { currentIndex, handleApplyFilters, handleSelectFilter, setCurrentIndex, totalImageRefs } =
+    useImageFilters()
+
+  const { handleBack, handleNext, nextButtonTitle, title } = useStepControl({
     handleApplyFilters,
     handlePublish,
-    images,
-    isOpenCreatePost,
-    setIsOpenCreatePost,
     uploadAllImages,
   })
 
@@ -57,7 +50,7 @@ export const CreatePostModal = () => {
     addImageUrlForPost,
     handleNext: () => {
       handleNext()
-      setSelectedImage(images.length)
+      dispatch(createPostSlice.actions.setSelectedImage(images.length))
     },
   })
 
@@ -70,7 +63,7 @@ export const CreatePostModal = () => {
         message={t.doYouWantToCloseCreation}
         onConfirm={handleConfirm}
         onReject={() => {}}
-        setIsOpen={setIsOpenActionConfirmation}
+        setIsOpen={() => dispatch(createPostSlice.actions.setIsOpenActionConfirmation(false))}
         title={t.close}
       />
       <Modal
@@ -84,7 +77,9 @@ export const CreatePostModal = () => {
         isOpen={isOpenCreatePost}
         mode={step === 1 ? 'default' : 'withStep'}
         nextButtonTitle={nextButtonTitle}
-        onOpenChange={setIsOpenCreatePost}
+        onOpenChange={() =>
+          dispatch(createPostSlice.actions.setIsOpenCreatePost(!isOpenCreatePost))
+        }
         title={title}
       >
         {(error || apiError) && (
@@ -108,12 +103,7 @@ export const CreatePostModal = () => {
             fileInputRef={fileInputRef as React.RefObject<HTMLInputElement>}
             handleDeleteImageUrl={handleDeleteImageUrl}
             handleFileSelect={handleFileSelect}
-            images={images}
-            isDisableInput={isDisableInput}
             isLoading={isLoading}
-            selectedImage={selectedImage}
-            setImages={setImages}
-            setSelectedImage={setSelectedImage}
             slides={addedImageSlides}
             uploadImage={uploadImage}
           />
@@ -122,7 +112,6 @@ export const CreatePostModal = () => {
           <ImageFiltersModal
             currentIndex={currentIndex}
             handleSelectFilter={handleSelectFilter}
-            images={images}
             setCurrentIndex={setCurrentIndex}
             slides={addedImageSlides}
           />
@@ -131,7 +120,6 @@ export const CreatePostModal = () => {
           <PublicationModal
             correct={correct}
             handleChange={handleChange}
-            images={images}
             isLoading={isLoading}
             limit={limit}
             slides={addedImageSlides}

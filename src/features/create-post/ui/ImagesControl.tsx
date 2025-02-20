@@ -1,5 +1,6 @@
 import React, { RefObject } from 'react'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Button, DragAndDropInput, ScrollArea } from '@byte-creators/ui-kit'
 import {
   CloseOutlineSmall,
@@ -9,14 +10,11 @@ import {
 } from '@byte-creators/ui-kit/icons'
 
 import { useImageControl } from '../model/useImageControl'
-import { ImageData } from '../types'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: ImageData[]
-  isDisableInput: boolean
   uploadImage: () => void
 }
 
@@ -24,11 +22,11 @@ export const ImageControl = ({
   fileInputRef,
   handleDeleteImageUrl,
   handleFileSelect,
-  images,
-  isDisableInput,
   uploadImage,
 }: Props) => {
   const { imagesControlRef, isImagesControlOpen, setIsImagesControlOpen } = useImageControl()
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images, isDisableInput } = createPostState
 
   return (
     <div className={'relative ml-auto'} ref={imagesControlRef}>

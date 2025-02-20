@@ -5,7 +5,7 @@ export type UsersInfoResponse = {
   prevCursor: number
 } & WithPaginationResponse<UsersInfo>
 
-type UsersInfo = {
+export type UsersInfo = {
   avatars: Avatar[]
   createdAt: string
   firstName: string
@@ -43,5 +43,20 @@ export type WithFollowersCountUserProfile = {
   lastName: string
   publicationsCount: number
   region: null | string
+  userName: string
+}
+
+type UserMetadata = {
+  followers: number
+  following: number
+  publications: number
+}
+
+export type UserProfile = {
+  aboutMe: string
+  avatars: Avatar[]
+  id: number
+  onClick: () => void
+  userMetadata: UserMetadata
   userName: string
 }

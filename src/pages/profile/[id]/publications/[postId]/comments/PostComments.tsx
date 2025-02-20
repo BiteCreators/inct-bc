@@ -13,8 +13,15 @@ import { useParams } from 'next/navigation'
 
 export default function PostComments() {
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
-  const { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef } =
-    useCommentState()
+  const {
+    answerData,
+    contentComment,
+    correct,
+    handleAnswerClick,
+    limit,
+    setContentComment,
+    textareaRef,
+  } = useCommentState()
 
   const params = useParams<{ id: string; postId: string }>()
   const id = params?.id
@@ -63,6 +70,8 @@ export default function PostComments() {
           <AddCommentTextarea
             answerData={answerData}
             contentComment={contentComment}
+            correct={correct}
+            limit={limit}
             postId={postId!}
             ref={textareaRef}
             setContentComment={setContentComment}

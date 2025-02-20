@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
-import { PAYMENT_PROVIDERS, TYPE_DESCRIPTIONS, paymentsApi } from '@/entities/payments'
+import { paymentsApi } from '@/entities/payments'
 import { paymentsSlice } from '@/features/payments'
-import { useScopedTranslation } from '@byte-creators/utils'
+import { PAYMENT_PROVIDERS, SUBSCRIPTION_TYPES, useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
 import { SubscriptionFormData, createSubscriptionSchema } from '../schemas/subscription.schema'
@@ -23,7 +23,7 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
 
   const t = useScopedTranslation('Payments')
 
-  const getPaymentDataByType = (desc: TYPE_DESCRIPTIONS | null) => {
+  const getPaymentDataByType = (desc: SUBSCRIPTION_TYPES | null) => {
     if (subscriptionTypes) {
       return subscriptionTypes.data.find(type => type.typeDescription === desc)
     }

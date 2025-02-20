@@ -1,39 +1,62 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { commentsApi } from '@/entities/comments'
-import { Post } from '@/entities/posts'
-import { useMediaQuery } from '@byte-creators/utils'
+import { postsApi } from '@/entities/posts'
+import { Alert } from '@byte-creators/ui-kit'
+import { skipToken } from '@reduxjs/toolkit/query'
+import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 import { PostDetailsSlide } from './PostDetailsSlide'
 import { PostDesktop } from './desktop/PostDesktop'
-import { PostMobile } from './mobile/PostMobile'
 
-type Props = {
-  post: Post
-}
-
-export const PostDetails = ({ post }: Props) => {
+export const PostDetails = () => {
+  const params = useParams()
   const router = useRouter()
+
+  const currentUserId = useAppSelector(selectUserId)
+
+  const { data: post } = postsApi.useGetPublicPostByIdQuery(
+    params !== null ? { postId: Number(params.postId) } : skipToken
+  )
+
+  const {
+    data: commentsData,
+    error,
+    isLoading,
+  } = commentsApi.useGetCommentsQuery(currentUserId ? { postId: post?.id || 0 } : skipToken)
+
   const handleNavigateToImage = (imageUrl: string) => {
     const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
 
     router.push({
-      pathname: `/profile/${post.ownerId}/publications/${post.id}/view`,
+      pathname: `/profile/${post?.ownerId}/publications/${post?.id}/view`,
       query: { image: proxyUrl },
     })
   }
-  const slides = post.images.map((image: any, i) => (
+  const slides = post?.images.map((image: any, i) => (
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))
 
-  const isLargeScreen = useMediaQuery('(min-width: 768px)')
+  let comments = commentsData?.items
 
-  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post.id })
+  if (currentUserId) {
+    const currentUserComments = commentsData?.items.filter(
+      comment => comment.from.id === currentUserId
+    )
+    const commentsWithoutCurrentUser = commentsData?.items.filter(
+      comment => comment.from.id !== currentUserId
+    )
 
-  const comments = data?.items
-
-  if (isLargeScreen) {
-    return <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides} />
-  } else {
-    return <PostMobile comments={comments} post={post} slides={slides} />
+    if (currentUserComments && commentsWithoutCurrentUser) {
+      comments = [...currentUserComments, ...commentsWithoutCurrentUser]
+    }
   }
+
+  return (
+    <>
+      <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+      {error && <Alert message={'Comments loaded failed'} type={'error'} />}
+    </>
+  )
 }

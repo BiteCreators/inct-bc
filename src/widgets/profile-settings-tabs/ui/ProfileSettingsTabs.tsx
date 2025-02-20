@@ -56,7 +56,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
             query: {
               ...router.query,
               success: true,
-              tab: 'my-payments',
+              tab: 'account-management',
             },
           },
           undefined,

@@ -1,9 +1,12 @@
 import React from 'react'
 
 import { Post } from '@/entities/posts'
-import { Typography } from '@byte-creators/ui-kit'
-import { BookmarkOutline, HeartOutline, PaperPlaneOutline } from '@byte-creators/ui-kit/icons'
+import { useLikePost } from '@/features/posts/model/useLikePost'
+import { Alert, Typography } from '@byte-creators/ui-kit'
 import { cn } from '@byte-creators/utils'
+
+import { ActionButtonGroup } from './ActionButtonGroup'
+import { Likes } from './Likes'
 
 type Props = {
   post: Post
@@ -15,27 +18,23 @@ export const PostActionsBlock = ({ post }: Props) => {
     month: 'long',
     year: 'numeric',
   }).format(new Date(post.createdAt))
+  const { apiError, handleLike, postLikes } = useLikePost(post)
 
   return (
     <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
       <div className={cn(['pt-4 px-0', 'md:px-6'])}>
-        <div className={'flex justify-between mb-3'}>
-          <div>
-            <button className={'mr-6'}>
-              <HeartOutline />
-            </button>
-            <button>
-              <PaperPlaneOutline viewBox={'0 0 26 26'} />
-            </button>
-          </div>
-          <button>
-            <BookmarkOutline viewBox={'0 3 24 24'} />
-          </button>
-        </div>
+        <ActionButtonGroup className={'m-0 mb-3'} handleLike={handleLike} postLikes={postLikes} />
         <div className={'mb-3'}>
-          {/*--------LIKES-----------*/}
-          <p>Likes</p>
-          {/*------------------------*/}
+          <Likes className={'mb-2'} postLikes={postLikes} />
+          {apiError && (
+            <Alert
+              canClose={false}
+              message={apiError}
+              portal={false}
+              purpose={'alert'}
+              type={'error'}
+            />
+          )}
           <Typography className={'text-light-900 font-weight600'} variant={'small-text'}>
             {formattedDate}
           </Typography>

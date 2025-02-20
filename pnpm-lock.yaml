@@ -12,11 +12,11 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       '@byte-creators/ui-kit':
-        specifier: ^1.6.1
-        version: 1.6.1(pswtot6nrgevzv3b6vvu2yvgzy)
+        specifier: ^1.9.7
+        version: 1.9.7(ztsueiqhsynedbylibn3ch7ouq)
       '@byte-creators/utils':
-        specifier: ^1.7.1
-        version: 1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)
+        specifier: ^1.10.4
+        version: 1.10.4(eyvz6zxhtps2nrlo74dvv34dwq)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.1(react-hook-form@7.54.1(react@18.3.1))
@@ -431,8 +431,8 @@ packages:
       tailwindcss: ^3.4.1
       typescript: ^5
 
-  '@byte-creators/ui-kit@1.6.1':
-    resolution: {integrity: sha512-4cvZD/LpEfSerpbVIocCPq37jSgxQLHEIaY/YWAeeCQ4BBiV46kL7g9A+8MNWWpY5m012swQAqJSu9jWMKKH/Q==}
+  '@byte-creators/ui-kit@1.9.7':
+    resolution: {integrity: sha512-gJQa7zUJ4TTh3boj7kapiP3Rpx5oMSR+YybYalmEGOQGjvHw8xzRTc1CLI3ER67RkDtt2lcjg7G41vIXRczPfg==}
     peerDependencies:
       '@rollup/plugin-commonjs': ^26.0.1
       '@rollup/plugin-node-resolve': ^15.2.3
@@ -455,8 +455,8 @@ packages:
       rollup-plugin-postcss: ^4.0.2
       tailwind-merge: ^2.5.2
 
-  '@byte-creators/utils@1.8.2':
-    resolution: {integrity: sha512-aZGwwuJfiPE2XaWv1nowTrFY4/UxiU3ERjSYnjkCo1MRBTyMBdv6Q8pN5i0H8s2YlcS3sapxwYqu+YUiKioutA==}
+  '@byte-creators/utils@1.10.4':
+    resolution: {integrity: sha512-hhlggUwK1sXNhRxUW2SGXarrLf8iP6xZ4n+Xcljq2MwtRPAUhddd0H+PYZ3+WDyiR61SFTe4CtGU3WocEVTjOQ==}
     peerDependencies:
       next: 14.2.20
       react: ^18
@@ -5989,11 +5989,11 @@ snapshots:
       tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.7.2))
       typescript: 5.7.2
 
-  '@byte-creators/ui-kit@1.6.1(pswtot6nrgevzv3b6vvu2yvgzy)':
+  '@byte-creators/ui-kit@1.9.7(ztsueiqhsynedbylibn3ch7ouq)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
-      '@byte-creators/utils': 1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)
+      '@byte-creators/utils': 1.10.4(eyvz6zxhtps2nrlo74dvv34dwq)
       '@hookform/resolvers': 3.9.1(react-hook-form@7.54.1(react@18.3.1))
       '@radix-ui/react-dialog': 1.1.4(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-dropdown-menu': 2.1.4(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6042,7 +6042,7 @@ snapshots:
       - tailwindcss
       - typescript
 
-  '@byte-creators/utils@1.8.2(eyvz6zxhtps2nrlo74dvv34dwq)':
+  '@byte-creators/utils@1.10.4(eyvz6zxhtps2nrlo74dvv34dwq)':
     dependencies:
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       clsx: 2.1.1
