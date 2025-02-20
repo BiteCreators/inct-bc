@@ -25,18 +25,19 @@ export const DropdownPost = ({
   classNameButton,
   isFollow = false,
   isMyPost,
+  post,
 }: Props) => {
   const forDrop: DropdownItem[] = []
   const {
     apiError,
     confirmOpen,
-    copyLinkHandler,
+    copyPostLinkHandler,
     deletePostHandler,
     handleConfirm,
     handleReject,
     setConfirmOpen,
     t,
-  } = useDropdownPost()
+  } = useDropdownPost({ post })
 
   if (isMyPost) {
     forDrop.push(
@@ -70,7 +71,7 @@ export const DropdownPost = ({
     forDrop.push({
       icon: <CopyOutline className={'w-[23px] h-[23px]'} />,
       label: t.copyLink,
-      onClick: copyLinkHandler,
+      onClick: copyPostLinkHandler,
     })
   }
 

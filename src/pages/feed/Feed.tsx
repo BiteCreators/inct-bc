@@ -2,13 +2,8 @@ import { useRef, useState } from 'react'
 
 import { postsApi } from '@/entities/posts'
 import { PostFeed } from '@/features/posts'
-import { LinearLoader } from '@byte-creators/ui-kit'
+import { Alert, LinearLoader } from '@byte-creators/ui-kit'
 import { useIntersectionObserver, useScopedTranslation } from '@byte-creators/utils'
-import dynamic from 'next/dynamic'
-
-const Alert = dynamic(() => import('@byte-creators/ui-kit').then(mod => mod.Alert), {
-  ssr: false,
-})
 
 const Feed = () => {
   const [pageSize, setPageSize] = useState(8)
