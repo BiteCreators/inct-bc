@@ -5,7 +5,7 @@ export type UsersInfoResponse = {
   prevCursor: number
 } & WithPaginationResponse<UsersInfo>
 
-type UsersInfo = {
+export type UsersInfo = {
   avatars: Avatar[]
   createdAt: string
   firstName: string

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { commentsApi } from '@/entities/comments'
 
 export const useCreateComment = ({
@@ -21,8 +20,7 @@ export const useCreateComment = ({
   const isAnswer = !!answerData
   const [createComment] = commentsApi.useCreateCommentMutation()
   const [createAnswerComment] = commentsApi.useCreateAnswerCommentMutation()
-  const { handleApiError } = useHandleApiError('Posts')
-  const [apiError, setApiError] = useState('')
+  const [error, setError] = useState<null | string>(null)
   const handleCreateAnswerComment = async () => {
     try {
       if (contentComment && isAnswer) {
@@ -30,24 +28,26 @@ export const useCreateComment = ({
           commentId: answerData.commentId,
           content: contentComment,
           postId: answerData.postId,
-        })
+        }).unwrap()
         setContentComment('')
       }
     } catch (error) {
-      handleApiError({ error, setApiError })
+      setContentComment('')
+      setError('answer request error')
     }
   }
 
   const handleCreateComment = async () => {
     try {
       if (contentComment) {
-        await createComment({ content: contentComment, postId: Number(postId) })
+        await createComment({ content: contentComment, postId: Number(postId) }).unwrap()
         setContentComment('')
       }
     } catch (error) {
-      handleApiError({ error, setApiError })
+      setContentComment('')
+      setError('comment request error')
     }
   }
 
-  return { apiError, handleCreateAnswerComment, handleCreateComment, isAnswer, setApiError }
+  return { error, handleCreateAnswerComment, handleCreateComment, isAnswer }
 }

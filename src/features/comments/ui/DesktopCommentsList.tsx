@@ -1,9 +1,12 @@
 import React from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { Comment } from '@/entities/comments/types/comments.types'
 import { PostComment } from '@/features/comments'
 import { ScrollArea } from '@byte-creators/ui-kit'
+import Link from 'next/link'
 
 type Props = {
   comments?: Comment[]
@@ -18,6 +21,8 @@ export const DesktopCommentsList = ({
   handleAnswerClick,
   isLoading = false,
 }: Props) => {
+  const currentUserId = useAppSelector(selectUserId)
+
   const skeletonComments = Array.from({ length: 3 }).map((_, index) => (
     <SkeletonTheme baseColor={'#3f3e3e'} highlightColor={'#575656'} key={index}>
       <div className={'mb-4'}>
@@ -36,7 +41,17 @@ export const DesktopCommentsList = ({
       ))
     }
 
-    return 'No comments'
+    return currentUserId ? (
+      <span>No comments</span>
+    ) : (
+      <span>
+        Please{' '}
+        <Link className={'text-primary-300'} href={'/auth/sign-in'}>
+          Log In
+        </Link>{' '}
+        to see comments
+      </span>
+    )
   }
 
   return (

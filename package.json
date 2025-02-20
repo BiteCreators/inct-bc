@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@byte-creators/config": "^1.0.5",
-    "@byte-creators/ui-kit": "^1.6.1",
-    "@byte-creators/utils": "^1.10.2",
+    "@byte-creators/utils": "^1.10.4",
+    "@byte-creators/ui-kit": "^1.9.7",
     "@hookform/resolvers": "^3.9.0",
     "@module-federation/nextjs-mf": "^8.7.8",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -87,5 +87,6 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

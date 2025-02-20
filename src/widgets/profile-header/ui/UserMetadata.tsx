@@ -42,16 +42,16 @@ export const UserMetadata = ({ isLoading }: Props) => {
           locale={locale}
           onClick={() => handleOpenModal('followers')}
         />
-
-        <FollowProvider currentUserProfile={profile}>
-          <ProfileFollowModal
-            currentUserProfile={profile}
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            type={modalType}
-          />
-        </FollowProvider>
-
+        <ProfileFollowModal
+          currentUserProfile={{
+            followers: profile.userMetadata.followers,
+            following: profile.userMetadata.following,
+            id: profile.id,
+          }}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          type={modalType}
+        />
         <div className={'flex flex-col text-xs sm:text-sm'}>
           {isLoading ? (
             <Skeleton height={50} width={90} />

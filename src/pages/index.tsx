@@ -1,55 +1,64 @@
 import { DefaultLayout } from '@/application/layouts/DefautlLayout'
 import { wrapper } from '@/application/store'
-import { Post } from '@/entities/posts'
+import { postsApi } from '@/entities/posts'
 import { RegisteredUsers } from '@/widgets/registered-users/RegisteredUsers'
-import { PostCard } from '@byte-creators/ui-kit'
+import { LinearLoader } from '@byte-creators/ui-kit'
+import { PostCard } from '@byte-creators/ui-kit/components'
 import { cn } from '@byte-creators/utils'
-import { InferGetServerSidePropsType } from 'next'
+import { skipToken } from '@reduxjs/toolkit/query'
+import { useParams } from 'next/navigation'
 
-import { NextPageWithLayout } from './_app'
+export const getServerSideProps = wrapper.getServerSideProps(store => async context => {
+  const endCursorPostId = context.params?.endCursorPostId
+    ? Number(context.params.endCursorPostId)
+    : undefined
 
-type PublicPostsResponse = {
-  items: Post[]
-  pageSize: number
-  totalCount: number
-}
+  await store
+    .dispatch(
+      postsApi.endpoints.getAllPublicPosts.initiate(
+        endCursorPostId ? { endCursorPostId } : { pageSize: 4 }
+      )
+    )
+    .unwrap()
 
-export const getStaticProps = wrapper.getStaticProps(store => async context => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL
-
-  if (!apiUrl) {
-    console.error('NEXT_PUBLIC_API_URL is not defined')
-
-    return { props: { postsData: { items: [], pageSize: 0, totalCount: 0 } } }
-  }
-
-  try {
-    const res = await fetch(`${apiUrl}/v1/public-posts/all/?sortDirection=desc&pageSize=4`)
-
-    if (!res.ok) {
-      console.error('Failed to fetch posts data')
-
-      return {
-        props: { postsData: { items: [], pageSize: 0, totalCount: 0 } },
-      }
-    }
-
-    const postsData: PublicPostsResponse = await res.json()
-
-    return {
-      props: { postsData },
-      revalidate: 60,
-    }
-  } catch (error) {
-    console.error('Error fetching posts:', error)
-
-    return { props: { postsData: { items: [], pageSize: 0, totalCount: 0 } } }
+  return {
+    props: {},
   }
 })
 
-const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
-  postsData,
-}: InferGetServerSidePropsType<typeof getStaticProps>) => {
+const Main = () => {
+  const params = useParams<{ endCursorPostId: string }>()
+
+  let queryParams
+
+  if (params !== null) {
+    if (params.endCursorPostId) {
+      queryParams = { endCursorPostId: Number(params.endCursorPostId), pageSize: 4 }
+    } else {
+      queryParams = { pageSize: 4 }
+    }
+  } else {
+    queryParams = skipToken
+  }
+
+  const { data: postsData, isLoading } = postsApi.useGetAllPublicPostsQuery(queryParams, {
+    pollingInterval: 60000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+  })
+
+  if (isLoading) {
+    return (
+      <div className={'flex h-60 justify-center items-center'}>
+        <LinearLoader isLoading={isLoading} />
+      </div>
+    )
+  }
+
+  if (!postsData?.items.length) {
+    return <p>No posts found</p>
+  }
+
   const { items: posts } = postsData
 
   return (
@@ -64,14 +73,11 @@ const Main: NextPageWithLayout<{ postsData: PublicPostsResponse }> = ({
               avatarOwner={post.avatarOwner}
               createdAt={post.createdAt}
               description={post.description}
-              //TODO: make this partial
               isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
               postId={post.id}
-              postImageHight={post.images[0].height}
               postImageUrl={post.images[0].url}
-              postImageWidth={post.images[0].width}
               userName={post.userName}
             />
           ))}

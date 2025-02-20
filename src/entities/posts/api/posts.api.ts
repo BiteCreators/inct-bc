@@ -3,10 +3,11 @@ import { Avatar, WithSearchPaginationParams } from '@/common/types/api.types'
 
 import { PostLikesResponse, Reaction } from '../types/likes.types'
 import {
+  AllPublicPostsRequest,
   CreatePostRequest,
   Post,
-  PublicPostsRequest,
   PublicPostsResponse,
+  UserPublicPostsRequest,
 } from '../types/posts.types'
 
 type CreatePostImageResponse = { uploadId: string } & Avatar
@@ -47,6 +48,23 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: `v1/posts/image/${uploadId}`,
       }),
     }),
+    getAllPublicPosts: builder.query<PublicPostsResponse, AllPublicPostsRequest>({
+      providesTags: res =>
+        res
+          ? [
+              ...res.items.map(post => ({ id: post.id, type: 'Posts' as const })),
+              { id: 'LIST', type: 'Posts' },
+            ]
+          : [{ id: 'LIST', type: 'Posts' }],
+      query: data => {
+        const { endCursorPostId, ...params } = data
+
+        return {
+          params,
+          url: endCursorPostId ? `v1/public-posts/all/${endCursorPostId}` : `v1/public-posts/all`,
+        }
+      },
+    }),
     getPostById: builder.query<Post, { postId: number }>({
       providesTags: ['Post'],
       query: ({ postId }) => ({
@@ -71,7 +89,7 @@ export const postsApi = inctagramApi.injectEndpoints({
         url: `v1/public-posts/${postId}`,
       }),
     }),
-    getPublicPostsByUserId: builder.query<PublicPostsResponse, PublicPostsRequest>({
+    getPublicPostsByUserId: builder.query<PublicPostsResponse, UserPublicPostsRequest>({
       providesTags: res =>
         res
           ? [

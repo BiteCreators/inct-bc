@@ -2,8 +2,7 @@ import { useRef, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 
 import { postsApi } from '@/entities/posts'
-import { ImageWithSkeleton } from '@/features/posts/ui/ImageWithSkeleton'
-import { LoaderBlock, Typography } from '@byte-creators/ui-kit'
+import { Typography } from '@byte-creators/ui-kit'
 import { useIntersectionObserver } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import Link from 'next/link'
@@ -37,7 +36,6 @@ export const Posts = () => {
 
   return (
     <div className={'flex gap-5 justify-center flex-wrap relative'}>
-      {(isFetching || isLoading) && skeletonItems}
       {!isLoading && data?.items && data?.items.length < 1 ? (
         <Typography> user has no publications yet </Typography>
       ) : (
@@ -54,6 +52,7 @@ export const Posts = () => {
           <div ref={paginationRef}></div>
         </>
       )}
+      {(isFetching || isLoading) && skeletonItems}
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowMod
 import { Button } from '@byte-creators/ui-kit'
 
 type Props = {
-  currentUserProfile: UserProfile
+  currentUserProfile: { followers: number; following: number; id: number }
   type: 'followers' | 'following'
   user: Follower
 }

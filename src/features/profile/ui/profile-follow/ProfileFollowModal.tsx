@@ -6,7 +6,7 @@ import { FollowModalItems } from '@/features/profile/ui/profile-follow/FollowMod
 import { ActionConfirmation, Modal } from '@byte-creators/ui-kit'
 
 type Props = {
-  currentUserProfile: UserProfile
+  currentUserProfile: { followers: number; following: number; id: number }
   isOpen: boolean
   onClose: () => void
   type: 'followers' | 'following'
@@ -25,7 +25,8 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
     isFollowingLoading,
     setConfirmOpen,
   } = useFollowContext()
-
+  
+  //TODO: separate followers and following queries
   if (!isFollowingLoading && !isFollowersLoading) {
     return (
       <>
