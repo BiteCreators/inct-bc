@@ -1,17 +1,16 @@
 import React, { ReactNode } from 'react'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { ScrollArea, Slider, Typography } from '@byte-creators/ui-kit'
 import { cn } from '@byte-creators/utils'
 
 import s from '../styles/filters.module.css'
 
-import { ImageData } from '../types'
 import { filterValues } from '../utils/filterValues'
 
 type Props = {
   currentIndex: number
   handleSelectFilter: (selectedFilter: string) => void
-  images: ImageData[]
   setCurrentIndex: (currentIndex: number) => void
   slides: ReactNode[]
 }
@@ -19,10 +18,12 @@ type Props = {
 export const ImageFiltersModal = ({
   currentIndex,
   handleSelectFilter,
-  images,
   setCurrentIndex,
   slides,
 }: Props) => {
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images } = createPostState
+
   return (
     <div className={'flex min-h-[400px]'}>
       <div className={'w-1/2'}>
@@ -41,7 +42,7 @@ export const ImageFiltersModal = ({
                   <img
                     alt={'oops'}
                     className={cn('w-full h-full', s[filterValues[index].class])}
-                    src={images[currentIndex].initialUrl}
+                    src={images[currentIndex]?.initialUrl}
                   />
                 </div>
                 <Typography>{el.name}</Typography>

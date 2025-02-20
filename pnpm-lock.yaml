@@ -13,7 +13,7 @@ importers:
         version: 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       '@byte-creators/ui-kit':
         specifier: ^1.9.7
-        version: 1.9.7(pswtot6nrgevzv3b6vvu2yvgzy)
+        version: 1.9.7(ztsueiqhsynedbylibn3ch7ouq)
       '@byte-creators/utils':
         specifier: ^1.10.4
         version: 1.10.4(eyvz6zxhtps2nrlo74dvv34dwq)
@@ -5989,7 +5989,7 @@ snapshots:
       tailwindcss: 3.4.17(ts-node@10.9.2(@types/node@20.17.10)(typescript@5.7.2))
       typescript: 5.7.2
 
-  '@byte-creators/ui-kit@1.9.7(pswtot6nrgevzv3b6vvu2yvgzy)':
+  '@byte-creators/ui-kit@1.9.7(ztsueiqhsynedbylibn3ch7ouq)':
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)

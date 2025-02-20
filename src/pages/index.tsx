@@ -81,8 +81,7 @@ const Main = () => {
                 post.images && post.images[0] ? post.images[0].height : undefined
               }
               postId={post.id}
-              postImageUrl={post.images && post.images[0] ? post.images[0].url : ''}
-              postSize={post.images && post.images[0] ? post.images[0].width : undefined}
+              postImageUrl={post.images[0]?.url || ''}
               userName={post.userName}
             />
           ))}
