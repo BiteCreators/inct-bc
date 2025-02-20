@@ -61,6 +61,7 @@ const Main = () => {
 
   const { items: posts } = postsData
 
+  //TODO: rewrite "?" syntax
   return (
     <div className={cn('max-w-[972px] mr-[20%] ml-[10%]')}>
       <div>
@@ -76,8 +77,12 @@ const Main = () => {
               isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
+              postContainerHeight={
+                post.images && post.images[0] ? post.images[0].height : undefined
+              }
               postId={post.id}
-              postImageUrl={post.images[0].url}
+              postImageUrl={post.images && post.images[0] ? post.images[0].url : ''}
+              postSize={post.images && post.images[0] ? post.images[0].width : undefined}
               userName={post.userName}
             />
           ))}

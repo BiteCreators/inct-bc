@@ -2,19 +2,24 @@ import { useState } from 'react'
 
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { authApi } from '@/entities/auth'
-import { postsApi } from '@/entities/posts'
+import { Post, postsApi } from '@/entities/posts'
 import { useConfirmation, useScopedTranslation } from '@byte-creators/utils'
 import { useParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
-export const useDropdownPost = () => {
+export const useDropdownPost = ({ post }: { post: Post }) => {
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
   const router = useRouter()
   const [apiError, setApiError] = useState('')
   const { handleApiError } = useHandleApiError('Posts')
-  const copyLinkHandler = async () => {
-    await navigator.clipboard.writeText(window.location.href)
+  const copyPostLinkHandler = async () => {
+    const url = window.location.href.replace(
+      'feed',
+      `profile/${post.ownerId}/publications/${post.id}`
+    )
+
+    await navigator.clipboard.writeText(url)
   }
   const { data: me } = authApi.useMeQuery()
   const userId = me ? me.userId : ''
@@ -39,7 +44,7 @@ export const useDropdownPost = () => {
   return {
     apiError,
     confirmOpen,
-    copyLinkHandler,
+    copyPostLinkHandler,
     deletePostHandler,
     handleConfirm,
     handleReject,

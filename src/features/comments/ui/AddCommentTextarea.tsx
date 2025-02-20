@@ -1,4 +1,4 @@
-import React, { ComponentProps, forwardRef, useEffect } from 'react'
+import React, { ComponentProps, forwardRef, useEffect, useRef } from 'react'
 
 import { Alert, Button, ScrollArea, TextArea } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
@@ -18,6 +18,7 @@ type Props = {
   limit?: number
   postId: string
   setContentComment: (text: string) => void
+  transparent?: boolean
 } & ComponentProps<'textarea'>
 
 export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
@@ -55,6 +56,22 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
         }
       }, 50)
     }
+
+    const autoResizeTextArea = () => {
+      if (transparentTextareaRef.current) {
+        const textarea = transparentTextareaRef.current
+
+        textarea.style.height = `auto`
+        textarea.style.height = `${Math.min(
+          textarea.scrollHeight,
+          4 * parseFloat(getComputedStyle(textarea).lineHeight)
+        )}px`
+      }
+    }
+
+    useEffect(() => {
+      autoResizeTextArea()
+    }, [contentComment])
 
     useEffect(() => {
       setTimeout(() => {

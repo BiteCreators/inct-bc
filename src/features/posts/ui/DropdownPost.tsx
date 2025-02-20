@@ -14,22 +14,30 @@ import {
 type Props = {
   changeEditMode: (e: boolean) => void
   className?: string
+  classNameButton?: string
+  isFollow?: boolean
   isMyPost: boolean
   post: Post
 }
-export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => {
+export const DropdownPost = ({
+  changeEditMode,
+  className,
+  classNameButton,
+  isFollow = false,
+  isMyPost,
+  post,
+}: Props) => {
   const forDrop: DropdownItem[] = []
-  const isFollow = false
   const {
     apiError,
     confirmOpen,
-    copyLinkHandler,
+    copyPostLinkHandler,
     deletePostHandler,
     handleConfirm,
     handleReject,
     setConfirmOpen,
     t,
-  } = useDropdownPost()
+  } = useDropdownPost({ post })
 
   if (isMyPost) {
     forDrop.push(
@@ -63,7 +71,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => 
     forDrop.push({
       icon: <CopyOutline className={'w-[23px] h-[23px]'} />,
       label: t.copyLink,
-      onClick: copyLinkHandler,
+      onClick: copyPostLinkHandler,
     })
   }
 
@@ -77,7 +85,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => 
         setIsOpen={setConfirmOpen}
         title={t.deletePost}
       />
-      <Dropdown className={className} items={forDrop} />
+      <Dropdown className={className} classNameButton={classNameButton} items={forDrop} />
       {apiError && (
         <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
       )}
