@@ -61,6 +61,7 @@ const Main = () => {
 
   const { items: posts } = postsData
 
+  //TODO: rewrite "?" syntax
   return (
     <div className={cn('max-w-[972px] mr-[20%] ml-[10%]')}>
       <div>

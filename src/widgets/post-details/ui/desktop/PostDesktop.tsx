@@ -27,8 +27,15 @@ export const PostDesktop = ({ comments, isLoading = false, post, slides }: Props
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
 
-  const { answerData, contentComment, handleAnswerClick, setContentComment, textareaRef } =
-    useCommentState()
+  const {
+    answerData,
+    contentComment,
+    correct,
+    handleAnswerClick,
+    limit,
+    setContentComment,
+    textareaRef,
+  } = useCommentState()
 
   const postWithPic = post?.images.length !== 0
 
@@ -87,6 +94,8 @@ export const PostDesktop = ({ comments, isLoading = false, post, slides }: Props
                   <AddCommentTextarea
                     answerData={answerData}
                     contentComment={contentComment}
+                    correct={correct}
+                    limit={limit}
                     postId={post.id.toString()}
                     ref={textareaRef}
                     setContentComment={setContentComment}

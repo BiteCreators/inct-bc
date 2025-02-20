@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { commentsApi } from '@/entities/comments'
 import { postsApi } from '@/entities/posts'
 import { Alert } from '@byte-creators/ui-kit'
@@ -10,12 +12,19 @@ import { PostDesktop } from './desktop/PostDesktop'
 
 export const PostDetails = () => {
   const params = useParams()
+  const router = useRouter()
+
+  const currentUserId = useAppSelector(selectUserId)
 
   const { data: post } = postsApi.useGetPublicPostByIdQuery(
     params !== null ? { postId: Number(params.postId) } : skipToken
   )
 
-  const router = useRouter()
+  const {
+    data: commentsData,
+    error,
+    isLoading,
+  } = commentsApi.useGetCommentsQuery(currentUserId ? { postId: post?.id || 0 } : skipToken)
 
   const handleNavigateToImage = (imageUrl: string) => {
     const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
@@ -29,9 +38,20 @@ export const PostDetails = () => {
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))
 
-  const { data, error, isLoading } = commentsApi.useGetCommentsQuery({ postId: post?.id || 0 })
+  let comments = commentsData?.items
 
-  const comments = data?.items
+  if (currentUserId) {
+    const currentUserComments = commentsData?.items.filter(
+      comment => comment.from.id === currentUserId
+    )
+    const commentsWithoutCurrentUser = commentsData?.items.filter(
+      comment => comment.from.id !== currentUserId
+    )
+
+    if (currentUserComments && commentsWithoutCurrentUser) {
+      comments = [...currentUserComments, ...commentsWithoutCurrentUser]
+    }
+  }
 
   return (
     <>
