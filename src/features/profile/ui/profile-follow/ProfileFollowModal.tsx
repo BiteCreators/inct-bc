@@ -25,7 +25,7 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
     isFollowingLoading,
     setConfirmOpen,
   } = useFollowContext()
-  
+
   //TODO: separate followers and following queries
   if (!isFollowingLoading && !isFollowersLoading) {
     return (
