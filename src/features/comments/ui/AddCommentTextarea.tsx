@@ -57,29 +57,29 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       }, 50)
     }
 
-    const autoResizeTextArea = () => {
-      if (transparentTextareaRef.current) {
-        const textarea = transparentTextareaRef.current
+    // const autoResizeTextArea = () => {
+    //   if (transparentTextareaRef.current) {
+    //     const textarea = transparentTextareaRef.current
+    //
+    //     textarea.style.height = `auto`
+    //     textarea.style.height = `${Math.min(
+    //       textarea.scrollHeight,
+    //       4 * parseFloat(getComputedStyle(textarea).lineHeight)
+    //     )}px`
+    //   }
+    // }
 
-        textarea.style.height = `auto`
-        textarea.style.height = `${Math.min(
-          textarea.scrollHeight,
-          4 * parseFloat(getComputedStyle(textarea).lineHeight)
-        )}px`
-      }
-    }
+    // useEffect(() => {
+    //   autoResizeTextArea()
+    // }, [contentComment])
 
-    useEffect(() => {
-      autoResizeTextArea()
-    }, [contentComment])
-
-    useEffect(() => {
-      setTimeout(() => {
-        if (textAreaRef.current) {
-          textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
-        }
-      }, 50)
-    }, [textAreaRef])
+    // useEffect(() => {
+    //   setTimeout(() => {
+    //     if (textAreaRef.current) {
+    //       textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
+    //     }
+    //   }, 50)
+    // }, [textAreaRef])
 
     return (
       <div className={cn(['flex py-2 px-0', 'md:px-6'])}>
