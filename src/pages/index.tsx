@@ -77,7 +77,7 @@ const Main = () => {
               key={post.id}
               ownerId={post.ownerId}
               postId={post.id}
-              postImageUrl={post.images[0].url}
+              postImageUrl={post.images[0]?.url || ''}
               userName={post.userName}
             />
           ))}

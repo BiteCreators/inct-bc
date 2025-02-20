@@ -1,27 +1,23 @@
 import { useEffect, useState } from 'react'
 
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { useHandleApiError } from '@/common/lib/hooks/useHanldeApiError'
 import { postsApi } from '@/entities/posts'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import { useScopedTranslation, useValidationLimit } from '@byte-creators/utils'
 
-import { ImageData } from '../types'
-
 export const useCreatePost = () => {
-  const [isOpenCreatePost, setIsOpenCreatePost] = useState(true)
-  const [isOpenActionConfirmation, setIsOpenActionConfirmation] = useState(false)
-  const [isDisableInput, setIsDisableInput] = useState(false)
-
+  const dispatch = useAppDispatch()
   const [createPostImage, { isLoading: isLoadingCreate }] = postsApi.useCreatePostImageMutation()
   const [createPost] = postsApi.useCreatePostMutation()
   const [deletePostImage, { isLoading: isLoadingDelete }] = postsApi.useDeletePostImageMutation()
-
-  const [uploadIds, setUploadIds] = useState<{ uploadId: string }[]>([])
-  const [images, setImages] = useState<ImageData[]>([])
-
   const [apiError, setApiError] = useState<string>('')
   const { handleApiError } = useHandleApiError('Profile')
   const t = useScopedTranslation('Posts')
   const isLoading = isLoadingCreate || isLoadingDelete
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images, isDisableInput, isOpenActionConfirmation, isOpenCreatePost, uploadIds } =
+    createPostState
 
   const { correct, handleChange, limit, value } = useValidationLimit({
     limit: 500,
@@ -45,14 +41,16 @@ export const useCreatePost = () => {
       if (images.length === 0) {
         handleNext()
       }
-      setImages(images => [
-        ...images,
-        {
-          initialUrl: URL.createObjectURL(file),
-          selectedFilter: '',
-          totalUrl: '',
-        },
-      ])
+      dispatch(
+        createPostSlice.actions.setImages([
+          ...images,
+          {
+            initialUrl: URL.createObjectURL(file),
+            selectedFilter: '',
+            totalUrl: '',
+          },
+        ])
+      )
     }
   }
 
@@ -63,11 +61,11 @@ export const useCreatePost = () => {
       uploadId: image.uploadId,
     }))
 
-    setUploadIds(uploadIds)
+    dispatch(createPostSlice.actions.setUploadIds(uploadIds))
   }
 
   const handleDeleteImageUrl = (index: number) => {
-    setImages(images => images.filter((_, i) => i !== index))
+    dispatch(createPostSlice.actions.setImages(images.filter((_, i) => i !== index)))
   }
 
   const handlePublish = async () => {
@@ -77,9 +75,9 @@ export const useCreatePost = () => {
           childrenMetadata: uploadIds,
           description: value,
         }).unwrap()
-        setIsOpenCreatePost(false)
-        setUploadIds([])
-        setImages([])
+        dispatch(createPostSlice.actions.setIsOpenCreatePost(false))
+        dispatch(createPostSlice.actions.setUploadIds([]))
+        dispatch(createPostSlice.actions.setImages([]))
       }
     } catch (error) {
       handleApiError({ error, setApiError })
@@ -88,13 +86,13 @@ export const useCreatePost = () => {
 
   const handleInteractOutside = (e: any) => {
     e.preventDefault()
-    setIsOpenActionConfirmation(true)
+    dispatch(createPostSlice.actions.setIsOpenActionConfirmation(true))
   }
 
   const handleConfirm = () => {
-    setIsOpenCreatePost(false)
-    setUploadIds([])
-    setImages([])
+    dispatch(createPostSlice.actions.setIsOpenCreatePost(false))
+    dispatch(createPostSlice.actions.setUploadIds([]))
+    dispatch(createPostSlice.actions.setImages([]))
     if (uploadIds) {
       uploadIds.forEach(el => {
         deletePostImage({ uploadId: el.uploadId })
@@ -103,11 +101,11 @@ export const useCreatePost = () => {
   }
 
   const handleBackWithoutSave = () => {
-    setIsOpenActionConfirmation(true)
+    dispatch(createPostSlice.actions.setIsOpenActionConfirmation(true))
   }
 
   useEffect(() => {
-    setIsDisableInput(images.length >= 9)
+    dispatch(createPostSlice.actions.setIsDisableInput(images.length >= 9))
   }, [images])
 
   return {
@@ -126,9 +124,6 @@ export const useCreatePost = () => {
     isOpenActionConfirmation,
     isOpenCreatePost,
     limit,
-    setImages,
-    setIsOpenActionConfirmation,
-    setIsOpenCreatePost,
     t,
     uploadAllImages,
     value,

@@ -2,15 +2,12 @@ import React, { ReactNode } from 'react'
 
 import { profileApi } from '@/entities/profile'
 import { SnakeGame } from '@/features/games/ui/SnakeGame'
-import { LoaderBlock, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
+import { Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
-
-import { ImageData } from '../types'
 
 type Props = {
   correct: boolean
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  images: ImageData[]
   isLoading: boolean
   limit: number
   slides: ReactNode[]
@@ -27,7 +24,6 @@ export const PublicationModal = ({
 }: Props) => {
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
-  // const isLoading = true
 
   if (isLoading) {
     return (

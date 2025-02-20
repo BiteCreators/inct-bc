@@ -1,5 +1,6 @@
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { authSlice } from '@/entities/auth'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import { SideNavbarItem } from '@byte-creators/ui-kit'
 import {
   Bookmark,
@@ -24,6 +25,7 @@ import { useScopedTranslation } from '@byte-creators/utils'
 export const SideNavbar = () => {
   const t = useScopedTranslation('Navigation')
   const userId = useAppSelector(authSlice.selectors.selectUserId)
+  const dispatch = useAppDispatch()
 
   if (!userId) {
     return null
@@ -38,6 +40,7 @@ export const SideNavbar = () => {
           icon={<PlusSquareOutline />}
           iconActive={<PlusSquare />}
           label={t.create}
+          onClick={() => dispatch(createPostSlice.actions.setIsOpenCreatePost(true))}
         />
         <SideNavbarItem
           href={`/profile/${userId}`}

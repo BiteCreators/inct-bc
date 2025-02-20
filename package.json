@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@byte-creators/config": "^1.0.5",
-    "@byte-creators/ui-kit": "^1.9.4",
+    "@byte-creators/ui-kit": "^1.9.6",
     "@byte-creators/utils": "^1.9.0",
     "@hookform/resolvers": "^3.9.0",
     "@module-federation/nextjs-mf": "^8.7.8",
