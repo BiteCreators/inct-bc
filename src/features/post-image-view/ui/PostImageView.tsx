@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { useImagePalette } from '@/features/post-image-view/model/useImagePalette'
 import { DisplayImage } from '@/features/post-image-view/ui/DisplayImage'
 import { Alert } from '@byte-creators/ui-kit'
@@ -10,6 +12,11 @@ export const PostImageView = () => {
   const router = useRouter()
   const { image } = router.query
   const { error, gradient } = useImagePalette()
+  const [isLoading, setIsLoading] = useState(true)
+
+  const handleImageLoad = () => {
+    setIsLoading(false)
+  }
 
   return (
     <>
@@ -25,7 +32,7 @@ export const PostImageView = () => {
         </div>
       </div>
       <main className={'flex items-center justify-center min-h-[90vh] p-4 px-16'}>
-        <DisplayImage uploadedImage={image as string} />
+        <DisplayImage onImageLoad={handleImageLoad} uploadedImage={image as string} />
       </main>
       {error && <Alert message={error} purpose={'toast'} type={'error'} />}
     </>
