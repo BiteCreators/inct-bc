@@ -1,11 +1,10 @@
-import { ReactNode } from 'react'
-
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
-import { Avatar } from '@/common/types/api.types'
 import { authSlice } from '@/entities/auth'
 import { type Post } from '@/entities/posts'
 import { AddCommentTextarea } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
+import { useHandleNavigateToImage } from '@/features/posts/model/useHandleNavigateToImage'
+import { PostDetailsSlide } from '@/widgets/post-details/ui/PostDetailsSlide'
 import { Alert, Button, LinearLoader, Slider, Typography, UserProfile } from '@byte-creators/ui-kit'
 import { useScopedTranslation, wordWrapping } from '@byte-creators/utils'
 import Link from 'next/link'
@@ -39,13 +38,10 @@ export const PostFeed = ({ post }: Props) => {
   const userId = useAppSelector(authSlice.selectors.selectUserId)
   const isMyPost = post.ownerId === userId || false
 
-  const getSlides = (
-    images: ({
-      uploadId: string
-    } & Avatar)[]
-  ): ReactNode[] => {
-    return images.map(image => <img key={image.uploadId} src={image.url} />)
-  }
+  const handleNavigateToImage = useHandleNavigateToImage(post)
+  const slides = post?.images.map((image: any, i) => (
+    <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
+  ))
 
   return (
     <div className={'mb-9'}>
@@ -82,7 +78,7 @@ export const PostFeed = ({ post }: Props) => {
           />
         </div>
       </div>
-      <Slider slides={getSlides(post.images)} />
+      <Slider slides={slides} />
       {!hasImages && (
         <Typography variant={'regular-text'}>{wordWrapping(post.description)}</Typography>
       )}
