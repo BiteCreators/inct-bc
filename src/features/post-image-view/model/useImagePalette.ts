@@ -7,7 +7,7 @@ export const useImagePalette = () => {
   const router = useRouter()
   const { image: imageSrc } = router.query
   const [colorPalette, setColorPalette] = useState<[number, number, number][] | null>(null)
-  const [gradient, setGradient] = useState<string>('')
+  const [colors, setColors] = useState<string[]>([])
   const [error, setError] = useState<null | string>(null)
 
   useEffect(() => {
@@ -36,9 +36,9 @@ export const useImagePalette = () => {
     if (colorPalette) {
       const gradientColors = colorPalette.map(color => `rgb(${color.join(',')})`)
 
-      setGradient(`conic-gradient(from 0deg, ${gradientColors.join(', ')})`)
+      setColors(gradientColors)
     }
   }, [colorPalette])
 
-  return { error, gradient }
+  return { colors, error }
 }
