@@ -2,7 +2,7 @@ FROM node:20.11-alpine as dependencies
 WORKDIR /app
 COPY package*.json ./
 RUN npm install pnpm -g
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 
 FROM node:20.11-alpine as builder
 WORKDIR /app
