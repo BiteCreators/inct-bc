@@ -12,9 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byte-creators/config": "^1.0.5",
+    "@byte-creators/utils": "^1.10.6",
     "@byte-creators/ui-kit": "^1.9.8",
-    "@byte-creators/utils": "^1.10.4",
     "@hookform/resolvers": "^3.9.0",
     "@module-federation/nextjs-mf": "^8.7.8",
     "@radix-ui/react-dialog": "^1.1.1",
