@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byte-creators/utils": "^1.10.4",
+    "@byte-creators/utils": "^1.10.6",
     "@byte-creators/ui-kit": "^1.9.7",
     "@byte-creators/config": "^1.0.5",
     "@hookform/resolvers": "^3.9.0",
