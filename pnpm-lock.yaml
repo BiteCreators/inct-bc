@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@byte-creators/config':
+        specifier: ^1.0.5
+        version: 1.0.5(hjl6kbyusv3tuxgqmal32jg4sy)
       '@byte-creators/ui-kit':
         specifier: ^1.9.8
         version: 1.9.8(pswtot6nrgevzv3b6vvu2yvgzy)
