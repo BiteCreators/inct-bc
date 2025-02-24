@@ -1,8 +1,8 @@
-import React, { ComponentProps, forwardRef, useEffect, useRef } from 'react'
+import React, { ComponentProps, forwardRef } from 'react'
 
-import { Alert, Button, ScrollArea, TextArea } from '@byte-creators/ui-kit'
+import { Alert, Button, TextArea } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
-import { cn, mergeRefs, useTextArea, useValidationLimit } from '@byte-creators/utils'
+import { cn, mergeRefs, useScopedTranslation, useTextArea } from '@byte-creators/utils'
 
 import { useCreateComment } from '../model/useCreateComment'
 
@@ -32,9 +32,11 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       onChange,
       postId,
       setContentComment,
+      transparent,
     }: Props,
     ref
   ) => {
+    const t = useScopedTranslation('Posts')
     const { handleChange, textAreaRef } = useTextArea({
       autoResize: true,
       onChange,
@@ -57,42 +59,22 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
       }, 50)
     }
 
-    // const autoResizeTextArea = () => {
-    //   if (transparentTextareaRef.current) {
-    //     const textarea = transparentTextareaRef.current
-    //
-    //     textarea.style.height = `auto`
-    //     textarea.style.height = `${Math.min(
-    //       textarea.scrollHeight,
-    //       4 * parseFloat(getComputedStyle(textarea).lineHeight)
-    //     )}px`
-    //   }
-    // }
-
-    // useEffect(() => {
-    //   autoResizeTextArea()
-    // }, [contentComment])
-
-    // useEffect(() => {
-    //   setTimeout(() => {
-    //     if (textAreaRef.current) {
-    //       textAreaRef.current.scrollTop = textAreaRef.current.scrollHeight
-    //     }
-    //   }, 50)
-    // }, [textAreaRef])
-
     return (
-      <div className={cn(['flex py-2 px-0', 'md:px-6'])}>
-        <div className={'w-full'}>
+      <div className={cn(['flex py-2 px-0', 'md:px-6', transparent && 'md:px-0'])}>
+        <div className={'w-full h-auto'}>
           <TextArea
-            className={'text-light-100 text-md bg-dark-100 leading-tight max-h-32'}
+            className={cn([
+              'text-light-100 text-md bg-dark-100 leading-tight max-h-32',
+              transparent ? 'bg-transparent border-none h-9 px-0' : '',
+            ])}
             disabled={disabled}
             isCorrect={correct}
             limitCount={limit}
             maxLength={limit}
             onChange={handleTextAreaChange}
-            placeholder={'Add a Comment...'}
+            placeholder={t.addComment}
             ref={mergeRefs([ref, textAreaRef])}
+            rows={transparent ? 1 : undefined}
             value={contentComment}
           />
         </div>
@@ -116,7 +98,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
               onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
               variant={'text'}
             >
-              Publish
+              {t.publish}
             </Button>
             {error && (
               <Alert

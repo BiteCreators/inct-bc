@@ -1,18 +1,17 @@
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { commentsApi } from '@/entities/comments'
-import { postsApi } from '@/entities/posts'
+import { Post, postsApi } from '@/entities/posts'
+import { useHandleNavigateToImage } from '@/features/posts/model/useHandleNavigateToImage'
 import { Alert } from '@byte-creators/ui-kit'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 import { PostDetailsSlide } from './PostDetailsSlide'
 import { PostDesktop } from './desktop/PostDesktop'
 
 export const PostDetails = () => {
   const params = useParams()
-  const router = useRouter()
 
   const currentUserId = useAppSelector(selectUserId)
 
@@ -26,14 +25,7 @@ export const PostDetails = () => {
     isLoading,
   } = commentsApi.useGetCommentsQuery(currentUserId ? { postId: post?.id || 0 } : skipToken)
 
-  const handleNavigateToImage = (imageUrl: string) => {
-    const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
-
-    router.push({
-      pathname: `/profile/${post?.ownerId}/publications/${post?.id}/view`,
-      query: { image: proxyUrl },
-    })
-  }
+  const handleNavigateToImage = useHandleNavigateToImage(post as Post)
   const slides = post?.images.map((image: any, i) => (
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))

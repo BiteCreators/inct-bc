@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
+import Skeleton from 'react-loading-skeleton'
 import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { Controls } from '@/features/post-image-view/ui/Controls'
-import { LoaderBlock } from '@byte-creators/ui-kit'
+import { LinearLoader } from '@byte-creators/ui-kit'
 
 type Props = {
+  onImageLoad: () => void
   uploadedImage: string
 }
 
-export const ImageZoom = ({ uploadedImage }: Props) => {
+export const ImageZoom = ({ onImageLoad, uploadedImage }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
 
   const handleImageLoad = () => {
     setIsLoading(false)
+    onImageLoad()
   }
 
   const handleImageError = () => {
@@ -21,7 +24,17 @@ export const ImageZoom = ({ uploadedImage }: Props) => {
 
   return (
     <TransformWrapper initialScale={1}>
-      {isLoading && <LoaderBlock />}
+      {isLoading && <LinearLoader isLoading={isLoading} />}
+      {isLoading && (
+        <Skeleton
+          baseColor={'#222222'}
+          borderRadius={8}
+          className={'absolute top-0 left-0'}
+          height={'72vh'}
+          highlightColor={'#333333'}
+          width={'72vh'}
+        />
+      )}
       <div className={'text-center'} style={{ display: isLoading ? 'none' : 'block' }}>
         <TransformComponent>
           <img
