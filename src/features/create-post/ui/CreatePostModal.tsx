@@ -54,11 +54,21 @@ export const CreatePostModal = () => {
     },
   })
 
-  const addedImageSlides = generateAddedImageSlides(images, totalImageRefs)
+  const addedImageSlides = generateAddedImageSlides(images, step, totalImageRefs)
+  let maxWidthClass = 'md:max-w-[492px]' // дефолтное значение
+
+  if (step === 2) {
+    maxWidthClass = 'max-w-full sm:max-w-[492px]'
+  } else if (step === 3) {
+    maxWidthClass = 'w-full md:max-w-[984px]'
+  } else if (step === 4) {
+    maxWidthClass = 'md:max-w-[984px]'
+  }
 
   return (
     <div>
       <ActionConfirmation
+        classNameMessage={'w-[220px] md:w-auto'}
         isOpen={isOpenActionConfirmation}
         message={t.doYouWantToCloseCreation}
         onConfirm={handleConfirm}
@@ -67,9 +77,7 @@ export const CreatePostModal = () => {
         title={t.close}
       />
       <Modal
-        className={`max-w-[330px] ${
-          step === 3 || step === 4 ? 'md:max-w-[984px]' : 'md:max-w-[492px]'
-        } w-full min-h-64`}
+        className={`max-w-[350px] md:max-w-[330px] ${maxWidthClass} w-full min-h-64`}
         disabledButton={isLoading}
         handleBack={step === 2 ? handleBackWithoutSave : handleBack}
         handleInteractOutside={step !== 1 ? handleInteractOutside : () => {}}
