@@ -45,5 +45,6 @@ export const config = {
     '/profile/:id/settings',
     '/feed',
     '/search',
+    '/messenger',
   ],
 }
