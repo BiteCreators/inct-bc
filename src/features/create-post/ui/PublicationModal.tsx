@@ -27,10 +27,19 @@ export const PublicationModal = ({
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
   if (isLoading) {
-    return (
+    return isLargeScreen ? (
       <SnakeGame
         cellsClassName={'h-10 w-10'}
         fieldWidth={23}
+        title={'Help the dragon catch the egg while the post is loading!'}
+      />
+    ) : (
+      <SnakeGame
+        cellsClassName={'h-8 w-8'}
+        className={'m-1'}
+        fieldHeight={10}
+        fieldWidth={10}
+        mobileMod
         title={'Help the dragon catch the egg while the post is loading!'}
       />
     )
