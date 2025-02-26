@@ -15,7 +15,7 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
   const [createPaymentSubscription, { isLoading }] =
     paymentsApi.useCreatePaymentSubscriptionMutation()
 
-  const { query } = useRouter()
+  const { locale, query } = useRouter()
 
   const [validationError, setValidationError] = useState('')
   const [apiError, setApiError] = useState('')
@@ -49,7 +49,7 @@ export const useSubmitPayment = ({ provider }: { provider: PAYMENT_PROVIDERS }) 
       amount: paymentData?.amount,
       baseUrl:
         process.env.NEXT_PUBLIC_BASE_URL +
-        `/en/profile/${query.id}/settings?tab=account-management`,
+        `/${locale}/profile/${query.id}/settings?tab=account-management`,
       paymentType: provider,
       typeSubscription: paymentData?.typeDescription,
     }
