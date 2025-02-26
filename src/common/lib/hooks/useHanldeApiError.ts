@@ -1,8 +1,7 @@
 import React from 'react'
 import { FieldValues, Path, UseFormSetError } from 'react-hook-form'
 
-import { LocaleType } from '@/locales/en'
-import { useScopedTranslation } from '@byte-creators/utils'
+import { LocaleType, useScopedTranslation } from '@byte-creators/utils'
 
 import { isApiError, isApiErrorWithArray, isFetchBaseQueryError } from '../utils/apiHelpers'
 

@@ -1,5 +1,4 @@
-import { LocaleType } from '@/locales/en'
-import { PAYMENT_PROVIDERS, SUBSCRIPTION_TYPES } from '@byte-creators/utils'
+import { LocaleType, PAYMENT_PROVIDERS, SUBSCRIPTION_TYPES } from '@byte-creators/utils'
 import { z } from 'zod'
 
 export const createSubscriptionSchema = (t: LocaleType['Payments']) => {
