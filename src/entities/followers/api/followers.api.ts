@@ -71,7 +71,7 @@ export const followersApi = inctagramApi.injectEndpoints({
     }),
 
     removeFollower: builder.mutation<void, { userId: number }>({
-      invalidatesTags: ['Followers'],
+      invalidatesTags: ['Followers', 'Posts'],
       query: ({ userId }) => ({
         method: 'DELETE',
         url: `v1/users/follower/${userId}`,

@@ -18,7 +18,7 @@ export const useLikePost = (post: Post) => {
 
   const handleLike = async () => {
     if (!isAuth) {
-      await router.push(`/auth/sign-in`)
+      return router.push(`/auth/sign-in`)
     }
     const newLikeStatus = postLikes?.isLiked ? 'NONE' : 'LIKE'
 

@@ -1,4 +1,4 @@
-import { LocaleType } from '@/locales/en'
+import { LocaleType } from '@byte-creators/utils'
 import { z } from 'zod'
 
 export const createSignInSchema = (t: LocaleType['Auth']['errors']) => {
