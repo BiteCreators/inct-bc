@@ -22,13 +22,10 @@ export const usePostFeed = ({ post }: { post: Post }) => {
   } = commentsApi.useGetCommentsQuery({ postId: post.id || 0 })
 
   useEffect(() => {
-    if (comments) {
-      if (comments.items.length > 0) {
-        setIsCommented(true)
-      } else {
-        setIsCommented(false)
-      }
+    if (!comments) {
+      return
     }
+    setIsCommented(comments.items.length > 0)
   }, [comments])
 
   const hasImages = post.images.length !== 0
