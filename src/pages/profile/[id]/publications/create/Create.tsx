@@ -11,7 +11,7 @@ export default function Create() {
   const { data: profile, isLoading, isSuccess } = profileApi.useGetProfileQuery()
 
   return (
-    <div className={'px-[15px] md:pl-6 md:pr-16'}>
+    <div className={'mx-[15px] md:pl-6 md:pr-16'}>
       {isLoading && <Loader fullScreen />}
       {isLargeScreen && isSuccess && (
         <>

@@ -3,17 +3,17 @@ import Skeleton from 'react-loading-skeleton'
 
 import { postsApi } from '@/entities/posts'
 import { Typography } from '@byte-creators/ui-kit'
-import { useIntersectionObserver, useMediaQuery } from '@byte-creators/utils'
+import { cn, useIntersectionObserver, useMediaQuery } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
+import mock from 'public/examples/mock.png'
 
 export const Posts = () => {
   const [pageSize, setPageSize] = useState(8)
   const params = useParams<{ id: string }>()
   const paginationRef = useRef<HTMLDivElement>(null)
-  const isLargeScreen = useMediaQuery('(min-width: 768px)')
-
+  const isSuperSmallScreen = useMediaQuery('(max-width: 400px)')
   const { data, isFetching, isLoading } = postsApi.useGetPublicPostsByUserIdQuery(
     params !== null
       ? {
@@ -30,12 +30,9 @@ export const Posts = () => {
       setPageSize(prev => prev + 8)
     }
   })
-  //todo: fix skeleton size
+
   const skeletonItems = Array.from({ length: 5 }, (_, index) => (
-    <Skeleton
-      className={`rounded-md ${isLargeScreen ? '!w-[260px] !h-[260px]' : '!w-[108px] !h-[108px]'}`}
-      key={index}
-    />
+    <Skeleton className={'rounded-md w-full aspect-[1]'} key={index} />
   ))
 
   return (
@@ -44,9 +41,12 @@ export const Posts = () => {
         <Typography> user has no publications yet </Typography>
       ) : (
         <div
-          className={`grid gap-4 ${
-            isLargeScreen ? 'grid-cols-4' : 'grid-cols-2'
-          } sm:grid-cols-3 md:grid-cols-4`}
+          className={cn([
+            'gap-2 sm:gap-4',
+            isSuperSmallScreen
+              ? 'mr-12'
+              : 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4',
+          ])}
         >
           {data?.items.map(post => (
             <Link
@@ -56,15 +56,16 @@ export const Posts = () => {
             >
               <img
                 alt={'post-img'}
-                className={'w-full h-auto rounded-md'}
-                height={isLargeScreen ? 260 : 108}
-                src={post.images[0]?.url}
-                width={isLargeScreen ? 260 : 108}
+                className={cn([
+                  'h-auto rounded-md',
+                  isSuperSmallScreen ? 'mx-auto mb-4 min-w-[330px] max-w-full' : 'w-full',
+                ])}
+                src={post.images[0]?.url || mock.src}
               />
             </Link>
           ))}
-          {/* Добавляем скелетоны в сетку */}
           {(isFetching || isLoading) && skeletonItems}
+          {/*{skeletonItems}*/}
           <div ref={paginationRef}></div>
         </div>
       )}

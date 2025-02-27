@@ -41,7 +41,7 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
         {
           <Modal
             isOpen={isOpen}
-            maxWidth={'w-[640px]'}
+            maxWidth={'w-[350px] md:w-[640px]'}
             mode={'default'}
             onOpenChange={onClose}
             title={type === 'followers' ? `${followers} Followers` : `${following} Following`}
