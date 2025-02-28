@@ -1,14 +1,7 @@
 import React from 'react'
 
-import { MobileAppMenu } from '@/features/navigation'
-import { Header } from '@/widgets/header'
-import { Sidebar } from '@/widgets/sidebar'
-import { PageLayout } from '@byte-creators/ui-kit'
+import { WrapperPageLayout } from '@/application/layouts/WrapperPageLayout'
 
 export const DefaultLayout = (page: React.ReactElement) => {
-  return (
-    <PageLayout header={<Header />} mobileMenu={<MobileAppMenu />} sidebar={<Sidebar />}>
-      {page}
-    </PageLayout>
-  )
+  return <WrapperPageLayout>{page}</WrapperPageLayout>
 }
