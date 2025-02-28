@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import { profileApi } from '@/entities/profile'
 import { SnakeGame } from '@/features/games/ui/SnakeGame'
@@ -26,16 +26,30 @@ export const PublicationModal = ({
   const { data: profile } = profileApi.useGetProfileQuery()
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
-  if (isLoading && isLargeScreen) {
-    return (
-      <SnakeGame
-        cellsClassName={'h-10 w-10'}
-        fieldWidth={23}
-        title={'Help the dragon catch the egg while the post is loading!'}
-      />
-    )
-  }
+  // Стейт для отслеживания загрузки
+  const [isPublishing, setIsPublishing] = useState(false)
 
+  useEffect(() => {
+    if (isLoading) {
+      setIsPublishing(true) // Когда загрузка начинается, ставим флаг
+    } else {
+      setIsPublishing(false) // Когда загрузка завершена, сбрасываем флаг
+    }
+  }, [isLoading])
+
+  // Рендер для мобильных устройств
+  const renderMobileLoading = () => <LoaderBlock portal />
+
+  // Рендер для десктопных устройств
+  const renderDesktopLoading = () => (
+    <SnakeGame
+      cellsClassName={'h-10 w-10'}
+      fieldWidth={23}
+      title={'Help the dragon catch the egg while the post is loading!'}
+    />
+  )
+
+  // Контент публикации
   const content = (
     <div className={'md:w-1/2 p-3 md:p-6 max-h-[200px] '}>
       <div className={'mb-4 md:mb-6'}>
@@ -64,13 +78,17 @@ export const PublicationModal = ({
     </div>
   )
 
+  // Если пост загружается, показываем лоадер
+  if (isPublishing) {
+    return isLargeScreen ? renderDesktopLoading() : renderMobileLoading()
+  }
+
   return (
     <div className={'flex flex-col md:flex-row'}>
       <div className={'h-auto md:w-1/2'}>
         <Slider duration={0} slides={slides} />
       </div>
       {isLargeScreen ? content : <ScrollArea>{content}</ScrollArea>}
-      {isLoading && !isLargeScreen && <LoaderBlock portal />}
     </div>
   )
 }
