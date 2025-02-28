@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 
 import { profileApi } from '@/entities/profile'
 import { SnakeGame } from '@/features/games/ui/SnakeGame'
-import { ScrollArea, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
+import { LoaderBlock, ScrollArea, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
 import { useMediaQuery, useScopedTranslation } from '@byte-creators/utils'
 
 type Props = {
@@ -26,20 +26,11 @@ export const PublicationModal = ({
   const { data: profile } = profileApi.useGetProfileQuery()
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
-  if (isLoading) {
-    return isLargeScreen ? (
+  if (isLoading && isLargeScreen) {
+    return (
       <SnakeGame
         cellsClassName={'h-10 w-10'}
         fieldWidth={23}
-        title={'Help the dragon catch the egg while the post is loading!'}
-      />
-    ) : (
-      <SnakeGame
-        cellsClassName={'h-8 w-8'}
-        className={'m-1'}
-        fieldHeight={10}
-        fieldWidth={10}
-        mobileMod
         title={'Help the dragon catch the egg while the post is loading!'}
       />
     )
@@ -79,7 +70,7 @@ export const PublicationModal = ({
         <Slider duration={0} slides={slides} />
       </div>
       {isLargeScreen ? content : <ScrollArea>{content}</ScrollArea>}
-      {/*{isLoading && <LoaderBlock portal />}*/}
+      {isLoading && !isLargeScreen && <LoaderBlock portal />}
     </div>
   )
 }
