@@ -2,7 +2,8 @@ import React from 'react'
 
 import { useForgotPassword } from '@/features/auth/model/useForgotPassword'
 import { LinkSentModal } from '@/features/auth/ui/LinkSentModal'
-import { Alert, Button, Card, FormInput, Recaptcha, Typography } from '@byte-creators/ui-kit'
+import { Recaptcha } from '@/features/reCaptcha'
+import { Alert, Button, Card, FormInput, Typography } from '@byte-creators/ui-kit'
 import Link from 'next/link'
 
 export const ForgotPasswordForm = () => {
