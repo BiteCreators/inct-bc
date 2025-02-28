@@ -48,13 +48,13 @@ export const FollowModalItems = ({ currentUserProfile, type }: Props) => {
             value={searchValue}
           />
           {error && <Alert message={error} type={'error'} />}
-          <ScrollArea className={'h-[550px]'}>
-            <div className={'mr-2 mt-2'}>
+          <ScrollArea className={'h-[350px] md:h-[550px]'}>
+            <div className={'mr-1 md:mr-2 mt-2'}>
               {filteredUsers.map((user: Follower) => (
                 <div className={'mb-6 flex justify-between'} key={user.userId}>
                   <UserProfile
                     avatarUrl={user.avatars[0]?.url || example.src}
-                    className={'w-72'}
+                    className={'md:w-72'}
                     isLoading={isFollowingLoading || isFollowersLoading}
                     profileId={user.userId}
                     userName={user.userName}
