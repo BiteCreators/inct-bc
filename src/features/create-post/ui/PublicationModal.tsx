@@ -1,9 +1,18 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import { profileApi } from '@/entities/profile'
 import { SnakeGame } from '@/features/games/ui/SnakeGame'
-import { ScrollArea, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
+import {
+  Alert,
+  Button,
+  LoaderBlock,
+  ScrollArea,
+  Slider,
+  TextArea,
+  UserProfile,
+} from '@byte-creators/ui-kit'
 import { useMediaQuery, useScopedTranslation } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 type Props = {
   correct: boolean
@@ -26,24 +35,37 @@ export const PublicationModal = ({
   const { data: profile } = profileApi.useGetProfileQuery()
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
-  if (isLoading) {
-    return isLargeScreen ? (
-      <SnakeGame
-        cellsClassName={'h-10 w-10'}
-        fieldWidth={23}
-        title={'Help the dragon catch the egg while the post is loading!'}
-      />
-    ) : (
-      <SnakeGame
-        cellsClassName={'h-8 w-8'}
-        className={'m-1'}
-        fieldHeight={10}
-        fieldWidth={10}
-        mobileMod
-        title={'Help the dragon catch the egg while the post is loading!'}
-      />
-    )
+  const [isPublishing, setIsPublishing] = useState(false)
+  const [isRedirecting, setIsRedirecting] = useState(false)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (isLoading) {
+      setIsPublishing(true)
+    } else {
+      setIsPublishing(false)
+    }
+  }, [isLoading])
+
+  const handleRedirect = () => {
+    if (isRedirecting) {
+      return
+    }
+
+    setIsRedirecting(true)
+    router.push('/profile/1431')
   }
+
+  const renderMobileLoading = () => <LoaderBlock portal />
+
+  const renderDesktopLoading = () => (
+    <SnakeGame
+      cellsClassName={'h-10 w-10'}
+      fieldWidth={23}
+      title={'Help the dragon catch the egg while the post is loading!'}
+    />
+  )
 
   const content = (
     <div className={'md:w-1/2 p-3 md:p-6 max-h-[200px] '}>
@@ -73,13 +95,29 @@ export const PublicationModal = ({
     </div>
   )
 
+  if (isPublishing) {
+    return isLargeScreen ? renderDesktopLoading() : renderMobileLoading()
+  }
+
   return (
     <div className={'flex flex-col md:flex-row'}>
       <div className={'h-auto md:w-1/2'}>
         <Slider duration={0} slides={slides} />
       </div>
       {isLargeScreen ? content : <ScrollArea>{content}</ScrollArea>}
-      {/*{isLoading && <LoaderBlock portal />}*/}
+      {isLoading && !isLargeScreen && <LoaderBlock portal />}
+
+      <div className={'my-4'}>
+        <Alert message={`isLoading: ${isLoading}`} type={'info'} />
+        <Alert message={`isPublishing: ${isPublishing}`} type={'info'} />
+        <Alert message={`isRedirecting: ${isRedirecting}`} type={'info'} />
+      </div>
+
+      <div className={'mt-5'}>
+        <Button onClick={handleRedirect} variant={'primary'}>
+          Go to profile
+        </Button>
+      </div>
     </div>
   )
 }
