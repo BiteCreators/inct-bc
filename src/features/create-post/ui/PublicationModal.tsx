@@ -2,8 +2,17 @@ import React, { ReactNode, useEffect, useState } from 'react'
 
 import { profileApi } from '@/entities/profile'
 import { SnakeGame } from '@/features/games/ui/SnakeGame'
-import { LoaderBlock, ScrollArea, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
+import {
+  Alert,
+  Button,
+  LoaderBlock,
+  ScrollArea,
+  Slider,
+  TextArea,
+  UserProfile,
+} from '@byte-creators/ui-kit'
 import { useMediaQuery, useScopedTranslation } from '@byte-creators/utils'
+import { useRouter } from 'next/router'
 
 type Props = {
   correct: boolean
@@ -26,21 +35,30 @@ export const PublicationModal = ({
   const { data: profile } = profileApi.useGetProfileQuery()
   const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
-  // Стейт для отслеживания загрузки
   const [isPublishing, setIsPublishing] = useState(false)
+  const [isRedirecting, setIsRedirecting] = useState(false)
+
+  const router = useRouter()
 
   useEffect(() => {
     if (isLoading) {
-      setIsPublishing(true) // Когда загрузка начинается, ставим флаг
+      setIsPublishing(true)
     } else {
-      setIsPublishing(false) // Когда загрузка завершена, сбрасываем флаг
+      setIsPublishing(false)
     }
   }, [isLoading])
 
-  // Рендер для мобильных устройств
+  const handleRedirect = () => {
+    if (isRedirecting) {
+      return
+    }
+
+    setIsRedirecting(true)
+    router.push('/profile/1431')
+  }
+
   const renderMobileLoading = () => <LoaderBlock portal />
 
-  // Рендер для десктопных устройств
   const renderDesktopLoading = () => (
     <SnakeGame
       cellsClassName={'h-10 w-10'}
@@ -49,7 +67,6 @@ export const PublicationModal = ({
     />
   )
 
-  // Контент публикации
   const content = (
     <div className={'md:w-1/2 p-3 md:p-6 max-h-[200px] '}>
       <div className={'mb-4 md:mb-6'}>
@@ -78,7 +95,6 @@ export const PublicationModal = ({
     </div>
   )
 
-  // Если пост загружается, показываем лоадер
   if (isPublishing) {
     return isLargeScreen ? renderDesktopLoading() : renderMobileLoading()
   }
@@ -89,6 +105,19 @@ export const PublicationModal = ({
         <Slider duration={0} slides={slides} />
       </div>
       {isLargeScreen ? content : <ScrollArea>{content}</ScrollArea>}
+      {isLoading && !isLargeScreen && <LoaderBlock portal />}
+
+      <div className={'my-4'}>
+        <Alert message={`isLoading: ${isLoading}`} type={'info'} />
+        <Alert message={`isPublishing: ${isPublishing}`} type={'info'} />
+        <Alert message={`isRedirecting: ${isRedirecting}`} type={'info'} />
+      </div>
+
+      <div className={'mt-5'}>
+        <Button onClick={handleRedirect} variant={'primary'}>
+          Go to profile
+        </Button>
+      </div>
     </div>
   )
 }
