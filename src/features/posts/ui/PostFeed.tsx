@@ -83,6 +83,8 @@ export const PostFeed = ({ post }: Props) => {
         <Typography variant={'regular-text'}>{wordWrapping(post.description)}</Typography>
       )}
       <ActionButtonGroup
+        //TODO: remove ts ignore
+        //@ts-ignore
         handleLike={handleLike}
         postId={post.id}
         postLikes={postLikes}

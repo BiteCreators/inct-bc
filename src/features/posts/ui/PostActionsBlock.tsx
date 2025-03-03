@@ -23,7 +23,9 @@ export const PostActionsBlock = ({ post }: Props) => {
   return (
     <div className={cn(['border-transparent relative', 'md:border-y-[1px] border-dark-100'])}>
       <div className={cn(['pt-4 px-0', 'md:px-6'])}>
-        <ActionButtonGroup className={'m-0 mb-3'} handleLike={handleLike} postLikes={postLikes} />
+        {/*TODO: remove ts ignore*/}
+        {/*@ts-ignore*/}
+        <ActionButtonGroup className={'m-0 mb-'} handleLike={handleLike} postLikes={postLikes} />
         <div className={'mb-3'}>
           <Likes className={'mb-2'} postLikes={postLikes} />
           {apiError && (
