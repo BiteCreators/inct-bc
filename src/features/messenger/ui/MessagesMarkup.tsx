@@ -1,4 +1,4 @@
-import { mockData } from '@/features/messenger/mockData'
+import { mockData, mockImages, step } from '@/features/messenger/mockData'
 import { UserAvatar } from '@/widgets/profile-header/ui/UserAvatar'
 import { ScrollArea, Typography } from '@byte-creators/ui-kit'
 import { CheckmarkOutline, DoneAllOutline } from '@byte-creators/ui-kit/icons'
@@ -7,7 +7,7 @@ import { cn } from '@byte-creators/utils'
 type Props = {}
 export const MessagesMarkup = ({}: Props) => {
   return (
-    <ScrollArea className={'max-h-[65vh]'}>
+    <ScrollArea className={mockImages.length && step === 1 ? 'h-[55vh]' : 'h-[60vh]'}>
       <div className={'px-[70px] pt-10'}>
         {mockData.items.map((item, index) => {
           const isOwner = item.ownerId === 2

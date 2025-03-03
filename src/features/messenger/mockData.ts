@@ -1,3 +1,29 @@
+//mock: fix later
+
+// steps = {
+//   0: 'дефолтный',
+//   1: 'для текстовых (с кнопкой send message)',
+//   2: 'для голосового',
+// }
+
+export const step = 0 as 0 | 1 | 2
+
+export const mockImages = [
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+  'https://cs13.pikabu.ru/post_img/2023/09/10/6/1694334404138966000.webp',
+  'https://icdn.lenta.ru/images/2024/11/29/13/20241129132354457/square_320_36b8ae637c18b07c8681474f9243c736.jpg',
+]
 export const mockData = {
   items: [
     {
