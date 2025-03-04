@@ -1,39 +1,3 @@
-.image-container {
-  position: relative;
-
-  overflow: hidden;
-
-  width: 200px;
-  height: 200px;
-
-  border: 2px solid #ccc;
-  border-radius: 8px;
-}
-
-.image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.image {
-  position: relative;
-
-  overflow: hidden;
-  align-items: center;
-
-  border-radius: 0.5rem;
-
-  transition: all 0.2s ease-in-out;
-}
-
-.box {
-  overflow: hidden;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-}
-
 .up {
   position: absolute;
 
