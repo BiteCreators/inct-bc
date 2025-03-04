@@ -24,7 +24,13 @@ export const ImageZoom = ({ onImageLoad, uploadedImage }: Props) => {
   const handleImageError = () => {
     setIsLoading(false)
   }
-  const skeletonSize = isLargeScreen ? '72vh' : isSuperSmallScreen ? '40vh' : '50vh'
+  let skeletonSize = '50vh'
+
+  if (isLargeScreen) {
+    skeletonSize = '72vh'
+  } else if (isSuperSmallScreen) {
+    skeletonSize = '40vh'
+  }
 
   return (
     <TransformWrapper initialScale={1}>

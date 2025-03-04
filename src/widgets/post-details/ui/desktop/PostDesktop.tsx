@@ -5,7 +5,7 @@ import { authSlice } from '@/entities/auth'
 import { Comment } from '@/entities/comments/types/comments.types'
 import { Post } from '@/entities/posts'
 import { AddCommentTextarea, DesktopCommentsList } from '@/features/comments'
-import { EditPost } from '@/features/edit-post'
+import { EditPostDesktop } from '@/features/edit-post'
 import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { Button, Modal, Slider } from '@byte-creators/ui-kit'
 import { Close } from '@byte-creators/ui-kit/icons'
@@ -45,7 +45,7 @@ export const PostDesktop = ({ comments, isLoading = false, post, slides }: Props
 
   return (
     <>
-      <EditPost changeEditMode={setEditMode} isOpen={editMode} post={post} slides={slides} />
+      <EditPostDesktop changeEditMode={setEditMode} isOpen={editMode} post={post} slides={slides} />
       {post ? (
         <Modal
           className={cn([

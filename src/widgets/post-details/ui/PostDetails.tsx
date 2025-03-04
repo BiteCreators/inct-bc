@@ -3,7 +3,9 @@ import { selectUserId } from '@/entities/auth/model/auth.slice'
 import { commentsApi } from '@/entities/comments'
 import { Post, postsApi } from '@/entities/posts'
 import { useHandleNavigateToImage } from '@/features/posts/model/useHandleNavigateToImage'
+import { PostMobile } from '@/widgets/post-details/ui/mobile/PostMobile'
 import { Alert } from '@byte-creators/ui-kit'
+import { useMediaQuery } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
 
@@ -12,6 +14,7 @@ import { PostDesktop } from './desktop/PostDesktop'
 
 export const PostDetails = () => {
   const params = useParams()
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 
   const currentUserId = useAppSelector(selectUserId)
 
@@ -47,7 +50,11 @@ export const PostDetails = () => {
 
   return (
     <>
-      <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+      {isLargeScreen ? (
+        <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+      ) : (
+        <PostMobile comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+      )}
       {error && <Alert message={'Comments loaded failed'} type={'error'} />}
     </>
   )

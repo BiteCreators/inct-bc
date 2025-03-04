@@ -80,7 +80,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
         </div>
         <div className={'flex items-center'}>
           <button
-            className={'md:hidden ml-6 max-h-9'}
+            className={'lg:hidden ml-6 max-h-9'}
             onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
           >
             <ArrowBackOutline
@@ -93,7 +93,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </button>
           <div className={'relative whitespace-nowrap'}>
             <Button
-              className={cn(['max-h-9 align-bottom ml-6 hidden', 'md:inline-block'])}
+              className={cn(['max-h-9 align-bottom ml-6 hidden', 'lg:inline-block'])}
               disabled={!contentComment}
               onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
               variant={'text'}
