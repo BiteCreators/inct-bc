@@ -33,8 +33,9 @@ export const UserInfoHeader = ({
     <div className={'flex justify-between mb-5 gap-3 sm:gap-5'}>
       <Typography
         className={cn([
+          !isLargeScreen && 'max-w-52',
           isSuperSmallScreen && 'mt-8',
-          'whitespace-break-spaces overflow-hidden text-ellipsis',
+          'break-words text overflow-hidden text-ellipsis',
         ])}
         variant={isLargeScreen ? 'h1' : 'h2'}
       >
