@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react'
 import { Answer } from '@/entities/comments/types/comments.types'
 import { Avatar, Typography } from '@byte-creators/ui-kit'
 import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
-import { cn, useGetRelativeTime } from '@byte-creators/utils'
+import { cn, useGetRelativeTime, useMediaQuery } from '@byte-creators/utils'
 
 type Props = {
   answer: Answer
@@ -20,6 +20,7 @@ export const CommentAnswer = ({
   handleUpdateLikeStatusAnswer,
   postId,
 }: Props) => {
+  const isLargeScreen = useMediaQuery('(min-width: 920px)')
   const { getRelativeTime } = useGetRelativeTime()
   const relativeTime = getRelativeTime(new Date(answer.createdAt).getTime())
 
@@ -31,13 +32,18 @@ export const CommentAnswer = ({
       <div className={'flex flex-1'}>
         <div className={'flex-1'}>
           <Typography className={'break-words'} variant={'regular-text'}>
-            {
-              <span className={'text-base font-weight600 leading-5 mr-2'}>
-                {answer.from.username}
-              </span>
-            }
-            {children || answer.content}
+            <span className={'text-base font-weight600 leading-5 mr-2'}>
+              {answer.from.username}
+            </span>
+            {isLargeScreen && (children || answer.content)}
           </Typography>
+
+          {!isLargeScreen && (
+            <Typography className={'text-[14px] break-words'} variant={'regular-text'}>
+              {children || answer.content}
+            </Typography>
+          )}
+
           <div className={'mt-1 flex gap-3'}>
             <Typography className={'text-light-900'} variant={'small-text'}>
               {relativeTime}

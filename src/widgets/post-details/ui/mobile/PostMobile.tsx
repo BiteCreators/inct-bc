@@ -10,20 +10,18 @@ import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { DropdownPost } from '@/features/posts/ui/DropdownPost'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
 import { Slider } from '@byte-creators/ui-kit'
-import { cn } from '@byte-creators/utils'
-import { useRouter } from 'next/router'
+import { cn, useMediaQuery } from '@byte-creators/utils'
 
 import { useCommentState } from '../../model/useCommentState'
 
 type Props = {
   comments?: Comment[]
-  isLoading?: boolean
   post: Post | undefined
   slides: ReactNode[]
 }
 
-export const PostMobile = ({ comments, isLoading = false, post, slides }: Props) => {
-  const router = useRouter()
+export const PostMobile = ({ comments, post, slides }: Props) => {
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)')
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
   const { data: currentUser } = authApi.useMeQuery()
@@ -57,7 +55,7 @@ export const PostMobile = ({ comments, isLoading = false, post, slides }: Props)
           <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px]'} />
           <div className={'max-w-[480px] w-full flex flex-col overflow-hidden'}>
             <PostActionsBlock post={post} />
-            <div className={cn(['flex-1 w-full px-0', 'md:px-6'])}>
+            <div className={cn(['flex-1 w-full px-0', isLargeScreen && 'px-6'])}>
               <div className={cn(['flex flex-col pt-3 gap-5 w-full', !isAuth && 'mb-4'])}>
                 <MobileCommentsList
                   comments={comments}
@@ -66,7 +64,7 @@ export const PostMobile = ({ comments, isLoading = false, post, slides }: Props)
                 />
               </div>
             </div>
-            <div className={'mb-7 mt-3 ml-1'}>
+            <div className={'mb-7 mt-3'}>
               {isAuth && (
                 <AddCommentTextarea
                   answerData={answerData}

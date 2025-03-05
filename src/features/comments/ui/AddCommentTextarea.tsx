@@ -2,7 +2,13 @@ import React, { ComponentProps, forwardRef } from 'react'
 
 import { Alert, Button, TextArea } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
-import { cn, mergeRefs, useScopedTranslation, useTextArea } from '@byte-creators/utils'
+import {
+  cn,
+  mergeRefs,
+  useMediaQuery,
+  useScopedTranslation,
+  useTextArea,
+} from '@byte-creators/utils'
 
 import { useCreateComment } from '../model/useCreateComment'
 
@@ -36,6 +42,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
     }: Props,
     ref
   ) => {
+    const isLargeScreen = useMediaQuery('(min-width: 1024px)')
     const t = useScopedTranslation('Posts')
     const { handleChange, textAreaRef } = useTextArea({
       autoResize: true,
@@ -60,7 +67,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
     }
 
     return (
-      <div className={cn(['flex py-2 px-0', 'md:px-6', transparent && 'md:px-0'])}>
+      <div className={cn(['flex py-2 px-0', isLargeScreen && 'px-6', transparent && 'md:px-0'])}>
         <div className={'w-full h-auto'}>
           <TextArea
             className={cn([
@@ -80,7 +87,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
         </div>
         <div className={'flex items-center'}>
           <button
-            className={'lg:hidden ml-6 max-h-9'}
+            className={'xl:hidden ml-6 max-h-9'}
             onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
           >
             <ArrowBackOutline
@@ -93,7 +100,7 @@ export const AddCommentTextarea = forwardRef<HTMLTextAreaElement, Props>(
           </button>
           <div className={'relative whitespace-nowrap'}>
             <Button
-              className={cn(['max-h-9 align-bottom ml-6 hidden', 'lg:inline-block'])}
+              className={cn(['max-h-9 align-bottom ml-6 hidden', 'xl:inline-block'])}
               disabled={!contentComment}
               onClick={isAnswer ? handleCreateAnswerComment : handleCreateComment}
               variant={'text'}
