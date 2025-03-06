@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { selectUserId } from '@/entities/auth/model/auth.slice'
-import { commentsApi } from '@/entities/comments'
+import { commentsApi, sortCommentsByUser } from '@/entities/comments'
 import { Post, postsApi } from '@/entities/posts'
 import { useHandleNavigateToImage } from '@/features/posts/model/useHandleNavigateToImage'
 import { PostMobile } from '@/widgets/post-details/ui/mobile/PostMobile'
@@ -33,27 +33,14 @@ export const PostDetails = () => {
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))
 
-  let comments = commentsData?.items
-
-  if (currentUserId) {
-    const currentUserComments = commentsData?.items.filter(
-      comment => comment.from.id === currentUserId
-    )
-    const commentsWithoutCurrentUser = commentsData?.items.filter(
-      comment => comment.from.id !== currentUserId
-    )
-
-    if (currentUserComments && commentsWithoutCurrentUser) {
-      comments = [...currentUserComments, ...commentsWithoutCurrentUser]
-    }
-  }
+  const comments = sortCommentsByUser(commentsData?.items || [], String(currentUserId))
 
   return (
     <>
       {isLargeScreen ? (
         <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
       ) : (
-        <PostMobile comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+        <PostMobile comments={comments} post={post} slides={slides || []} />
       )}
       {error && <Alert message={'Comments loaded failed'} type={'error'} />}
     </>

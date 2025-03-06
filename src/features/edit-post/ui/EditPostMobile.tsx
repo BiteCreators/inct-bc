@@ -60,7 +60,9 @@ export const EditPostMobile = ({ changeEditMode, isOpen, post, slides }: Props) 
             <Button className={'text-light-100 px-0'} onClick={changeModalState} variant={'text'}>
               {t.cropCancel}
             </Button>
-            <Typography variant={'h1'}>{t.editPost}</Typography>
+            <Typography className={'text-center px-2'} variant={'h2'}>
+              {t.editPost}
+            </Typography>
             <Button className={'px-0'} disabled={!correct} onClick={saveChanges} variant={'text'}>
               {tProfile.save}
             </Button>

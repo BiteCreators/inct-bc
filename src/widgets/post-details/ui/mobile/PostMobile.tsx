@@ -10,7 +10,9 @@ import { PostActionsBlock, PostDescription } from '@/features/posts'
 import { DropdownPost } from '@/features/posts/ui/DropdownPost'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
 import { Slider } from '@byte-creators/ui-kit'
+import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
 import { cn, useMediaQuery } from '@byte-creators/utils'
+import Link from 'next/link'
 
 import { useCommentState } from '../../model/useCommentState'
 
@@ -44,7 +46,12 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
       {post ? (
         <>
           <div className={'font-bold py-5 sm:py-3 flex justify-between w-full'}>
-            <PostOwnerProfile post={post} />
+            <div className={'flex gap-4'}>
+              <Link href={`/profile/${post.ownerId}`}>
+                <ArrowBackOutline height={26} viewBox={'0 -6 24 24'} />
+              </Link>
+              <PostOwnerProfile post={post} />
+            </div>
             <DropdownPost
               changeEditMode={setEditMode}
               className={'z-50'}
@@ -64,7 +71,7 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
                 />
               </div>
             </div>
-            <div className={'mb-7 mt-3'}>
+            <div className={'mb-7 mt-3 pl-1'}>
               {isAuth && (
                 <AddCommentTextarea
                   answerData={answerData}

@@ -40,7 +40,7 @@ export const PostDesktop = ({ comments, isLoading = false, post, slides }: Props
   const postWithPic = post?.images.length !== 0
 
   const handleOpenChange = () => {
-    router.back()
+    router.push(`/profile/${post?.ownerId}`)
   }
 
   return (

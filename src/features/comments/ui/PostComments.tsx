@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { authSlice } from '@/entities/auth'
 import { selectUserId } from '@/entities/auth/model/auth.slice'
-import { commentsApi } from '@/entities/comments'
+import { commentsApi, sortCommentsByUser } from '@/entities/comments'
 import { postsApi } from '@/entities/posts'
 import { AddCommentTextarea, PostComment } from '@/features/comments'
 import { PostDescription } from '@/features/posts'
@@ -28,20 +28,7 @@ export const PostComments = () => {
     currentUserId ? { postId: post?.id || 0 } : skipToken
   )
 
-  let comments = commentsData?.items
-
-  if (currentUserId) {
-    const currentUserComments = commentsData?.items.filter(
-      comment => comment.from.id === currentUserId
-    )
-    const commentsWithoutCurrentUser = commentsData?.items.filter(
-      comment => comment.from.id !== currentUserId
-    )
-
-    if (currentUserComments && commentsWithoutCurrentUser) {
-      comments = [...currentUserComments, ...commentsWithoutCurrentUser]
-    }
-  }
+  const comments = sortCommentsByUser(commentsData?.items || [], String(currentUserId))
   const {
     answerData,
     contentComment,
