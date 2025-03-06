@@ -21,7 +21,7 @@ export const PostImageView = () => {
     <>
       <div className={'fixed inset-0 w-full h-full blur-[100px] m-auto'}>
         <div
-          className={styles.box}
+          className={'overflow-hidden min-h-screen m-0 p-0'}
           style={{ backgroundImage: `linear-gradient(80deg, black, ${colors[0]})` }}
         >
           <section
@@ -42,7 +42,11 @@ export const PostImageView = () => {
           />
         </div>
       </div>
-      <main className={'flex items-center justify-center min-h-[90vh] p-4 px-16'}>
+      <main
+        className={
+          'flex items-center justify-center min-h-[70vh] md:min-h-[90vh] py-0 md:py-4 px-5 md:px-16'
+        }
+      >
         <DisplayImage onImageLoad={handleImageLoad} uploadedImage={image as string} />
       </main>
       {error && <Alert message={error} purpose={'toast'} type={'error'} />}

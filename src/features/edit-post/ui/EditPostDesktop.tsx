@@ -20,7 +20,7 @@ type Props = {
   slides: ReactNode[]
 }
 
-export const EditPost = ({ changeEditMode, isOpen, post, slides }: Props) => {
+export const EditPostDesktop = ({ changeEditMode, isOpen, post, slides }: Props) => {
   const {
     apiError,
     changeModalState,

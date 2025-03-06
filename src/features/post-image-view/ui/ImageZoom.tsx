@@ -4,6 +4,7 @@ import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch'
 
 import { Controls } from '@/features/post-image-view/ui/Controls'
 import { LinearLoader } from '@byte-creators/ui-kit'
+import { useMediaQuery } from '@byte-creators/utils'
 
 type Props = {
   onImageLoad: () => void
@@ -12,6 +13,8 @@ type Props = {
 
 export const ImageZoom = ({ onImageLoad, uploadedImage }: Props) => {
   const [isLoading, setIsLoading] = useState(true)
+  const isLargeScreen = useMediaQuery('(min-width: 768px)')
+  const isSuperSmallScreen = useMediaQuery('(max-width: 450px)')
 
   const handleImageLoad = () => {
     setIsLoading(false)
@@ -20,6 +23,13 @@ export const ImageZoom = ({ onImageLoad, uploadedImage }: Props) => {
 
   const handleImageError = () => {
     setIsLoading(false)
+  }
+  let skeletonSize = '50vh'
+
+  if (isLargeScreen) {
+    skeletonSize = '72vh'
+  } else if (isSuperSmallScreen) {
+    skeletonSize = '40vh'
   }
 
   return (
@@ -30,16 +40,16 @@ export const ImageZoom = ({ onImageLoad, uploadedImage }: Props) => {
           baseColor={'#222222'}
           borderRadius={8}
           className={'absolute top-0 left-0'}
-          height={'72vh'}
+          height={skeletonSize}
           highlightColor={'#333333'}
-          width={'72vh'}
+          width={skeletonSize}
         />
       )}
       <div className={'text-center'} style={{ display: isLoading ? 'none' : 'block' }}>
         <TransformComponent>
           <img
             alt={'uploaded'}
-            className={'rounded-lg h-[72vh] w-[72vh]'}
+            className={'rounded-lg md:h-[72vh] sm:w-[72vh]'}
             onError={handleImageError}
             onLoad={handleImageLoad}
             src={uploadedImage}
