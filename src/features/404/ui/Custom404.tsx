@@ -1,7 +1,7 @@
 import { PlatformerGame } from '@/features/games/ui/PlatformerGame'
 import { Typography } from '@byte-creators/ui-kit'
 
-import s from './styles.module.css'
+import s from '../styles.module.css'
 
 type Props = {}
 export const Custom404 = ({}: Props) => {
