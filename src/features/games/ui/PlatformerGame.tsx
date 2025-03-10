@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { Typography } from '@byte-creators/ui-kit'
+
 type Dino = {
   height: number
   img: HTMLImageElement | null
@@ -19,6 +21,7 @@ type Cactus = {
 export const PlatformerGame = () => {
   const boardRef = useRef<HTMLCanvasElement | null>(null)
   const [gameOver, setGameOver] = useState(false)
+  const [isPaused, setIsPaused] = useState(true)
   const [score, setScore] = useState(0)
 
   const boardWidth = 750
@@ -55,6 +58,12 @@ export const PlatformerGame = () => {
     velocityYRef.current = 0
   }
 
+  const startGame = () => {
+    setIsPaused(false)
+    setGameOver(false)
+    resetGame()
+  }
+
   useEffect(() => {
     const board = boardRef.current
 
@@ -70,7 +79,7 @@ export const PlatformerGame = () => {
 
     const dinoImg = new Image()
 
-    dinoImg.src = '/images/platformer/dragon2.png'
+    dinoImg.src = '/images/platformer/dragon-red.png'
 
     const cactus1Img = new Image()
 
@@ -89,7 +98,7 @@ export const PlatformerGame = () => {
     let animationFrameId: number
 
     const update = () => {
-      if (gameOver) {
+      if (isPaused || gameOver) {
         return
       }
 
@@ -116,8 +125,7 @@ export const PlatformerGame = () => {
 
         if (detectCollision(dinoRef.current, cactus)) {
           setGameOver(true)
-          dinoRef.current.img = new Image()
-          dinoRef.current.img.src = '/images/platformer/dragon-dead.png'
+          setIsPaused(true)
         }
 
         if (cactus.x + cactus.width < 0) {
@@ -131,7 +139,7 @@ export const PlatformerGame = () => {
     }
 
     const placeCactus = () => {
-      if (gameOver) {
+      if (isPaused || gameOver) {
         return
       }
 
@@ -169,21 +177,23 @@ export const PlatformerGame = () => {
       clearInterval(gameInterval)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [gameOver])
+  }, [isPaused, gameOver])
 
   const moveDino = (e: KeyboardEvent) => {
-    if (gameOver) {
+    if (isPaused || gameOver) {
       return
     }
 
     if ((e.code === 'Space' || e.code === 'ArrowUp') && dinoRef.current.y === dinoY) {
-      velocityYRef.current = -10
+      velocityYRef.current = -10 // Прыжок
     }
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.code === 'Enter' && gameOver) {
-      resetGame()
+    if (e.code === 'Enter') {
+      if (isPaused || gameOver) {
+        startGame()
+      }
     } else {
       moveDino(e)
     }
@@ -193,7 +203,7 @@ export const PlatformerGame = () => {
     window.addEventListener('keydown', handleKeyDown)
 
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [gameOver])
+  }, [isPaused, gameOver])
 
   const detectCollision = (a: Dino, b: Cactus): boolean => {
     return (
@@ -202,11 +212,18 @@ export const PlatformerGame = () => {
   }
 
   return (
-    <div className={'m-6 border w-[800px] bg-light-300'}>
+    <div className={'w-[800px] bg-light-300'}>
       <canvas height={boardHeight} id={'board'} ref={boardRef} width={boardWidth} />
-      <div className={'p-3 border bg-dark-900'}>
-        <p>Score: {score}</p>
-        {gameOver && <p>Game Over! Press Enter to restart.</p>}
+      <div className={'p-3 text-light-100 bg-dark-700'}>
+        <Typography className={'pb-1'} variant={'small-text'}>
+          Score: {score}
+        </Typography>
+        <Typography
+          className={isPaused ? 'text-light-100' : 'text-transparent'}
+          variant={'regular-text'}
+        >
+          {gameOver ? 'Game Over! Press Enter to restart.' : 'Press Enter to start the game.'}
+        </Typography>
       </div>
     </div>
   )
