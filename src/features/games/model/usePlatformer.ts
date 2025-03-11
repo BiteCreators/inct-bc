@@ -38,7 +38,7 @@ export const usePlatformer = () => {
   })
 
   const obstacleArrayRef = useRef<Obstacle[]>([])
-  const velocityX = -8
+  const velocityX = -7
   const gravity = 0.4
   const velocityYRef = useRef(0)
 
@@ -81,15 +81,15 @@ export const usePlatformer = () => {
 
     const obstacle1Img = new Image()
 
-    obstacle1Img.src = '/images/platformer/cactus1.png'
+    obstacle1Img.src = '/images/platformer/stone.png'
 
     const obstacle2Img = new Image()
 
-    obstacle2Img.src = '/images/platformer/cactus2.png'
+    obstacle2Img.src = '/images/platformer/tree.png'
 
     const obstacle3Img = new Image()
 
-    obstacle3Img.src = '/images/platformer/cactus3.png'
+    obstacle3Img.src = '/images/platformer/castle.png'
 
     heroRef.current.img = heroImg
 
@@ -156,10 +156,10 @@ export const usePlatformer = () => {
         obstacle.width = 102
       } else if (placeObstacleChance > 0.7) {
         obstacle.img = obstacle2Img
-        obstacle.width = 69
+        obstacle.width = 60
       } else if (placeObstacleChance > 0.5) {
         obstacle.img = obstacle1Img
-        obstacle.width = 34
+        obstacle.width = 40
       }
 
       if (obstacle.img) {

@@ -5,7 +5,14 @@ export const PlatformerGame = () => {
   const { boardHeight, boardRef, boardWidth, gameOver, isPaused, score } = usePlatformer()
 
   return (
-    <div className={'w-[800px] bg-light-300'}>
+    <div
+      className={'w-[800px]'}
+      style={{
+        backgroundImage: `url(/images/platformer/bg.gif)`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+      }}
+    >
       <canvas height={boardHeight} id={'board'} ref={boardRef} width={boardWidth} />
       <div className={'p-3 text-light-100 bg-dark-700'}>
         <Typography className={'pb-1'} variant={'small-text'}>
