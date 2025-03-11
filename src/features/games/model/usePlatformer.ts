@@ -16,17 +16,35 @@ type Obstacle = {
   y: number
 }
 
-export const usePlatformer = () => {
+export type Mode = 'desktop' | 'mobile' | 'tablet'
+
+export const usePlatformer = (mode: Mode = 'desktop') => {
   const boardRef = useRef<HTMLCanvasElement | null>(null)
   const [gameOver, setGameOver] = useState(false)
   const [isPaused, setIsPaused] = useState(true)
   const [score, setScore] = useState(0)
 
-  const boardWidth = 750
-  const boardHeight = 250
-  const heroWidth = 88
-  const heroHeight = 94
-  const heroX = 50
+  let scale: number
+
+  if (mode === 'desktop') {
+    scale = 1
+  } else {
+    scale = mode === 'tablet' ? 0.5 : 0.4
+  }
+
+  const baseBoardWidth = 750
+  const baseBoardHeight = 250
+  const baseHeroWidth = 88
+  const baseHeroHeight = 94
+  const baseHeroX = 50
+  const baseObstacleHeight = 70
+  const baseObstacleWidth = 34
+
+  const boardWidth = baseBoardWidth * scale
+  const boardHeight = baseBoardHeight * scale
+  const heroWidth = baseHeroWidth * scale
+  const heroHeight = baseHeroHeight * scale
+  const heroX = baseHeroX * scale
   const heroY = boardHeight - heroHeight
 
   const heroRef = useRef<Hero>({
@@ -38,8 +56,8 @@ export const usePlatformer = () => {
   })
 
   const obstacleArrayRef = useRef<Obstacle[]>([])
-  const velocityX = -7
-  const gravity = 0.4
+  const velocityX = -7 * scale
+  const gravity = 0.4 * scale
   const velocityYRef = useRef(0)
 
   const resetGame = () => {
@@ -60,6 +78,16 @@ export const usePlatformer = () => {
     setIsPaused(false)
     setGameOver(false)
     resetGame()
+  }
+
+  const moveHero = () => {
+    if (isPaused || gameOver) {
+      return
+    }
+
+    if (heroRef.current.y === heroY) {
+      velocityYRef.current = -10 * scale
+    }
   }
 
   useEffect(() => {
@@ -115,18 +143,18 @@ export const usePlatformer = () => {
         )
       }
 
-      obstacleArrayRef.current.forEach((cactus, index) => {
-        cactus.x += velocityX
-        if (cactus.img) {
-          context.drawImage(cactus.img, cactus.x, cactus.y, cactus.width, cactus.height)
+      obstacleArrayRef.current.forEach((obstacle, index) => {
+        obstacle.x += velocityX
+        if (obstacle.img) {
+          context.drawImage(obstacle.img, obstacle.x, obstacle.y, obstacle.width, obstacle.height)
         }
 
-        if (detectCollision(heroRef.current, cactus)) {
+        if (detectCollision(heroRef.current, obstacle)) {
           setGameOver(true)
           setIsPaused(true)
         }
 
-        if (cactus.x + cactus.width < 0) {
+        if (obstacle.x + obstacle.width < 0) {
           obstacleArrayRef.current.splice(index, 1)
         }
       })
@@ -142,24 +170,24 @@ export const usePlatformer = () => {
       }
 
       const obstacle: Obstacle = {
-        height: 70,
+        height: baseObstacleHeight * scale,
         img: null,
-        width: 34,
+        width: baseObstacleWidth * scale,
         x: boardWidth,
-        y: boardHeight - 70,
+        y: boardHeight - baseObstacleHeight * scale,
       }
 
       const placeObstacleChance = Math.random()
 
       if (placeObstacleChance > 0.9) {
         obstacle.img = obstacle3Img
-        obstacle.width = 102
+        obstacle.width = 102 * scale
       } else if (placeObstacleChance > 0.7) {
         obstacle.img = obstacle2Img
-        obstacle.width = 60
+        obstacle.width = 60 * scale
       } else if (placeObstacleChance > 0.5) {
         obstacle.img = obstacle1Img
-        obstacle.width = 40
+        obstacle.width = 40 * scale
       }
 
       if (obstacle.img) {
@@ -175,33 +203,27 @@ export const usePlatformer = () => {
       clearInterval(gameInterval)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [isPaused, gameOver])
-
-  const moveHero = (e: KeyboardEvent) => {
-    if (isPaused || gameOver) {
-      return
-    }
-
-    if ((e.code === 'Space' || e.code === 'ArrowUp') && heroRef.current.y === heroY) {
-      velocityYRef.current = -10
-    }
-  }
+  }, [isPaused, gameOver, scale])
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.code === 'Enter') {
-      if (isPaused || gameOver) {
-        startGame()
+    if (mode === 'desktop') {
+      if (e.code === 'Enter') {
+        if (isPaused || gameOver) {
+          startGame()
+        }
+      } else if (e.code === 'Space' || e.code === 'ArrowUp') {
+        moveHero()
       }
-    } else {
-      moveHero(e)
     }
   }
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown)
+    if (mode === 'desktop') {
+      window.addEventListener('keydown', handleKeyDown)
 
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isPaused, gameOver])
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isPaused, gameOver, mode])
 
   const detectCollision = (a: Hero, b: Obstacle): boolean => {
     return (
@@ -209,5 +231,5 @@ export const usePlatformer = () => {
     )
   }
 
-  return { boardHeight, boardRef, boardWidth, gameOver, isPaused, score }
+  return { boardHeight, boardRef, boardWidth, gameOver, isPaused, moveHero, score, startGame }
 }
