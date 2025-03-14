@@ -11,7 +11,7 @@ import { DropdownPost } from '@/features/posts/ui/DropdownPost'
 import { PostOwnerProfile } from '@/features/posts/ui/PostOwnerProfile'
 import { Slider } from '@byte-creators/ui-kit'
 import { ArrowBackOutline } from '@byte-creators/ui-kit/icons'
-import { cn, useMediaQuery } from '@byte-creators/utils'
+import { cn, useMediaQuery, useScreenWidth } from '@byte-creators/utils'
 import Link from 'next/link'
 
 import { useCommentState } from '../../model/useCommentState'
@@ -24,6 +24,7 @@ type Props = {
 
 export const PostMobile = ({ comments, post, slides }: Props) => {
   const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+  const isSmallScreen = useMediaQuery('(max-width: 480px)')
   const isAuth = useAppSelector(authSlice.selectors.selectAccessToken)
   const [editMode, setEditMode] = useState<boolean>(false)
   const { data: currentUser } = authApi.useMeQuery()
@@ -36,6 +37,9 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
     setContentComment,
     textareaRef,
   } = useCommentState()
+
+  const screenWidth = useScreenWidth()
+  const sliderSize = screenWidth - 30
 
   const isMyPost = post?.ownerId === currentUser?.userId || false
 
@@ -59,7 +63,18 @@ export const PostMobile = ({ comments, post, slides }: Props) => {
               post={post}
             />
           </div>
-          <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px]'} />
+          {isSmallScreen ? (
+            <Slider
+              isMobile
+              nativeStyles={{
+                height: sliderSize,
+                width: sliderSize,
+              }}
+              slides={slides}
+            />
+          ) : (
+            <Slider height={'full'} slides={slides} stylesSlider={'max-w-[500px]'} />
+          )}
           <div className={'max-w-[480px] w-full flex flex-col overflow-hidden'}>
             <PostActionsBlock post={post} />
             <div className={cn(['flex-1 w-full px-0', isLargeScreen && 'px-6'])}>
