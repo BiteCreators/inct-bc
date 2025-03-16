@@ -24,5 +24,6 @@ export const inctagramApi = createApi({
     'Answer',
     'Notifications',
     'Messages',
+    'Payments',
   ],
 })
