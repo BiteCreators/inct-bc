@@ -1,5 +1,5 @@
 import { Subscription } from '@/entities/payments'
-
+// TODO remove
 export const getSubscriptionDates = (data: Subscription[]) => {
   const paymentsDatesArray = data.map(el => {
     return new Date(el.dateOfPayment).getTime()
