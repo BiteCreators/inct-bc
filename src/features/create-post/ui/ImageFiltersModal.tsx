@@ -29,12 +29,12 @@ export const ImageFiltersModal = ({
       <ScrollArea className={'h-full'} scrollbarClassName={'bg-dark-100'}>
         <ul
           className={
-            'bg-dark-300 md:bg-transparent grid grid-cols-3 md:gap-x-6 md:gap-y-[18px] md:px-14 pt-6 pb-6'
+            'bg-dark-300 md:bg-transparent grid grid-cols-3 md:gap-x-6 md:gap-y-[18px] md:px-9 pt-6 pb-6'
           }
         >
           {filterValues.map((el, index) => (
             <li
-              className={'flex flex-col gap-2 items-center cursor-pointer pb-4 md:pb-0'}
+              className={'flex flex-col gap-3 items-center cursor-pointer pb-5 md:pb-0'}
               key={el.name}
               onClick={() => handleSelectFilter(el.class)}
             >
