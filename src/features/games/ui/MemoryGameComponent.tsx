@@ -14,6 +14,7 @@ type Card = {
 type ValidNumbers = 2 | 3 | 4 | 5 | 6 | 7 | 8
 
 type Props = {
+  cardSize?: number
   columns: ValidNumbers
   rows: ValidNumbers
 }
@@ -30,7 +31,7 @@ const images = [
   '/images/memory-game/cat2.png',
 ]
 
-export const MemoryGameComponent = ({ columns, rows }: Props) => {
+export const MemoryGameComponent = ({ cardSize = 64, columns, rows }: Props) => {
   const [cards, setCards] = useState<Card[]>([])
   const [selectedCards, setSelectedCards] = useState<number[]>([])
   const [matchedPairs, setMatchedPairs] = useState<number>(0)
@@ -115,12 +116,13 @@ export const MemoryGameComponent = ({ columns, rows }: Props) => {
           {cards.map((card, index) => (
             <div
               className={cn([
-                'w-16 h-16 border border-light-900 flex items-center',
+                'border border-light-900 flex items-center',
                 'justify-center text-white font-bold cursor-pointer transition',
                 card.isFlipped || card.isMatched ? 'bg-primary-700' : 'bg-dark-300',
               ])}
               key={card.id}
               onClick={() => handleCardClick(index)}
+              style={{ height: `${cardSize}px`, width: `${cardSize}px` }}
             >
               {card.isFlipped ? (
                 <img alt={'card'} className={cn(['w-full h-full'])} src={card.image} />
