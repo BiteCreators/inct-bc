@@ -1,10 +1,9 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import { profileApi } from '@/entities/profile'
-import { MemoryGameComponent } from '@/features/games/ui/MemoryGameComponent'
-import { SnakeGame } from '@/features/games/ui/SnakeGame'
-import { ScrollArea, Slider, TextArea, Typography, UserProfile } from '@byte-creators/ui-kit'
-import { cn, useMediaQuery, useScopedTranslation } from '@byte-creators/utils'
+import { LoaderSwitcher } from '@/features/personalization'
+import { ScrollArea, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
+import { useMediaQuery, useScopedTranslation } from '@byte-creators/utils'
 
 type Props = {
   correct: boolean
@@ -23,45 +22,22 @@ export const PublicationModal = ({
   slides,
   value,
 }: Props) => {
+  const isLargeScreen = useMediaQuery('(min-width: 768px)')
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
-  const isLargeScreen = useMediaQuery('(min-width: 768px)')
-  // if (isLoading) {
-  //   return isLargeScreen ? (
-  //     <SnakeGame
-  //       cellsClassName={'h-10 w-10'}
-  //       fieldWidth={23}
-  //       title={'Help the dragon catch the egg while the post is loading!'}
-  //     />
-  //   ) : (
-  //     <SnakeGame
-  //       cellsClassName={'h-8 w-8'}
-  //       className={'m-1'}
-  //       fieldHeight={10}
-  //       fieldWidth={10}
-  //       mobileMod
-  //       title={'Help the dragon catch the egg while the post is loading!'}
-  //     />
-  //   )
-  // }
+
+  const [loaderType, setLoaderType] = useState<string>('Default (spinner)')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLoader = localStorage.getItem('loaderType') || 'Default (spinner)'
+
+      setLoaderType(savedLoader)
+    }
+  }, [])
 
   if (isLoading) {
-    return (
-      <div
-        className={cn([
-          'flex text-center items-center justify-around p-2',
-          !isLargeScreen && 'flex-col gap-4',
-        ])}
-      >
-        <div className={'text-center items-center justify-center'}>
-          <Typography variant={'h2'}>Fancy a game while you wait?🤔</Typography>
-          <Typography variant={'h3'}>We&#39;re on a mission to find the cutest emojis</Typography>
-        </div>
-        <div className={cn(['border-2 border-light-900', isLargeScreen ? 'w-[456px]' : 'w-fit'])}>
-          <MemoryGameComponent columns={isLargeScreen ? 6 : 4} rows={isLargeScreen ? 6 : 4} />
-        </div>
-      </div>
-    )
+    return <LoaderSwitcher loaderType={loaderType} />
   }
 
   const content = (
@@ -98,7 +74,6 @@ export const PublicationModal = ({
         <Slider duration={0} slides={slides} />
       </div>
       {isLargeScreen ? content : <ScrollArea>{content}</ScrollArea>}
-      {/*{isLoading && <LoaderBlock portal />}*/}
     </div>
   )
 }

@@ -1,4 +1,37 @@
-type Props = {}
-export const Personalization = ({}: Props) => {
-  return <div>Personalization</div>
+import React from 'react'
+
+import { loaderOptions, useLoaderOptions } from '@/features/personalization'
+import { Alert, Card, RadioGroup, Typography } from '@byte-creators/ui-kit'
+
+export const Personalization = () => {
+  const { alertState, handleAlertClose, handleLoaderChange, selectedLoader } = useLoaderOptions()
+
+  return (
+    <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
+      <div>
+        <Typography className={'font-weight600 mb-2'} variant={'h3'}>
+          Post publishing loader type
+        </Typography>
+
+        <Card className={'flex flex-col mb-10'}>
+          <RadioGroup
+            defaultValue={selectedLoader}
+            onChange={handleLoaderChange}
+            options={loaderOptions}
+          />
+        </Card>
+
+        <Alert
+          canClose
+          className={'mt-4'}
+          duration={4000}
+          message={alertState.message}
+          onClose={handleAlertClose}
+          open={alertState.visible}
+          purpose={'toast'}
+          type={alertState.type}
+        />
+      </div>
+    </div>
+  )
 }

@@ -30,10 +30,10 @@ const MyPayments = dynamic(
 
 type TabValues =
   | 'account-management'
-  | 'app-settings'
   | 'devices'
   | 'general-information'
   | 'my-payments'
+  | 'personalization'
 
 export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
   const t = useScopedTranslation('Navigation')
@@ -108,7 +108,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
         {
           content: <Personalization />,
           label: 'Personalization',
-          value: 'app-settings',
+          value: 'personalization',
         },
       ]}
       value={selectedTab}
