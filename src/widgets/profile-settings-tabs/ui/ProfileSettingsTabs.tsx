@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { Personalization } from '@/features/personalization'
 import { LocationsProps } from '@/pages/profile/[id]/settings'
 import { TabsBase } from '@byte-creators/ui-kit'
 import { useScopedTranslation } from '@byte-creators/utils'
@@ -27,7 +28,12 @@ const MyPayments = dynamic(
   { ssr: true }
 )
 
-type TabValues = 'account-management' | 'devices' | 'general-information' | 'my-payments'
+type TabValues =
+  | 'account-management'
+  | 'app-settings'
+  | 'devices'
+  | 'general-information'
+  | 'my-payments'
 
 export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
   const t = useScopedTranslation('Navigation')
@@ -98,6 +104,11 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
           content: <MyPayments />,
           label: t.myPayments,
           value: 'my-payments',
+        },
+        {
+          content: <Personalization />,
+          label: 'Personalization',
+          value: 'app-settings',
         },
       ]}
       value={selectedTab}
