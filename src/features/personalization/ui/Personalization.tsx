@@ -1,16 +1,17 @@
 import React from 'react'
 
-import { loaderOptions, useLoaderOptions } from '@/features/personalization'
+import { useLoaderOptions } from '@/features/personalization'
 import { Alert, Card, RadioGroup, Typography } from '@byte-creators/ui-kit'
 
 export const Personalization = () => {
-  const { alertState, handleAlertClose, handleLoaderChange, selectedLoader } = useLoaderOptions()
+  const { alertState, handleAlertClose, handleLoaderChange, loaderOptions, selectedLoader, t } =
+    useLoaderOptions()
 
   return (
     <div className={'flex flex-col gap-10 text-sm relative lg:flex-row'}>
       <div>
         <Typography className={'font-weight600 mb-2'} variant={'h3'}>
-          Post publishing loader type
+          {t.title}
         </Typography>
 
         <Card className={'flex flex-col mb-10'}>

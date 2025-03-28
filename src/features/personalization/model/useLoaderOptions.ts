@@ -1,8 +1,22 @@
 import { useState } from 'react'
 
+import { useScopedTranslation } from '@byte-creators/utils'
+
+type LoaderOption = {
+  disabled: boolean
+  label: string
+  value: string
+}
+
 const defaultLoader = 'Default (spinner)'
 
 export const useLoaderOptions = () => {
+  const t = useScopedTranslation('Personalization')
+  const loaderOptions: LoaderOption[] = [
+    { disabled: false, label: t.spinner, value: 'Default (spinner)' },
+    { disabled: false, label: t.cardGame.name, value: 'Memory card game' },
+    { disabled: false, label: t.snakeGame.name, value: 'Snake game' },
+  ]
   const [selectedLoader, setSelectedLoader] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('loaderType') || defaultLoader
@@ -23,10 +37,10 @@ export const useLoaderOptions = () => {
 
       if (typeof window !== 'undefined') {
         localStorage.setItem('loaderType', value)
-        showAlert('Loader preference saved successfully!', 'success')
+        showAlert(t.success, 'success')
       }
     } catch (error) {
-      showAlert('Failed to save loader preference', 'error')
+      showAlert(t.error, 'error')
     }
   }
 
@@ -38,5 +52,5 @@ export const useLoaderOptions = () => {
     setAlertState(prev => ({ ...prev, visible: false }))
   }
 
-  return { alertState, handleAlertClose, handleLoaderChange, selectedLoader }
+  return { alertState, handleAlertClose, handleLoaderChange, loaderOptions, selectedLoader, t }
 }

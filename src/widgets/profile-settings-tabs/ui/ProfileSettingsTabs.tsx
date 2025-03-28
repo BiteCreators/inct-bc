@@ -36,7 +36,8 @@ type TabValues =
   | 'personalization'
 
 export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
-  const t = useScopedTranslation('Navigation')
+  const tNav = useScopedTranslation('Navigation')
+  const tPers = useScopedTranslation('Personalization')
   const router = useRouter()
   const selectedTab = (router.query.tab as TabValues) || 'general-information'
   const handleTabChange = (value: TabValues) => {
@@ -82,7 +83,7 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
       tabsData={[
         {
           content: <EditProfileForm cities={cities} countries={countries} />,
-          label: t.generalInfo,
+          label: tNav.generalInfo,
           value: 'general-information',
         },
         {
@@ -92,22 +93,22 @@ export const ProfileSettingsTabs = ({ cities, countries }: LocationsProps) => {
               <SessionsList />
             </div>
           ),
-          label: t.devices,
+          label: tNav.devices,
           value: 'devices',
         },
         {
           content: <AccountManagement />,
-          label: t.accountManagement,
+          label: tNav.accountManagement,
           value: 'account-management',
         },
         {
           content: <MyPayments />,
-          label: t.myPayments,
+          label: tNav.myPayments,
           value: 'my-payments',
         },
         {
           content: <Personalization />,
-          label: 'Personalization',
+          label: tPers.personalization,
           value: 'personalization',
         },
       ]}

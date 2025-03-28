@@ -15,8 +15,8 @@ importers:
         specifier: ^1.9.9
         version: 1.9.9(rbz2ijynevbsu37soitau3zctm)
       '@byte-creators/utils':
-        specifier: ^1.11.0
-        version: 1.11.0(63fgu4psfbgkgul7ytcqau5isa)
+        specifier: ^1.12.0
+        version: 1.12.0(63fgu4psfbgkgul7ytcqau5isa)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.1(react-hook-form@7.54.1(react@18.3.1))
@@ -455,8 +455,8 @@ packages:
       rollup-plugin-postcss: ^4.0.2
       tailwind-merge: ^2.5.2
 
-  '@byte-creators/utils@1.11.0':
-    resolution: {integrity: sha512-miCzka2H/fwmZK5uEAidKqQG71arBnIS+ZOKdEqvzBBKr4mWP/zWbTj+gRZrkrKfFx6cApg3PlOUSBU6V+BhEA==}
+  '@byte-creators/utils@1.12.0':
+    resolution: {integrity: sha512-HJ1HeHiXwH7X2o/bzYy2VeG4YCmocGpKSWO9MIJy0l2o75/147Cc2YnGBflwCSApUk9fGx5VmcAUDpijgIRt0Q==}
     peerDependencies:
       next: 14.2.20
       react: ^18
@@ -6004,7 +6004,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.26.0
       '@byte-creators/config': 1.0.5(3uhz7xy7wkngoaum2dsjgy3tq4)
-      '@byte-creators/utils': 1.11.0(63fgu4psfbgkgul7ytcqau5isa)
+      '@byte-creators/utils': 1.12.0(63fgu4psfbgkgul7ytcqau5isa)
       '@hookform/resolvers': 3.9.1(react-hook-form@7.54.1(react@18.3.1))
       '@radix-ui/react-dialog': 1.1.4(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-dropdown-menu': 2.1.4(@types/react-dom@18.3.5(@types/react@19.0.1))(@types/react@19.0.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6054,7 +6054,7 @@ snapshots:
       - tailwindcss
       - typescript
 
-  '@byte-creators/utils@1.11.0(63fgu4psfbgkgul7ytcqau5isa)':
+  '@byte-creators/utils@1.12.0(63fgu4psfbgkgul7ytcqau5isa)':
     dependencies:
       '@byte-creators/config': 1.0.5(3uhz7xy7wkngoaum2dsjgy3tq4)
       '@reduxjs/toolkit': 2.6.1(react-redux@9.2.0(@types/react@19.0.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
