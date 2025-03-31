@@ -1,5 +1,7 @@
+import { authBaseQuery, createReauthBaseQuery } from '@/common/api/base-queries'
 import { inctagramApi } from '@/common/api/inct.api'
 
+// Типы запросов
 type RegistrationRequest = {
   baseUrl: string
   email: string
@@ -43,35 +45,39 @@ type RegistrationEmailResendingRequest = {
   baseUrl: string
   email: string
 }
+
 type GoogleAuthResponse = {
   accessToken: string
   email: string
 }
 
 export const authApi = inctagramApi.injectEndpoints({
-  endpoints: builder => ({
+  endpoints: (builder: any) => ({
     checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeRequest>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         method: 'POST',
-        url: 'v1/auth/check-recovery-code',
+        url: '/auth/check-recovery-code',
       }),
     }),
     forgotPassword: builder.mutation<void, ForgotPasswordRequest>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         headers: {
           'Content-Type': 'application/json',
         },
         method: 'POST',
-        url: `/v1/auth/password-recovery`,
+        url: '/auth/password-recovery',
       }),
     }),
     googleAuth: builder.mutation<GoogleAuthResponse, { code: string }>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         method: 'POST',
-        url: '/v1/auth/google/login',
+        url: '/auth/google/login',
       }),
     }),
     login: builder.mutation<{ accessToken: string }, LoginRequest>({
@@ -79,54 +85,64 @@ export const authApi = inctagramApi.injectEndpoints({
       query: body => ({
         body,
         method: 'POST',
-        url: '/v1/auth/login',
+        url: 'v1/auth/login',
       }),
     }),
+    // @ts-ignore
     logout: builder.mutation<void, void>({
       invalidatesTags: ['Me'],
-      query: body => ({
-        body,
+      query: () => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         method: 'POST',
-        url: '/v1/auth/logout',
+        url: '/auth/logout',
       }),
     }),
+    // @ts-ignore
     me: builder.query<MeResponse, void>({
       providesTags: ['Me'],
-      query: body => ({
-        body,
+      query: () => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         method: 'GET',
-        url: '/v1/auth/me',
+        url: '/auth/me',
       }),
     }),
+    // @ts-ignore
     newPassword: builder.mutation<void, NewPasswordRequest>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         headers: {
           'Content-Type': 'application/json',
         },
         method: 'POST',
-        url: `/v1/auth/new-password`,
+        url: '/auth/new-password',
       }),
     }),
+    // @ts-ignore
     registration: builder.mutation<void, RegistrationRequest>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         method: 'POST',
-        url: 'v1/auth/registration',
+        url: '/auth/registration',
       }),
     }),
+    // @ts-ignore
     registrationConfirmation: builder.mutation<void, RegistrationConfirmationRequest>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         method: 'POST',
-        url: '/v1/auth/registration-confirmation',
+        url: '/auth/registration-confirmation',
       }),
     }),
+    // @ts-ignore
     registrationEmailResending: builder.mutation<void, RegistrationEmailResendingRequest>({
       query: body => ({
+        baseQuery: createReauthBaseQuery(authBaseQuery),
         body,
         method: 'POST',
-        url: '/v1/auth/registration-email-resending',
+        url: '/auth/registration-email-resending',
       }),
     }),
   }),
