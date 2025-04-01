@@ -61,24 +61,20 @@ export const useSignInForm = () => {
       await new Promise(resolve => setTimeout(resolve, 500))
 
       if (!document.cookie.includes('accessToken')) {
-        throw new Error('COOKIES_BLOCKED')
+        setApiError(t.errors.cookiesDisabled)
+
+        return
       }
 
       dispatch(authSlice.actions.setCredentials({ accessToken: token, userId }))
       Router.push(`/profile/${userId}`)
-    } catch (error: any) {
-      if (error.message === 'COOKIES_BLOCKED') {
-        setApiError(
-          'Для входа на сайт необходимо разрешить использование файлов cookie в настройках вашего браузера.'
-        )
-      } else {
-        handleApiError({
-          error,
-          modifyMessage: modifySingInApiError,
-          setApiError,
-          setError,
-        })
-      }
+    } catch (error) {
+      handleApiError({
+        error,
+        modifyMessage: modifySingInApiError,
+        setApiError,
+        setError,
+      })
     }
   }
 
