@@ -15,6 +15,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
+  "resolveJsonModule": true,
   "exclude": [
     "node_modules"
   ]
