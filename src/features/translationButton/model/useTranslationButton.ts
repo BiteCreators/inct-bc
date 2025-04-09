@@ -11,15 +11,17 @@ export const useTranslationButton = (
   const router = useRouter()
   const locale = router.locale === 'en' ? 'en' : 'ru'
 
-  const ruRegex = /^[^a-zA-Z]*[\u0400-\u04FF]+[^a-zA-Z]*$/
-  const enRegex = /^[a-zA-Z0-9\s\W]+$/
+  const ruRegex = /[\u0400-\u04FF]/
+  const enRegex = /^[^а-яА-Я]*$/
+  const nonAlphanumericRegex = /^[^a-zA-Z\u0400-\u04FF]*$/
 
   const isPostInRussian = ruRegex.test(originalText)
   const isPostInEnglish = enRegex.test(originalText)
-
+  const isNonAlphanumeric = nonAlphanumericRegex.test(originalText)
   const shouldShowTranslateButton =
-    (locale === 'ru' && isPostInEnglish) || (locale === 'en' && isPostInRussian)
-
+    originalText !== '' &&
+    !isNonAlphanumeric &&
+    ((locale === 'ru' && !isPostInRussian) || (locale === 'en' && !isPostInEnglish))
   let buttonText = ''
 
   if (isTranslated) {
