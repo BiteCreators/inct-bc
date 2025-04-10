@@ -1,7 +1,8 @@
-import { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import { Answer, Comment } from '@/entities/comments/types/comments.types'
 import { CommentAnswer } from '@/features/comments/ui/CommentAnswer'
+import { TranslationButton } from '@/features/translationButton'
 import { Avatar, Typography } from '@byte-creators/ui-kit'
 import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
 import { cn } from '@byte-creators/utils'
@@ -32,6 +33,9 @@ export const MobileCommentContent = ({
   relativeTime,
   setIsAnswersOpen,
 }: Props) => {
+  const [translatedText, setTranslatedText] = useState(comment.content)
+  const commentContent = translatedText || comment.content
+
   return (
     <div className={'flex'}>
       <div className={'flex flex-col'}>
@@ -46,8 +50,16 @@ export const MobileCommentContent = ({
         </div>
         <div className={'flex flex-col ml-12'}>
           <Typography className={'text-[14px] mb-[2px] break-words'} variant={'regular-text'}>
-            {children || comment.content}
+            {children || commentContent}
           </Typography>
+          {!children && (
+            <TranslationButton
+              className={'text-sm flex -mt-1'}
+              originalText={comment.content}
+              setTranslatedText={setTranslatedText}
+              translatedText={translatedText}
+            />
+          )}
           <div className={'flex mt-1 gap-3'}>
             <Typography className={'text-light-900'} variant={'small-text'}>
               {relativeTime}
