@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import { Comment } from '@/entities/comments/types/comments.types'
+import { TranslationButton } from '@/features/translationButton'
 import { Avatar, Typography } from '@byte-creators/ui-kit'
 import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
 import { cn } from '@byte-creators/utils'
@@ -19,6 +20,9 @@ export const DesktopCommentContent = ({
   handleUpdateLikeStatusComment,
   relativeTime,
 }: Props) => {
+  const [translatedText, setTranslatedText] = useState(comment.content)
+  const commentContent = translatedText || comment.content
+
   return (
     <>
       <div className={'col-span-1 row-span-2 pt-1'}>
@@ -33,7 +37,7 @@ export const DesktopCommentContent = ({
                   {comment.from.username}
                 </span>
               }
-              {children || comment.content}
+              {children || commentContent}
             </Typography>
             <div className={'mt-1 flex gap-3'}>
               <Typography className={'text-light-900'} variant={'small-text'}>
@@ -57,6 +61,14 @@ export const DesktopCommentContent = ({
                   Answer
                 </button>
               </Typography>
+              {!children && (
+                <TranslationButton
+                  className={'text-sm flex -mt-1'}
+                  originalText={comment.content}
+                  setTranslatedText={setTranslatedText}
+                  translatedText={translatedText}
+                />
+              )}
             </div>
           </div>
           <div

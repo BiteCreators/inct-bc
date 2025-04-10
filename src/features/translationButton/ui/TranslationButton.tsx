@@ -2,14 +2,21 @@ import React from 'react'
 
 import { useTranslationButton } from '@/features/translationButton'
 import { Button } from '@byte-creators/ui-kit'
+import { cn } from '@byte-creators/utils'
 
 type Props = {
+  className?: string
   originalText: string
   setTranslatedText: (translatedText: string) => void
   translatedText: string
 }
 
-export const TranslationButton = ({ originalText, setTranslatedText, translatedText }: Props) => {
+export const TranslationButton = ({
+  className,
+  originalText,
+  setTranslatedText,
+  translatedText,
+}: Props) => {
   const { buttonText, isTranslated, shouldShowTranslateButton, showOriginalText, translateText } =
     useTranslationButton(originalText, translatedText, setTranslatedText)
 
@@ -19,7 +26,7 @@ export const TranslationButton = ({ originalText, setTranslatedText, translatedT
 
   return (
     <Button
-      className={'bg-transparent p-0 text-primary-700'}
+      className={cn([className, 'bg-transparent p-0 text-primary-700'])}
       onClick={isTranslated ? showOriginalText : translateText}
       variant={'icon'}
     >

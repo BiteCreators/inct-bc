@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 
 import { Answer } from '@/entities/comments/types/comments.types'
+import { TranslationButton } from '@/features/translationButton'
 import { Avatar, Typography } from '@byte-creators/ui-kit'
 import { Heart, HeartOutline } from '@byte-creators/ui-kit/icons'
 import { cn, useGetRelativeTime, useMediaQuery } from '@byte-creators/utils'
@@ -20,6 +21,8 @@ export const CommentAnswer = ({
   handleUpdateLikeStatusAnswer,
   postId,
 }: Props) => {
+  const [translatedText, setTranslatedText] = useState(answer.content)
+  const answerContent = translatedText || answer.content
   const isLargeScreen = useMediaQuery('(min-width: 920px)')
   const { getRelativeTime } = useGetRelativeTime()
   const relativeTime = getRelativeTime(new Date(answer.createdAt).getTime())
@@ -35,12 +38,12 @@ export const CommentAnswer = ({
             <span className={'text-base font-weight600 leading-5 mr-2'}>
               {answer.from.username}
             </span>
-            {isLargeScreen && (children || answer.content)}
+            {isLargeScreen && (children || answerContent)}
           </Typography>
 
           {!isLargeScreen && (
             <Typography className={'text-[14px] break-all'} variant={'regular-text'}>
-              {children || answer.content}
+              {children || answerContent}
             </Typography>
           )}
 
@@ -66,6 +69,14 @@ export const CommentAnswer = ({
                 Answer
               </button>
             </Typography>
+            {!children && (
+              <TranslationButton
+                className={'text-sm flex -mt-1'}
+                originalText={answer.content}
+                setTranslatedText={setTranslatedText}
+                translatedText={translatedText}
+              />
+            )}
             <div
               className={cn(
                 'flex justify-center items-center ml-3 w-4 h-4',
