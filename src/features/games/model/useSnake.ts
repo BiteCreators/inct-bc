@@ -196,6 +196,47 @@ export const useSnake = (fieldWidth: number, fieldHeight: number) => {
     }
   }, [])
 
+  const handleKeyDown = (event: { key: string }) => {
+    switch (event.key) {
+      case 'ArrowUp':
+        setDirection('up')
+        break
+      case 'ArrowDown':
+        setDirection('down')
+        break
+      case 'ArrowLeft':
+        setDirection('left')
+        break
+      case 'ArrowRight':
+        setDirection('right')
+        break
+      case ' ':
+        setGameRunning(prev => !prev)
+        break
+      default:
+        return
+    }
+  }
+
+  // Обработчик событий для мобильных устройств (касания)
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0]
+
+        if (touch.clientX < window.innerWidth / 2) {
+          setDirection('left')
+        } else {
+          setDirection('right')
+        }
+      }
+    }
+
+    window.addEventListener('touchstart', handleTouchStart)
+
+    return () => window.removeEventListener('touchstart', handleTouchStart)
+  }, [])
+
   const currentHeadPosition: FieldSegmentType = {
     x: snakePosition[0]['x'],
     y: snakePosition[0]['y'],
@@ -212,6 +253,7 @@ export const useSnake = (fieldWidth: number, fieldHeight: number) => {
     field,
     foodPosition,
     gameRunning,
+    handleKeyDown,
     moveSnake,
     snakePosition,
     updateField,

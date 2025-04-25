@@ -50,7 +50,7 @@ export const useEditProfileForm = () => {
   const onSubmit = async (data: EditProfileFormData) => {
     const formData = {
       ...data,
-      dateOfBirth: data.dateOfBirth.toLocaleDateString(),
+      dateOfBirth: data.dateOfBirth.toDateString(),
     }
 
     try {

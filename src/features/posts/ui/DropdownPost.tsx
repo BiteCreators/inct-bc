@@ -14,22 +14,33 @@ import {
 type Props = {
   changeEditMode: (e: boolean) => void
   className?: string
+  classNameButton?: string
+  isFollow?: boolean
   isMyPost: boolean
   post: Post
 }
-export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => {
+export const DropdownPost = ({
+  changeEditMode,
+  className,
+  classNameButton,
+  isFollow = false,
+  isMyPost,
+  post,
+}: Props) => {
   const forDrop: DropdownItem[] = []
-  const isFollow = false
   const {
     apiError,
     confirmOpen,
-    copyLinkHandler,
+    copyPostLinkHandler,
     deletePostHandler,
     handleConfirm,
     handleReject,
+    messageConfirmation,
     setConfirmOpen,
     t,
-  } = useDropdownPost()
+    titleConfirmation,
+    unfollowHandler,
+  } = useDropdownPost({ post })
 
   if (isMyPost) {
     forDrop.push(
@@ -51,7 +62,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => 
       forDrop.push({
         icon: <PersonRemoveOutline />,
         label: t.unfollow,
-        onClick: () => {},
+        onClick: unfollowHandler,
       })
     } else {
       forDrop.push({
@@ -63,7 +74,7 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => 
     forDrop.push({
       icon: <CopyOutline className={'w-[23px] h-[23px]'} />,
       label: t.copyLink,
-      onClick: copyLinkHandler,
+      onClick: copyPostLinkHandler,
     })
   }
 
@@ -71,13 +82,13 @@ export const DropdownPost = ({ changeEditMode, className, isMyPost }: Props) => 
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={t.deletePostQuestion}
+        message={messageConfirmation}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={t.deletePost}
+        title={titleConfirmation}
       />
-      <Dropdown className={className} items={forDrop} />
+      <Dropdown className={className} classNameButton={classNameButton} items={forDrop} />
       {apiError && (
         <Alert className={'z-50'} message={apiError} portal purpose={'toast'} type={'error'} />
       )}

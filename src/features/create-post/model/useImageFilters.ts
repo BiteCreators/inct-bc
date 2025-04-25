@@ -1,22 +1,24 @@
 import { useRef, useState } from 'react'
 
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import domtoimage from 'dom-to-image'
 
 import { ImageData } from '../types'
 
-export const useImageFilters = ({
-  images,
-  setImages,
-}: {
-  images: ImageData[]
-  setImages: (images: ImageData[]) => void
-}) => {
+export const useImageFilters = () => {
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images } = createPostState
+  const dispatch = useAppDispatch()
   const totalImageRefs = useRef<(HTMLImageElement | null)[]>(Array(images.length).fill(null))
 
   const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const handleSetImages = (newImages: ImageData[]) => {
+    dispatch(createPostSlice.actions.setImages(newImages))
+  }
 
   const handleSelectFilter = (selectedFilter: string) => {
-    setImages(images.map((el, i) => (i === currentIndex ? { ...el, selectedFilter } : el)))
+    handleSetImages(images.map((el, i) => (i === currentIndex ? { ...el, selectedFilter } : el)))
   }
 
   const urlToFile = async (url: string, fileName: string) => {
@@ -42,7 +44,7 @@ export const useImageFilters = ({
           newUrls.push(url)
         }
       }, Promise.resolve())
-      setImages(images.map((el, index) => ({ ...el, totalUrl: newUrls[index] })))
+      handleSetImages(images.map((el, index) => ({ ...el, totalUrl: newUrls[index] })))
     } catch (error) {
       console.error('Error applying filters:', error)
     }

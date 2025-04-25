@@ -2,12 +2,14 @@ import { inctagramApi } from '@/common/api/inct.api'
 import { locationApi } from '@/common/api/location.api'
 import { authSlice } from '@/entities/auth'
 import { postSlice } from '@/entities/posts'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import { paymentsSlice } from '@/features/payments'
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
 const rootReducer = combineReducers({
   auth: authSlice.reducer,
+  createPost: createPostSlice.reducer,
   [inctagramApi.reducerPath]: inctagramApi.reducer,
   [locationApi.reducerPath]: locationApi.reducer,
   payments: paymentsSlice.reducer,
@@ -21,6 +23,7 @@ const makeStore = () =>
       getDefaultMiddleware().concat(inctagramApi.middleware, locationApi.middleware),
     reducer: {
       auth: authSlice.reducer,
+      createPost: createPostSlice.reducer,
       [inctagramApi.reducerPath]: inctagramApi.reducer,
       [locationApi.reducerPath]: locationApi.reducer,
       payments: paymentsSlice.reducer,

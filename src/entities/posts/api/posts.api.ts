@@ -5,6 +5,8 @@ import { PostLikesResponse, Reaction } from '../types/likes.types'
 import {
   AllPublicPostsRequest,
   CreatePostRequest,
+  FollowerPublicationsRequest,
+  FollowerPublicationsResponse,
   Post,
   PublicPostsResponse,
   UserPublicPostsRequest,
@@ -62,6 +64,24 @@ export const postsApi = inctagramApi.injectEndpoints({
         return {
           params,
           url: endCursorPostId ? `v1/public-posts/all/${endCursorPostId}` : `v1/public-posts/all`,
+        }
+      },
+    }),
+    getFollowerPublications: builder.query<
+      FollowerPublicationsResponse,
+      FollowerPublicationsRequest
+    >({
+      providesTags: ['Posts'],
+      query: data => {
+        const { endCursorPostId, pageNumber, pageSize } = data
+
+        return {
+          params: {
+            endCursorPostId,
+            pageNumber,
+            pageSize,
+          },
+          url: `v1/home/publications-followers`,
         }
       },
     }),

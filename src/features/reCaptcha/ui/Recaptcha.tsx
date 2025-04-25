@@ -1,6 +1,6 @@
 'use client'
 import { ComponentProps, forwardRef } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { ReCAPTCHA } from 'react-google-recaptcha'
 
 import { cn } from '@byte-creators/utils'
 import { useRouter } from 'next/router'

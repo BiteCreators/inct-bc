@@ -1,3 +1,5 @@
-export default function Feed() {
-  return <div>feed</div>
+import Feed from './Feed'
+
+export default function Page() {
+  return <Feed />
 }

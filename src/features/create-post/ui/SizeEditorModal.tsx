@@ -1,22 +1,18 @@
 import React, { ReactNode, RefObject, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import { CroppingTools } from '@/features/create-post/ui/CroppingTools'
 import { LoaderBlock, Slider } from '@byte-creators/ui-kit'
 
-import { ImageData } from '../types'
 import { ImageControl } from './ImagesControl'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: ImageData[]
-  isDisableInput: boolean
   isLoading: boolean
-  selectedImage: null | number
-  setImages: React.Dispatch<React.SetStateAction<ImageData[]>>
-  setSelectedImage: (selectedImage: null | number) => void
   slides: ReactNode[]
   uploadImage: () => void
 }
@@ -25,15 +21,14 @@ export const SizeEditorModal = ({
   fileInputRef,
   handleDeleteImageUrl,
   handleFileSelect,
-  images,
-  isDisableInput,
   isLoading,
-  selectedImage,
-  setImages,
-  setSelectedImage,
   slides,
   uploadImage,
 }: Props) => {
+  const dispatch = useAppDispatch()
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images, selectedImage } = createPostState
+
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [aspect, setAspect] = useState(1)
@@ -70,11 +65,7 @@ export const SizeEditorModal = ({
       <div className={'w-full p-3 flex gap-6 absolute bottom-0'}>
         <CroppingTools
           croppedAreaPixels={croppedAreaPixels}
-          images={images}
-          selectedImage={selectedImage}
           setAspect={setAspect}
-          setImages={setImages}
-          setSelectedImage={setSelectedImage}
           setZoom={setZoom}
           zoom={zoom}
         />
@@ -83,10 +74,8 @@ export const SizeEditorModal = ({
           handleDeleteImageUrl={handleDeleteImageUrl}
           handleFileSelect={file => {
             handleFileSelect(file)
-            setSelectedImage(images.length)
+            dispatch(createPostSlice.actions.setSelectedImage(images.length))
           }}
-          images={images}
-          isDisableInput={isDisableInput}
           uploadImage={uploadImage}
         />
       </div>

@@ -9,6 +9,7 @@ import {
 export const paymentsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
     cancelAutoRenewal: builder.mutation<void, void>({
+      invalidatesTags: ['Payments'],
       query: body => ({
         body,
         method: 'POST',
@@ -28,6 +29,7 @@ export const paymentsApi = inctagramApi.injectEndpoints({
       }),
     }),
     getCurrentPayment: builder.query<CurrentPaymentResponse, void>({
+      providesTags: ['Payments'],
       query: () => ({
         url: 'v1/subscriptions/current-payment-subscriptions',
       }),

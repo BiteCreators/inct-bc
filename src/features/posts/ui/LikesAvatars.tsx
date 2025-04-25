@@ -14,9 +14,9 @@ export const LikesAvatars = ({ items }: Props) => {
     <div className={'flex mr-5'}>
       {avatarsToShow.map((item, index) => (
         <Avatar
-          avatarURL={item.avatars[0].url}
+          avatarURL={item.avatars[0]?.url}
           imgStyles={'w-6'}
-          key={item.avatars[0].url}
+          key={`${item.avatars[0]?.url} ${index}`}
           linkContainerClassname={items.length > 1 ? '-mr-2' : ''}
         />
       ))}

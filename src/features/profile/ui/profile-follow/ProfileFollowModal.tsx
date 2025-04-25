@@ -25,7 +25,7 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
     isFollowingLoading,
     setConfirmOpen,
   } = useFollowContext()
-  
+
   //TODO: separate followers and following queries
   if (!isFollowingLoading && !isFollowersLoading) {
     return (
@@ -40,8 +40,9 @@ export const ProfileFollowModal = ({ currentUserProfile, isOpen, onClose, type }
         />
         {
           <Modal
+            className={'sm:m-0 w-[350px] sm:w-[450px] xl:w-[640px]'}
             isOpen={isOpen}
-            maxWidth={'w-[640px]'}
+            maxWidth={'max-w-[640px]'}
             mode={'default'}
             onOpenChange={onClose}
             title={type === 'followers' ? `${followers} Followers` : `${following} Following`}

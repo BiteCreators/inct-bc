@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
+import { Follower } from '@/entities/followers/types/followers.types'
 import { useFollowContext } from '@/features/profile/ui/profile-follow/FollowModalContext'
 import { Button } from '@byte-creators/ui-kit'
 
@@ -19,12 +19,17 @@ export const FollowModalButtons = ({ currentUserProfile, type, user }: Props) =>
       {me?.userId !== user.userId && (
         <>
           {!user.isFollowing && (
-            <Button disabled={followLoading} onClick={() => handleFollow(user.userId)}>
+            <Button
+              className={'px-2 sm:px-4'}
+              disabled={followLoading}
+              onClick={() => handleFollow(user.userId)}
+            >
               Follow
             </Button>
           )}
           {user.isFollowing && (
             <Button
+              className={'px-2 sm:px-4'}
               disabled={removeLoading}
               onClick={() => handleConfirmDeleting(user)}
               variant={'outline'}

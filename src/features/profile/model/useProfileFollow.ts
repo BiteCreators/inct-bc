@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { authApi } from '@/entities/auth'
 import { followersApi } from '@/entities/followers'
-import { Follower, UserProfile } from '@/entities/followers/types/followers.types'
+import { Follower } from '@/entities/followers/types/followers.types'
 import { useConfirmation } from '@byte-creators/utils'
 
 export const useProfileFollow = (currentUserProfile: { userName: string }) => {
@@ -24,7 +24,7 @@ export const useProfileFollow = (currentUserProfile: { userName: string }) => {
     useConfirmation()
 
   const [currentFollowerName, setCurrentFollowerName] = useState('')
-  
+
   const following = followingList?.items.length
   const followers = followersList?.items.length
 

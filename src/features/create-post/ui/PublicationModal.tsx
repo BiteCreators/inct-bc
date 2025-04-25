@@ -1,16 +1,13 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import { profileApi } from '@/entities/profile'
-import { SnakeGame } from '@/features/games/ui/SnakeGame'
-import { LoaderBlock, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
-import { useScopedTranslation } from '@byte-creators/utils'
-
-import { ImageData } from '../types'
+import { LoaderSwitcher } from '@/features/personalization'
+import { ScrollArea, Slider, TextArea, UserProfile } from '@byte-creators/ui-kit'
+import { useMediaQuery, useScopedTranslation } from '@byte-creators/utils'
 
 type Props = {
   correct: boolean
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  images: ImageData[]
   isLoading: boolean
   limit: number
   slides: ReactNode[]
@@ -25,51 +22,58 @@ export const PublicationModal = ({
   slides,
   value,
 }: Props) => {
+  const isLargeScreen = useMediaQuery('(min-width: 768px)')
   const t = useScopedTranslation('Posts')
   const { data: profile } = profileApi.useGetProfileQuery()
-  // const isLoading = true
+
+  const [loaderType, setLoaderType] = useState<string>('Default (spinner)')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLoader = localStorage.getItem('loaderType') || 'Default (spinner)'
+
+      setLoaderType(savedLoader)
+    }
+  }, [])
 
   if (isLoading) {
-    return (
-      <SnakeGame
-        cellsClassName={'h-10 w-10'}
-        fieldWidth={23}
-        title={'Help the dragon catch the egg while the post is loading!'}
-      />
-    )
+    return <LoaderSwitcher loaderType={loaderType} />
   }
 
+  const content = (
+    <div className={'md:w-1/2 p-3 md:p-6 max-h-[200px]'}>
+      <div className={'mb-4 md:mb-6'}>
+        {profile && (
+          <UserProfile
+            avatarUrl={profile.avatars[0]?.url || ''}
+            isLoading={isLoading}
+            profileId={profile.id}
+            userName={profile.userName}
+          />
+        )}
+      </div>
+      <TextArea
+        className={'max-h-[100px] md:min-h-[120px] md:max-h-[180px]'}
+        isCorrect={correct}
+        label={t.addPublicationDesctiption}
+        limitCount={limit}
+        onChange={handleChange}
+        placeholder={'Type here...'}
+        value={value}
+      />
+      <div className={'flex mx-[-24px] mt-5 mb-6'}>
+        <div className={'h-px bg-dark-100 w-full'} />
+      </div>
+      <span className={'pb-12 md:pb-0'}>LOCATION</span>
+    </div>
+  )
+
   return (
-    <div className={'flex'}>
-      <div className={'w-1/2'}>
+    <div className={'flex flex-col md:flex-row'}>
+      <div className={'h-auto md:w-1/2'}>
         <Slider duration={0} slides={slides} />
       </div>
-      <div className={'w-1/2 p-6'}>
-        <div className={'mb-6'}>
-          {profile && (
-            <UserProfile
-              avatarUrl={profile.avatars[0]?.url || ''}
-              isLoading={isLoading}
-              profileId={profile.id}
-              userName={profile.userName}
-            />
-          )}
-        </div>
-        <TextArea
-          className={'min-h-[120px] max-h-[180px]'}
-          isCorrect={correct}
-          label={t.addPublicationDesctiption}
-          limitCount={limit}
-          onChange={handleChange}
-          placeholder={'Type here...'}
-          value={value}
-        />
-        <div className={'flex mx-[-24px] mt-5 mb-6'}>
-          <div className={'h-px bg-dark-100 w-full'} />
-        </div>
-        <span>LOCATION</span>
-      </div>
-      {/*{isLoading && <LoaderBlock portal />}*/}
+      {isLargeScreen ? content : <ScrollArea>{content}</ScrollArea>}
     </div>
   )
 }

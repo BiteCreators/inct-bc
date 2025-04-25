@@ -1,28 +1,22 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
+import { useAppDispatch, useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { authSlice } from '@/entities/auth'
+import { createPostSlice } from '@/entities/posts/model/createPostSlice'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
-import { ImageData } from '../types'
-
 export const useStepControl = ({
   handleApplyFilters,
-  handlePublish,
-  images,
-  isOpenCreatePost,
-  setIsOpenCreatePost,
   uploadAllImages,
 }: {
   handleApplyFilters: () => Promise<{ newFiles: File[] }>
   handlePublish: () => Promise<void>
-  images: ImageData[]
-  isOpenCreatePost: boolean
-  setIsOpenCreatePost: Dispatch<SetStateAction<boolean>>
   uploadAllImages: (files: File[]) => Promise<void>
 }) => {
-  const [step, setStep] = useState(1)
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images, isOpenCreatePost, step } = createPostState
+  const dispatch = useAppDispatch()
   const t = useScopedTranslation('Posts')
 
   const router = useRouter()
@@ -48,14 +42,13 @@ export const useStepControl = ({
     switch (step) {
       case 1:
       case 2:
-        setStep(prevStep => prevStep + 1)
+        dispatch(createPostSlice.actions.setStep(step + 1))
         break
       case 3:
-        setStep(prevStep => prevStep + 1)
+        dispatch(createPostSlice.actions.setStep(step + 1))
         break
       case 4:
         try {
-          //setIsOpenCreatePost(false)
           const res = await handleApplyFilters()
 
           await uploadAllImages(res.newFiles)
@@ -69,7 +62,7 @@ export const useStepControl = ({
   }
 
   const handleBack = () => {
-    setStep(prevStep => prevStep - 1)
+    dispatch(createPostSlice.actions.setStep(step - 1))
   }
 
   useEffect(() => {
@@ -77,16 +70,14 @@ export const useStepControl = ({
       router.push(`/profile/${userId}`)
     }
     if (images.length === 0) {
-      setStep(1)
+      dispatch(createPostSlice.actions.setStep(1))
     }
-  }, [images, setStep, isOpenCreatePost, router, userId])
+  }, [images, dispatch, isOpenCreatePost, router, userId])
 
   return {
     handleBack,
     handleNext,
     nextButtonTitle,
-    setStep,
-    step,
     title,
   }
 }

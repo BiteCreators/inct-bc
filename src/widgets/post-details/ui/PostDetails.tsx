@@ -1,18 +1,20 @@
 import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { selectUserId } from '@/entities/auth/model/auth.slice'
-import { commentsApi } from '@/entities/comments'
-import { postsApi } from '@/entities/posts'
+import { commentsApi, sortCommentsByUser } from '@/entities/comments'
+import { Post, postsApi } from '@/entities/posts'
+import { useHandleNavigateToImage } from '@/features/posts/model/useHandleNavigateToImage'
+import { PostMobile } from '@/widgets/post-details/ui/mobile/PostMobile'
 import { Alert } from '@byte-creators/ui-kit'
+import { useMediaQuery } from '@byte-creators/utils'
 import { skipToken } from '@reduxjs/toolkit/query'
 import { useParams } from 'next/navigation'
-import { useRouter } from 'next/router'
 
 import { PostDetailsSlide } from './PostDetailsSlide'
 import { PostDesktop } from './desktop/PostDesktop'
 
 export const PostDetails = () => {
   const params = useParams()
-  const router = useRouter()
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)')
 
   const currentUserId = useAppSelector(selectUserId)
 
@@ -26,36 +28,20 @@ export const PostDetails = () => {
     isLoading,
   } = commentsApi.useGetCommentsQuery(currentUserId ? { postId: post?.id || 0 } : skipToken)
 
-  const handleNavigateToImage = (imageUrl: string) => {
-    const proxyUrl = `/api/proxy?path=${encodeURIComponent(imageUrl)}`
-
-    router.push({
-      pathname: `/profile/${post?.ownerId}/publications/${post?.id}/view`,
-      query: { image: proxyUrl },
-    })
-  }
+  const handleNavigateToImage = useHandleNavigateToImage(post as Post)
   const slides = post?.images.map((image: any, i) => (
     <PostDetailsSlide handleNavigateToImage={handleNavigateToImage} image={image} key={i} />
   ))
 
-  let comments = commentsData?.items
-
-  if (currentUserId) {
-    const currentUserComments = commentsData?.items.filter(
-      comment => comment.from.id === currentUserId
-    )
-    const commentsWithoutCurrentUser = commentsData?.items.filter(
-      comment => comment.from.id !== currentUserId
-    )
-
-    if (currentUserComments && commentsWithoutCurrentUser) {
-      comments = [...currentUserComments, ...commentsWithoutCurrentUser]
-    }
-  }
+  const comments = sortCommentsByUser(commentsData?.items || [], String(currentUserId))
 
   return (
     <>
-      <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+      {isLargeScreen ? (
+        <PostDesktop comments={comments} isLoading={isLoading} post={post} slides={slides || []} />
+      ) : (
+        <PostMobile comments={comments} post={post} slides={slides || []} />
+      )}
       {error && <Alert message={'Comments loaded failed'} type={'error'} />}
     </>
   )

@@ -1,5 +1,6 @@
 import React, { RefObject } from 'react'
 
+import { useAppSelector } from '@/common/lib/hooks/reduxHooks'
 import { Button, DragAndDropInput, ScrollArea } from '@byte-creators/ui-kit'
 import {
   CloseOutlineSmall,
@@ -7,16 +8,14 @@ import {
   ImageOutline,
   PlusCircleOutlineBig,
 } from '@byte-creators/ui-kit/icons'
+import { useMediaQuery } from '@byte-creators/utils'
 
 import { useImageControl } from '../model/useImageControl'
-import { ImageData } from '../types'
 
 type Props = {
   fileInputRef: RefObject<HTMLInputElement>
   handleDeleteImageUrl: (index: number) => void
   handleFileSelect: (file: File) => void
-  images: ImageData[]
-  isDisableInput: boolean
   uploadImage: () => void
 }
 
@@ -24,11 +23,12 @@ export const ImageControl = ({
   fileInputRef,
   handleDeleteImageUrl,
   handleFileSelect,
-  images,
-  isDisableInput,
   uploadImage,
 }: Props) => {
   const { imagesControlRef, isImagesControlOpen, setIsImagesControlOpen } = useImageControl()
+  const createPostState = useAppSelector(state => state.createPost)
+  const { images, isDisableInput } = createPostState
+  const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
   return (
     <div className={'relative ml-auto'} ref={imagesControlRef}>
@@ -56,11 +56,15 @@ export const ImageControl = ({
                   />
                   <button
                     className={
-                      'top-[2px] right-[2px] p-0 w-3 h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
+                      'top-[2px] right-[2px] p-0 w-5 h-5 md:w-3 md:h-3 bg-dark-500 bg-opacity-80 rounded-sm absolute'
                     }
                     onClick={() => handleDeleteImageUrl(i)}
                   >
-                    <CloseOutlineSmall />
+                    {isLargeScreen ? (
+                      <CloseOutlineSmall />
+                    ) : (
+                      <CloseOutlineSmall height={20} viewBox={'0 0 12 12'} width={20} />
+                    )}
                   </button>
                 </li>
               ))}

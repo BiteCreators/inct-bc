@@ -27,6 +27,7 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
   const { confirmOpen, handleConfirm, handleReject, requestConfirmation, setConfirmOpen } =
     useConfirmation()
   const t = useScopedTranslation('Posts')
+  const tProfile = useScopedTranslation('Profile')
   const refreshData = async () => {
     await router.replace(router.asPath)
   }
@@ -77,6 +78,7 @@ export const useEditPost = ({ changeEditMode, postText }: editPost) => {
     setConfirmOpen,
     setValue,
     t,
+    tProfile,
     value,
   }
 }
