@@ -1,5 +1,12 @@
-import { MessengerPage } from '@/features/messenger/ui/Messenger'
+import dynamic from 'next/dynamic'
 
-export default function Messenger() {
-  return <MessengerPage />
+// eslint-disable-next-line import/no-unresolved
+export const RemoteMessenger = dynamic(() => import('messenger/Messenger'), {
+  ssr: false,
+})
+
+const Index = () => {
+  return <RemoteMessenger />
 }
+
+export default Index
