@@ -111,13 +111,6 @@
         <span>RTK Query</span>
     </td>
           <td align="center">
-                  <a href="https://www.react-hook-form.com/">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6ZftARRCrAE8y0M8egNhkMPTV0Zf62S0Epg&s" alt="Icon" height="50"/>
-         </a>
-        <br/>
-        <span>React hook form</span>
-    </td>
-          <td align="center">
                   <a href="https://www.typescriptlang.org/">
              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL38u-0VeY-nhi5S2x5ZwfpWvDKbwmCHMM8w&s" alt="Icon" height="50"/>             
          </a>
