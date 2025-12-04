@@ -2,10 +2,6 @@
 
 # INCTAGRAM
 
-<a href="https://inctbc.ru/">
-    inctbc.ru
-</a>
-
 ## Social network from the Byte Creators development team
 
 ### This application takes inspiration from Instagram but with our unique vision of simplicity, speed, and modern design.
