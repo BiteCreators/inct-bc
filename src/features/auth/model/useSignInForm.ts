@@ -8,14 +8,12 @@ import { authApi, authSlice, decodeAccessToken } from '@/entities/auth'
 import { SignInFormData, createSignInSchema } from '@/features/auth/lib/schemas/signIn.schema'
 import { useScopedTranslation } from '@byte-creators/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as jose from 'jose'
 import Router from 'next/router'
 
 import { modifySingInApiError } from '../lib/modifySignInApiError'
 
 export const useSignInForm = () => {
   const t = useScopedTranslation('Auth')
-
   const signInSchema = createSignInSchema(t.errors)
 
   const {
@@ -31,6 +29,7 @@ export const useSignInForm = () => {
     mode: 'onChange',
     resolver: zodResolver(signInSchema),
   })
+
   const [login, { isLoading }] = authApi.useLoginMutation()
   const dispatch = useAppDispatch()
   const { handleApiError } = useHandleApiError('Auth')
@@ -44,6 +43,7 @@ export const useSignInForm = () => {
         email,
         password,
       }).unwrap()
+
       const token = res.accessToken
       const { userId } = decodeAccessToken(token)
 
@@ -51,12 +51,21 @@ export const useSignInForm = () => {
         throw new Error('access token is invalid')
       }
 
-      setCookies('accessToken', res.accessToken, {
+      setCookies('accessToken', token, {
         maxAge: 2678400,
         path: '/',
         sameSite: 'lax',
         secure: true,
       })
+
+      await new Promise(resolve => setTimeout(resolve, 500))
+
+      if (!document.cookie.includes('accessToken')) {
+        setApiError(t.errors.cookiesDisabled)
+
+        return
+      }
+
       dispatch(authSlice.actions.setCredentials({ accessToken: token, userId }))
       Router.push(`/profile/${userId}`)
     } catch (error) {

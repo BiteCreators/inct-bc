@@ -11,6 +11,7 @@ import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 
+import '/src/application/styles/vars.css'
 import '@/application/styles/globals.css'
 
 //TODO: remove this
@@ -56,7 +57,9 @@ export default function App({ Component, ...rest }: AppPropsWithLayout) {
   return (
     <Providers store={store}>
       <LinearLoader isLoading={isLoading} />
-      <div className={cn(inter.className)}>{getLayout(<Component {...props.pageProps} />)}</div>
+      <div className={cn(inter.className, 'bg-dark-700')}>
+        {getLayout(<Component {...props.pageProps} />)}
+      </div>
     </Providers>
   )
 }

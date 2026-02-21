@@ -70,7 +70,7 @@ export const useCreatePost = () => {
 
   const handlePublish = async () => {
     try {
-      if (uploadIds && uploadIds.length < 10) {
+      if (uploadIds && uploadIds.length < 9) {
         await createPost({
           childrenMetadata: uploadIds,
           description: value,
@@ -105,7 +105,7 @@ export const useCreatePost = () => {
   }
 
   useEffect(() => {
-    dispatch(createPostSlice.actions.setIsDisableInput(images.length >= 9))
+    dispatch(createPostSlice.actions.setIsDisableInput(images.length >= 8))
   }, [images])
 
   return {

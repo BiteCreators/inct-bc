@@ -1,6 +1,6 @@
 import { Path } from 'react-hook-form'
 
-import { LocaleType } from '@/locales/en'
+import { LocaleType } from '@byte-creators/utils'
 
 import { SignInFormData } from './schemas/signIn.schema'
 

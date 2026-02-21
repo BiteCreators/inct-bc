@@ -35,8 +35,11 @@ export const DropdownPost = ({
     deletePostHandler,
     handleConfirm,
     handleReject,
+    messageConfirmation,
     setConfirmOpen,
     t,
+    titleConfirmation,
+    unfollowHandler,
   } = useDropdownPost({ post })
 
   if (isMyPost) {
@@ -59,7 +62,7 @@ export const DropdownPost = ({
       forDrop.push({
         icon: <PersonRemoveOutline />,
         label: t.unfollow,
-        onClick: () => {},
+        onClick: unfollowHandler,
       })
     } else {
       forDrop.push({
@@ -79,11 +82,11 @@ export const DropdownPost = ({
     <>
       <ActionConfirmation
         isOpen={confirmOpen}
-        message={t.deletePostQuestion}
+        message={messageConfirmation}
         onConfirm={handleConfirm}
         onReject={handleReject}
         setIsOpen={setConfirmOpen}
-        title={t.deletePost}
+        title={titleConfirmation}
       />
       <Dropdown className={className} classNameButton={classNameButton} items={forDrop} />
       {apiError && (

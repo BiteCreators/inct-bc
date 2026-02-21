@@ -48,12 +48,12 @@ export const SideNavbar = () => {
           iconActive={<Person />}
           label={t.myProfile}
         />
-        <SideNavbarItem
-          href={'/messenger'}
-          icon={<MessageCircleOutline />}
-          iconActive={<MessageCircle />}
-          label={t.messenger}
-        />
+        {/*<SideNavbarItem*/}
+        {/*  href={'/messenger'}*/}
+        {/*  icon={<MessageCircleOutline />}*/}
+        {/*  iconActive={<MessageCircle />}*/}
+        {/*  label={t.messenger}*/}
+        {/*/>*/}
         <SideNavbarItem
           href={'/search'}
           icon={<SearchOutline />}
@@ -61,26 +61,25 @@ export const SideNavbar = () => {
           label={t.search}
         />
       </div>
-      <div className={'flex flex-col gap-6'}>
-        <SideNavbarItem
-          href={'/statistics'}
-          icon={<TrendingUpOutline />}
-          iconActive={<TrendingUp />}
-          label={t.statistics}
-        />
-        <SideNavbarItem
-          href={'/favorites'}
-          icon={<BookmarkOutline />}
-          iconActive={<Bookmark />}
-          label={t.favorites}
-        />
-        {/*<SideNavbarItem*/}
-        {/*  href={'/games'}*/}
-        {/*  icon={<PlayCircleOutline />}*/}
-        {/*  iconActive={<PlayCircle />}*/}
-        {/*  label={'Games'}*/}
-        {/*/>*/}
-      </div>
+      {/*<div className={'flex flex-col gap-6'}>*/}
+      {/*  <SideNavbarItem*/}
+      {/*    href={'/statistics'}*/}
+      {/*    icon={<TrendingUpOutline />}*/}
+      {/*    iconActive={<TrendingUp />}*/}
+      {/*    label={t.statistics}*/}
+      {/*  />*/}
+      {/*  <SideNavbarItem*/}
+      {/*    href={'/favorites'}*/}
+      {/*    icon={<BookmarkOutline />}*/}
+      {/*    iconActive={<Bookmark />}*/}
+      {/*    label={t.favorites}*/}
+      {/*  />*/}
+      {/*<SideNavbarItem*/}
+      {/*  href={'/games'}*/}
+      {/*  icon={<PlayCircleOutline />}*/}
+      {/*  iconActive={<PlayCircle />}*/}
+      {/*  label={'Games'}*/}
+      {/*/>*/}
     </nav>
   )
 }

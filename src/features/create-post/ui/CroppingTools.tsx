@@ -51,7 +51,7 @@ export const CroppingTools = ({ croppedAreaPixels, setAspect, setZoom, zoom }: P
             }
           >
             <button className={'hover:text-primary-500'} onClick={onCrop}>
-              {t.crop}
+              OK
             </button>
           </div>
           <div

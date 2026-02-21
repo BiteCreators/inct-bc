@@ -31,7 +31,7 @@ export const HeaderMenu = () => {
     {
       icon: <SettingsOutline />,
       label: tNav.profileSettings,
-      onClick: () => router.push('/profile-settings'),
+      onClick: () => router.push(`/profile/${router.query.id}/settings`),
     },
     {
       icon: <TrendingUp />,

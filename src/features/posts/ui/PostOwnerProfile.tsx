@@ -20,7 +20,9 @@ export const PostOwnerProfile = ({ post }: Props) => {
         className={'hover:text-primary-300 text-light-100 duration-75'}
         href={`/profile/${post.ownerId}`}
       >
-        <Typography variant={'h2'}>{post.userName}</Typography>
+        <Typography className={'break-words sm:break-normal max-w-48 sm:max-w-auto'} variant={'h2'}>
+          {post.userName}
+        </Typography>
       </Link>
     </div>
   )

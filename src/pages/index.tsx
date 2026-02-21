@@ -63,12 +63,12 @@ const Main = () => {
 
   //TODO: rewrite "?" syntax
   return (
-    <div className={cn('max-w-[972px] mr-[20%] ml-[10%]')}>
+    <div className={cn('max-w-[976px] mx-auto')}>
       <div>
         <RegisteredUsers usersCount={postsData.totalCount} />
       </div>
       <div className={'pt-6'}>
-        <div className={'grid grid-cols-4 gap-3'}>
+        <div className={'flex flex-wrap justify-center gap-3'}>
           {posts.map(post => (
             <PostCard
               avatarOwner={post.avatarOwner}
@@ -77,9 +77,6 @@ const Main = () => {
               isAdmin={false}
               key={post.id}
               ownerId={post.ownerId}
-              postContainerHeight={
-                post.images && post.images[0] ? post.images[0].height : undefined
-              }
               postId={post.id}
               postImageUrl={post.images[0]?.url || ''}
               userName={post.userName}

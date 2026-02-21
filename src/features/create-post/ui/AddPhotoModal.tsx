@@ -28,10 +28,10 @@ export const AddPhotoModal = ({ fileInputRef, handleFileSelect, uploadImage }: P
           <ImageOutline height={48} viewBox={'0 0 24 24'} width={48} />
         </div>
       </DragAndDropInput>
-      <Button className={'w-56 bottom-0 mb-7'} onClick={uploadImage}>
+      <Button className={'w-full md:w-56 bottom-0 mb-7'} onClick={uploadImage}>
         {t.selectFromComputer}
       </Button>
-      <Button className={'w-56 bottom-0 mb-9'} variant={'outline'}>
+      <Button className={'w-full md:w-56 bottom-0 mb-9'} variant={'outline'}>
         {t.openDraft}
       </Button>
     </div>

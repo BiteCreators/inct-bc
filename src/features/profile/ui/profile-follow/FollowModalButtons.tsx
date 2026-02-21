@@ -19,12 +19,17 @@ export const FollowModalButtons = ({ currentUserProfile, type, user }: Props) =>
       {me?.userId !== user.userId && (
         <>
           {!user.isFollowing && (
-            <Button disabled={followLoading} onClick={() => handleFollow(user.userId)}>
+            <Button
+              className={'px-2 sm:px-4'}
+              disabled={followLoading}
+              onClick={() => handleFollow(user.userId)}
+            >
               Follow
             </Button>
           )}
           {user.isFollowing && (
             <Button
+              className={'px-2 sm:px-4'}
               disabled={removeLoading}
               onClick={() => handleConfirmDeleting(user)}
               variant={'outline'}

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 
+import { useScopedTranslation } from '@byte-creators/utils'
 import { useRouter } from 'next/router'
 
 export const useAccountManagement = () => {
   const [paymentModal, setPaymentModal] = useState({ isOpen: false, status: '' })
-
+  const t = useScopedTranslation('Payments')
   const router = useRouter()
 
   useEffect(() => {
@@ -38,5 +39,6 @@ export const useAccountManagement = () => {
   return {
     handelModalClose,
     paymentModal,
+    t,
   }
 }

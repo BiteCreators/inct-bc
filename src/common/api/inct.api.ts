@@ -1,10 +1,10 @@
-import { baseQueryWithReauth } from '@/common/api/base-query'
+import { baseQueryWithReauth } from '@byte-creators/utils'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 import { isHydrateAction } from '../lib/utils/isHydrateAction'
 
 export const inctagramApi = createApi({
-  baseQuery: baseQueryWithReauth,
+  baseQuery: baseQueryWithReauth({ payload: undefined, type: 'auth/logout' }),
   endpoints: () => ({}),
   extractRehydrationInfo(action, { reducerPath }): any {
     if (isHydrateAction(action)) {
@@ -23,5 +23,7 @@ export const inctagramApi = createApi({
     'Comment',
     'Answer',
     'Notifications',
+    'Messages',
+    'Payments',
   ],
 })

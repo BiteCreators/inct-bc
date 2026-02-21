@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "cross-env NEXT_PRIVATE_LOCAL_WEBPACK=true next dev -p 3000",
     "build": "next build",
     "build:production": "next build",
     "start": "next start",
@@ -12,11 +12,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@byte-creators/utils": "^1.10.4",
-    "@byte-creators/ui-kit": "^1.9.7",
     "@byte-creators/config": "^1.0.5",
+    "@byte-creators/ui-kit": "^1.9.10",
+    "@byte-creators/utils": "^1.10.10",
     "@hookform/resolvers": "^3.9.0",
-    "@module-federation/nextjs-mf": "^8.7.8",
+    "@module-federation/nextjs-mf": "8.8.21",
     "@radix-ui/react-dialog": "^1.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@types/lodash": "^4.17.14",
@@ -30,6 +30,7 @@
     "lodash": "^4.17.21",
     "next": "14.2.20",
     "next-redux-wrapper": "^8.1.0",
+    "node-google-translate-skidz": "^1.1.2",
     "postcss": "^8.4.49",
     "react": "^18",
     "react-cookie": "^7.2.0",
@@ -86,7 +87,8 @@
     "stylelint": "^16.9.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "webpack": "^5.98.0"
   },
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

@@ -43,7 +43,7 @@ export const SignInForm = () => {
         />
         <Button
           className={'mt-[52px] sm:mt-0 py-3 sm:py-2'}
-          disabled={!isValid || isLoading}
+          disabled={!isValid || isLoading || !!apiError}
           type={'submit'}
         >
           {t.signIn}

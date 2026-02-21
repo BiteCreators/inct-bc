@@ -18,7 +18,7 @@ export const AccountManagement = () => {
 
   const dispatch = useAppDispatch()
 
-  const { handelModalClose, paymentModal } = useAccountManagement()
+  const { handelModalClose, paymentModal, t } = useAccountManagement()
 
   let disableAccountTypeOption = false
 
@@ -58,12 +58,12 @@ export const AccountManagement = () => {
         isOpen={paymentModal.isOpen}
         mode={'default'}
         onOpenChange={handelModalClose}
-        title={paymentModal.status}
+        title={paymentModal.status === 'Success' ? t.modalSuccessTitle : t.modalErrorTitle}
       >
         {paymentModal.status === 'Success' ? (
-          <p className={'mb-16'}>Payment was successful!</p>
+          <p className={'mb-16'}>{t.modalSuccessMessage}</p>
         ) : (
-          <p className={'mb-16'}>Transaction failed. Please, write to support</p>
+          <p className={'mb-16'}>{t.modalErrorMessage}</p>
         )}
         <Button className={'w-full mb-6'} onClick={handelModalClose} variant={'primary'}>
           <span>OK</span>
